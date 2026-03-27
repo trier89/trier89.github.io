@@ -1,0 +1,42 @@
+baseURL = 'https://trier89.github.io/'
+languageCode = 'ko-kr'
+defaultContentLanguage = 'ko'
+title = '계획대로 느긋하게'
+theme = 'hugo-theme-stack'
+paginate = 10
+
+[params]
+  description = 'P이고 싶은 J의 여유로운 여행 블로그'
+  mainSections = ['post']
+  favicon = ''
+
+[params.sidebar]
+  emoji = ''
+  subtitle = 'P이고 싶은 J의 여유로운 여행 블로그'
+
+[params.article]
+  math = false
+  toc = true
+  readingTime = true
+
+[params.comments]
+  enabled = false
+
+[menu]
+[[menu.main]]
+  name = '여행'
+  url = '/categories/여행/'
+  weight = 1
+
+[[menu.main]]
+  name = '오늘의 뉴스'
+  url = '/categories/뉴스/'
+  weight = 2
+
+[[menu.main]]
+  name = '만든 것들'
+  url = '/categories/프로젝트/'
+  weight = 3
+
+[markup.goldmark.renderer]
+  unsafe = true
