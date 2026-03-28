@@ -31,6 +31,12 @@ if [ ! -s "/tmp/news_raw_$DATE.json" ]; then
     exit 1
 fi
 
+# Collect previous post titles for dedup
+PREV_TITLES=""
+for f in "$BLOG_ROOT"/content/post/news-*/index.md; do
+    [ -f "$f" ] && PREV_TITLES="$PREV_TITLES$(grep -oP '\*\*\d+\. \[\K[^\]]+' "$f" 2>/dev/null | head -20)\n"
+done
+
 # Step 2: Build prompt file
 echo "Generating analysis with Claude..." >> "$LOG_FILE"
 
@@ -64,6 +70,10 @@ tags:
 - 경제: 국내 + 글로벌 경제 모두 포함
 - 사회: 국내 사회 뉴스만
 - 사건사고: 국내 사건사고만
+- 중복 제거: 아래 "이전 포스팅 기사 제목" 목록에 있는 것과 같은 사건/주제를 다룬 기사는 URL이 달라도 반드시 제외할 것
+
+이전 포스팅 기사 제목:
+${PREV_TITLES}
 - 마지막에 --- 후 *이 글은 자동으로 생성된 뉴스 브리핑입니다.*
 - 한국어, 전문적이면서 읽기 쉽게
 - 프론트매터와 본문만 출력할 것. 설명이나 코드블록 없이 순수 마크다운만.
