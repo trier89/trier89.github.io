@@ -41,7 +41,7 @@ cat > "/tmp/news_prompt_$DATE.txt" << PROMPT_EOF
 
 맨 처음에 이 프론트매터를 그대로 넣어:
 ---
-title: "오늘의 뉴스 - ${DATE_DISPLAY} (${WEEKDAY})"
+title: "양면 뉴스 - ${DATE_DISPLAY} (${WEEKDAY})"
 date: ${DATE}
 description: "AI, 스마트건설, 세계/국내 주요 뉴스 브리핑"
 categories:
