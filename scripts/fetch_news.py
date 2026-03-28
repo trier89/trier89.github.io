@@ -16,13 +16,13 @@ def main():
     client = TavilyClient(api_key=api_key)
 
     topics = {
-        "AI": "AI artificial intelligence 인공지능 LLM 생성형AI latest news 2026",
-        "BIM/스마트건설": "BIM 스마트건설 smart construction 디지털트윈 건설기술 신기술 주요건설사 2026",
+        "AI": "new AI model release LLM 새 언어모델 출시 breakthrough 2026",
+        "스마트건설": "한국 스마트건설 BIM 디지털트윈 건설기술 신기술 국내 건설사 2026",
         "세계": "world news today major international breaking",
-        "한국 정치": "한국 정치 뉴스 오늘 국회 대통령",
-        "한국 사회": "한국 사회 뉴스 오늘",
-        "한국 경제": "한국 경제 뉴스 오늘 증시 기업",
-        "한국 사건사고": "한국 사건 사고 뉴스 오늘",
+        "국내 정치": "한국 정치 뉴스 오늘 국회 대통령",
+        "국내 사회": "한국 사회 뉴스 오늘",
+        "국내 경제": "한국 경제 뉴스 오늘 증시 기업",
+        "국내 사건사고": "한국 국내 사건 사고 뉴스 오늘",
     }
 
     results = {}
