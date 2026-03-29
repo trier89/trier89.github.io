@@ -10,7 +10,10 @@ POST_DIR="$BLOG_ROOT/content/post/news-$DATE"
 PYTHON="/usr/bin/python3"
 WEEKDAY=$($PYTHON -c "import datetime; wd=['월','화','수','목','금','토','일']; print(wd[datetime.date.today().weekday()])")
 
-export TAVILY_API_KEY="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"
+# Load secrets from .env file (not committed to git)
+source "$SCRIPTS_DIR/.env"
+export TAVILY_API_KEY
+export GH_TOKEN
 export PATH="/Users/minim/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 LOG_FILE="$SCRIPTS_DIR/news-cron.log"
@@ -65,12 +68,13 @@ tags:
 - 기사 제목에 원문 링크 포함: **번호. [제목](URL)**
 - AI: 새로 출시된 언어모델이나 획기적인 AI 기술/방식만. 없으면 섹션 생략
 - 스마트건설: 국내 기사만 (BIM, 디지털트윈, 신기술, 주요 건설사 현황). 없으면 섹션 생략
-- 세계: 글로벌 주요 뉴스, 중복 지양
-- 정치: 국내 정치만
-- 경제: 국내 + 글로벌 경제 모두 포함
-- 사회: 국내 사회 뉴스만
-- 사건사고: 국내 사건사고만
-- 중복 제거: 아래 "이전 포스팅 기사 제목" 목록에 있는 것과 같은 사건/주제를 다룬 기사는 URL이 달라도 반드시 제외할 것
+- 세계: 글로벌 주요 뉴스, 중복 지양. 반드시 2~3건 포함
+- 정치: 국내 정치만. 반드시 1~2건 포함
+- 경제: 국내 + 글로벌 경제 모두 포함. 반드시 2~3건 포함
+- 사회: 국내 사회 뉴스만. 반드시 1~2건 포함
+- 사건사고: 국내 사건사고만. 반드시 1~2건 포함
+- AI와 스마트건설만 해당 기사가 없으면 섹션 생략 가능. 나머지 5개 카테고리(세계/정치/경제/사회/사건사고)는 반드시 포함
+- 중복 제거: 아래 "이전 포스팅 기사 제목" 목록에 있는 것과 같은 사건/주제를 다룬 기사는 URL이 달라도 제외하고, 대신 다른 기사를 찾아서 넣을 것
 
 이전 포스팅 기사 제목:
 ${PREV_TITLES}

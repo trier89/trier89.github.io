@@ -58,7 +58,7 @@ def main():
             response = client.search(
                 query=query,
                 topic="news",
-                max_results=8,
+                max_results=15,
                 days=1,
             )
             articles = []
@@ -72,7 +72,7 @@ def main():
                     "url": url,
                     "content": r.get("content", r.get("snippet", ""))[:500],
                 })
-                if len(articles) >= 3:
+                if len(articles) >= 5:
                     break
             results[category] = articles
         except Exception as e:
