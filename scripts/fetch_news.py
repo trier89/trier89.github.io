@@ -42,14 +42,17 @@ def main():
     if previous_urls:
         print(f"Found {len(previous_urls)} previous URLs to deduplicate", file=sys.stderr)
 
+    # Korean news domains to prioritize
+    kr_domains = ["정치", "사회", "사건사고", "스마트건설"]
+
     topics = {
         "AI": "new AI model release LLM 새 언어모델 출시 breakthrough 2026",
         "스마트건설": "한국 스마트건설 BIM 디지털트윈 건설기술 신기술 국내 건설사 2026",
         "세계": "top headlines world news today breaking major",
-        "정치": "한국 정치 주요 뉴스 속보 오늘 국회 대통령",
-        "경제": "주요 경제 뉴스 속보 오늘 증시 기업 글로벌",
-        "사회": "한국 사회 주요 뉴스 속보 오늘",
-        "사건사고": "한국 국내 사건 사고 주요 뉴스 속보 오늘",
+        "정치": "South Korea politics news today 한국 정치",
+        "경제": "economy stock market news today global 경제 증시",
+        "사회": "South Korea society news today 한국 사회",
+        "사건사고": "South Korea accident crime incident news 한국 사건사고",
     }
 
     results = {}
@@ -59,7 +62,7 @@ def main():
                 query=query,
                 topic="news",
                 max_results=15,
-                days=1,
+                days=2 if category in kr_domains else 1,
             )
             articles = []
             for r in response.get("results", []):
