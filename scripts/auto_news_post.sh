@@ -90,7 +90,15 @@ PROMPT_EOF
 
 mkdir -p "$POST_DIR"
 
+# Try claude CLI first, fall back to OpenAI API
 claude --print -p "$(cat /tmp/news_prompt_$DATE.txt)" > "$POST_DIR/index.md" 2>> "$LOG_FILE"
+
+# Check if claude output is valid (not empty or login error)
+if [ ! -s "$POST_DIR/index.md" ] || grep -q "Not logged in" "$POST_DIR/index.md" 2>/dev/null; then
+    echo "Claude CLI failed, falling back to OpenAI API..." >> "$LOG_FILE"
+    export OPENAI_API_KEY
+    $PYTHON "$SCRIPTS_DIR/generate_analysis.py" "/tmp/news_prompt_$DATE.txt" > "$POST_DIR/index.md" 2>> "$LOG_FILE"
+fi
 
 if [ ! -s "$POST_DIR/index.md" ]; then
     echo "ERROR: Claude output empty." >> "$LOG_FILE"
