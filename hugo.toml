@@ -4,6 +4,8 @@ defaultContentLanguage = 'ko'
 title = '계획대로 느긋하게'
 theme = 'hugo-theme-stack'
 paginate = 10
+buildFuture = true
+timeZone = 'Asia/Seoul'
 
 [params]
   description = 'P이고 싶은 J의 여유로운 여행 블로그'
