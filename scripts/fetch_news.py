@@ -45,11 +45,11 @@ def main():
     topics = {
         "AI": "new AI model release LLM 새 언어모델 출시 breakthrough 2026",
         "스마트건설": "한국 스마트건설 BIM 디지털트윈 건설기술 신기술 국내 건설사 2026",
-        "세계": "world news today major international breaking",
-        "정치": "한국 정치 뉴스 오늘 국회 대통령",
-        "경제": "경제 뉴스 오늘 증시 기업 글로벌",
-        "사회": "한국 사회 뉴스 오늘",
-        "사건사고": "한국 국내 사건 사고 뉴스 오늘",
+        "세계": "top headlines world news today breaking major",
+        "정치": "한국 정치 주요 뉴스 속보 오늘 국회 대통령",
+        "경제": "주요 경제 뉴스 속보 오늘 증시 기업 글로벌",
+        "사회": "한국 사회 주요 뉴스 속보 오늘",
+        "사건사고": "한국 국내 사건 사고 주요 뉴스 속보 오늘",
     }
 
     results = {}
