@@ -12,64 +12,153 @@ tags:
 
 ## 🤖 AI
 
-1. **[Meta's Muse Spark Sent Its AI App Soaring up the App Store Rankings](https://www.businessinsider.com/meta-ai-app-rankings-muse-spark-release-2026-4)**  
-   Meta의 Muse Spark AI 모델 출시로 인해 자사의 AI 앱 다운로드 수가 급증하였습니다. 미국 애플 앱스토어에서 다운로드가 약 46,000회 이루어졌으며, 이는 전일 대비 87% 증가한 수치입니다. Muse Spark는 현재 무료 앱 다운로드 순위에서 6위에 오르며, 과거 1개월 평균 순위 65위에서 큰 상승세를 보이고 있습니다.  
-   🔍 시각 A: Meta의 혁신적인 AI 기술이 많은 사용자의 관심을 끌고 있으며, 경쟁력 있는 앱으로 자리매김할 잠재력을 보여주고 있습니다.  
-   🔎 시각 B: 그러나 사용자의 실제 활용 사례와 피드백이 부족해 향후 지속 가능한 성장에 대한 우려가 존재합니다.
+**1. [Anthropic, 사이버보안 특화 AI 모델 'Claude Mythos Preview' 공개…"너무 위험해 비공개"](https://www.theguardian.com/technology/2026/apr/10/anthropic-new-ai-model-claude-mythos-implications)**
 
-## 🏗️ 스마트건설
+Anthropic이 뛰어난 사이버보안 및 사이버공격 능력을 갖춘 AI 모델 'Claude Mythos Preview'를 발표했다. 이 모델은 기존 AI 모델과 달리 사이버 공격·방어 양면에서 탁월한 성능을 보여, 회사 측이 공개 출시가 너무 위험하다고 판단할 정도다. Cisco의 보안 전문가 Anthony Grieco도 이 모델의 역량에 주목했으며, 디지털 시스템 전반에 혼란과 파괴를 가져올 수 있는 잠재력이 있다는 평가가 나온다. AI 안전성과 능력 사이의 균형에 대한 업계 논의가 다시 뜨거워지고 있다.
 
-오늘은 스마트건설 관련 뉴스가 없습니다.
+🔍 **시각 A**: AI 보안 기술의 획기적 발전으로 사이버 방어 역량이 크게 강화될 수 있다. 위험성을 인지하고 선제적으로 비공개 결정을 내린 Anthropic의 책임감 있는 태도도 업계 모범 사례로 평가된다.
+
+🔎 **시각 B**: 아무리 비공개라 해도 이런 수준의 공격 능력을 가진 AI가 존재한다는 사실 자체가 위협이다. 내부 유출이나 역공학 가능성을 완전히 차단할 수 없으며, AI 군비경쟁을 부추길 수 있다는 우려가 크다.
+
+---
+
+**2. [알리바바, 글로벌 리더보드 석권한 AI 영상 모델 'HappyHorse'의 정체 공개](https://www.cnbc.com/2026/04/10/alibaba-happyhorse-ai-video-model-benchmark-reveal.html)**
+
+글로벌 AI 영상 생성 리더보드에서 익명으로 상위권을 차지하며 주목받던 모델 'HappyHorse'가 중국 알리바바의 ATH AI Innovation Unit 프로젝트였음이 확인됐다. 개발팀은 새로 생성한 X(구 트위터) 계정을 통해 정체를 밝혔으며, 이는 알리바바의 AI 역량을 과시하는 전략적 공개로 해석된다. 벤치마크에서 기존 유명 모델들을 제치고 정상에 오르며, 중국 빅테크의 AI 영상 분야 경쟁력이 재조명되고 있다.
+
+🔍 **시각 A**: 익명 참가를 통해 편견 없이 순수 실력으로 검증받은 결과라는 점에서 기술력의 신뢰도가 높다. AI 영상 생성 분야에서 글로벌 경쟁이 활발해지면 소비자와 크리에이터 모두 혜택을 볼 수 있다.
+
+🔎 **시각 B**: 익명으로 리더보드를 장악한 뒤 정체를 공개하는 방식은 마케팅 전략에 가까우며, 벤치마크 성적이 실제 사용 환경의 품질을 보장하지는 않는다. 중국 AI 기업의 데이터 수집 및 활용에 대한 투명성 문제도 여전히 남아있다.
+
+---
 
 ## 🌍 세계
 
-1. **[Brazil's Supreme Court postpones decision on how Rio picks a governor, extending political chaos](https://www.washingtonpost.com/world/2026/04/09/brazil-rio-governor-supreme-court/d43c0228-3466-11f1-b85b-2cd751275c1d_story.html)**  
-   브라질 대법원이 리우데자네이루 주지사를 어떻게 선출할지에 대한 결정을 연기했습니다. 이로 인해 리우의 정치적 혼란이 계속되고 있으며, 대법원의 결정은 향후 주의 정치적 안정성에 큰 영향을 미칠 것으로 예상됩니다.  
-   🔍 시각 A: 이러한 결정 연기는 정치적 갈등의 격화를 우려하는 많은 시민들로부터 긍정적인 해석을 받을 수 있습니다.  
-   🔎 시각 B: 그러나 이런 비효율적인 결정 과정은 시민의 신뢰를 약화시키고, 정치적 혼란을 지속적으로 심화시킬 수 있는 위험을 내포하고 있습니다.
+**1. [트럼프 "오늘 밤 한 문명 사라질 것" 이란에 최후 압박](https://news.google.com/rss/articles/CBMiVkFVX3lxTE1ZdVRmY0pJTUxqeEY3bDliRWtRYXc2bzNPdDZNZWRjdXV1b2haSjR6OVFRYTZWQUtNSkVfbXpybUg4a0kzcUQ0QVlzdmdEdDk2dmVIVFZ3?oc=5)**
 
-2. **[U.S. Postal Service plans to halt some pension payments](https://www.nbcnews.com/video/shorts/u-s-postal-service-plans-to-halt-some-pension-payments-261098053653)**  
-   미국 우편 서비스가 일부 연금 지급을 중단할 계획입니다. 이는 재정적 제한과 운영 효율성을 높이기 위한 조치로 보입니다.  
-   🔍 시각 A: 이 결정은 재정적 안정성을 확보하고 효율적인 운영을 위한 긍정적인 시도로 해석될 수 있습니다.  
-   🔎 시각 B: 그러나 이는 많은 퇴직자들에게 심각한 재정적 영향을 미칠 수 있으며, 여론의 반발을 초래할 가능성이 높습니다.
+트럼프 대통령이 이란을 향해 "오늘 밤 한 문명이 사라질 것"이라는 극단적 발언을 하며 최후통첩 수준의 압박을 가했다. 미국-이란 휴전 협상이 진행되는 가운데 이스라엘의 레바논 공습으로 300명 이상이 사망하는 등 중동 정세가 급격히 악화되고 있다. 호르무즈 해협을 둘러싼 석유 수송 긴장도 고조되며, 국제유가와 글로벌 금융시장에 직접적인 영향을 미치고 있다.
+
+🔍 **시각 A**: 강경한 외교적 압박이 이란의 핵 프로그램과 군사적 팽창을 억제하는 유일한 수단이라는 시각이 있다. 실제로 이란이 협상 테이블에 나온 것 자체가 압박의 효과라는 분석도 나온다.
+
+🔎 **시각 B**: 문명 멸망을 운운하는 극단적 수사는 오히려 협상을 파탄시키고 전면전 위험을 높인다. 민간인 피해가 급증하는 상황에서 군사적 위협을 강화하는 것은 국제법적·인도주의적 비판을 면하기 어렵다.
+
+---
+
+**2. [이스라엘 레바논 공습으로 미-이란 휴전 위기…글로벌 증시 불안](https://www.reuters.com/world/china/global-markets-wrapup-1pix-2026-04-10/)**
+
+이스라엘의 레바논 대규모 폭격으로 하루 만에 300명 이상이 사망했으며, 이는 전쟁 발발 이후 최악의 공격으로 기록됐다. 네타냐후 총리는 베이루트와의 직접 대화를 모색하겠다고 밝혔지만, 미-이란 휴전 협상 자체가 위태로운 상황이다. 아시아-태평양 증시는 혼조세를 보였으며, 한국 코스피는 1.9% 상승했으나 유가 변동성에 대한 우려가 지속되고 있다.
+
+🔍 **시각 A**: 네타냐후의 직접 대화 제안은 군사 작전과 병행한 외교적 출구 전략일 수 있다. 미국 주도의 다자간 중재가 본격화되면 중동 안정화의 전환점이 될 가능성도 있다.
+
+🔎 **시각 B**: 대규모 민간인 살상 직후의 대화 제안은 국제사회의 비난을 무마하기 위한 형식적 제스처에 불과하다는 비판이 강하다. 전쟁의 장기화로 글로벌 에너지 공급망과 경제에 미치는 충격이 갈수록 심화되고 있다.
+
+---
+
+**3. [황제펭귄, 멸종위기종으로 공식 지정](https://www.nbcnews.com/video/shorts/emperor-penguins-declared-endangered-261072965832)**
+
+남극을 대표하는 황제펭귄이 공식적으로 멸종위기종으로 지정됐다. 기후변화로 인한 해빙 감소가 주요 원인으로, 서식지와 번식 환경이 급격히 악화되고 있다. 과학자들은 현재 추세가 계속되면 금세기 말까지 황제펭귄 군집의 상당수가 소멸할 수 있다고 경고하고 있다.
+
+🔍 **시각 A**: 공식 멸종위기 지정은 국제적 보호 조치와 예산 확보의 법적 근거가 되며, 기후변화 대응의 상징적 전환점이 될 수 있다. 대중의 관심과 환경 인식 제고에도 기여한다.
+
+🔎 **시각 B**: 멸종위기 지정만으로는 실질적 보호가 어려우며, 근본 원인인 탄소 배출 감축 없이는 형식적 조치에 그칠 수 있다. 각국의 이해관계가 충돌하는 남극 거버넌스 현실에서 실효성 있는 보호 이행은 난제다.
+
+---
 
 ## 🏛️ 정치
 
-1. **[South Korean minister vows to expand legal remedies for adoptees and other rights victims](https://www.washingtonpost.com/world/2026/04/10/south-korea-justice-minister-foreign-adoptions/73ed4f60-34a9-11f1-b85b-2cd751275c1d_story.html)**  
-   한국의 법무부 장관이 입양인 및 정부 주도의 인권 피해자들을 위한 법적 구제를 확대하겠다고 발표했습니다. 특히 해외 입양이 과거 군사 정권 하에서 광범위한 사기와 관련된 문제라며 이를 해결하겠다고 강조했습니다.  
-   🔍 시각 A: 장관의 강한 의지가 과거의 잘못을 바로잡고 인권을 보호하는데 중요한 기여를 할 것으로 기대됩니다.  
-   🔎 시각 B: 그러나 실제로 이러한 정책이 효과적으로 시행될 수 있을지에 대한 의문이 남아 있는 상태입니다.
+**1. [추경호, 대구시장 출마선언…"고향 위해 모든 경험 쏟겠다"](https://news.google.com/rss/articles/CBMia0FVX3lxTFBmNmhuNDNPN2g5SUdSV0Jjd1RBVk9VazlyUEtJeUhmdXBNNXlQRWV2UUdsUzFDWWNOY0FVRU5RMHMtYi1HbU5WYmFXUWk3UGJiUGltZTVuSEZBb1g3TmlTQmhDZUNyamdqbFRz?oc=5)**
+
+전 경제부총리 추경호가 대구시장 출마를 공식 선언했다. 그는 "고향을 위해 모든 경험을 쏟겠다"며 경제 전문성을 내세운 지역 발전 비전을 제시했다. 국정 경험과 경제 분야 전문성을 바탕으로 한 행정력을 강조하며, 대구 지역 정치판에 새로운 변수로 떠올랐다.
+
+🔍 **시각 A**: 경제부총리 출신의 출마로 대구 경제 활성화와 중앙정부 네트워크를 활용한 지역 발전을 기대할 수 있다. 거시경제 운영 경험이 지방재정 관리에 강점으로 작용할 수 있다.
+
+🔎 **시각 B**: 중앙 관료 출신이 지역 현안에 얼마나 밀착된 이해를 갖고 있는지 의문이다. '낙하산 출마'라는 비판과 함께, 대구 시민의 체감 문제를 해결할 구체적 계획이 부족하다는 지적도 있다.
+
+---
+
+**2. [법무부 장관 "과거 해외입양은 강제 아동인신매매"…피해자 구제 확대 선언](https://www.washingtonpost.com/world/2026/04/10/south-korea-justice-minister-foreign-adoptions/73ed4f60-34a9-11f1-b85b-2cd751275c1d_story.html)**
+
+정성호 법무부 장관이 과거 군사정부 시절의 해외입양을 "강제 아동인신매매"로 규정하며, 국가 주도 인권침해 피해자들에 대한 사법적 구제를 확대하겠다고 밝혔다. 특히 입양 과정에서 광범위한 사기가 있었던 해외입양인들의 권리 구제에 초점을 맞추고, 관련 판결에 대한 정부의 항소를 대폭 자제하겠다고 선언했다. 한국 고위 공직자로서는 이례적으로 강한 표현을 사용한 것으로 평가된다.
+
+🔍 **시각 A**: 국가가 과거 잘못을 정면으로 인정하고 피해자 구제를 확대하는 것은 역사적 정의 실현의 중요한 진전이다. 해외입양인들의 오랜 고통에 대한 실질적 치유의 시작이 될 수 있다.
+
+🔎 **시각 B**: 수십 년이 지난 시점의 구제 확대가 실질적 효과를 얼마나 가질 수 있을지 의문이다. 또한 정부의 항소 자제 선언이 사법부 독립성에 미치는 영향과 재정적 부담에 대한 검토도 필요하다.
+
+---
 
 ## 💰 경제
 
-1. **[World shares mostly higher and oil gains ahead of planned US-Iran ceasefire talks](https://www.thesunchronicle.com/business/world-shares-mostly-higher-and-oil-gains-ahead-of-planned-us-iran-ceasefire-talks/article_c72d175d-9246-56cb-aff9-2fe323fcc81b.html)**  
-   전 세계 주식 시장이 광범위하게 상승세를 보이고 있으며, 미국-Iran 간의 휴전 협상 앞두고 유가도 상승하고 있습니다. 특히 한국 코스피지수도 상승세를 나타내고 있습니다.  
-   🔍 시각 A: 이러한 긍정적인 추세는 글로벌 경제 안정성 회복과 낮은 금리 환경 덕분으로 해석될 수 있습니다.  
-   🔎 시각 B: 그러나 중동의 정치적 불안정성이 지속된다면, 이러한 상승세는 언제든지 무너질 수 있는 위험 요소로 작용할 수 있습니다.
+**1. [코스피, 국제유가 재급등에 2%대 하락 출발](https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5idXhIWGRodldjTnJlTlhpTVFvb3FhMVk3R0NFNWZEb1JKdC1WbnlXSmJ1ck12MlVYWDRIck45VVROOWZyN0xMY25oVjhlc21Xa2tYR0hlSTI5TXBJb3dnMFJOY3ZRWlU?oc=5)**
 
-2. **[Stocks shaky as Israeli attacks on Lebanon tests Iran ceasefire](https://www.reuters.com/world/china/global-markets-wrapup-1pix-2026-04-10/)**  
-   이스라엘의 레바논 공격이 Iran 점령 군의 휴전 협상을 시험하고 있는 가운데, 주식 시장은 불안정한 상태에 놓여 있습니다.  
-   🔍 시각 A: 긴장이 고조되는 가운데도 시장은 강한 저항력을 보이고 있습니다.  
-   🔎 시각 B: 그러나 이러한 상황은 투자 심리를 위축시키고, 불확실성을 증가시켜 급격한 하락을 초래할 가능성이 있습니다.
+국제유가의 재급등으로 코스피가 장 초반 2%대 하락으로 출발했다. 중동 지역의 군사적 긴장 고조가 원유 공급 불안을 자극하면서, 에너지 수입 의존도가 높은 한국 증시에 직접적 타격을 주고 있다. 투자자들의 위험 회피 심리가 강화되며 외국인 매도세도 이어졌다.
+
+🔍 **시각 A**: 지정학적 리스크에 따른 일시적 조정으로, 중동 상황이 안정되면 빠른 반등이 가능하다. 유가 상승은 에너지 관련 종목에는 오히려 호재로 작용할 수 있다.
+
+🔎 **시각 B**: 중동 갈등이 장기화될 경우 수입 물가 상승과 인플레이션 재확산으로 이어질 수 있다. 한국 경제의 구조적 취약점인 에너지 해외 의존도가 다시 한번 드러난 셈이다.
+
+---
+
+**2. [중동 리스크 확산…주식시장 전망 불투명](https://news.google.com/rss/articles/CBMic0FVX3lxTE0tNnM2bVV3M21ab0tKU0hHSFFXY0tCZi1MRi04TjFQc19nMkhKTU8wemlNSGhmTEV0cm1oZ2tVZy1FSzJDQjhNWWJFbE9hNUEwMjBWRkpqYndjWU8xaUtxTUN0STMzVkVQWFgxX29XOFNFUW_SAXdBVV95cUxOUHIzRl9UVFlRVEVxQWN0ejVxUWczbmU5eFFxb0ZGRlV3d3FxbWQ0M0haTnVXT2FjWU9ZZjhITV9faHppT09IM3lOTExwWlpLZ1ZTa0M1WGdZN1ZCVVZrd3JDaWJ3MnBvdnM0bV9ybnJZYkhjSTZ0TQ?oc=5)**
+
+중동발 지정학적 리스크가 글로벌 금융시장 전반으로 확산되고 있다. 미-이란 휴전 협상의 불확실성과 이스라엘-레바논 충돌 격화가 맞물리면서, 안전자산 선호 현상이 두드러지고 있다. 전문가들은 3~4% 인플레이션 지속과 연내 상징적 수준의 금리 인하 1회 정도를 전망하고 있다.
+
+🔍 **시각 A**: 불확실성이 극대화된 시점이 오히려 장기 투자자에게는 저가 매수 기회가 될 수 있다. 미국과 이란 간 협상이 타결되면 시장의 급격한 회복도 기대된다.
+
+🔎 **시각 B**: 전쟁과 인플레이션의 동시 충격은 스태그플레이션 우려를 키운다. 중앙은행들의 정책 여력도 제한적이어서, 시장 변동성이 장기간 지속될 가능성이 높다.
+
+---
+
+**3. ["좋은 기업? 나쁜 주식!" 네이버의 마지막 기회](https://news.google.com/rss/articles/CBMiUkFVX3lxTE1tcDZzbmRuN3l4bEdoQWZidTY2NUswR0J1ZDkxQUpUWkpKSlM4NmFLZXBBeENvd2IxVHVDOFVRYl9kNk9kSl95TXVDak9xOV93Smc?oc=5)**
+
+국내 증시에서 네이버의 주가 부진이 화제로 떠올랐다. 기업 펀더멘털은 탄탄하지만 주가 성과가 따라가지 못하는 '좋은 기업, 나쁜 주식' 현상이 지속되면서, 투자자들 사이에서 지금이 네이버의 마지막 기회인지에 대한 논쟁이 벌어지고 있다. AI 투자 확대와 수익화 전략이 주가 반등의 관건으로 꼽힌다.
+
+🔍 **시각 A**: 네이버의 AI·클라우드 투자가 본격적으로 결실을 맺기 시작하면, 현재 주가 수준은 명확한 저평가 구간으로 판단될 수 있다. 플랫폼 지배력과 기술력은 여전히 건재하다.
+
+🔎 **시각 B**: 글로벌 빅테크와의 AI 경쟁에서 네이버의 규모와 자본력은 한계가 있다. 수년간 반복되는 '마지막 기회' 서사는 투자자 피로를 유발하며, 구조적 성장 정체의 신호일 수 있다.
+
+---
 
 ## 👥 사회
 
-1. **[Former Agriculture Minister Kim Young-rok Unveils 2 Trillion Won Agricultural Budget Plan](https://en.sedaily.com/society/2026/04/09/former-agriculture-minister-kim-young-rok-unveils-2)**  
-   김영록 전 농림축산식품부 장관이 2조 원 규모의 농업 예산 계획을 발표했습니다. 이는 쌀 가격 문제 해결 및 기본소득을 포함한 다양한 정책을 추진하기 위한 것입니다.  
-   🔍 시각 A: 농업계의 전문성과 혁신을 통합한 적극적인 정책이 새로운 성장 동력으로 작용할 것으로 기대됩니다.  
-   🔎 시각 B: 하지만 대규모 예산 편성이 실제 효과를 거두지 못할 경우, 예산 낭비에 대한 비판이 제기될 수 있습니다.
+**1. [인구 절벽 앞에 선 대한민국, 지금이 마지막 기회다](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1KcDNvbl84MHMzZngzZVNlOHpRQUhNSUpDQ2FNNExOb2liWE5ZMXZ3U0t3Um9QNzI4bGVxd1pDalNFaTBJSkpoYm5NekpmQU56Yl9DNzROaXJmbDQ?oc=5)**
+
+대한민국이 인구 절벽의 위기에 직면해 있으며, 전문가들은 지금이 대응할 수 있는 마지막 기회라고 경고하고 있다. 출산율이 세계 최저 수준으로 떨어진 가운데, 고령화 속도 역시 OECD 국가 중 가장 빠르게 진행되고 있다. 생산가능인구 감소로 경제 성장, 연금, 의료 시스템 전반에 걸쳐 구조적 위기가 예고되고 있다.
+
+🔍 **시각 A**: 위기 인식의 확산이 정부와 사회 전반의 정책 대응을 가속화할 수 있다. 육아·주거·교육 등 종합적 지원 체계가 마련되면, 출산율 반등의 가능성이 아직 남아있다.
+
+🔎 **시각 B**: 수십 년간 수조 원의 예산을 투입했음에도 출산율은 계속 하락하고 있어, 기존 정책의 실효성에 근본적 의문이 제기된다. 인구 감소를 전제로 한 사회 시스템 재설계가 더 현실적인 대안일 수 있다.
+
+---
+
+**2. [김어준의 어제, 오늘, 그리고 내일](https://news.google.com/rss/articles/CBMiakFVX3lxTFBQVmh2dXhqRFV5aFROY0RKZVR6Z0NoN1hrNl9CeVhrOWJrY3FWME1aOVFfZVZGSk1acjN5SU8wbnBzUGxnNE9XdHFMWHFQdFdOS3pSMkRUallqdXp6WEpfbHBSZXZnVWxObXfSAW5BVV95cUxPZmdvemQyT3BDTUw2bHlNdUZLTzZBWTdaZnhNMjVydUF4RG5hWWp1RHdJd1RBZzZwcTcxMDVzSi1EVmxNS21sMDFWX2xRTFkteEZ6Vm1IVGM4NGlkQTdNV3lhYjNwRnlVT2lvZ1p0dw?oc=5)**
+
+방송인 겸 정치 평론가 김어준의 과거 활동과 현재 영향력, 그리고 향후 행보에 대한 분석이 조명되고 있다. 팟캐스트와 유튜브를 통해 정치적 영향력을 확대해 온 그의 활동은 한국 미디어 지형에서 독특한 위치를 차지하고 있다. 지지자와 비판자 간의 극명한 시각 차이가 존재하는 인물이다.
+
+🔍 **시각 A**: 기존 언론이 다루지 못하는 이슈를 발굴하고 대중의 정치 참여를 촉진한 공로가 있다. 대안 미디어의 역할과 가능성을 보여준 선구적 사례로 평가할 수 있다.
+
+🔎 **시각 B**: 검증되지 않은 주장과 편향적 보도가 여론을 왜곡하고 사회 갈등을 심화시킨다는 비판이 꾸준하다. 미디어 영향력에 비해 책임성과 투명성이 부족하다는 지적도 있다.
+
+---
 
 ## 🚨 사건사고
 
-1. **[Search for Missing Maintenance Worker After Fire on Submarine at Hyundai](https://maritime-executive.com/article/search-for-missing-maintenance-worker-after-fire-on-submarine-at-hyundai)**  
-   현대중공업에서 운영 중인 잠수함에서 발생한 화재로 한 작업자가 실종되었습니다. 현재 구조 작업이 진행되고 있으며, 실종된 작업자의 신원이 밝혀진 상태입니다.  
-   🔍 시각 A: 구조팀의 빠른 대처가 필요한 상황으로, 재난 대응 시스템이 효과적으로 작동하고 있음을 보여줍니다.  
-   🔎 시각 B: 그러나 안전 관리 미비로 인해 이러한 사고가 발생했을 경우, 책임을 묻는 여론이 일어날 수 있습니다.
+**1. [현대중공업 잠수함 화재…유지보수 작업자 1명 사망](https://maritime-executive.com/article/search-for-missing-maintenance-worker-after-fire-on-submarine-at-hyundai)**
 
-2. **[Hundreds search for wolf that escaped from zoo in South Korea](https://www.theguardian.com/world/2026/apr/09/wolf-escaped-zoo-daejeon-south-korea)**  
-   대전의 한 동물원에서 탈출한 늑에 대한 수색이 진행되고 있습니다. 관련 당국이 긴급 대처를 펼치고 있는 가운데, 인근 지역 주민들은 불안감을 호소하고 있습니다.  
-   🔍 시각 A: 긴급 대응이 실시간으로 이루어지는 모습은 지역 사회의 안전을 최우선으로 하고 있는 것을 보여줍니다.  
-   🔎 시각 B: 그러나 이런 이야기가 SNS를 통해 확산되면서 시민들의 불안감을 가중시킬 수 있는 가능성도 존재합니다.
+4월 9일 울산 HD현대중공업 조선소에서 정비 중이던 잠수함 '홍범도'함에서 화재가 발생해 하청업체 소속 60대 여성 청소 노동자 1명이 사망했다. 화재는 낮 시간에 발생했으며, 실종자 수색 과정에서 잠수함 내부 접근이 어려운 구역에서 시신이 발견됐다. 해군 함정의 유지보수 과정에서의 안전 관리 실태에 대한 점검이 요구되고 있다.
+
+🔍 **시각 A**: 신속한 구조 작업이 이루어졌으며, 이번 사고를 계기로 군함 정비 시 하청 노동자 안전 기준이 강화될 수 있다. 방산 조선소의 안전 시스템 전반에 대한 재점검의 계기가 된다.
+
+🔎 **시각 B**: 위험한 밀폐 공간에서 고령의 하청 노동자가 작업하고 있었다는 점은 구조적 안전 관리 부실을 보여준다. 방산·조선업계의 다단계 하도급 구조 속 안전 사각지대가 반복적으로 인명피해를 낳고 있다.
+
+---
+
+**2. [대전 동물원 늑대 탈출…300여 명 투입 대규모 수색](https://www.theguardian.com/world/2026/apr/09/wolf-escaped-zoo-daejeon-south-korea)**
+
+인구 150만 대전시의 오월드(O-World) 동물원에서 2살짜리 수컷 늑대 '늑구'가 울타리 아래를 파고 탈출했다. 소방·경찰·군 인력 300명 이상이 투입된 대규모 수색 작전이 3일째 이어지고 있으며, 인근 학교가 휴교하는 등 시민 불안이 확산되고 있다. 이 사건은 밈 코인 생성과 대통령의 관심까지 불러일으키며 사회적 화제가 됐다.
+
+🔍 **시각 A**: 대규모 인력을 신속히 투입한 초동 대응과 학교 휴교 등 선제적 안전 조치는 적절했다. 이번 사건을 계기로 전국 동물원의 시설 안전 점검이 이루어지는 계기가 될 수 있다.
+
+🔎 **시각 B**: 동물원의 기본적인 사육 시설 관리가 허술했다는 것이 드러났다. 3일 넘게 포획하지 못하고 있는 점도 동물 관리 역량의 한계를 보여주며, 동물원 운영 체계 전반에 대한 근본적 재검토가 필요하다.
 
 ---
 
