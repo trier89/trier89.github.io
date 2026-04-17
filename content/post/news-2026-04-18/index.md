@@ -12,68 +12,114 @@ tags:
 
 ## 🤖 AI
 
-1. **[Opus 4.7 Can See Better: And More About Anthropic’s Concession Prize](https://www.forbes.com/sites/johnwerner/2026/04/16/opus-47-can-see-better-and-more-about-anthropics-concession-prize/)**
-   Opus 4.7의 새로운 비전 인식 능력이 향상되었습니다. 이는 Anthropic의 최신 기술 발전을 통해 이루어진 것으로, AI 모델이 보다 정확하게 비주얼 정보 처리할 수 있는 경향을 보여줍니다. 이러한 기술은 다양한 산업에서 응용 가능성이 높습니다.
-   🔍 **긍정적 관점:** Opus 4.7의 개선된 인식 능력은 사용자 경험을 크게 향상시킬 것으로 기대됩니다. 특히, 비즈니스 및 안전 분야에서의 활용 가능성도 높습니다.
-   🔎 **비판적 관점:** 최신 AI 기술이 발전하면서 발생할 수 있는 정보의 오해 및 남용 문제에 대한 우려가 여전히 존재합니다.
+**1. [Anthropic CEO heads to White House amid hacking fears over new AI model](https://www.washingtonpost.com/technology/2026/04/17/anthropic-ai-trump-security/)**
 
-## 🏗️ 스마트건설
+Anthropic의 CEO 다리오 아모데이가 4월 17일 백악관 비서실장 수지 와일스와 회동했다. 회동의 핵심 의제는 Anthropic이 새롭게 공개한 차세대 AI 모델 'Mythos'로, 이 모델은 컴퓨터 코드에서 오랫동안 발견되지 않았던 보안 취약점을 찾아낼 수 있는 강력한 능력을 지닌 것으로 알려졌다. 미 연방정부는 이 기술이 국가 안보에 미칠 영향을 두고 긴장과 기대를 동시에 보이고 있으며, Anthropic은 펜타곤의 블랙리스트 결정에 대해 소송을 제기한 상태다. 이번 만남은 양측 갈등 해소를 위한 중요한 분기점으로 평가된다.
 
-1. **[Nemetschek Group acquires HCSS in latest contech M&A](https://www.constructiondive.com/news/nemetschek-group-acquires-hcss-contech-merger-acquisition/817673/)**
-   Nemetschek 그룹이 건설 기술 분야의 공격적인 M&A로 HCSS를 인수했습니다. 이번 인수는 Nemetschek의 건설 소프트웨어 포트폴리오를 확대하고, 시장 점유율을 더욱 강화하는데 기여할 것입니다.
-   🔍 **긍정적 관점:** 이 인수는 건설업계의 디지털 혁신을 가속화할 것으로 보이며, 새로운 기술의 통합이 효율성을 증가시킬 것입니다.
-   🔎 **비판적 관점:** 인수 후 통합 과정에서 기존 고객들이 적절한 서비스를 받을 수 있을지에 대한 우려가 존재합니다.
+🔍 **시각 A**: Mythos는 사이버 보안 방어 체계를 강화할 수 있는 혁신적 도구로, 미국이 글로벌 사이버 위협에 선제적으로 대응할 수 있는 기반을 마련해준다. 정부와 민간 AI 기업이 협력 채널을 회복한다는 점에서 AI 거버넌스의 모범 사례가 될 수 있다.
+
+🔎 **시각 B**: 동일한 기술이 공격 도구로 전용될 위험성도 매우 크며, 대규모 취약점 발견 능력을 지닌 모델이 통제 없이 확산될 경우 사이버 공격의 비대칭성을 악화시킬 수 있다. 정부와 빅테크 간 비공식 협상 채널이 투명성 없이 진행되는 점도 우려 요소다.
+
+**2. [OpenAI introduces GPT-Rosalind, its drug discovery AI](https://pharmaphorum.com/news/openai-introduces-gpt-rosalind-its-drug-discovery-ai)**
+
+OpenAI가 신약 개발과 생명과학 연구 가속화를 목표로 한 전문 모델 'GPT-Rosalind'를 공개했다. 이번 출시는 OpenAI의 생명과학 분야 진출 확장의 일환으로, 같은 주에 발표된 노보 노디스크와의 전략적 제휴와도 맞물린다. 노보 노디스크는 신약 개발부터 상업화까지 전 과정에 OpenAI 기술을 적용할 예정이다. 생명과학 분야에서 AI 모델 출시가 잇따르며 산업 지형이 빠르게 재편되고 있다.
+
+🔍 **시각 A**: 신약 개발 기간을 획기적으로 단축할 수 있는 전문 AI 모델의 등장은 환자들에게 새로운 치료 옵션을 빠르게 제공하는 데 기여할 것이다. 빅파마와의 협력은 AI 기술의 실제 임상 적용 가능성을 높이는 중요한 단계다.
+
+🔎 **시각 B**: AI가 제안하는 후보물질이 실제 안전성·유효성 검증을 충분히 거치지 않을 위험이 있으며, 거대 제약사와 빅테크의 결합은 신약 가격 결정권 집중 등 새로운 의료 형평성 문제를 야기할 수 있다.
+
+---
 
 ## 🌍 세계
 
-1. **[War with Iran 'going along swimmingly,' Trump says](https://www.modernghana.com/amp/videonews/637364)**
-   트럼프 대통령은 이란과의 전쟁이 순조롭게 진행되고 있다고 밝혔습니다. 이러한 발언은 국내외에서 다양한 해석과 논란을 야기하고 있습니다.
-   🔍 **긍정적 관점:** 전쟁이 조속히 마무리될 경우, 중동 지역의 안정과 경제 회복이 가능할 것입니다.
-   🔎 **비판적 관점:** 전쟁에 대한 긍정적 언급이 높아질수록, 인명 피해와 국제 사회의 반발이 우려됩니다.
+**1. [Crowds gather in Lebanon after ceasefire announcement](https://www.nbcnews.com/video/shorts/crowds-gather-in-lebanon-after-ceasefire-announcement-261554245634)**
 
-2. **[Police officer on horseback chases purse thief in New York](https://www.nbcnews.com/video/shorts/police-officer-on-horseback-chases-purse-thief-in-new-york-261550149784)**
-   뉴욕에서 경찰이 말을 타고 엽서 도둑을 추격하는 사건이 발생했습니다. 이러한 사건은 대중의 주목을 받으며 경찰 효율성에 대한 다양한 논의가 이어지고 있습니다.
-   🔍 **긍정적 관점:** 경찰의 신속하고 강력한 대응은 시민의 안전을 보장하는데 크게 기여합니다.
-   🔎 **비판적 관점:** 그러나 경찰의 폭력적 대응 방식이 시민들과의 갈등을 유발할 가능성도 있어 우려가 필요합니다.
+이스라엘-레바논 휴전 발표 이후 레바논 곳곳에서 시민들이 거리로 쏟아져 나와 평화를 환영하는 군중집회가 열렸다. 장기간 이어진 긴장 상태가 해소되며 레바논 사회는 안도감을 표출하고 있다. 이번 휴전은 중동 전반의 정세 안정에 긍정적 신호로 작용하고 있으며, 미국·이란 간 협상 진전과도 맞물려 주목받고 있다. 다만 휴전의 지속 가능성과 후속 협상 결과는 여전히 불투명하다.
+
+🔍 **시각 A**: 휴전은 수많은 민간인의 생명을 보호하고 인도주의적 위기를 완화할 수 있는 결정적 조치다. 지역 안정은 글로벌 에너지 시장과 무역 흐름에도 긍정적 영향을 미칠 것으로 기대된다.
+
+🔎 **시각 B**: 과거에도 휴전 합의가 단기간 내 무효화된 사례가 많아, 이번 합의의 실효성에 의문이 제기된다. 근본적인 정치·종교적 갈등이 해결되지 않은 상태에서의 휴전은 일시적 봉합에 그칠 가능성이 있다.
+
+**2. [War with Iran 'going along swimmingly,' Trump says](https://www.modernghana.com/amp/videonews/637364)**
+
+도널드 트럼프 대통령이 라스베이거스 방문 중 이란과의 전쟁이 "순조롭게 진행되고 있다"고 발언하며, 경제·유가 이슈와 함께 전쟁 상황을 직접 거론했다. 백악관은 이란과의 협상 타결에 대해 낙관적 입장을 표명하며 외교적 해법 모색을 시사했다. 동시에 이란이 호르무즈 해협을 상업 운항에 다시 개방한다고 발표하면서 글로벌 에너지 시장이 즉각 반응했다. 미·이란 갈등은 외교와 군사가 동시에 진행되는 복합 국면에 진입했다.
+
+🔍 **시각 A**: 군사적 압박과 외교적 협상이 병행되며 이란을 협상 테이블로 이끄는 데 효과를 발휘하고 있다. 호르무즈 해협 재개방은 글로벌 경제 위기 회피에 결정적 역할을 한다.
+
+🔎 **시각 B**: 진행 중인 전쟁을 "순조롭다"고 표현하는 것은 인명 피해의 심각성을 가볍게 다루는 발언이라는 비판이 제기된다. 협상 낙관론이 군사 행동을 정당화하는 도구로 활용될 우려도 있다.
+
+**3. [호르무즈 해협 국제 화상회의 시작…이재명 대통령 공개 발언 예정](https://news.google.com/rss/articles/CBMiZkFVX3lxTE5FM0ItVk5sOE43amxxdEFkSEJWOTJMTi1pMmhFRnhnamxFTTZJa2h2TkE3VTFZOUt2eWZuOGdqZW93UzhNNjRBNmZNSG1mX1hkbXp0Sl9vMERHNEdPY3lPT2tORFBtdw?oc=5)**
+
+호르무즈 해협 안정을 논의하는 국제 화상 정상회의가 시작되며, 이재명 대통령이 공개 발언을 통해 한국의 입장을 밝힐 예정이다. 한국은 호르무즈 해협을 통한 원유 공급 의존도가 매우 높아 이번 사안에 직접적 이해관계를 가진다. 이재명 대통령은 호르무즈 해협 안정을 위한 국제사회 차원의 관리 메커니즘 모색을 제안할 계획이다. 한국이 글로벌 에너지 안보 논의의 주도적 참여국으로 자리매김하는 자리로 평가된다.
+
+🔍 **시각 A**: 한국이 다자 외교 무대에서 에너지 안보 의제를 적극 제기하며 글로벌 리더십을 발휘하는 사례다. 호르무즈 해협 관리 메커니즘 제안은 실용적이면서도 평화 지향적 해법으로 주목받는다.
+
+🔎 **시각 B**: 화상회의 형식의 다자 메커니즘이 실제 강제력 있는 합의를 도출할 수 있을지 의문이며, 자칫 선언적 수준에 그칠 수 있다. 한국이 미·이란 사이에서 외교적 균형을 유지하기 어려운 국면에 접어들 수 있다.
+
+---
 
 ## 🏛️ 정치
 
-1. **[South Koreans breathe sighs of relief as escaped wolf is returned to zoo safely](https://www.theguardian.com/world/2026/apr/17/south-korea-escaped-wolf-captured-returned-zoo-safely)**
-   한국에서 탈출한 늑대가 무사히 동물원으로 돌아온 소식에 많은 국민들이 안도했습니다. 이번 사건은 동물 보호에 대한 논란을 재점화했습니다.
-   🔍 **긍정적 관점:** 늑대의 안전한 귀환은 동물 보호와 생명 존중의 중요성을 일깨우는 계기가 됩니다.
-   🔎 **비판적 관점:** 동물의 탈출과 같은 사건이 자주 발생할 경우, 동물원 운영과 관리의 문제점이 드러날 수 있습니다.
+**1. [李 대통령 "제조업 비중 높은 한국, 파격적 혁신해야"](https://news.google.com/rss/articles/CBMia0FVX3lxTFB2VUE4emhBbXk0d05EemF1UVRTbFBEVklkcHljZFRCZnFXc3FqSHo3NEo1ZmIyOTMwUnVocUlPNFF5a05ERjVCaXNhc2NXZF9TMDY5b1BhQmpjODNVa29LdWN4Q3BvY2RrRUlj?oc=5)**
 
-2. **오늘은 주요 국내 뉴스가 없습니다.**
+이재명 대통령이 청와대 회의에서 한국 경제구조의 특성을 짚으며 "제조업 비중이 높은 한국은 파격적 혁신을 추진해야 한다"고 강조했다. 글로벌 공급망 재편과 AI·로봇 기술 확산 속에서 전통 제조업의 경쟁력 유지를 위한 구조 전환이 시급하다는 인식이 반영됐다. 정부는 첨단 제조 전환과 R&D 투자 확대를 핵심 정책 방향으로 추진할 것으로 보인다. 이번 발언은 향후 산업·고용 정책의 큰 틀을 시사한다.
+
+🔍 **시각 A**: 제조업 강국으로서 한국이 AI·자동화 시대에 선제적으로 혁신을 추진해야 한다는 방향 제시는 시의적절하다. 산업 경쟁력 유지를 위한 정부의 강력한 메시지가 민간 투자 확대로 이어질 것으로 기대된다.
+
+🔎 **시각 B**: '파격적 혁신'이라는 추상적 구호에 그칠 경우 실제 산업 현장의 변화로 연결되지 못할 우려가 있다. 자동화 가속은 제조업 일자리 감소와 직결되므로 노동시장 안전망에 대한 구체적 대책이 병행돼야 한다.
+
+---
 
 ## 💰 경제
 
-1. **[Stock market today: Dow climbs 1,000 points, S&P 500 and Nasdaq surge as Iran says Strait of Hormuz 'completely open'](https://uk.finance.yahoo.com/news/stock-market-today-dow-climbs-900-points-sp-500-and-nasdaq-rise-as-iran-says-strait-of-hormuz-completely-open-230532468.html)**
-   이란이 호르무즈 해협이 완전 개방되었다고 발표하자 미 증시가 급등했습니다. 이는 투자자들에게 긍정적인 신호로 작용하고 있습니다.
-   🔍 **긍정적 관점:** 주식 시장의 급상승은 경제 회복에 대한 기대감을 높이며, 투자자들의 신뢰를 강화합니다.
-   🔎 **비판적 관점:** 하지만 전쟁과 정치적 긴장감이 여전히 존재하는 상황에서 시장의 불안정성이 우려됩니다.
+**1. [Oil Tumbles 10% And The Dow Soars More Than 1,000 Points After Iran Reopens The Strait Of Hormuz](https://www.huffpost.com/entry/financial-markets-oil-hormuz_n_69e2499de4b0555d213b1d4b)**
 
-2. **[Oil Tumbles 10% And The Dow Soars More Than 1,000 Points After Iran Reopens The Strait Of Hormuz](https://www.huffpost.com/entry/financial-markets-oil-hormuz_n_69e2499de4b0555d213b1d4b)**
-   호르무즈 해협의 재개방 소식으로 인해 유가가 10% 급락했으며, 주가 지수는 큰 폭으로 상승했습니다. 이는 중동의 안정성이 회복될 것이라는 기대감을 반영합니다.
-   🔍 **긍정적 관점:** 유가 하락은 글로벌 경제에 긍정적인 영향을 주며, 특히 수입 국가들에게 도움이 됩니다.
-   🔎 **비판적 관점:** 그러나 하락하는 유가는 석유 산업의 불안정성을 야기할 수 있으며, 관련 기업에는 부정적인 영향을 미칠 수 있습니다.
+이란이 호르무즈 해협을 다시 상업 운항에 개방한다고 발표하면서 국제 유가는 13% 이상 급락하고, 다우지수는 1,000포인트 넘게 치솟았다. 미국 증시는 3월 말 저점 대비 12% 이상 상승하며 또 한 번 사상 최고치를 경신했다. 호르무즈 해협을 통한 원유 운송 정상화는 글로벌 인플레이션 압력 완화에 직접적 영향을 미친다. 미·이란 협상 진전 기대감과 맞물려 위험자산 선호 심리가 빠르게 회복되고 있다.
+
+🔍 **시각 A**: 호르무즈 해협 재개방은 글로벌 경제 최악의 시나리오를 회피하게 해준 결정적 사건이며, 에너지 가격 안정은 전 세계 소비자와 기업에 즉각적 혜택을 제공한다. 시장이 빠르게 회복되며 투자 심리가 정상화되고 있다.
+
+🔎 **시각 B**: 단기간에 발생한 급격한 가격 변동은 시장의 과민 반응을 보여주며, 지정학적 리스크가 재발할 경우 동일한 폭의 역방향 충격이 발생할 수 있다. 단일 변수에 의존하는 시장 구조의 취약성이 다시 한번 확인됐다.
+
+**2. [증시 오늘 '핫이슈' …"애매해도 7월 이후 중복상장 원칙적 금지"](https://news.google.com/rss/articles/CBMiUkFVX3lxTE82azR2MmpoRlRCMHlDRHl3WU4xR210QjdhRVZhZTZtZEhOU1hBb05FUmROZXF4emxrbHBXa2F4LXdwYllCX0E3QUFuaHFuUUNPQXc?oc=5)**
+
+금융당국이 7월 이후 자회사·모회사 간 중복상장을 원칙적으로 금지하는 방안을 발표했다. 이는 모회사 주주의 가치 희석 문제와 코리아 디스카운트 해소를 위한 핵심 조치로 평가된다. 시장에서는 이미 상장 추진 중인 기업들의 일정 조정이 불가피해질 전망이다. 그동안 논란이 컸던 물적분할 후 상장 문제에 대한 제도적 해법으로 주목받고 있다.
+
+🔍 **시각 A**: 중복상장 금지 정책은 소액주주 보호와 한국 자본시장의 신뢰도 제고에 결정적 기여를 할 것이다. 코리아 디스카운트 해소를 위한 구조적 개혁이 본격화되며 외국인 투자 유입 확대도 기대된다.
+
+🔎 **시각 B**: '원칙적 금지'라는 모호한 기준은 예외 조항을 둘러싼 분쟁과 정책 불확실성을 키울 수 있다. 자금 조달 수단이 제한되면 성장기 기업의 투자 위축으로 이어질 우려도 제기된다.
+
+**3. [Stock market today: Dow climbs 1,000 points, S&P 500 and Nasdaq surge as Iran says Strait of Hormuz 'completely open'](https://uk.finance.yahoo.com/news/stock-market-today-dow-climbs-900-points-sp-500-and-nasdaq-rise-as-iran-says-strait-of-hormuz-completely-open-230532468.html)**
+
+미국 증시가 사상 최고치를 경신한 뒤에도 추가 상승하며 강한 랠리를 보였다. iShares 반도체 ETF(SOXX)는 8거래일 연속 장중 사상 최고치를 기록했고, 나스닥 종합지수와 기술주 ETF는 13거래일 연속 상승세를 이어갔다. 이란의 호르무즈 해협 개방 선언이 글로벌 위험자산 랠리를 견인한 핵심 동력이다. 반도체와 빅테크가 시장 상승을 주도하며 AI 투자 모멘텀이 재확인되고 있다.
+
+🔍 **시각 A**: 지정학적 긴장 완화와 AI 산업 성장이 결합하며 글로벌 자산 가격이 건전한 상승세를 이어가고 있다. 반도체 섹터의 연속 신고가는 실물 수요 회복을 반영하는 신호로 해석된다.
+
+🔎 **시각 B**: 단기간의 과열된 상승은 향후 조정 위험을 키우며, 일부 종목의 밸류에이션이 펀더멘털을 크게 상회한다는 분석이 늘고 있다. 지정학적 호재에 의존한 랠리는 지속성에 의문이 따른다.
+
+---
 
 ## 👥 사회
 
-1. **[After a paralyzing stroke, a South Korean pianist recreates himself as a one-handed performer](https://apnews.com/article/korea-onehanded-pianist-stroke-4aa4d4ebf27c4cf68e25e470e116b44d)**
-   한 한국 피아니스트가 중풍으로 팔을 잃은 후, 한 손으로 재능을 발휘하며 새로운 길을 걷고 있습니다. 그의 이야기는 많은 이들에게 희망을 주고 있습니다.
-   🔍 **긍정적 관점:** 그의 사례는 장애인들이 사회에서 어떻게 성공할 수 있는지를 보여주는 영감을 제공합니다.
-   🔎 **비판적 관점:** 그러나 사회적 지원과 환경이 부족한 경우, 성공하기 어려운 현실도 여전히 존재합니다.
+**1. [South Korea turns to 2 African nations for oil as disruptions at the Strait of Hormuz continue](https://africa.businessinsider.com/local/markets/south-korea-turns-to-2-african-nations-for-oil-as-disruptions-at-the-strait-of-hormuz/wtv8rrq)**
 
-2. **오늘은 주요 국내 뉴스가 없습니다.**
+한국이 호르무즈 해협 운항 차질에 대응해 알제리와 리비아 등 북아프리카 두 국가를 대체 원유 공급처로 모색하고 있다. 중동 의존도가 높은 한국 에너지 수급 구조의 취약성을 보여주는 사례다. 정부는 공급선 다변화를 통해 단기 가격 변동성에 대응하고 장기 에너지 안보를 강화한다는 방침이다. 산업계와 가정 모두에 영향을 미치는 핵심 사회 이슈로 부상하고 있다.
+
+🔍 **시각 A**: 공급선 다변화는 한국의 에너지 안보를 강화하고 외부 충격에 대한 내성을 키우는 현명한 조치다. 아프리카 국가들과의 협력 확대는 새로운 자원 외교 기회를 만들어낼 수 있다.
+
+🔎 **시각 B**: 알제리·리비아 모두 정치적 불안정성을 안고 있어 새로운 공급원도 안정적이지 않을 수 있다. 근본적 해법은 재생에너지 전환 가속화이며, 단순 공급선 교체로는 구조적 리스크를 해소할 수 없다.
+
+---
 
 ## 🚨 사건사고
 
-1. **[속보] 울산화력 붕괴 5명 사망 추정···2명 실종](https://news.google.com/rss/articles/CBMiakFVX3lxTE9mMm5vbFBJbnFaLVBpQ3E2TFZZWUpzcXc4Sndnb3FMOEVCRlJvVTNydlI2aVRadkI3UjFYdVZRRGR4VzdhUU5VNnd4M213cXBHYkI3aG1ieV80MGF3c0VScVcxOXl3NHlrNnfSAW5BVV95cUxQVjgxVXRoOFdxcFZ0N3JEbUpEU2NkR0FuVklxS0NGVTBQY2pkY05Wczl6RGg2a2pRbGtzSTlMRTRkUFVvTGNIRTFkRlVDLUFfdG1uWHV2NmFoaUNfTGhrLUJTV3phRk1OVldSZ0s2QQ?oc=5)**
-   울산의 한 화력발전소에서 붕괴 사고가 발생하여 5명이 사망한 것으로 추정되고 있으며, 2명이 실종되었습니다. 구조작업이 진행되고 있습니다.
-   🔍 **긍정적 관점:** 신속한 구조작업을 통해 더 많은 생명을 구할 수 있는 가능성이 있습니다.
-   🔎 **비판적 관점:** 그러나 이 사고는 인프라의 안전성 문제를 심각하게 드러내며, 이에 대한 전반적인 재검토가 필요합니다.
+**1. [[속보] 울산화력 붕괴 5명 사망 추정···2명 실종](https://news.google.com/rss/articles/CBMiakFVX3lxTE9mMm5vbFBJbnFaLVBpQ3E2TFZZWUpzcXc4Sndnb3FMOEVCRlJvVTNydlI2aVRadkI3UjFYdVZRRGR4VzdhUU5VNnd4M213cXBHYkI3aG1ieV80MGF3c0VScVcxOXl3NHlrNnfSAW5BVV95cUxQVjgxVXRoOFdxcFZ0N3JEbUpEU2NkR0FuVklxS0NGVTBQY2pkY05Wczl6RGg2a2pRbGtzSTlMRTRkUFVvTGNIRTFkRlVDLUFfdG1uWHV2NmFoaUNfTGhrLUJTV3phRk1OVldSZ0s2QQ?oc=5)**
 
-2. **오늘은 주요 국내 뉴스가 없습니다.**
+울산화력발전소에서 구조물 붕괴 사고가 발생해 5명이 사망한 것으로 추정되고 5명에 대한 수색이 진행 중이다. 사고는 발전소 내 작업 중 발생한 것으로 알려졌으며, 정확한 원인 규명은 진행 중이다. 소방·구조 당국은 실종자 수색과 인명 구조에 총력을 기울이고 있다. 노후 발전 인프라의 안전 관리 문제가 다시금 도마 위에 오르고 있다.
 
----  
+🔍 **시각 A**: 사고 발생 즉시 신속한 구조 활동이 전개되고 있어 추가 피해 최소화에 집중하는 모습이다. 이번 사고를 계기로 발전 시설 전반의 안전 진단과 시스템 개선이 가속화될 것으로 기대된다.
+
+🔎 **시각 B**: 산업 현장의 반복되는 중대재해는 그동안의 안전관리 시스템이 실효성 있게 작동하지 않았음을 보여준다. 노후 발전소의 점검 주기와 구조적 안전성에 대한 근본적 재검토가 시급하며, 책임 소재 규명도 철저히 이뤄져야 한다.
+
+---
+
 *이 글은 자동으로 생성된 뉴스 브리핑입니다.*
