@@ -11,61 +11,130 @@ tags:
 ---
 
 ## 🤖 AI
-1. **[Live-Captioning Glasses Reveal Real-Time AI Captions in 2026 – Why It Matters Now](https://glassalmanac.com/live-captioning-glasses-reveal-real-time-ai-captions-in-2026-why-it-matters-now/)**
-   최신 라이브 캡셔닝 안경이 2026년에 실시간 AI 자막을 제공하겠다는 의도를 밝히고 있습니다. 이 기술은 일상적인 사용을 위해 충분히 성숙해졌으며, 여러 기술 기업들이 관련 하드웨어 개발에 나서고 있다는 보고가 있습니다. 특히 애플이 4종의 스마트 안경 모델을 시험 중이라는 소식도 있습니다.  
-   🔍 시각 A: 이 기술은 장애인을 포함한 모든 사용자에게 더 나은 접근성을 제공하며, 커뮤니케이션의 장벽을 허물 수 있습니다.  
-   🔎 시각 B: 그러나 이러한 기술은 개인 정보 보호 문제를 야기할 수 있으며, 사용자의 행동을 지속적으로 모니터링하는 데 대한 우려가 커질 수 있습니다.
 
-2. **[OpenClaw vs Hermes Agent: Why Nous Research's Self-Improving Agent Now Leads OpenRouter's Global Rankings](https://www.marktechpost.com/2026/05/10/openclaw-vs-hermes-agent-why-nous-researchs-self-improving-agent-now-leads-openrouters-global-rankings/)**
-   Nous Research의 하이브리드 AI 에이전트, Hermes Agent가 OpenRouter의 글로벌 순위에서 1위를 기록했습니다. 이 에이전트는 스스로 학습하고 개선하는 기능을 갖추고 있어, 기존의 OpenClaw를 넘어선 것으로 평가받고 있습니다.  
-   🔍 시각 A: AI 기술이 지속적으로 발전하고 있으며, 이는 더 높은 효율성과 성과를 가능하게 합니다.  
-   🔎 시각 B: 하지만 스스로 발전할 수 있는 AI의 통제 문제와 윤리적 우려가 제기되고 있습니다.
+**1. [OpenClaw vs Hermes Agent: Nous Research의 자가개선형 에이전트, OpenRouter 글로벌 1위 등극](https://www.marktechpost.com/2026/05/10/openclaw-vs-hermes-agent-why-nous-researchs-self-improving-agent-now-leads-openrouters-global-rankings/)**
 
-## 🏗️ 스마트건설
-1. **[Lack of BIM skills could make construction labor shortage worse](https://www.bdcnetwork.com/aec-tech/bim-and-information-technology/news/55288670/lack-of-bim-skills-could-make-construction-labor-shortage-worse)**
-   BIM 기술의 충분한 교육이 이루어지지 않으면 건설 분야의 인력 부족이 더욱 심화될 것이라는 경고가 나왔습니다. 이 보고서는 필요 기술 교육 기회의 부족이 문제의 주요 원인이라고 지적하고 있습니다.  
-   🔍 시각 A: BIM 기술이 발전함에 따라 교육 기회를 넓히는 것이 중요하며, 이는 전체 산업의 경쟁력을 높일 수 있습니다.  
-   🔎 시각 B: 그러나 당장 해결책이 마련되지 않는다면, 건설 산업의 인력 문제는 더욱 심각해질 수 있습니다.
+오픈소스 AI 에이전트 시장에 새로운 선두주자가 등장했다. 2026년 5월 10일 기준, Nous Research가 개발한 Hermes Agent가 OpenClaw를 제치고 OpenRouter 글로벌 일일 앱·에이전트 순위에서 1위를 차지했다. Hermes Agent는 자가개선(self-improving) 메커니즘을 핵심으로 하며, 사용자 피드백과 작업 결과를 학습해 스스로 성능을 향상시킨다. 한편 OpenClaw의 창업자 Peter Steinberger는 지난 2월 OpenAI에 합류하며 업계 인재 이동의 변화를 보여주고 있다.
+
+🔍 시각 A: 오픈소스 진영에서 자가개선형 에이전트가 상용 모델과 경쟁할 수준으로 발전한 점은 AI 민주화의 중요한 이정표다. 폐쇄형 거대 모델에 의존하지 않고도 고성능 에이전트를 구축할 수 있는 길이 열렸다는 점에서 개발자 생태계 전반에 긍정적이다.
+
+🔎 시각 B: 자가개선 메커니즘은 통제 가능성과 안전성 측면에서 새로운 위험 요소를 안고 있다. 에이전트가 스스로 학습 방향을 결정한다면 의도하지 않은 행동 패턴이 생성될 수 있으며, 오픈소스 특성상 악용 가능성도 배제할 수 없다.
+
+**2. [실시간 자막 안경, 2026년 일상 활용 단계 진입](https://glassalmanac.com/live-captioning-glasses-reveal-real-time-ai-captions-in-2026-why-it-matters-now/)**
+
+WIRED의 5월 9일자 구매 가이드와 테스트 결과에 따르면, 라이브 캡셔닝 안경 기술이 일상 활용 가능한 수준까지 성숙했다. AI 기반 실시간 음성-텍스트 변환을 안경 디스플레이에 표시하는 이 기술은 청각 장애인뿐 아니라 다국어 환경 회의 등 일반 소비자 시장으로 확장되고 있다. TechCrunch에 따르면 애플도 4가지 스마트 안경 디자인을 시험 중인 것으로 알려져, 빅테크의 본격적인 시장 진입이 임박한 상황이다.
+
+🔍 시각 A: 청각 장애인의 일상 소통 장벽을 극적으로 낮추는 접근성 혁명이며, 다국어 비즈니스 미팅·국제 행사에서도 즉각적인 커뮤니케이션 도구로 자리 잡을 잠재력이 크다. 웨어러블 AI가 실생활 효용을 입증한 첫 사례 중 하나다.
+
+🔎 시각 B: 모든 대화가 실시간 텍스트로 변환·기록될 수 있다는 점은 사생활 침해 우려를 증폭시킨다. 또한 AI 자막의 오역이나 누락이 중요한 의사결정 상황에서 오해를 유발할 수 있어, 정확도가 충분히 검증되기 전 광범위한 채택은 위험하다.
+
+---
 
 ## 🌍 세계
-1. **[Saudi oil giant Aramco sees Q1 profits rise 25% by shifting exports to its East-West Pipeline](https://apnews.com/article/aramco-saudi-arabian-oil-ab384a52510f7af0c1e5629889742285)**
-   사우디아라비아의 아람코가 수출 경로를 동서 파이프로 전환하면서 1분기 수익이 25% 증가했습니다. 이는 국제 유가 상승이 반영된 결과로, 회사의 재무 건전성을 더욱 강화할 것으로 보입니다.  
-   🔍 시각 A: 아람코의 수익 증가로 인해 사우디 경제가 더욱 안정될 가능성이 커 집니다.  
-   🔎 시각 B: 그러나 이러한 유가 상승이 전 세계 경제에 미치는 악영향도 고려해야 합니다.
 
-2. **[Britain’s Starmer fights for his job as calls for his ouster grow after local election losses](https://apnews.com/article/uk-starmer-labour-resignation-pressure-98241a9dfeb39c385a5e2e5207a1a5a3)**
-   브리튼의 노동당 지도자인 스타머가 최근의 지방 선거에서의 큰 패배 이후 직무 유지를 위해 고군분투하고 있습니다. 당내에서 그의 퇴진을 요구하는 목소리가 커지고 있는 가운데, 정치적 미래가 불확실해 보입니다.  
-   🔍 시각 A: 스타머의 리더십이 지속된다면 당의 재편성과 재도약의 기회를 모색할 수 있습니다.  
-   🔎 시각 B: 그러나 그의 지도력이 회복되지 않는다면, 당의 존립 자체가 위태로울 수 있습니다.
+**1. [러시아, 우크라이나의 미국 중재 3일 휴전 위반 주장](https://apnews.com/article/russia-ukraine-war-ceasefire-beabe2b017b868e99408e227c403789b)**
+
+러시아가 일요일, 미국이 중재한 3일간의 휴전을 우크라이나가 위반했다고 비난했다. 우크라이나 측은 반대로 러시아군의 공격이 계속되고 있다고 주장하며 양측의 책임 공방이 격화되고 있다. 트럼프 행정부의 외교적 노력으로 성사된 이번 휴전은 양측의 신뢰 부족으로 출발부터 흔들리고 있는 상황이다. 평화 협상으로의 진전을 기대했던 국제사회의 우려가 커지고 있다.
+
+🔍 시각 A: 비록 짧은 휴전이지만 미국이 양측을 협상 테이블에 앉히는 데 성공했다는 점만으로도 의미가 있다. 부분적 위반에도 불구하고 외교적 모멘텀이 유지된다면 더 본격적인 평화 프로세스로 이어질 수 있는 발판이 될 수 있다.
+
+🔎 시각 B: 휴전 발효 즉시 양측이 상대를 비난하는 패턴은 신뢰 기반이 전혀 형성되지 못했음을 의미한다. 미국의 일방적 중재 모델이 실질적 종전이 아닌 정치적 쇼에 그칠 위험이 크며, 양측의 근본적 영토·안보 갈등을 해소하지 못한 휴전은 반복적으로 무너질 가능성이 높다.
+
+**2. [사우디 아람코, 1분기 순이익 25% 증가… 동서 송유관 활용 수출 전환 성공](https://apnews.com/article/aramco-saudi-arabian-oil-ab384a52510f7af0c1e5629889742285)**
+
+사우디아라비아 국영 석유기업 아람코가 1분기 순이익이 전년 대비 25% 증가했다고 발표했다. 호르무즈 해협의 지정학적 긴장이 고조되는 가운데, 아람코는 페르시아만을 우회하는 동서 송유관(East-West Pipeline)으로 수출 경로를 전환해 안정적 공급망을 유지했다. 이는 호르무즈 봉쇄 우려에도 불구하고 사우디가 글로벌 에너지 시장에서 영향력을 강화하는 결과를 낳았다. 국제 유가 상승세와 맞물려 중동 산유국들의 전략적 입지가 재편되고 있다.
+
+🔍 시각 A: 사우디의 인프라 다각화 투자가 위기 상황에서 빛을 발한 모범 사례다. 글로벌 에너지 안보 측면에서도 호르무즈 의존도를 낮추는 대안 경로의 효용성이 입증되어, 향후 유가 변동성을 완화하는 효과를 기대할 수 있다.
+
+🔎 시각 B: 산유국의 이익이 늘어난다는 것은 곧 소비국과 가계의 부담이 가중된다는 의미이며, 글로벌 인플레이션 압력으로 작용한다. 또한 중동 분쟁의 장기화가 사우디에 구조적 이익을 안기는 구도는 평화 정착 인센티브를 약화시킬 수 있다.
+
+**3. [영국 스타머 총리, 지방선거 패배로 사임 압박… 정치 생명 위기](https://apnews.com/article/uk-starmer-labour-resignation-pressure-98241a9dfeb39c385a5e2e5207a1a5a3)**
+
+영국 키어 스타머 총리가 지방선거에서 노동당이 참패한 후 당내 사임 요구에 직면해 정치 생명을 건 싸움을 벌이고 있다. 집권 후 단기간에 지지율이 급락하면서 노동당 내부에서도 리더십 교체론이 부상하고 있다. 경제 정책과 이민 문제에 대한 유권자 불만이 누적된 결과로 평가되며, 야당 보수당과 개혁당이 반사이익을 얻는 형국이다. 영국 정치권의 불안정성이 유럽 전반의 정치 지형에 영향을 미칠 가능성도 거론된다.
+
+🔍 시각 A: 민주주의가 정상적으로 작동하고 있다는 신호다. 유권자가 선거를 통해 집권당에 책임을 묻고, 당내 자정 작용이 활발히 이뤄지는 모습은 영국 정치의 건강성을 보여주는 측면이 있다.
+
+🔎 시각 B: 잦은 리더십 교체는 정책의 일관성과 국제 신뢰를 훼손한다. 브렉시트 이후 영국이 직면한 경제·외교 난제들은 단기 처방으로 해결될 수 없으며, 정치적 불안정이 길어지면 투자 위축과 통화 약세로 이어질 수 있다.
+
+---
 
 ## 🏛️ 정치
-1. **[South Korean Investigation Shows Unidentified Projectiles Struck HMM Ship](https://maritime-executive.com/article/south-korean-investigation-shows-unidentified-projectiles-struck-hmm-ship)**
-   한국 정부는 5월 4일 페르시아만에서 HMM 선박이 발사체에 맞았다고 발표했습니다. 이는 외교적 긴장이 높아지는 가운데 발생한 사건으로, 자세한 조사가 진행 중입니다.  
-   🔍 시각 A: 정부의 신속한 조사 요청은 안전성을 높이고 불필요한 무역 마찰을 피할 수 있는 방법입니다.  
-   🔎 시각 B: 하지만 선박 피해의 원인을 명확히 밝히지 않으면, 여전히 불확실성이 남아 있을 것입니다.
+
+**1. [이재명 대통령 "제조업 비중 높은 한국, 파격적 혁신해야"](https://news.google.com/rss/articles/CBMia0FVX3lxTFB2VUE4emhBbXk0d05EemF1UVRTbFBEVklkcHljZFRCZnFXc3FqSHo3NEo1ZmIyOTMwUnVocUlPNFF5a05ERjVCaXNhc2NXZF9TMDY5b1BhQmpjODNVa29LdWN4Q3BvY2RrRUlj?oc=5)**
+
+이재명 대통령이 청와대 회의에서 "제조업 비중이 높은 한국 경제 구조상 파격적 혁신이 필요하다"고 강조했다. 글로벌 산업 재편과 AI·첨단 기술 경쟁이 가속화되는 상황에서 기존 제조업 기반의 한국이 새로운 도약을 위한 전환이 시급하다는 메시지다. 정부는 제조업 혁신과 함께 신산업 육성을 위한 정책 패키지를 준비 중인 것으로 알려졌다. 산업계와의 소통 강화 및 규제 개혁이 후속 과제로 거론된다.
+
+🔍 시각 A: 한국 경제의 구조적 한계를 정확히 진단한 적시 발언으로 평가된다. 대통령이 직접 산업 혁신의 시급성을 천명함으로써 정부 부처와 민간이 변화의 동력을 얻을 수 있는 계기가 마련되었다.
+
+🔎 시각 B: '파격적 혁신' 같은 추상적 구호만으로는 산업 현장의 실질 변화를 이끌 수 없다. 구체적 정책 수단, 재원 조달 계획, 기존 제조업 종사자에 대한 전환 지원 방안이 함께 제시되지 않으면 단순 정치적 수사에 그칠 우려가 있다.
+
+**2. [장동혁 "양도세 중과로 집값 더 오를 것"](https://news.google.com/rss/articles/CBMiiwFBVV95cUxQUldDajBIYVR6STMyeVRkel94ZTRGQ1doaUI1NVNZcFY1TDZDNmFLVm1tQk0zZUhnTXlMVU5mM0lwejlqaVJJRHMzWGRJTkhOWC1pWGFmTll2ajBPV1BNMW5WR2EtWV9vc2lhMnB6V2NpcmpmQ1REc0xLY0o1YjF6c1haeGJBZ1kycDVj?oc=5)**
+
+장동혁 의원이 정부의 양도소득세 중과 정책에 대해 "오히려 집값 상승을 부추길 것"이라고 비판했다. 다주택자에 대한 양도세 부담이 커지면 매물이 시장에서 잠겨 공급 위축으로 이어진다는 논리다. 부동산 정책을 둘러싼 여야 공방이 본격화되는 가운데, 정부의 세제 개편 방향에 대한 정치권 평가가 엇갈리고 있다. 부동산 시장 안정화를 위한 정책 효과 논쟁이 다시 가열되는 모습이다.
+
+🔍 시각 A: 정책 시행 전 부작용 가능성을 경고하는 야권의 견제는 건전한 정책 검증 과정의 일부다. 과거 부동산 정책의 의도하지 않은 결과들을 반면교사 삼아 시장의 실제 반응을 면밀히 검토할 필요가 있다.
+
+🔎 시각 B: 양도세 중과 비판은 결국 다주택자의 세 부담 완화로 이어지기 쉬워, 자산 양극화와 투기 수요를 방치하는 결과를 낳을 수 있다. '매물 잠김' 논리는 단기 효과에 치중한 분석이며, 중장기적 자산 배분 정의의 관점이 결여되어 있다.
+
+---
 
 ## 💰 경제
-1. **[Trump goes to China, inflation comes to America: What to watch this week](https://finance.yahoo.com/economy/article/trump-goes-to-china-inflation-comes-to-america-what-to-watch-this-week-104329157.html)**
-   이번 주에는 미국의 인플레이션 지표가 불러오는 시장 변화를 주의 깊게 살펴봐야 할 것입니다. S&P 500은 0.8% 상승하며, 기술주가 이를 주도하고 있습니다.  
-   🔍 시각 A: 경제가 회복세를 보이고 있다는 긍정적인 신호로 해석할 수 있습니다.  
-   🔎 시각 B: 그러나 인플레이션이 지속되는 한, 소비자 신뢰도에 부정적인 영향을 미칠 수 있습니다.
 
-2. **[Stocks are walking a tightrope to fresh record highs — as a handful of names do most of the heavy lifting](https://www.marketwatch.com/story/stocks-are-walking-a-tightrope-to-fresh-record-highs-as-a-handful-of-names-do-most-of-the-heavy-lifting-fe5a166a)**
-   주식 시장은 기록적인 고점을 향해 나아가고 있지만, 유가 상승이 가계에 부담을 주고 있습니다. 일부 기술주가 시장을 끌어올리는 반면, 전반적인 경제 성장에 대한 불안감이 존재합니다.  
-   🔍 시각 A: 기술주와 성장주들이 주식 시장에서 큰 성과를 올리면서 투자자들에게 희망을 주고 있습니다.  
-   🔎 시각 B: 그러나 유가 상승이 가계 경제에 부정적인 영향을 미치는 만큼, 지속 가능성에 대한 우려가 있습니다.
+**1. [트럼프 방중·미국 인플레이션 발표… 이번 주 시장의 핵심 변수](https://finance.yahoo.com/economy/article/trump-goes-to-china-inflation-comes-to-america-what-to-watch-this-week-104329157.html)**
+
+이번 주 글로벌 시장은 트럼프 대통령의 중국 방문과 미국 소비자물가지수(CPI) 발표라는 두 가지 빅 이벤트에 주목하고 있다. 지난주 S&P 500은 2.4%, 나스닥은 4.5% 상승하며 AI 관련주와 반도체주의 강세가 시장을 견인했다. 트럼프-시진핑 회담에서는 무역 협상과 기술 수출 통제 완화 가능성이 핵심 의제로 거론된다. CPI 발표는 연준의 향후 금리 결정 방향을 좌우할 핵심 지표가 될 전망이다.
+
+🔍 시각 A: 미중 정상회담은 양국 간 긴장 완화의 실질적 계기가 될 수 있다. AI 인프라 투자 모멘텀이 강하게 유지되는 가운데 무역 불확실성까지 해소된다면, 글로벌 증시의 추가 상승 여력이 충분하다.
+
+🔎 시각 B: 시장 상승이 소수 AI·반도체 종목에 편중되어 있다는 점은 구조적 위험 신호다. CPI 결과가 예상을 상회하면 금리 인하 기대가 무너지면서 고평가된 기술주의 급락이 시장 전반으로 파급될 수 있으며, 미중 회담도 실질 합의 없는 정치적 이벤트에 그칠 가능성이 있다.
+
+**2. [좁아진 상승 주도주… AI 열풍 속 유가 급등이 가계에 부담](https://www.marketwatch.com/story/stocks-are-walking-a-tightrope-to-fresh-record-highs-as-a-handful-of-names-do-most-of-the-heavy-lifting-fe5a166a)**
+
+미국 증시가 사상 최고치를 경신하고 있지만, 시장 상승이 극소수 기술주에 편중되어 있어 '아슬아슬한 줄타기' 상태라는 분석이 나왔다. AI 관련 1분기 실적은 압도적으로 강했으나, 호르무즈 해협 긴장으로 유가가 급등하면서 일반 가계의 부담이 가중되고 있다. 시장 전문가들은 기술주 집중 현상이 2000년대 닷컴 버블을 연상시킨다는 우려를 제기한다. 거시 지표와 미시적 가계 체감 경기 사이의 괴리가 확대되는 양상이다.
+
+🔍 시각 A: AI 혁명이 실제 기업 실적과 생산성 향상으로 이어지고 있다는 점은 닷컴 버블과 본질적으로 다르다. 강한 펀더멘털을 갖춘 기업들이 시장을 견인하고 있다는 점에서 현재 상승은 정당화될 수 있는 측면이 있다.
+
+🔎 시각 B: 자산 시장과 실물 경제의 디커플링은 사회적 양극화를 심화시키는 위험 신호다. 주식·자산을 보유한 계층은 부를 늘리는 반면, 유가 상승의 직격탄을 맞는 일반 가계는 실질소득이 감소하는 K자형 양극화가 고착화되고 있다.
+
+**3. [지난주 증시 강세 마감, 이번 주 거시·기업 실적 주목](https://www.tipranks.com/news/the-week-that-was-the-week-ahead-macro-and-markets-may-10)**
+
+지난주 미국 증시는 강한 고용지표와 반도체주 강세에 힘입어 신고가를 기록했다. S&P 500은 7,397.09(+0.84%), 나스닥은 29,195.16(+2.35%)으로 마감했고, 다우지수는 49,600.78(+0.02%)로 보합세를 보였다. 미국 10년물 국채금리는 4.33%로 하락하며 채권 시장의 압력이 다소 완화됐다. 이번 주는 1분기 실적 시즌이 마무리되며 주요 거시경제 지표 발표에 시장의 관심이 집중될 전망이다.
+
+🔍 시각 A: 고용지표 호조와 채권금리 하락의 동반 진행은 '골디락스' 시나리오에 가까운 이상적 조합이다. 인플레이션이 통제되는 가운데 경기 모멘텀이 유지된다면 연준의 정책 운신 폭이 넓어질 수 있다.
+
+🔎 시각 B: 다우지수의 보합과 나스닥의 강세가 동시에 나타나는 현상은 시장 폭의 협소함을 다시 한 번 보여준다. 성장주에 편중된 상승은 지속 가능성이 떨어지며, 거시지표가 한 번이라도 시장 기대를 빗나가면 큰 폭의 조정이 불가피하다.
+
+---
 
 ## 👥 사회
-1. **[North Korea May Have Nuclear Response If Kim Jong-un Assassinated](https://www.newsweek.com/north-korea-may-have-nuclear-response-if-kim-jong-un-assassinated-11933650)**
-   북한이 김정은의 암살 시 자동으로 핵 공격을 단행하는 내용을 헌법에 추가했습니다. 이는 국제 사회에서의 긴장이 더욱 고조될 위험을 내포하고 있습니다.  
-   🔍 시각 A: 북한의 새로운 법안은 국가의 안보 강화 의지를 반영합니다.  
-   🔎 시각 B: 그러나 이는 글로벌 안보에 심각한 위협 요소로 작용할 수 있습니다.
+
+**1. [한국 외교부 "HMM 화물선 미식별 발사체 2발 피격… 화재 발생"](https://maritime-executive.com/article/south-korean-investigation-shows-unidentified-projectiles-struck-hmm-ship)**
+
+한국 외교부는 5월 10일 브리핑을 통해, 지난 5월 4일 페르시아만에서 피해를 입은 HMM 일반화물선이 미식별 발사체 2발에 피격되어 화재가 발생했다고 공식 발표했다. 외교부는 선박 기관실에서 증거를 수집하고 CCTV 영상을 분석하는 등 조사를 진행 중이며, 다양한 추측을 종식시키기 위해 사실관계를 명확히 했다. 호르무즈 해협의 긴장이 고조되는 가운데 한국 국적 선박 피격이 확인되면서 국가적 차원의 대응이 본격화되고 있다. 정부는 미국의 해양자유구상(MFC) 참여도 검토 중이라고 밝혔다.
+
+🔍 시각 A: 정부가 신속하게 조사 결과를 공개하고 국제사회와의 공조를 모색하는 것은 책임 있는 대응 자세다. MFC 참여 검토는 한국이 글로벌 해상 안전에 기여하는 중견국으로서의 위상을 강화하는 계기가 될 수 있다.
+
+🔎 시각 B: 사건 발생 후 일주일 가까이 지나 경위 설명이 나온 점은 정부 대응의 신속성에 의문을 제기한다. MFC 참여는 미국 주도 군사 협의체에 깊숙이 편입되는 결정으로, 중동 지역에서 한국이 분쟁의 직접 당사자가 될 위험을 감수해야 한다.
+
+---
 
 ## 🚨 사건사고
-1. **['김창민 감독 상해치사' 피의자 2명, 오늘 영장심사](https://news.google.com/rss/articles/CBMib0FVX3lxTFBfYUFhVjJ2TkJRMWJoR1VuSXhsMjJMVnVfNTFTU2piOVV0TEcxM0x5ZWE4bVM4MzdfMEJwZlJPMVZ3aGRKUmNsWmZLMzNPbHVlOTRvNkJUZjMzd3NiMEg0OHNDdHp2eHl4MHEtb05Yb9IBc0FVX3lxTE01OEk3NDU4QjlndDZQMl9Ja3ZscEhuZ0hsbGI3STgyd3NQMVNXN0psTXJmZEUzUzNJREhOMTVleVNWY081ZHRZSVRTRGlUc3N0OHRDUnRGVkFsV0J5dTJkOU5aY3BsTEM4dU1ZckJPU3hMSzA?oc=5)**
-   김창민 감독의 상해치사 사건에 연루된 두 명이 영장심사를 받게 되었습니다. 이 사건은 사회적으로 큰 논란을 불러일으키고 있으며, 일각에서는 법적 제재의 필요성이 제기되고 있습니다.  
-   🔍 시각 A: 법적 절차가 투명하게 이루어진다면, 사회 정의가 구현될 가능성이 높습니다.  
-   🔎 시각 B: 그러나 이 사건이 향후 사회적 갈등을 야기할 우려가 있습니다.
+
+**1. [이란 드론, 호르무즈에서 한국 선박 1분 간격 두 차례 피격… 23피트 구멍](https://www.ynetnews.com/article/byvmyy0011x)**
+
+호르무즈 해협의 군사적 긴장이 고조되는 가운데, 한국 측은 화물선 HMM Namu호가 1분 간격으로 두 차례 이란 드론에 피격됐다고 일요일 밤 확인했다. 공격으로 대규모 화재가 발생했고 선미에 23피트 깊이의 구멍이 생겼으나, 승선했던 24명의 선원은 전원 무사 생존했다. 이번 공격은 호르무즈 해협의 상호 봉쇄와 교전이 격화되는 와중에 발생한 사건으로, 한국 해운업계와 정부의 대응이 급해지고 있다. 중동 정세 악화가 한국 경제의 핵심 물류 동맥에 직접적 위협이 되고 있음이 확인된 사건이다.
+
+🔍 시각 A: 24명 전원 생존이라는 결과는 선원들의 침착한 대응과 선박 안전 시스템이 제 역할을 했음을 보여준다. 이번 사건을 계기로 분쟁 지역 운항 가이드라인이 강화되고 국제적 안전 협력이 한층 두터워질 것으로 기대된다.
+
+🔎 시각 B: 한국 국적 선박이 직접 공격 대상이 되었다는 사실은 한국이 의도치 않게 중동 분쟁의 피해 당사국이 됐다는 위험한 신호다. 향후 추가 공격이나 보험·운송비 폭등이 한국 경제 전반에 충격을 줄 수 있으며, 외교적 대응이 지연될 경우 국민 안전이 위협받을 수 있다.
+
+**2. ['김창민 감독 상해치사' 피의자 2명, 오늘 영장심사](https://news.google.com/rss/articles/CBMib0FVX3lxTFBfYUFhVjJ2TkJRMWJoR1VuSXhsMjJMVnVfNTFTU2piOVV0TEcxM0x5ZWE4bVM4MzdfMEJwZlJPMVZ3aGRKUmNsWmZLMzNPbHVlOTRvNkJUZjMzd3NiMEg0OHNDdHp2eHl4MHEtb05Yb9IBc0FVX3lxTE01OEk3NDU4QjlndDZQMl9Ja3ZscEhuZ0hsbGI3STgyd3NQMVNXN0psTXJmZEUzUzNJREhOMTVleVNWY081ZHRZSVRTRGlUc3N0OHRDUnRGVkFsV0J5dTJkOU5aY3BsTEM4dU1ZckJPU3hMSzA?oc=5)**
+
+김창민 감독 상해치사 사건의 피의자 2명에 대한 구속영장 실질심사가 오늘 진행된다. 사건의 경위와 피의자들의 가담 정도, 도주 우려 여부 등이 영장 발부의 주요 판단 기준이 될 전망이다. 영화·문화계 인사가 연루된 사건이어서 사회적 관심이 높으며, 수사기관은 추가 관련자 조사도 검토하고 있는 것으로 알려졌다. 사법부의 신중한 판단이 요구되는 상황이다.
+
+🔍 시각 A: 사회적 관심이 큰 사건일수록 사법 절차가 투명하고 엄정하게 진행되어야 하며, 영장심사가 신속히 이뤄지는 것은 법치주의가 정상 작동한다는 신호다. 피의자의 방어권과 피해자 측의 진실 규명 요구가 균형 있게 고려되어야 한다.
+
+🔎 시각 B: 유명인 관련 사건에서 종종 보이는 언론의 과열 보도는 영장심사 단계의 무죄추정 원칙을 훼손할 수 있다. 또한 영장 발부 여부와 관계없이 피의자 신상이 광범위하게 노출되는 현상은 사법 절차 전반의 신뢰성을 훼손하는 부작용을 낳는다.
 
 ---
 
