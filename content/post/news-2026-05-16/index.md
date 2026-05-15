@@ -12,57 +12,129 @@ tags:
 
 ## 🤖 AI
 
-1. **[VFLOK REBRANDS AS SWIFT WORKFORCE AI INC.](https://www.prnewswire.com/news-releases/vflok-rebrands-as-swift-workforce-ai-inc-302773611.html)**
-   - AI 스타트업인 VFLOK이 의료 및 간병 서비스를 위한 업무 일정 관리에 특화된 LLM을 개발하기 위해 'Swift Workforce AI Inc.'으로 브랜드를 재편했습니다. 이 서비스는 병원과 노인 요양 시설 등에서 효율성을 높이는 데 중점을 두고 있으며, 업계에서 많은 기대를 받고 있습니다.
-   - 🔍 시각 A: Swift Workforce AI는 직원과 환자의 시간을 절약하고 서비스의 질을 높일 것으로 보입니다. 이는 결국 의료 시스템의 전반적인 효율성에 긍정적인 영향을 미칠 것입니다.
-   - 🔎 시각 B: 그러나 일부 전문가들은 AI 기반 관리의 도입이 인력이 감소하게 만들 수 있다는 우려를 제기하고 있습니다. 기술이 인력을 대체할 경우, 장기적으로는 부작용이 우려됩니다.
+**1. [Government AI chatbot goes live across GOV.UK App](https://www.publictechnology.net/2026/05/15/society-and-welfare/government-ai-chatbot-goes-live-across-gov-uk-app/)**
+
+영국 정부가 2년 6개월간의 개발과 시범 운영을 거쳐 Claude LLM 기반의 AI 챗봇을 GOV.UK 앱에 정식 통합했다. 작년 7월 출시된 이 앱은 현재 56만 3천 명의 등록 사용자를 보유하고 있으며, 정부 디지털 서비스(GDS)가 주도해 개발했다. 사용자들은 이제 챗봇을 통해 다양한 정부 서비스를 자동화된 방식으로 이용할 수 있게 된다. Anthropic의 Claude를 채택한 정부 단위 AI 서비스로는 가장 큰 규모의 공공 배포 사례 중 하나로 평가된다.
+
+🔍 시각 A: 시민 친화적 행정 서비스의 새로운 표준을 제시한 사례로, 복잡한 정부 절차를 자연어로 안내받을 수 있어 정보 접근성이 크게 향상된다. 특히 디지털 격차로 어려움을 겪던 고령층과 소수 언어 사용자에게 실질적 도움이 될 것으로 기대된다.
+
+🔎 시각 B: 정부 행정에 LLM을 도입하면 환각(hallucination)으로 잘못된 행정 정보를 안내할 위험이 상존한다. 또한 민감한 시민 데이터가 AI 모델 학습이나 분석에 활용될 가능성에 대한 투명성·감독 체계가 충분히 마련되지 않으면 프라이버시 침해 우려가 커질 수 있다.
+
+**2. [Osaurus brings both local and cloud AI models to your Mac](https://techcrunch.com/2026/05/15/osaurus-brings-both-local-and-cloud-ai-models-to-your-mac/)**
+
+Apple 전용 오픈소스 LLM 서버인 Osaurus가 출시됐다. 이 도구는 사용자가 로컬 모델과 클라우드 모델 사이를 자유롭게 전환하면서도 파일과 도구를 모두 자기 하드웨어에 유지할 수 있도록 설계됐다. 데스크톱 AI 컴패니언 Dinoki 프로젝트에서 파생된 결과물로, 점차 상품화되는 AI 모델 시장 위에 소프트웨어 레이어를 구축하려는 흐름을 대표한다. 개인정보와 데이터 주권을 중시하는 사용자층을 정조준한 것이 특징이다.
+
+🔍 시각 A: 클라우드 의존도를 낮추면서도 필요할 때 강력한 클라우드 모델을 호출할 수 있는 하이브리드 구조는, 프라이버시와 성능을 동시에 추구하는 실용적 해법이다. 오픈소스 생태계 확장에도 기여하며 개발자 친화적 환경을 만들 수 있다.
+
+🔎 시각 B: 로컬·클라우드 통합 구조는 보안 경계가 모호해져 어떤 데이터가 어디로 흘러가는지 사용자가 추적하기 어려워질 수 있다. 또한 Apple 전용이라는 한계로 생태계 확산에 제약이 있고, 일반 사용자가 모델을 직접 관리하는 부담이 적지 않다.
 
 ## 🏗️ 스마트건설
 
-1. **[Xpanner secures $18 million Series B funding to scale AI-powered automation in construction](https://roboticsandautomationnews.com/2026/05/15/xpanner-secures-18-million-series-b-funding-to-scale-ai-powered-automation-in-construction/101595/)**
-   - Xpanner는 건설 자동화 기기 시장에서 AI 기술을 적용하며, 시리즈 B 자금으로 1,800만 달러를 확보했습니다. 이 회사는 한국에서 설립되어 미국의 주요 태양광 발전소 EPC와도 거래를 성사시킨 성공적인 사례를 만들었습니다.
-   - 🔍 시각 A: AI 기술의 통합은 건설 현장의 효율성을 크게 높이고, 운영 비용 절감에도 기여할 것으로 예상됩니다.
-   - 🔎 시각 B: 그러나 많은 자본이 투입된 만큼, 이러한 기술이 장기적으로 실제 현장에 효과적으로 적용될 수 있을지 의문이 제기되고 있습니다. 
+**1. [Xpanner, AI 기반 건설 자동화 확장 위해 1,800만 달러 시리즈 B 투자 유치](https://roboticsandautomationnews.com/2026/05/15/xpanner-secures-18-million-series-b-funding-to-scale-ai-powered-automation-in-construction/101595/)**
+
+2020년 대한민국에서 Bobcat, BMW, Boeing, Hexagon, Volvo Construction Equipment 출신 산업 베테랑들이 설립한 Xpanner가 1,800만 달러 규모의 시리즈 B 브릿지 투자 유치에 성공했다. Xpanner는 건설 분야 Physical AI 영역에서 의미 있는 매출과 입증된 수익성을 동시에 보유한 유일한 기업으로 평가받고 있다. 미국 상위 20개 태양광 발전소 EPC 업체 중 19곳과 거래를 완료했거나 활발한 논의를 진행 중이며, 이는 업계에서 매우 이례적인 수준의 시장 침투율이다. 이번 투자금은 AI 기반 건설 자동화 장비의 양산 및 글로벌 확장에 활용될 예정이다.
+
+🔍 시각 A: 한국 스타트업이 건설 자동화 분야에서 글로벌 빅 플레이어들과 경쟁하며 압도적인 미국 시장 침투율을 달성한 사례로, 한국 Physical AI 기술력의 위상을 높였다. 인력 부족이 심화되는 글로벌 건설 현장에서 AI 자동화 장비 수요는 급격히 늘어날 것이다.
+
+🔎 시각 B: 시리즈 B 단계에서 1,800만 달러는 글로벌 양산을 본격화하기엔 부족한 규모이며, 시리즈 B "브릿지" 라운드라는 점은 다음 정식 라운드 조달이 쉽지 않을 가능성을 시사한다. 또한 태양광 EPC 업체 한 분야에 매출이 집중돼 있어 시장 변동성에 취약할 수 있다.
 
 ## 🌍 세계
 
-1. **[Taiwan, Iran questions linger after Trump's China trip](https://www.modernghana.com/amp/videonews/649833)**
-   - 도널드 트럼프의 최근 중국 방문 이후, 대만과 이란 문제에 대한 논란이 여전히 지속되고 있습니다. 전문가들은 이러한 국제 관계가 앞으로의 글로벌 무역 및 외교에 미칠 영향을 주목하고 있습니다.
-   - 🔍 시각 A: 트럼프의 방문은 미국과 중국 간의 갈등을 완화할 수 있는 기회로 작용할 가능성이 있습니다.
-   - 🔎 시각 B: 반면, 이러한 만남이 실제로 어떤 실질적인 변화를 가져올지는 미지수이며, 자칫 추가적인 갈등을 초래할 수도 있다는 우려가 존재합니다.
+**1. [트럼프-시진핑 베이징 정상회담, 대만·이란 문제 미결로 종료](https://www.modernghana.com/amp/videonews/649833)**
 
-2. **[Hecla Mining Stock Slumps as Sentiment Sours](https://www.tipranks.com/news/catalyst/hecla-mining-stock-slumps-as-sentiment-sours)**
-   - 헬카 마이닝이 최근 실적 발표 이후 주가가 하락세를 보이고 있으며, 이는 곧 금 투자에 대한 부정적인 분위기를 반영하고 있습니다. 이러한 주식 저하는 귀금속 시장 전반에 악영향을 미칠 수 있습니다.
-   - 🔍 시각 A: 금 가격 하락은 저렴한 매수를 원하는 투자자들에게 새로운 기회를 제공할 수 있습니다.
-   - 🔎 시각 B: 그러나 금 채굴 관련 기업들이 지속적인 손실을 보게 되는 경우, 이는 장기적으로 투자자 신뢰를 저하할 수 있습니다.
+도널드 트럼프 미국 대통령이 시진핑 중국 국가주석과 베이징에서 2시간 이상의 고위급 정상회담을 가졌다. 시 주석은 대만 문제가 잘못 다뤄질 경우 미·중 양국이 "충돌과 갈등"으로 치달을 수 있다고 강력히 경고했고, 트럼프는 시진핑을 "위대한 지도자"로 칭하며 이란이 호르무즈 해협을 다시 개방하도록 영향력을 행사해 줄 것을 요청했다. 회담의 주요 성과는 제한적이며, 대만과 이란이라는 핵심 쟁점에 대한 명확한 합의는 도출되지 않았다. 향후 미·중 관계와 동아시아 지정학 구도에 중대한 영향을 미칠 회담으로 평가된다.
+
+🔍 시각 A: 양 정상이 직접 만나 첨예한 쟁점을 테이블 위에 올려놓은 것 자체가 의미 있는 외교적 성과다. 대만과 이란 문제에서 즉각적 합의는 없었지만, 정상 간 대화 채널이 유지된다는 사실만으로도 군사적 충돌 위험을 낮추는 효과가 있다.
+
+🔎 시각 B: 시 주석의 "충돌" 발언은 대만에 대한 중국의 강경 입장이 오히려 강화됐음을 시사하며, 트럼프의 노골적 친밀 표현은 동맹국들에게 미국의 입장이 흔들리고 있다는 신호로 읽힐 수 있다. 호르무즈 해협 문제에서도 구체적 진전이 없어 중동 긴장은 여전히 미해결 상태로 남았다.
+
+**2. [이스라엘-미국의 이란 공습 3일째… 여전히 안갯속인 전쟁의 향방](https://news.google.com/rss/articles/CBMiXEFVX3lxTE1ISFlab3BTNW9IdVI1ZGI5TW5Nc2dndzhzT2FuVTBMbkloWDJieTFnaU1XVEVYM01Ca2dFY2oxemtEY3paVTNaRFpiQ1JGQXhvRlJBcmItNEVab1NC0gFiQVVfeXFMTy1SajdMY25idHdPWXpGeWt5U2N1U1VfWF9zcW9pQmtUdGdkSFhSX0d0QlZyNGxRX0dWcXV1NjFMMU9hR00tY2RMVWNkYTdRUXpCNGRSMkJjOW4wYngxSXlYbEE?oc=5)**
+
+이스라엘과 미국이 이란을 상대로 공습을 시작한 지 3일째에 접어들었으나 전쟁의 양상과 결말은 여전히 불투명한 상태다. 이란이 호르무즈 해협을 봉쇄하면서 글로벌 원유 공급망에 직접적 충격이 가해지고 있으며, 트럼프 대통령이 시진핑에게 "이란 설득"을 요청한 배경이기도 하다. 중동 지역 긴장은 최고조에 달해 있으며, 주변 아랍국들과 유럽 국가들의 외교적 중재 노력이 본격화되고 있다. 이번 분쟁이 어떻게 마무리될지에 따라 향후 수년간의 중동 안보 지형이 결정될 전망이다.
+
+🔍 시각 A: 이란의 핵·미사일 위협을 억제하기 위한 이스라엘과 미국의 단호한 군사 대응은 장기적으로 중동의 안정에 기여할 수 있다. 국제사회의 외교적 개입이 본격화되는 점도 조기 출구 전략 가능성을 시사한다.
+
+🔎 시각 B: 호르무즈 해협 봉쇄로 글로벌 에너지 가격이 급등하고 있어 세계 경제에 심각한 충격이 우려된다. 또한 군사 충돌이 장기화될 경우 민간인 피해가 급증하고 중동 전역으로 확전될 위험이 매우 크다.
+
+**3. [서울 도심 헬기 소음 안내, "놀라지 마세요"](https://news.google.com/rss/articles/CBMibkFVX3lxTE9ZT19QVFlBeFBHRm9LTkF5UlpvdUt1cm1qWTliUVpBNjB3cGEyNmRLbXBaSXhxeS1vMW42ZmdlV2o3d2RLdHVidUVuNWtibmhCX2xxQlhLd01WS1R2a3Y2Y3BiVktNc0NOWU9VaEhn?oc=5)**
+
+당국이 서울 도심에서 헬기 소음이 발생할 예정임을 시민들에게 사전 안내했다. 군·경 합동 훈련 또는 주요 행사 경호 목적으로 추정되며, 시민들의 불안과 혼란을 줄이기 위한 선제적 공지로 이뤄졌다. 도심 상공 헬기 비행은 인구 밀집 지역의 안전 문제와도 직결되는 사안으로 관심을 모은다.
+
+🔍 시각 A: 시민들에게 미리 상황을 알려 불필요한 신고와 공포를 예방하는 행정 서비스는 모범적이다. 안전 훈련의 투명성을 높이는 긍정적 변화로 평가된다.
+
+🔎 시각 B: 도심 한복판 헬기 운용은 소음 공해와 사고 위험을 동시에 안고 있으며, "놀라지 말라"는 공지만으로 충분치 않다. 시민의 일상 평온을 침해하는 군·관 활동에 대한 더 엄격한 통제 기준이 필요하다.
 
 ## 🏛️ 정치
 
-1. **[South Korea official says unlikely anyone but Iran behind Hormuz ship attack, Yonhap reports](https://www.yahoo.com/news/articles/south-korea-official-says-unlikely-034105935.html)**
-   - 한 한국 고위 관리는 최근 호르무즈 해협에서 발생한 한국 선박 공격 사건에 대해 이란 외에는 다른 주체의 개입 가능성이 낮다고 판단하고 있다고 밝혔습니다. 이 사건에 대한 조사가 진행 중입니다.
-   - 🔍 시각 A: 이란과의 외교적 관계가 긴밀하게 연결된 만큼, 한국의 외교 전략에도 긍정적인 영향을 미칠 수 있습니다.
-   - 🔎 시각 B: 그러나 이란에 대한 비난이 계속될 경우, 한-이란 관계가 더욱 악화될 위험이 존재합니다. 
+**1. [이재명 대통령 "제조업 비중 높은 한국, 파격적 혁신해야"](https://news.google.com/rss/articles/CBMia0FVX3lxTFB2VUE4emhBbXk0d05EemF1UVRTbFBEVklkcHljZFRCZnFXc3FqSHo3NEo1ZmIyOTMwUnVocUlPNFF5a05ERjVCaXNhc2NXZF9TMDY5b1BhQmpjODNVa29LdWN4Q3BvY2RrRUlj?oc=5)**
+
+이재명 대통령이 청와대 일정에서 "제조업 비중이 높은 한국 경제 구조상 파격적인 혁신이 필요하다"고 강조했다. AI·반도체·바이오 등 첨단 산업으로의 전환이 본격화되는 글로벌 흐름 속에서 한국이 기존 제조업 경쟁력을 유지하면서도 새로운 성장 동력을 확보해야 한다는 메시지로 풀이된다. 대통령은 정부 차원의 전폭적 지원과 규제 혁신 의지를 함께 밝혔다. 이는 최근 코스피 8000선 돌파 등 시장의 AI 투자 열기와 맞물려 정책 방향성을 명확히 한 것으로 해석된다.
+
+🔍 시각 A: 한국 경제의 구조적 한계를 정면으로 인정하고 혁신을 강조한 대통령의 메시지는 산업계와 시장에 명확한 시그널을 준다. 정부 주도의 규제 완화와 첨단 산업 지원이 동시에 추진되면 글로벌 경쟁력 강화에 실질적 기여가 가능하다.
+
+🔎 시각 B: "파격적 혁신"이라는 추상적 구호만으로는 구체적 정책 효과를 기대하기 어렵다. 또한 제조업 종사자들의 고용 불안과 산업 전환에 따른 사회적 비용에 대한 구체적 대안 없이 혁신만 강조될 경우 양극화가 심화될 수 있다.
+
+**2. [한국 정부 "호르무즈 한국 선박 공격, 이란 외 다른 주체 가능성 낮아"](https://www.reuters.com/world/asia-pacific/south-korea-official-says-unlikely-anyone-iran-behind-hormuz-ship-attack-yonhap-2026-05-14/)**
+
+한국 외교부 고위 관계자가 5월 4일 호르무즈 해협 인근에서 발생한 HMM의 'Namu' 화물선 피격 사건과 관련해 이란 외 다른 주체가 배후일 가능성은 낮다고 밝혔다. 한국은 미국과 정보를 공유하며 분석을 진행 중이며, 이번 공격으로 화재가 발생하고 선체 후미 하부가 손상됐다. 이란이 공식적으로 책임을 인정하지는 않았으나, 한국 정부는 사실상 이란을 배후로 지목한 셈이다. 이란-이스라엘·미국 간 군사 충돌이 격화되는 상황에서 한국의 외교적 입지에도 중대한 영향을 미칠 사안이다.
+
+🔍 시각 A: 한국 정부가 미국과 공조해 정확한 정보 분석에 기반한 판단을 내린 점은 외교적 신뢰성을 높이는 결정이다. 명확한 책임 규명은 향후 한국 선박과 국민 안전 보장의 기반이 된다.
+
+🔎 시각 B: 한국이 이란을 공식적으로 지목할 경우 이란과의 외교·경제 관계가 급속히 악화될 수 있으며, 중동 지역 한국 기업과 교민들의 보복 위험도 증가한다. 이스라엘-이란 충돌 와중에 한국이 한쪽 편에 서는 모습이 부담이 될 수 있다.
 
 ## 💰 경제
 
-1. **[Wall Street sees gold dropping further as yields and the dollar strengthen](https://www.kitco.com/news/article/2026-05-15/wall-street-sees-gold-dropping-further-yields-and-dollar-strengthen-main)**
-   - 월가 전문가들은 금 가격이 추가 하락할 것으로 예상하고 있습니다. 이는 미국의 금리 상승과 달러 강세의 영향으로 분석되고 있습니다.
-   - 🔍 시각 A: 금 투자자들은 이러한 상황을 이용해 저가 매수 기회를 찾을 수 있습니다.
-   - 🔎 시각 B: 그러나 금 가격 하락은 경제적 불안감을 더욱 부각시키고, 안전 자산에 대한 회피로 이어질 수 있습니다.
+**1. [코스피 8,000선 돌파 후 차익실현 매물 쏟아져 6% 급락 마감](https://news.google.com/rss/articles/CBMiZEFVX3lxTE1nRUs2SDJFOWNoNVVDcTFEVDUtZWh0MlZFRm9FaU5iRmtXQ05HUjJuaW56Rl9EZGVEaWpPLWtUc01DME9GNVpqemtYUHYzMTZDaE9YZ0hMRzdzWTZDNkxHVVR0X1rSAWhBVV95cUxPX0N5Qk5YbHF6bXRla3V3STFWZWd0WGtKRWlKV3lxVUJVQ3d6dTU4aHZERUQwdERReXdUei1Na0tlZHhyTE9rQk84dnhZQkVEbWtqU2NXTWJsMlMwbktqTTB3d1JXV2owYg?oc=5)**
+
+코스피 지수가 사상 처음으로 8,000선을 돌파한 직후 대규모 차익실현 매물이 쏟아지며 하루 만에 6.1% 급락한 7,493.18로 마감했다. 'AI 머니'로 불리는 풍부한 글로벌 유동성이 한국 시장으로 유입되며 단기 급등이 이어졌으나, 트럼프-시진핑 정상회담의 모호한 결과와 이란 사태 등 지정학적 불확실성이 투자자들의 차익실현 욕구를 자극했다. 외국인과 기관 투자자들의 매도세가 동반되며 변동성이 극대화됐다. 시장은 단기 조정 후 추가 상승 여부를 두고 의견이 엇갈리고 있다.
+
+🔍 시각 A: 코스피 8,000선 돌파 자체가 한국 자본시장의 체질 변화를 보여주는 역사적 이정표다. AI·반도체 중심의 구조적 성장 동력이 유지되는 한 단기 조정은 건강한 매물 소화 과정으로 볼 수 있다.
+
+🔎 시각 B: 하루 만에 6% 급락은 한국 시장의 과열과 변동성 위험을 그대로 드러낸 것이다. 개인 투자자들이 고점에 매수한 뒤 큰 손실을 입을 위험이 크며, AI 테마에 의존한 상승은 거품 가능성을 배제할 수 없다.
+
+**2. [Newsom celebrates as the AI boom bails out California](https://www.sfgate.com/politics/article/ai-boom-california-budget-22259829.php)**
+
+수년간 수십억 달러 규모의 적자에 시달리던 캘리포니아주가 AI 붐에 힘입어 다음 회계연도에 세수가 급증할 것으로 전망된다. 캘리포니아의 3대 AI 거대 기업이 연내 IPO를 추진 중이며, 이에 대한 기대감만으로도 이미 주 경제에 활력을 불어넣고 있다. 실제 상장이 이뤄질 경우 주 정부 재정에 막대한 추가 수입이 들어올 것으로 예상된다. 다만 분석가들은 주식 시장이 거품 양상을 보이고 있어 축포를 터뜨리기엔 이르다고 경고한다.
+
+🔍 시각 A: AI 산업의 성장이 지자체 재정과 일자리 창출에 직접적 기여를 하는 모범 사례로, 미국 경제의 새로운 성장 엔진이 가시화되고 있다. 캘리포니아의 적극적인 AI 친화 정책이 결실을 맺는 모습이다.
+
+🔎 시각 B: 주 재정이 소수 AI 기업의 IPO 성공에 의존하는 구조는 매우 취약하다. AI 거품이 꺼질 경우 캘리포니아는 다시 심각한 재정 위기에 직면할 수 있으며, 한 산업 의존형 경제의 위험성을 그대로 보여준다.
+
+**3. [Wall Street, 금값 추가 하락 전망… Main Street는 4,500달러 지지선 주목](https://www.kitco.com/news/article/2026-05-15/wall-street-sees-gold-dropping-further-yields-and-dollar-strengthen-main)**
+
+월가 전문가들은 미국 국채 금리 상승과 달러 강세로 금값의 추가 하락을 전망하고 있다. 반면 개인 투자자(Main Street)들은 온스당 4,500달러를 핵심 지지선으로 보고 강세 입장을 유지하고 있다. 이란 전쟁과 글로벌 정세 불안에도 안전자산인 금이 약세를 보이는 것은 달러 강세 영향이 더 크다는 분석이다. 향후 연준의 통화정책 기조와 지정학적 리스크 진행 상황이 금값 향방을 결정할 핵심 변수로 꼽힌다.
+
+🔍 시각 A: 글로벌 자산시장이 안전자산보다 위험자산으로의 자금 이동을 시사하며, 이는 경기 회복에 대한 시장의 자신감 표시로 해석할 수 있다. 달러 강세는 미국 경제 펀더멘털의 견고함을 반영한다.
+
+🔎 시각 B: 이란 전쟁 등 심각한 지정학적 위기에도 금이 안전자산으로서 제 역할을 못하는 것은 시장이 위험을 과소평가하고 있다는 신호일 수 있다. 강달러는 신흥국 금융 위기 위험을 높이는 부작용을 동반한다.
 
 ## 👥 사회
 
-1. **[2026년 1월 29일(목) 오늘의 캐어유 뉴스](https://news.google.com/rss/articles/CBMibEFVX3lxTE8xbUhiS2d4bE1BZVVIMnFLUjd0cE1zWUJGbHBQUlJwUzVjZ21aUWxlalVjUkpicVk2bW85Z1pBZmZEbEFRTkRob0tiLTVaaUgtbk80bHFFSnI2TldnTS1wN055UXpmYjl4RUdMQg?oc=5)**
-   - 의료 및 복지 사항에 대한 최근 업데이트가 발표되었습니다. 이로 인해 사회적 관심이 집중되고 있습니다.
-   - 🔍 시각 A: 이러한 뉴스는 사회적 안전망을 강화하는 긍정적인 신호로 해석될 수 있습니다.
-   - 🔎 시각 B: 그러나 여전히 많은 문제가 해결되지 않고 있어, 정책의 효과성을 점검할 필요성이 있습니다.
+**1. [메디포스트 카티스템, 일본 임상 3상 모든 평가지표 충족… 통계적 유의성 입증](https://www.biospace.com/press-releases/mediposts-cartistem-meets-all-primary-and-secondary-endpoints-in-japan-phase-3-trial-and-demonstrates-statistically-significant-efficacy-gains-versus-active-control)**
+
+한국 바이오 기업 메디포스트의 줄기세포 치료제 '카티스템(CARTISTEM)'이 일본 임상 3상에서 모든 1차 및 2차 평가지표를 충족하며 표준치료(SOC) 대비 통계적으로 유의미한 효능 개선을 입증했다. 52주 추적 연구에서 모든 핵심 효능 지표에서 통계적 유의성을 달성한 것이다. 메디포스트는 2026년 하반기 일본 생물학적제제 허가신청(BLA)을 제출할 예정이며, 이번 결과는 카티스템의 글로벌 상업화 전망을 크게 강화할 것으로 평가된다. 한국이 자체 개발한 줄기세포 치료제가 일본 시장 진출의 결정적 발판을 마련한 의미가 크다.
+
+🔍 시각 A: 한국 바이오 산업이 까다롭기로 유명한 일본 식약처 임상에서 명확한 효능을 입증한 것은 K-바이오의 위상을 한 단계 끌어올린 쾌거다. 무릎관절염 등으로 고통받는 환자들에게 새로운 치료 옵션을 제공할 수 있게 됐다.
+
+🔎 시각 B: 임상 성공이 곧 시판 승인으로 이어지는 것은 아니며, 줄기세포 치료제의 가격 부담과 보험 적용 여부가 실제 환자 접근성을 좌우할 것이다. 또한 BLA 제출과 승인까지 추가로 1~2년이 소요되는 만큼 상업적 성과까지는 시간이 더 필요하다.
 
 ## 🚨 사건사고
 
-1. **['김창민 감독 상해치사' 피의자 2명, 오늘 영장심사](https://news.google.com/rss/articles/CBMib0FVX3lxTFBfYUFhVjJ2TkJRMWJoR1VuSXhsMjJMVnVfNTFTU2piOVV0TEcxM0x5ZWE4bVM4MzdfMEJwZlJPMVZ3aGRKUmNsWmZLMzNPbHVlOTRvNkJUZjMzd3NiMEg0OHNDdHp2eHl4MHEtb05Yb9IBc0FVX3lxTE01OEk3NDU4QjlndDZQMl9Ja3ZscEhuZ0hsbGI3STgyd3NQMVNXN0psTXJmZEUzUzNJREhOMTVleVNWY081ZHRZSVRTRGlUc3N0OHRDUnRGVkFsV0J5dTJkOU5aY3BsTEM4dU1ZckJPU3hMSzA?oc=5)**
-   - 한국의 유명 감독이 상해치사 혐의로 기소된 사건에서 두 명의 피의자가 영장심사를 받습니다. 이 사건은 매우 민감하게 다루어지고 있으며, 대중의 관심이 집중되고 있습니다.
-   - 🔍 시각 A: 사건이 공정하게 해결될 경우, 사회에 큰 정의감을 제공할 수 있습니다.
-   - 🔎 시각 B: 그러나 이 사건의 진행 과정에서 법적 문제가 발생할 가능성이 있어, 여론이 더욱 악화될 수도 있습니다.
+**1. ['김창민 감독 상해치사' 피의자 2명, 오늘 영장심사](https://news.google.com/rss/articles/CBMib0FVX3lxTFBfYUFhVjJ2TkJRMWJoR1VuSXhsMjJMVnVfNTFTU2piOVV0TEcxM0x5ZWE4bVM4MzdfMEJwZlJPMVZ3aGRKUmNsWmZLMzNPbHVlOTRvNkJUZjMzd3NiMEg0OHNDdHp2eHl4MHEtb05Yb9IBc0FVX3lxTE01OEk3NDU4QjlndDZQMl9Ja3ZscEhuZ0hsbGI3STgyd3NQMVNXN0psTXJmZEUzUzNJREhOMTVleVNWY081ZHRZSVRTRGlUc3N0OHRDUnRGVkFsV0J5dTJkOU5aY3BsTEM4dU1ZckJPU3hMSzA?oc=5)**
+
+영화감독 김창민 씨를 사망에 이르게 한 혐의로 입건된 피의자 2명에 대한 구속 전 피의자 심문(영장심사)이 진행된다. 검찰과 경찰은 상해치사 혐의를 적용해 구속영장을 청구한 상태이며, 사건의 정확한 경위와 가해자들의 폭행 의도 여부가 핵심 쟁점이다. 문화예술계 인사가 피해자라는 점에서 사회적 관심이 집중되고 있으며, 법원의 영장 발부 여부에 따라 향후 수사와 재판 방향이 결정될 전망이다.
+
+🔍 시각 A: 신속한 영장심사 진행은 수사 당국이 사안의 중대성을 인식하고 엄정 대응하고 있음을 보여준다. 피해자 인권 보호와 진상 규명을 위한 절차가 차질 없이 진행되는 점은 긍정적이다.
+
+🔎 시각 B: 상해치사 사건은 가해자의 의도 입증이 까다로워 영장이 기각되면 수사 동력이 약화될 수 있다. 또한 피해자가 유명인이라는 이유로 여론 재판이 과도하게 이뤄질 경우 피의자의 방어권 보장에도 문제가 생길 수 있다.
+
+**2. [대구 수성구 만촌동 아파트 14층서 화재 등 사건사고](https://news.google.com/rss/articles/CBMiWEFVX3lxTE01eXNlZnRaeXY5SlBET2VGLUVWOG1ZclA2R1AyQmp5bDU0OHQxZFRtamJtOWJvazBNUGo5Nl8wdFNZQXBmNE1tU1hvbE1BSHhrc01nbHVoc2rSAWhBVV95cUxPc3lBZXM1NGttODhVYzZVSjBqemNEdDFCamh0c3E0djRacWdtUTIwVWFZbXJ5RGdOV3hxb19MQmxvNmw1Tkg0b3NyYXNoMG5ZbEpUZy1Fd1BTYTRkZlpZMjc4Tzc2Zml1RA?oc=5)**
+
+대구 수성구 만촌동 한 아파트 14층에서 화재가 발생해 소방당국이 긴급 출동했다. 고층 아파트 화재는 진압이 까다롭고 인명 피해 위험이 큰 사고로, 주민 대피와 진화 작업이 동시에 이뤄졌다. 정확한 화재 원인과 인명·재산 피해 규모는 추가 조사가 필요한 상황이며, 같은 날 전국 각지에서 다수의 사건사고가 보고됐다. 봄철 건조한 날씨로 인한 화재 위험이 높아진 시기인 만큼 주의가 요구된다.
+
+🔍 시각 A: 소방당국의 신속한 대응으로 대형 인명 피해를 막을 수 있었던 것은 평소의 훈련과 시스템이 작동했음을 보여준다. 고층 화재 대응 능력이 점차 향상되고 있다는 평가가 가능하다.
+
+🔎 시각 B: 14층 고층에서의 화재는 노후 아파트의 구조적 취약성과 소방 안전 점검의 부실 가능성을 시사한다. 매년 반복되는 봄철 화재에 대한 근본적인 예방 대책과 고층 건물 화재 안전 기준 강화가 시급하다.
 
 ---
 
