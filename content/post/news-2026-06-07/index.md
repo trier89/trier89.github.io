@@ -12,53 +12,101 @@ tags:
 
 ## 🌍 세계
 
-**1. [Removing ‘invisibility cloaks’ and safely skipping chemo: new weapons in war on cancer shared at US conference](https://www.theguardian.com/science/2026/jun/06/new-weapons-war-on-cancer-asco-conference-takeaways)**  
-미국 임상 종양학회(ASCO)에서 개최된 연례 회의에서는 암 세포가 숨는 것을 막고 췌장암 치료의 새로운 전환점을 마련하는 약물에 대한 새로운 연구가 발표되었다. 많은 의사와 연구자들이 암 치료의 미래에 긍정적인 기대감을 표명하고 있지만, 일부 연구자들은 기대와는 달리 신중한 접근이 필요하다고 언급했다.  
-🔍 시각 A: 이번 연구 결과는 암 치료에 대한 새로운 가능성을 제시하며, 많은 환자들에게 희망을 줄 수 있다.  
-🔎 시각 B: 그러나 초기 결과일 뿐이므로, 실제 치료에 적용하기까지는 추가적인 연구와 검증이 필요하다.
+**1. [중국 시진핑 주석, 7년 만의 북한 방문 임박](https://www.bbc.com/news/articles/clypym3q7p1o)**
 
-**2. [China's leader Xi Jinping set to make rare visit to North Korea](https://www.bbc.com/news/articles/clypym3q7p1o)**  
-중국의 시진핑 주석이 북한을 방문할 예정이다. 이는 거의 7년 만의 방문으로, 북한의 핵무기 관련 국제 제재와 인권 문제 속에서 중국과 북한 간의 관계를 강화하는 중요한 계기가 될 것으로 보인다.  
-🔍 시각 A: 이러한 방문은 중국이 북한과의 관계를 더욱 공고히 하려는 의지를 반영하며, 한반도 비핵화를 위한 대화의 계기가 될 수 있다.  
-🔎 시각 B: 하지만 이 방문이 실제로 북한의 행동 변화로 이어질지는 미지수이며, 국제 사회에서는 이를 걱정하는 목소리도 여전히 존재한다.
+중국 국가주석 시진핑이 오는 6월 8일부터 9일까지 김정은 국무위원장의 초청으로 북한을 공식 방문한다고 양국 국영매체가 보도했다. 시 주석의 평양 방문은 2019년 이후 약 7년 만으로, 핵·미사일 개발로 국제 제재를 받는 북한과 최대 경제·정치 파트너인 중국 간 밀착을 다시 한번 보여주는 신호로 해석된다. 미·중 갈등이 심화되는 가운데 이번 방문은 동북아 지정학 지형에 적지 않은 파장을 예고하고 있다.
 
-**3. [Nvidia CEO says robotics is South Korea's next big sector, points to 'some surprises'](https://www.reuters.com/business/media-telecom/nvidia-ceo-sees-robotics-next-major-sector-south-korea-2026-06-05/)**  
-엔비디아의 CEO인 젠슨 황은 한국이 로봇 공학의 차세대 주요 산업으로 부상할 것이라고 예측하였다. 한국의 제조업 중심지로서 로봇 기술과 AI의 융합이 중요한 역할을 할 것으로 기대된다.  
-🔍 시각 A: 이는 한국의 산업 발전에 긍정적인 전환점이 될 수 있으며, 일자리 창출 및 글로벌 경쟁력 향상에 기여할 것으로 보인다.  
-🔎 시각 B: 그러나 실제 로봇 기술이 산업 전반에 제대로 적용되기까지는 시간이 필요하며, 관련 인프라와 규제 문제도 해결해야 한다.
+🔍 **시각 A**: 중국의 적극적인 대북 외교는 한반도 정세의 안정적 관리와 대화 채널 유지 측면에서 긍정적이다. 북한의 외교적 고립이 완화되면 협상 테이블 복귀 가능성도 한층 높아질 수 있다.
+
+🔎 **시각 B**: 그러나 유엔 제재 체제 아래에서 중국의 노골적 밀착 행보는 국제 공조를 약화시키고, 북한의 핵 보유국 지위 굳히기에 명분을 줄 수 있다는 우려가 크다. 한국과 미국 입장에서는 외교적 압박 카드가 약해진다는 점도 부담이다.
+
+**2. [트럼프 2주 휴전 발표에 국제유가 19% 폭락](https://news.google.com/rss/articles/CBMiWEFVX3lxTE9CbUJoeEdhN0NXVVNTYXhjbUVwT3YyYkNiWHdUc2xjWUxnczhKZUpMcTkxeEtFZ1Vac3l3VzBiV193T2ozYXpoLVpISTc0YjdsQTlNejhTR0M?oc=5)**
+
+도널드 트럼프 미국 대통령이 중동 분쟁 당사국 간 2주간의 휴전을 발표하면서 국제유가가 하루 만에 19% 폭락하는 이례적 흐름을 보였다. 이란-이스라엘 긴장에 따른 공급 차질 우려로 급등했던 유가가 단숨에 되돌림 흐름을 그리며 글로벌 인플레이션과 에너지 시장에 즉각적인 영향을 미치고 있다. 단기 휴전이 실제 이행될지, 그리고 정전 종료 이후 어떤 양상으로 전개될지가 향후 시장의 최대 변수로 떠올랐다.
+
+🔍 **시각 A**: 휴전이 성립된다면 글로벌 인플레이션 압력이 완화되고 소비자 물가 부담 역시 줄어든다. 항공·물류·제조업 등 에너지 의존도가 높은 산업의 회복도 기대된다.
+
+🔎 **시각 B**: 단 2주짜리 단기 휴전은 근본 갈등 해소가 아니어서, 시장에 잘못된 안도감을 줄 수 있다. 휴전 만료 후 유가가 다시 급등할 경우 변동성 충격은 한층 클 수 있다.
+
+**3. [암 정복의 새 무기들 - ASCO 2026에서 공개된 혁신 치료법](https://www.theguardian.com/science/2026/jun/06/new-weapons-war-on-cancer-asco-conference-takeaways)**
+
+세계 최대 암 학술대회인 미국 임상종양학회(ASCO) 2026 연례 회의가 시카고에서 4만여 명이 참석한 가운데 개최됐다. 이번 회의에서는 암세포가 면역체계를 회피하기 위해 사용하는 '투명망토'를 제거하는 신약과 췌장암 치료의 돌파구가 될 만한 연구 결과 등이 발표돼 큰 주목을 받았다. 또한 일부 환자에게서 항암화학요법을 안전하게 생략할 수 있는 가능성도 제시되며, 표적·면역치료 시대로의 전환을 더욱 가속화하고 있다.
+
+🔍 **시각 A**: 그동안 난치성으로 분류돼 온 췌장암 등에서 의미 있는 진전이 나타나면서 환자들에게 새로운 희망이 열리고 있다. 화학요법 생략 가능성은 환자 삶의 질을 획기적으로 개선할 수 있는 잠재력이 있다.
+
+🔎 **시각 B**: 다만 신약과 표적치료제는 여전히 고가이며, 모든 국가의 보험 체계가 이를 감당할 수 있는 것은 아니다. 의료 접근성 격차로 인해 혜택이 일부 환자에게만 돌아갈 수 있다는 우려가 남는다.
 
 ## 🏛️ 정치
 
-**1. [Nvidia CEO says robotics is South Korea's next big sector, points to 'some surprises'](https://www.reuters.com/business/media-telecom/nvidia-ceo-sees-robotics-next-major-sector-south-korea-2026-06-05/)**  
-최근 엔비디아의 CEO는 한국에서 로봇 공학이 차세대 산업으로 부상할 것이라는 예측을 하며, 기업과 정부가 협력해야 한다고 강조했다. 국내 로봇 산업의 발전 가능성에 대한 기대감이 높아지고 있다.  
-🔍 시각 A: 이는 한국 경제에 새로운 성장 동력을 제공할 수 있으며, 글로벌 시장에서의 경쟁 우위를 점할 기회가 될 수 있다.  
-🔎 시각 B: 그러나 과도한 기대는 오히려 우려를 낳을 수 있으며, 실질적인 투자와 인프라 지원이 뒷받침되지 않는 한 성장은 한계가 있을 수 있다.
+**1. [李 대통령 "세계유산위원회, 안전·쾌적한 국제회의 돼야…철저한 준비 필요"](https://news.google.com/rss/articles/CBMibEFVX3lxTE94YnhhUTRSbGlFZThpV29RTmVlT2REdUFHZjgzY1F0b3J3cl83QmgxVFFWTndCZHhoOERrMGNyVVF5UEZFU1ZBQkVtWXNBdVAteEFNV2VfaVEySE8tVlRLNEtVU3ExbGs5U1JGb9IBckFVX3lxTE1DWlQxM0hHVUxMd2pLRjFRbkYwM1doV0NyZGdZaXVQTkpoOEhrSE1mamdVVGdyY2N3NzdxOHpGYWlBU1B3cVhaOEZQTkJXZnluZ0pQN01EYVJSSnRuRXVUWUpJWDRsYXNzNk1fckFORjJOUQ?oc=5)**
+
+이재명 대통령이 한국에서 개최 예정인 세계유산위원회와 관련해 "안전하고 쾌적한 국제회의가 되어야 하며 철저한 준비가 필요하다"고 강조했다. 대통령은 회의의 원활한 진행을 위한 의전·치안·인프라 점검을 직접 챙기겠다는 의지를 밝히며, 관계 부처에 빈틈없는 준비를 주문했다. 국제 행사 유치를 통한 한국의 문화외교 강화 측면에서도 의미가 있다는 평가다.
+
+🔍 **시각 A**: 정상급 회의가 안전하고 매끄럽게 진행될 경우, 한국의 국제적 위상과 문화유산 외교 입지가 한층 강화될 수 있다. 대통령이 직접 챙기는 모습은 국제사회에 신뢰감을 줄 수 있는 신호다.
+
+🔎 **시각 B**: 다만 대규모 국제 행사에 따른 예산 투입과 일상 시민 불편이라는 비용도 적지 않다. 외형적 성과 중심의 준비가 자칫 실질적 의제 논의나 후속 정책 연계를 놓치는 결과로 이어질 수 있다.
 
 ## 💰 경제
 
-**1. [America In Focus: US job market is rebounding, but economic frustration persists](https://www.greenwichtime.com/business/article/america-in-focus-us-job-market-is-rebounding-22294012.php)**  
-미국의 고용 시장이 회복되고 있는 반면에, 경제적 불만은 여전히 존재하고 있다. 최근 5월에는 예상보다 많은 일자리가 창출되었으나, 높은 물가 상승률은 여전히 가계에 부담을 주고 있다.  
-🔍 시각 A: 일자리 증가와 고용률 상승은 긍정적인 신호이며, 경제 회복에 대한 기대를 높이는 배경이 된다.  
-🔎 시각 B: 그러나 가계의 경제적 고통이 지속되는 한, 국민의 불만은 계속될 것이고 이는 소비와 경제 성장에 부정적인 영향을 미칠 수 있다.
+**1. [반도체株 폭락, 빅테크 의존 증시에 치명타](https://www.livemint.com/market/stock-market-news/carnage-in-chip-stocks-hits-extra-hard-in-top-heavy-market-11780726576834.html)**
 
-**2. [Carnage in chip stocks hits extra hard in top-heavy market](https://www.livemint.com/market/stock-market-news/carnage-in-chip-stocks-hits-extra-hard-in-top-heavy-market-11780726576834.html)**  
-최근 반도체 주식의 하락은 시장 전체에 부정적인 영향을 미쳤으며, 일부 전문가들은 이는 AI 기술 투자에 대한 우려가 반영된 결과라고 분석하고 있다.  
-🔍 시각 A: 반도체 산업은 여전히 중요한 기술 분야이며, 장기적으로 투자 기회가 있을 것으로 예상된다.  
-🔎 시각 B: 그러나 단기적인 하락은 시장의 불안감을 키우고 있으며, 투자자들은 더욱 신중해져야 할 것으로 보인다.
+금리 상승 우려와 AI 투자 과열에 대한 경계가 맞물리며 월가에서 반도체 대형주들이 일제히 급락, 나스닥지수가 1년여 만에 최악의 하루를 기록했다. 마이크론, AMD 등 AI 랠리를 견인했던 칩 메이커들이 동반 하락하면서 빅테크에 과도하게 의존했던 시장 구조의 취약성이 그대로 드러났다. 투자자들은 AI에 투입된 수조 달러 규모의 자본이 충분한 수익을 거둘 수 있는지에 대해 의구심을 강화하고 있다.
+
+🔍 **시각 A**: 과열 양상을 보였던 AI·반도체 섹터의 조정은 장기적으로 시장의 건전성을 회복하는 계기가 될 수 있다. 거품을 걷어내고 실적 기반의 기업으로 자금이 재배분될 가능성도 있다.
+
+🔎 **시각 B**: 그러나 빅테크 의존도가 큰 지수 구조 특성상, 추가 조정 시 일반 투자자의 손실 규모가 매우 커질 수 있다. AI 수익화 지연이 본격화될 경우 글로벌 자본시장 전체로 파장이 확산될 수 있다.
+
+**2. [미국 5월 고용 17.2만 개 증가, 이란 전쟁 여파 속 노동시장은 견조](https://www.greenwichtime.com/business/article/america-in-focus-us-job-market-is-rebounding-22294012.php)**
+
+미 노동부 발표에 따르면 5월 미국 비농업 부문 고용은 17만 2,000개 늘어나며 시장 예상을 상회했다. 이란 전쟁발 비용 상승 압력에도 불구하고 노동시장은 의외의 회복 탄력성을 보여주고 있으며, 식료품·연료 가격 부담 속에서 가계와 기업의 의사결정에 큰 영향을 미치고 있다. 다만 임금 상승과 물가 압력이 동시에 진행되면서 연준의 정책 방향성에 대한 불확실성은 더 커진 모습이다.
+
+🔍 **시각 A**: 강한 고용은 미국 경제의 기초체력이 여전히 탄탄하다는 신호로, 글로벌 수요와 한국 수출 기업에도 긍정적 영향을 줄 수 있다. 경기 침체 우려를 완화시키는 효과가 있다.
+
+🔎 **시각 B**: 반대로 견조한 고용은 연준의 금리 인하 시점을 더 늦출 수 있어, 고금리 장기화가 신흥국 자본 유출과 부채 부담을 키울 우려가 있다. 임금 상승 압력이 인플레이션 재상승으로 이어질 가능성도 배제하기 어렵다.
+
+**3. [중동 긴장 재고조에 미 증시 하락…국내 증시 변동성도 확대](https://news.google.com/rss/articles/CBMiUkFVX3lxTE8zUzJySE9NZDBzVVZnMFMyeGI2ZHlPeFNBOUhod25tNXYxWUwwVDdlMkI4TVRtbHZ1emI0ZU9QcWR2RUlrQTIyVFAyNlJrdXlFNGc?oc=5)**
+
+중동 지역의 긴장이 다시 고조되면서 뉴욕 증시가 하락 마감했고, 국내 증시 역시 변동성 우려가 커지고 있다. 유가와 안전자산 흐름이 동시에 출렁이는 가운데, 외국인 수급과 환율 변동이 코스피의 단기 흐름을 좌우할 핵심 변수로 부상했다. 투자자들은 휴전 합의 이행 여부와 향후 협상 진행 양상에 촉각을 곤두세우고 있다.
+
+🔍 **시각 A**: 단기 충격이 발생하더라도 한국 증시는 견조한 수출 실적과 반도체 업황 회복 흐름에 힘입어 빠른 회복이 가능하다는 기대가 있다. 변동성 확대는 우량주 저가 매수 기회가 될 수도 있다.
+
+🔎 **시각 B**: 반면 지정학적 리스크와 미 증시 약세가 겹칠 경우 코스피의 하방 압력은 더 커질 수 있다. 가계 부채 부담이 큰 국내 환경에서 자산 가격 변동성 확대는 실물 경제로 충격이 전이될 위험이 있다.
 
 ## 👥 사회
 
-**1. [인구 절벽 앞에 선 대한민국, 지금이 마지막 기회다](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1KcDNvbl84MHMzZngzZVNlOHpRQUhNSUpDQ2FNNExOb2liWE5ZMXZ3U0t3Um9QNzI4bGVxd1pDalNFaTBJSkpoYm5NekpmQU56Yl9DNzROaXJmbDQ?oc=5)**  
-대한민국의 인구 감소 문제는 심각한 상황에 이르렀으며, 전문가들은 이를 해결하기 위한 정책적 노력이 시급하다고 경고하고 있다.  
-🔍 시각 A: 이번 문제는 정부가 적극적으로 대응해야 하며, 이를 기회로 삼아 다문화 사회로의 전환을 모색할 필요가 있다.  
-🔎 시각 B: 하지만 많은 국민들은 금전적 지원이나 정책이 구체적이지 않으면 변화가 없다고 우려하고 있다.
+**1. [인구 절벽 앞에 선 대한민국, "지금이 마지막 기회"](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1KcDNvbl84MHMzZngzZVNlOHpRQUhNSUpDQ2FNNExOb2liWE5ZMXZ3U0t3Um9QNzI4bGVxd1pDalNFaTBJSkpoYm5NekpmQU56Yl9DNzROaXJmbDQ?oc=5)**
+
+대한민국이 세계 최저 수준의 출산율과 가속화되는 고령화로 사실상 인구 절벽 직전에 와 있다는 진단이 다시 한 번 나왔다. 전문가들은 이번 10년이 인구 구조 붕괴를 막을 수 있는 사실상 마지막 골든타임이라고 지적하며, 단편적 출산 장려책이 아닌 주거·고용·교육·돌봄을 아우르는 구조적 개혁이 필요하다고 강조했다. 지방소멸과 학교·병원 인프라 붕괴도 동시에 진행되며 위기감은 더욱 커지고 있다.
+
+🔍 **시각 A**: 위기를 명확히 인식한 만큼, 사회적 합의에 기반한 강력한 구조 개혁의 동력을 모을 수 있는 기회이기도 하다. 디지털·로봇·AI 기반 생산성 혁신이 인구 감소의 충격을 일부 완화할 가능성도 있다.
+
+🔎 **시각 B**: 그러나 그동안 380조 원 넘는 예산이 투입된 저출생 정책이 별다른 성과를 내지 못한 사례에서 보듯, 정치적 단기 대응이 반복될 경우 위기 대응은 또다시 실기할 수 있다. 청년층의 주거·일자리 불안이 개선되지 않는 한 출산율 반등은 어렵다는 비관론이 강하다.
+
+**2. [스타벅스 코리아 'Tank Day' 사태, 5·18 모독 논란으로 전국 보이콧 확산](https://www.theguardian.com/world/2026/jun/06/starbucks-south-korea-tank-day-promotion-blunder)**
+
+스타벅스 코리아가 5월 18일에 새 텀블러 라인인 'Tank' 출시 행사를 진행하면서 광주 민주화운동 기념일에 '탱크'를 연상시키는 마케팅을 펼친 사실이 알려져 거센 반발에 부딪혔다. 정부 부처들은 잇따라 스타벅스와의 협력 관계를 단절했고, 전국 매장에는 사과문이 게시되는 한편 경찰 수사와 정치권의 비판이 이어지고 있다. 결국 회장이 직접 사과에 나섰지만 불매운동의 여파는 가라앉지 않는 분위기다.
+
+🔍 **시각 A**: 시민사회가 역사적 감수성에 무딘 기업 마케팅에 즉각적·집단적으로 대응했다는 점은, 한국 사회의 민주적 가치와 역사 의식이 여전히 강하게 작동함을 보여준다. 글로벌 기업에 대한 책임 있는 ESG 경영을 촉구하는 계기가 될 수 있다.
+
+🔎 **시각 B**: 다만 마케팅 실수에 대한 처벌이 보이콧·정치적 공세로 비례 이상 확대될 경우, 외국 기업의 한국 시장 진출이나 투자 의사결정에 부정적 신호로 작용할 수 있다. 감정적 대응 위주의 사회적 분위기에 대한 우려도 제기된다.
 
 ## 🚨 사건사고
 
-**1. [서소문 고가 철거 완료…오늘부터 열차 운행 정상화](https://news.google.com/rss/articles/CBMibkFVX3lxTE5CazRBMTJGZTlUTFBmY1JnMk1jNC1fcUxHbTNKZk91cnV3eW1XVGliUmx1cElhRXRVcmY2dUZIZFh3YUVSV2pjTmczTS1MNlRqUG12WEc2b3FoQlotT1BLV2hMcXZCY3l3SUpSd2Vn?oc=5)**  
-서울에서 진행된 서소문 고가 철거 작업이 완료되었으며, 이에 따라 해당 노선의 열차 운행이 정상화되었다. 시민들은 이에 대해 긍정적인 반응을 보이고 있다.  
-🔍 시각 A: 교통 편의를 위해 필요한 작업이고, 지역 시민들에게 큰 도움이 될 것으로 보인다.  
-🔎 시각 B: 그러나 작업이 지연되며 일부 시민들은 불편을 겪었고, 이러한 사건이 반복되지 않도록 해야 한다.
+**1. ['김창민 감독 상해치사' 피의자 2명, 영장실질심사 진행](https://news.google.com/rss/articles/CBMib0FVX3lxTFBfYUFhVjJ2TkJRMWJoR1VuSXhsMjJMVnVfNTFTU2piOVV0TEcxM0x5ZWE4bVM4MzdfMEJwZlJPMVZ3aGRKUmNsWmZLMzNPbHVlOTRvNkJUZjMzd3NiMEg0OHNDdHp2eHl4MHEtb05Yb9IBc0FVX3lxTE01OEk3NDU4QjlndDZQMl9Ja3ZscEhuZ0hsbGI3STgyd3NQMVNXN0psTXJmZEUzUzNJREhOMTVleVNWY081ZHRZSVRTRGlUc3N0OHRDUnRGVkFsV0J5dTJkOU5aY3BsTEM4dU1ZckJPU3hMSzA?oc=5)**
+
+영화감독 김창민 씨의 사망 사건과 관련해 상해치사 혐의를 받는 피의자 2명에 대한 구속 전 피의자 심문(영장실질심사)이 오늘 진행된다. 수사기관은 두 사람이 폭행을 가한 정황을 확보하고 구속 수사가 필요하다고 판단한 것으로 전해졌으며, 영장 발부 여부에 따라 향후 수사는 큰 분수령을 맞게 된다. 문화예술계 인사의 사망인 만큼 사회적 관심도 높다.
+
+🔍 **시각 A**: 신속한 영장 청구와 심사 진행은 폭력 사건에 대한 사법기관의 단호한 대응 의지를 보여준다. 절차적 정의를 통해 진실 규명이 이루어질 것이라는 기대가 가능하다.
+
+🔎 **시각 B**: 다만 유명인 사망 사건이 가지는 사회적 파장 속에서, 수사 초기 단계 정보가 과도하게 공개될 경우 피의자의 방어권과 사실관계 왜곡 우려가 동시에 발생할 수 있다. 여론 재판이 되지 않도록 신중한 보도와 수사 보안이 요구된다.
+
+**2. [서소문 고가 철거 완료…열차 운행 정상화](https://news.google.com/rss/articles/CBMibkFVX3lxTE5CazRBMTJGZTlUTFBmY1JnMk1jNC1fcUxHbTNKZk91cnV3eW1XVGliUmx1cElhRXRVcmY2dUZIZFh3YUVSV2pjTmczTS1MNlRqUG12WEc2b3FoQlotT1BLV2hMcXZCY3l3SUpSd2Vn?oc=5)**
+
+서울 도심의 노후 시설 정비 차원에서 진행돼 온 서소문 고가 철거 작업이 완료되며 인근을 통과하는 열차 운행이 오늘부터 정상화됐다. 철거 기간 동안 우회 운행과 일부 노선 지연이 잇따랐던 만큼, 출퇴근 시민과 인근 상권에는 적지 않은 불편이 있었다. 시는 추가 안전 점검 후 통행 흐름이 안정화될 것이라고 밝혔다.
+
+🔍 **시각 A**: 노후 인프라의 철거와 재정비는 도심 안전성을 한층 끌어올리는 긍정적 결과로 이어진다. 보행·교통 환경 개선과 도심 미관 회복 효과도 기대된다.
+
+🔎 **시각 B**: 다만 공사 기간 중 시민 불편이 누적되었고, 향후 대체 인프라가 적시에 갖춰지지 않을 경우 교통 혼잡이 재발할 가능성이 있다. 도심 재정비 과정에서 시민 소통과 보상 체계가 충분했는지에 대한 점검이 필요하다.
 
 ---
 
