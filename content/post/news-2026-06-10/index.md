@@ -1,0 +1,3 @@
+API Error: Claude Code is unable to respond to this request, which appears to violate our Usage Policy (https://www.anthropic.com/legal/aup). This request triggered restrictions on violative cyber content and was blocked under Anthropic's Usage Policy. To request an adjustment pursuant to our Cyber Verification Program based on how you use Claude, fill out https://claude.com/form/cyber-use-case?token=qpbKdscfQB5oHBCuQTB7GMUDMDkUHO-PHKs8g52nOToK-GXYF-lgP64X2dMbtpKxyNWXWUfpUvwq1g_hlTl4RoD5EGKJa4cxEYF6XBiKVE7cIy17JyHLuHmBH0NLISafPyrhZUDs1g… Try rephrasing the request or attempting a different approach.
+
+Request ID: req_011CbtWvKv5eon8DECiE19b1
