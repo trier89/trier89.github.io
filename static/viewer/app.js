@@ -115,6 +115,7 @@ $('align-save').addEventListener('click', () => {
   }
   dump.videoYaw = parseFloat($('video-yaw').value);
   dump.videoRadius = parseFloat($('video-radius').value);
+  dump.videoPath = videoPath;
   downloadBlob(new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' }),
     'alignment.json');
   setStatus('정렬값을 alignment.json 으로 저장했습니다');
@@ -132,6 +133,7 @@ $('align-load').addEventListener('change', async (e) => {
     }
     if (dump.videoYaw !== undefined) { $('video-yaw').value = dump.videoYaw; applyVideoYaw(); }
     if (dump.videoRadius !== undefined) { $('video-radius').value = dump.videoRadius; applyVideoRadius(); }
+    if (dump.videoPath?.points?.length) { videoPath = dump.videoPath; refreshPath(); }
     syncTransformInputs();
     setStatus('정렬값을 불러왔습니다');
   } catch (err) { setStatus('정렬 파일을 읽지 못했습니다: ' + err.message); }
@@ -606,6 +608,12 @@ videoEl.crossOrigin = 'anonymous';
 let videoSphere = null;
 let savedCamState = null;
 
+// 촬영 경로: world = 수동 웨이포인트(레이어 위치 키프레임), path = SLAM 궤적(로컬 좌표, 기즈모로 정렬)
+const videoPathNode = new THREE.Group();
+layers.video.axis.add(videoPathNode);
+let videoPath = { space: 'world', points: [] }; // {t, pos:[x,y,z], yaw?}
+let pathLine = null;
+
 $('file-video').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (file) loadVideoFile(file);
@@ -627,7 +635,7 @@ function loadVideoFile(file) {
     });
     videoSphere = new THREE.Mesh(geo, mat);
     videoSphere.name = 'videoSphere';
-    layers.video.axis.add(videoSphere);
+    videoPathNode.add(videoSphere);
     applyVideoRadius();
     applyVideoYaw();
     applyVideoFront();
@@ -676,7 +684,7 @@ function enter360() {
       rotateSpeed: controls.rotateSpeed,
     };
   }
-  const center = layers.video.group.getWorldPosition(new THREE.Vector3());
+  const center = videoSphere.getWorldPosition(new THREE.Vector3());
   const dir = new THREE.Vector3().subVectors(camera.position, controls.target).normalize();
   controls.target.copy(center);
   camera.position.copy(center).addScaledVector(dir, 0.01);
@@ -714,6 +722,136 @@ $('video-seek').addEventListener('input', (e) => {
 });
 function fmtTime(s) {
   return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+}
+
+/* ------------------------------------------------ 촬영 경로 (자동 이동) */
+$('wp-record').addEventListener('click', () => {
+  if (!videoSphere) { setStatus('먼저 360 영상을 불러오세요'); return; }
+  if (!videoEl.duration) { setStatus('영상 로드 후 기록할 수 있습니다'); return; }
+  if (videoPath.space !== 'world') { // SLAM 궤적 위에 수동 기록 시 초기화
+    videoPath = { space: 'world', points: [] };
+    videoPathNode.position.set(0, 0, 0);
+  }
+  const t = +videoEl.currentTime.toFixed(2);
+  const wp = {
+    t,
+    pos: layers.video.group.position.toArray(),
+    yaw: parseFloat($('video-yaw').value),
+  };
+  const i = videoPath.points.findIndex((p) => Math.abs(p.t - t) < 0.4);
+  if (i >= 0) videoPath.points[i] = wp; else videoPath.points.push(wp);
+  videoPath.points.sort((a, b) => a.t - b.t);
+  refreshPath();
+  setStatus(`웨이포인트 기록: ${fmtTime(t)} 시점, 총 ${videoPath.points.length}개`);
+});
+
+$('wp-clear').addEventListener('click', () => {
+  videoPath = { space: 'world', points: [] };
+  videoPathNode.position.set(0, 0, 0);
+  refreshPath();
+  setStatus('촬영 경로를 지웠습니다');
+});
+
+$('wp-import').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    const points = parseTrajectory(await file.text(), file.name.toLowerCase());
+    if (points.length < 2) throw new Error('경로 지점이 2개 미만입니다');
+    videoPath = { space: 'path', points };
+    layers.video.group.position.set(0, 0, 0); // 정렬은 기즈모로 새로 시작
+    refreshPath();
+    setStatus(`SLAM 궤적 ${points.length}개 지점 로드 — 정렬 패널에서 '360° 영상'을 선택해 ` +
+      `경로를 모델 위치에 맞추고(이동·회전) 스케일을 보정하세요`);
+  } catch (err) { setStatus('궤적 파일을 읽지 못했습니다: ' + err.message); }
+  e.target.value = '';
+});
+
+/* TUM 형식(timestamp tx ty tz [qx qy qz qw]) 또는 JSON [{t,x,y,z,yaw?}] */
+function parseTrajectory(text, name) {
+  let points = [];
+  if (name.endsWith('.json')) {
+    const j = JSON.parse(text);
+    const arr = Array.isArray(j) ? j : j.waypoints || j.points || [];
+    points = arr.map((p) => ({
+      t: +p.t,
+      pos: p.pos ? p.pos.map(Number) : [+p.x, +p.y, +p.z],
+      yaw: p.yaw !== undefined ? +p.yaw : undefined,
+    })).filter((p) => isFinite(p.t) && p.pos.every(isFinite));
+  } else {
+    for (const line of text.split('\n')) {
+      const t = line.trim();
+      if (!t || t.startsWith('#')) continue;
+      const v = t.split(/[\s,;]+/).map(Number);
+      if (v.length < 4 || v.slice(0, 4).some((x) => !isFinite(x))) continue;
+      points.push({ t: v[0], pos: [v[1], v[2], v[3]] });
+    }
+  }
+  points.sort((a, b) => a.t - b.t);
+  if (points.length < 2) return points;
+  // 시작을 0초로 정규화, 프레임 번호 타임스탬프면 영상 길이에 맞게 재배분
+  const t0 = points[0].t;
+  points.forEach((p) => { p.t -= t0; });
+  const maxT = points[points.length - 1].t;
+  if (videoEl.duration && maxT > 0 && Math.abs(maxT - videoEl.duration) / videoEl.duration > 0.1) {
+    const k = videoEl.duration / maxT;
+    points.forEach((p) => { p.t *= k; });
+    setStatus(`궤적 시간축을 영상 길이(${fmtTime(videoEl.duration)})에 맞췄습니다`);
+  }
+  return points;
+}
+
+function refreshPath() {
+  if (pathLine) {
+    pathLine.geometry.dispose();
+    pathLine.parent?.remove(pathLine);
+    pathLine = null;
+  }
+  $('wp-count').textContent = videoPath.points.length
+    ? `${videoPath.points.length}개 지점${videoPath.space === 'path' ? ' (SLAM)' : ''}` : '';
+  if (videoPath.points.length >= 2) {
+    const pts = videoPath.points.map((p) => new THREE.Vector3(...p.pos));
+    pathLine = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({ color: 0x62d98a }));
+    (videoPath.space === 'world' ? scene : layers.video.axis).add(pathLine);
+  }
+}
+
+function samplePath(t) {
+  const pts = videoPath.points;
+  if (t <= pts[0].t) return pts[0];
+  const last = pts[pts.length - 1];
+  if (t >= last.t) return last;
+  let i = 0;
+  while (i < pts.length - 2 && pts[i + 1].t < t) i++;
+  const a = pts[i], b = pts[i + 1];
+  const f = (t - a.t) / Math.max(b.t - a.t, 1e-6);
+  const pos = [0, 1, 2].map((k) => a.pos[k] + (b.pos[k] - a.pos[k]) * f);
+  let yaw;
+  if (a.yaw !== undefined && b.yaw !== undefined) {
+    yaw = a.yaw + ((((b.yaw - a.yaw) + 540) % 360) - 180) * f; // 최단각 보간
+  } else yaw = a.yaw ?? b.yaw;
+  return { pos, yaw };
+}
+
+function updatePathFollow() {
+  if (!videoSphere || !videoPath.points.length || !$('wp-follow').checked) return;
+  if (!videoEl.duration || gizmo.dragging) return;
+  const s = samplePath(videoEl.currentTime);
+  const target = videoPath.space === 'world' ? layers.video.group.position : videoPathNode.position;
+  target.set(s.pos[0], s.pos[1], s.pos[2]);
+  if (s.yaw !== undefined) {
+    videoSphere.rotation.y = THREE.MathUtils.degToRad(s.yaw);
+    $('video-yaw').value = s.yaw;
+  }
+  // 360 시점 안에서는 카메라가 구체를 따라가도록
+  if (savedCamState) {
+    const center = videoSphere.getWorldPosition(new THREE.Vector3());
+    const dir = new THREE.Vector3().subVectors(camera.position, controls.target);
+    controls.target.copy(center);
+    camera.position.copy(center).add(dir);
+  }
 }
 
 /* ------------------------------------------------------------- 거리 측정 */
@@ -852,7 +990,16 @@ function clearLayer(key) {
   if (key === 'model') clearSelection();
   layers[key].axis.clear();
   layers[key].files.length = 0;
-  if (key === 'video') { videoSphere = null; videoEl.pause(); videoEl.removeAttribute('src'); }
+  if (key === 'video') {
+    videoSphere = null;
+    videoEl.pause();
+    videoEl.removeAttribute('src');
+    videoPath = { space: 'world', points: [] };
+    videoPathNode.clear();
+    videoPathNode.position.set(0, 0, 0);
+    layers.video.axis.add(videoPathNode); // axis.clear()로 떨어져 나간 노드 복구
+    refreshPath();
+  }
   refreshFileList(key);
   updateStats();
 }
@@ -965,6 +1112,7 @@ window.addEventListener('resize', resize);
 
 renderer.setAnimationLoop(() => {
   resize();
+  updatePathFollow();
   controls.update();
   updateLabels();
   renderer.render(scene, camera);
