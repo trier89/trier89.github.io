@@ -282,6 +282,7 @@ canvas.addEventListener('pointerup', async (e) => {
   const moved = Math.hypot(e.clientX - pointerDownAt[0], e.clientY - pointerDownAt[1]);
   pointerDownAt = null;
   if (moved > 5) return; // 드래그(궤도 회전)는 선택으로 치지 않음
+  if (fineAlign) { handleFineAlignClick(e); return; }
   if (!layers.model.group.visible || !layers.model.axis.children.length) return;
   raycaster.setFromCamera(pointerNDC(e), camera);
   const hits = raycaster.intersectObject(layers.model.group, true);
@@ -721,6 +722,157 @@ function fmtTime(s) {
   return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 }
 
+/* ----------------------------------------- 360 정밀 정렬 (대응점 방식) */
+// 영상 속 지점(=구체 중심에서의 방향)과 모델/스캔의 같은 지점(3D 좌표)을
+// 2쌍 이상 찍으면 구체의 위치(x,y,z)와 방위각을 최소제곱으로 푼다.
+// 카메라가 수평으로 촬영됐다고 가정(360캠은 대부분 수평 보정됨).
+let fineAlign = null; // { pairs: [{d, P}], pendingDir, markers }
+
+$('video-finealign').addEventListener('click', () => {
+  if (fineAlign) { cancelFineAlign(); return; }
+  if (!videoSphere) { setStatus('먼저 360 영상을 불러오세요'); return; }
+  if (!layers.model.axis.children.length && !layers.cloud.axis.children.length) {
+    setStatus('정밀 정렬에는 모델 또는 포인트클라우드가 필요합니다'); return;
+  }
+  if (!savedCamState) enter360(); // 관측 방향은 구체 중심 기준이어야 함
+  if (measuring) $('tool-measure').click();
+  fineAlign = { pairs: [], pendingDir: null, markers: new THREE.Group() };
+  scene.add(fineAlign.markers);
+  $('video-finealign').classList.add('active');
+  $('finealign-row').classList.remove('hidden');
+  updateFineAlignUI();
+  setStatus('정밀 정렬 ①: 영상에서 식별 가능한 지점(기둥 모서리 등)을 클릭하세요 — 투명도를 절반쯤 낮추면 비교가 쉽습니다');
+});
+$('finealign-cancel').addEventListener('click', cancelFineAlign);
+function cancelFineAlign() {
+  if (!fineAlign) return;
+  scene.remove(fineAlign.markers);
+  fineAlign = null;
+  $('video-finealign').classList.remove('active');
+  $('finealign-row').classList.add('hidden');
+  setStatus('정밀 정렬을 취소했습니다');
+}
+function updateFineAlignUI() {
+  const n = fineAlign ? fineAlign.pairs.length : 0;
+  $('finealign-apply').textContent = `계산 적용 (${n}쌍)`;
+  $('finealign-apply').disabled = n < 2;
+}
+function fineAlignMarker(pos, color) {
+  const dot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.06, 12, 8),
+    new THREE.MeshBasicMaterial({ color, depthTest: false }));
+  dot.position.copy(pos);
+  dot.renderOrder = 1001;
+  fineAlign.markers.add(dot);
+}
+
+function handleFineAlignClick(e) {
+  raycaster.setFromCamera(pointerNDC(e), camera);
+  const center = layers.video.group.getWorldPosition(new THREE.Vector3());
+  if (!fineAlign.pendingDir) {
+    // ① 영상 지점: 구체 중심 기준 방향을 콘텐츠(구체 로컬) 좌표로 기록
+    const dWorld = raycaster.ray.direction.clone().normalize();
+    const qInv = videoSphere.getWorldQuaternion(new THREE.Quaternion()).invert();
+    fineAlign.pendingDir = dWorld.clone().applyQuaternion(qInv);
+    fineAlignMarker(center.clone().addScaledVector(dWorld,
+      parseFloat($('video-radius').value) * 0.95), 0x62d98a);
+    setStatus(`정밀 정렬 ②: 같은 지점을 모델/스캔에서 클릭하세요 (${fineAlign.pairs.length + 1}번째 쌍)`);
+  } else {
+    // ② 모델/스캔의 같은 지점
+    raycaster.params.Points.threshold = Math.max(parseFloat($('cloud-size').value) * 2, 0.08);
+    const targets = [];
+    if (layers.model.axis.children.length) targets.push(layers.model.group);
+    if (layers.cloud.axis.children.length) targets.push(layers.cloud.group);
+    const hits = raycaster.intersectObjects(targets, true).filter((h) => h.object.isMesh || h.object.isPoints);
+    if (!hits.length) { setStatus('모델/스캔이 잡히지 않았습니다 — 형상이 있는 곳을 클릭하세요'); return; }
+    const P = hits[0].point.clone();
+    fineAlignMarker(P, 0x5b9dff);
+    fineAlign.pairs.push({ d: fineAlign.pendingDir, P });
+    fineAlign.pendingDir = null;
+    updateFineAlignUI();
+    const n = fineAlign.pairs.length;
+    setStatus(n < 2
+      ? `쌍 ${n} 완료 — 서로 다른 방향에서 한 쌍 더 찍으세요`
+      : `쌍 ${n} 완료 — 더 찍을수록 정확합니다. 준비되면 [계산 적용]`);
+  }
+}
+
+$('finealign-apply').addEventListener('click', () => {
+  if (!fineAlign || fineAlign.pairs.length < 2) return;
+  const sol = solve360Pose(fineAlign.pairs,
+    layers.video.group.getWorldPosition(new THREE.Vector3()),
+    THREE.MathUtils.degToRad(parseFloat($('video-yaw').value)));
+  if (!sol) { setStatus('계산 실패: 대응점들이 한 방향에 몰려 있습니다 — 좌/우/앞 등 다른 방향으로 다시 찍으세요'); return; }
+  layers.video.group.position.copy(sol.C);
+  layers.video.group.rotation.set(0, 0, 0); // 방위는 슬라이더로 일원화
+  let deg = THREE.MathUtils.radToDeg(sol.theta);
+  deg = ((deg + 180) % 360 + 360) % 360 - 180;
+  $('video-yaw').value = deg.toFixed(1);
+  applyVideoYaw();
+  syncTransformInputs();
+  if (savedCamState) { // 새 중심으로 카메라 스냅
+    const dir = new THREE.Vector3().subVectors(camera.position, controls.target).normalize();
+    controls.target.copy(sol.C);
+    camera.position.copy(sol.C).addScaledVector(dir, 0.01);
+  }
+  const err = THREE.MathUtils.radToDeg(sol.residual);
+  cancelFineAlign();
+  setStatus(`정밀 정렬 적용 — 평균 오차 ${err.toFixed(1)}° ${err > 3 ? '(큰 편입니다: 대응점을 다시 확인하세요)' : ''}`);
+});
+
+// 교대 최소화: 방위(닫힌형) ↔ 위치(광선-점 최소제곱 3x3)
+function solve360Pose(pairs, C0, theta0) {
+  let C = C0.clone();
+  let theta = theta0;
+  const yawed = (d, t) => new THREE.Vector3(
+    Math.cos(t) * d.x + Math.sin(t) * d.z,
+    d.y,
+    -Math.sin(t) * d.x + Math.cos(t) * d.z);
+  for (let it = 0; it < 40; it++) {
+    let A = 0, B = 0;
+    for (const { d, P } of pairs) {
+      const u = P.clone().sub(C);
+      if (u.lengthSq() < 1e-8) continue;
+      u.normalize();
+      A += d.x * u.x + d.z * u.z;
+      B += d.z * u.x - d.x * u.z;
+    }
+    theta = Math.atan2(B, A);
+    // Σ(I - vvᵀ)C = Σ(I - vvᵀ)P 풀기
+    const m = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    const rhs = [0, 0, 0];
+    for (const { d, P } of pairs) {
+      const v = yawed(d, theta);
+      const vv = [v.x, v.y, v.z];
+      const p = [P.x, P.y, P.z];
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const a = (r === c ? 1 : 0) - vv[r] * vv[c];
+          m[r][c] += a;
+          rhs[r] += a * p[c];
+        }
+      }
+    }
+    const M = new THREE.Matrix3().set(
+      m[0][0], m[0][1], m[0][2],
+      m[1][0], m[1][1], m[1][2],
+      m[2][0], m[2][1], m[2][2]);
+    if (Math.abs(M.determinant()) < 1e-6) return null; // 광선이 모두 평행
+    M.invert();
+    const e = M.elements; // column-major
+    C = new THREE.Vector3(
+      e[0] * rhs[0] + e[3] * rhs[1] + e[6] * rhs[2],
+      e[1] * rhs[0] + e[4] * rhs[1] + e[7] * rhs[2],
+      e[2] * rhs[0] + e[5] * rhs[1] + e[8] * rhs[2]);
+  }
+  let residual = 0;
+  for (const { d, P } of pairs) {
+    const u = P.clone().sub(C).normalize();
+    residual += Math.acos(THREE.MathUtils.clamp(yawed(d, theta).dot(u), -1, 1));
+  }
+  return { C, theta, residual: residual / pairs.length };
+}
+
 /* ------------------------------------------------ 촬영 경로 (자동 이동) */
 $('wp-record').addEventListener('click', () => {
   if (!videoSphere) { setStatus('먼저 360 영상을 불러오세요'); return; }
@@ -860,6 +1012,7 @@ const labels = []; // { worldPos, el }
 const raycaster = new THREE.Raycaster();
 
 $('tool-measure').addEventListener('click', () => {
+  if (!measuring && fineAlign) cancelFineAlign();
   measuring = !measuring;
   measureStart = null;
   $('tool-measure').classList.toggle('active', measuring);
@@ -1137,7 +1290,8 @@ window.addEventListener('keydown', (e) => {
       if (videoEl.src) { e.preventDefault(); $('video-play').click(); }
       break;
     case 'escape':
-      if (savedCamState) exit360();
+      if (fineAlign) cancelFineAlign();
+      else if (savedCamState) exit360();
       else if (measuring) $('tool-measure').click();
       else if (selHelper) clearSelection();
       else { gizmo.detach(); gizmoTarget = null; $('gizmo-target').value = ''; }

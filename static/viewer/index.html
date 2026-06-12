@@ -95,6 +95,13 @@
         <button class="mini" id="video-place">현재 시점에 배치</button>
         <button class="mini accent" id="video-enter">시점 진입</button>
       </div>
+      <div class="row btnrow">
+        <button class="mini" id="video-finealign">🎯 정밀 정렬 (대응점)</button>
+      </div>
+      <div class="row btnrow hidden" id="finealign-row">
+        <button class="mini accent" id="finealign-apply" disabled>계산 적용 (0쌍)</button>
+        <button class="mini" id="finealign-cancel">취소</button>
+      </div>
       <div class="row videoctl">
         <button class="mini" id="video-play">▶</button>
         <input type="range" id="video-seek" min="0" max="100" step="0.1" value="0" class="grow">
