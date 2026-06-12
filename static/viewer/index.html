@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>통합 검토 뷰어 — BIM · 포인트클라우드 · 360영상</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <header>
+      <h1>통합 검토 뷰어</h1>
+      <p class="sub">BIM 모델 · 포인트클라우드 · 360° 영상 중첩 검토</p>
+    </header>
+
+    <!-- 모델 -->
+    <section class="panel" id="panel-model">
+      <h2><span class="dot dot-model"></span>3D 모델 (NWD 변환)</h2>
+      <p class="hint">NWD는 브라우저에서 직접 열 수 없습니다.
+        Navisworks에서 <b>FBX</b>로 내보내거나(파일 → 내보내기 → FBX),
+        Revit/기타 도구로 <b>GLB·glTF·OBJ</b>로 변환 후 불러오세요.</p>
+      <label class="filebtn">모델 파일 열기 (.glb .gltf .fbx .obj)
+        <input type="file" id="file-model" accept=".glb,.gltf,.fbx,.obj" multiple>
+      </label>
+      <div class="row">
+        <label>단위
+          <select id="model-unit">
+            <option value="1" selected>m</option>
+            <option value="0.01">cm</option>
+            <option value="0.001">mm</option>
+          </select>
+        </label>
+        <label class="chk"><input type="checkbox" id="model-zup"> Z-up 데이터</label>
+      </div>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="model-visible" checked> 표시</label>
+        <label class="grow">투명도 <input type="range" id="model-opacity" min="0" max="1" step="0.01" value="1"></label>
+      </div>
+      <ul class="filelist" id="list-model"></ul>
+      <button class="mini" id="clear-model">모델 지우기</button>
+    </section>
+
+    <!-- 포인트클라우드 -->
+    <section class="panel" id="panel-cloud">
+      <h2><span class="dot dot-cloud"></span>포인트클라우드</h2>
+      <label class="filebtn">스캔 파일 열기 (.las .ply .pcd .xyz)
+        <input type="file" id="file-cloud" accept=".las,.laz,.ply,.pcd,.xyz,.pts,.txt" multiple>
+      </label>
+      <p class="hint">LAZ(압축)·E57·RCP/RCS는 미지원 — CloudCompare 등으로 LAS/PLY 변환 후 사용하세요. 대용량은 자동으로 표본 추출됩니다(최대 400만 점).</p>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="cloud-visible" checked> 표시</label>
+        <label class="chk"><input type="checkbox" id="cloud-zup" checked> Z-up 데이터</label>
+      </div>
+      <div class="row">
+        <label class="grow">투명도 <input type="range" id="cloud-opacity" min="0" max="1" step="0.01" value="1"></label>
+      </div>
+      <div class="row">
+        <label class="grow">점 크기 <input type="range" id="cloud-size" min="0.005" max="0.3" step="0.005" value="0.04"></label>
+      </div>
+      <ul class="filelist" id="list-cloud"></ul>
+      <button class="mini" id="clear-cloud">포인트클라우드 지우기</button>
+    </section>
+
+    <!-- 360 영상 -->
+    <section class="panel" id="panel-video">
+      <h2><span class="dot dot-video"></span>360° 영상</h2>
+      <label class="filebtn">영상 파일 열기 (.mp4 .webm)
+        <input type="file" id="file-video" accept="video/*">
+      </label>
+      <p class="hint">equirectangular(2:1) 포맷 360 영상을 구체에 투영합니다. Insta360/RICOH THETA 등에서 내보낸 영상 사용.</p>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="video-visible" checked> 표시</label>
+        <label class="grow">투명도 <input type="range" id="video-opacity" min="0" max="1" step="0.01" value="1"></label>
+      </div>
+      <div class="row">
+        <label class="grow">구체 반경(m) <input type="range" id="video-radius" min="2" max="60" step="0.5" value="15"></label>
+      </div>
+      <div class="row">
+        <label class="grow">방위 정렬(°) <input type="range" id="video-yaw" min="-180" max="180" step="0.5" value="0"></label>
+      </div>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="video-front"> 영상을 전경으로</label>
+      </div>
+      <div class="row btnrow">
+        <button class="mini" id="video-place">현재 시점에 배치</button>
+        <button class="mini accent" id="video-enter">시점 진입</button>
+      </div>
+      <div class="row videoctl">
+        <button class="mini" id="video-play">▶</button>
+        <input type="range" id="video-seek" min="0" max="100" step="0.1" value="0" class="grow">
+        <span id="video-time">0:00</span>
+      </div>
+    </section>
+
+    <!-- 정렬 -->
+    <section class="panel" id="panel-align">
+      <h2>정렬 (이동·회전·스케일)</h2>
+      <div class="row">
+        <label class="grow">대상
+          <select id="gizmo-target">
+            <option value="">없음</option>
+            <option value="model">3D 모델</option>
+            <option value="cloud">포인트클라우드</option>
+            <option value="video">360° 영상</option>
+          </select>
+        </label>
+      </div>
+      <div class="row btnrow">
+        <button class="mini mode" id="mode-translate" data-mode="translate">이동 (W)</button>
+        <button class="mini mode" id="mode-rotate" data-mode="rotate">회전 (E)</button>
+        <button class="mini mode" id="mode-scale" data-mode="scale">스케일 (R)</button>
+      </div>
+      <div class="xyz">
+        <label>X <input type="number" id="tx" step="0.1" value="0"></label>
+        <label>Y <input type="number" id="ty" step="0.1" value="0"></label>
+        <label>Z <input type="number" id="tz" step="0.1" value="0"></label>
+        <label>RX° <input type="number" id="rx" step="1" value="0"></label>
+        <label>RY° <input type="number" id="ry" step="1" value="0"></label>
+        <label>RZ° <input type="number" id="rz" step="1" value="0"></label>
+        <label>배율 <input type="number" id="sc" step="0.01" value="1" min="0.0001"></label>
+      </div>
+      <div class="row btnrow">
+        <button class="mini" id="align-save">정렬 저장(JSON)</button>
+        <label class="mini filebtn-inline">정렬 불러오기<input type="file" id="align-load" accept=".json"></label>
+      </div>
+    </section>
+
+    <!-- 검토 도구 -->
+    <section class="panel" id="panel-tools">
+      <h2>검토 도구</h2>
+      <div class="row btnrow">
+        <button class="mini" id="tool-measure">📏 거리 측정</button>
+        <button class="mini" id="tool-clearmeasure">측정 지우기</button>
+      </div>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="clip-enable"> 수평 단면</label>
+        <label class="grow">높이 <input type="range" id="clip-height" min="-10" max="50" step="0.1" value="3"></label>
+      </div>
+      <div class="row btnrow">
+        <button class="mini" id="tool-fit">화면 맞춤 (F)</button>
+        <button class="mini" id="tool-shot">📷 캡처</button>
+      </div>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="show-grid" checked> 그리드</label>
+        <label class="chk"><input type="checkbox" id="bg-light"> 밝은 배경</label>
+      </div>
+    </section>
+
+    <footer>
+      <p>드래그&드롭으로도 파일을 불러올 수 있습니다.<br>
+      단축키: W/E/R 기즈모 · F 화면맞춤 · ESC 취소</p>
+    </footer>
+  </aside>
+
+  <main id="viewport">
+    <canvas id="canvas"></canvas>
+    <div id="labels"></div>
+    <div id="statusbar"><span id="status-msg">파일을 불러오세요</span><span id="status-stats"></span></div>
+    <div id="exit-360" class="hidden"><button id="video-exit">360 시점 나가기 (ESC)</button></div>
+    <div id="drophint" class="hidden">파일을 놓아 불러오기</div>
+    <div id="loading" class="hidden"><div class="spinner"></div><span id="loading-msg">불러오는 중…</span></div>
+  </main>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
