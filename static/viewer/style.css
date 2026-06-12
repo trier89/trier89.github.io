@@ -105,6 +105,18 @@ button.mini.active { background: #2456a8; border-color: #5b9dff; color: #fff; }
 #props-body td:first-child { color: #8a93a6; width: 42%; }
 #props-body td:last-child { color: #e4e7ee; }
 
+#split-divider {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+  background: #5b9dff; opacity: .55; pointer-events: none;
+}
+.splitcap {
+  position: absolute; top: 12px; transform: translateX(-50%);
+  background: rgba(20, 24, 31, .8); border: 1px solid #2b313d; border-radius: 12px;
+  padding: 3px 11px; font-size: 11px; color: #cdd5e4; pointer-events: none;
+}
+#split-cap-l { left: 25%; }
+#split-cap-r { left: 75%; }
+
 #statusbar {
   position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between;
   padding: 5px 12px; font-size: 11px; color: #9aa4b8;

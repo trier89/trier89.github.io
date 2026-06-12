@@ -283,10 +283,7 @@ canvas.addEventListener('pointerup', async (e) => {
   pointerDownAt = null;
   if (moved > 5) return; // 드래그(궤도 회전)는 선택으로 치지 않음
   if (!layers.model.group.visible || !layers.model.axis.children.length) return;
-  const rect = canvas.getBoundingClientRect();
-  raycaster.setFromCamera(new THREE.Vector2(
-    ((e.clientX - rect.left) / rect.width) * 2 - 1,
-    -((e.clientY - rect.top) / rect.height) * 2 + 1), camera);
+  raycaster.setFromCamera(pointerNDC(e), camera);
   const hits = raycaster.intersectObject(layers.model.group, true);
   const hit = hits.find((h) => h.object.isMesh);
   if (!hit) { clearSelection(); return; }
@@ -879,11 +876,7 @@ function clearMeasurements() {
 
 canvas.addEventListener('pointerdown', (e) => {
   if (!measuring || e.button !== 0) return;
-  const rect = canvas.getBoundingClientRect();
-  const ndc = new THREE.Vector2(
-    ((e.clientX - rect.left) / rect.width) * 2 - 1,
-    -((e.clientY - rect.top) / rect.height) * 2 + 1);
-  raycaster.setFromCamera(ndc, camera);
+  raycaster.setFromCamera(pointerNDC(e), camera);
   raycaster.params.Points.threshold = Math.max(parseFloat($('cloud-size').value) * 2, 0.08);
   const targets = [];
   layers.model.group.visible && targets.push(layers.model.group);
@@ -977,8 +970,62 @@ function fitView() {
   $('clip-height').max = (box.max.y + 1).toFixed(1);
 }
 
+/* ------------------------------------------------------------- 분할 비교 */
+const SPLIT_PRESETS = {
+  video: ['video'],
+  model: ['model'],
+  cloud: ['cloud'],
+  modelcloud: ['model', 'cloud'],
+  all: ['model', 'cloud', 'video'],
+};
+const splitOn = () => $('split-enable').checked;
+
+function applyBaseVisibility() {
+  layers.model.group.visible = $('model-visible').checked;
+  layers.cloud.group.visible = $('cloud-visible').checked;
+  layers.video.group.visible = $('video-visible').checked;
+}
+function applySideVisibility(presetKey) {
+  const preset = SPLIT_PRESETS[presetKey] || SPLIT_PRESETS.all;
+  layers.model.group.visible = $('model-visible').checked && preset.includes('model');
+  layers.cloud.group.visible = $('cloud-visible').checked && preset.includes('cloud');
+  layers.video.group.visible = $('video-visible').checked && preset.includes('video');
+}
+
+function updateSplitUI() {
+  const on = splitOn();
+  $('split-divider').classList.toggle('hidden', !on);
+  $('split-cap-l').classList.toggle('hidden', !on);
+  $('split-cap-r').classList.toggle('hidden', !on);
+  $('labels').style.display = on ? 'none' : ''; // 분할 시 측정 라벨 좌표가 안 맞으므로 숨김
+  if (on) {
+    const txt = (sel) => sel.options[sel.selectedIndex].text;
+    $('split-cap-l').textContent = txt($('split-left'));
+    $('split-cap-r').textContent = txt($('split-right'));
+    setStatus('분할 비교 — 좌우가 같은 시점으로 동기화됩니다. 드래그·이동은 양쪽에 함께 적용');
+  } else {
+    applyBaseVisibility();
+  }
+}
+$('split-enable').addEventListener('change', updateSplitUI);
+$('split-left').addEventListener('change', updateSplitUI);
+$('split-right').addEventListener('change', updateSplitUI);
+
+// 분할 모드에서는 클릭한 절반 기준으로 NDC 변환 (양쪽 모두 같은 카메라)
+function pointerNDC(e) {
+  const rect = canvas.getBoundingClientRect();
+  let x = e.clientX - rect.left;
+  let w = rect.width;
+  if (splitOn()) {
+    const half = rect.width / 2;
+    if (x >= half) x -= half;
+    w = half;
+  }
+  return new THREE.Vector2((x / w) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
+}
+
 $('tool-shot').addEventListener('click', () => {
-  renderer.render(scene, camera);
+  // preserveDrawingBuffer라 마지막 프레임(분할 화면 포함)이 그대로 캡처됨
   canvas.toBlob((blob) => {
     if (blob) downloadBlob(blob, `검토캡처_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.png`);
   });
@@ -1110,12 +1157,34 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 
+const viewSize = new THREE.Vector2();
 renderer.setAnimationLoop(() => {
   resize();
   updatePathFollow();
   controls.update();
-  updateLabels();
-  renderer.render(scene, camera);
+  renderer.getSize(viewSize);
+  if (splitOn()) {
+    const halfW = Math.floor(viewSize.x / 2);
+    camera.aspect = halfW / viewSize.y;
+    camera.updateProjectionMatrix();
+    renderer.setScissorTest(true);
+    applySideVisibility($('split-left').value);
+    renderer.setViewport(0, 0, halfW, viewSize.y);
+    renderer.setScissor(0, 0, halfW, viewSize.y);
+    renderer.render(scene, camera);
+    applySideVisibility($('split-right').value);
+    renderer.setViewport(halfW, 0, viewSize.x - halfW, viewSize.y);
+    renderer.setScissor(halfW, 0, viewSize.x - halfW, viewSize.y);
+    renderer.render(scene, camera);
+    renderer.setScissorTest(false);
+    renderer.setViewport(0, 0, viewSize.x, viewSize.y);
+    applyBaseVisibility();
+  } else {
+    camera.aspect = viewSize.x / viewSize.y;
+    camera.updateProjectionMatrix();
+    updateLabels();
+    renderer.render(scene, camera);
+  }
 });
 resize();
 setStatus('모델·포인트클라우드·360영상 파일을 불러오거나 화면에 드래그하세요');

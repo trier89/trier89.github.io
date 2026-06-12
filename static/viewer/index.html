@@ -159,6 +159,29 @@
         <label class="chk"><input type="checkbox" id="clip-enable"> 수평 단면</label>
         <label class="grow">높이 <input type="range" id="clip-height" min="-10" max="50" step="0.1" value="3"></label>
       </div>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="split-enable"> ◧ 분할 비교 (좌/우)</label>
+      </div>
+      <div class="row">
+        <label class="grow">좌
+          <select id="split-left">
+            <option value="video" selected>360 영상</option>
+            <option value="model">모델</option>
+            <option value="cloud">스캔</option>
+            <option value="modelcloud">모델+스캔</option>
+            <option value="all">전체</option>
+          </select>
+        </label>
+        <label class="grow">우
+          <select id="split-right">
+            <option value="video">360 영상</option>
+            <option value="model">모델</option>
+            <option value="cloud">스캔</option>
+            <option value="modelcloud" selected>모델+스캔</option>
+            <option value="all">전체</option>
+          </select>
+        </label>
+      </div>
       <div class="row btnrow">
         <button class="mini" id="tool-fit">화면 맞춤 (F)</button>
         <button class="mini" id="tool-shot">📷 캡처</button>
@@ -182,6 +205,9 @@
       <div class="props-head"><span id="props-title">객체 속성</span><button id="props-close">×</button></div>
       <div id="props-body"></div>
     </div>
+    <div id="split-divider" class="hidden"></div>
+    <div id="split-cap-l" class="splitcap hidden"></div>
+    <div id="split-cap-r" class="splitcap hidden"></div>
     <div id="statusbar"><span id="status-msg">파일을 불러오세요</span><span id="status-stats"></span></div>
     <div id="exit-360" class="hidden"><button id="video-exit">360 시점 나가기 (ESC)</button></div>
     <div id="drophint" class="hidden">파일을 놓아 불러오기</div>
