@@ -52,7 +52,8 @@ Cupix는 영상에서 카메라 이동 경로를 자동 계산(SLAM)합니다. �
 
 1. **수동 웨이포인트** — 영상을 멈추고 그 시점의 촬영 위치로 구체를 옮긴 뒤 `현재 위치 기록`.
    몇 개만 찍어두면 재생 시 사이 구간을 보간해 자동 이동합니다.
-2. **SLAM 궤적 가져오기** — 무료 오픈소스 [Stella-VSLAM](https://github.com/stella-cv/stella_vslam)은
-   equirectangular 360 영상을 그대로 입력받아 카메라 궤적을 계산해 줍니다.
-   결과(`frame_trajectory.txt`, TUM 형식)를 뷰어로 가져오면 경로가 표시되고,
-   정렬 기즈모로 모델 좌표에 맞추면(단안 SLAM은 스케일 보정 필요) 재생과 동기화되어 움직입니다.
+2. **SLAM 궤적 자동 계산** — 저장소의
+   [`tools/slam`](https://github.com/trier89/trier89.github.io/tree/main/tools/slam) 파이프라인을 쓰면
+   `./slam360.sh 현장촬영.mp4` 한 줄로 궤적 파일이 나옵니다 (Docker 필요, 모든 처리는 내 PC에서만).
+   결과를 뷰어로 가져오면 경로가 표시되고, 정렬 기즈모로 모델 좌표에 맞추면
+   (단안 SLAM은 스케일 보정 필요) 재생과 동기화되어 움직입니다.
