@@ -27,9 +27,10 @@
       <h2><span class="dot dot-model"></span>3D 모델 (NWD 변환)</h2>
       <p class="hint">NWD는 브라우저에서 직접 열 수 없습니다.
         Navisworks에서 <b>FBX</b>로 내보내거나(파일 → 내보내기 → FBX),
-        Revit/기타 도구로 <b>GLB·glTF·OBJ</b>로 변환 후 불러오세요.</p>
-      <label class="filebtn">모델 파일 열기 (.glb .gltf .fbx .obj)
-        <input type="file" id="file-model" accept=".glb,.gltf,.fbx,.obj" multiple>
+        Revit에서 <b>IFC</b>로 내보내면 <b>객체 속성까지</b> 함께 불러옵니다.
+        객체를 클릭하면 속성이 표시됩니다.</p>
+      <label class="filebtn">모델 파일 열기 (.ifc .glb .gltf .fbx .obj)
+        <input type="file" id="file-model" accept=".ifc,.glb,.gltf,.fbx,.obj" multiple>
       </label>
       <div class="row">
         <label>단위
@@ -164,6 +165,10 @@
   <main id="viewport">
     <canvas id="canvas"></canvas>
     <div id="labels"></div>
+    <div id="props" class="hidden">
+      <div class="props-head"><span id="props-title">객체 속성</span><button id="props-close">×</button></div>
+      <div id="props-body"></div>
+    </div>
     <div id="statusbar"><span id="status-msg">파일을 불러오세요</span><span id="status-stats"></span></div>
     <div id="exit-360" class="hidden"><button id="video-exit">360 시점 나가기 (ESC)</button></div>
     <div id="drophint" class="hidden">파일을 놓아 불러오기</div>

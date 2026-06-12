@@ -83,6 +83,28 @@ button.mini.active { background: #2456a8; border-color: #5b9dff; color: #fff; }
   border-radius: 6px; padding: 2px 7px; font-size: 12px; white-space: nowrap;
 }
 
+#props {
+  position: absolute; top: 14px; right: 14px; width: 290px; max-height: calc(100% - 70px);
+  background: rgba(27, 31, 39, .94); border: 1px solid #2b313d; border-radius: 10px;
+  display: flex; flex-direction: column; overflow: hidden; backdrop-filter: blur(4px);
+}
+.props-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 12px; border-bottom: 1px solid #2b313d; font-weight: 600; font-size: 13px;
+}
+.props-head button {
+  background: none; border: none; color: #8a93a6; font-size: 17px; cursor: pointer; line-height: 1;
+}
+#props-body { overflow-y: auto; padding: 8px 12px 12px; }
+#props-body h3 {
+  font-size: 11.5px; color: #5b9dff; margin: 10px 0 4px; font-weight: 600;
+  border-bottom: 1px solid #2b313d; padding-bottom: 3px;
+}
+#props-body table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+#props-body td { padding: 2px 4px 2px 0; vertical-align: top; word-break: break-all; }
+#props-body td:first-child { color: #8a93a6; width: 42%; }
+#props-body td:last-child { color: #e4e7ee; }
+
 #statusbar {
   position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between;
   padding: 5px 12px; font-size: 11px; color: #9aa4b8;

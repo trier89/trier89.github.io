@@ -150,7 +150,9 @@ async function loadModelFile(file) {
   showLoading(`모델 불러오는 중: ${file.name}`);
   try {
     let object;
-    if (ext === 'glb' || ext === 'gltf') {
+    if (ext === 'ifc') {
+      object = await loadIFCObject(file);
+    } else if (ext === 'glb' || ext === 'gltf') {
       const gltf = await gltfLoader.loadAsync(url);
       object = gltf.scene;
     } else if (ext === 'fbx') {
@@ -195,14 +197,199 @@ function applyModelOpacity() {
     if (!o.isMesh) return;
     const mats = Array.isArray(o.material) ? o.material : [o.material];
     mats.forEach((m) => {
-      m.transparent = op < 1;
-      m.opacity = op;
-      m.depthWrite = op >= 0.55; // 반투명일 때 뒤 레이어가 비치도록
+      const base = m.userData.baseOpacity ?? 1; // IFC 유리 등 원래 반투명 재질 유지
+      m.transparent = op * base < 1;
+      m.opacity = op * base;
+      m.depthWrite = op * base >= 0.55; // 반투명일 때 뒤 레이어가 비치도록
       m.needsUpdate = true;
     });
   });
 }
 $('clear-model').addEventListener('click', () => clearLayer('model'));
+
+/* --------------------------------------------------- IFC 로딩 (속성 포함) */
+const IFC_CDN = 'https://cdn.jsdelivr.net/npm/web-ifc@0.0.57/';
+let ifcEnv = null; // { api } — 최초 IFC 로드 시에만 WASM 다운로드
+
+async function getIfcAPI() {
+  if (!ifcEnv) {
+    ifcEnv = (async () => {
+      const WebIFC = await import(IFC_CDN + 'web-ifc-api.js');
+      const api = new WebIFC.IfcAPI();
+      api.SetWasmPath(IFC_CDN, true);
+      await api.Init();
+      return { api };
+    })();
+  }
+  return ifcEnv;
+}
+
+async function loadIFCObject(file) {
+  const { api } = await getIfcAPI();
+  const data = new Uint8Array(await file.arrayBuffer());
+  const modelID = api.OpenModel(data, { COORDINATE_TO_ORIGIN: true });
+  const root = new THREE.Group();
+  root.name = file.name;
+  root.userData.ifcModelID = modelID;
+  const matCache = new Map();
+  api.StreamAllMeshes(modelID, (flatMesh) => {
+    const geoms = flatMesh.geometries;
+    for (let i = 0; i < geoms.size(); i++) {
+      const pg = geoms.get(i);
+      const g = api.GetGeometry(modelID, pg.geometryExpressID);
+      // WASM 메모리 뷰는 즉시 복사해야 함
+      const verts = new Float32Array(api.GetVertexArray(g.GetVertexData(), g.GetVertexDataSize()));
+      const index = new Uint32Array(api.GetIndexArray(g.GetIndexData(), g.GetIndexDataSize()));
+      const geo = new THREE.BufferGeometry();
+      const buf = new THREE.InterleavedBuffer(verts, 6); // [px py pz nx ny nz]
+      geo.setAttribute('position', new THREE.InterleavedBufferAttribute(buf, 3, 0));
+      geo.setAttribute('normal', new THREE.InterleavedBufferAttribute(buf, 3, 3));
+      geo.setIndex(new THREE.BufferAttribute(index, 1));
+      const c = pg.color;
+      const key = `${c.x.toFixed(3)}_${c.y.toFixed(3)}_${c.z.toFixed(3)}_${c.w.toFixed(3)}`;
+      let mat = matCache.get(key);
+      if (!mat) {
+        mat = new THREE.MeshStandardMaterial({
+          color: new THREE.Color(c.x, c.y, c.z),
+          transparent: c.w < 1, opacity: c.w,
+          metalness: 0, roughness: 0.9, side: THREE.DoubleSide,
+        });
+        mat.userData.baseOpacity = c.w;
+        matCache.set(key, mat);
+      }
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.matrixAutoUpdate = false;
+      mesh.matrix.fromArray(pg.flatTransformation);
+      mesh.userData.expressID = flatMesh.expressID;
+      root.add(mesh);
+    }
+  });
+  if (!root.children.length) throw new Error('IFC에서 형상을 찾지 못했습니다');
+  return root;
+}
+
+/* ----------------------------------------------- 객체 선택 + 속성 패널 */
+let selHelper = null;
+let pointerDownAt = null;
+
+canvas.addEventListener('pointerdown', (e) => {
+  if (e.button === 0) pointerDownAt = [e.clientX, e.clientY];
+});
+canvas.addEventListener('pointerup', async (e) => {
+  if (e.button !== 0 || !pointerDownAt || measuring || gizmo.dragging) return;
+  const moved = Math.hypot(e.clientX - pointerDownAt[0], e.clientY - pointerDownAt[1]);
+  pointerDownAt = null;
+  if (moved > 5) return; // 드래그(궤도 회전)는 선택으로 치지 않음
+  if (!layers.model.group.visible || !layers.model.axis.children.length) return;
+  const rect = canvas.getBoundingClientRect();
+  raycaster.setFromCamera(new THREE.Vector2(
+    ((e.clientX - rect.left) / rect.width) * 2 - 1,
+    -((e.clientY - rect.top) / rect.height) * 2 + 1), camera);
+  const hits = raycaster.intersectObject(layers.model.group, true);
+  const hit = hits.find((h) => h.object.isMesh);
+  if (!hit) { clearSelection(); return; }
+  selectObject(hit.object);
+});
+
+async function selectObject(mesh) {
+  clearSelection();
+  selHelper = new THREE.BoxHelper(mesh, 0xffd76b);
+  selHelper.material.depthTest = false;
+  selHelper.renderOrder = 998;
+  scene.add(selHelper);
+
+  if (mesh.userData.expressID !== undefined) {
+    await showIFCProps(mesh);
+  } else {
+    showNodeProps(mesh);
+  }
+}
+function clearSelection() {
+  if (selHelper) { selHelper.geometry.dispose(); scene.remove(selHelper); selHelper = null; }
+  $('props').classList.add('hidden');
+}
+$('props-close').addEventListener('click', clearSelection);
+
+function propRow(rows, k, v) {
+  if (v === undefined || v === null || v === '') return;
+  rows.push(`<tr><td>${escapeHtml(String(k))}</td><td>${escapeHtml(String(v))}</td></tr>`);
+}
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function ifcVal(v) { // IfcPropertySingleValue / IfcQuantity 의 값 꺼내기
+  if (v === null || v === undefined) return undefined;
+  if (typeof v !== 'object') return v;
+  if ('value' in v) return v.value;
+  for (const k of Object.keys(v)) {
+    if (k.endsWith('Value') && v[k] && 'value' in v[k]) return v[k].value;
+  }
+  return undefined;
+}
+
+async function showIFCProps(mesh) {
+  const root = (() => { let o = mesh; while (o && o.userData.ifcModelID === undefined) o = o.parent; return o; })();
+  if (!root) return;
+  const { api } = await getIfcAPI();
+  const modelID = root.userData.ifcModelID;
+  const id = mesh.userData.expressID;
+  let html = '';
+  try {
+    const item = await api.properties.getItemProperties(modelID, id, true);
+    let typeName = '';
+    try { typeName = api.GetNameFromTypeCode(api.GetLineType(modelID, id)) || ''; } catch { /* 구버전 호환 */ }
+    $('props-title').textContent = item.Name?.value || typeName || '객체 속성';
+    const rows = [];
+    propRow(rows, 'IFC 타입', typeName);
+    propRow(rows, 'GlobalId', item.GlobalId?.value);
+    propRow(rows, 'ObjectType', item.ObjectType?.value);
+    propRow(rows, 'Tag', item.Tag?.value);
+    propRow(rows, 'ExpressID', id);
+    html += `<table>${rows.join('')}</table>`;
+
+    const psets = await api.properties.getPropertySets(modelID, id, true);
+    for (const pset of psets) {
+      const items = pset.HasProperties || pset.Quantities || [];
+      const prows = [];
+      for (const p of items) propRow(prows, p.Name?.value, ifcVal(p.NominalValue ?? p));
+      if (prows.length) {
+        html += `<h3>${escapeHtml(pset.Name?.value || '속성세트')}</h3><table>${prows.join('')}</table>`;
+      }
+    }
+  } catch (err) {
+    html += `<p class="hint">속성 조회 실패: ${escapeHtml(err.message)}</p>`;
+  }
+  $('props-body').innerHTML = html;
+  $('props').classList.remove('hidden');
+}
+
+// FBX/glTF: 이름 있는 가장 가까운 상위 노드의 이름·userData(glTF extras) 표시
+function showNodeProps(mesh) {
+  let named = mesh;
+  while (named && !named.name && named.parent !== layers.model.axis) named = named.parent;
+  const target = named && named.name ? named : mesh;
+  $('props-title').textContent = target.name || '(이름 없음)';
+  const rows = [];
+  propRow(rows, '노드 타입', mesh.type);
+  const INTERNAL_KEYS = ['worldOffset', 'transformData', 'gltfExtensions'];
+  let extras = null;
+  for (let o = mesh; o && o !== layers.model.axis.parent; o = o.parent) {
+    const ud = o.userData;
+    if (ud && Object.keys(ud).some((k) => !INTERNAL_KEYS.includes(k))) { extras = ud; break; }
+  }
+  if (extras) {
+    for (const [k, v] of Object.entries(extras)) {
+      if (INTERNAL_KEYS.includes(k)) continue;
+      propRow(rows, k, typeof v === 'object' ? JSON.stringify(v) : v);
+    }
+  }
+  if (!extras) {
+    rows.push(`<tr><td colspan="2">이 형식(FBX/OBJ)에는 BIM 속성이 없습니다 — 속성까지 보려면 IFC로 내보내세요.</td></tr>`);
+  }
+  $('props-body').innerHTML = `<table>${rows.join('')}</table>`;
+  $('props').classList.remove('hidden');
+}
 
 /* ----------------------------------------------------- 포인트클라우드 로딩 */
 const MAX_POINTS = 4_000_000;
@@ -662,6 +849,7 @@ $('tool-shot').addEventListener('click', () => {
 
 /* -------------------------------------------------------------- 공통 유틸 */
 function clearLayer(key) {
+  if (key === 'model') clearSelection();
   layers[key].axis.clear();
   layers[key].files.length = 0;
   if (key === 'video') { videoSphere = null; videoEl.pause(); videoEl.removeAttribute('src'); }
@@ -713,7 +901,7 @@ $('file-cloud').addEventListener('change', async (e) => {
 });
 
 /* 드래그&드롭: 확장자로 자동 라우팅 */
-const MODEL_EXT = ['glb', 'gltf', 'fbx', 'obj'];
+const MODEL_EXT = ['ifc', 'glb', 'gltf', 'fbx', 'obj'];
 const CLOUD_EXT = ['las', 'laz', 'ply', 'pcd', 'xyz', 'pts', 'txt'];
 const VIDEO_EXT = ['mp4', 'webm', 'mov', 'm4v'];
 window.addEventListener('dragover', (e) => {
@@ -757,6 +945,7 @@ window.addEventListener('keydown', (e) => {
     case 'escape':
       if (savedCamState) exit360();
       else if (measuring) $('tool-measure').click();
+      else if (selHelper) clearSelection();
       else { gizmo.detach(); gizmoTarget = null; $('gizmo-target').value = ''; }
       break;
   }
