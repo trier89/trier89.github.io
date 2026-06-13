@@ -10,17 +10,41 @@ tags:
   - 데일리뉴스
 ---
 
+## 🤖 AI
+
+**1. [앤트로픽, 美 정부 안보 우려에 '클로드 페이블 5·미토스 5' 긴급 중단](https://www.bbc.com/news/articles/c932g3v3e13o)**
+
+앤트로픽이 공개 출시 며칠 만에 강력한 신규 AI 모델의 가동을 긴급 중단했다. 미국 당국이 안보 우려를 제기하며 외국 국적자의 '클로드 페이블 5(Claude Fable 5)' 사용을 금지하는 명령을 내렸기 때문이다. 회사는 스스로 이 모델을 "너무 강력하다"고 표현했으며, 이번 명령으로 페이블 5와 미토스 5를 모든 고객에 대해 갑작스럽게 비활성화해야 했다고 밝혔다. 수출 통제 성격의 조치로, 구체적인 안보 위협의 내용은 공개되지 않았다.
+
+🔍 시각 A: 가장 앞선 AI 모델에 대해 정부가 선제적으로 안보 장치를 가동했다는 점은, 프런티어 AI의 위험을 제도권이 실질적으로 통제하기 시작했음을 보여준다. 기업 스스로 "너무 강력하다"고 인정한 모델을 신속히 차단한 것은 책임 있는 개발 거버넌스의 한 사례로 평가될 수 있다.
+
+🔎 시각 B: 구체적 근거가 공개되지 않은 채 이루어진 갑작스러운 차단은, 출시된 서비스를 신뢰하고 도입한 기업·이용자에게 막대한 혼란과 손실을 안긴다. 모호한 '국가안보' 명분이 산업 통제와 정치적 판단의 도구로 남용될 수 있다는 우려도 제기된다.
+
+**2. [앤트로픽, 모델 중단과 동시에 '프로젝트 글래스윙' 공개](https://gizmodo.com/anthropics-models-hyped-as-scarily-powerful-apparently-scared-the-government-too-much-and-now-theyre-disabled-2000770341)**
+
+앤트로픽은 미 정부의 고강도 수출 통제 명령에 따라 두 개의 핵심 프런티어 모델을 "갑작스럽게 비활성화"했다고 금요일 성명에서 밝혔다. 해당 명령은 외국 국적자가 미국 내외에서 이 모델을 사용하지 못하도록 하는 내용으로, 불특정한 국가안보 우려가 배경으로 지목됐다. 회사는 같은 시점에 '프로젝트 글래스윙(Project Glasswing)'을 새롭게 공개하며 대응에 나섰다.
+
+🔍 시각 A: 모델 중단이라는 악재 속에서도 새로운 프로젝트를 동시에 내놓은 것은, 규제 환경 변화에 맞춰 사업을 빠르게 재편하는 기업의 적응력을 보여준다. 통제 가능한 형태의 AI 제공 방식을 모색하는 시도로 읽힐 수 있다.
+
+🔎 시각 B: 강력한 모델을 '무섭다'며 마케팅해온 기업이 결국 정부 개입을 자초했다는 비판도 가능하다. 과장된 위험 서사가 규제를 부르고, 그 비용은 고스란히 시장과 이용자에게 전가되는 악순환이 우려된다.
+
 ## 🌍 세계
 
-**1. [Elon Musk becomes first trillionaire: what that wealth actually represents](https://www.ynetnews.com/business/article/rkldppcbge)**  
-Elon Musk는 SpaceX의 시장 데뷔로 인해 첫 번째 조 단위 부자가 되었습니다. 그의 부는 주로 종이상의 금액이지만 현대 재산과 세계 불평등의 척도를 드러내고 있습니다. 이는 몇몇 주요 경제국의 GDP나 막대한 부채와 비교될 정도로 방대한 가치로, 그의 부의 기반이 되는 기술 혁신을 강조합니다.  
-🔍 긍정적 관점: Musk의 성공은 혁신과 기업가 정신의 상징으로, 새로운 시대의 기업가들이 가능성을 보여줍니다.  
-🔎 비판적 관점: 그러나 그의 부는 대다수 사람들에게는 불가능한 목표로 느껴지며, 사회적 불평등을 심화시키는 문제가 될 수 있습니다.
+**1. [美 국방 "오늘 이란의 핵심 시설들 폭격할 것"](https://news.google.com/rss/articles/CBMiT0FVX3lxTE1QUHJyeXowOC0tS3FHeVpfX1MwOFNpOXFGYkJ0SFJyWDdaV2tQUjNISDlLN0xwOE1WSHRNcmZNYkhKNUc4TXJQV0xjVmI1ajQ?oc=5)**
 
-**2. [Citing fallout from Iran war, World Bank cuts forecast for global economic growth](https://www.latimes.com/business/story/2026-06-13/citing-fallout-from-iran-war-world-bank-cuts-forecast-for-global-economic-growth)**  
-세계은행은 이란 전쟁의 여파로 많은 국가들의 경제 성장 전망을 하향 조정했습니다. 에너지 가격 상승과 불확실성이 주요 요인이었으며, 미국 경제의 성장률은 2.2%로 유지될 것으로 예상하고 있습니다.  
-🔍 긍정적 관점: 이러한 조정은 세계 경제의 위험을 미리 경고하여 투자자들에게 예측 가능한 환경을 제공합니다.  
-🔎 비판적 관점: 반면, 이는 많은 국가들의 경제적 어려움을 시사하며 글로벌 경제의 불안정성을 부각시킵니다.
+미국 국방장관이 "오늘 이란의 핵심 시설들을 폭격할 것"이라고 밝혔다고 로이터가 속보로 전했다. 이는 이란을 둘러싼 군사적 긴장이 실제 무력 충돌 국면으로 격화되고 있음을 시사한다. 핵심 시설을 직접 겨냥한 발언인 만큼 중동 전역의 정세와 국제 에너지 시장에 즉각적인 파장이 예상된다.
+
+🔍 시각 A: 위협 시설을 정밀 타격하겠다는 분명한 의지는 확산되는 위기를 조기에 차단하려는 단호한 안보 전략으로 볼 수 있다. 명확한 메시지가 상대의 도발을 억제하는 효과를 낼 수 있다는 기대도 있다.
+
+🔎 시각 B: 핵심 시설에 대한 직접 폭격은 전면전으로의 확전 위험을 크게 높이며, 민간 피해와 에너지 가격 폭등 등 광범위한 후폭풍을 부를 수 있다. 외교적 해법이 소진되기 전의 무력 사용은 국제사회의 강한 반발을 살 가능성이 크다.
+
+**2. [시진핑 오늘 방북, 北 노동신문 기고 "국제질서 공동 수호"](https://news.google.com/rss/articles/CBMieEFVX3lxTFBVcW5MS1FkbU54YmtqQjR5aU1jSENySTQ2WFhWVVpFVlJzLU1TdVJYX2M1SlRqQTUwMEdIdDlmM2VCR19lMG9SWjhqdHhPUTd6Vk42bHNueWFWbnBYVVUtRXdjWHV3dmNtc1NMY3pCTTZjQTlDU2hDOQ?oc=5)**
+
+시진핑 중국 국가주석이 오늘 북한을 방문한다. 시 주석은 북한 노동신문 기고를 통해 "국제질서 공동 수호"를 강조하며 북·중 간 전략적 밀착을 부각했다. 미국과의 긴장이 고조되는 국면에서 이뤄지는 이번 방북은 동북아 정세에 적지 않은 함의를 갖는다.
+
+🔍 시각 A: 정상 외교를 통한 북·중 협력 강화는 한반도 주변 정세에서 중국의 안정적 관여를 끌어낼 여지를 만든다. 다자 외교 채널이 살아 있다는 점은 위기 관리 측면에서 긍정적이다.
+
+🔎 시각 B: "국제질서 공동 수호"라는 명분 아래 권위주의 진영의 결속이 강화되는 것은, 대북 제재 공조와 한반도 비핵화 노력을 약화시킬 수 있다. 진영 대결 구도가 굳어지면 역내 긴장은 더 깊어질 우려가 있다.
 
 ## 🏛️ 정치
 
@@ -28,15 +52,29 @@ Elon Musk는 SpaceX의 시장 데뷔로 인해 첫 번째 조 단위 부자가 �
 
 ## 💰 경제
 
-**1. [Why TD Securities anticipates even bigger days ahead for SpaceX](https://www.cnbc.com/2026/06/13/spacex-surges-but-bigger-days-are-ahead-td-securities-.html)**  
-TD 증권은 SpaceX가 주요 지수에 포함될 때 더 큰 성장을 할 것으로 예상합니다. 이 회사는 최근의 IPO가 미국 주요 증시에서 중요한 변곡점이 될 것이라고 언급했습니다.  
-🔍 긍정적 관점: SpaceX의 성장은 혁신 기술의 상징으로, 다른 기업들에게도 긍정적인 영향을 미칠 수 있습니다.  
-🔎 비판적 관점: 하지만 이와 같은 기술 주식 중심의 시장은 많은 투자자들에게 매우 리스크가 크고 변동성이 높아 우려를 낳고 있습니다.
+**1. [일론 머스크, 세계 첫 '조만장자' 등극…스페이스X 상장이 견인](https://www.ynetnews.com/business/article/rkldppcbge)**
 
-**2. [증시 오늘 '핫이슈'…\"60주선까지 급락한 금, '나, 아직 죽지 않았어!'\" ](https://news.google.com/rss/articles/CBMiUkFVX3lxTE1vVE5qZWwyNmx5NzNlTWFDUFpRQURWS2dTSi1DWWJMQ3MxRjZtak9SUGpIZ2J0b2QxcXNBVzJCdEFvb2tZbG9SX3ZwV1hkamdmZXc?oc=5)**  
-금 가격이 급락하며 투자자들이 위축되고 있는 가운데, 시장 전문가들은 금의 가치를 다시 확인해야 한다고 강조합니다.  
-🔍 긍정적 관점: 이는 투자자들에게 새로운 기회를 열어줄 수 있으며, 여러 자산 클래스를 재조정할 수 있는 계기가 될 것입니다.  
-🔎 비판적 관점: 그러나 금의 급락은 불확실한 경제 환경을 더욱 악화시킬 수 있으며, 이는 결국 더 많은 투자 손실로 이어질 수 있습니다.
+일론 머스크가 순자산 1조 달러를 돌파하며 세계 최초의 조만장자(trillionaire)가 됐다. 그의 로켓 기업 스페이스X의 시장 데뷔(상장)가 자산 급증을 견인했다. 1조 달러는 그간 주요 경제국의 GDP나 초대형 기업 가치에나 쓰이던 단위로, 대부분 주식 평가에 기반한 '장부상' 부라는 점에서 현대 부의 규모와 글로벌 불평등 문제를 동시에 부각한다.
+
+🔍 시각 A: 민간 우주 기업의 성공적 상장이 만들어낸 성과로, 혁신 기업이 창출하는 가치의 폭발력을 상징적으로 보여준다. 스페이스X의 기업가치 인정은 우주산업 전반에 대한 투자 확대로 이어질 수 있다.
+
+🔎 시각 B: 한 개인의 자산이 주요국 경제 규모에 맞먹는 현실은 부의 극단적 집중과 불평등 심화를 적나라하게 드러낸다. 대부분 주가에 묶인 '종이 부'인 만큼 시장 변동 시 거품 논란도 피하기 어렵다.
+
+**2. [세계은행, 이란戰 여파에 글로벌 성장 전망 하향](https://www.latimes.com/business/story/2026-06-13/citing-fallout-from-iran-war-world-bank-cuts-forecast-for-global-economic-growth)**
+
+세계은행이 이란 전쟁의 경제적 여파를 이유로 올해 글로벌 경제 성장률 전망을 낮췄다. 에너지 가격 상승과 불확실성 확대가 성장을 끌어내릴 것이라는 분석으로, 전 세계 3분의 2 국가의 성장 전망이 하향 조정됐다. 다만 미국 경제는 올해 2.2% 성장할 것으로 봐 1월 전망과 동일하게 유지했다.
+
+🔍 시각 A: 지정학적 충격을 신속히 반영해 전망을 조정한 것은 정책 당국과 투자자에게 선제적 대응의 근거를 제공한다. 미국 등 주요 경제의 성장 전망이 유지된 점은 글로벌 경기의 하단을 지지하는 요인이다.
+
+🔎 시각 B: 세계 3분의 2 국가의 성장 둔화 전망은 전쟁발 에너지 충격이 이미 실물경제 전반으로 번지고 있음을 보여준다. 전쟁이 장기화될 경우 인플레이션 재점화와 신흥국 위기 등 추가 하방 위험이 크다.
+
+**3. [코스피, 반도체 급반등에 8,000선 회복](https://news.google.com/rss/articles/CBMiZEFVX3lxTE1nak90Yi11MHZLNFlTNmFFX2N3TzlLcGE4Ynp6X1FkN1JLZ2hCWVNfR1ZxTWFMWjB1cllrVlluYmJ1ejl1b21KZm9hQk1MampLYWRzZjhfb2VxODRvaTRvWmgwUVnSAWhBVV95cUxNNFdIQ3RnemMtaVVOM0lMYWlrUGJ5SVpQVEc1WG0tU1hIWVhqYjZOc2V1NlJSNk5fbG9XZFRQdWFOMHBOX3JlNmpyVmxTSER6cTBRaS1XMy1JREtlZHlOTUxPb3oxV1VabQ?oc=5)**
+
+코스피가 반도체주의 급반등에 힘입어 8,000선을 회복했다. 대형 반도체 종목의 강세가 지수 전반의 상승을 이끌며 투자 심리가 개선됐다. 글로벌 불확실성 속에서도 국내 증시의 핵심 동력이 여전히 반도체 업황에 있음을 재확인한 흐름이다.
+
+🔍 시각 A: 반도체 반등에 따른 지수 회복은 국내 증시의 펀더멘털 회복 기대를 키운다. 주력 산업이 견인하는 상승은 외국인·기관 자금 유입으로 이어질 가능성이 있다.
+
+🔎 시각 B: 지수가 특정 업종에 과도하게 의존하는 구조는, 반도체 업황이 꺾일 경우 변동성이 그대로 시장 전체로 전이될 위험을 내포한다. 단기 반등을 추세 전환으로 단정하기엔 대외 불확실성이 여전히 크다.
 
 ## 👥 사회
 
@@ -44,7 +82,13 @@ TD 증권은 SpaceX가 주요 지수에 포함될 때 더 큰 성장을 할 것�
 
 ## 🚨 사건사고
 
-오늘은 주요 국내 뉴스가 없습니다.
+**1. [경기 고양시 일산서구 법곳동 자동차정비소서 화재 발생](https://news.google.com/rss/articles/CBMiWEFVX3lxTE9OeHBvRFVwMWdNcGlaYkZHUGJhaDNHazFEODFQakxnWkdyLUxKYXZYeGg3RkNGaXJpdVFQTkdmaUsyOUhVT0N0dHloX2hIUU5Cd1FYa3NuZzXSAWhBVV95cUxNYUVXQXcxX3ZFUVdKU1JWSHhQQllVdU16QllQbFRzMS1WUGRod0Z1QUdLWDFZamhSUTY0anBoNnM2bnBnUEJDQk9jNWMwZ19ZVDBtNDVPT1hFWjJiZHVNTzRSQXJ2M3p4VQ?oc=5)**
+
+경기 고양시 일산서구 법곳동의 한 자동차정비소에서 화재가 발생했다. 정비소는 유류와 가연성 자재가 많아 화재 시 빠른 확산과 추가 폭발 위험이 큰 시설로 분류된다. 소방 당국이 출동해 진화에 나섰으며 정확한 발화 원인과 피해 규모는 추가 확인이 필요하다.
+
+🔍 시각 A: 도심 정비소 화재가 인명 피해 없이 신속히 통제됐다면 소방 대응 체계가 제 역할을 했다는 의미다. 이를 계기로 유사 시설의 화재 예방 점검이 강화되는 효과를 기대할 수 있다.
+
+🔎 시각 B: 가연성 물질이 밀집한 정비소에서 화재가 반복된다는 점은 사업장 안전관리의 구조적 허점을 드러낸다. 사후 진화에 그치지 않고 점화원 관리와 정기 안전점검 등 예방 체계 전반을 재정비할 필요가 있다.
 
 ---
 
