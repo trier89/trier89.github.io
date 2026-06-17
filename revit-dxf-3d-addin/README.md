@@ -47,15 +47,46 @@ dotnet build -c Release -p:RevitVersion=2025
 
 ## 설치
 
-1. 빌드 결과물을 복사:
+> ⚠️ **중요**: 빌드와 설치는 **Revit이 깔린 본인 Windows PC에서** 해야 합니다.
+> 이 저장소에는 빌드 결과물(`bin/`)이 포함되지 않으므로(.gitignore), PC에서 직접 빌드해야 합니다.
+> 클라우드/CI에서 빌드한 DLL은 본인 PC의 Revit에 자동으로 설치되지 않습니다.
+
+### 방법 A — 설치 스크립트 (권장)
+
+Windows PC에서 저장소를 받은 뒤 PowerShell로:
+
+```powershell
+# revit-dxf-3d-addin 폴더에서 (Revit 2025면 2025로)
+powershell -ExecutionPolicy Bypass -File install.ps1 -RevitVersion 2024 -Build
+```
+
+스크립트가 빌드 → 올바른 `%AppData%` 경로에 배치 → **다운로드 차단(Mark-of-the-Web) 해제**까지 자동으로 처리합니다.
+(`-Build` 생략 시 이미 빌드된 산출물만 복사. `.NET SDK`가 없으면 Visual Studio로 먼저 빌드하세요.)
+
+### 방법 B — 수동 설치
+
+1. 본인 PC에서 빌드 (위 [빌드](#빌드) 참고). 산출물: `src\bin\Revit2024\Release\` (2025는 `Revit2025`)
+2. DLL을 복사 — **Revit 연도 폴더를 본인 버전에 맞추세요**:
    ```
    %AppData%\Autodesk\Revit\Addins\2024\RevitDxfTo3D\
        RevitDxfTo3D.dll
        netDxf.dll
    ```
-2. `RevitDxfTo3D.addin` 파일을 `%AppData%\Autodesk\Revit\Addins\2024\`에 복사
-   (매니페스트의 `<Assembly>` 경로는 위 폴더 구조 기준입니다)
-3. Revit 실행 → **애드인 탭 → "DXF → 3D" 패널 → "DXF 도면 3D 변환"** 버튼
+   (Revit 2025면 net8.0-windows 산출물이라 `RevitDxfTo3D.deps.json`도 함께 복사)
+3. `RevitDxfTo3D.addin` 을 `%AppData%\Autodesk\Revit\Addins\2024\` 에 복사
+   (매니페스트의 상대 경로 `RevitDxfTo3D\RevitDxfTo3D.dll` 가 위 하위 폴더를 가리킵니다)
+4. **차단 해제** — 복사한 각 `.dll`·`.addin` 파일에서: 우클릭 → 속성 → 하단 "차단 해제" 체크 → 확인.
+   또는 PowerShell: `Get-ChildItem "$env:APPDATA\Autodesk\Revit\Addins\2024" -Recurse | Unblock-File`
+5. Revit 재시작 → **애드인 탭 → "DXF → 3D" 패널 → "DXF 도면 3D 변환"** 버튼
+
+### 버튼이 안 보일 때 점검 순서
+
+1. **차단 해제** 했는지 (다운로드한 DLL은 기본 차단됨 — 설치 실패 1순위 원인)
+2. **Revit 버전 ↔ 빌드 타깃** 일치: Revit 2024 이하는 `Revit2024`(net48) 산출물, Revit 2025는 `Revit2025`(net8.0-windows) 산출물
+3. **연도 폴더** 정확한지: `%AppData%\Autodesk\Revit\Addins\<본인_연도>\`
+4. **파일 배치**: `.addin`은 연도 폴더 바로 아래, DLL들은 그 아래 `RevitDxfTo3D\` 하위 폴더
+5. Revit 시작 시 애드인 로드 오류 대화상자가 떴는지 (떴다면 메시지가 원인을 알려줌)
+6. `%LocalAppData%\Autodesk\Revit\Autodesk Revit <연도>\Journals\` 의 최신 저널 로그에서 `RevitDxfTo3D` 검색 — 로드 실패 사유가 기록됨
 
 ## 사용법
 
