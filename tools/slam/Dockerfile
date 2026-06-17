@@ -39,9 +39,10 @@ RUN git clone --recursive --depth 1 https://github.com/stella-cv/stella_vslam.gi
  && rm -rf /tmp/stella \
  && ldconfig
 
-# 실행 바이너리 (run_video_slam)
+# 실행 바이너리 (run_video_slam) — 헤드리스이므로 뷰어 비활성화
 RUN git clone --recursive --depth 1 https://github.com/stella-cv/stella_vslam_examples.git /tmp/ex \
  && cmake -S /tmp/ex -B /tmp/ex/build -DCMAKE_BUILD_TYPE=Release \
+      -DUSE_PANGOLIN_VIEWER=OFF -DUSE_SOCKET_PUBLISHER=OFF \
  && cmake --build /tmp/ex/build -j"$(nproc)" \
  && cp /tmp/ex/build/run_video_slam /usr/local/bin/ \
  && rm -rf /tmp/ex

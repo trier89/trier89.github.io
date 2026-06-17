@@ -65,6 +65,7 @@ slam360.bat 현장촬영.mp4
 | 경로가 휘어 있음 (드리프트) | 같은 지점을 한 번 더 지나가게 촬영하면 루프 클로징으로 보정됨 |
 | 2:1 경고 | 카메라 앱에서 equirectangular(360) 형식으로 다시 내보내기 |
 | 빌드 실패 | `docker build --no-cache -t slam360 .` 재시도, Docker 메모리 4GB 이상 할당 |
+| 베이스 이미지 403/네트워크 차단 | 사내 프록시·방화벽이 Docker Hub CDN을 막는 환경에서 발생. 일반 PC(Docker Desktop)에서는 정상. `docker login` 후 재시도하거나 사내 미러 레지스트리 사용 |
 
 ## 라이선스
 
