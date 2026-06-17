@@ -10,6 +10,8 @@ using RevitDxfTo3D.Dxf;
 using RevitDxfTo3D.Recognition;
 using RevitDxfTo3D.Revit;
 using RevitDxfTo3D.UI;
+// .NET 8 WinForms에도 TaskDialog가 있어 Revit 것과 충돌하므로 명시적으로 고정
+using TaskDialog = Autodesk.Revit.UI.TaskDialog;
 
 namespace RevitDxfTo3D.Commands
 {

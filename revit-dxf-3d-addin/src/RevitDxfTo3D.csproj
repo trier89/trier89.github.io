@@ -1,8 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <!--
+    Revit 버전 전환:
+      dotnet build                          → 기본값 2024 (net48)
+      dotnet build -p:RevitVersion=2025     → Revit 2025 (net8.0-windows)
+    지원: 2021~2024 = net48 / 2025+ = net8.0-windows
+  -->
   <PropertyGroup>
-    <!-- Revit 2021~2024 (net48). Revit 2025+ 사용 시 README의 안내대로 TFM/패키지 버전을 변경하세요. -->
+    <RevitVersion Condition="'$(RevitVersion)' == ''">2024</RevitVersion>
+    <IsDotNet8 Condition="$([MSBuild]::VersionGreaterThanOrEquals($(RevitVersion), 2025))">true</IsDotNet8>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsDotNet8)' == 'true'">
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <!-- Windows가 아닌 환경(CI/Linux)에서도 net8.0-windows 빌드 허용 -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsDotNet8)' != 'true'">
     <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <LangVersion>10</LangVersion>
     <Nullable>disable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
@@ -14,15 +34,15 @@
 
   <ItemGroup>
     <!-- Revit API 참조 (빌드 전용, 런타임에는 Revit이 로드한 어셈블리 사용) -->
-    <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="2024.*" />
-    <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="2024.*" />
+    <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*" />
+    <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*" />
     <!-- DXF 파서 -->
     <PackageReference Include="netDxf" Version="3.0.1" />
-    <!-- Windows가 아닌 환경에서도 net48 빌드가 가능하도록 하는 참조 어셈블리 -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- net48 전용: Windows가 아닌 환경에서도 빌드되도록 참조 어셈블리 + 클래식 GUI 참조 -->
+  <ItemGroup Condition="'$(IsDotNet8)' != 'true'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Drawing" />
   </ItemGroup>

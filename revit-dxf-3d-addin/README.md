@@ -26,15 +26,24 @@ DXF 평면도를 불러와 **벽 / 문 / 창 / 바닥 / 룸**을 자동 인식�
 
 요구 사항: .NET SDK 8 이상 (Visual Studio 2022도 가능). Revit 설치 없이 빌드됩니다 (NuGet의 Revit API 참조 패키지 사용).
 
+대상 Revit 버전은 `RevitVersion` 속성으로 전환합니다. 이 값에 따라 타깃 프레임워크(net48 ↔ net8.0-windows)와 Revit API 패키지 버전이 자동으로 맞춰집니다.
+
 ```bash
 cd revit-dxf-3d-addin/src
+
+# Revit 2021~2024 (net48) — 기본값
 dotnet build -c Release
-# → src/bin/Release/RevitDxfTo3D.dll (+ netDxf.dll)
+# → src/bin/Revit2024/Release/RevitDxfTo3D.dll (+ netDxf.dll)
+
+# Revit 2025 (net8.0-windows)
+dotnet build -c Release -p:RevitVersion=2025
+# → src/bin/Revit2025/Release/RevitDxfTo3D.dll (+ netDxf.dll)
 ```
 
-기본 타깃은 **Revit 2021~2024** (net48)입니다. Revit 2025+는 `src/RevitDxfTo3D.csproj`에서:
-- `<TargetFramework>net8.0-windows</TargetFramework>`
-- Nice3point 패키지 버전을 `2025.*`로 변경
+산출물은 버전별 폴더(`bin/Revit2024/`, `bin/Revit2025/`)로 분리되어 서로 덮어쓰지 않습니다.
+다른 연도(예: `2026`)도 해당 Nice3point API 패키지가 출시되면 `-p:RevitVersion=2026`으로 동일하게 빌드됩니다.
+
+> 참고: `net8.0-windows`(WinForms)는 Windows 데스크톱 타깃이 포함된 SDK가 필요합니다. Windows의 공식 .NET SDK / Visual Studio에서는 그대로 빌드됩니다. Linux/CI에서 빌드하려면 공식 Microsoft .NET SDK를 쓰세요(`EnableWindowsTargeting`은 프로젝트에 이미 설정돼 있습니다). 일부 배포판이 패키징한 source-built SDK에는 WindowsDesktop 타깃이 빠져 있어 net48(2024) 빌드만 가능합니다.
 
 ## 설치
 
