@@ -10,45 +10,105 @@ tags:
   - 데일리뉴스
 ---
 
+## 🤖 AI
+
+**1. [General Intuition, 약 20억 달러 가치로 3억 달러 투자 유치 추진](https://techcrunch.com/2026/06/18/general-intuition-in-talks-to-raise-300m-at-around-2b-valuation/)**
+
+뉴욕 기반 스타트업 General Intuition이 약 20억 달러의 기업가치로 3억 달러 규모의 투자를 유치하는 협상을 진행 중인 것으로 알려졌다. 이 회사는 AI 에이전트가 공간과 시간 속에서 움직이는 법을 학습하는 파운데이션 모델을 개발하고 있다. 핵심 자산은 게임 클립 플랫폼 Medal에서 나오는 연간 20억 개에 달하는 영상 데이터로, 월간 1,000만 명의 사용자로부터 수집된다. 이 데이터셋을 활용해 '체화된(embodied) AI'와 월드 모델을 훈련시키는 것이 회사의 차별화 전략이다.
+
+🔍 시각 A: 방대한 실사용자 영상 데이터를 기반으로 한 월드 모델은 로보틱스와 자율 에이전트 분야에서 기존 텍스트 중심 LLM이 갖지 못한 공간·시간 추론 능력을 열어줄 수 있다. 텍스트를 넘어 물리 세계를 이해하는 AI로의 전환점이 될 가능성이 크다.
+
+🔎 시각 B: 아직 상용 제품도 없는 단계에서 20억 달러 평가는 AI 거품 우려를 다시 자극한다. 게임 영상 기반 데이터가 실제 물리 세계의 복잡성과 안전성 요구를 충분히 대변할 수 있을지도 검증되지 않았다.
+
+**2. [기업용 '에이전틱 AI' 확산이 부른 거버넌스 위기 — Barndoor AI](https://www.cnbc.com/video/2026/06/17/oren-michels-barndoor-ai-ceo-a-fortt-knox-conversation.html)**
+
+Barndoor AI의 CEO 오렌 마이클스는 Anthropic의 MCP 프로토콜을 통해 기업 시스템에 연결되는 '에이전틱' AI 에이전트의 급증이 새로운 거버넌스 위기를 만들고 있다고 진단했다. 현재 수만 개의 MCP 서버가 유통되고 있으며 일부는 악성코드를 포함하고 있다는 지적이다. Barndoor는 모든 LLM 및 MCP 호출이 Salesforce, Gmail, Jira 같은 시스템에 닿기 전에 검사하는 단일 통제 평면(control plane)을 해법으로 제시한다. Mashery 창업자였던 그가 API 관리 경험을 AI 보안으로 확장한 셈이다.
+
+🔍 시각 A: 에이전트가 실제 기업 데이터를 다루기 시작한 만큼, 모든 호출을 사전 검사하는 통제 계층은 보안과 규정 준수를 위한 필수 인프라가 될 수 있다. 새로운 위협에 선제적으로 대응하는 접근이라는 점에서 의미가 있다.
+
+🔎 시각 B: 통제 평면 자체가 모든 민감 데이터가 거쳐 가는 단일 장애·공격 지점이 될 수 있다는 역설이 있다. 또한 검증되지 않은 MCP 서버 생태계의 혼란은 특정 보안 솔루션의 마케팅을 위해 과장될 여지도 있다.
+
 ## 🌍 세계
 
-### 1. [이란 "오늘밤부터 모든 전쟁 종료…19일 서명식"](https://news.google.com/rss/articles/CBMibkFVX3lxTE00blp2MVItVXhELUR6bndjeGxUam5xcURDei1zODRQU25pbGxlX0NIcW9FeDktN1VOWVJKQ2tzRlgxZ1R4UTRSX21GcGFCMVo5OGcxZ1kzRnVWODdqMHFHc094ZHg3TERmdEtkX2Nn?oc=5)  
-이란 정부가 모든 군사 작전을 종료하고, 6월 19일 역사적인 평화 조약 서명식을 개최할 것이라고 발표했다. 이는 불안정한 중동 정세 속에서도 큰 반향을 일으키고 있다.  
-🔍 시각 A: 이란의 결정은 중동에서의 긴장을 완화하고 평화로운 coopération을 촉진하는 중요한 단계로 평가받고 있다.  
-🔎 시각 B: 그러나 이란의 발표가 진정한 화해 의도가 있는 것인지 의문을 제기하는 목소리도 있다.  
+**1. [[속보] 이란 "오늘밤부터 모든 전쟁 종료…19일 서명식"](https://news.google.com/rss/articles/CBMibkFVX3lxTE00blp2MVItVXhELUR6bndjeGxUam5xcURDei1zODRQU25pbGxlX0NIcW9FeDktN1VOWVJKQ2tzRlgxZ1R4UTRSX21GcGFCMVo5OGcxZ1kzRnVWODdqMHFHc094ZHg3TERmdEtkX2Nn?oc=5)**
 
-### 2. [트럼프 "오늘 이란 더 강하게 다시 공격할 것"](https://news.google.com/rss/articles/CBMiWkFVX3lxTFBoNjlZdTI1OU14VWVodU1GRmdlMzFwVzRWZDRvR3lWSXUwdk4zUF8zUzBrY2ZOazdESlRDRXdfRmFqZGlvZzlIeHY5Z2hsN1oxbTF5a1lIZEFaUQ?oc=5)  
-도널드 트럼프 전 대통령은 이란의 발표와 관계없이 공격을 감행할 것이라는 입장을 밝혔다. 그가 본격적인 정치 활동을 재개하며 군사적 긴장을 조장하는 건 아닌지 우려가 커지고 있다.  
-🔍 시각 A: 트럼프의 강력한 발언은 그의 지지층을 재결집하고, 미국의 강력한 군사력을 강조하는 효과가 있을 수 있다.  
-🔎 시각 B: 그러나 이러한 발언이 중동에서의 긴장을 한층 더 고조시킬 수 있다는 우려도 존재한다.  
+이란이 "오늘 밤부터 모든 전쟁을 종료한다"고 발표하며 19일 공식 서명식을 예고했다. 이는 그동안 이어진 중동 지역 무력 충돌의 종지부를 알리는 중대한 외교적 전환점으로 해석된다. 다만 같은 날 일부 외신은 추가 공격 가능성을 시사하는 상반된 보도를 내놓아 정세의 불확실성이 여전히 남아 있다. 서명식의 실제 이행 여부가 향후 중동 안정의 가늠자가 될 전망이다.
+
+🔍 시각 A: 장기화된 무력 충돌이 공식 종전 합의로 이어진다면 민간인 피해를 줄이고 지역 경제 회복의 발판이 될 수 있다. 외교적 해법이 작동했다는 점에서 긍정적인 신호다.
+
+🔎 시각 B: 서명 직전까지 공격 위협이 오가는 상황은 합의의 견고함을 의심케 한다. 과거에도 중동의 휴전·종전 선언이 단기간에 무너진 전례가 많아 신중한 접근이 필요하다.
+
+**2. [트럼프, 9년 만에 방중… 오늘 시진핑과 정상회담](https://news.google.com/rss/articles/CBMingFBVV95cUxQSWxoWFdURWhqbWtlckJMWXBqZEYxMGhXZTJpdEswTmYxZE5GQUh3UnZiRU1ya1l2YWJmTGszNXRHUVowNEJBdlRUbHJMRjdpOGlMRnJuTlpyYlZGMDNfQm5mY0RDTHZMT1ZHSzVIVk9UN0dQTTNJRHprckZkektid1puOFVXejY3MTB6RldIN0o0aXlLRXdVODZiSGpWZw?oc=5)**
+
+도널드 트럼프 미국 대통령이 9년 만에 중국을 방문해 시진핑 국가주석과 정상회담을 갖는다. 미중 양국은 무역, 첨단기술, 안보 등 광범위한 현안을 두고 대화에 나설 것으로 보인다. 세계 1·2위 경제 대국 정상의 직접 회담인 만큼 글로벌 무역질서와 공급망 전반에 미칠 파장이 주목된다.
+
+🔍 시각 A: 최고위급 직접 대화는 미중 갈등의 긴장을 완화하고 무역·기술 분쟁의 출구를 모색할 기회다. 양국 간 소통 채널 복원 자체가 세계 경제 불확실성 해소에 기여할 수 있다.
+
+🔎 시각 B: 정상회담이 구체적 합의 없는 상징적 만남에 그칠 경우 기대만 키우고 실질 변화는 없을 수 있다. 첨단기술 패권 경쟁이라는 구조적 갈등은 정상 간 만남 한 번으로 풀리기 어렵다.
+
+**3. [길고 비치 연쇄살인범, 법정에서 피해자 유족과 마주하다](https://www.modernghana.com/amp/videonews/667993)**
+
+길고 비치 연쇄살인 사건의 범인 렉스 호이어만이 8명의 여성을 살해한 책임을 인정하고 가석방 없는 다중 종신형을 선고받았다. 그는 법정에서 "할 말이 없다"고 밝혔으며, 피해자 유족들이 직접 그를 마주한 가운데 선고가 이뤄졌다. 수년간 미제로 남아 있던 미국의 대표적 강력범죄가 마침내 사법적 결말을 맞은 사건이다.
+
+🔍 시각 A: 오랜 미제 사건이 명확한 유죄 인정과 중형으로 마무리되며 유족들에게 사법 정의가 실현됐다. 장기 미제 수사가 결국 결실을 맺었다는 점에서 형사사법 체계의 끈질김을 보여준다.
+
+🔎 시각 B: 범인 검거까지 수년이 걸린 점은 초기 수사의 한계를 드러낸다. 가해자의 형식적 사과는 유족의 상실을 결코 되돌릴 수 없다는 근본적 한계도 남는다.
 
 ## 🏛️ 정치
 
-오늘은 주요 국내 뉴스가 없습니다.
+**1. [李대통령, 로마 도착…오늘 한국-이탈리아 정상회담](https://news.google.com/rss/articles/CBMiZkFVX3lxTE9Cd3EwX1VOREhYb0VTVjVKTC1RVnp1MHlUendqVjhjcEpvWmVNaWxrRWNwSjhmelpmTXdpV0FGRE5EMDhhbHg4M050WFNwWEZoQ084bnRkOUNUemFBSk1KM3p6a2liQQ?oc=5)**
+
+이재명 대통령이 로마에 도착해 한국-이탈리아 정상회담에 나선다. 양국은 경제 협력, 방산, 첨단산업 등 다양한 분야의 파트너십 강화 방안을 논의할 것으로 예상된다. 이번 순방은 유럽 주요국과의 외교·경제 관계를 확대하려는 정부 기조의 일환으로 풀이된다.
+
+🔍 시각 A: 유럽 핵심 국가와의 정상 외교는 수출 시장 다변화와 방산·첨단산업 협력 확대에 실질적 기회를 제공한다. 다자 외교 무대에서 한국의 위상을 높이는 행보로 평가된다.
+
+🔎 시각 B: 정상 순방이 의례적 선언에 그치고 구체적 후속 성과로 이어지지 않으면 외교 효과는 제한적이다. 국내 현안이 산적한 상황에서 순방 성과에 대한 국민적 체감도가 관건이다.
 
 ## 💰 경제
 
-### 1. [Gold faces global monetary policy tightening as BOE vote shows growing support for rate hike](https://www.kitco.com/news/article/2026-06-18/gold-faces-global-monetary-policy-tightening-boe-vote-shows-growing-support)  
-금 시장이 글로벌 통화 정책의 긴축 우려로 어려움을 겪고 있다. 영국 중앙은행의 금리 인상 지지 증가가 그 배경이다.  
-🔍 시각 A: 이는 금의 안전 자산으로서의 역할을 강화하고, 시장에서 금에 대한 관심을 높일 수 있는 긍정적인 요소로 작용할 수 있다.  
-🔎 시각 B: 반면, 금리에 대한 불확실성이 증가하는 가운데 금 가격 압박이 지속될 수 있다는 경고도 제기되고 있다.  
+**1. [[오늘의증시] 코스피, 반도체 힘으로 9000선 돌파…코스닥은 3% 급락](https://news.google.com/rss/articles/CBMiZEFVX3lxTE9MN2hXMnNBS00tbE1sNDdmVlNHbGlsSzdOMFNWUWJMZ2NScjc2ZXZtRjJ5cmZ3ZkV1cHZFR0RDczhpY1pqVXd0LXVUQU1ST2kwMkhVN1YwSVQ0bnRKT1JIS3dTRlrSAWhBVV95cUxQMEszV1FDbXczcFlEUXV3WkQtRnZFYnNzRk5tM2dGSGtLZWs5VGVldC1xZnBIdG9iM3R6bmRUTFk2dmh0U25Ic3R2b2Rwc0s4TWxwYllUNWEwOFBzZEktTDdYZ0ZUOV8wOQ?oc=5)**
 
-### 2. [Artisanal Collective Launches AEMS Living Heritage Lab to Support Artisan Empowerment, Cultural, and Market Access](https://natlawreview.com/press-releases/artisanal-collective-launches-aems-living-heritage-lab-support-artisan)  
-예술가와 유산 공동체의 역량 강화를 지원하기 위해 Artisanal Collective가 AEMS Living Heritage Lab을 출범했다.  
-🔍 시각 A: 이는 지역 경제에 긍정적인 영향을 미치고, 예술과 문화를 통해 사회적 가치 창출을 촉진할 수 있다.  
-🔎 시각 B: 하지만 유사한 프로젝트의 성공 여부가 불투명한 만큼, 실제 효과를 볼 수 있을지에 대한 의문이 있다.  
+코스피가 반도체 업종의 강세에 힘입어 9000선을 돌파했다. 반면 코스닥은 3% 가까이 급락하며 대형주와 중소형주 간 차별화 장세가 뚜렷하게 나타났다. 반도체 중심의 수급 쏠림이 지수를 끌어올린 가운데, 시장의 온기가 전체 종목으로 확산되지 못하는 모습이다.
+
+🔍 시각 A: 코스피의 9000선 돌파는 한국 증시의 체력과 반도체 산업의 글로벌 경쟁력을 방증한다. 주력 산업의 호조가 지수 상승을 견인하는 건 경제 펀더멘털 측면에서 긍정적이다.
+
+🔎 시각 B: 코스닥 급락이 보여주듯 반도체 일부 대형주에 의존한 상승은 시장의 불균형을 드러낸다. 특정 업종 쏠림이 심화되면 지수 변동성과 개인 투자자 손실 위험도 커진다.
+
+**2. [영란은행(BOE) 금리 인상 지지 확대…금값, 글로벌 통화긴축 압박 직면](https://www.kitco.com/news/article/2026-06-18/gold-faces-global-monetary-policy-tightening-boe-vote-shows-growing-support)**
+
+영란은행(BOE) 통화정책 표결에서 금리 인상을 지지하는 위원이 늘면서 글로벌 통화정책이 다시 긴축 기조로 기울고 있다. 미 연준 역시 최소 한 차례 금리 인상을 시사하는 등 주요국 중앙은행의 매파 신호가 강해졌다. 이에 따라 이자가 없는 안전자산인 금은 매수세를 끌어내지 못하며 약세 압박을 받고 있다.
+
+🔍 시각 A: 주요국의 긴축 기조는 인플레이션을 통제하려는 단호한 의지를 보여준다. 물가 안정이 회복되면 중장기적으로 실물경제와 자산시장의 건전성이 높아질 수 있다.
+
+🔎 시각 B: 추가 금리 인상은 가계와 기업의 이자 부담을 키워 경기 둔화 위험을 높인다. 안전자산 수요까지 위축되는 상황은 시장 참여자들의 불안 심리를 키울 수 있다.
+
+**3. [바이오연료 성장, 농가 경제와 작물 수요 끌어올릴 전망](https://www.farms.com/ag-industry-news/biofuel-growth-may-boost-farm-economy-and-crop-demand-430.aspx)**
+
+S&P 글로벌 에너지의 새 연구는 바이오연료 수요 확대가 미국 농업과 농촌 경제를 강화할 수 있다고 분석했다. 미국 농민·목축업자 단체(USFRA)의 의뢰로 진행된 이 연구는 바이오연료 확대가 작물 수요를 늘리고 식량 생산도 증가시킬 수 있다고 전망했다. 에너지 전환 흐름 속에서 농업이 새로운 성장 동력을 확보할 가능성을 제시한 것이다.
+
+🔍 시각 A: 바이오연료 수요 증가는 농가 소득을 늘리고 침체된 농촌 경제에 활력을 불어넣을 수 있다. 에너지와 농업을 연결하는 지속가능한 성장 모델로서 의미가 크다.
+
+🔎 시각 B: 연료용 작물 수요 확대가 식량 작물과 토지를 두고 경쟁하면 식품 가격 상승을 부를 수 있다. 업계 단체가 의뢰한 연구라는 점에서 결과의 객관성도 따져볼 필요가 있다.
 
 ## 👥 사회
 
-오늘은 주요 국내 뉴스가 없습니다.
+**1. ["'용지 부족' 잠실7동 제2투표소, 오늘 밤 10시까지 투표"](https://news.google.com/rss/articles/CBMia0FVX3lxTE1mM3gzWjZjSk9Za3Q5Y2swWlY2LVdHMWIyWnhxNFpRUmgyQVRNcTVGNEZxbnZFS3I0c1gySDBkd1dHWEJiNUtrQzlqcXBVeXEtX3B5dng2Q0FObWFPRTVnMmR2eW1ESGh2X2tZ?oc=5)**
+
+서울 잠실7동 제2투표소에서 투표용지 부족 사태가 발생해 투표 시간이 밤 10시까지 연장됐다. 예상보다 많은 유권자가 몰리거나 용지 수급 관리에 차질이 빚어지면서 일부 유권자들이 대기하는 불편을 겪었다. 선거 행정의 현장 대응 역량이 도마 위에 오른 사례다.
+
+🔍 시각 A: 용지 부족에도 투표 시간을 연장해 유권자의 참정권을 끝까지 보장하려 한 점은 적절한 조치였다. 현장에서 신속히 대응해 투표 기회를 지켜낸 것은 긍정적이다.
+
+🔎 시각 B: 투표용지 수급 예측 실패는 기본적인 선거 행정의 허점을 드러낸다. 이런 혼선은 선거 관리의 신뢰성을 떨어뜨리고 일부 유권자의 투표 포기로 이어질 수 있다.
 
 ## 🚨 사건사고
 
-### 1. ["반도체 운반 탑차 조심해라"…교통사고 보험금만 194억?](https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZWjJ5Z2ZRZ19aZUJDbkIza3N4UUZ6Q1V6cFVrUHpuSy1Sa0FlYkM0b21oQW5HVm9RNDJxMTR5eVBxclVZRTQxa3BEOTJiOTM4MG8wWHhfY1A5d9IBVEFVX3lxTE9EQmJoUzl5YV9DMS01ZWZ4VE5CVjVYZ3R4VnRfcTk0SWE4VVpRLXVJOHFaN0dNRGItRWxBTkRRUXdaNUZhNXpYSGlST21uMDhzelAyVA?oc=5)  
-최근 발생한 교통사고로 인해 반도체 운반 탑차와 관련된 보험금 지급이 194억 원에 달하는 것으로 나타났다.  
-🔍 시각 A: 이는 안전 운전의 중요성을 다시 한번 일깨우는 사례로 볼 수 있으며, 교통 안전 교육의 필요성을 강조하고 있다.  
-🔎 시각 B: 그러나 높은 보험금 지급은 반도체 물류 분야의 비즈니스에 부담을 줄 수 있다는 우려가 존재한다.  
+**1. ["반도체 운반 탑차 조심해라"…교통사고 보험금만 194억?](https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZWjJ5Z2ZRZ19aZUJDbkIza3N4UUZ6Q1V6cFVrUHpuSy1Sa0FlYkM0b21oQW5HVm9RNDJxMTR5eVBxclVZRTQxa3BEOTJiOTM4MG8wWHhfY1A5d9IBVEFVX3lxTE9EQmJoUzl5YV9DMS01ZWZ4VE5CVjVYZ3R4VnRfcTk0SWE4VVpRLXVJOHFaN0dNRGItRWxBTkRRUXdaNUZhNXpYSGlST21uMDhzelAyVA?oc=5)**
+
+반도체를 운반하는 탑차와 관련된 교통사고 보험금 규모가 194억 원에 달한다는 분석이 나왔다. 고가의 반도체 화물 특성상 사고 한 건당 손해액이 막대해 보험업계의 주의가 요구되고 있다. 운송 과정의 안전 관리와 화물 보험 체계 전반에 대한 점검 필요성이 제기된다.
+
+🔍 시각 A: 고가 화물 운송의 위험을 수치로 드러낸 분석은 운송·보험 업계가 안전 관리 체계를 강화하는 계기가 될 수 있다. 사전 경각심을 높여 사고와 손실을 줄이는 데 도움이 된다.
+
+🔎 시각 B: 막대한 보험금 규모는 반도체 물류의 안전 관리가 여전히 취약하다는 방증이다. 반복되는 고액 사고는 결국 보험료 인상으로 이어져 산업 전반의 비용 부담을 키울 수 있다.
 
 ---
-
 *이 글은 자동으로 생성된 뉴스 브리핑입니다.*
