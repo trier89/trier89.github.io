@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>DXF to 3D</Name>
+    <Assembly>RevitDxfTo3D\RevitDxfTo3D.dll</Assembly>
+    <AddInId>7E1F3C52-9A41-4B7D-8A0B-2C5D1E69B8A4</AddInId>
+    <FullClassName>RevitDxfTo3D.App</FullClassName>
+    <VendorId>DXF3D</VendorId>
+    <VendorDescription>DXF floor plan to 3D model converter</VendorDescription>
+  </AddIn>
+</RevitAddIns>

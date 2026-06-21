@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+    <Nullable>disable</Nullable>
+    <RootNamespace>RevitDxfTo3D.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="netDxf.netstandard" Version="3.0.1" />
+  </ItemGroup>
+
+  <!-- Revit API에 의존하지 않는 인식 코드만 가져와 검증한다 -->
+  <ItemGroup>
+    <Compile Include="../../src/Core/**/*.cs" />
+    <Compile Include="../../src/Dxf/**/*.cs" />
+    <Compile Include="../../src/Recognition/**/*.cs" />
+  </ItemGroup>
+
+</Project>

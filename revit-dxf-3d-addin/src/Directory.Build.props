@@ -1,0 +1,15 @@
+<Project>
+  <!--
+    Revit 버전별로 bin/obj를 분리해 2024(net48)와 2025(net8.0-windows) 빌드가
+    서로 덮어쓰지 않게 한다. restore보다 먼저 평가되도록 Directory.Build.props에 둔다.
+      bin\Revit2024\Release\  ·  bin\Revit2025\Release\
+  -->
+  <PropertyGroup>
+    <RevitVersion Condition="'$(RevitVersion)' == ''">2024</RevitVersion>
+    <BaseOutputPath>bin\Revit$(RevitVersion)\</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj\Revit$(RevitVersion)\</BaseIntermediateOutputPath>
+    <!-- 버전별 obj 분리로 인해 다른 버전의 생성 소스가 Compile glob에 딸려오지
+         않도록, 모든 bin/obj 하위를 명시적으로 제외한다. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin/**;obj/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>
