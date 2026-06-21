@@ -12,56 +12,114 @@ tags:
 
 ## 🤖 AI
 
-1. **[What is GLM-5.2? Another open-source Chinese AI model has Silicon Valley's attention.](https://www.businessinsider.com/what-is-glm-5-2-chinese-ai-coding-model-2026-6)**  
-   중국의 새로운 오픈소스 AI 모델이 실리콘밸리의 주목을 받고 있습니다. GLM-5.2는 1백만 토큰의 컨텍스트 윈도우를 통해 Anthropic 및 OpenAI의 모델과 경쟁할 수 있습니다. 이 모델은 중국 기술 발전의 또 다른 예시로 부각되고 있습니다.  
-   🔍 **시각 A:** 이러한 모델의 출시는 AI 발전에 긍정적인 영향을 미치며, 글로벌 경쟁을 촉진할 수 있습니다.  
-   🔎 **시각 B:** 그러나 미국의 AI 시장에서 중국의 발전이 큰 위협으로 작용할 수 있다는 우려도 존재합니다.
+**1. [GLM-5.2란 무엇인가? 또 하나의 중국발 오픈소스 AI 모델이 실리콘밸리의 이목을 끌다](https://www.businessinsider.com/what-is-glm-5-2-chinese-ai-coding-model-2026-6)**
 
-## 🏗️ 스마트건설
+중국 z.AI가 공개한 신규 오픈소스 모델 GLM-5.2가 실리콘밸리에서 화제를 모으고 있다. 1년여 전 딥시크(DeepSeek) R1이 미국 챗봇 패권에 대한 중국의 위협을 알렸던 이후 다시 한 번 비슷한 수준의 관심을 받고 있다는 평가다. 이 회사는 GLM-5.2가 100만 토큰(1M)의 컨텍스트 윈도를 지원한다고 밝혔는데, 이는 앤트로픽 클로드 오푸스 4.8, 오픈AI의 최상위 모델과 같은 반열에 올려놓는 수치다. 특히 코딩 성능이 강조되며 오픈소스 진영의 경쟁 구도를 다시 흔들고 있다.
 
-- 오늘은 주요 국내 뉴스가 없습니다.
+🔍 시각 A: 강력한 성능의 모델이 오픈소스로 공개되면서 스타트업과 연구자들이 비용 부담 없이 최신 AI를 활용할 수 있게 됐다. 폐쇄형 모델 중심의 시장에 건강한 경쟁을 불어넣어 기술 발전 속도를 가속할 수 있다.
+
+🔎 시각 B: 중국발 오픈소스 모델의 약진은 미국 주도의 AI 생태계와 안보 지형에 새로운 긴장을 야기한다. 출처와 학습 데이터, 잠재적 보안 리스크에 대한 검증 없이 성능 수치에만 열광하는 분위기는 경계할 필요가 있다.
+
+---
 
 ## 🌍 세계
 
-1. **[U.S. and Iranian negotiators meet in Switzerland to hash out peace plan](https://www.washingtonpost.com/world/2026/06/21/us-iranian-meet-switzerland-hash-out-peace-plan/)**  
-   미국과 이란의 협상자들이 스위스에서 많은 이슈를 논의하며 평화 계획을 수립하기 위한 논의를 시작했습니다. 이 협상은 이란의 핵 프로그램과 관련된 문제도 포함되어 있습니다.  
-   🔍 **시각 A:** 양측의 대화를 통해 긴장이 완화될 수 있는 기회가 마련되고 있습니다.  
-   🔎 **시각 B:** 그러나 역사적으로 이란과의 협상이 항상 긍정적인 결과를 가져온 것은 아니며, 신뢰 구축에 시간이 필요합니다.
+**1. [미·이란 협상단, 스위스에서 평화안 조율 회동](https://www.washingtonpost.com/world/2026/06/21/us-iranian-meet-switzerland-hash-out-peace-plan/)**
 
-2. **[ABC World News Tonight with David Muir Full Broadcast - June 20, 2026](https://www.modernghana.com/amp/videonews/669500)**  
-   ABC 뉴스의 최신 방송에서는 플로리다와 남부 지역의 홍수 위협과 난항을 겪고 있는 이란 관련 문제를 중심으로 보도되었습니다.  
-   🔍 **시각 A:** 뉴스에서 전달하는 경각심은 국민의 안전을 위한 중요성을 강조합니다.  
-   🔎 **시각 B:** 반복되는 기후 문제와 군사적 긴장이 대중에게 스트레스를 주고 있다는 비판도 있습니다.
+JD 밴스 미국 부통령이 일요일 스위스에 도착해 이란의 핵 프로그램을 포함한 현안을 놓고 고위급 협상에 나섰다. 스티브 위트코프, 재러드 쿠슈너 등 특사들이 동행했으며, 미국은 흔들리는 평화 프로세스를 다시 궤도에 올리려는 의도다. 60일 시한이 거론되는 가운데 호르무즈 해협 문제 등 민감한 쟁점이 협상 테이블에 올랐다. 이번 회동은 중동 정세의 향방을 가를 분수령으로 평가된다.
+
+🔍 시각 A: 군사적 충돌이 격화되는 상황에서 양국이 직접 대화 테이블에 앉았다는 점만으로도 긴장 완화의 신호로 읽을 수 있다. 외교적 해법 모색은 추가 인명 피해와 유가 충격을 막을 가장 현실적인 길이다.
+
+🔎 시각 B: 시한과 통행료 부과를 압박 수단으로 내세운 협상은 진정한 신뢰 구축보다 거래적 성격이 강하다. 호르무즈 봉쇄 같은 강수가 오가는 상황에서 합의가 깨질 경우 오히려 갈등이 더 격화될 위험이 있다.
+
+**2. [이스라엘-미국의 이란 공습: 발발 3일째이지만… 여전히 안갯속인 전쟁의 향방](https://news.google.com/rss/articles/CBMiXEFVX3lxTE1ISFlab3BTNW9IdVI1ZGI5TW5Nc2dndzhzT2FuVTBMbkloWDJieTFnaU1XVEVYM01Ca2dFY2oxemtEY3paVTNaRFpiQ1JGQXhvRlJBcmItNEVab1NC0gFiQVVfeXFMTy1SajdMY25idHdPWXpGeWt5U2N1U1VfWF9zcW9pQmtUdGdkSFhSX0d0QlZyNGxRX0dWcXV1NjFMMU9hR00tY2RMVWNkYTdRUXpCNGRSMkJjOW4wYngxSXlYbEE?oc=5)**
+
+이스라엘과 미국의 이란 공습이 사흘째 이어지고 있으나 전쟁의 향방은 여전히 불투명하다. 군사 작전의 목표와 종료 시점이 명확하지 않은 가운데, 이란의 보복 가능성과 확전 우려가 동시에 제기되고 있다. 스위스에서 진행 중인 협상과 전장의 상황이 엇갈리며 정세 예측이 어려운 국면이다.
+
+🔍 시각 A: 협상과 군사 압박이 병행되는 가운데, 외교 채널이 열려 있다는 점은 조기 종전의 가능성을 남겨둔다. 국제사회의 중재 노력이 더해진다면 사태가 통제 가능한 범위에서 마무리될 여지가 있다.
+
+🔎 시각 B: 목표가 불분명한 군사 작전은 장기화와 민간 피해 확대로 이어질 수 있다. 중동 전역으로의 확전과 글로벌 에너지·공급망 충격이라는 통제 불가능한 후폭풍을 부를 위험이 크다.
+
+**3. [[속보] 트럼프 "오늘 밤 한 문명 멸망할 것"](https://news.google.com/rss/articles/CBMibkFVX3lxTE42WUxGYkJYOERMSUtENGZuakxpclh3ZzVKNXpVTHB5VllUZVBYVnNqdHNUOENQU2NGa2xGTmRWN3U2VXQ5NnZjQ3JMYkhUY1FDYkYwb015X1dqdkNaRnBhdTVLbHFfNGI0ZDZqMmVn?oc=5)**
+
+트럼프 미국 대통령이 "오늘 밤 한 문명이 멸망할 것"이라는 강도 높은 발언을 내놓아 파장이 일고 있다. 이란을 겨냥한 것으로 해석되는 이 발언은 군사적 긴장이 최고조에 달한 시점에 나와 더욱 주목된다. 강경 수사가 협상 압박용인지, 실제 행동 예고인지를 두고 해석이 분분하다.
+
+🔍 시각 A: 강력한 메시지는 상대를 협상 테이블로 끌어내기 위한 압박 카드로 작동할 수 있다. 분명한 레드라인 제시가 오히려 무력 충돌을 억제하는 효과를 낼 수도 있다.
+
+🔎 시각 B: 지도자의 극단적 수사는 외교적 운신의 폭을 좁히고 상대의 강경 대응을 유발할 수 있다. '문명 멸망' 같은 표현은 국제사회의 불안을 증폭시키고 우발적 확전의 빌미가 될 위험이 있다.
+
+---
 
 ## 🏛️ 정치
 
-1. **[Rebuilding Korea Party Condemns Han Chan-sik's Anti-Reform Record](https://www.chosun.com/english/national-en/2026/06/21/G7OZJP6MTZEDNJNN2TLVXCLKOA/)**  
-   한국의 여당인 재건한국당이 한찬식의 반개혁 기록을 비판하며 성명을 발표했습니다. 이 당은 한찬식의 임명에 대해 우려를 표하며 반개혁 기록을 강조하고 있습니다.  
-   🔍 **시각 A:** 반개혁 인사들이 정부의 타락을 방지하고 청렴성을 높이는 데 기여할 수 있습니다.  
-   🔎 **시각 B:** 정책 변화가 필요할 때마다 반개혁 인사가 임명되어 사회적 저항을 불러올 수 있다는 우려도 있습니다.
+**1. [조국혁신당, 한찬식 신임 민정수석 '반개혁 이력' 우려 표명](https://www.chosun.com/english/national-en/2026/06/21/G7OZJP6MTZEDNJNN2TLVXCLKOA/)**
+
+이재명 대통령이 21일 수석비서관급 일부 참모진을 교체한 가운데, 검사 출신 한찬식 신임 민정수석 임명을 두고 조국혁신당이 거듭 우려를 표명했다. 박병언 조국혁신당 수석대변인은 '반개혁 이력에 대한 우려'라는 제목의 논평을 내고 비판에 나섰다. 검찰 개혁을 핵심 과제로 내세운 여권 일각에서 검사 출신 인사 발탁을 둘러싼 논쟁이 점화된 양상이다.
+
+🔍 시각 A: 풍부한 법률·실무 경험을 갖춘 인사를 민정수석에 기용하는 것은 국정 안정과 전문성 확보 측면에서 합리적 선택일 수 있다. 출신만으로 인사를 재단하기보다 실제 직무 수행을 지켜볼 필요가 있다.
+
+🔎 시각 B: 검찰 개혁을 표방한 정부가 검사 출신을 민정수석에 앉히는 것은 개혁 동력과 메시지의 일관성을 흔들 수 있다. 여권 내 비판이 제기된 만큼 인사의 정치적 부담이 적지 않다.
+
+**2. [[오늘과 내일/이상훈] 교사 정치 활동, 한국 사회가 감당 가능한가](https://news.google.com/rss/articles/CBMidkFVX3lxTE45aHlIMEtFVkM1eVVQcFlDNGlic0NmZm5FSUpTTVgxeERlZUVVcmxQZTZYSWd6ZHlUTDkyaGFmZFpyMjNjR2UzajZPbENJcndLdFUxWjJhTk9LbWRBVjhnRzI4Uk9va1duQkNVekxLY25nVnhzVWfSAWZBVV95cUxNQzJ2bzNhOGNuMnJ5ZWhpNmoyNGJMUVE0by0ycHc5Rm9RWFhtMmkwdmZuUXhTeXlJenRxYU9aYkZxbmh5MWtqVDhHOGc2UTdUdXNDZWRxOHdkSlYtUGQ4YjJtQ2NaQnc?oc=5)**
+
+교사의 정치 활동 허용 범위를 둘러싼 논의가 한국 사회에서 다시 화두로 떠올랐다. 칼럼은 교육의 정치적 중립성과 교사 개인의 정치적 기본권 사이의 긴장을 짚으며, 우리 사회가 이를 감당할 준비가 됐는지 질문을 던진다. 교사 정치 활동 확대를 둘러싼 찬반 양론이 교육계와 정치권에서 첨예하게 맞서는 상황이다.
+
+🔍 시각 A: 교사도 시민으로서 정치적 표현과 참여의 자유를 보장받아야 한다는 점에서 활동 범위 확대는 기본권 신장의 흐름과 맞닿아 있다. 다른 직역과의 형평성 측면에서도 재검토할 여지가 있다.
+
+🔎 시각 B: 학생에게 직접적 영향을 미치는 교사의 정치 활동은 교육의 중립성을 훼손할 우려가 크다. 충분한 사회적 합의와 제도적 안전장치 없이 확대될 경우 교실의 정치화라는 부작용을 낳을 수 있다.
+
+---
 
 ## 💰 경제
 
-1. **[Ford Sues Law Firm, Alleging Fraudulent Inflation Of Lemon Law Legal Fees](https://finance.yahoo.com/small-business/articles/ford-sues-law-firm-alleging-180030300.html)**  
-   포드는 한 법무법인을 상대로 레몬법 법적 수수료의 fraudulent inflation에 대해 소송을 제기했습니다. 이 사건은 법률 비용의 투명성을 둘러싼 논란을 재조명하고 있습니다.  
-   🔍 **시각 A:** 법률 서비스가 더 투명해짐으로써 소비자 보호가 강화될 수 있습니다.  
-   🔎 **시각 B:** 이 사건은 법률 산업의 비합리적인 비용 구조 문제를 더욱 부각시킬 수 있습니다.
+**1. [[경제] 코스피 '8천피' 안착… 오늘 증시 상황은?](https://news.google.com/rss/articles/CBMib0FVX3lxTE5vTjJhVG40SEI5VU16SVhZWEVTck0xOFc1STlicXM0ZkJoR2hNV2Q2RXUyT1dwbFhvSlBWYkc2azVSUFVIYS05Q1lVNzFtV2dGLXltQWRiclJCamhscDM3VkVxbVJ1RU1FSllGXzFyTQ?oc=5)**
 
-2. **[Massive bonuses for South Korea's chip workers puts central bank on inflation alert](https://www.cnbc.com/2026/06/20/south-korea-tech-samsung-sk-hynix-bonus-bank-of-korea.html)**  
-   한국의 반도체 산업에서 근로자들에게 주어질 대규모 보너스가 중앙은행에 물가 상승에 대한 경고를 주고 있습니다. 삼성과 SK 하이닉스에서 예상되는 막대한 보너스는 통화 정책에 영향을 미칠 수 있습니다.  
-   🔍 **시각 A:** 이는 국내 경제 활성화에 기여할 긍정적인 신호로 해석될 수 있습니다.  
-   🔎 **시각 B:** 하지만, 과도한 보너스는 물가 상승과 중앙은행의 긴축 정책을 유발할 가능성도 있습니다.
+코스피가 사상 처음 8,000선에 안착하며 새로운 국면을 맞았다. AI 메모리 반도체 수출 호조와 미국 증시 강세 흐름이 지수를 끌어올린 주요 동력으로 분석된다. 다만 가파른 상승 이후 단기 변동성에 대한 경계감도 함께 커지고 있다. 시장은 미국 인플레이션 지표와 중동 정세를 주시하며 추가 방향성을 가늠하고 있다.
+
+🔍 시각 A: 반도체 업황 회복과 외국인 자금 유입에 힘입은 지수 8,000선 안착은 한국 경제의 펀더멘털 개선을 반영한다. 글로벌 AI 붐의 핵심 수혜국으로서 추가 상승 여력이 기대된다.
+
+🔎 시각 B: 특정 반도체 업종에 쏠린 상승은 지수의 체질이 취약할 수 있음을 시사한다. 환율 불안과 외부 변수에 따라 가파른 조정이 닥칠 수 있어 과열을 경계해야 한다.
+
+**2. [반도체 흑자에도 멈추지 않는 원화 약세… 17년 만의 최저](https://www.forbes.com/sites/daraabasiita/2026/06/20/koreas-chip-surplus-cannot-stop-the-won-from-sliding/)**
+
+한국 원화가 AI 메모리 칩 수출 호황에 따른 강력한 무역흑자에도 불구하고 17년 만의 최저 수준에 머물고 있다. 이 역설은 자본수지 유출에서 비롯되는데, 국내 저축자들이 미국 기술주 등 해외 주식에 대규모로 투자하면서 자금이 빠져나가고 있기 때문이다. 같은 AI 붐이 한쪽에서는 무역흑자를, 다른 쪽에서는 자본 유출을 동시에 키우는 구조다.
+
+🔍 시각 A: 무역흑자라는 견고한 기초 체력이 유지되는 만큼 원화 약세는 일시적 자본 흐름의 문제일 수 있다. 약한 원화는 수출 기업의 가격 경쟁력을 높여 또 다른 호재로 작용한다.
+
+🔎 시각 B: 흑자에도 통화가치가 하락하는 구조적 자본 유출은 가계 자산의 해외 의존 심화를 드러낸다. 환율 불안이 수입 물가와 인플레이션을 자극해 한국은행의 통화정책 운신을 좁힐 수 있다.
+
+**3. [美 증시, 핵심 인플레이션 지표 앞두고 선물 하락](https://www.cnbc.com/2026/06/21/stock-market-today-live-updates.html)**
+
+연준이 주시하는 인플레이션 지표 발표를 앞두고 미국 주식 선물이 일제히 하락했다. S&P500 선물은 0.4%, 나스닥100 선물은 0.6% 내렸으며, 다우 선물도 0.4% 떨어졌다. 다만 직전 한 주 동안 나스닥은 2% 넘게, 다우는 1% 가까이 오르며 이란 사태 완화와 유가 안정의 수혜를 누린 바 있다. 이번 물가 지표는 향후 금리 경로를 가를 핵심 변수로 꼽힌다.
+
+🔍 시각 A: 중동 긴장 완화와 유가 안정이 증시 상승을 뒷받침하며, 지표 발표 전 숨 고르기는 자연스러운 흐름이다. 인플레이션이 둔화로 확인되면 금리 인하 기대가 강화돼 추가 랠리가 가능하다.
+
+🔎 시각 B: 인플레이션 지표에 시장이 민감하게 반응한다는 것은 그만큼 통화정책 불확실성이 크다는 의미다. 새 연준 의장 체제와 맞물려 예상을 벗어난 물가가 나올 경우 급격한 변동성이 재현될 수 있다.
+
+---
 
 ## 👥 사회
 
-1. **[Court Upholds Fines for Law Firm's 'Sentence Prediction' Ads](https://www.chosun.com/english/national-en/2026/06/20/DBQCPXXOTVHN3JDB34IKDSKZCU/)**  
-   법원이 법률 광고에서 "15초 안에 판결 예측"과 같은 문구를 사용한 법무법인에 대한 벌금을 정당하다고 판결했습니다. 이는 광고의 진실성을 보여주는 사례가 되고 있습니다.  
-   🔍 **시각 A:** 이 판결은 소비자의 권리를 보호하는 중요한 조치로 바라볼 수 있습니다.  
-   🔎 **시각 B:** 하지만 이는 법률 산업의 자유로운 시장 경쟁을 해칠 수 있다는 비판을 받고 있습니다.
+**1. ['형량 예측 15초' 광고 법무법인 징계 정당… 법원, 과태료 유지](https://www.chosun.com/english/national-en/2026/06/20/DBQCPXXOTVHN3JDB34IKDSKZCU/)**
+
+서울행정법원 행정3부(부장판사 호성호)가 '15초 형량 예측', '파격 할인가' 등의 문구를 사용한 법무법인과 대표 변호사에 대한 징계 과태료가 정당하다고 판결했다. 재판부는 해당 법무법인과 대표 변호사가 법무부 변호사징계위원회를 상대로 낸 소송을 기각하며 원고의 청구를 받아들이지 않았다. 자극적 광고 문구를 둘러싼 법조 윤리와 소비자 보호 기준이 다시 확인된 판결이다.
+
+🔍 시각 A: 과장·자극적 법률 서비스 광고에 제동을 건 판결은 의뢰인을 오인 광고로부터 보호하는 의미가 크다. 법률 시장의 신뢰와 직역 윤리를 지키는 합리적 기준 제시로 평가할 수 있다.
+
+🔎 시각 B: 광고 규제가 지나치게 엄격하면 정보 접근성이 낮은 소비자가 오히려 법률 서비스 비교 기회를 잃을 수 있다. 표현의 자유와 시장 경쟁 위축 사이의 균형에 대한 추가 논의가 필요하다.
+
+---
 
 ## 🚨 사건사고
 
-- 오늘은 주요 국내 뉴스가 없습니다.
+**1. [[17일 오늘의 사건사고] 대구 달성군 한 이불공장서 화재 발생](https://news.google.com/rss/articles/CBMiWEFVX3lxTE9ydFhzWUhFNFpLMVd2cjJ6aUx6V0V6X0d1blE3LTFYdkhXWVZzMWYzNFFBb295SHU0Q1NzYU5fczd5elo5eUdQcnpHNUUtc1FCb0RDLTktRFfSAWhBVV95cUxNRmdUT29VZUFnNHN3Zkh2bllqMzRUQzMyZ252SzRGMDFwalVZdmNhcnZvYUFLZl9IeUpYdmxBREd4LU9naUQzQzlsQUNqZ3F5Vnl5UU4wVl9Fb09LVmVNMnpSOFcxUnltdg?oc=5)**
 
----  
+대구 달성군의 한 이불공장에서 화재가 발생해 소방 당국이 진화에 나섰다. 가연성 물질이 많은 공장 특성상 불이 빠르게 번질 위험이 커 진화에 어려움이 따랐다. 인명 피해와 정확한 화재 원인은 당국이 조사 중이다.
+
+🔍 시각 A: 신속한 소방 대응으로 추가 확산을 막은 점은 다행이며, 이번 사례는 공장 밀집 지역의 화재 대비 체계를 점검하는 계기가 될 수 있다. 정확한 원인 규명으로 재발 방지책 마련이 기대된다.
+
+🔎 시각 B: 가연성 자재가 집중된 제조 공장의 화재 취약성이 또다시 드러났다. 평소 소방 점검과 안전 설비 관리가 미흡했던 것은 아닌지 구조적 점검이 시급하다.
+
+---
+
 *이 글은 자동으로 생성된 뉴스 브리핑입니다.*
