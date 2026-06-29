@@ -12,64 +12,121 @@ tags:
 
 ## 🤖 AI
 
-1. **[‘The Next Vanguard’: OpenAI, Altman Hit With New Lawsuit Over FSU Shooting](https://www.law.com/dailybusinessreview/2026/06/29/the-next-vanguard-openai-altman-hit-with-new-lawsuit-over-fsu-shooting/)**
-   OpenAI와 샘 앨트먼이 플로리다주에서 발생한 총기사건과 관련하여 새로운 소송에 직면했습니다. 소송은 인공지능의 책임과 안전성에 대한 논란을 다시 불러일으키고 있습니다. 이 사건은 AI 모델이 인간의 행동에 미치는 영향에 대한 지속적인 우려를 반영합니다.
-   🔍 **시각 A**: 이러한 소송은 AI의 책임을 명확히 하고, 안전성 강화를 촉진할 수 있는 기회를 제공합니다. AI 기술의 발전이 법적 틀 내에서 안전하게 이루어질 수 있다면 긍정적인 변화로 이어질 것입니다.  
-   🔎 **시각 B**: 그러나 과도한 규제가 혁신을 저해할 수 있다는 우려도 존재합니다. AI 기술이 사회에 긍정적인 영향을 미치는 데 걸림돌이 될 수 있습니다.
+**1. [트럼프 행정부, 앤트로픽 '클로드 페이블 5' 접근 재허용 임박…7월 초 규제 해제 가능성](https://gigazine.net/gsc_news/en/20260629-anthropic-fable-5-return-soon/)**
 
-## 🏗️ 스마트건설
+여러 외신에 따르면 트럼프 행정부는 AI 기업 앤트로픽이 제공하는 고성능 AI 모델 '클로드 페이블 5(Claude Fable 5)'에 대한 접근을 곧 재개할 것으로 전망된다. 페이블 5는 앤트로픽이 2026년 6월 9일 출시한 차세대 언어모델로, 출시 직후 정부 차원의 접근 제한 조치가 적용된 바 있다. 보도에 따르면 이르면 2026년 7월 초부터 관련 규제가 해제될 수 있는 것으로 알려졌다. 이번 조치가 현실화되면 출시 직후 묶였던 최신 모델이 다시 시장에서 활용될 길이 열린다.
 
-(해당 기사가 없습니다.)
+🔍 시각 A: 최신 고성능 모델에 대한 규제가 빠르게 정비되면 기업과 연구자들이 첨단 AI 역량을 적시에 활용할 수 있어 혁신 속도가 한층 빨라질 전망이다. 출시 직후의 불확실성이 해소된다는 점에서 AI 생태계 전반에 긍정적 신호로 읽힌다.
+
+🔎 시각 B: 강력한 신형 모델이 충분한 안전성 검증 없이 단기간에 풀린다면 오남용과 통제 공백에 대한 우려가 커질 수 있다. 규제 해제 시점이 정치적 판단에 좌우되는 모습은 AI 거버넌스의 일관성과 예측 가능성에 의문을 남긴다.
+
+---
 
 ## 🌍 세계
 
-1. **[Stock Market Today: Dow Rises On U.S.-Iran News; SpaceX Rallies On Addition To Nasdaq-100 Index (Live Coverage)](https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-us-iran-spacex-spcx-stock-nasdaq-100/)**
-   미국과 이란 간의 공격이 중단되면서 다우 지수가 상승했습니다. 이 소식은 금융 시장에 긍정적인 영향을 미쳤으며, 스페이스X가 나스닥 100 지수에 추가되어 주식시장에서 큰 반향을 일으켰습니다.
-   🔍 **시각 A**: 이러한 평화로운 소식은 투자자들에게 긍정적인 신호로 작용하며, 시장에 안정감을 더해 줄 것으로 기대됩니다.  
-   🔎 **시각 B**: 하지만 여전히 복잡한 지정학적 상황이 얽혀 있어 불확실성이 존재하며, 그러한 변동성이 투자자에게 부담으로 작용할 수 있습니다.
+**1. [트럼프, 9년 만에 방중…오늘 시진핑과 정상회담](https://news.google.com/rss/articles/CBMingFBVV95cUxQSWxoWFdURWhqbWtlckJMWXBqZEYxMGhXZTJpdEswTmYxZE5GQUh3UnZiRU1ya1l2YWJmTGszNXRHUVowNEJBdlRUbHJMRjdpOGlMRnJuTlpyYlZGMDNfQm5mY0RDTHZMT1ZHSzVIVk9UN0dQTTNJRHprckZkektid1puOFVXejY3MTB6RldIN0o0aXlLRXdVODZiSGpWZw?oc=5)**
 
-2. **[Brazil vs. Japan Live Updates, Score: Latest World Cup News and Goals](https://www.foxsports.com/live-blog/soccer/brazil-vs-japan-live-updates-score-latest-world-cup-news-goals)**
-   FIFA 남자 월드컵에서 브라질이 일본과의 경기를 치르며 세계 축구 팬들의 관심이 집중되고 있습니다. 경기는 많은 기대를 모으며 진행되고 있습니다.
-   🔍 **시각 A**: 이 경기는 국가 간의 축구 대결로서, 다양한 문화의 축구 스타일을 접할 수 있는 기회를 제공합니다.  
-   🔎 **시각 B**: 그러나 경기 결과에 따른 국가 간의 감정이 격해질 수 있어 스포트라이트가 부정적인 여파를 낳을 우려도 있습니다.
+도널드 트럼프 미국 대통령이 9년 만에 중국을 방문해 시진핑 국가주석과 정상회담을 갖는다. 미중 양국이 무역·기술·안보 등 다층적 현안을 두고 긴장과 협상을 반복해온 가운데 성사된 이번 회담은 전 세계의 이목을 집중시키고 있다. 두 정상의 대면 협의는 향후 미중 관계의 방향성을 가늠하는 분수령이 될 전망이다. 회담 결과는 글로벌 통상 질서와 공급망 전반에 적지 않은 영향을 미칠 것으로 보인다.
+
+🔍 시각 A: 양국 정상이 직접 마주 앉아 대화에 나서는 것 자체가 갈등 완화의 출발점이 될 수 있다. 최고위급 소통 채널이 복원되면 무역 갈등과 안보 불안정을 관리할 여지가 넓어진다.
+
+🔎 시각 B: 상징적 회담이 구체적 합의 없이 끝날 경우 기대만 키운 채 실질적 변화는 미미할 수 있다. 양측의 근본적 이해관계 차이가 큰 만큼 단기 성과에 과도한 의미를 부여하는 것은 경계해야 한다.
+
+**2. [미국·이란, 상호 공격 중단 합의…뉴욕증시 다우 상승](https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-us-iran-spacex-spcx-stock-nasdaq-100/)**
+
+미국과 이란이 주말 사이 격화됐던 상호 공격을 중단하기로 합의하면서 다우존스 산업평균지수 등 주요 지수가 상승세로 돌아섰다. 양국이 추가 충돌을 멈추고 협상을 이어가기로 하면서 중동발 지정학 리스크가 일부 완화됐다. 시장은 즉각 안도하며 위험자산 선호 심리가 회복되는 모습을 보였다. 다만 합의의 지속성에 대해서는 여전히 신중론이 제기된다.
+
+🔍 시각 A: 무력 충돌이 확전으로 치닫기 전에 양국이 자제에 합의한 것은 중동 안정과 글로벌 경제에 긍정적이다. 유가와 증시가 빠르게 반응한 만큼 불확실성 해소 효과가 가시화되고 있다.
+
+🔎 시각 B: 공격 중단이 곧바로 항구적 평화를 의미하지는 않으며, 긴장은 언제든 재점화될 수 있다. 시장이 단기 뉴스에 과민하게 반응하는 구조는 향후 변동성 위험을 키울 수 있다.
+
+**3. [시카고 파이어, 폴란드 득점왕 레반도프스키 영입…MLS 전력 보강](https://www.chicagofirefc.com/news/a-defining-moment-in-chicago-sports-chicago-fire-fc-acquires-global-football-icon-robert-lewandowski)**
+
+미국 프로축구 메이저리그사커(MLS)의 시카고 파이어가 폴란드 역대 최다 득점자 로베르트 레반도프스키를 지정선수(DP)로 영입했다고 발표했다. 레반도프스키는 FC 바르셀로나를 떠나 MLS 무대에 합류하며, 클럽과 국가대표를 합쳐 700골 이상을 기록한 세계적 골잡이다. 이번 영입은 시카고 스포츠계의 '결정적 순간'으로 평가받고 있다. 북미 축구 시장의 위상이 한층 높아졌음을 보여주는 사례다.
+
+🔍 시각 A: 세계적 스타의 합류는 MLS의 흥행성과 경쟁력을 동시에 끌어올리는 호재다. 월드컵 개최와 맞물려 북미 축구의 글로벌 위상이 빠르게 상승하고 있다.
+
+🔎 시각 B: 전성기를 지난 스타에게 막대한 비용을 투입하는 영입은 단기 마케팅 효과에 그칠 수 있다. 리그의 지속 가능한 성장은 스타 의존보다 유소년·구단 시스템 강화에 달려 있다.
+
+---
 
 ## 🏛️ 정치
 
-1. **[South Korea president calls for 'thorough investigation' into dismal 2026 World Cup campaign as head coach resigns](https://www.goal.com/en/lists/south-korea-president-calls-for-thorough-investigation-into-dismal-2026-world-cup-campaign-head-coach-resigns/blta0d538025549f446)**
-   한국의 축구 감독이 2026년 월드컵의 실망스러운 성적을 이유로 사임했습니다. 이에 대해 대통령이 철저한 조사를 요청하며 정치적 압박이 가중되고 있습니다.
-   🔍 **시각 A**: 리더십 변화가 새로운 방향성을 제시할 수 있으며, 축구 발전에 기여할 긍정적인 계기가 될 수 있습니다.  
-   🔎 **시각 B**: 그러나 이러한 정치적 개입이 의도치 않은 책임 전가로 이어질 수 있어 우려를 낳고 있습니다.
+**1. [한국 정부, 월드컵 조별리그 탈락 '철저 조사' 지시…홍명보 감독 사퇴](https://apnews.com/article/south-korea-turmoil-world-cup-a38db6c746ed981f556211d66e1de6a5)**
+
+이재명 대통령이 2026 월드컵 조별리그 탈락이라는 부진한 성적에 대해 정부 차원의 공식 조사를 지시하면서 정치적 파장이 커지고 있다. 한국 대표팀은 조별리그 3경기에서 1승 2패, 승점 3점에 그치며 32강 진출에 실패했고, 홍명보 감독은 책임을 지고 사퇴했다. 대통령이 문화체육관광부에 진상 규명을 요구하면서 스포츠 사안이 국정 현안으로 비화했다. 대표팀의 수십 년 만의 최악 성적을 둘러싸고 책임론이 거세게 일고 있다.
+
+🔍 시각 A: 국가적 관심사인 대표팀 성적 부진의 구조적 원인을 정부가 들여다보겠다는 것은 책임 행정의 일환으로 볼 수 있다. 행정·운영상의 문제를 점검해 시스템을 개선할 계기가 될 수 있다.
+
+🔎 시각 B: 스포츠 경기 결과에 대통령이 직접 조사를 지시하는 것은 정치적 개입이라는 비판을 피하기 어렵다. 자율성을 지녀야 할 체육계에 정치 논리가 과도하게 투영될 경우 부작용이 우려된다.
+
+**2. [한국 기술기업들, AI 수요 대응 위해 518조원 규모 반도체 허브 구축](https://apnews.com/article/korea-samsung-ai-hynix-chips-22352d95c7a821c5f4548b2d1a4ebde8)**
+
+이재명 대통령과 삼성전자·SK하이닉스 등 국내 대표 기술기업들이 폭증하는 AI 수요에 대응하기 위한 약 518조원 규모의 반도체 제조 허브 구축에 나섰다. 이번 프로젝트는 한국이 글로벌 AI·반도체 공급망에서 주도권을 확보하기 위한 대규모 국가적 투자로 평가된다. 정부와 기업이 손을 맞잡은 민관 협력 형태로 추진된다. 천문학적 투자 규모는 한국 산업 정책의 무게중심이 AI 반도체로 이동하고 있음을 보여준다.
+
+🔍 시각 A: 세계적 AI 수요 폭증 국면에서 대규모 선제 투자는 한국 반도체 산업의 초격차를 굳히는 발판이 될 수 있다. 민관이 합심한 전략적 투자로 양질의 일자리와 미래 성장 동력 확보가 기대된다.
+
+🔎 시각 B: 518조원에 달하는 투자가 특정 산업과 대기업에 집중되면 경제 편중과 재정 부담이라는 후폭풍을 낳을 수 있다. 수요 전망이 빗나갈 경우 대규모 설비가 과잉투자로 전락할 위험도 상존한다.
+
+---
 
 ## 💰 경제
 
-1. **[The stock market rally that’s making some people rich and everyone else miserable](https://edition.cnn.com/2026/06/29/business/stock-market-economy)**
-   미국의 주식 시장이 대규모로 상승하며 일부 사람들에게는 부를 가져다주고 있지만, 다른 많은 이들에게는 고통을 안기고 있습니다. 상위 20%의 소득자들이 소비의 대부분을 차지하고 있는 현상이 심화되고 있습니다.
-   🔍 **시각 A**: 이는 경제적 불균형을 시정하는 정책 추진의 계기가 될 수 있으며, 더 많은 사람에게 기회가 제공될 수 있습니다.  
-   🔎 **시각 B**: 그러나 이러한 부의 집중은 사회적 갈등을 초래할 수 있으며, 부정적인 감정을 불러일으킬 수 있습니다.
+**1. [일부만 부유하게, 나머지는 비참하게…미국을 떠받치는 증시 랠리의 그늘](https://edition.cnn.com/2026/06/29/business/stock-market-economy)**
 
-2. **[XiaoZhi Weekly News | Seer Robotics Officially Lists on HKEX; Galaxy General's Galbot S1 Joins CATL Workforce](https://autonews.gasgoo.com/articles/icv/xiaozhi-weekly-news-seer-robotics-officially-lists-on-hkex-galaxy-generals-galbot-s1-joins-catl-workforce-2071589351476473857)**
-   Seer Robotics가 홍콩 증권거래소에 상장되었으며, 이는 로봇 기술이 주목받고 있는 현재의 추세를 반영합니다.
-   🔍 **시각 A**: 산업 혁신과 같은 긍정적인 변화를 이끌어낼 가능성이 높아, 많은 투자자를 유치할 것입니다.  
-   🔎 **시각 B**: 그러나 기술 기업의 상장은 과도한 기대를 불러일으켜, 투자자들에게 피해를 줄 수 있는 위험 요소가 될 수 있습니다.
+미국 경제의 명암을 동시에 떠받치는 것은 다름 아닌 놀라운 증시 랠리라는 분석이 나왔다. 댈러스 연방준비은행에 따르면 상위 20% 고소득층이 미국 소비 지출의 57%를 차지하며, 미국 전체 주택 가치의 절반 이상도 이들이 보유하고 있다. 반면 하위 계층의 자산 비중은 극히 미미해 양극화가 심화되고 있다. 만약 이 랠리가 식으면 경제 전체가 상당한 충격을 받을 수 있다는 경고가 제기된다.
+
+🔍 시각 A: 강한 증시는 자산 효과를 통해 소비를 떠받치며 경기 둔화를 막는 완충 역할을 한다. 시장이 견조하게 유지되는 한 미국 경제의 성장 모멘텀도 이어질 수 있다.
+
+🔎 시각 B: 성장의 과실이 상위 계층에 집중되는 구조는 양극화를 고착화하고 사회적 불만을 키운다. 소수의 자산 가격에 경제 전반이 좌우되는 모델은 랠리가 꺾일 때 위험을 한꺼번에 노출시킨다.
+
+**2. [반도체 쉬자 성장주가 뛰었다…코스닥 8% 급등 '순환매 장세'](https://news.google.com/rss/articles/CBMiZEFVX3lxTE5BdVk4M1BZWGtnWTZpbWcyWlhXWHZBaGNYTzlyZnJqdW5LektzLTFSRV9aa1ViTE9aVnZ5eXVQdVpkdUZ1dWw2d0tpa1VCV2N5cHBLemxTdVN4a0ZTanFRRXJsX03SAWhBVV95cUxNelY1QloyT1JUUWUyNzl2NE9jbDFpcWhLVG9yandpZTA2bGVaS0ZxNDVWQ0xQZTVsMkQyMVV1RTN4ajRiUktsTWJLUk1JTldfdU5UTUJkQ3ZDRWEzRGhEX0YyYUZ3TnVXNA?oc=5)**
+
+국내 증시에서 그간 상승을 주도하던 반도체주가 숨을 고르는 사이 성장주가 강하게 반등하며 코스닥 지수가 8% 가까이 급등했다. 주도주가 바뀌며 자금이 업종 간 이동하는 전형적인 '순환매 장세'가 펼쳐졌다는 분석이다. 특정 업종에 쏠렸던 매수세가 분산되면서 시장 전반에 온기가 퍼졌다. 다만 급등 이후 변동성 확대 가능성에 대한 경계심도 함께 커지고 있다.
+
+🔍 시각 A: 주도주가 교체되며 자금이 폭넓게 순환하는 것은 시장 체력이 한쪽에 치우치지 않았다는 긍정적 신호다. 성장주로의 온기 확산은 증시의 저변을 넓히는 효과를 낸다.
+
+🔎 시각 B: 단기간 8% 급등은 펀더멘털보다 수급에 기댄 변동성 장세일 가능성이 크다. 순환매의 끝물에서 뒤늦게 진입한 투자자들이 손실을 떠안는 패턴이 반복될 수 있다.
+
+**3. [스페이스X, 오늘 증시 데뷔…사상 최대 규모](https://news.google.com/rss/articles/CBMiUkFVX3lxTE5Cc3BKMzBBdElrRlhSeDNUY0hVNmJYa09LcnRpLWMzX2pReHRSY0c5bXNrY0VDR0QwNDdWLW5TQUxzQm9uSWZmUTBETXBsZXo0amfSAVNBVV95cUxPaU9WSUh3Tm42amVEd195WXdrQllKckJmVDk3dHREN0s5SWFOa3ZQUHZPWWp2YzFjY0czYW5nYnJhQnp4UjV5SnVVR0xrcFhwRHl5bw?oc=5)**
+
+일론 머스크가 이끄는 우주기업 스페이스X가 사상 최대 규모로 증시에 데뷔한다. 이번 상장은 나스닥-100 지수 편입과 맞물려 시장의 비상한 관심을 받고 있으며, 관련 종목의 주가가 강하게 반응했다. 우주 산업에 대한 투자 열기가 자본시장 전면으로 확산되는 신호로 읽힌다. 역대급 공모 규모는 신성장 산업에 대한 시장의 기대를 단적으로 보여준다.
+
+🔍 시각 A: 우주 산업 선도 기업의 대규모 상장은 미래 기술 분야로 자금이 유입되는 촉매가 될 수 있다. 혁신 기업의 자본 조달 통로가 넓어지면 산업 생태계 전반이 활력을 얻는다.
+
+🔎 시각 B: 사상 최대 규모라는 화려한 수식어 뒤에는 고평가 논란과 거품 우려가 따라붙는다. 수익성 검증이 충분치 않은 단계에서의 과열된 기대는 상장 후 급격한 조정으로 이어질 수 있다.
+
+---
 
 ## 👥 사회
 
-1. **[‘Utterly baffled’: President calls for investigation after South Korea’s dismal World Cup](https://www.nbcnews.com/sports/soccer/south-korea-president-investigation-world-cup-coach-resigns-rcna352181)**
-   한국의 월드컵 성적이 좋지 않자, 대통령이 조사를 촉구하고 감독이 사임하는 사태가 발생했습니다. 이로 인해 사회 전반에 대한 논의가 활발하게 이어지고 있습니다.
-   🔍 **시각 A**: 이는 한국 축구가 전반적인 투자의 필요성을 인식하는 계기가 될 수 있으며, 팬들의 관심을 높일 수 있습니다.  
-   🔎 **시각 B**: 하지만 이러한 정치적 압박이 축구계의 자율성을 침해할 위험이 존재합니다.
+**1. [혐오사회로 흐르는 한국, 언론과 소수자 '연결'이 필요하다](https://news.google.com/rss/articles/CBMicEFVX3lxTE8wVHRiR1RIWXZkVUwxaVh0Tks0Tm9YNzlxMmM4SFloM29vUV9LV2JmSlpBTDNJcHBkbzBVQ202S0RfanFjTGlWakhlaWxKY0QwaWl2TjVMZW1fV2xRNXUzZ1QzcktkWXlmcldTcGUyVnQ?oc=5)**
 
-2. **[South Korea leaves World Cup in turmoil as early exit prompts fierce criticism from president](https://www.bozemandailychronicle.com/ap_news/sports/south-korea-leaves-world-cup-in-turmoil-as-early-exit-prompts-fierce-criticism-from-president/article_89f1350a-d221-5094-a842-b0c64c440f7e.html)**
-   한국이 월드컵에서 조기 탈락하면서 대통령의 강한 비판이 이어지고 있습니다. 이는 대중의 반응과 연계되어 사회적 긴장감을 증대시키고 있습니다.
-   🔍 **시각 A**: 이를 통해 사회 전반에 대한 관심이 높아질 수 있으며, 스포츠 발전을 위한 새로운 기회를 모색할 수 있습니다.  
-   🔎 **시각 B**: 하지만 부정적인 여론이 강해질 경우, 축구계에 대한 불신과 갈등이 심화될 수 있습니다.
+한국 사회 곳곳에서 혐오 정서가 확산되는 가운데, 언론과 소수자를 잇는 '연결'의 역할이 절실하다는 진단이 제기됐다. 분열과 갈등이 일상화되는 흐름 속에서 미디어가 사회적 약자의 목소리를 매개하는 책임을 다해야 한다는 지적이다. 혐오 표현이 일상화될수록 공동체의 신뢰 자본이 빠르게 잠식된다는 우려가 깔려 있다. 언론의 보도 태도와 의제 설정이 사회 통합의 향방을 좌우한다는 점이 강조된다.
+
+🔍 시각 A: 혐오 확산을 사회적 의제로 끌어올려 언론의 책임을 환기하는 것은 건강한 공론장을 위한 중요한 발걸음이다. 소수자와의 연결을 모색하는 논의는 공동체 회복의 토대가 된다.
+
+🔎 시각 B: 혐오 문제를 언론의 역할만으로 환원하면 근본적 사회·경제적 원인을 놓칠 수 있다. 담론 차원의 제언에 그칠 경우 실질적 제도 개선으로 이어지지 못한 채 구호에 머물 위험이 있다.
+
+**2. ['용지 부족' 잠실7동 제2투표소, 오늘 밤 10시까지 투표 연장](https://news.google.com/rss/articles/CBMia0FVX3lxTE1mM3gzWjZjSk9Za3Q5Y2swWlY2LVdHMWIyWnhxNFpRUmgyQVRNcTVGNEZxbnZFS3I0c1gySDBkd1dHWEJiNUtrQzlqcXBVeXEtX3B5dng2Q0FObWFPRTVnMmR2eW1ESGh2X2tZ?oc=5)**
+
+서울 잠실7동 제2투표소에서 투표용지 부족 사태가 발생해 투표가 밤 10시까지 연장되는 일이 벌어졌다. 유권자들이 몰리는 가운데 용지 수급에 차질이 빚어지면서 일부 주민이 투표에 불편을 겪었다. 선거 관리 당국은 연장 조치로 미처 투표하지 못한 유권자들의 참정권을 보장하려 했다. 기본적인 선거 인프라 관리의 허점이 드러났다는 지적이 나온다.
+
+🔍 시각 A: 용지 부족이라는 돌발 상황에서도 투표 시간을 연장해 유권자의 참정권을 끝까지 보장한 것은 적절한 대응이었다. 현장의 유연한 조치가 시민의 권리를 지켜냈다.
+
+🔎 시각 B: 투표용지 부족은 사전에 충분히 예방할 수 있었던 행정 관리 부실의 결과다. 선거의 기본 인프라조차 안정적으로 운영하지 못한 점은 선거 관리의 신뢰성에 의문을 남긴다.
+
+---
 
 ## 🚨 사건사고
 
-1. **['내란 가담·김건희 수사청탁' 박성재 오늘 1심 선고](https://news.google.com/rss/articles/CBMib0FVX3lxTE1kZng5RFFBVEoxLTFZVmU1N1A5aEk1Ykpib0NHdnpINlB2YWJiUnUyR3Y0Q1paekUtWWVWcElWdXF2S25XNnh3RzV2eDZ4ckxOUXRud2dNYkpya0JLYkVmd2xNMjFjQ3lBUE5PTng1QdIBc0FVX3lxTE92SHNqanF0bG9XZzA1aDcwYi1qazJ4cXBDTmU3MmFhY2IwN21oM1JxelVFZC1vbkd3S1lYakxpdkxhRlg4cEN1SU9DV0xQcEpzWTd0dmZUZXBYcnFpSXl3b3BMbW9sSUZLMVpPa09vdU9FV2c)**
-   박성재의 1심 선고가 오늘 진행됩니다. 이는 정치적, 사회적 긴장을 불러일으키고 있으며, 각계의 관심과 논의가 이어지고 있습니다.
-   🔍 **시각 A**: 공정한 재판을 통해 사회 정의가 실현되는 계기가 될 것입니다.  
-   🔎 **시각 B**: 법적 절차가 정치적 영향으로 인해 왜곡될 위험이 있으며, 결과에 따른 여론이 사회 분열을 초래할 수 있습니다.
+**1. ['내란 가담·김건희 수사청탁' 박성재 오늘 1심 선고](https://news.google.com/rss/articles/CBMib0FVX3lxTE1kZng5RFFBVEoxLTFZVmU1N1A5aEk1Ykpib0NHdnpINlB2YWJiUnUyR3Y0Q1paekUtWWVWcElWdXF2S25XNnh3RzV2eDZ4ckxOUXRud2dNYkpya0JLYkVmd2xNMjFjQ3lBUE5PTng1QdIBc0FVX3lxTE92SHNqanF0bG9XZzA1aDcwYi1qazJ4cXBDTmU3MmFhY2IwN21oM1JxelVFZC1vbkd3S1lYakxpdkxhRlg4cEN1SU9DV0xQcEpzWTd0dmZUZXBYcnFpSXl3b3BMbW9sSUZLMVpPa09vdU9FV2c?oc=5)**
+
+내란 가담 및 김건희 관련 수사 청탁 의혹을 받는 박성재 전 법무부 장관에 대한 1심 선고가 오늘 내려진다. 그동안 법정에서는 혐의의 사실관계와 책임 범위를 두고 검찰과 변호인 측이 첨예하게 맞서 왔다. 이번 선고는 일련의 내란 관련 사건 처리 흐름에서 중대한 분기점으로 주목받고 있다. 사법부의 판단이 향후 유사 사건들에 미칠 파장에도 이목이 쏠린다.
+
+🔍 시각 A: 권력형 의혹에 대한 사법부의 엄정한 판단은 법치주의 확립과 책임 규명의 중요한 이정표가 된다. 재판을 통한 진실 규명은 사회적 의혹 해소에 기여할 수 있다.
+
+🔎 시각 B: 정치적으로 민감한 사안인 만큼 선고 결과를 둘러싸고 진영 간 해석 논란이 불가피하다. 1심 판단만으로 사안이 종결되지 않고 항소심까지 갈등이 장기화될 가능성도 크다.
 
 ---
 
