@@ -11,58 +11,128 @@ tags:
 ---
 
 ## 🤖 AI
-**1. [Tricking AI By Simply Switching Which Spoken Language You Use In Your Prompts](https://www.forbes.com/sites/lanceeliot/2026/07/12/tricking-ai-by-simply-switching-which-spoken-language-you-use-in-your-prompts/)**  
-AI 연구자들은 이제 다국어를 사용하는 프롬프트에서 AI를 속일 수 있는 가능성에 대해 논의하고 있다. 이는 AI 모델들이 다양한 언어에서 점점 더 강력해짐에 따라 이러한 방식의 유효성이 감소하고 있음을 보여준다. 이러한 '다국어 안전성 저하'는 AI 개발자들이 AI의 신뢰성을 더욱 높이기 위해 해결해야 할 중요한 과제로 떠오르고 있다.  
-🔍 시각 A: 이 연구는 AI 모델의 다국어 처리 능력을 향상시키고, 다양한 사용자의 언어를 고려한 보다 진보된 AI 시스템 개발 가능성을 제시한다.  
-🔎 시각 B: 그러나 이러한 발견은 AI의 안전성과 신뢰성을 위한 더 많은 심층 연구가 필요하다는 경고 신호로 해석될 수 있으며, 사용자에게 혼란을 초래할 가능성도 있다.
 
-**2. [Overcoming AI’s ‘Storytelling’ Problem: Lessons From The Music Industry](https://www.forbes.com/sites/joemckendrick/2026/07/12/overcoming-ais-storytelling-problem-lessons-from-the-music-industry/)**  
-뮤지션 will.i.am은 AI가 인간성과 공감을 기반으로 한 새로운 산업을 창출할 것이라고 강조하며, AI를 통해 크리에이티브 재능이 위협받는 것이 아니라 오히려 '스토리텔링 문제' 해결이 필요하다고 주장했다. 이는 AI가 예술가로 인정받지 못하는 문제를 해결해야 한다는 점을 시사한다.  
-🔍 시각 A: 이러한 주장은 AI가 인간의 감성을 이해하고 창의적인 작업을 지원할 수 있는 잠재력을 강조하며, 미래의 기술 발전에 대한 희망적인 시각을 제공한다.  
-🔎 시각 B: 반면, AI가 예술을 대체하는 것을 우려하는 목소리도 있으며, 이는 창작의 본질적인 가치에 도전하는 요소로 작용할 수 있다.
+**1. [ChatGPT의 선택의 역설 - GPT-5.6 모델 3종 출시](https://www.axios.com/2026/07/12/openai-chatgpt-work-luna-terra-sol)**
 
-## 🏗️ 스마트건설
-오늘은 주요 국내 뉴스가 없습니다.
+OpenAI가 지난주 GPT-5.6 계열의 신규 모델 3종을 출시하고 새로운 앱과 함께 다양한 추론 레벨, 구독 티어를 선보였다. 사용자들은 이제 모델 이름, 추론 강도, 요금제의 여러 조합 중에서 자신의 업무와 예산에 맞는 "골디락스" 설정을 스스로 찾아야 하는 상황에 놓였다. Axios는 진화하는 AI 도구가 비개발자도 더 빠르고 저렴하게 높은 품질의 결과물을 만들 수 있게 해주지만, 적절한 설정을 찾는 것 자체가 새로운 진입 장벽이 되고 있다고 지적했다. 모델 라인업의 세분화는 AI 활용 능력의 격차를 더욱 벌릴 수 있다는 분석도 나온다.
+
+🔍 시각 A: 다양한 모델과 요금제 옵션은 사용자가 자신의 용도에 맞게 비용과 성능을 최적화할 수 있는 선택권을 넓혀준다. 경량 작업에는 저렴한 모델을, 복잡한 추론에는 고성능 모델을 쓰는 유연성은 AI 대중화를 가속할 수 있다.
+
+🔎 시각 B: 복잡한 모델명과 티어 구조는 일반 사용자에게 혼란만 가중시키며, 결국 "무엇을 써야 할지 모르는" 피로감으로 이어질 수 있다. 선택의 부담을 사용자에게 전가하는 방식은 AI 접근성 향상이라는 본래 취지와 어긋난다는 비판이 나온다.
+
+**2. [골드만삭스가 꼽은 중국 AI 모델 3선 - GLM-5.2 프론티어급 도약](https://www.cnbc.com/2026/07/12/goldman-sachs-picks-its-favorite-chinese-ai-models.html)**
+
+골드만삭스가 중국 AI 모델 중 선호하는 3개를 선정해 발표했으며, 이 중 상장사는 단 한 곳뿐이다. 특히 오픈소스로 공개된 GLM-5.2 모델은 여러 지표에서 Anthropic의 Fable 5에 필적하는 성능을 보이며 최근 큰 주목을 받고 있다. 골드만삭스는 GLM-5.2가 프론티어급에 근접한 성능으로 중국 내 기업 시장과 글로벌 중소기업 시장에서 빠르게 채택되고 있으며, 개발자들 사이에서 광범위하게 사용되고 있다고 평가했다. 중국 AI 모델들이 미국 선두 기업과의 격차를 빠르게 좁히고 있다는 신호로 해석된다.
+
+🔍 시각 A: 오픈소스 기반의 고성능 모델 등장은 AI 기술의 접근 비용을 낮추고 글로벌 경쟁을 촉진해 전체 생태계 발전에 기여한다. 특정 국가나 기업의 독점 구도가 깨지면 혁신 속도는 더 빨라질 수 있다.
+
+🔎 시각 B: 중국 AI 모델의 급부상은 미중 기술 패권 경쟁을 격화시키고, 데이터 보안과 검열 문제에 대한 우려도 함께 키운다. 오픈소스라는 형식이 지정학적 리스크와 안전성 검증 부족 문제를 가려서는 안 된다는 지적이 나온다.
 
 ## 🌍 세계
-**1. [Escalating tensions between the US and Iran as ceasefire collapses](https://www.centraloregondaily.com/news/nation-world/escalating-tensions-between-the-us-and-iran-as-ceasefire-collapses/video_4067bfaf-6353-5c8c-8fd4-1686151f2c84.html)**  
-미국과 이란 간의 불안정한 휴전이 깨지면서 군사적 긴장이 다시 고조되고 있다. 이란 전쟁은 지역과 세계 경제에 심각한 영향을 미칠 수 있는 상황으로, 유엔은 군사 충돌을 피할 것을 촉구했다.  
-🔍 시각 A: 이러한 상황은 국제 사회가 더 많은 외교적 노력을 통해 갈등을 해결하고 평화를 유지해야 한다는 긍정적인 요청을 상기시킨다.  
-🔎 시각 B: 그러나 이러한 경고에도 불구하고 군사적 충돌의 위험이 여전히 존재하며, 실제로 전쟁으로 이어질 경우 세계 경제에 중대한 부정적인 영향을 미칠 수 있다.
 
-**2. [Iconic NY museum affected by Legionnaires' outbreak](https://www.modernghana.com/amp/videonews/680872)**  
-세계적으로 유명한 구겐하임 미술관에서 레지오넬라균 감염 사건이 발생하여 몇 개의 건물에서 박테리아가 검출되었다. 이는 관람객의 건강과 안전에 대한 우려를 불러일으키고 있다.  
-🔍 시각 A: 이 사건을 통해 미술관 측은 건강 안전 조치를 강화할 필요성이 있음을 인식하게 되었으며, 이를 계기로 더 철저한 예방 조치가 마련될 것이다.  
-🔎 시각 B: 반면, 이처럼 유명한 장소에서 발생한 감염 사건은 관광업에 부정적인 영향을 미치고, 관람객의 방문을 저하시키는 결과를 초래할 수 있다.
+**1. [미국-이란 휴전 붕괴, 긴장 고조](https://www.centraloregondaily.com/news/nation-world/escalating-tensions-between-the-us-and-iran-as-ceasefire-collapses/video_4067bfaf-6353-5c8c-8fd4-1686151f2c84.html)**
+
+미국과 이란 간 휴전이 붕괴되면서 양국 간 군사적 긴장이 다시 급격히 고조되고 있다. 유엔 안토니우 구테흐스 사무총장은 전면전으로 확대될 경우 중동 지역은 물론 세계 경제에 재앙적 결과를 초래할 수 있다며 즉각적인 긴장 완화를 촉구했다. 이번 충돌은 미국과 이스라엘의 대이란 합동 작전 이후 시작된 2026년 이란 전쟁의 연장선에 있으며, 국제사회의 중재 노력에도 사태 수습의 실마리가 보이지 않고 있다. 확전 우려로 국제 유가와 금융시장도 크게 출렁이고 있다.
+
+🔍 시각 A: 국제사회와 유엔이 적극적으로 중재에 나서고 있어 외교적 해법의 가능성은 여전히 열려 있다. 위기가 최고조에 달했을 때 오히려 극적인 협상 타결이 이뤄진 역사적 선례도 적지 않다.
+
+🔎 시각 B: 휴전이 한 차례 붕괴된 만큼 양측의 신뢰 기반이 무너져 재협상은 훨씬 어려워졌다. 장기화될 경우 에너지 공급망 충격과 세계 경제 침체로 이어질 수 있으며, 그 부담은 결국 각국의 서민 경제가 떠안게 된다.
+
+**2. ["세계 공급망 전체 위기"...외신 '반도체 거인 노조 파업' 긴급 속보](https://news.google.com/rss/articles/CBMiXkFVX3lxTE9kQ1pNbGIxbThmd01RRVJWNklJRW5OUXdtRDN1Y255WGJrcHRBTTgzX25jbGhBdzBJVzlkY1J1ZHpvWnJmd2NlSDlYdEJXSkd2M1J4UC00RnF2Z3U3MEE?oc=5)**
+
+글로벌 반도체 대기업에서 발생한 노조 파업 소식이 외신을 통해 긴급 타전되며 세계 공급망 전체가 위기에 빠질 수 있다는 경고가 나오고 있다. 반도체는 스마트폰, 자동차, AI 데이터센터까지 거의 모든 산업의 핵심 부품인 만큼, 생산 차질이 장기화되면 파급 효과가 전방위로 확산될 수 있다. AI 인프라 투자 붐으로 반도체 수요가 폭증한 시점에 벌어진 파업이라 시장의 긴장감이 더욱 크다. 각국 정부와 주요 고객사들도 사태 추이를 예의주시하고 있다.
+
+🔍 시각 A: 이번 파업은 반도체 호황의 과실이 노동자에게도 공정하게 분배되어야 한다는 목소리를 국제적으로 환기시키는 계기가 될 수 있다. 노사 합의가 원만히 이뤄지면 업계 전반의 근로 조건 개선으로 이어질 수 있다.
+
+🔎 시각 B: 파업 장기화 시 반도체 가격 급등과 공급 차질로 전자제품, 자동차 등 연관 산업 전체가 타격을 입을 수 있다. AI 붐으로 가뜩이나 빠듯한 공급 상황에서 소비자 가격 인상으로 전가될 가능성이 크다.
+
+**3. [국제유가 다시 급등, 브렌트 4%↑ 배럴당 103.87달러](https://news.google.com/rss/articles/CBMiWEFVX3lxTE9xb1ducDl5Tlc4Nzk5WWtCX3lLSnVEY1BXZVhzcjkza0Z3TnliWEZESHJteGZvOG54clNnS2RtTmFrMy1QUXRNbzE5RXNhSU1TTmZIajhKZEI?oc=5)**
+
+국제유가가 다시 급등하며 브렌트유가 4% 오른 배럴당 103.87달러를 기록했다. 미국-이란 휴전 붕괴에 따른 중동 정세 불안이 유가를 끌어올린 핵심 요인으로 지목된다. 유가 100달러 선 재돌파는 글로벌 인플레이션 재점화 우려를 키우며 각국 중앙은행의 통화정책 셈법을 복잡하게 만들고 있다. 에너지 수입 의존도가 높은 한국 경제에도 무역수지 악화와 물가 상승 압력이라는 이중 부담이 예상된다.
+
+🔍 시각 A: 유가 상승은 신재생에너지 전환과 에너지 효율화 투자를 가속하는 촉매가 될 수 있다. 에너지 안보의 중요성이 부각되면서 공급망 다변화와 자립도 제고 노력도 힘을 받을 것이다.
+
+🔎 시각 B: 고유가는 물류비, 원자재 가격, 전기요금까지 연쇄적으로 밀어 올려 서민 생활 부담을 직접적으로 가중시킨다. 인플레이션 재발로 금리 인하 기대가 후퇴하면 경기 회복에도 찬물을 끼얹을 수 있다.
 
 ## 🏛️ 정치
-**1. [김민석 ‘보완수사권 폐지’에 조선일보 “정치제물된 한국의 형사사법”](https://news.google.com/rss/articles/CBMicEFVX3lxTE82NVY4dWROQ21hMnB3Z3pieVJoc2o1WTVVNUNQaXBFcEVwYTFIclRvQS1NQ2k4b3JvSFhuRTl5Z1hBbGxqLXBnNHRJLXduaE5IOGFPXzM4STZGTjRVTHNDem1MTm5RSFFpcDFncEk1bFI?oc=5)**  
-한국의 정치 상황에서 김민석 의원이 보완수사권 폐지를 주장했다. 이와 관련하여 조선일보는 이를 정치적 목적에 의해 조작된 형사사법 제도의 후퇴라고 논평하였다.  
-🔍 시각 A: 이 주장은 법률 체계가 더 투명해지고, 상황에 따라 보다 유연한 반응을 보일 수 있는 기회를 만든다.  
-🔎 시각 B: 반면, 이러한 변화가 범죄 예방과 범죄 사실 규명의 효율성을 저하시키는 결과를 낳을 수 있으며, 사회 안전에 부정적인 영향을 미칠 수 있다.
+
+**1. [한국갤럽 대통령 지지율 53%·민주당 전당대회…오늘의 키워드로 본 대한민국](https://news.google.com/rss/articles/CBMibkFVX3lxTE8zbVg5MGN4Y0ZiZEM5RlhDUHRUb2VBeDJDbXpIS3AxVlkwV1JMR1Zxc0JlRXcwNkVHT01Ra0Mwek1tMUJiQmFnemIzNnh2NVM3UGlkUlV6VjlXVFd0OXlDSkNsS2Nzc0NWb1U4UnRR0gFyQVVfeXFMUEVtb3M0cEswQWVybnB1dExQR0w4Z1QwRTBNWWxNa1JIUDdHTzB0YmdyamFiV1FHYmplTXdMd0RMajl4Zm5ZQmhoR05rRXdSSGpZZFR0WjNGQl92SjhDd1lKcjhXWVEzd2JCeXplNFpZcHFR?oc=5)**
+
+한국갤럽 여론조사에서 대통령 국정 지지율이 53%를 기록하며 과반을 유지한 것으로 나타났다. 정치권에서는 더불어민주당 전당대회가 주요 이슈로 부상하며 차기 당권 경쟁 구도에 관심이 집중되고 있다. SK하이닉스의 나스닥 ADR 상장 등 경제 이슈와 맞물려 정부의 정책 성과에 대한 평가도 지지율에 반영된 것으로 분석된다. 전당대회 결과에 따라 향후 당정 관계와 정국 운영 방향에도 변화가 예상된다.
+
+🔍 시각 A: 과반을 웃도는 지지율은 정부가 주요 개혁 과제를 안정적으로 추진할 수 있는 동력이 된다. 여당 전당대회를 통한 지도부 재정비는 책임 정치를 구현하는 민주적 절차로 볼 수 있다.
+
+🔎 시각 B: 지지율은 유동적인 지표인 만큼 정책 성과보다 지지율 관리에 치중하는 국정 운영은 경계해야 한다. 전당대회가 계파 경쟁으로 흐르면 민생 입법이 뒷전으로 밀릴 수 있다는 우려도 있다.
+
+**2. [김민석 '보완수사권 폐지'에 조선일보 "정치제물된 한국의 형사사법"](https://news.google.com/rss/articles/CBMicEFVX3lxTE82NVY4dWROQ21hMnB3Z3pieVJoc2o1WTVVNUNQaXBFcEVwYTFIclRvQS1NQ2k4b3JvSFhuRTl5Z1hBbGxqLXBnNHRJLXduaE5IOGFPXzM4STZGTjRVTHNDem1MTm5RSFFpcDFncEk1bFI?oc=5)**
+
+김민석 총리가 언급한 검찰 보완수사권 폐지 방침을 두고 언론과 정치권의 공방이 가열되고 있다. 조선일보는 사설을 통해 "정치 제물이 된 한국의 형사사법"이라며 수사 체계 개편이 정치적 목적에 좌우되고 있다고 강하게 비판했다. 보완수사권 폐지는 검경 수사권 조정의 연장선에 있는 사안으로, 수사 공백과 사건 처리 지연에 대한 우려와 검찰 권한 분산이라는 개혁 명분이 맞서고 있다. 형사사법 체계의 근간을 바꾸는 사안인 만큼 향후 입법 과정에서 격론이 예상된다.
+
+🔍 시각 A: 검찰 권한의 분산은 수사기관 간 견제와 균형을 강화해 권력기관 개혁을 완성하는 수순으로 볼 수 있다. 오랜 기간 논의된 개혁 과제를 일관되게 추진하는 것은 제도적 정합성 측면에서 의미가 있다.
+
+🔎 시각 B: 보완수사권이 폐지되면 부실 수사를 바로잡을 장치가 사라져 사건 처리 지연과 수사 공백의 피해가 국민에게 돌아갈 수 있다. 충분한 공론화와 보완책 없이 속도전으로 밀어붙일 경우 형사사법 시스템 전반의 혼란이 우려된다.
 
 ## 💰 경제
-**1. [UN chief urges end to US-Iran conflict amid escalating tensions](https://cryptobriefing.com/un-chief-urges-end-to-us-iran-conflict-amid-escalating-tensions/)**  
-유엔 사무총장은 미국과 이란 간의 군사적 충돌을 중단할 것을 촉구하고, 전면전이 일어날 경우 지역 및 글로벌 경제에 미칠 심각한 결과에 대해 경고했다.  
-🔍 시각 A: 이러한 외침은 국제 사회가 긴장을 완화하고 평화로운 해결을 위해 협력해야 하는 필요성을 강조한다.  
-🔎 시각 B: 하지만 군사적 갈등이 지속될 경우 자원 가격의 급등과 같은 경제적 충격을 초래할 우려가 있으며, 이는 세계 경제에 큰 위협이 될 수 있다.
 
-**2. [Is It Too Late to Buy Eli Lilly Stock? Here's What $1,000 Invested Today Could Be Worth in 10 Years.](https://www.aol.com/articles/too-buy-eli-lilly-stock-123000000.html)**  
-Eli Lilly의 비만 치료제로 인해 지속적인 성장 가능성이 예상된다. 투자자들은 현재 주식에 투자할지를 고민하는 한편, 이 회사의 미래 잠재력에 대해 희망적인 전망을 내놓고 있다.  
-🔍 시각 A: Eli Lilly는 현재의 성장세로 인해 장기적인 투자품으로 좋은 포지션에 있으며, 이는 투자자에게 긍정적인 영향을 줄 수 있다.  
-🔎 시각 B: 그러나 최신 연구나 시장의 변화에 따라 예상치 못한 변수로 주식 가치가 하락할 가능성 또한 존재한다.
+**1. [SK하이닉스, 오늘 나스닥 상장…국내 증시 영향은](https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1rT1JTMXJ0OFFJZ29WcnFhMkp5bmVFUDVRS2dydEdBc3ZXbEp0ajFYODQ0SVJ5MExsaWJEaFRGN1BQY1VJQV9PbnJrTEpSUHRCcGFqRHJkU0N1eW9tVlRlZnh1V3JrQ0k?oc=5)**
+
+SK하이닉스가 미국 나스닥에 ADR(주식예탁증서) 형태로 상장하며 글로벌 자본시장에 본격 데뷔한다. AI 메모리 반도체 수요 급증으로 실적이 고공행진하는 가운데 이뤄진 상장이라 글로벌 투자자들의 관심이 뜨겁다. 국내 증시에서는 이번 상장이 코리아 디스카운트 해소와 반도체 업종 재평가로 이어질지, 아니면 국내 거래 물량 분산으로 작용할지를 두고 전망이 엇갈린다. 상장을 앞두고 국내 반도체 관련주에도 온기가 확산되며 코스닥이 5%대 급반등하는 등 시장이 민감하게 반응하고 있다.
+
+🔍 시각 A: 나스닥 상장은 글로벌 투자자 접근성을 높여 기업 가치 재평가와 자금 조달 여력 확대로 이어질 수 있다. 한국 대표 기술기업의 미국 증시 진출은 K-반도체의 위상을 높이고 국내 증시 전반의 신뢰도 제고에도 긍정적이다.
+
+🔎 시각 B: 거래가 미국 시장으로 분산되면 국내 증시의 유동성과 대표성이 약화될 수 있다는 우려가 있다. 국내 자본시장의 매력도를 근본적으로 높이지 못하면 우량 기업의 해외 이탈이 반복되는 신호탄이 될 수 있다.
+
+**2. [SK하이닉스 ADR 앞두고 반도체 온기 확산…코스닥 5%대 급반등](https://news.google.com/rss/articles/CBMiZEFVX3lxTE9fcXRSeVY2dVNab2ZHbnMyMHJUTFFiZnVaOE41MW9hQWlYY05aUTJsaWxxZVpEUU1wS0hIbUdzblFTWFpTZVR2bDNDcjYtWGFYb0pUQl9nZ29ha1NEZFVDUFVZSGfSAWhBVV95cUxQREl0dWV3ZDJBSkxqbVQ2MlJyX05jVXJvYVU1eU5kMVdzN0NEMjlMbWJjcDg2MksxRHNsMUJyRjNERDE2bVItZEkwVmtraV8yOW12WEl4T0pnUVJYSDNJamJURjBrTnZ0ag?oc=5)**
+
+SK하이닉스의 나스닥 ADR 상장을 앞두고 반도체 업종 전반에 투자 심리가 개선되며 코스닥 지수가 5%대 급반등했다. 반도체 소재·부품·장비 관련 중소형주에 매수세가 몰리며 지수 상승을 견인했다. 최근 중동발 불안과 유가 급등으로 변동성이 커진 가운데 나온 반등이라 시장의 안도감이 크지만, 대외 변수에 따라 언제든 되돌림이 나타날 수 있다는 신중론도 함께 나온다. 전문가들은 반도체 슈퍼사이클 기대와 지정학적 리스크가 당분간 시장을 오가게 할 것으로 보고 있다.
+
+🔍 시각 A: 반도체 생태계 전반으로 온기가 확산되는 것은 국내 소부장 기업들의 실적 개선 기대를 반영한 건강한 흐름이다. 대형주 호재가 중소형주까지 낙수효과를 내는 것은 시장 저변 확대에 긍정적이다.
+
+🔎 시각 B: 단기 급등은 기대감이 앞선 과열일 수 있으며, 유가 급등과 중동 불안 같은 대외 악재가 여전한 상황에서 추격 매수는 위험할 수 있다. 실적이 뒷받침되지 않는 테마성 상승은 변동성 확대의 빌미가 되기 쉽다.
+
+**3. [일라이 릴리 주식, 지금 사도 늦지 않았나…10년 뒤 1,000달러의 가치는](https://www.aol.com/articles/too-buy-eli-lilly-stock-123000000.html)**
+
+비만 치료제 시장의 강자 일라이 릴리 주식이 최근 3년간 160% 급등한 가운데, 지금 투자해도 늦지 않았는지에 대한 분석이 나왔다. 비만 치료제 산업은 향후 10년간 지속될 성장 동력으로 평가되며, 일라이 릴리는 이 시장의 선두 주자로 꼽힌다. 글로벌 비만 인구 증가와 치료제 적응증 확대가 장기 성장 스토리를 뒷받침한다는 분석이다. 다만 이미 높아진 밸류에이션과 경쟁 심화는 변수로 지목된다.
+
+🔍 시각 A: 비만 치료제는 당뇨, 심혈관 질환 등으로 적응증이 계속 확장되고 있어 성장 여력이 여전히 크다. 제약 산업의 혁신이 인류 건강 개선과 투자 수익을 동시에 창출하는 대표 사례로 볼 수 있다.
+
+🔎 시각 B: 3년간 160% 오른 주가에는 이미 장밋빛 전망이 상당 부분 반영되어 있어 고점 매수 위험이 있다. 경쟁사의 신약 출시, 약가 인하 압력, 특허 만료 등 리스크를 간과한 낙관론은 경계해야 한다.
 
 ## 👥 사회
-**1. [이슈 오늘｜국내 사설의 오늘, 선거는 뜨겁고 시장은 불안했다](https://news.google.com/rss/articles/CBMiaEFVX3lxTE12dTVLUkpMSlZGZEdwbExTVzdJTlVwNzBkMzdRU1g0Nnk0T3QySW4wN2hKa2xkclNYNUhLUTlzVjNEam9jZHNXdmN0T3NRTWhrX205dlYxTzR6czZpYVItcFdFZS1Kdmc3?oc=5)**  
-최근 한국 사회에서 선거가 중요한 이슈로 부상하고, 그로 인해 경제 시장이 불안정한 모습을 보이고 있다. 여러 매체의 논평을 통해 이러한 상황이 심도 깊은 논의가 필요함을 시사하고 있다.  
-🔍 시각 A: 이러한 상황은 민주주의 의혹을 높이는 긍정적인 발전으로 볼 수 있으며, 활성화된 정치적 참여가 사회적 발전에 기여할 수 있다.  
-🔎 시각 B: 그러나 정치적 불안정이 경제에 미치는 부정적인 영향은 과소평가할 수 없으며, 실제 경제적 위기로 이어지는 결과를 초래할 수 있다.
+
+**1. [오늘의 핫뉴스 7…코스피 9000·청년정책·월드컵까지 대한민국 흔든 이슈 총정리](https://news.google.com/rss/articles/CBMibkFVX3lxTE02VHdLRkg2NTFoN0FXNGdmVlB4enJINXFxbUVaamhObF9mZXlJVjM3VVU0UjJ2WW9mVU4wLVBMRnozWHIxakJpX3plYW5FRzBuQ3lEWVgzdXpCRzNBdFBXbXdaWFJ1b2hOZ3NLNlFR0gFyQVVfeXFMTnE4blpQdkFRekdMX2JRc1NDNlRDZEpTb2NiN3c4NVBvR0FrS09CcFJiOU4zTk1BX3NLOUM5Tk5CajRvaEg0RnZKZngwWEQ1ckhERGMyTnZPNzl1S2Z0MUVMOWlJc2NXWXFXZ3lsWDRxQUdB?oc=5)**
+
+코스피 9000 시대 진입, 정부의 청년정책 발표, 월드컵 열기까지 대한민국을 뒤흔든 주요 이슈들이 한꺼번에 쏟아진 하루였다. 증시 활황으로 자산시장에 대한 국민적 관심이 높아진 가운데, 청년층을 겨냥한 정책 지원 방안도 사회적 논의의 중심에 섰다. 월드컵 대표팀의 선전은 사회 전반에 활력을 불어넣으며 세대를 아우르는 공감대를 형성하고 있다. 경제·정책·스포츠가 맞물리며 사회 분위기 전반이 들썩이는 모습이다.
+
+🔍 시각 A: 증시 호황과 청년정책, 스포츠 이벤트가 어우러지며 사회 전반에 긍정적 에너지가 확산되고 있다. 특히 청년정책이 주요 의제로 다뤄지는 것은 미래 세대에 대한 사회적 관심이 높아졌다는 방증이다.
+
+🔎 시각 B: 자산시장 활황의 이면에는 자산 격차 확대와 소외 계층의 상대적 박탈감이 자리한다. 축제 분위기에 가려 주거비, 고용 불안 등 청년층의 구조적 문제가 일회성 정책으로 덮이는 것은 아닌지 따져봐야 한다.
+
+**2. [이슈 오늘｜국내 사설의 오늘, 선거는 뜨겁고 시장은 불안했다](https://news.google.com/rss/articles/CBMiaEFVX3lxTE12dTVLUkpMSlZGZEdwbExTVzdJTlVwNzBkMzdRU1g0Nnk0T3QySW4wN2hKa2xkclNYNUhLUTlzVjNEam9jZHNXdmN0T3NRTWhrX205dlYxTzR6czZpYVItcFdFZS1Kdmc3?oc=5)**
+
+주요 언론 사설들이 뜨거워지는 선거 정국과 불안정한 금융시장을 일제히 조명했다. 정치권의 경쟁이 본격화되면서 민생 현안보다 정쟁이 앞서는 것 아니냐는 우려가 사설 전반에 깔려 있다. 동시에 유가 급등과 대외 불확실성으로 출렁이는 시장 상황에 대한 정책 대응을 주문하는 목소리도 높았다. 언론들은 정치와 경제 양쪽 모두에서 안정적 리더십이 필요한 시점이라고 입을 모았다.
+
+🔍 시각 A: 다양한 사설이 선거와 경제 이슈를 균형 있게 짚는 것은 언론이 공론장 역할을 수행하고 있다는 긍정적 신호다. 유권자들이 여러 관점을 접하며 성숙한 판단을 내릴 수 있는 토대가 된다.
+
+🔎 시각 B: 선거철 사설은 진영 논리에 따라 같은 사안도 정반대로 해석하는 경향이 있어 독자의 혼란을 키울 수 있다. 시장 불안을 정치 공방의 소재로 소비하기보다 실질적 대안 제시에 집중해야 한다는 지적이 나온다.
 
 ## 🚨 사건사고
-**1. [Suspect sought in connection with shooting that injured young child on South Side](https://www.cbsnews.com/chicago/news/grand-boulevard-shooting-6-year-old/)**  
-시카고 남부에서 발생한 총격 사건에서 어린이가 다치는 사건이 발생하여, 경찰이 용의자에 대한 정보를 요청하고 있다. 이는 지역 사회에 큰 충격과 불안을 안기고 있다.  
-🔍 시각 A: 경찰의 빠른 대응과 지역 사회의 협력이 이루어진다면, 범죄 예방에 도움이 될 수 있으며 피해자의 안전을 보장할 수 있다.  
-🔎 시각 B: 그러나 이러한 사건이 빈번히 발생하는 현실은 지역 사회의 안전에 대한 심각한 경고이며, 더 나아가 범죄 예방을 위한 구조적 변화가 필요함을 시사한다.
+
+**1. ['음료 피습 자작극' 의혹 정이한 전 부산시장 후보, 오늘 구속 기로…경찰 "증거인멸 우려"](https://news.google.com/rss/articles/CBMic0FVX3lxTE8tczVEQTdQOENGUWhUd2hVaWhVZXlaZGhGNWFUaTlTcGIwOGZOM25XZ0hOTEpCRExCVFZydHBsMlRETGQ2RWM4TTFEN3o4Z2JhNC1GdDR6WF9hdlp0elJRdVlSUE1GTDZvTFpFQlRpM0JjRTg?oc=5)**
+
+'음료 피습 자작극' 의혹을 받는 정이한 전 부산시장 후보가 오늘 구속 갈림길에 선다. 경찰은 증거인멸 우려를 이유로 구속영장을 신청했으며, 법원의 영장실질심사 결과에 따라 신병 처리 방향이 결정된다. 선거 기간 발생한 피습 사건이 자작극이었다는 의혹이 사실로 드러날 경우 선거 공정성을 훼손한 중대 범죄로 다뤄질 전망이다. 정치인 관련 사건인 만큼 수사의 공정성과 신속성에 대한 국민적 관심이 집중되고 있다.
+
+🔍 시각 A: 경찰이 정치인 신분에 구애받지 않고 원칙대로 구속영장을 신청한 것은 법 앞의 평등을 보여주는 사례다. 철저한 수사를 통해 진상이 규명되면 선거 관련 자작극 범죄에 대한 경종을 울릴 수 있다.
+
+🔎 시각 B: 아직 법원의 판단이 나오지 않은 상황에서 여론이 유죄를 예단하는 것은 무죄추정 원칙에 어긋난다. 정치적 파장이 큰 사건일수록 수사 과정의 정보 유출과 여론재판을 경계해야 한다.
+
+**2. [충남 태안 32번 국도서 차량 치임사고 등 잇단 교통사고](https://news.google.com/rss/articles/CBMiWEFVX3lxTE4yWnNfOER2SUkyWXQzeHpFZkhvSXNqbDJKUTN3TTFJaVZzZ3F3dUFPUnhuUmJYSm1qV0d2MjZoZkJFWWptUE1wRXMwbUN4aGVLVUc1dDMzb07SAWhBVV95cUxONGg2c3ZIR1dPSUdPRmJvZkotaC1SY3hwM08wbW1zQUFXckJ6QzZCN2hFUklVVC1xb1U5Vm9KNHBvclNKYmxGVnpsTUlBYzJFZkRWb1djZ0NtNkZfalRrWTd1SlhkQ3NGSA?oc=5)**
+
+충남 태안군 32번 국도에서 보행자가 차량에 치이는 사고가 발생하는 등 전국에서 교통사고가 잇따랐다. 국도 구간은 차량 속도가 높고 보행자 보호 시설이 상대적으로 부족해 사고 위험이 큰 것으로 지적된다. 특히 여름 휴가철을 맞아 관광지 주변 도로의 통행량이 늘면서 교통사고 위험도 함께 높아지고 있다. 경찰은 정확한 사고 경위를 조사하는 한편 운전자와 보행자 모두의 주의를 당부했다.
+
+🔍 시각 A: 사고 사례가 신속히 공유되면서 지자체와 도로 당국이 위험 구간을 점검하고 안전시설을 보강하는 계기가 될 수 있다. 휴가철을 앞둔 시점의 경각심 제고는 추가 사고 예방에 실질적인 도움이 된다.
+
+🔎 시각 B: 매년 반복되는 국도 보행자 사고는 사후 대응만으로는 줄어들지 않으며, 구조적인 도로 설계 개선이 뒤따라야 한다. 사고 다발 구간에 대한 예산 투입과 개선 공사가 지연되는 동안 피해는 계속 누적되고 있다.
 
 ---
 
