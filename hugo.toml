@@ -41,5 +41,10 @@ googleAnalytics = 'G-E8ECH6NV3Y'
   url = '/categories/프로젝트/'
   weight = 3
 
+[[menu.main]]
+  name = '도구'
+  url = '/categories/도구/'
+  weight = 4
+
 [markup.goldmark.renderer]
   unsafe = true
