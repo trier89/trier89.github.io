@@ -44,6 +44,7 @@ readingTime: false
       <div id="yt-big" style="font-size:36px;font-weight:800;line-height:1.2;"></div>
     </div>
     <table style="width:100%;margin-top:12px;font-size:14.5px;border-collapse:collapse;"><tbody id="yt-rows"></tbody></table>
+    <div id="yt-tips" style="margin-top:16px;"></div>
     <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ 간이 계산이에요. 신용카드 공제·의료비 문턱(총급여 3%)·표준세액공제 등 세부 규정으로 실제와 차이가 납니다. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
     <button id="yt-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;cursor:pointer;">📤 공유하기</button>
   </div>
@@ -75,8 +76,9 @@ $('yt-go').onclick=function(){
   var thr=g*0.25;
   var cardUse=v('yt-card'), cashUse=v('yt-cash');
   var over=Math.max(cardUse+cashUse-thr,0);
-  var cardDed=0;
-  if(over>0){var cashPart=Math.min(cashUse,over);var cardPart=over-cashPart;cardDed=Math.min(cardPart*0.15+cashPart*0.30,3000000);}
+  var cardCap=g<=70000000?3000000:(g<=120000000?2500000:2000000); // 총급여별 카드공제 한도
+  var cardDed=0, cardFull=0;
+  if(over>0){var cashPart=Math.min(cashUse,over);var cardPart=over-cashPart;cardFull=cardPart*0.15+cashPart*0.30;cardDed=Math.min(cardFull,cardCap);}
   // 과세표준
   var mortgage=Math.min(v('yt-mortgage'),18000000);   // 장기주택저당 이자 소득공제(한도 근사 1,800만)
   var culture=g<=70000000?v('yt-culture')*0.30:0;      // 문화비·체육시설 30% 소득공제(총급여 7천 이하만)
@@ -111,13 +113,36 @@ $('yt-go').onclick=function(){
   $('yt-rows').innerHTML=
     '<tr><td style="color:#555;">근로소득공제</td><td>-'+won(earnDed(g))+'</td></tr>'
     +'<tr><td style="color:#555;">인적공제 ('+fam+'명)</td><td>-'+won(perDed)+'</td></tr>'
-    +(cardDed>0?'<tr><td style="color:#555;">신용/체크카드 공제</td><td>-'+won(cardDed)+'</td></tr>':'')
+    +(cardDed>0?'<tr><td style="color:#555;">신용/체크카드 공제'+(cardFull>=cardCap?' (한도도달)':'')+'</td><td>-'+won(cardDed)+'</td></tr>':'')
     +(mortgage>0?'<tr><td style="color:#555;">장기주택저당 이자</td><td>-'+won(mortgage)+'</td></tr>':'')
     +(culture>0?'<tr><td style="color:#555;">문화비·체육시설 공제</td><td>-'+won(culture)+'</td></tr>':'')
     +'<tr><td style="color:#555;">과세표준</td><td>'+won(base)+'</td></tr>'
     +'<tr><td style="color:#555;">산출세액</td><td>'+won(calcTax)+'</td></tr>'
     +'<tr><td style="color:#555;">세액공제 합계</td><td>-'+won(appliedCredit)+'</td></tr>'
     +'<tr class="hl"><td>결정세액</td><td>'+won(decided)+'</td></tr>';
+  // ── 맞춤 절세 팁 (입력값 기반) ──
+  var tips=[];
+  // 세액공제 vs 소득공제 우선순위
+  var myRate=base<=14000000?6:base<=50000000?15:base<=88000000?24:base<=150000000?35:38;
+  tips.push('💡 <b>세액공제가 소득공제보다 유리</b>해요. 소득공제는 내 세율('+myRate+'%)만큼만 줄지만, 세액공제(연금저축·월세 등)는 낸 세금에서 직접 깎여요. 여윳돈은 세액공제 항목부터 채우세요.');
+  // 연금저축 한도 여유
+  if(pension<9000000){var room=(9000000-pension)/10000;var rate2=g<=55000000?16.5:13.2;
+    tips.push('🏦 <b>연금저축·IRP 한도가 '+Math.round(room).toLocaleString()+'만원 남았어요.</b> 여기 더 넣으면 '+rate2+'% ('+Math.round(room*rate2/100).toLocaleString()+'만원)를 돌려받아요. 절세율 최고 항목이에요.');}
+  // 신용카드 최적화
+  if(cardUse+cashUse<thr){var need=(thr-(cardUse+cashUse))/10000;
+    tips.push('💳 카드 사용액이 아직 <b>총급여의 25%('+Math.round(thr/10000).toLocaleString()+'만원)에 '+Math.round(need).toLocaleString()+'만원 부족</b>해요. 여기 넘어야 카드 공제가 시작돼요.');}
+  else if(cardFull>=cardCap){
+    tips.push('💳 카드 공제가 <b>이미 한도('+Math.round(cardCap/10000)+'만원)에 도달</b>했어요. 이 이상은 체크카드로 써도 소득공제가 안 늘어나니, <b>혜택 좋은 신용카드를 써도 똑같아요.</b>');}
+  else if(cashUse<over){
+    tips.push('💳 25%는 넘겼고 한도는 남았어요. 이 구간에선 <b>체크카드·현금영수증이 공제율 2배(30%)</b>라 유리해요. 앞으로 지출은 체크카드로!');}
+  // 의료비 문턱
+  if(med>0&&med<=g*0.03){
+    tips.push('🏥 의료비는 <b>총급여의 3%('+Math.round(g*0.03/10000).toLocaleString()+'만원)를 넘는 금액만</b> 공제돼요. 지금은 문턱 미달이라 공제가 0이에요.');}
+  // 월세 자격 리마인더
+  if(rent>0){tips.push('🏠 월세 세액공제는 <b>무주택 세대주(총급여 8천만↓·기준시가 4억↓ 주택)</b> 조건이에요. 자격 확인하세요.');}
+  // 고향사랑 꿀팁
+  if(home===0){tips.push('🎁 <b>고향사랑기부 10만원</b>은 전액 세액공제 + 답례품(3만원 상당)까지 받아요. 사실상 이득이라 안 하면 손해!');}
+  $('yt-tips').innerHTML='<div style="font-weight:700;color:#b45309;margin-bottom:8px;">🎯 나를 위한 절세 팁</div>'+tips.map(function(x){return '<div style="padding:10px 12px;background:#fffbeb;border-radius:8px;margin-bottom:6px;font-size:14px;line-height:1.6;">'+x+'</div>';}).join('');
   $('yt-out').style.display='block';
   $('yt-share').onclick=function(){var t=(refund>=0?'연말정산 예상 환급 '+won(Math.abs(refund)):'연말정산 추가납부 '+won(Math.abs(refund)))+'! 나도 계산 👉 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
 };
