@@ -1,60 +1,60 @@
 ---
 title: "오늘 사람들이 검색한 것 — 7월 21일 검색 트렌드"
-date: 2026-07-21T07:40:00+09:00
+date: 2026-07-21T17:30:00+09:00
 categories: ["트렌드"]
 tags: ["검색 트렌드", "실시간 검색어", "구글 트렌드", "7월 21일"]
 ---
 
-7월 21일 아침, 구글에서 검색량이 급상승한 키워드들입니다. 무엇이 화제인지 관련 기사와 함께 정리했어요.
+7월 21일, 오늘 구글에서 검색량이 급상승한 키워드들입니다. 무엇이 화제인지 관련 기사와 함께 정리했어요.
 
-### 1. 관광객 `검색 1000+`
-
-- [무사증 관광객 타지역 이동 허용 제주에 득일까 실일까](https://v.daum.net/v/20260721060213704) — Daum
-- [위성곤 지사, 문체부에 무사증 제도 개선 요청](https://www.jemin.com/news/articleView.html?idxno=840409) — 제민일보
-
-### 2. 기생충 `검색 200+`
-
-- [오락가락 美기생충 사태…"테일러팜스 양상추서 검출 안돼"](https://www.yna.co.kr/view/AKR20260721003200075) — 연합뉴스
-- [수천 명 감염 비상인데...미, 원인 파악도 못하고 허둥지둥](https://science.ytn.co.kr/program/view.php?mcd=0082&key=202607201623010710) — YTN 사이언스
-
-### 3. 삼천당제약 주가 `검색 100+`
-
-- [FDA 답변에 '상한가'…삼천당제약, 정말 '허가 문턱' 넘었나](https://www.hankyung.com/article/202607203782i) — 한국경제
-- [삼천당제약 "FDA서 제네릭 개발전략 검토 답변서 받아"](https://www.yna.co.kr/view/AKR20260720136400017) — 연합뉴스
-
-### 4. 클로드ai `검색 200+`
-
-- [중국 새 AI 공개 "미국 따라잡나"‥반도체 '휘청'](https://imnews.imbc.com/replay/2026/nwtoday/article/6838795_37012.html) — MBC 뉴스
-- [블룸버그 "'키미3'는 훨씬 많은 메모리 요구"](https://v.daum.net/v/20260721094556490) — Daum
-
-### 5. 경제학 `검색 200+`
-
-- [What’s behind MLB’s aggressive sales pitch to fans ahead of this winter’s labor battle](https://www.cnn.com/2026/07/17/sport/mlb-labor-battle-analysis) — CNN
-- [MLB labor dispute loomed over 2026 All-Star Game](https://www.espn.com/mlb/story/_/id/49381100/mlb-labor-dispute-looms-2026-all-star-game) — ESPN
-
-### 6. 고준희 `검색 500+`
-
-- [고준희 "마지막 키스는 어제" 과감한 고백](https://www.newsis.com/view/NISX20260721_0003716176) — 뉴시스
-- [“결혼 말고는 다 해…마지막 키스는 어제” 고준희, 깜짝 고백(‘아근진’)](https://www.mk.co.kr/news/hot-issues/12103013) — 매일경제
-
-### 7. 데이터 센터 `검색 100+`
-
-- [나노, 美 AI 데이터센터 온사이트 발전 SCR 촉매필터 수주](https://www.newsis.com/view/NISX20260721_0003716117) — 뉴시스
-- [[특징주] 나노, 미국 AI 데이터센터 온사이트 발전설비향 SCR 촉매 공급 수주 소식에 상승세](https://www.etoday.co.kr/news/view/2605479) — 이투데이
-
-### 8. 국가수사본부 `검색 200+`
-
-- [경찰 장윤기 수사팀, 경찰청 국수본 압수수색](https://imnews.imbc.com/news/2026/society/article/6838830_36918.html) — MBC 뉴스
-- [검·경, 국수본 동시 압수수색...윗선 수사 확대](https://www.ytn.co.kr/_ln/0115_202607210941531684) — YTN
-
-### 9. 태안군 `검색 200+`
+### 1. 005930 `검색 5000+`
 
 - 관련 기사가 아직 잡히지 않은 키워드예요.
 
-### 10. 한보름 `검색 200+`
+### 2. 신진 서 `검색 2000+`
 
-- [한보름, 비키니 몸매 자랑할 만하네..압도적인 '글래머'](https://www.koreadaily.com/article/20260719031143570) — 미주중앙일보
-- [한보름 핑크 비키니, 러블리 섹시 [DA★]](https://sports.donga.com/ent/article/all/20260721/134334059/1) — 스포츠동아
+- [AI 넘어선 ‘신’의 한 수... 신진서, 카타고에 역전승](https://www.chosun.com/national/people/2026/07/21/CBHVHEW4WZEPTKRPNLLN7Y6XWM/) — 조선일보
+- [2분25초나 걸린 ‘신’의 첫수, 최강 카타고도 흔들렸다···“AI 완벽함이 오히려 약점”](https://www.khan.co.kr/article/202607211720011) — 경향신문
+
+### 3. 닛케이 평균주가 `검색 200+`
+
+- [中 AI 쇼크 진정에 日닛케이지수 3.3% 급반등](https://v.daum.net/v/20260721154210007) — Daum
+- [亞 증시 모처럼 훈풍…日 키옥시아 17% 급등[Asia마감] - 머니투데이](https://www.mt.co.kr/world/2026/07/21/2026072117233149910) — 머니투데이
+
+### 4. 사이드카 `검색 1000+`
+
+- [코스피 올해 19번째 매수 사이드카 발동‥6,800선 회복](https://imnews.imbc.com/news/2026/econo/article/6838906_36932.html) — MBC 뉴스
+- [7월 반도체 수출 역대 최대 기록에 코스피 반등 성공](https://stock.mk.co.kr/news/view/1124339) — 매일경제 마켓
+
+### 5. 안동선 `검색 500+`
+
+- [DJ 따른 4선 정계 원로…안동선 전 새정치국민회의 부총재 별세](https://www.yna.co.kr/amp/view/AKR20260721096700704) — 연합뉴스
+- [DJ 곁 한결같이 지킨 안동선 전 새정치국민회의 부총재 별세](https://www.hankookilbo.com/news/article/A2026072114250005819) — 한국일보
+
+### 6. 새만금 `검색 200+`
+
+- [새만금MP 변경 신청권자 '도지사' 지정…박지원 의원, 법안 발의](https://www.yna.co.kr/view/AKR20260721153300055) — 연합뉴스
+- [새만금 'RE100 전용 산단' 속도전…박지원, 입지·지원 3법 쐈다](https://www.newsis.com/view/NISX20260721_0003717129) — 뉴시스
+
+### 7. 박나래 매니저 `검색 2000+`
+
+- ['폭로 안할테니 매출 10% 달라' 요구한 박나래 전 매니저 구속](https://www.yna.co.kr/view/AKR20260721094200004) — 연합뉴스
+- [박나래 협박 전 매니저 구속…"매출 10% 달라"](https://www.yonhapnewstv.co.kr/news/MYH20260721165828m3U) — 연합뉴스TV
+
+### 8. 농구 `검색 1000+`
+
+- [동아시아 넘어 아시아 최강 도전...EASL-BCL 아시아 출전 체계 확정](https://www.chosun.com/sports/basketball/2026/07/21/GY2TAYLBGUZDCOBQHBRWIYZUGA/) — 조선일보
+- [EASL 성적으로 농구 아시아 챔스 진출권 준다…출전 방식 확정](https://www.yna.co.kr/view/AKR20260721111900007) — 연합뉴스
+
+### 9. 투표 `검색 200+`
+
+- [민주당 당권주자 신경전‥오늘부터 예비경선 투표](https://v.daum.net/v/20260721122213821) — Daum
+- [민주당 당권 승부 본궤도 올랐다, 김민석의 '당정 일체'냐 정청래의 '민주당답게'냐](https://www.businesspost.co.kr/BP?command=article_view&num=442791) — 비즈니스포스트
+
+### 10. 이재현 `검색 200+`
+
+- [1위 굳히기 들어간 삼성, 이재현·배찬승 1군 콜업…이재현, 9번 유격수 선발 출장 [오!쎈 고척] - 머니투데이](https://www.mt.co.kr/sports/2026/07/21/202607211645778177O) — 머니투데이
+- [선두 삼성, 불펜투수 배찬승·유격수 이재현 1군 복귀…더 강해진다](https://www.news1.kr/sports/baseball/6234503) — 뉴스1
 
 ---
 
