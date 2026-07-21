@@ -45,12 +45,12 @@ def main():
 
     md = [f"""---
 title: "오늘 사람들이 검색한 것 — {now.month}월 {now.day}일 검색 트렌드"
-date: {now:%Y-%m-%d}T07:40:00+09:00
+date: {now:%Y-%m-%d}T17:30:00+09:00
 categories: ["뉴스"]
 tags: ["검색 트렌드", "실시간 검색어", "구글 트렌드", "{now.month}월 {now.day}일"]
 ---
 
-{now.month}월 {now.day}일 아침, 구글에서 검색량이 급상승한 키워드들입니다. 무엇이 화제인지 관련 기사와 함께 정리했어요.
+{now.month}월 {now.day}일, 오늘 구글에서 검색량이 급상승한 키워드들입니다. 무엇이 화제인지 관련 기사와 함께 정리했어요.
 """]
     for i, e in enumerate(items, 1):
         tr = f" `검색 {e['traffic']}`" if e["traffic"] else ""
