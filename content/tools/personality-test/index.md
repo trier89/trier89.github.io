@@ -99,17 +99,21 @@ function result(){
     var poles={EI:['E','I'],SN:['S','N'],TF:['T','F'],JP:['J','P'],AT:['A','Tu']};
     var pair=poles[axis];
     var other=pair[0]===apole?pair[1]:pair[0];
-    // A선택지=apole극, B선택지=반대극
     score[pick===0?apole:(apole==='A'?'Tu':other)] += 1;
-    if(apole==='A'&&pick!==0)score['Tu']+=0; // guard
   });
   function pct(a,b){var t=score[a]+score[b];return t?Math.round(score[a]/t*100):50;}
   var code=(score.E>=score.I?'E':'I')+(score.S>=score.N?'S':'N')+(score.T>=score.F?'T':'F')+(score.J>=score.P?'J':'P');
   var ident=score.A>=score.Tu?'A':'T';
+  var barsHtml=bar('내향 I','외향 E',pct('I','E'))+bar('현실 S','직관 N',pct('S','N'))+bar('사고 T','감정 F',pct('T','F'))+bar('계획 J','즉흥 P',pct('J','P'))+bar('확신 A','민감 T',pct('A','Tu'));
+  renderResult(code,ident,barsHtml,false);
+}
+function bar(l1,l2,p){
+  return '<div style="margin:8px 0;"><div style="display:flex;justify-content:space-between;font-size:13px;color:#555;"><span>'+l1+' '+p+'%</span><span>'+l2+' '+(100-p)+'%</span></div><div style="height:10px;background:#e5e7eb;border-radius:5px;"><div style="height:10px;width:'+p+'%;background:#059669;border-radius:5px;"></div></div></div>';
+}
+function renderResult(code,ident,barsHtml,shared){
+  $('pt-intro').style.display='none';$('pt-quiz').style.display='none';
+  if(!TYPES[code]||!AT_DESC[ident]){code='INFP';ident='T';}
   var t=TYPES[code], at=AT_DESC[ident];
-  function bar(l1,l2,p){
-    return '<div style="margin:8px 0;"><div style="display:flex;justify-content:space-between;font-size:13px;color:#555;"><span>'+l1+' '+p+'%</span><span>'+l2+' '+(100-p)+'%</span></div><div style="height:10px;background:#e5e7eb;border-radius:5px;"><div style="height:10px;width:'+p+'%;background:#059669;border-radius:5px;"></div></div></div>';
-  }
   function list(arr){return '<ul style="margin:6px 0 0;padding-left:20px;line-height:1.7;">'+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
   var celebHtml = t.celeb ? '<h3 style="margin:20px 0 6px;font-size:17px;">⭐ 같은 유형 유명인</h3><div style="line-height:1.7;">'+t.celeb.name+' — '+t.celeb.note+'</div><div style="font-size:12px;color:#999;">방송·인터뷰에서 본인이 직접 밝힌 경우만 싣습니다 (계속 추가 중)</div>' : '<div style="font-size:12px;color:#999;margin-top:16px;">⭐ 같은 유형 유명인: 본인이 직접 밝힌 사례를 확인해 추가 중입니다</div>';
   $('pt-result').innerHTML=
@@ -118,11 +122,7 @@ function result(){
    +'<div style="font-size:44px;font-weight:800;color:#047857;">'+code+'-'+ident+'</div>'
    +'<div style="font-size:19px;font-weight:700;margin-top:2px;">'+t.n+' <span style="color:#059669;font-size:15px;">'+at.tag+'</span></div>'
    +'</div>'
-   +bar('내향 I','외향 E',pct('I','E'))
-   +bar('현실 S','직관 N',pct('S','N'))
-   +bar('사고 T','감정 F',pct('T','F'))
-   +bar('계획 J','즉흥 P',pct('J','P'))
-   +bar('확신 A','민감 T',pct('A','Tu'))
+   +(shared?'<div style="text-align:center;margin:10px 0;padding:10px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:14px;">친구가 공유한 결과예요 🎁 당신도 궁금하죠?</div>':barsHtml)
    +'<p style="line-height:1.7;margin-top:14px;">'+t.d+'</p>'
    +'<p style="line-height:1.7;font-size:14.5px;color:#555;">'+at.txt+'</p>'
    +'<h3 style="margin:20px 0 6px;font-size:17px;">👍 장점</h3>'+list(t.g)
@@ -134,19 +134,32 @@ function result(){
    +'<h3 style="margin:20px 0 6px;font-size:17px;">💞 잘 맞는 유형</h3><div style="line-height:1.7;"><b>'+t.m+'</b> ('+TYPES[t.m].n+') — 서로의 빈 곳을 채워주는 조합으로 자주 꼽혀요 (재미로 봐주세요!)</div>'
    +celebHtml
    +'<div style="display:flex;gap:10px;margin-top:22px;">'
-   +'<button onclick="location.reload()" style="flex:1;padding:13px;border:2px solid #059669;border-radius:10px;background:#fff;color:#047857;font-weight:700;font-size:15px;cursor:pointer;">다시 하기</button>'
-   +'<button id="pt-share" style="flex:1;padding:13px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">결과 공유하기</button>'
+   +(shared
+      ?'<button id="pt-mine" style="flex:1;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:16px;cursor:pointer;">나도 테스트하기 →</button>'
+      :'<button onclick="location.href=location.pathname" style="flex:1;padding:13px;border:2px solid #059669;border-radius:10px;background:#fff;color:#047857;font-weight:700;font-size:15px;cursor:pointer;">다시 하기</button>'
+       +'<button id="pt-share" style="flex:1;padding:13px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">결과 공유하기</button>')
    +'</div>'
    +'<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14.5px;">🎂 내 생일엔 무슨 일이? → <a href="/tools/my-birthday/">생일 이야기 보기</a> · 🔢 <a href="/tools/age-calculator/">만나이 계산기</a></div>';
   $('pt-result').style.display='block';
-  $('pt-share').onclick=function(){
-    var txt='나의 성격유형은 '+code+'-'+ident+' '+t.n+'! 너도 해봐 👉 '+location.origin+location.pathname;
-    if(navigator.share){navigator.share({text:txt});}
-    else{navigator.clipboard.writeText(txt).then(function(){alert('결과가 복사됐어요! 붙여넣기로 공유하세요.');});}
-  };
+  if(shared){
+    var mine=document.getElementById('pt-mine');
+    if(mine)mine.onclick=function(){location.href=location.pathname;};
+  }else{
+    $('pt-share').onclick=function(){
+      var url=location.origin+location.pathname+'?r='+code+'-'+ident;
+      var txt='나의 성격유형은 '+code+'-'+ident+' '+t.n+'! 너도 해봐 👉 '+url;
+      if(navigator.share){navigator.share({text:txt});}
+      else{navigator.clipboard.writeText(txt).then(function(){alert('결과가 복사됐어요! 붙여넣기로 공유하세요.');});}
+    };
+  }
   window.scrollTo({top:document.getElementById('ptest').offsetTop-20,behavior:'smooth'});
 }
 $('pt-start').onclick=function(){$('pt-intro').style.display='none';$('pt-quiz').style.display='block';show();};
+// 공유 링크(?r=CODE-IDENT)로 들어오면 그 결과를 바로 보여줌
+(function(){
+  var m=(location.search.match(/[?&]r=([A-Za-z]{4})-?([ATat])/));
+  if(m){var code=m[1].toUpperCase(), ident=m[2].toUpperCase(); renderResult(code,ident,'',true);}
+})();
 })();
 </script>
 
