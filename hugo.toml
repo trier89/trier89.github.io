@@ -52,14 +52,19 @@ googleAnalytics = 'G-E8ECH6NV3Y'
   weight = 3
 
 [[menu.main]]
-  name = '도구'
-  url = '/categories/도구/'
+  name = '도구방'
+  url = '/tools/'
   weight = 4
+
+[[menu.main]]
+  name = '게임방'
+  url = '/games/'
+  weight = 5
 
 [[menu.main]]
   name = '오늘의 역사'
   url = '/categories/오늘의-역사/'
-  weight = 5
+  weight = 6
 
 [markup.goldmark.renderer]
   unsafe = true
