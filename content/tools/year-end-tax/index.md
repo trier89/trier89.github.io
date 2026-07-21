@@ -39,7 +39,8 @@ readingTime: false
   <div style="font-size:12px;color:#6b7280;margin-top:5px;line-height:1.5;">※ 전통시장·대중교통·문화비는 <b>총급여 25% 초과분에 한해</b> 위 공제율로 <b>각 100만원까지 추가공제</b>돼요 (문화비·도서·공연·영화·박물관·미술관·헬스장·수영장은 총급여 7천만원 이하만).</div>
   <div style="margin-top:14px;font-weight:700;color:#2563eb;">🧾 세액공제 (연간 납입액, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
-    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">연금저축·IRP</span><input type="tel" id="yt-pension" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">연금저축 <span style="color:#999;">(한도 600만)</span></span><input type="tel" id="yt-pension" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">IRP <span style="color:#999;">(연금저축 합산 900만)</span></span><input type="tel" id="yt-irp" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">보장성 보험료</span><input type="tel" id="yt-ins" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">의료비</span><input type="tel" id="yt-med" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">기부금</span><input type="tel" id="yt-donate" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
@@ -51,6 +52,7 @@ readingTime: false
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">주택청약저축 <span style="color:#999;">(무주택)</span></span><input type="tel" id="yt-housing" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">청년형 장기펀드 <span style="color:#999;">(청년)</span></span><input type="tel" id="yt-youthfund" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">국민성장펀드 <span style="color:#999;">(3천↓40%·~5천20%·~7천10%)</span></span><input type="tel" id="yt-kgf" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
   <button id="yt-go" style="width:100%;margin-top:16px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-size:17px;font-weight:700;cursor:pointer;">계산하기</button>
   <div id="yt-out" style="display:none;margin-top:20px;">
@@ -108,10 +110,17 @@ $('yt-go').onclick=function(){
   var mortgage=Math.min(v('yt-mortgage'),18000000);   // 장기주택저당 이자 소득공제(한도 근사 1,800만)
   var housing=Math.min(v('yt-housing'),3000000)*0.40;  // 주택청약: 납입 40%, 연 300만 한도(무주택 세대주)
   var youthfund=Math.min(v('yt-youthfund'),6000000)*0.40; // 청년형 장기펀드: 납입 40%, 연 600만 한도(총급여 5천↓ 청년)
-  var base=g-earnDed(g)-perDed-cardDed-mortgage-housing-youthfund;
+  // 국민성장펀드: 투자액 차등 소득공제(3천↓40%·3~5천20%·5~7천10%), 공제한도 1,800만
+  var kgfUse=v('yt-kgf');
+  var kgf=(Math.min(kgfUse,30000000)*0.40)+(Math.max(Math.min(kgfUse,50000000)-30000000,0)*0.20)+(Math.max(Math.min(kgfUse,70000000)-50000000,0)*0.10);
+  kgf=Math.min(kgf,18000000);
+  var base=g-earnDed(g)-perDed-cardDed-mortgage-housing-youthfund-kgf;
   var calcTax=tax(base);                   // 산출세액
   // 세액공제
-  var pension=Math.min(v('yt-pension'),9000000); // 연금저축+IRP 한도 900만 근사
+  // 연금저축 단독 600만 한도 + IRP 포함 합산 900만 한도
+  var pensionSaving=Math.min(v('yt-pension'),6000000);
+  var irpAmt=v('yt-irp');
+  var pension=Math.min(pensionSaving+irpAmt,9000000);
   var pensionCr=pension*(g<=55000000?0.165:0.132);
   var ins=Math.min(v('yt-ins'),1000000);
   var insCr=ins*0.12;
@@ -144,7 +153,7 @@ $('yt-go').onclick=function(){
   $('yt-card2').style.background=refund>=0?'#ecfdf5':'#fef2f2';
   function sec(t){return '<tr><td colspan="2" style="padding-top:14px;font-weight:800;color:#111;border-bottom:2px solid #ddd;">'+t+'</td></tr>';}
   function row(l,val,neg){return '<tr><td style="color:#555;">'+l+'</td><td style="'+(neg?'color:#dc2626;':'')+'">'+(neg?'-':'')+won(val)+'</td></tr>';}
-  var incDedSum=earnDed(g)+perDed+cardDed+mortgage+housing+youthfund;
+  var incDedSum=earnDed(g)+perDed+cardDed+mortgage+housing+youthfund+kgf;
   var html=sec('① 소득')+row('총급여 (연봉)',g);
   html+=sec('② 소득공제 (소득을 줄여줘요)')
     +row('근로소득공제',earnDed(g),1)+row('인적공제 ('+fam+'명)',perDed,1)
@@ -153,6 +162,7 @@ $('yt-go').onclick=function(){
     +(mortgage>0?row('장기주택저당 이자',mortgage,1):'')
     +(housing>0?row('주택청약저축',housing,1):'')
     +(youthfund>0?row('청년형 장기펀드',youthfund,1):'')
+    +(kgf>0?row('국민성장펀드',kgf,1):'')
     +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">소득공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(incDedSum)+'</td></tr>'
     +'<tr class="hl"><td>③ 과세표준</td><td>'+won(base)+'</td></tr>';
   html+=sec('④ 산출세액 (과세표준 × 세율)')+row('과세표준 '+won(base)+' 기준',calcTax);
@@ -180,6 +190,13 @@ $('yt-go').onclick=function(){
   // 연금저축 한도 여유
   if(pension<9000000){var room=(9000000-pension)/10000;var rate2=g<=55000000?16.5:13.2;
     tips.push('🏦 <b>연금저축·IRP 한도가 '+Math.round(room).toLocaleString()+'만원 남았어요.</b> 여기 더 넣으면 '+rate2+'% ('+Math.round(room*rate2/100).toLocaleString()+'만원)를 돌려받아요. 절세율 최고 항목이에요.');}
+  // 연금저축 vs IRP 우선순위
+  tips.push('🥇 <b>연금저축 vs IRP, 뭐부터?</b> 세액공제율은 둘 다 같아요(16.5%/13.2%). 그래서 <b>연금저축부터 600만원 채우고, 남는 건 IRP로</b>(합산 900만). 이유: 연금저축은 ①중간에 일부만 인출 가능 ②주식형 100%까지 가능. IRP는 ①중도해지 시 세금 페널티가 크고 ②위험자산 70%까지만 담을 수 있어요. 유동성·운용자유도에서 연금저축이 유리해요.');
+  // 국민성장펀드 안내
+  if(kgfUse>0){
+    tips.push('🇰🇷 <b>국민성장펀드</b>로 <b>'+won(kgf)+'</b> 소득공제 받았어요(투자액 차등: 3천↓40%·5천↓20%·7천↓10%, 공제한도 1,800만). 단 <b>5년 폐쇄형이라 중도해지가 안 되고</b>, 배당은 9% 분리과세예요. 여윳돈으로만 하세요.');}
+  else if(g>=30000000){
+    tips.push('🇰🇷 <b>국민성장펀드</b>는 투자액의 최대 40%까지 소득공제(3천만↓ 40%·~5천 20%·~7천 10%, 한도 1,800만)에 배당 9% 분리과세예요. 대신 5년 묶이는 폐쇄형이라 여유자금일 때만 고려하세요.');}
   // 신용카드 최적화
   var totalSpend=credit+cash+market+transit+cultureUse;
   if(totalSpend<thr){var need=(thr-totalSpend)/10000;
