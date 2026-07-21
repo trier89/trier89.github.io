@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>오목 게임(2인) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
+<meta name="description" content="한 화면에서 번갈아 두는 오목 게임. 5개를 먼저 이으면 승리하는 무료 웹게임.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<style>
+:root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.6;min-height:100vh;padding:20px 14px;text-align:center;}
+h1{font-size:22px;margin-top:6px;}
+.sub{color:var(--dim);font-size:13px;margin:6px 0 14px;}
+canvas{background:#0d0d10;border:2px solid var(--line);border-radius:10px;display:block;margin:0 auto;max-width:100%;touch-action:none;}
+#wrap{position:relative;display:inline-block;}
+#overlay{position:absolute;inset:0;background:rgba(13,13,16,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:20px;}
+#overlay h2{color:var(--coral);font-size:22px;margin-bottom:10px;}
+#overlay p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.7;}
+button{background:var(--coral);border:0;border-radius:8px;color:#fff;font:inherit;font-weight:700;padding:11px 22px;cursor:pointer;}
+button:hover{background:var(--coral-soft);}
+.hud{display:flex;gap:18px;justify-content:center;margin-top:14px;color:var(--dim);font-size:14px;flex-wrap:wrap;}
+.hud b{color:var(--yellow);}
+.foot{margin-top:28px;padding-top:16px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px;}
+.foot a{color:var(--coral);text-decoration:none;}
+</style>
+</head>
+<body>
+<!--pf-topnav-injected-->
+<div style="max-width:760px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #3e3e3a;padding:10px 12px 12px;">
+  <a href="/" style="color:#d97757;font-weight:800;font-size:15px;text-decoration:none;">✻ 계획대로 느긋하게</a>
+  <nav style="display:flex;gap:5px;flex-wrap:wrap;">
+    <a href="/tools/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧰 도구방</a>
+    <a href="/games/" style="color:#d97757;text-decoration:none;border:1px solid #d97757;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🎮 게임방</a>
+    <a href="/tests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧠 심리테스트</a>
+    <a href="/categories/뉴스/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">📰 뉴스</a>
+  </nav>
+</div>
+<h1>⚫ 오목</h1>
+<div class="sub">2인이 번갈아 두기 · 5개를 먼저 이으면 승리</div>
+<div id="wrap">
+  <canvas id="cv" width="450" height="450"></canvas>
+  <div id="overlay">
+    <h2>오목 (2인)</h2>
+    <p>한 화면에서 번갈아 두는 오목이에요.<br>가로·세로·대각선으로 <b>5개</b>를 먼저 이으면 승리!</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span id="turn"></span><button id="rst" style="background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:6px 14px;border-radius:8px;font:inherit;cursor:pointer;">다시</button></div>
+<div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+<script>
+
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var N=15,PAD=18,S=(cv.width-PAD*2)/(N-1);
+var board,turn,over,turnE=document.getElementById('turn');
+function reset(){board=[];for(var i=0;i<N;i++){board.push(new Array(N).fill(0));}turn=1;over=false;draw();upd();}
+function upd(){turnE.innerHTML=over?'':'차례: <b style="color:'+(turn===1?'#e8e6e3':'#e0c07e')+'">'+(turn===1?'⚫ 흑':'⚪ 백')+'</b>';}
+function draw(){
+  ctx.fillStyle='#d9b98a';ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.strokeStyle='#5c4a30';ctx.lineWidth=1;
+  for(var i=0;i<N;i++){ctx.beginPath();ctx.moveTo(PAD,PAD+i*S);ctx.lineTo(cv.width-PAD,PAD+i*S);ctx.stroke();ctx.beginPath();ctx.moveTo(PAD+i*S,PAD);ctx.lineTo(PAD+i*S,cv.height-PAD);ctx.stroke();}
+  for(var y=0;y<N;y++)for(var x=0;x<N;x++){if(board[y][x]){ctx.beginPath();ctx.arc(PAD+x*S,PAD+y*S,S*0.42,0,7);ctx.fillStyle=board[y][x]===1?'#1a1a1a':'#f5f5f5';ctx.fill();ctx.strokeStyle='#555';ctx.stroke();}}
+}
+function win(x,y,p){var dirs=[[1,0],[0,1],[1,1],[1,-1]];for(var d=0;d<4;d++){var cnt=1;for(var s=-1;s<=1;s+=2){var nx=x+dirs[d][0]*s,ny=y+dirs[d][1]*s;while(nx>=0&&nx<N&&ny>=0&&ny<N&&board[ny][nx]===p){cnt++;nx+=dirs[d][0]*s;ny+=dirs[d][1]*s;}}if(cnt>=5)return true;}return false;}
+cv.addEventListener('click',function(e){
+  if(over)return;var rect=cv.getBoundingClientRect();var sx=cv.width/rect.width;
+  var x=Math.round(((e.clientX-rect.left)*sx-PAD)/S),y=Math.round(((e.clientY-rect.top)*sx-PAD)/S);
+  if(x<0||x>=N||y<0||y>=N||board[y][x])return;
+  board[y][x]=turn;draw();
+  if(win(x,y,turn)){over=true;turnE.innerHTML='<b style="color:#d97757">'+(turn===1?'⚫ 흑':'⚪ 백')+' 승리! 🎉</b>';return;}
+  turn=turn===1?2:1;upd();
+});
+document.getElementById('start').onclick=function(){document.getElementById('overlay').style.display='none';reset();};
+document.getElementById('rst').onclick=reset;
+reset();
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>카드 뒤집기(메모리 게임) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
+<meta name="description" content="같은 그림을 찾아 짝을 맞추는 카드 뒤집기(메모리) 게임. 적은 횟수로 클리어하는 무료 웹게임.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<style>
+:root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.6;min-height:100vh;padding:20px 14px;text-align:center;}
+h1{font-size:22px;margin-top:6px;}
+.sub{color:var(--dim);font-size:13px;margin:6px 0 14px;}
+canvas{background:#0d0d10;border:2px solid var(--line);border-radius:10px;display:block;margin:0 auto;max-width:100%;touch-action:none;}
+#wrap{position:relative;display:inline-block;}
+#overlay{position:absolute;inset:0;background:rgba(13,13,16,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:20px;}
+#overlay h2{color:var(--coral);font-size:22px;margin-bottom:10px;}
+#overlay p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.7;}
+button{background:var(--coral);border:0;border-radius:8px;color:#fff;font:inherit;font-weight:700;padding:11px 22px;cursor:pointer;}
+button:hover{background:var(--coral-soft);}
+.hud{display:flex;gap:18px;justify-content:center;margin-top:14px;color:var(--dim);font-size:14px;flex-wrap:wrap;}
+.hud b{color:var(--yellow);}
+.foot{margin-top:28px;padding-top:16px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px;}
+.foot a{color:var(--coral);text-decoration:none;}
+</style>
+</head>
+<body>
+<!--pf-topnav-injected-->
+<div style="max-width:760px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #3e3e3a;padding:10px 12px 12px;">
+  <a href="/" style="color:#d97757;font-weight:800;font-size:15px;text-decoration:none;">✻ 계획대로 느긋하게</a>
+  <nav style="display:flex;gap:5px;flex-wrap:wrap;">
+    <a href="/tools/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧰 도구방</a>
+    <a href="/games/" style="color:#d97757;text-decoration:none;border:1px solid #d97757;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🎮 게임방</a>
+    <a href="/tests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧠 심리테스트</a>
+    <a href="/categories/뉴스/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">📰 뉴스</a>
+  </nav>
+</div>
+<h1>🃏 카드 뒤집기</h1>
+<div class="sub">같은 그림 2장을 찾아 짝을 맞춰요 · 적은 횟수가 최고기록</div>
+<div id="wrap">
+  <div id="grid" style="display:grid;gap:8px;width:340px;max-width:92vw;margin:0 auto;"></div>
+  <div id="overlay">
+    <h2>카드 뒤집기</h2>
+    <p>같은 그림 카드 2장을 찾아 짝을 맞춰요.<br>적은 횟수로 모두 맞추면 최고기록!</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span>MOVES <b id="mv">0</b></span><span>BEST <b id="hi">-</b></span></div>
+<style>#grid .mcard{aspect-ratio:1;position:relative;cursor:pointer;}
+#grid .mfront,#grid .mback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:26px;backface-visibility:hidden;transition:transform .3s;}
+#grid .mfront{background:#1f1f1d;border:2px solid #3e3e3a;color:#9c9a94;}
+#grid .mback{background:#2b2b28;border:2px solid #d97757;transform:rotateY(180deg);}
+#grid .mcard.open .mfront,#grid .mcard.done .mfront{transform:rotateY(180deg);}
+#grid .mcard.open .mback,#grid .mcard.done .mback{transform:rotateY(360deg);}
+#grid .mcard.done{opacity:.5;}</style>
+<div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+<script>
+
+(function(){
+var EMOJI=['🍎','🍌','🍇','🍒','🥝','🍑','🍉','🍓','🥥','🍍','🥑','🍋'];
+var grid=document.getElementById('grid'),movesE=document.getElementById('mv'),hiE=document.getElementById('hi'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
+var hi=+localStorage.getItem('mem_hi')||0; hiE.textContent=hi?hi:'-';
+var cards,first,lock,moves,matched,size=4;
+function build(){
+  var pairs=size*size/2, pool=EMOJI.slice(0,pairs), deck=pool.concat(pool);
+  for(var i=deck.length-1;i>0;i--){var j=(Math.random()*(i+1))|0;var t=deck[i];deck[i]=deck[j];deck[j]=t;}
+  grid.style.gridTemplateColumns='repeat('+size+',1fr)';
+  grid.innerHTML=''; cards=[]; first=null; lock=false; moves=0; matched=0; movesE.textContent=0;
+  deck.forEach(function(em,i){
+    var c=document.createElement('div'); c.className='mcard'; c.dataset.em=em;
+    c.innerHTML='<div class="mfront">?</div><div class="mback">'+em+'</div>';
+    c.onclick=function(){flip(c);}; grid.appendChild(c); cards.push(c);
+  });
+}
+function flip(c){
+  if(lock||c.classList.contains('open')||c.classList.contains('done'))return;
+  c.classList.add('open');
+  if(!first){first=c;return;}
+  moves++; movesE.textContent=moves; lock=true;
+  if(first.dataset.em===c.dataset.em){
+    first.classList.add('done');c.classList.add('done');matched+=2;first=null;lock=false;
+    if(matched===cards.length)win();
+  } else {
+    var a=first,b=c;setTimeout(function(){a.classList.remove('open');b.classList.remove('open');first=null;lock=false;},700);
+  }
+}
+function win(){
+  if(!hi||moves<hi){hi=moves;localStorage.setItem('mem_hi',hi);hiE.textContent=hi;}
+  ov.style.display='flex';ov.querySelector('h2').textContent='CLEAR! 🎉';
+  ov.querySelector('p').innerHTML='<b style="color:#e0c07e">'+moves+'</b>번 만에 완성!<br>최소 기록 '+hi+'번';
+  var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
+  b.textContent='📤 자랑하기';b.onclick=function(){var t='카드뒤집기 '+moves+'번 클리어! 🃏 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  btn.textContent='다시 하기';
+}
+btn.onclick=function(){ov.style.display='none';build();};
+build();
+})();
+
+</script>
+</body>
+</html>
