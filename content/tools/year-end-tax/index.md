@@ -36,6 +36,8 @@ readingTime: false
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">문화비·헬스장 <span style="color:#999;">(총급여 7천↓)</span></span><input type="tel" id="yt-culture" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">주택청약저축 <span style="color:#999;">(무주택)</span></span><input type="tel" id="yt-housing" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">청년형 장기펀드 <span style="color:#999;">(청년)</span></span><input type="tel" id="yt-youthfund" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
   <button id="yt-go" style="width:100%;margin-top:16px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-size:17px;font-weight:700;cursor:pointer;">계산하기</button>
   <div id="yt-out" style="display:none;margin-top:20px;">
@@ -82,7 +84,9 @@ $('yt-go').onclick=function(){
   // 과세표준
   var mortgage=Math.min(v('yt-mortgage'),18000000);   // 장기주택저당 이자 소득공제(한도 근사 1,800만)
   var culture=g<=70000000?v('yt-culture')*0.30:0;      // 문화비·체육시설 30% 소득공제(총급여 7천 이하만)
-  var base=g-earnDed(g)-perDed-cardDed-mortgage-culture;
+  var housing=Math.min(v('yt-housing'),3000000)*0.40;  // 주택청약: 납입 40%, 연 300만 한도(무주택 세대주)
+  var youthfund=Math.min(v('yt-youthfund'),6000000)*0.40; // 청년형 장기펀드: 납입 40%, 연 600만 한도(총급여 5천↓ 청년)
+  var base=g-earnDed(g)-perDed-cardDed-mortgage-culture-housing-youthfund;
   var calcTax=tax(base);                   // 산출세액
   // 세액공제
   var pension=Math.min(v('yt-pension'),9000000); // 연금저축+IRP 한도 900만 근사
@@ -116,6 +120,8 @@ $('yt-go').onclick=function(){
     +(cardDed>0?'<tr><td style="color:#555;">신용/체크카드 공제'+(cardFull>=cardCap?' (한도도달)':'')+'</td><td>-'+won(cardDed)+'</td></tr>':'')
     +(mortgage>0?'<tr><td style="color:#555;">장기주택저당 이자</td><td>-'+won(mortgage)+'</td></tr>':'')
     +(culture>0?'<tr><td style="color:#555;">문화비·체육시설 공제</td><td>-'+won(culture)+'</td></tr>':'')
+    +(housing>0?'<tr><td style="color:#555;">주택청약저축 공제</td><td>-'+won(housing)+'</td></tr>':'')
+    +(youthfund>0?'<tr><td style="color:#555;">청년형 장기펀드 공제</td><td>-'+won(youthfund)+'</td></tr>':'')
     +'<tr><td style="color:#555;">과세표준</td><td>'+won(base)+'</td></tr>'
     +'<tr><td style="color:#555;">산출세액</td><td>'+won(calcTax)+'</td></tr>'
     +'<tr><td style="color:#555;">세액공제 합계</td><td>-'+won(appliedCredit)+'</td></tr>'
@@ -140,6 +146,11 @@ $('yt-go').onclick=function(){
     tips.push('🏥 의료비는 <b>총급여의 3%('+Math.round(g*0.03/10000).toLocaleString()+'만원)를 넘는 금액만</b> 공제돼요. 지금은 문턱 미달이라 공제가 0이에요.');}
   // 월세 자격 리마인더
   if(rent>0){tips.push('🏠 월세 세액공제는 <b>무주택 세대주(총급여 8천만↓·기준시가 4억↓ 주택)</b> 조건이에요. 자격 확인하세요.');}
+  // 청년형 장기펀드 / 주택청약 팁
+  if(g<=50000000 && v('yt-youthfund')===0){
+    tips.push('🌱 <b>청년(만19~34세)이고 총급여 5천만원 이하</b>면 「청년형 장기펀드」에 넣은 돈의 40%(연 600만원 한도 → 최대 240만원)를 소득공제받아요. 정부 지원 상품이에요.');}
+  if(v('yt-housing')===0){
+    tips.push('🏠 <b>무주택 세대주</b>라면 「주택청약종합저축」 납입액의 40%(연 300만원 한도)를 소득공제받아요. 청약 기회 + 절세 둘 다 챙기세요.');}
   // 고향사랑 꿀팁
   if(home===0){tips.push('🎁 <b>고향사랑기부 10만원</b>은 전액 세액공제 + 답례품(3만원 상당)까지 받아요. 사실상 이득이라 안 하면 손해!');}
   $('yt-tips').innerHTML='<div style="font-weight:700;color:#b45309;margin-bottom:8px;">🎯 나를 위한 절세 팁</div>'+tips.map(function(x){return '<div style="padding:10px 12px;background:#fffbeb;border-radius:8px;margin-bottom:6px;font-size:14px;line-height:1.6;">'+x+'</div>';}).join('');
@@ -164,5 +175,7 @@ $('yt-go').onclick=function(){
 - **월세 세액공제**: 무주택 세대주(총급여 8천만↓·기준시가 4억↓ 주택)면 연 월세액의 15~17%를 세금에서 깎아줘요 (한도 1,000만원).
 - **고향사랑기부금**: 10만원까지는 전액 세액공제(사실상 낸 만큼 돌려받음)+답례품, 초과분은 15%.
 - **문화비·헬스장**: 총급여 7,000만원 이하면 도서·공연·영화·헬스장·수영장 결제액에 30% 소득공제 (신용카드 공제에 추가).
+- **주택청약종합저축**: 무주택 세대주면 납입액의 40%를 소득공제 (연 300만원 한도).
+- **청년형 장기펀드(소득공제 장기펀드)**: 정부가 청년 자산형성을 돕는 상품. 만 19~34세·총급여 5천만원 이하면 납입액의 40%(연 600만원 한도 → 최대 240만원)를 소득공제받아요.
 
 > 이 계산기는 주요 항목만 반영한 **간이 추정**이에요. 실제 연말정산은 훨씬 많은 규정이 적용되니, 정확한 금액은 [국세청 홈택스 연말정산 미리보기](https://www.hometax.go.kr)에서 확인하세요.
