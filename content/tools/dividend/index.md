@@ -87,8 +87,23 @@ $('dv-go').onclick=function(){
     +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>';
   $('dv-list').innerHTML=LIST.map(function(x){return '<tr><td style="color:#444;">'+x[0]+'</td><td>'+x[1]+'</td></tr>';}).join('');
   $('dv-out').style.display='block';
-  $('dv-share').onclick=function(){var t='월 배당 '+won(tgt)+' 받으려면 원금 '+won(principal)+', '+years+'년간 매달 '+won(Math.ceil(monthly))+'! 내 노후설계 👉 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  $('dv-share').onclick=function(){
+    var url=location.origin+location.pathname+'?t='+tgt+'&y='+$('dv-yield').value+'&g='+$('dv-growth').value+'&n='+years+(have>0?'&h='+have:'');
+    var t='월 배당 '+won(tgt)+' 받으려면 원금 '+won(principal)+', '+years+'년간 매달 '+won(Math.ceil(monthly))+'! 내 노후설계 👉 '+url;
+    if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('결과 링크가 복사됐어요! 저장·공유하세요.');});}};
 };
+// 공유 링크(?t=&y=&g=&n=&h=)로 들어오면 값 채우고 자동 계산 (결과 저장·재현)
+(function(){
+  var p=new URLSearchParams(location.search);
+  if(p.get('t')){
+    $('dv-target').value=p.get('t');
+    if(p.get('y'))$('dv-yield').value=p.get('y');
+    if(p.get('g'))$('dv-growth').value=p.get('g');
+    if(p.get('n'))$('dv-years').value=p.get('n');
+    if(p.get('h'))$('dv-have').value=p.get('h');
+    $('dv-go').click();
+  }
+})();
 })();
 </script>
 
