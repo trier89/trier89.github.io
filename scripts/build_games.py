@@ -361,5 +361,77 @@ write("othello", shell("othello", "오셀로(리버시) 게임",
     "⚪ 오셀로", "컴퓨터와 대결 · 상대 돌을 감싸 뒤집어요 · 흰 점이 둘 수 있는 자리",
     OTHELLO_BODY, OTHELLO_JS))
 
+# ─────────────────────────────────────────────────────────────
+# 🟦 테트리스
+# ─────────────────────────────────────────────────────────────
+TETRIS_JS = r'''
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var COLS=10,ROWS=20,B=cv.width/COLS;
+var COLORS=['','#31c7ef','#f7d308','#ad4d9c','#42b642','#ef2029','#5a65ad','#ef7921'];
+var SHAPES=[[],
+[[1,1,1,1]],                 // I
+[[2,2],[2,2]],               // O
+[[0,3,0],[3,3,3]],           // T
+[[0,4,4],[4,4,0]],           // S
+[[5,5,0],[0,5,5]],           // Z
+[[6,0,0],[6,6,6]],           // J
+[[0,0,7],[7,7,7]]];          // L
+var grid,cur,px,py,score,lines,level,hi=+localStorage.getItem('tetris_hi')||0,state='ready',drop,acc,bag=[];
+var scE=document.getElementById('sc'),lnE=document.getElementById('ln'),lvE=document.getElementById('lv'),hiE=document.getElementById('hi'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
+hiE.textContent=hi;
+function newGrid(){grid=[];for(var y=0;y<ROWS;y++)grid.push(new Array(COLS).fill(0));}
+function nextPiece(){if(!bag.length){bag=[1,2,3,4,5,6,7];for(var i=bag.length-1;i>0;i--){var j=(Math.random()*(i+1))|0;var t=bag[i];bag[i]=bag[j];bag[j]=t;}}return bag.pop();}
+function spawn(){cur=SHAPES[nextPiece()].map(function(r){return r.slice();});px=((COLS-cur[0].length)/2)|0;py=0;if(collide(px,py,cur))over();}
+function collide(nx,ny,sh){for(var y=0;y<sh.length;y++)for(var x=0;x<sh[y].length;x++){if(sh[y][x]){var gx=nx+x,gy=ny+y;if(gx<0||gx>=COLS||gy>=ROWS||(gy>=0&&grid[gy][gx]))return true;}}return false;}
+function merge(){for(var y=0;y<cur.length;y++)for(var x=0;x<cur[y].length;x++){if(cur[y][x]&&py+y>=0)grid[py+y][px+x]=cur[y][x];}}
+function rotate(){var n=cur.length,m=cur[0].length,r=[];for(var x=0;x<m;x++){r.push([]);for(var y=n-1;y>=0;y--)r[x].push(cur[y][x]);}
+  var nx=px;if(collide(px,py,r)){if(!collide(px-1,py,r))nx=px-1;else if(!collide(px+1,py,r))nx=px+1;else return;}px=nx;cur=r;}
+function clearLines(){var c=0;for(var y=ROWS-1;y>=0;y--){if(grid[y].every(function(v){return v;})){grid.splice(y,1);grid.unshift(new Array(COLS).fill(0));c++;y++;}}
+  if(c){lines+=c;score+=[0,100,300,500,800][c]*level;level=1+((lines/10)|0);drop=Math.max(80,600-(level-1)*45);sync();}}
+function sync(){scE.textContent=score;lnE.textContent=lines;lvE.textContent=level;}
+function down(){if(collide(px,py+1,cur)){merge();clearLines();spawn();}else py++;}
+function hard(){while(!collide(px,py+1,cur))py++;down();}
+function draw(){
+  ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,cv.width,cv.height);
+  for(var y=0;y<ROWS;y++)for(var x=0;x<COLS;x++){if(grid[y][x])cell(x,y,grid[y][x]);}
+  if(cur)for(var y=0;y<cur.length;y++)for(var x=0;x<cur[y].length;x++){if(cur[y][x])cell(px+x,py+y,cur[y][x]);}
+}
+function cell(x,y,c){ctx.fillStyle=COLORS[c];ctx.fillRect(x*B+1,y*B+1,B-2,B-2);ctx.fillStyle='rgba(255,255,255,.15)';ctx.fillRect(x*B+1,y*B+1,B-2,3);}
+function loop(t){if(state!=='play')return;if(!acc)acc=t;if(t-acc>drop){down();acc=t;}draw();requestAnimationFrame(loop);}
+function over(){state='over';if(score>hi){hi=score;localStorage.setItem('tetris_hi',hi);hiE.textContent=hi;}
+  ov.style.display='flex';ov.querySelector('h2').textContent='GAME OVER';
+  ov.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b> · '+lines+'줄<br>최고기록 '+hi;
+  var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
+  b.textContent='📤 자랑하기';b.onclick=function(){var t='테트리스 '+score+'점! 🟦 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  btn.textContent='다시 도전';}
+function start(){ov.style.display='none';newGrid();score=0;lines=0;level=1;drop=600;acc=0;bag=[];sync();spawn();state='play';requestAnimationFrame(loop);}
+btn.onclick=start;
+document.addEventListener('keydown',function(e){if(state!=='play')return;var k=e.key;
+  if(k==='ArrowLeft'){if(!collide(px-1,py,cur))px--;}else if(k==='ArrowRight'){if(!collide(px+1,py,cur))px++;}
+  else if(k==='ArrowDown'){down();}else if(k==='ArrowUp'){rotate();}else if(k===' '){hard();}else return;e.preventDefault();draw();});
+function bind(id,fn){var b=document.getElementById(id);if(b)b.onclick=function(){if(state!=='play')return;fn();draw();};}
+bind('t-l',function(){if(!collide(px-1,py,cur))px--;});bind('t-r',function(){if(!collide(px+1,py,cur))px++;});
+bind('t-rot',rotate);bind('t-d',down);bind('t-drop',hard);
+})();
+'''
+TETRIS_BODY = '''<div id="wrap">
+  <canvas id="cv" width="240" height="480"></canvas>
+  <div id="overlay">
+    <h2>TETRIS</h2>
+    <p>← → 이동 · ↑ 회전 · ↓ 내리기 · 스페이스 한번에<br>줄을 꽉 채우면 사라져요!</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span>SCORE <b id="sc">0</b></span><span>LINES <b id="ln">0</b></span><span>LV <b id="lv">1</b></span><span>BEST <b id="hi">0</b></span></div>
+<div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+  <button id="t-l" class="tbtn">◀</button><button id="t-rot" class="tbtn">↻</button><button id="t-r" class="tbtn">▶</button><button id="t-d" class="tbtn">▼</button><button id="t-drop" class="tbtn">⤓</button>
+</div>
+<style>.tbtn{background:#1f1f1d;border:1px solid #3e3e3a;color:#e8e6e3;font-size:20px;width:52px;height:48px;border-radius:8px;cursor:pointer;}</style>'''
+write("tetris", shell("tetris", "테트리스 게임",
+    "블록을 쌓아 줄을 없애는 클래식 테트리스. 키보드·터치 버튼으로 조작하는 무료 웹게임.",
+    "🟦 테트리스", "← → 이동 · ↑ 회전 · ↓ 내리기 · 스페이스 한 번에 · 모바일은 아래 버튼",
+    TETRIS_BODY, TETRIS_JS))
+
 if __name__=="__main__":
     pass
