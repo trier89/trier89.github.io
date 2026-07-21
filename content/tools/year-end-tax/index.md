@@ -29,6 +29,13 @@ readingTime: false
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">보장성 보험료</span><input type="tel" id="yt-ins" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">의료비</span><input type="tel" id="yt-med" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">기부금</span><input type="tel" id="yt-donate" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">월세액 (연간)</span><input type="tel" id="yt-rent" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">고향사랑기부금</span><input type="tel" id="yt-hometown" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+  </div>
+  <div style="margin-top:14px;font-weight:700;color:#7c3aed;">🏠 추가 소득공제 (연간, 만원)</div>
+  <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">문화비·헬스장 <span style="color:#999;">(총급여 7천↓)</span></span><input type="tel" id="yt-culture" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
   <button id="yt-go" style="width:100%;margin-top:16px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-size:17px;font-weight:700;cursor:pointer;">계산하기</button>
   <div id="yt-out" style="display:none;margin-top:20px;">
@@ -62,7 +69,9 @@ $('yt-go').onclick=function(){
   var cardDed=0;
   if(over>0){var cashPart=Math.min(cashUse,over);var cardPart=over-cashPart;cardDed=Math.min(cardPart*0.15+cashPart*0.30,3000000);}
   // 과세표준
-  var base=g-earnDed(g)-perDed-cardDed;
+  var mortgage=Math.min(v('yt-mortgage'),18000000);   // 장기주택저당 이자 소득공제(한도 근사 1,800만)
+  var culture=g<=70000000?v('yt-culture')*0.30:0;      // 문화비·체육시설 30% 소득공제(총급여 7천 이하만)
+  var base=g-earnDed(g)-perDed-cardDed-mortgage-culture;
   var calcTax=tax(base);                   // 산출세액
   // 세액공제
   var pension=Math.min(v('yt-pension'),9000000); // 연금저축+IRP 한도 900만 근사
@@ -72,7 +81,13 @@ $('yt-go').onclick=function(){
   var med=v('yt-med'); var medBase=Math.max(med-g*0.03,0); var medCr=medBase*0.15;
   var donate=v('yt-donate'); var donCr=Math.min(donate,g*0.3)*0.15;
   var childCr=child>=1?(child===1?150000:child===2?300000:300000+(child-2)*300000):0;
-  var credits=pensionCr+insCr+medCr+donCr+childCr;
+  // 월세 세액공제: 총급여 5,500만↓ 17%, 7,000만↓ 15%, 한도 1,000만
+  var rent=Math.min(v('yt-rent'),10000000);
+  var rentCr=g<=55000000?rent*0.17:(g<=70000000?rent*0.15:0);
+  // 고향사랑기부: 10만원 이하 전액, 초과분 15%(상한 500만)
+  var home=Math.min(v('yt-hometown'),5000000);
+  var homeCr=Math.min(home,100000)+Math.max(home-100000,0)*0.15;
+  var credits=pensionCr+insCr+medCr+donCr+childCr+rentCr+homeCr;
   var stdCredit=130000;                    // 표준세액공제(특별공제 없을때) 근사
   var appliedCredit=Math.max(credits,stdCredit);
   var decided=Math.max(calcTax-appliedCredit,0);      // 결정세액
@@ -87,6 +102,8 @@ $('yt-go').onclick=function(){
     '<tr><td style="color:#555;">근로소득공제</td><td>-'+won(earnDed(g))+'</td></tr>'
     +'<tr><td style="color:#555;">인적공제 ('+fam+'명)</td><td>-'+won(perDed)+'</td></tr>'
     +(cardDed>0?'<tr><td style="color:#555;">신용/체크카드 공제</td><td>-'+won(cardDed)+'</td></tr>':'')
+    +(mortgage>0?'<tr><td style="color:#555;">장기주택저당 이자</td><td>-'+won(mortgage)+'</td></tr>':'')
+    +(culture>0?'<tr><td style="color:#555;">문화비·체육시설 공제</td><td>-'+won(culture)+'</td></tr>':'')
     +'<tr><td style="color:#555;">과세표준</td><td>'+won(base)+'</td></tr>'
     +'<tr><td style="color:#555;">산출세액</td><td>'+won(calcTax)+'</td></tr>'
     +'<tr><td style="color:#555;">세액공제 합계</td><td>-'+won(appliedCredit)+'</td></tr>'
@@ -109,5 +126,8 @@ $('yt-go').onclick=function(){
 - **연금저축·IRP**가 세액공제율이 높아요(13.2~16.5%). 노후 준비 + 절세 두 마리 토끼.
 - **체크카드·현금영수증**은 신용카드보다 공제율이 2배(30%). 총급여 25% 넘게 쓰는 구간부터는 체크카드가 유리.
 - **의료비**는 총급여 3%를 넘는 금액만 공제돼요.
+- **월세 세액공제**: 무주택 세대주(총급여 8천만↓·기준시가 4억↓ 주택)면 연 월세액의 15~17%를 세금에서 깎아줘요 (한도 1,000만원).
+- **고향사랑기부금**: 10만원까지는 전액 세액공제(사실상 낸 만큼 돌려받음)+답례품, 초과분은 15%.
+- **문화비·헬스장**: 총급여 7,000만원 이하면 도서·공연·영화·헬스장·수영장 결제액에 30% 소득공제 (신용카드 공제에 추가).
 
 > 이 계산기는 주요 항목만 반영한 **간이 추정**이에요. 실제 연말정산은 훨씬 많은 규정이 적용되니, 정확한 금액은 [국세청 홈택스 연말정산 미리보기](https://www.hometax.go.kr)에서 확인하세요.
