@@ -1,0 +1,65 @@
+{{ define "body-class" }}
+    article-page
+    {{/* 
+        Enable the right sidebar if
+            - Widget different from 'TOC' is enabled
+            - TOC is enabled and not empty
+    */}}
+    {{- $HasWidgetNotTOC := false -}}
+    {{- $TOCWidgetEnabled := false -}}
+    {{- range .Site.Params.widgets.page -}}
+        {{- if ne .type "toc" -}}
+            {{ $HasWidgetNotTOC = true -}}
+        {{- else -}}
+            {{ $TOCWidgetEnabled = true -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- $TOCManuallyDisabled := eq .Params.toc false -}}
+    {{- $TOCEnabled := and (not $TOCManuallyDisabled) $TOCWidgetEnabled -}}
+    {{- $hasTOC := ge (len .TableOfContents) 100 -}}
+    {{- .Scratch.Set "TOCEnabled" (and $TOCEnabled $hasTOC) -}}
+    
+    {{- .Scratch.Set "hasWidget" (or $HasWidgetNotTOC (and $TOCEnabled $hasTOC)) -}}
+{{ end }}
+
+{{ define "main" }}
+    {{ partial "article/article.html" . }}
+
+    {{ if .Params.links }}
+        {{ partial "article/components/links" . }}
+    {{ end }}
+
+    {{ partial "article/components/related-content" . }}
+
+    <div class="pf-share" style="margin-top:22px;padding-top:16px;border-top:1px dashed var(--card-separator-color,#3e3e3a);">
+        <div style="font-size:14px;color:#888;margin-bottom:8px;">📤 이 글 공유하기</div>
+        <div id="pf-share-btns" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+    </div>
+    <script>
+    (function(){
+      var url=location.href.split('#')[0].split('?')[0];
+      var title=document.title;
+      var b=document.getElementById('pf-share-btns');
+      function mk(label,emoji,fn){var a=document.createElement('button');a.textContent=emoji+' '+label;a.style.cssText='background:#1f1f1d;border:1px solid #3e3e3a;border-radius:20px;color:#e8e6e3;padding:8px 15px;font:inherit;font-size:13px;cursor:pointer;';a.onmouseover=function(){a.style.borderColor='#d97757';};a.onmouseout=function(){a.style.borderColor='#3e3e3a';};a.onclick=fn;b.appendChild(a);}
+      if(navigator.share)mk('공유','📲',function(){navigator.share({title:title,url:url});});
+      mk('카카오톡','💬',function(){window.open('https://story.kakao.com/share?url='+encodeURIComponent(url),'_blank','width=500,height=600');});
+      mk('X(트위터)','𝕏',function(){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(title)+'&url='+encodeURIComponent(url),'_blank','width=550,height=420');});
+      mk('페이스북','📘',function(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),'_blank','width=580,height=400');});
+      mk('링크복사','🔗',function(){navigator.clipboard.writeText(url).then(function(){alert('링크가 복사됐어요!');});});
+    })();
+    </script>
+
+    {{ if not (eq .Params.comments false) }}
+        {{ partial "comments/include" . }}
+    {{ end }}
+
+    {{ partialCached "footer/footer" . }}
+
+    {{ partialCached "article/components/photoswipe" . }}
+    {{ partial "article/components/mermaid" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ if .Scratch.Get "hasWidget" }}{{ partial "sidebar/right.html" (dict "Context" . "Scope" "page") }}{{ end}}
+{{ end }}

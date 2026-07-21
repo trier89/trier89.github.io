@@ -46,7 +46,7 @@ def main():
     md = [f"""---
 title: "오늘 사람들이 검색한 것 — {now.month}월 {now.day}일 검색 트렌드"
 date: {now:%Y-%m-%d}T17:30:00+09:00
-categories: ["뉴스"]
+categories: ["트렌드"]
 tags: ["검색 트렌드", "실시간 검색어", "구글 트렌드", "{now.month}월 {now.day}일"]
 ---
 

@@ -49,9 +49,14 @@ googleAnalytics = 'G-E8ECH6NV3Y'
   weight = 5
 
 [[menu.main]]
+  name = '트렌드'
+  url = '/categories/트렌드/'
+  weight = 6
+
+[[menu.main]]
   name = '오늘의 역사'
   url = '/categories/오늘의-역사/'
-  weight = 6
+  weight = 7
 
 [markup.goldmark.renderer]
   unsafe = true
