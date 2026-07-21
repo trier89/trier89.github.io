@@ -43,6 +43,22 @@ def main():
         print("트렌드 항목 부족 — 발행 스킵"); return
     items = items[:10]
 
+    # 기사가 안 붙은 키워드는 구글 뉴스 검색으로 보충 (빈 항목 방지)
+    for e in items:
+        if not e["news"]:
+            try:
+                q = urllib.parse.quote(f"{e['kw']} when:1d")
+                fu = f"https://news.google.com/rss/search?q={q}&hl=ko&gl=KR&ceid=KR:ko"
+                fx = urllib.request.urlopen(urllib.request.Request(fu, headers=UA), timeout=15).read()
+                for n in ET.fromstring(fx).findall(".//item")[:2]:
+                    t = (n.findtext("title") or "").strip()
+                    u = (n.findtext("link") or "").strip()
+                    se = n.find("source"); src = (se.text if se is not None else "") or ""
+                    if t and u:
+                        e["news"].append({"title": t, "url": u, "src": src})
+            except Exception:
+                pass
+
     md = [f"""---
 title: "오늘 사람들이 검색한 것 — {now.month}월 {now.day}일 검색 트렌드"
 date: {now:%Y-%m-%d}T17:30:00+09:00
