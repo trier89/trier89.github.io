@@ -67,3 +67,6 @@ googleAnalytics = 'G-E8ECH6NV3Y'
 
 [markup.goldmark.renderer]
   unsafe = true
+
+[outputs]
+  home = ['HTML', 'JSON']

@@ -1,0 +1,12 @@
+{{- $pages := where .Site.RegularPages "Section" "in" (slice "tools" "tests" "post") -}}
+[
+{{- range $i, $p := $pages -}}
+{{- if $i }},{{ end }}
+{"title":{{ $p.Title | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"desc":{{ $p.Description | jsonify }},"cat":{{ (index (or $p.Params.categories (slice "")) 0) | jsonify }},"tags":{{ (delimit (or $p.Params.tags (slice)) " ") | jsonify }}}
+{{- end -}}
+,
+{"title":"픽셀 인베이더","url":"/games/pixel-invaders/","desc":"레트로 우주 슈팅 게임","cat":"게임","tags":"게임 슈팅 갤러그 레트로"},
+{"title":"벽돌깨기","url":"/games/breakout/","desc":"공을 튕겨 벽돌을 깨는 클래식","cat":"게임","tags":"게임 벽돌깨기 아케이드"},
+{"title":"지뢰찾기","url":"/games/minesweeper/","desc":"숫자 힌트로 지뢰를 피하는 두뇌 게임","cat":"게임","tags":"게임 지뢰찾기 퍼즐"},
+{"title":"숫자야구","url":"/games/number-baseball/","desc":"3자리 숫자 추리 게임","cat":"게임","tags":"게임 숫자야구 추리"}
+]

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{{ partial "head/head.html" . }}
+{{ partial "pf/shell-head.html" . }}
+</head>
+<body>
+<div class="pf-wrap">
+{{ partial "pf/nav.html" . }}
+<main class="pf-main">
+  <h1>🔎 검색</h1>
+  <input type="text" id="q" placeholder="도구·게임·테스트·글 검색... (예: 나이, 배당, 운세)" autocomplete="off"
+    style="width:100%;padding:14px 16px;border:2px solid #3e3e3a;border-radius:12px;background:#1f1f1d;color:#e8e6e3;font:inherit;font-size:16px;box-sizing:border-box;">
+  <div id="sr" style="margin-top:20px;"></div>
+</main>
+{{ partial "pf/foot.html" . }}
+</div>
+<script>
+(function(){
+var q=document.getElementById('q'), sr=document.getElementById('sr'), idx=[];
+var CATEMOJI={'도구':'🧰','게임':'🎮','심리테스트':'🧠','트렌드':'🔍','오늘의 역사':'🏛','뉴스':'📰'};
+fetch('/index.json').then(function(r){return r.json();}).then(function(d){idx=d;
+  var p=new URLSearchParams(location.search).get('q');
+  if(p){q.value=p;run();}
+});
+function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function run(){
+  var t=q.value.trim().toLowerCase();
+  if(!t){sr.innerHTML='<div style="color:#9c9a94;">검색어를 입력해보세요. 예: <b>나이</b>, <b>배당</b>, <b>연애</b>, <b>게임</b></div>';return;}
+  var hits=idx.map(function(x){
+    var hay=(x.title+' '+x.desc+' '+x.tags+' '+x.cat).toLowerCase();
+    var score=0;
+    if(x.title.toLowerCase().indexOf(t)>-1)score+=10;
+    if(hay.indexOf(t)>-1)score+=3;
+    t.split(/\s+/).forEach(function(w){if(w&&hay.indexOf(w)>-1)score+=1;});
+    return {x:x,s:score};
+  }).filter(function(o){return o.s>0;}).sort(function(a,b){return b.s-a.s;});
+  if(!hits.length){sr.innerHTML='<div style="color:#9c9a94;">\''+esc(q.value)+'\' 검색 결과가 없어요. 다른 키워드로 찾아보세요.</div>';return;}
+  sr.innerHTML='<div style="color:#9c9a94;font-size:13px;margin-bottom:10px;">'+hits.length+'개 결과</div>'+
+    hits.slice(0,40).map(function(o){var x=o.x;var em=CATEMOJI[x.cat]||'📄';
+      return '<a href="'+x.url+'" style="display:block;text-decoration:none;border:1px solid #3e3e3a;border-radius:10px;padding:13px 16px;margin:8px 0;background:#1f1f1d;transition:all .12s;" onmouseover="this.style.borderColor=\'#d97757\'" onmouseout="this.style.borderColor=\'#3e3e3a\'">'
+        +'<div style="color:#e8e6e3;font-weight:700;">'+em+' '+esc(x.title)+' <span style="color:#e0c07e;font-size:12px;font-weight:400;">'+esc(x.cat)+'</span></div>'
+        +(x.desc?'<div style="color:#9c9a94;font-size:13px;margin-top:3px;">'+esc(x.desc)+'</div>':'')+'</a>';
+    }).join('');
+}
+q.addEventListener('input',run);
+})();
+</script>
+</body>
+</html>
