@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{{ partial "head/head.html" . }}
+{{ partial "pf/shell-head.html" . }}
+</head>
+<body>
+<div class="pf-wrap">
+{{ partial "pf/nav.html" . }}
+<main class="pf-main">
+  <h1>🧠 심리테스트</h1>
+  <p style="color:var(--dim);">재미로 보는 심리테스트 — 결과는 친구에게 바로 공유돼요</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;" class="pf-tg">
+    {{ range .Pages }}<a class="pf-card" href="{{ .RelPermalink }}" style="margin:0;"><div class="t">{{ .Title }}</div><div class="m">{{ .Description }}</div></a>{{ end }}
+  </div>
+  <style>@media(max-width:600px){.pf-tg{grid-template-columns:1fr!important;}}</style>
+</main>
+{{ partial "pf/foot.html" . }}
+</div>
+</body>
+</html>
