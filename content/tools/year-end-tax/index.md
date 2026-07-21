@@ -18,11 +18,25 @@ readingTime: false
     <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">부양가족 (본인 포함)</span><input type="tel" id="yt-fam" inputmode="numeric" value="1" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
     <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">20세 이하 자녀</span><input type="tel" id="yt-child" inputmode="numeric" value="0" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
   </div>
-  <div style="margin-top:14px;font-weight:700;color:#059669;">💳 소득공제 (연간 사용액, 만원)</div>
+  <label style="display:block;margin-top:14px;"><span style="display:block;font-weight:700;margin-bottom:6px;">원천징수세율 <span style="color:#999;font-weight:400;font-size:13px;">(회사에 신청한 비율)</span></span>
+    <select id="yt-withhold" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;background:#fff;">
+      <option value="100" selected>100% (기본 — 대부분 여기)</option>
+      <option value="80">80% (매달 덜 떼고 연말에 덜 환급)</option>
+      <option value="120">120% (매달 더 떼고 연말에 더 환급)</option>
+    </select></label>
+  <label style="display:block;margin-top:10px;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">이미 낸 세금 (기납부·원천징수 총액, 만원) <span style="color:#999;">— 급여명세서 있으면 입력, 없으면 자동추정</span></span>
+    <input type="tel" id="yt-prepaid" inputmode="numeric" placeholder="비우면 원천징수세율로 자동 계산" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
+  <div style="margin-top:14px;font-weight:700;color:#059669;">💳 카드·현금 소득공제 (연간 사용액, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;">
-    <label style="flex:1;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">신용카드</span><input type="tel" id="yt-card" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
-    <label style="flex:1;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">체크카드·현금</span><input type="tel" id="yt-cash" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">신용카드 <span style="color:#999;">15%</span></span><input type="tel" id="yt-card" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">체크카드·현금 <span style="color:#999;">30%</span></span><input type="tel" id="yt-cash" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
+  <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
+    <label style="flex:1 1 30%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">전통시장 <span style="color:#999;">40%</span></span><input type="tel" id="yt-market" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 30%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">대중교통 <span style="color:#999;">40%</span></span><input type="tel" id="yt-transit" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 30%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">문화비·도서·공연·헬스장 <span style="color:#999;">30%·7천↓</span></span><input type="tel" id="yt-culture" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+  </div>
+  <div style="font-size:12px;color:#6b7280;margin-top:5px;line-height:1.5;">※ 전통시장·대중교통·문화비는 <b>총급여 25% 초과분에 한해</b> 위 공제율로 <b>각 100만원까지 추가공제</b>돼요 (문화비·도서·공연·영화·박물관·미술관·헬스장·수영장은 총급여 7천만원 이하만).</div>
   <div style="margin-top:14px;font-weight:700;color:#2563eb;">🧾 세액공제 (연간 납입액, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">연금저축·IRP</span><input type="tel" id="yt-pension" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
@@ -35,7 +49,6 @@ readingTime: false
   <div style="margin-top:14px;font-weight:700;color:#7c3aed;">🏠 추가 소득공제 (연간, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
-    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">문화비·헬스장 <span style="color:#999;">(총급여 7천↓)</span></span><input type="tel" id="yt-culture" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">주택청약저축 <span style="color:#999;">(무주택)</span></span><input type="tel" id="yt-housing" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">청년형 장기펀드 <span style="color:#999;">(청년)</span></span><input type="tel" id="yt-youthfund" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
@@ -47,7 +60,7 @@ readingTime: false
     </div>
     <table style="width:100%;margin-top:12px;font-size:14.5px;border-collapse:collapse;"><tbody id="yt-rows"></tbody></table>
     <div id="yt-tips" style="margin-top:16px;"></div>
-    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ 여기서 \'환급\'은 <b>공제를 하나도 안 받았을 때 대비 아낀 세금</b>이에요. 실제 환급액은 회사가 매달 미리 뗀 세금(기납부)과 결정세액의 차이라 조금 달라요. 간이 계산이라 신용카드 공제·의료비 문턱(총급여 3%)·표준세액공제 등 세부 규정으로 실제와 차이가 납니다. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
+    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ \'환급/추가납부\'는 <b>매달 미리 낸 세금(기납부) − 결정세액</b>이에요. 기납부는 급여명세서 원천징수액을 직접 넣으면 정확하고, 안 넣으면 원천징수세율(80/100/120%)로 간이세액을 추정해요. 카드공제 초과분 배분·의료비 문턱(3%)·표준세액공제 등은 근사치라 홈택스 실제값과 차이가 납니다. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
     <button id="yt-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;cursor:pointer;">📤 공유하기</button>
   </div>
 </div>
@@ -74,19 +87,28 @@ $('yt-go').onclick=function(){
   var fam=Math.max(parseInt($('yt-fam').value)||1,1), child=parseInt($('yt-child').value)||0;
   // 소득공제
   var perDed=1500000*fam;                 // 인적공제 150만/인
-  // 신용카드: 총급여 25% 초과분의 15%(신용)·30%(체크현금), 한도 단순 300만
+  // 신용카드 등 소득공제: 총급여 25% 초과분에 공제율(신용15·체크현금30·전통시장40·대중교통40·문화비30)
+  // 최저사용금액(25%)은 공제율 낮은 것부터 차감(신용→체크현금/문화→시장/교통) = 납세자 유리
   var thr=g*0.25;
-  var cardUse=v('yt-card'), cashUse=v('yt-cash');
-  var over=Math.max(cardUse+cashUse-thr,0);
-  var cardCap=g<=70000000?3000000:(g<=120000000?2500000:2000000); // 총급여별 카드공제 한도
-  var cardDed=0, cardFull=0;
-  if(over>0){var cashPart=Math.min(cashUse,over);var cardPart=over-cashPart;cardFull=cardPart*0.15+cashPart*0.30;cardDed=Math.min(cardFull,cardCap);}
+  var credit=v('yt-card'), cash=v('yt-cash'), market=v('yt-market'), transit=v('yt-transit');
+  var cultureUse=g<=70000000?v('yt-culture'):0;   // 문화비는 총급여 7천 이하만
+  var bk=[{u:credit,r:0.15,g:'base'},{u:cash,r:0.30,g:'base'},{u:cultureUse,r:0.30,g:'add',n:'culture'},{u:market,r:0.40,g:'add',n:'market'},{u:transit,r:0.40,g:'add',n:'transit'}];
+  bk.sort(function(a,b){return a.r-b.r;});
+  var rem=thr; bk.forEach(function(x){var t=Math.min(x.u,rem); x.ded=(x.u-t)*x.r; rem-=t;});
+  var baseCap=g<=70000000?3000000:2500000;                 // 기본 한도(7천↓ 300만 / 초과 250만)
+  var addCap =g<=70000000?3000000:2000000;                 // 추가 한도(시장+교통+문화, 7천↓ 300만 / 초과 200만)
+  var baseFull=bk.filter(function(x){return x.g==='base';}).reduce(function(s,x){return s+x.ded;},0);
+  var baseDed=Math.min(baseFull,baseCap);
+  var addFull=bk.filter(function(x){return x.g==='add';}).reduce(function(s,x){return s+Math.min(x.ded,1000000);},0); // 각 항목 100만 한도
+  var addDed=Math.min(addFull,addCap);
+  var cardDed=baseDed+addDed;
+  var cardUse=credit+cash, cardFull=baseFull, cardCap=baseCap; // 팁·표시용(기본 카드 기준)
+  var baseCapPoint=thr+baseCap/0.15;   // 신용카드만으로 기본한도 채우는 사용액(이상이면 카드종류 무관)
   // 과세표준
   var mortgage=Math.min(v('yt-mortgage'),18000000);   // 장기주택저당 이자 소득공제(한도 근사 1,800만)
-  var culture=g<=70000000?v('yt-culture')*0.30:0;      // 문화비·체육시설 30% 소득공제(총급여 7천 이하만)
   var housing=Math.min(v('yt-housing'),3000000)*0.40;  // 주택청약: 납입 40%, 연 300만 한도(무주택 세대주)
   var youthfund=Math.min(v('yt-youthfund'),6000000)*0.40; // 청년형 장기펀드: 납입 40%, 연 600만 한도(총급여 5천↓ 청년)
-  var base=g-earnDed(g)-perDed-cardDed-mortgage-culture-housing-youthfund;
+  var base=g-earnDed(g)-perDed-cardDed-mortgage-housing-youthfund;
   var calcTax=tax(base);                   // 산출세액
   // 세액공제
   var pension=Math.min(v('yt-pension'),9000000); // 연금저축+IRP 한도 900만 근사
@@ -107,23 +129,28 @@ $('yt-go').onclick=function(){
   var stdCredit=130000;                    // 표준세액공제(특별공제 없을때) 근사
   var appliedCredit=Math.max(credits,stdCredit);
   var decided=Math.max(calcTax-appliedCredit,0);      // 결정세액
-  // 기납부(원천징수) 근사 = 공제 없이 기본만 반영한 세액 ≈ 간이세액 연환산
-  // 공제 하나도 안 받았을 때(100% 기준) 세금 = 근로소득공제+본인 기본공제만 반영한 세액
-  var noDeductTax=Math.max(tax(g-earnDed(g)-1500000),0);
+  // 기납부(원천징수 총액) = 간이세액표 근사 × 선택 비율(80/100/120%)
+  // 간이세액 ≈ 근로소득공제+본인공제150만만 반영한 산출세액 - 표준세액공제 13만
+  var simpleTax=Math.max(tax(g-earnDed(g)-1500000)-130000,0);
+  var wtRate=parseFloat($('yt-withhold').value)||100;
+  var prepaidInput=v('yt-prepaid');   // 사용자가 직접 입력한 기납부(있으면 우선)
+  var prepaidAuto=Math.round(simpleTax*wtRate/100);
+  var noDeductTax=prepaidInput>0?prepaidInput:prepaidAuto;   // 기납부(원천징수)
+  var prepaidManual=prepaidInput>0;
   var refund=noDeductTax-decided;
-  $('yt-big-label').textContent=refund>=0?'공제로 아낀 세금 (예상 환급)':'예상 추가납부';
+  $('yt-big-label').textContent=refund>=0?'예상 환급 (원천징수 '+wtRate+'% 기준)':'예상 추가납부 (원천징수 '+wtRate+'% 기준)';
   $('yt-big').textContent=won(Math.abs(refund));
   $('yt-big').style.color=refund>=0?'#047857':'#dc2626';
   $('yt-card2').style.background=refund>=0?'#ecfdf5':'#fef2f2';
   function sec(t){return '<tr><td colspan="2" style="padding-top:14px;font-weight:800;color:#111;border-bottom:2px solid #ddd;">'+t+'</td></tr>';}
   function row(l,val,neg){return '<tr><td style="color:#555;">'+l+'</td><td style="'+(neg?'color:#dc2626;':'')+'">'+(neg?'-':'')+won(val)+'</td></tr>';}
-  var incDedSum=earnDed(g)+perDed+cardDed+mortgage+culture+housing+youthfund;
+  var incDedSum=earnDed(g)+perDed+cardDed+mortgage+housing+youthfund;
   var html=sec('① 소득')+row('총급여 (연봉)',g);
   html+=sec('② 소득공제 (소득을 줄여줘요)')
     +row('근로소득공제',earnDed(g),1)+row('인적공제 ('+fam+'명)',perDed,1)
-    +(cardDed>0?row('신용/체크카드'+(cardFull>=cardCap?' (한도도달)':''),cardDed,1):'')
+    +(baseDed>0?row('신용/체크카드'+(baseFull>baseCap?' (한도도달)':''),baseDed,1):'')
+    +(addDed>0?row('전통시장·대중교통·문화비 추가'+(addFull>addCap?' (한도도달)':''),addDed,1):'')
     +(mortgage>0?row('장기주택저당 이자',mortgage,1):'')
-    +(culture>0?row('문화비·체육시설',culture,1):'')
     +(housing>0?row('주택청약저축',housing,1):'')
     +(youthfund>0?row('청년형 장기펀드',youthfund,1):'')
     +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">소득공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(incDedSum)+'</td></tr>'
@@ -141,9 +168,9 @@ $('yt-go').onclick=function(){
     +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">세액공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(appliedCredit)+'</td></tr>'
     +'<tr class="hl"><td>⑥ 결정세액 (실제 낼 세금)</td><td>'+won(decided)+'</td></tr>';
   html+=sec('⑦ 환급 계산')
-    +row('공제 하나도 안 받았다면',noDeductTax)
-    +row('공제 다 받은 결정세액',decided)
-    +'<tr class="hl"><td>'+(refund>=0?'→ 공제로 아낀 세금':'→ 추가납부')+'</td><td>'+won(Math.abs(refund))+'</td></tr>';
+    +row('기납부 ('+(prepaidManual?'직접입력':'원천징수 '+wtRate+'% 자동추정')+', 매달 미리 낸 세금)',noDeductTax)
+    +row('결정세액 (실제 낼 세금)',decided)
+    +'<tr class="hl"><td>'+(refund>=0?'→ 예상 환급':'→ 예상 추가납부')+'</td><td>'+won(Math.abs(refund))+'</td></tr>';
   $('yt-rows').innerHTML=html;
   // ── 맞춤 절세 팁 (입력값 기반) ──
   var tips=[];
@@ -154,12 +181,18 @@ $('yt-go').onclick=function(){
   if(pension<9000000){var room=(9000000-pension)/10000;var rate2=g<=55000000?16.5:13.2;
     tips.push('🏦 <b>연금저축·IRP 한도가 '+Math.round(room).toLocaleString()+'만원 남았어요.</b> 여기 더 넣으면 '+rate2+'% ('+Math.round(room*rate2/100).toLocaleString()+'만원)를 돌려받아요. 절세율 최고 항목이에요.');}
   // 신용카드 최적화
-  if(cardUse+cashUse<thr){var need=(thr-(cardUse+cashUse))/10000;
-    tips.push('💳 카드 사용액이 아직 <b>총급여의 25%('+Math.round(thr/10000).toLocaleString()+'만원)에 '+Math.round(need).toLocaleString()+'만원 부족</b>해요. 여기 넘어야 카드 공제가 시작돼요.');}
-  else if(cardFull>=cardCap){
-    tips.push('💳 카드 공제가 <b>이미 한도('+Math.round(cardCap/10000)+'만원)에 도달</b>했어요. 이 이상은 체크카드로 써도 소득공제가 안 늘어나니, <b>혜택 좋은 신용카드를 써도 똑같아요.</b>');}
-  else if(cashUse<over){
-    tips.push('💳 25%는 넘겼고 한도는 남았어요. 이 구간에선 <b>체크카드·현금영수증이 공제율 2배(30%)</b>라 유리해요. 앞으로 지출은 체크카드로!');}
+  var totalSpend=credit+cash+market+transit+cultureUse;
+  if(totalSpend<thr){var need=(thr-totalSpend)/10000;
+    tips.push('💳 카드·현금 사용액이 아직 <b>총급여의 25%('+Math.round(thr/10000).toLocaleString()+'만원)에 '+Math.round(need).toLocaleString()+'만원 부족</b>해요. 여기 넘어야 카드 공제가 시작돼요.');}
+  else if(baseFull>=baseCap){
+    tips.push('💳 기본 카드공제가 <b>이미 한도('+Math.round(baseCap/10000)+'만원)에 도달</b>했어요. 이 이상은 신용이든 체크든 공제가 안 늘어나니, <b>적립·혜택 좋은 신용카드를 쓰는 게 이득</b>이에요.');}
+  else{
+    tips.push('💳 25%는 넘겼고 한도는 남았어요. 이 구간은 <b>체크카드·현금영수증이 공제율 2배(30%)</b>라 유리해요. 참고로 <b>신용+체크·현금 합산이 '+Math.round(baseCapPoint/10000).toLocaleString()+'만원</b>을 넘으면 그 뒤론 신용카드만 써도 공제가 똑같아져서, 그때부턴 혜택 좋은 신용카드가 이득이에요.');}
+  // 전통시장·대중교통·문화비 추가공제 안내
+  if(market+transit+cultureUse>0){
+    tips.push('🚌 <b>전통시장·대중교통(각 40%)·문화비(30%, 총급여 7천↓)</b>는 25% 초과분에 한해 각 100만원까지 추가공제돼요. 지금 추가공제로 <b>'+won(addDed)+'</b> 빠졌어요. 대중교통은 후불교통카드면 자동 집계돼요.');}
+  else{
+    tips.push('🚌 <b>대중교통·전통시장</b> 쓴 게 있으면 따로 입력하세요. 신용카드(15%)보다 공제율이 높아요(각 40%, 100만원 한도). 다만 한도를 다 채우려면 그 항목에 250만원 넘게 써야 해서, 실제 절세는 크지 않아요.');}
   // 의료비 문턱
   if(med>0&&med<=g*0.03){
     tips.push('🏥 의료비는 <b>총급여의 3%('+Math.round(g*0.03/10000).toLocaleString()+'만원)를 넘는 금액만</b> 공제돼요. 지금은 문턱 미달이라 공제가 0이에요.');}
