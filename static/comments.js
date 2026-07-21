@@ -23,6 +23,7 @@
   ]).then(function(){
     firebase.initializeApp(cfg);
     var db = firebase.firestore();
+    try{ db.settings({experimentalAutoDetectLongPolling:true, merge:true}); }catch(e){}
     var auth = firebase.auth();
     auth.signInAnonymously().catch(function(e){console.warn('anon auth',e);});
 
