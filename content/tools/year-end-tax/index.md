@@ -47,7 +47,7 @@ readingTime: false
     </div>
     <table style="width:100%;margin-top:12px;font-size:14.5px;border-collapse:collapse;"><tbody id="yt-rows"></tbody></table>
     <div id="yt-tips" style="margin-top:16px;"></div>
-    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ 간이 계산이에요. 신용카드 공제·의료비 문턱(총급여 3%)·표준세액공제 등 세부 규정으로 실제와 차이가 납니다. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
+    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ 여기서 \'환급\'은 <b>공제를 하나도 안 받았을 때 대비 아낀 세금</b>이에요. 실제 환급액은 회사가 매달 미리 뗀 세금(기납부)과 결정세액의 차이라 조금 달라요. 간이 계산이라 신용카드 공제·의료비 문턱(총급여 3%)·표준세액공제 등 세부 규정으로 실제와 차이가 납니다. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
     <button id="yt-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;cursor:pointer;">📤 공유하기</button>
   </div>
 </div>
@@ -108,24 +108,43 @@ $('yt-go').onclick=function(){
   var appliedCredit=Math.max(credits,stdCredit);
   var decided=Math.max(calcTax-appliedCredit,0);      // 결정세액
   // 기납부(원천징수) 근사 = 공제 없이 기본만 반영한 세액 ≈ 간이세액 연환산
-  var basePrepaid=Math.max(tax(g-earnDed(g)-1500000)-stdCredit,0);
-  var refund=basePrepaid-decided;
-  $('yt-big-label').textContent=refund>=0?'예상 환급액':'예상 추가납부';
+  // 공제 하나도 안 받았을 때(100% 기준) 세금 = 근로소득공제+본인 기본공제만 반영한 세액
+  var noDeductTax=Math.max(tax(g-earnDed(g)-1500000),0);
+  var refund=noDeductTax-decided;
+  $('yt-big-label').textContent=refund>=0?'공제로 아낀 세금 (예상 환급)':'예상 추가납부';
   $('yt-big').textContent=won(Math.abs(refund));
   $('yt-big').style.color=refund>=0?'#047857':'#dc2626';
   $('yt-card2').style.background=refund>=0?'#ecfdf5':'#fef2f2';
-  $('yt-rows').innerHTML=
-    '<tr><td style="color:#555;">근로소득공제</td><td>-'+won(earnDed(g))+'</td></tr>'
-    +'<tr><td style="color:#555;">인적공제 ('+fam+'명)</td><td>-'+won(perDed)+'</td></tr>'
-    +(cardDed>0?'<tr><td style="color:#555;">신용/체크카드 공제'+(cardFull>=cardCap?' (한도도달)':'')+'</td><td>-'+won(cardDed)+'</td></tr>':'')
-    +(mortgage>0?'<tr><td style="color:#555;">장기주택저당 이자</td><td>-'+won(mortgage)+'</td></tr>':'')
-    +(culture>0?'<tr><td style="color:#555;">문화비·체육시설 공제</td><td>-'+won(culture)+'</td></tr>':'')
-    +(housing>0?'<tr><td style="color:#555;">주택청약저축 공제</td><td>-'+won(housing)+'</td></tr>':'')
-    +(youthfund>0?'<tr><td style="color:#555;">청년형 장기펀드 공제</td><td>-'+won(youthfund)+'</td></tr>':'')
-    +'<tr><td style="color:#555;">과세표준</td><td>'+won(base)+'</td></tr>'
-    +'<tr><td style="color:#555;">산출세액</td><td>'+won(calcTax)+'</td></tr>'
-    +'<tr><td style="color:#555;">세액공제 합계</td><td>-'+won(appliedCredit)+'</td></tr>'
-    +'<tr class="hl"><td>결정세액</td><td>'+won(decided)+'</td></tr>';
+  function sec(t){return '<tr><td colspan="2" style="padding-top:14px;font-weight:800;color:#111;border-bottom:2px solid #ddd;">'+t+'</td></tr>';}
+  function row(l,val,neg){return '<tr><td style="color:#555;">'+l+'</td><td style="'+(neg?'color:#dc2626;':'')+'">'+(neg?'-':'')+won(val)+'</td></tr>';}
+  var incDedSum=earnDed(g)+perDed+cardDed+mortgage+culture+housing+youthfund;
+  var html=sec('① 소득')+row('총급여 (연봉)',g);
+  html+=sec('② 소득공제 (소득을 줄여줘요)')
+    +row('근로소득공제',earnDed(g),1)+row('인적공제 ('+fam+'명)',perDed,1)
+    +(cardDed>0?row('신용/체크카드'+(cardFull>=cardCap?' (한도도달)':''),cardDed,1):'')
+    +(mortgage>0?row('장기주택저당 이자',mortgage,1):'')
+    +(culture>0?row('문화비·체육시설',culture,1):'')
+    +(housing>0?row('주택청약저축',housing,1):'')
+    +(youthfund>0?row('청년형 장기펀드',youthfund,1):'')
+    +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">소득공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(incDedSum)+'</td></tr>'
+    +'<tr class="hl"><td>③ 과세표준</td><td>'+won(base)+'</td></tr>';
+  html+=sec('④ 산출세액 (과세표준 × 세율)')+row('과세표준 '+won(base)+' 기준',calcTax);
+  html+=sec('⑤ 세액공제 (세금을 직접 깎아줘요)')
+    +(pensionCr>0?row('연금저축·IRP',pensionCr,1):'')
+    +(rentCr>0?row('월세',rentCr,1):'')
+    +(insCr>0?row('보장성 보험료',insCr,1):'')
+    +(medCr>0?row('의료비',medCr,1):'')
+    +(donCr>0?row('기부금',donCr,1):'')
+    +(homeCr>0?row('고향사랑기부',homeCr,1):'')
+    +(childCr>0?row('자녀 ('+child+'명)',childCr,1):'')
+    +(credits<stdCredit?row('표준세액공제 (특별공제 대신)',stdCredit,1):'')
+    +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">세액공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(appliedCredit)+'</td></tr>'
+    +'<tr class="hl"><td>⑥ 결정세액 (실제 낼 세금)</td><td>'+won(decided)+'</td></tr>';
+  html+=sec('⑦ 환급 계산')
+    +row('공제 하나도 안 받았다면',noDeductTax)
+    +row('공제 다 받은 결정세액',decided)
+    +'<tr class="hl"><td>'+(refund>=0?'→ 공제로 아낀 세금':'→ 추가납부')+'</td><td>'+won(Math.abs(refund))+'</td></tr>';
+  $('yt-rows').innerHTML=html;
   // ── 맞춤 절세 팁 (입력값 기반) ──
   var tips=[];
   // 세액공제 vs 소득공제 우선순위
