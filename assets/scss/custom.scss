@@ -1,5 +1,5 @@
-/* planfully.ai.kr — 우리 브랜드 다크(코랄) 톤 */
-[data-scheme="dark"] {
+/* planfully.ai.kr — 우리 브랜드 다크(코랄) 톤. :root 접두사로 테마 기본값 오버라이드 */
+:root[data-scheme="dark"] {
   --body-background: #262624;
   --card-background: #1f1f1d;
   --pre-background-color: #181816;
@@ -9,6 +9,5 @@
   --card-text-color-main: #e8e6e3;
   --card-text-color-secondary: #9c9a94;
   --card-separator-color: #3e3e3a;
-  --tag-border-radius: 8px;
 }
-.site-footer .powerby a { color: #d97757; }
+.site-footer .powerby a, .article-list--compact a:hover { color: #d97757; }
