@@ -24,21 +24,8 @@ googleAnalytics = 'G-E8ECH6NV3Y'
 
 [params.comments]
   enabled = true
-  provider = 'giscus'
+  provider = 'planfully'
 
-[params.comments.giscus]
-  repo = 'trier89/trier89.github.io'
-  repoID = 'R_kgDORy3MUQ'
-  category = 'General'
-  categoryID = 'DIC_kwDORy3MUc4DBn7v'
-  mapping = 'pathname'
-  strict = '0'
-  reactionsEnabled = '1'
-  emitMetadata = '0'
-  inputPosition = 'top'
-  lightTheme = 'light'
-  darkTheme = 'dark'
-  lang = 'ko'
 
 [menu]
 [[menu.main]]
