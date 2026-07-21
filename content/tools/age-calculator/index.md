@@ -44,7 +44,7 @@ readingTime: false
       <div id="ac-events" style="font-size:14.5px;line-height:1.65;"></div>
       <h3 style="font-size:18px;margin:18px 0 10px;">🎂 나와 생일이 같은 유명인</h3>
       <div id="ac-births" style="font-size:14.5px;line-height:1.65;"></div>
-      <div style="font-size:12px;color:#999;margin-top:10px;">출처: 한국어 위키백과 · 같은 월·일 기준</div>
+      <div style="font-size:12px;color:#999;margin-top:10px;">출처: 한국어 위키백과 · 최근 60일 문서 조회수 기준 유명한 순</div>
     </div>
   </div>
 </div>
@@ -97,7 +97,7 @@ readingTime: false
     $('ac-out').style.display='block';
     loadOnThisDay(bd);
   };
-  // 그날의 사건 + 같은 생일 유명인 — 한국어 위키백과 날짜 문서(사건/탄생 섹션) 파싱
+  // 그날의 사건 + 같은 생일 유명인 — 한국어 위키백과 날짜 문서 파싱 + 조회수(최근 60일) 유명도 랭킹
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
   function cleanWiki(t){
     return t.replace(/<ref[^>]*\/>/g,'').replace(/<ref[\s\S]*?<\/ref>/g,'')
@@ -108,14 +108,75 @@ readingTime: false
   function parseSection(wt,name){
     var re=new RegExp('==\\s*'+name+'\\s*==\\n([\\s\\S]*?)(?:\\n==|$)');
     var m=wt.match(re); if(!m)return [];
-    var out=[];
+    var out=[], curYear=null;
+    function push(year,body){
+      // 주제 문서 = 연도/날짜가 아닌 첫 내부링크의 원제목 (표시명 아님 — 동명이인 문서 정확 매칭)
+      var title=null, lre=/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, l;
+      while((l=lre.exec(body))){ if(!/^\d+년|^\d+월|^\d+일/.test(l[1])){ title=l[1]; break; } }
+      var txt=cleanWiki(body).replace(/[.。]\s*$/,'');
+      if(txt)out.push({year:year,text:txt,title:title});
+    }
     m[1].split('\n').forEach(function(line){
-      var lm=line.match(/^\*\s*\[\[(\d{3,4})년\]\]\s*[-–—]\s*(.+)/);
-      if(!lm)return;
-      var txt=cleanWiki(lm[2]).replace(/[.。]\s*$/,'');
-      if(txt)out.push({year:+lm[1],text:txt});
+      var one=line.match(/^\*\s*\[\[(\d{3,4})년\]\]\s*[-–—]\s*(.+)/);
+      if(one){curYear=+one[1];push(+one[1],one[2]);return;}
+      var yr=line.match(/^\*\s*\[\[(\d{3,4})년\]\]\s*$/);
+      if(yr){curYear=+yr[1];return;}                       // '* [[1984년]]' 단독 → 다음 ** 줄들의 연도
+      var sub=line.match(/^\*\*\s*(.+)/);
+      if(sub&&curYear)push(curYear,sub[1]);
     });
     return out;
+  }
+  function fetchViews(titles){
+    // action=query prop=pageviews 50개 배치 → {제목: 60일 조회수합}
+    // ⚠️pageviews prop은 응답당 일부 문서만 채우고 continue로 이어짐 → batchcomplete까지 루프(최대 6회)
+    var chunks=[]; for(var i=0;i<titles.length;i+=50)chunks.push(titles.slice(i,i+50));
+    function fetchChunk(ch){
+      var base='https://ko.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageviews&redirects=1&titles='+encodeURIComponent(ch.join('|'));
+      var merged={pages:{},redirects:[]};
+      function step(cont,n){
+        var u=base+(cont?Object.keys(cont).map(function(k){return '&'+k+'='+encodeURIComponent(cont[k]);}).join(''):'');
+        return fetch(u).then(function(r){return r.json();}).then(function(j){
+          if(!j||!j.query)return merged;
+          (j.query.redirects||[]).forEach(function(rd){merged.redirects.push(rd);});
+          Object.keys(j.query.pages).forEach(function(pid){
+            var pg=j.query.pages[pid];
+            if(!merged.pages[pid])merged.pages[pid]={title:pg.title,pageviews:{}};
+            var pv=pg.pageviews||{};
+            Object.keys(pv).forEach(function(k){if(pv[k])merged.pages[pid].pageviews[k]=pv[k];});
+          });
+          if(j.continue&&n<6)return step(j.continue,n+1);
+          return merged;
+        });
+      }
+      return step(null,0).catch(function(){return merged;});
+    }
+    return Promise.all(chunks.map(fetchChunk)).then(function(results){
+      var map={};
+      results.forEach(function(res){
+        res.redirects.forEach(function(rd){map['@'+rd.to]=rd.from;});
+        Object.keys(res.pages).forEach(function(pid){
+          var pg=res.pages[pid], tot=0;
+          Object.keys(pg.pageviews).forEach(function(k){tot+=pg.pageviews[k];});
+          map[pg.title]=tot;
+          if(map['@'+pg.title])map[map['@'+pg.title]]=tot;   // 리다이렉트 원제목에도 매핑
+        });
+      });
+      return map;
+    });
+  }
+  function rankRender(list, el, color, unit, topN){
+    var titles=list.filter(function(e){return e.title;}).map(function(e){return e.title;});
+    var done=function(sorted){
+      el.innerHTML=sorted.length?sorted.map(function(e){
+        return '<div style="margin-bottom:6px;"><b style="color:'+color+';">'+e.year+unit+'</b> · '+esc(e.text)+'</div>';
+      }).join(''):'이 날짜의 데이터가 없어요';
+    };
+    if(!titles.length){done(list.slice(0,topN));return;}
+    fetchViews(titles).then(function(views){
+      list.forEach(function(e){e.v=(e.title&&views[e.title])||0;});
+      list.sort(function(a,b){return b.v-a.v;});   // 유명한 순 (조회수 내림차순)
+      done(list.slice(0,topN));
+    }).catch(function(){done(list.slice(0,topN));});
   }
   function loadOnThisDay(bd){
     var box=$('ac-otd'); box.style.display='block';
@@ -124,20 +185,8 @@ readingTime: false
     fetch('https://ko.wikipedia.org/w/api.php?action=parse&format=json&origin=*&prop=wikitext&page='+encodeURIComponent(title))
       .then(function(r){return r.json();}).then(function(j){
         var wt=j.parse.wikitext['*'];
-        var byear=bd.getFullYear();
-        var ev=parseSection(wt,'사건').filter(function(e){return e.year>=1930;});
-        ev.sort(function(a,b){return Math.abs(a.year-byear)-Math.abs(b.year-byear);});
-        var top=ev.slice(0,5).sort(function(a,b){return a.year-b.year;});
-        $('ac-events').innerHTML=top.length?top.map(function(e){
-          return '<div style="margin-bottom:6px;"><b style="color:#1d4ed8;">'+e.year+'</b> · '+esc(e.text)+'</div>';
-        }).join(''):'이 날짜의 사건 데이터가 없어요';
-        var bs=parseSection(wt,'탄생').filter(function(e){return e.year>=1930;});
-        bs.sort(function(a,b){return a.year-b.year;});
-        var pick=[]; var step=Math.max(1,Math.floor(bs.length/8));
-        for(var i=0;i<bs.length&&pick.length<8;i+=step)pick.push(bs[i]);
-        $('ac-births').innerHTML=pick.length?pick.map(function(e){
-          return '<div style="margin-bottom:6px;"><b style="color:#7c3aed;">'+e.year+'년생</b> · '+esc(e.text)+'</div>';
-        }).join(''):'이 날짜의 탄생 데이터가 없어요';
+        rankRender(parseSection(wt,'사건').filter(function(e){return e.year>=1930;}), $('ac-events'), '#1d4ed8', '', 5);
+        rankRender(parseSection(wt,'탄생').filter(function(e){return e.year>=1930;}), $('ac-births'), '#7c3aed', '년생', 8);
       }).catch(function(){
         $('ac-events').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';
         $('ac-births').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';
