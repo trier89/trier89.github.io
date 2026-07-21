@@ -26,6 +26,14 @@ readingTime: false
     <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">모으는 기간 (년)</span>
       <input type="tel" id="dv-years" inputmode="numeric" placeholder="20" value="20" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
   </div>
+  <label style="display:block;font-weight:700;margin:12px 0 6px;">예상 연 주가 상승률 (%) <span style="font-weight:400;color:#6b7280;font-size:13px;">— 배당과 별도, 모으는 동안 복리</span></label>
+  <select id="dv-growth" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;background:#fff;">
+    <option value="0">0% (상승 없다고 보수적으로)</option>
+    <option value="3">3% (안정적)</option>
+    <option value="5" selected>5% (장기 평균 근사)</option>
+    <option value="7">7% (성장 기대)</option>
+    <option value="10">10% (공격적)</option>
+  </select>
   <div style="margin-top:8px;font-size:13px;color:#6b7280;">이미 모은 돈이 있다면 (만원, 선택) <input type="tel" id="dv-have" inputmode="numeric" placeholder="0" style="width:90px;padding:5px 8px;border:1px solid #ccc;border-radius:6px;"></div>
   <button id="dv-go" style="width:100%;margin-top:14px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-size:17px;font-weight:700;cursor:pointer;">계산하기</button>
   <div id="dv-out" style="display:none;margin-top:20px;">
@@ -57,12 +65,13 @@ $('dv-go').onclick=function(){
   var y=parseFloat($('dv-yield').value)/100;
   var years=parseFloat($('dv-years').value)||20;
   var have=parseFloat($('dv-have').value)||0; // 만원
+  var g=parseFloat($('dv-growth').value)/100; // 연 주가상승률
   if(!tgt||tgt<=0){alert('원하는 월 배당액(만원)을 입력해 주세요');return;}
   var annualDiv=tgt*12; // 만원/년
-  var principal=annualDiv/y; // 필요 원금(만원)
-  var need=Math.max(principal-have,0);
-  // 월 적립: 목표원금을 배당수익률로 재투자 복리 성장한다고 가정 (월복리 r=y/12, n=years*12)
-  var r=y/12, n=years*12;
+  var principal=annualDiv/y; // 필요 원금(만원) — 목표 배당을 내려면 이만큼 필요
+  // 모으는 동안 총수익률 = 배당 재투자 + 주가상승 (복리)
+  var total=y+g;
+  var r=total/12, n=years*12;
   var fvHave=have*Math.pow(1+r,n); // 기존 자금의 미래가치
   var remain=Math.max(principal-fvHave,0);
   var monthly = r>0 ? remain*r/(Math.pow(1+r,n)-1) : remain/n; // 적립식 미래가치 역산 (만원)
@@ -72,6 +81,7 @@ $('dv-go').onclick=function(){
     '<tr><td style="color:#555;">목표 월 배당</td><td>'+won(tgt)+'</td></tr>'
     +'<tr><td style="color:#555;">연 배당 (세전)</td><td>'+won(annualDiv)+'</td></tr>'
     +'<tr><td style="color:#555;">가정 배당수익률</td><td>연 '+($('dv-yield').value)+'%</td></tr>'
+    +'<tr><td style="color:#555;">가정 주가상승률</td><td>연 '+($('dv-growth').value)+'% (모으는 동안)</td></tr>'
     +'<tr><td style="color:#555;">필요 총 원금</td><td>'+won(principal)+'</td></tr>'
     +(have>0?'<tr><td style="color:#555;">현재 보유</td><td>'+won(have)+'</td></tr>':'')
     +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>';
@@ -85,7 +95,7 @@ $('dv-go').onclick=function(){
 ## 배당금 계산기, 이렇게 계산해요
 
 - **필요 원금** = 목표 월 배당 × 12 ÷ 배당수익률. 예를 들어 월 100만원(연 1,200만원)을 연 4% 배당으로 받으려면 원금 **3억원**이 필요해요.
-- **월 적립액** = 목표 기간 동안 그 원금을 모으기 위해 매달 넣어야 하는 금액. 배당 재투자·복리 성장(연 수익률 = 배당률 가정)을 반영해 계산합니다.
+- **월 적립액** = 목표 기간 동안 그 원금을 모으기 위해 매달 넣어야 하는 금액. **모으는 동안의 총수익률(배당 재투자 + 주가 상승)**을 복리로 반영해 계산해요. 주가 상승률을 높게 잡을수록 매달 넣어야 할 돈은 줄어듭니다.
 
 ### 꼭 알아두세요
 
