@@ -101,11 +101,14 @@ function show(zi){
   $('ft-result').style.display='block';
   $('ft-again').onclick=function(){$('ft-result').style.display='none';window.scrollTo({top:$('fortune').offsetTop-20,behavior:'smooth'});};
   $('ft-share').onclick=function(){
-    var t=z[0]+'띠 '+dstr+' 운세: '+pick(TOTAL,base+8)+' 행운의 숫자 '+luckyNum+' 🔮 '+location.origin+location.pathname;
+    var url=location.origin+location.pathname+'?z='+zi;
+    var t=z[0]+'띠 '+dstr+' 운세: '+pick(TOTAL,base+8)+' 행운의 숫자 '+luckyNum+' 🔮 너도 봐 👉 '+url;
     if(navigator.share)navigator.share({text:t});else navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});
   };
   window.scrollTo({top:$('ft-result').offsetTop-40,behavior:'smooth'});
 }
+// 공유 링크(?z=띠index)로 들어오면 그 띠 운세를 바로 표시
+(function(){var m=location.search.match(/[?&]z=(\d{1,2})/);if(m){var zi=parseInt(m[1]);if(zi>=0&&zi<12)show(zi);}})();
 })();
 </script>
 

@@ -107,7 +107,8 @@ readingTime: false
     $('ac-out').style.display='block';
     var _share=document.getElementById('ac-share');
     _share.onclick=function(){
-      var t='나는 '+$('ac-age').textContent+'! ('+$('ac-zodiac').textContent+' · '+$('ac-star').textContent+') 만나이·띠·별자리 확인 👉 '+location.origin+location.pathname;
+      var _d=(''+(+ySel.value)).padStart(4,'0')+(''+(+mSel.value)).padStart(2,'0')+(''+(+dSel.value)).padStart(2,'0');
+      var t='나는 '+$('ac-age').textContent+'! ('+$('ac-zodiac').textContent+' · '+$('ac-star').textContent+') 만나이·띠·별자리 확인 👉 '+location.origin+location.pathname+'?d='+_d;
       if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}
     };
   };
