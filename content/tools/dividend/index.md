@@ -78,12 +78,14 @@ $('dv-go').onclick=function(){
   var monthly = r>0 ? remain*r/(Math.pow(1+r,n)-1) : remain/n; // 적립식 미래가치 역산 (만원)
   $('dv-principal').textContent=won(principal);
   $('dv-monthly').textContent=years+'년간 매달 '+won(Math.ceil(monthly))+' 씩';
-  $('dv-asset').textContent='💰 '+years+'년 뒤 주식 자산: '+won(principal)+' (이 자산이 월 '+won(tgt)+' 배당을 만들어요)';
+  $('dv-asset').innerHTML='💰 '+years+'년 뒤 주식 자산: <b>'+won(principal)+'</b><br>🔄 모으는 동안 배당은 전액 재투자(복리)로 불어나요';
   $('dv-rows').innerHTML=
     '<tr><td style="color:#555;">목표 월 배당</td><td>'+won(tgt)+'</td></tr>'
     +'<tr><td style="color:#555;">연 배당 (세전)</td><td>'+won(annualDiv)+'</td></tr>'
     +'<tr><td style="color:#555;">가정 배당수익률</td><td>연 '+($('dv-yield').value)+'%</td></tr>'
     +'<tr><td style="color:#555;">가정 주가상승률</td><td>연 '+($('dv-growth').value)+'% (모으는 동안)</td></tr>'
+    +'<tr><td style="color:#555;">배당 재투자</td><td style="color:#047857;">✓ 전액 재투자(복리)</td></tr>'
+    +'<tr><td style="color:#555;">모으는 동안 총수익률</td><td>연 '+((y+g)*100).toFixed(1)+'% <span style="color:#6b7280;font-weight:400;">(배당'+($('dv-yield').value)+'%+상승'+($('dv-growth').value)+'%)</span></td></tr>'
     +'<tr><td style="color:#555;">필요 총 원금</td><td>'+won(principal)+'</td></tr>'
     +(have>0?'<tr><td style="color:#555;">현재 보유</td><td>'+won(have)+'</td></tr>':'')
     +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>'
@@ -115,6 +117,7 @@ $('dv-go').onclick=function(){
 ## 배당금 계산기, 이렇게 계산해요
 
 - **필요 원금** = 목표 월 배당 × 12 ÷ 배당수익률. 예를 들어 월 100만원(연 1,200만원)을 연 4% 배당으로 받으려면 원금 **3억원**이 필요해요.
+- 🔄 **배당 재투자**: 모으는 동안 받은 배당은 전액 다시 투자한다고 가정해요. 그래서 "모으는 동안 총수익률 = 배당률 + 주가상승률"로 복리 계산됩니다. (은퇴 후에는 배당을 생활비로 쓰는 구조)
 - **N년 뒤 주식 자산가치** = 목표 원금에 도달한 그 자산이 곧 노후 자산이에요. 이 자산이 매달 목표 배당을 만들어내죠. 총 납입 원금과 복리 순수익도 함께 보여드려요.
 - **월 적립액** = 목표 기간 동안 그 원금을 모으기 위해 매달 넣어야 하는 금액. **모으는 동안의 총수익률(배당 재투자 + 주가 상승)**을 복리로 반영해 계산해요. 주가 상승률을 높게 잡을수록 매달 넣어야 할 돈은 줄어듭니다.
 
