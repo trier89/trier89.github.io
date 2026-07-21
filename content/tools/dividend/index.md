@@ -1,0 +1,94 @@
+---
+title: "배당금 계산기 — 월 배당 목표로 필요 원금·월 적립액 (노후·파이어족)"
+description: "원하는 월 배당액을 입력하면 필요한 투자 원금과, 목표 기간 동안 매달 얼마씩 모아야 하는지 계산해요. 고배당주·배당ETF 예시 참고."
+date: 2026-07-21
+slug: "dividend"
+categories: ["도구"]
+tags: ["배당금 계산기", "배당 계산기", "월 배당", "노후 준비", "파이어족", "고배당주"]
+toc: false
+readingTime: false
+---
+
+원하는 **월 배당액**을 입력하면 필요한 **투자 원금**과, 목표 기간 동안 **매달 얼마씩** 모아야 하는지 계산해요. 노후·파이어(FIRE) 준비 설계에 참고하세요.
+
+<div class="pf-tool" style="max-width:520px;margin:0 auto;">
+  <label style="display:block;font-weight:700;margin-bottom:6px;">목표: 월 배당액 (만원)</label>
+  <input type="tel" id="dv-target" inputmode="numeric" placeholder="예: 100 (월 100만원)" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;">
+  <div style="display:flex;gap:10px;margin-top:12px;">
+    <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">배당수익률 (연 %)</span>
+      <select id="dv-yield" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;background:#fff;">
+        <option value="3">3% (안정 배당ETF)</option>
+        <option value="4" selected>4% (일반 고배당)</option>
+        <option value="5">5% (고배당주)</option>
+        <option value="6">6% (초고배당·리츠)</option>
+        <option value="8">8% (커버드콜 등)</option>
+      </select></label>
+    <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">모으는 기간 (년)</span>
+      <input type="tel" id="dv-years" inputmode="numeric" placeholder="20" value="20" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
+  </div>
+  <div style="margin-top:8px;font-size:13px;color:#6b7280;">이미 모은 돈이 있다면 (만원, 선택) <input type="tel" id="dv-have" inputmode="numeric" placeholder="0" style="width:90px;padding:5px 8px;border:1px solid #ccc;border-radius:6px;"></div>
+  <button id="dv-go" style="width:100%;margin-top:14px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-size:17px;font-weight:700;cursor:pointer;">계산하기</button>
+  <div id="dv-out" style="display:none;margin-top:20px;">
+    <div style="text-align:center;padding:20px;border-radius:12px;background:#ecfdf5;">
+      <div style="font-size:14px;color:#555;">필요한 투자 원금</div>
+      <div id="dv-principal" style="font-size:34px;font-weight:800;color:#047857;line-height:1.2;"></div>
+      <div id="dv-monthly" style="font-size:16px;color:#065f46;font-weight:700;margin-top:6px;"></div>
+    </div>
+    <table style="width:100%;margin-top:12px;font-size:14.5px;border-collapse:collapse;"><tbody id="dv-rows"></tbody></table>
+    <div style="margin-top:16px;font-weight:700;color:#047857;">📋 고배당 예시 (참고용)</div>
+    <table style="width:100%;margin-top:6px;font-size:14px;border-collapse:collapse;"><tbody id="dv-list"></tbody></table>
+    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ 예시일 뿐이며 투자 권유가 아닙니다. 실제 배당률·주가는 수시로 바뀌니 증권사에서 확인하세요.</div>
+    <button id="dv-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;cursor:pointer;">📤 내 노후설계 공유</button>
+  </div>
+</div>
+<style>#dv-rows td{padding:9px 6px;border-bottom:1px solid #eee;}#dv-rows td:last-child{text-align:right;font-weight:700;}#dv-list td{padding:7px 6px;border-bottom:1px solid #f0f0f0;}#dv-list td:last-child{text-align:right;font-weight:700;color:#047857;}</style>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+// 고배당 예시(참고용·고정) — 대표 유형별. 실시간 아님.
+var LIST=[['배당ETF (S&P500 배당귀족류)','약 2~3%'],['국내 고배당주 (통신·금융·정유)','약 4~6%'],['리츠(REITs)','약 5~7%'],['미국 배당성장주','약 2~4%'],['커버드콜 ETF','약 7~12%'],['월배당 ETF','약 4~8%']];
+function won(man){ // 만원 단위 → 보기 좋은 문자열
+  var w=man*10000;
+  if(w>=100000000){var eok=Math.floor(w/100000000);var rest=Math.round((w%100000000)/10000);return eok+'억'+(rest?' '+rest.toLocaleString()+'만':'')+'원';}
+  return Math.round(man).toLocaleString()+'만원';
+}
+$('dv-go').onclick=function(){
+  var tgt=parseFloat($('dv-target').value); // 월 배당 만원
+  var y=parseFloat($('dv-yield').value)/100;
+  var years=parseFloat($('dv-years').value)||20;
+  var have=parseFloat($('dv-have').value)||0; // 만원
+  if(!tgt||tgt<=0){alert('원하는 월 배당액(만원)을 입력해 주세요');return;}
+  var annualDiv=tgt*12; // 만원/년
+  var principal=annualDiv/y; // 필요 원금(만원)
+  var need=Math.max(principal-have,0);
+  // 월 적립: 목표원금을 배당수익률로 재투자 복리 성장한다고 가정 (월복리 r=y/12, n=years*12)
+  var r=y/12, n=years*12;
+  var fvHave=have*Math.pow(1+r,n); // 기존 자금의 미래가치
+  var remain=Math.max(principal-fvHave,0);
+  var monthly = r>0 ? remain*r/(Math.pow(1+r,n)-1) : remain/n; // 적립식 미래가치 역산 (만원)
+  $('dv-principal').textContent=won(principal);
+  $('dv-monthly').textContent=years+'년간 매달 '+won(Math.ceil(monthly))+' 씩';
+  $('dv-rows').innerHTML=
+    '<tr><td style="color:#555;">목표 월 배당</td><td>'+won(tgt)+'</td></tr>'
+    +'<tr><td style="color:#555;">연 배당 (세전)</td><td>'+won(annualDiv)+'</td></tr>'
+    +'<tr><td style="color:#555;">가정 배당수익률</td><td>연 '+($('dv-yield').value)+'%</td></tr>'
+    +'<tr><td style="color:#555;">필요 총 원금</td><td>'+won(principal)+'</td></tr>'
+    +(have>0?'<tr><td style="color:#555;">현재 보유</td><td>'+won(have)+'</td></tr>':'')
+    +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>';
+  $('dv-list').innerHTML=LIST.map(function(x){return '<tr><td style="color:#444;">'+x[0]+'</td><td>'+x[1]+'</td></tr>';}).join('');
+  $('dv-out').style.display='block';
+  $('dv-share').onclick=function(){var t='월 배당 '+won(tgt)+' 받으려면 원금 '+won(principal)+', '+years+'년간 매달 '+won(Math.ceil(monthly))+'! 내 노후설계 👉 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+};
+})();
+</script>
+
+## 배당금 계산기, 이렇게 계산해요
+
+- **필요 원금** = 목표 월 배당 × 12 ÷ 배당수익률. 예를 들어 월 100만원(연 1,200만원)을 연 4% 배당으로 받으려면 원금 **3억원**이 필요해요.
+- **월 적립액** = 목표 기간 동안 그 원금을 모으기 위해 매달 넣어야 하는 금액. 배당 재투자·복리 성장(연 수익률 = 배당률 가정)을 반영해 계산합니다.
+
+### 꼭 알아두세요
+
+- **배당수익률은 직접 골라 입력**하세요. 실제 종목·ETF의 배당률과 주가는 수시로 바뀝니다.
+- 아래 예시 리스트는 **유형별 참고용**이며 특정 종목 매수를 권유하지 않습니다. 세금(배당소득세 15.4%)·환율·주가 변동은 반영되지 않은 단순 계산이에요.
+- 실제 투자 결정 전에는 반드시 증권사·전문가와 상담하세요.
