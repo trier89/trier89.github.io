@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{{ partial "head/head.html" . }}
+{{ partial "pf/shell-head.html" . }}
+</head>
+<body>
+<div class="pf-wrap">
+{{ partial "pf/nav.html" . }}
+<main class="pf-main">
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.description }}<p style="color:var(--dim);">{{ . }}</p>{{ end }}
+  <p style="color:var(--dim);font-size:13px;">{{ len .Pages }}개의 글</p>
+  {{ $pag := .Paginate .Pages }}
+  {{ range $pag.Pages }}
+    <a class="pf-card" href="{{ .RelPermalink }}">
+      <div class="t">{{ .Title }}</div>
+      <div class="m"><span class="cat">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span> · {{ .Date.Format "2006.01.02" }}{{ with .Description }} · {{ . }}{{ end }}</div>
+    </a>
+  {{ end }}
+  {{ $p := .Paginator }}
+  {{ if gt $p.TotalPages 1 }}
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;">
+    {{ if $p.HasPrev }}<a class="pf-card" style="display:inline-block;margin:0;" href="{{ $p.Prev.URL }}">← 이전</a>{{ end }}
+    <span style="color:var(--dim);align-self:center;font-size:13px;">{{ $p.PageNumber }} / {{ $p.TotalPages }}</span>
+    {{ if $p.HasNext }}<a class="pf-card" style="display:inline-block;margin:0;" href="{{ $p.Next.URL }}">다음 →</a>{{ end }}
+  </div>
+  {{ end }}
+</main>
+{{ partial "pf/foot.html" . }}
+</div>
+</body>
+</html>
