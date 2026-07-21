@@ -108,8 +108,11 @@ function loop(t){
   if(state!=='play')return;
   ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,W,H);
   for(var i=0;i<LANES;i++){ctx.fillStyle=i%2?'#141418':'#101014';ctx.fillRect(i*LW,0,LW,H);}
-  ctx.strokeStyle='#3e3e3a';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,HITY);ctx.lineTo(W,HITY);ctx.stroke();
-  for(var i=0;i<LANES;i++){ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(i*LW+4,HITY-4,LW-8,8);}
+  // 판정선 강조: 글로우 밴드 + 밝은 라인 + 레인별 타겟 링
+  ctx.fillStyle='rgba(224,192,126,.10)';ctx.fillRect(0,HITY-22,W,44);
+  ctx.strokeStyle='#e0c07e';ctx.lineWidth=4;ctx.shadowColor='#e0c07e';ctx.shadowBlur=14;ctx.beginPath();ctx.moveTo(0,HITY);ctx.lineTo(W,HITY);ctx.stroke();ctx.shadowBlur=0;
+  for(var i=0;i<LANES;i++){ctx.strokeStyle=LANECOL[i];ctx.lineWidth=3;ctx.beginPath();ctx.arc(i*LW+LW/2,HITY,LW*0.34,0,7);ctx.stroke();}
+  ctx.fillStyle='#e0c07e';ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText('▼ 여기서 맞춰요 ▼',W/2,HITY-28);
   var now=t-t0, allDone=true;
   notes.forEach(function(n){
     var nt=n.beat*BEAT; var y=HITY-(nt-now)*SPEED;
@@ -129,9 +132,10 @@ function popup(txt,col){pops.push({txt:txt,col:col,t:performance.now()});}
 function drawPops(t){ctx.textAlign='center';for(var i=pops.length-1;i>=0;i--){var p=pops[i],e=(t-p.t)/500;if(e>=1){pops.splice(i,1);continue;}ctx.globalAlpha=1-e;ctx.fillStyle=p.col;ctx.font='bold '+(30+e*16)+'px sans-serif';ctx.fillText(p.txt,W/2,H*0.42);ctx.globalAlpha=1;}}
 function hitLane(lane){
   if(state!=='play')return;
+  beep(SCALE[lane%SCALE.length],AC.currentTime,0.2,'square',0.2);  // 버튼 누르면 무조건 그 음이 남(악기처럼)
   var now=performance.now()-t0, best=null,bd=999;
   notes.forEach(function(n){if(n.hit||n.lane!==lane)return;var d=Math.abs(n.beat*BEAT-now);if(d<bd){bd=d;best=n;}});
-  if(best&&bd<160){best.hit=true;hitCnt++;beep(best.freq,AC.currentTime,0.2,'square',0.2);var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,'#42b642');popup(bd<60?'PERFECT':'GOOD','#42b642');sync();}
+  if(best&&bd<160){best.hit=true;hitCnt++;var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,'#42b642');popup(bd<60?'PERFECT':'GOOD','#42b642');sync();}
   else{combo=0;flash(lane,'#ef2029');popup('MISS','#ef2029');sync();}
 }
 function finish(){state='over';cancelAnimationFrame(raf);
