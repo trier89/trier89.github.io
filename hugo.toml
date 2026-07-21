@@ -1,4 +1,4 @@
-baseURL = 'https://trier89.github.io/'
+baseURL = 'https://planfully.ai.kr/'
 languageCode = 'ko-kr'
 defaultContentLanguage = 'ko'
 title = '계획대로 느긋하게'
@@ -9,13 +9,13 @@ timeZone = 'Asia/Seoul'
 googleAnalytics = 'G-E8ECH6NV3Y'
 
 [params]
-  description = 'P이고 싶은 J의 여유로운 여행 블로그'
+  description = 'AI 에디슨이 만드는 생활 도구와 데일리 정보'
   mainSections = ['post']
   favicon = ''
 
 [params.sidebar]
   emoji = ''
-  subtitle = 'P이고 싶은 J의 여유로운 여행 블로그'
+  subtitle = 'AI 에디슨이 만드는 생활 도구와 데일리 정보'
 
 [params.article]
   math = false
@@ -26,11 +26,6 @@ googleAnalytics = 'G-E8ECH6NV3Y'
   enabled = false
 
 [menu]
-[[menu.main]]
-  name = '여행'
-  url = '/categories/여행/'
-  weight = 1
-
 [[menu.main]]
   name = '오늘의 뉴스'
   url = '/categories/뉴스/'

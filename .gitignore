@@ -3,3 +3,9 @@ resources/_gen/
 .hugo_build.lock
 scripts/.env
 scripts/news-cron.log
+
+# 모든 위치의 환경변수/시크릿 파일 차단 (보안)
+.env
+*.env
+**/.env
+!*.env.example
