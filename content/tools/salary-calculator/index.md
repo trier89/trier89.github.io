@@ -1,5 +1,5 @@
 ---
-title: "연봉 실수령액 계산기 — 세후 월급·4대보험 (역계산 지원)"
+title: "연봉계산기 — 실수령액·4대보험 (연봉 역산 지원)"
 description: "연봉을 입력하면 4대보험·소득세를 뗀 실수령액을, 반대로 실수령액이나 건강보험료를 입력하면 연봉을 역으로 계산합니다. 2026년 기준 무료 계산기."
 date: 2026-07-21
 slug: "salary-calculator"
@@ -16,6 +16,7 @@ readingTime: false
     <button class="sc-tab" data-m="salary" style="flex:1;">연봉 → 실수령</button>
     <button class="sc-tab" data-m="net" style="flex:1;">실수령 → 연봉</button>
     <button class="sc-tab" data-m="health" style="flex:1;">건보료 → 연봉</button>
+    <button class="sc-tab" data-m="pension" style="flex:1;">국민연금 → 연봉</button>
   </div>
   <div id="sc-inrow">
     <label style="display:block;font-weight:700;margin-bottom:6px;" id="sc-label">연봉 (세전, 만원)</label>
@@ -86,6 +87,8 @@ function grossFromNet(targetNet,fam,child){
 }
 // 역산: 월 건강보험료 → 세전 월급
 function grossFromHealth(monthlyHI){ return monthlyHI/HI; }
+// 역산: 월 국민연금 → 세전 월급 (상한 반영)
+function grossFromPension(monthlyNP){ var g=monthlyNP/NP; return g>NP_CAP? (function(){alert("국민연금 상한(기준소득월액 "+NP_CAP.toLocaleString()+"원)을 초과해 정확한 역산이 어려워요. 상한 기준으로 표시합니다.");return NP_CAP;})() : g; }
 
 var tabs=document.querySelectorAll('.sc-tab');
 function setMode(m){
@@ -95,6 +98,7 @@ function setMode(m){
   if(m==='salary'){lab.textContent='연봉 (세전, 만원)';unit.textContent='만원';$('sc-val').placeholder='예: 4000';}
   if(m==='net'){lab.textContent='희망 월 실수령액 (만원)';unit.textContent='만원';$('sc-val').placeholder='예: 300';}
   if(m==='health'){lab.textContent='월 건강보험료 (원)';unit.textContent='원';$('sc-val').placeholder='예: 150000';}
+  if(m==='pension'){lab.textContent='월 국민연금 (원)';unit.textContent='원';$('sc-val').placeholder='예: 180000';}
 }
 tabs.forEach(function(t){t.onclick=function(){setMode(t.dataset.m);};});
 setMode('salary');
@@ -106,7 +110,8 @@ $('sc-go').onclick=function(){
   var gm; // 세전 월급
   if(mode==='salary'){gm=manToWon(v)/12;}
   else if(mode==='net'){gm=grossFromNet(manToWon(v),fam,child);}
-  else {gm=grossFromHealth(v);}
+  else if(mode==='health'){gm=grossFromHealth(v);}
+  else {gm=grossFromPension(v);}
   var d=deductions(gm,fam,child);
   var net=gm-d.total;
   var annualGross=gm*12;
