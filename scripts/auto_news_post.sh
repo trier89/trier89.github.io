@@ -24,8 +24,9 @@ if [ -f "$POST_DIR/index.md" ]; then
     echo "Already posted today, skipping." >> "$LOG_FILE"
     # 뉴스는 있어도 '오늘의 역사'가 없으면 그것만 생성·발행 (조기 종료 경로에서도 데일리 보장)
     $PYTHON "$SCRIPTS_DIR/today_in_history.py" >> "$LOG_FILE" 2>&1 || true
+    $PYTHON "$SCRIPTS_DIR/daily_trends.py" >> "$LOG_FILE" 2>&1 || true
     cd "$BLOG_ROOT"
-    git add content/post/today-* >> "$LOG_FILE" 2>&1 || true
+    git add content/post/today-* content/post/trends-* >> "$LOG_FILE" 2>&1 || true
     git diff --cached --quiet || { git commit -m "Add today-in-history: $DATE" >> "$LOG_FILE" 2>&1; git push >> "$LOG_FILE" 2>&1; }
     exit 0
 fi
@@ -113,12 +114,13 @@ fi
 
 # Step 2.5: 오늘의 역사 포스트 (2026-07-21 사용자 요청 — 실패해도 뉴스 발행은 계속)
 $PYTHON "$SCRIPTS_DIR/today_in_history.py" >> "$LOG_FILE" 2>&1 || echo "today_in_history failed (skip)" >> "$LOG_FILE"
+$PYTHON "$SCRIPTS_DIR/daily_trends.py" >> "$LOG_FILE" 2>&1 || echo "daily_trends failed (skip)" >> "$LOG_FILE"
 
 # Step 3: Git commit and push
 echo "Pushing to GitHub..." >> "$LOG_FILE"
 cd "$BLOG_ROOT"
 git add "content/post/news-$DATE/" >> "$LOG_FILE" 2>&1
-git add content/post/today-* >> "$LOG_FILE" 2>&1 || true
+git add content/post/today-* content/post/trends-* >> "$LOG_FILE" 2>&1 || true
 git commit -m "Add daily news: $DATE" >> "$LOG_FILE" 2>&1
 git push >> "$LOG_FILE" 2>&1
 
