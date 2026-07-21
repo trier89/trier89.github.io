@@ -9,6 +9,8 @@ timeZone = 'Asia/Seoul'
 googleAnalytics = 'G-E8ECH6NV3Y'
 
 [params]
+  colorScheme.toggle = false
+  colorScheme.default = 'dark'
   description = 'AI 에디슨이 만드는 생활 도구와 데일리 정보'
   mainSections = ['post']
   favicon = ''
