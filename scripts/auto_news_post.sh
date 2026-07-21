@@ -106,10 +106,14 @@ if [ ! -s "$POST_DIR/index.md" ]; then
     exit 1
 fi
 
+# Step 2.5: 오늘의 역사 포스트 (2026-07-21 사용자 요청 — 실패해도 뉴스 발행은 계속)
+$PYTHON "$SCRIPTS_DIR/today_in_history.py" >> "$LOG_FILE" 2>&1 || echo "today_in_history failed (skip)" >> "$LOG_FILE"
+
 # Step 3: Git commit and push
 echo "Pushing to GitHub..." >> "$LOG_FILE"
 cd "$BLOG_ROOT"
 git add "content/post/news-$DATE/" >> "$LOG_FILE" 2>&1
+git add content/post/today-* >> "$LOG_FILE" 2>&1 || true
 git commit -m "Add daily news: $DATE" >> "$LOG_FILE" 2>&1
 git push >> "$LOG_FILE" 2>&1
 
