@@ -30,6 +30,7 @@ readingTime: false
     <h3 style="font-size:18px;margin:18px 0 10px;">🎂 나와 생일이 같은 유명인</h3>
     <div id="bd-births" style="font-size:14.5px;line-height:1.65;"></div>
     <div style="font-size:12px;color:#999;margin-top:10px;">출처: 한국어 위키백과 · 최근 60일 문서 조회수 기준 유명한 순</div>
+    <button id="bd-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#7c3aed;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">📤 내 생일 이야기 공유하기</button>
     <div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14.5px;">
       🔢 내 <b>만 나이·띠·별자리·생일 D-day</b>가 궁금하다면 → <a href="/tools/age-calculator/">만나이 계산기</a>
     </div>
@@ -132,9 +133,11 @@ readingTime: false
     }).catch(function(){done(list.slice(0,topN));});
   }
   var DOW=['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
+  var lastBirth=null, lastTopCeleb='';
   $('bd-go').onclick=function(){
     var bd=parseBirth();
     if(!bd){alert('생년월일을 숫자 8자리로 입력해 주세요 (예: 19880818)');return;}
+    lastBirth=bd;
     $('bd-out').style.display='block';
     $('bd-head').textContent=bd.getFullYear()+'년 '+(bd.getMonth()+1)+'월 '+bd.getDate()+'일 '+DOW[bd.getDay()];
     $('bd-sub').textContent='당신은 '+DOW[bd.getDay()]+'에 태어났어요';
@@ -144,11 +147,21 @@ readingTime: false
       .then(function(r){return r.json();}).then(function(j){
         var wt=j.parse.wikitext['*'];
         rankRender(parseSection(wt,'사건').filter(function(e){return e.year>=1930;}), $('bd-events'), '#1d4ed8', '', 6);
-        rankRender(parseSection(wt,'탄생').filter(function(e){return e.year>=1930;}), $('bd-births'), '#7c3aed', '년생', 10);
+        var _bl=parseSection(wt,'탄생').filter(function(e){return e.year>=1930;});
+        rankRender(_bl, $('bd-births'), '#7c3aed', '년생', 10);
+        var _tv=_bl.filter(function(e){return e.title;});
+        if(_tv.length){fetchViews(_tv.map(function(e){return e.title;})).then(function(v){_tv.sort(function(a,b){return (v[b.title]||0)-(v[a.title]||0);});lastTopCeleb=(_tv[0].text||'').replace(/^[^ ]+의 /,'');});}
       }).catch(function(){
         $('bd-events').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';
         $('bd-births').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';
       });
+  };
+  document.getElementById('bd-share').onclick=function(){
+    if(!lastBirth)return;
+    var d=lastBirth;
+    var DOWk=['일','월','화','수','목','금','토'][d.getDay()];
+    var t=d.getFullYear()+'년 '+(d.getMonth()+1)+'월 '+d.getDate()+'일('+DOWk+')에 태어난 나!'+(lastTopCeleb?' 나랑 생일 같은 유명인은 '+lastTopCeleb+' 🎂':'')+' 너도 확인해봐 👉 '+location.origin+location.pathname;
+    if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요! 붙여넣기로 공유하세요.');});}
   };
 })();
 </script>

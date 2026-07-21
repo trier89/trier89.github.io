@@ -42,7 +42,8 @@ readingTime: false
         <tr><td style="padding:9px 6px;border-bottom:1px solid #eee;color:#555;">국민연금 수급 개시</td><td id="ac-pension" style="padding:9px 6px;border-bottom:1px solid #eee;font-weight:700;text-align:right;"></td></tr>
       </tbody>
     </table>
-    <div style="margin-top:16px;padding:14px;border-radius:10px;background:#f5f3ff;font-size:14.5px;">
+    <button id="ac-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#2563eb;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">📤 내 결과 공유하기</button>
+    <div style="margin-top:12px;padding:14px;border-radius:10px;background:#f5f3ff;font-size:14.5px;">
       🎂 내가 태어난 날 무슨 일이 있었는지, 나와 생일 같은 유명인이 궁금하다면 → <a href="/tools/my-birthday/">내 생일엔 무슨 일이?</a>
     </div>
   </div>
@@ -104,6 +105,11 @@ readingTime: false
     $('ac-pension').textContent = pd<=sd ? '이미 수급 연령 (만 '+pAge+'세)' :
       '만 '+pAge+'세 · D-'+dday(pd).toLocaleString()+' ('+pd.getFullYear()+'년)';
     $('ac-out').style.display='block';
+    var _share=document.getElementById('ac-share');
+    _share.onclick=function(){
+      var t='나는 '+$('ac-age').textContent+'! ('+$('ac-zodiac').textContent+' · '+$('ac-star').textContent+') 만나이·띠·별자리 확인 👉 '+location.origin+location.pathname;
+      if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}
+    };
   };
 })();
 </script>

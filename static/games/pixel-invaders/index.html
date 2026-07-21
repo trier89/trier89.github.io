@@ -192,6 +192,10 @@ function gameOver(){
   overlay.style.display='flex';
   overlay.querySelector('h2').textContent='GAME OVER';
   overlay.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b> · 웨이브 '+wave+'<br>최고기록 '+hi;
+  var _sb=document.getElementById('g-share')||document.createElement('button');
+  if(!_sb.id){_sb.id='g-share';_sb.style.cssText='margin-top:8px;background:transparent;border:1px solid #3e3e3a;border-radius:8px;color:#e8e6e3;font:inherit;padding:9px 18px;cursor:pointer;';overlay.querySelector('div,p')&&overlay.appendChild(_sb);}
+  _sb.textContent='📤 점수 자랑하기';
+  _sb.onclick=function(){var t='픽셀 인베이더에서 '+score+"점 (웨이브 "+wave+")" +'! 나 이겨봐 🕹️ '+location.origin+location.pathname; if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
   startBtn.textContent='다시 도전';
 }
 startBtn.onclick=function(){

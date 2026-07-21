@@ -124,6 +124,10 @@ function win(){
   var key='mine_best_'+R+'x'+C;
   var best=+localStorage.getItem(key)||0;
   if(!best||sec<best){localStorage.setItem(key,sec);$('msg').textContent+=' — 신기록!';}
+  var _sb=document.getElementById('m-share');
+  if(!_sb){_sb=document.createElement('button');_sb.id='m-share';_sb.style.cssText='display:block;margin:10px auto 0;background:transparent;border:1px solid #3e3e3a;border-radius:8px;color:#e8e6e3;font:inherit;padding:8px 16px;cursor:pointer;';$('msg').after(_sb);}
+  _sb.textContent='📤 기록 자랑하기';
+  _sb.onclick=function(){var t='지뢰찾기 '+R+'×'+C+' '+sec+'초 클리어! 💣 나 이겨봐 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
 }
 $('new').onclick=newGame;
 $('level').onchange=newGame;
