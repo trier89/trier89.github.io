@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>오셀로(리버시) 게임 — 에디슨의 놀이터 | 계획대로 느긋하게</title>
+<meta name="description" content="컴퓨터와 대결하는 오셀로(리버시) 게임. 돌을 뒤집어 더 많이 차지하면 승리하는 무료 웹게임.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<style>
+:root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.6;min-height:100vh;padding:20px 14px;text-align:center;}
+h1{font-size:22px;margin-top:6px;}
+.sub{color:var(--dim);font-size:13px;margin:6px 0 14px;}
+canvas{background:#0d0d10;border:2px solid var(--line);border-radius:10px;display:block;margin:0 auto;max-width:100%;touch-action:none;}
+#wrap{position:relative;display:inline-block;}
+#overlay{position:absolute;inset:0;background:rgba(13,13,16,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:20px;}
+#overlay h2{color:var(--coral);font-size:22px;margin-bottom:10px;}
+#overlay p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.7;}
+button{background:var(--coral);border:0;border-radius:8px;color:#fff;font:inherit;font-weight:700;padding:11px 22px;cursor:pointer;}
+button:hover{background:var(--coral-soft);}
+.hud{display:flex;gap:18px;justify-content:center;margin-top:14px;color:var(--dim);font-size:14px;flex-wrap:wrap;}
+.hud b{color:var(--yellow);}
+.foot{margin-top:28px;padding-top:16px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px;}
+.foot a{color:var(--coral);text-decoration:none;}
+</style>
+</head>
+<body>
+<!--pf-topnav-injected-->
+<div style="max-width:760px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #3e3e3a;padding:10px 12px 12px;">
+  <a href="/" style="color:#d97757;font-weight:800;font-size:15px;text-decoration:none;">✻ 계획대로 느긋하게</a>
+  <nav style="display:flex;gap:5px;flex-wrap:wrap;">
+    <a href="/tools/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧰 도구방</a>
+    <a href="/games/" style="color:#d97757;text-decoration:none;border:1px solid #d97757;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🎮 게임방</a>
+    <a href="/tests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧠 심리테스트</a>
+    <a href="/categories/뉴스/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">📰 뉴스</a>
+  </nav>
+</div>
+<h1>⚪ 오셀로</h1>
+<div class="sub">컴퓨터와 대결 · 상대 돌을 감싸 뒤집어요 · 흰 점이 둘 수 있는 자리</div>
+<div id="wrap">
+  <canvas id="cv" width="400" height="400"></canvas>
+  <div id="overlay">
+    <h2>오셀로 (리버시)</h2>
+    <p>상대 돌을 내 돌로 양쪽에서 감싸면 뒤집혀요.<br>컴퓨터와 대결 — 돌이 더 많으면 승리!</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span id="info"></span><button id="rst" style="background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:6px 14px;border-radius:8px;font:inherit;cursor:pointer;">다시</button></div>
+<div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+<script>
+
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var N=8,S=cv.width/N,bd,turn,over,info=document.getElementById('info');
+var DIRS=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+function reset(){bd=[];for(var i=0;i<N;i++)bd.push(new Array(N).fill(0));bd[3][3]=2;bd[4][4]=2;bd[3][4]=1;bd[4][3]=1;turn=1;over=false;draw();status();}
+function flips(b,x,y,p){if(b[y][x])return[];var res=[];for(var d=0;d<8;d++){var dx=DIRS[d][0],dy=DIRS[d][1],nx=x+dx,ny=y+dy,line=[];while(nx>=0&&nx<N&&ny>=0&&ny<N&&b[ny][nx]===3-p){line.push([nx,ny]);nx+=dx;ny+=dy;}if(line.length&&nx>=0&&nx<N&&ny>=0&&ny<N&&b[ny][nx]===p)res=res.concat(line);}return res;}
+function moves(b,p){var m=[];for(var y=0;y<N;y++)for(var x=0;x<N;x++){if(flips(b,x,y,p).length)m.push([x,y]);}return m;}
+function play(x,y,p){var f=flips(bd,x,y,p);if(!f.length)return false;bd[y][x]=p;f.forEach(function(c){bd[c[1]][c[0]]=p;});return true;}
+function count(p){var c=0;for(var y=0;y<N;y++)for(var x=0;x<N;x++)if(bd[y][x]===p)c++;return c;}
+function draw(){
+  ctx.fillStyle='#1b6b3a';ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.strokeStyle='#0d3d20';for(var i=0;i<=N;i++){ctx.beginPath();ctx.moveTo(i*S,0);ctx.lineTo(i*S,cv.height);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*S);ctx.lineTo(cv.width,i*S);ctx.stroke();}
+  var mv=over?[]:moves(bd,1);
+  for(var y=0;y<N;y++)for(var x=0;x<N;x++){if(bd[y][x]){ctx.beginPath();ctx.arc(x*S+S/2,y*S+S/2,S*0.4,0,7);ctx.fillStyle=bd[y][x]===1?'#1a1a1a':'#f5f5f5';ctx.fill();}}
+  ctx.fillStyle='rgba(255,255,255,.25)';mv.forEach(function(m){ctx.beginPath();ctx.arc(m[0]*S+S/2,m[1]*S+S/2,S*0.12,0,7);ctx.fill();});
+}
+function status(){info.innerHTML='⚫ 나 <b>'+count(1)+'</b> : <b>'+count(2)+'</b> 컴퓨터 ⚪';}
+function next(){
+  status();
+  if(!moves(bd,1).length&&!moves(bd,2).length){return end();}
+  if(turn===2){setTimeout(ai,550);}
+}
+function ai(){
+  var mv=moves(bd,2);
+  if(!mv.length){turn=1;draw();next();return;}
+  mv.sort(function(a,b){return flips(bd,b[0],b[1],2).length-flips(bd,a[0],a[1],2).length;});
+  // 모서리 우선
+  var corner=mv.filter(function(m){return (m[0]===0||m[0]===7)&&(m[1]===0||m[1]===7);});
+  var pick=corner.length?corner[0]:mv[0];
+  play(pick[0],pick[1],2);turn=1;draw();
+  if(!moves(bd,1).length&&moves(bd,2).length){turn=2;draw();next();}else next();
+}
+function end(){over=true;draw();var a=count(1),b=count(2);info.innerHTML='<b style="color:#d97757">'+(a>b?'🎉 승리!':a<b?'아쉽게 패배':'무승부')+'</b> ('+a+':'+b+')';}
+cv.addEventListener('click',function(e){
+  if(over||turn!==1)return;var rect=cv.getBoundingClientRect();var sx=cv.width/rect.width;
+  var x=(((e.clientX-rect.left)*sx)/S)|0,y=(((e.clientY-rect.top)*sx)/S)|0;
+  if(play(x,y,1)){turn=2;draw();next();}
+});
+document.getElementById('start').onclick=function(){document.getElementById('overlay').style.display='none';reset();};
+document.getElementById('rst').onclick=reset;
+reset();
+})();
+
+</script>
+</body>
+</html>

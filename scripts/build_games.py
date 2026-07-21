@@ -240,5 +240,126 @@ write("gomoku", shell("gomoku", "오목 게임(2인)",
     "⚫ 오목", "2인이 번갈아 두기 · 5개를 먼저 이으면 승리",
     GOMOKU_BODY, GOMOKU_JS))
 
+# ─────────────────────────────────────────────────────────────
+# 🏃 러너 (점프 — 장애물 피하기, 거리 기록)
+# ─────────────────────────────────────────────────────────────
+RUNNER_JS = r'''
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var W=cv.width,H=cv.height,GY=H-40;
+var py,vy,onG,dist,speed,obs,spawn,state='ready',hi=+localStorage.getItem('run_hi')||0,last;
+var hiE=document.getElementById('hi'),dE=document.getElementById('ds'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
+hiE.textContent=hi;
+function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=4.2;obs=[];spawn=60;}
+function jump(){if(state==='play'&&onG){vy=-11.5;onG=false;}else if(state==='ready'||state==='over'){start();}}
+function addObs(){var h=18+Math.random()*30;obs.push({x:W+10,w:16+Math.random()*14,h:h});}
+function loop(t){
+  if(state!=='play')return;
+  if(!last)last=t;var dt=Math.min((t-last)/16.7,3);last=t;
+  vy+=0.62*dt;py+=vy*dt;if(py>=GY-30){py=GY-30;vy=0;onG=true;}
+  dist+=speed*dt*0.1;speed+=0.0016*dt;
+  spawn-=dt;if(spawn<=0){addObs();spawn=Math.max(38,80-speed*3);}
+  for(var i=obs.length-1;i>=0;i--){obs[i].x-=speed*dt;if(obs[i].x<-30)obs.splice(i,1);}
+  // 충돌
+  var pl={x:34,y:py,w:26,h:30};
+  for(var i=0;i<obs.length;i++){var o=obs[i];if(pl.x<o.x+o.w&&pl.x+pl.w>o.x&&pl.y+pl.h>GY-o.h){return over();}}
+  draw();dE.textContent=Math.floor(dist)+'m';requestAnimationFrame(loop);
+}
+function draw(){
+  ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#3e3e3a';ctx.beginPath();ctx.moveTo(0,GY+10);ctx.lineTo(W,GY+10);ctx.stroke();
+  ctx.fillStyle='#e0c07e';ctx.fillRect(34,py,26,30);ctx.fillStyle='#0d0d10';ctx.fillRect(50,py+7,5,5);
+  ctx.fillStyle='#d97757';for(var i=0;i<obs.length;i++){var o=obs[i];ctx.fillRect(o.x,GY-o.h+10,o.w,o.h);}
+  ctx.fillStyle='#9c9a94';ctx.font='14px monospace';ctx.textAlign='left';ctx.fillText(Math.floor(dist)+'m',10,24);
+}
+function over(){state='over';var d=Math.floor(dist);if(d>hi){hi=d;localStorage.setItem('run_hi',hi);hiE.textContent=hi;}
+  ov.style.display='flex';ov.querySelector('h2').textContent='GAME OVER';
+  ov.querySelector('p').innerHTML='<b style="color:#e0c07e">'+d+'m</b> 달렸어요!<br>최고기록 '+hi+'m';
+  var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
+  b.textContent='📤 자랑하기';b.onclick=function(){var t='러너에서 '+d+'m 달렸어요! 🏃 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  btn.textContent='다시 도전';}
+function start(){ov.style.display='none';reset();state='play';last=0;requestAnimationFrame(loop);}
+btn.onclick=start;
+document.addEventListener('keydown',function(e){if(e.key===' '||e.key==='ArrowUp'){e.preventDefault();jump();}});
+cv.addEventListener('touchstart',function(e){e.preventDefault();jump();},{passive:false});
+cv.addEventListener('mousedown',function(){jump();});
+reset();draw();
+})();
+'''
+RUNNER_BODY = '''<div id="wrap">
+  <canvas id="cv" width="480" height="240"></canvas>
+  <div id="overlay">
+    <h2>RUNNER</h2>
+    <p>스페이스·↑·화면 탭으로 점프!<br>장애물을 피해 멀리 달리면 기록이 올라가요.</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span>거리 <b id="ds">0m</b></span><span>BEST <b id="hi">0</b></span></div>'''
+write("runner", shell("runner", "점프 러너 게임",
+    "장애물을 점프로 피하며 멀리 달리는 러너 게임. 스페이스·터치로 점프하는 무료 웹게임.",
+    "🏃 점프 러너", "스페이스·↑·탭으로 점프 · 멀리 달릴수록 기록",
+    RUNNER_BODY, RUNNER_JS))
+
+# ─────────────────────────────────────────────────────────────
+# ⚪ 오셀로 (리버시, vs 컴퓨터)
+# ─────────────────────────────────────────────────────────────
+OTHELLO_JS = r'''
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var N=8,S=cv.width/N,bd,turn,over,info=document.getElementById('info');
+var DIRS=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+function reset(){bd=[];for(var i=0;i<N;i++)bd.push(new Array(N).fill(0));bd[3][3]=2;bd[4][4]=2;bd[3][4]=1;bd[4][3]=1;turn=1;over=false;draw();status();}
+function flips(b,x,y,p){if(b[y][x])return[];var res=[];for(var d=0;d<8;d++){var dx=DIRS[d][0],dy=DIRS[d][1],nx=x+dx,ny=y+dy,line=[];while(nx>=0&&nx<N&&ny>=0&&ny<N&&b[ny][nx]===3-p){line.push([nx,ny]);nx+=dx;ny+=dy;}if(line.length&&nx>=0&&nx<N&&ny>=0&&ny<N&&b[ny][nx]===p)res=res.concat(line);}return res;}
+function moves(b,p){var m=[];for(var y=0;y<N;y++)for(var x=0;x<N;x++){if(flips(b,x,y,p).length)m.push([x,y]);}return m;}
+function play(x,y,p){var f=flips(bd,x,y,p);if(!f.length)return false;bd[y][x]=p;f.forEach(function(c){bd[c[1]][c[0]]=p;});return true;}
+function count(p){var c=0;for(var y=0;y<N;y++)for(var x=0;x<N;x++)if(bd[y][x]===p)c++;return c;}
+function draw(){
+  ctx.fillStyle='#1b6b3a';ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.strokeStyle='#0d3d20';for(var i=0;i<=N;i++){ctx.beginPath();ctx.moveTo(i*S,0);ctx.lineTo(i*S,cv.height);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*S);ctx.lineTo(cv.width,i*S);ctx.stroke();}
+  var mv=over?[]:moves(bd,1);
+  for(var y=0;y<N;y++)for(var x=0;x<N;x++){if(bd[y][x]){ctx.beginPath();ctx.arc(x*S+S/2,y*S+S/2,S*0.4,0,7);ctx.fillStyle=bd[y][x]===1?'#1a1a1a':'#f5f5f5';ctx.fill();}}
+  ctx.fillStyle='rgba(255,255,255,.25)';mv.forEach(function(m){ctx.beginPath();ctx.arc(m[0]*S+S/2,m[1]*S+S/2,S*0.12,0,7);ctx.fill();});
+}
+function status(){info.innerHTML='⚫ 나 <b>'+count(1)+'</b> : <b>'+count(2)+'</b> 컴퓨터 ⚪';}
+function next(){
+  status();
+  if(!moves(bd,1).length&&!moves(bd,2).length){return end();}
+  if(turn===2){setTimeout(ai,550);}
+}
+function ai(){
+  var mv=moves(bd,2);
+  if(!mv.length){turn=1;draw();next();return;}
+  mv.sort(function(a,b){return flips(bd,b[0],b[1],2).length-flips(bd,a[0],a[1],2).length;});
+  // 모서리 우선
+  var corner=mv.filter(function(m){return (m[0]===0||m[0]===7)&&(m[1]===0||m[1]===7);});
+  var pick=corner.length?corner[0]:mv[0];
+  play(pick[0],pick[1],2);turn=1;draw();
+  if(!moves(bd,1).length&&moves(bd,2).length){turn=2;draw();next();}else next();
+}
+function end(){over=true;draw();var a=count(1),b=count(2);info.innerHTML='<b style="color:#d97757">'+(a>b?'🎉 승리!':a<b?'아쉽게 패배':'무승부')+'</b> ('+a+':'+b+')';}
+cv.addEventListener('click',function(e){
+  if(over||turn!==1)return;var rect=cv.getBoundingClientRect();var sx=cv.width/rect.width;
+  var x=(((e.clientX-rect.left)*sx)/S)|0,y=(((e.clientY-rect.top)*sx)/S)|0;
+  if(play(x,y,1)){turn=2;draw();next();}
+});
+document.getElementById('start').onclick=function(){document.getElementById('overlay').style.display='none';reset();};
+document.getElementById('rst').onclick=reset;
+reset();
+})();
+'''
+OTHELLO_BODY = '''<div id="wrap">
+  <canvas id="cv" width="400" height="400"></canvas>
+  <div id="overlay">
+    <h2>오셀로 (리버시)</h2>
+    <p>상대 돌을 내 돌로 양쪽에서 감싸면 뒤집혀요.<br>컴퓨터와 대결 — 돌이 더 많으면 승리!</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span id="info"></span><button id="rst" style="background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:6px 14px;border-radius:8px;font:inherit;cursor:pointer;">다시</button></div>'''
+write("othello", shell("othello", "오셀로(리버시) 게임",
+    "컴퓨터와 대결하는 오셀로(리버시) 게임. 돌을 뒤집어 더 많이 차지하면 승리하는 무료 웹게임.",
+    "⚪ 오셀로", "컴퓨터와 대결 · 상대 돌을 감싸 뒤집어요 · 흰 점이 둘 수 있는 자리",
+    OTHELLO_BODY, OTHELLO_JS))
+
 if __name__=="__main__":
     pass
