@@ -1,0 +1,26 @@
+{
+  "date": "2026-07-21",
+  "company": "다락방 컴퍼니",
+  "weather": "화창 ☀️",
+  "employees": {
+    "boss":     {"floor":"top","name":"사장","role":"대표",       "emoji":"🧑‍💼","status":"지시 하달 중","mood":"good","bubble":"오늘도 다들 고생 많았다"},
+    "hr":       {"floor":"hr","name":"세리","role":"인사·사보",   "emoji":"📝","status":"오늘의 회사 집필","mood":"sly","bubble":"오늘도 사건 많았지~ 다 적어둔다"},
+    "sec":      {"floor":"hr","name":"비서","role":"모니터링",     "emoji":"🛎️","status":"채널 이상無 감시","mood":"calm","bubble":"전 구간 정상입니다"},
+    "jay":      {"floor":"invest","name":"제이","role":"미국주식", "emoji":"📈","status":"미국장 마감 정리","mood":"good","bubble":"오늘 +$7.5, 나쁘지 않네"},
+    "kook":     {"floor":"invest","name":"국주","role":"국내주식", "emoji":"📊","status":"하락장 관망","mood":"neutral","bubble":"돌다리도 두들겨 본다"},
+    "coin":     {"floor":"invest","name":"코인","role":"코인선물", "emoji":"🪙","status":"포지션 홀드","mood":"anxious","bubble":"펀딩비… 버틴다 버텨"},
+    "content":  {"floor":"content","name":"트렌디","role":"블로그","emoji":"✍️","status":"글 3편 발행","mood":"hyper","bubble":"오늘 트렌드 폼 미쳤다 ㅋㅋ"},
+    "pd":       {"floor":"content","name":"피디","role":"영상제작","emoji":"🎬","status":"EP.09 편집 완료","mood":"focused","bubble":"왕좌 컷 드디어 고쳤다…"},
+    "coach":    {"floor":"gym","name":"코치","role":"헬스·식단",   "emoji":"💪","status":"식단 코칭 중","mood":"intense","bubble":"단백질! 더! 물도 마셔!"}
+  },
+  "timeline": [
+    {"t":"08:25","who":"kook","msg":"국내장 시뮬 수확 완료"},
+    {"t":"09:35","who":"content","msg":"데일리 트렌드·뉴스 발행"},
+    {"t":"10:30","who":"jay","msg":"미국장 6트레이드 +$7.5, 사장 보고"},
+    {"t":"12:10","who":"pd","msg":"EP.09 왕좌·함대 컷 수정 → 최종 합본"},
+    {"t":"15:00","who":"coach","msg":"오늘 식단 피드백 전송"},
+    {"t":"18:00","who":"coin","msg":"펀딩비 정산, 포지션 유지 결정"},
+    {"t":"22:00","who":"hr","msg":"오늘의 사보 마감"}
+  ],
+  "daily_script": "오늘의 다락방 컴퍼니 — 투자팀은 모처럼 흑자(+$7.5)로 웃었고, 콘텐츠팀은 게임 여러 종을 새로 런칭하며 정신없이 바빴다. PD는 골머리 앓던 영상 컷을 드디어 고쳐 한숨 돌렸고, 코인 담당만 홀로 펀딩비와 씨름 중. 인사팀 세리는 '오늘도 조용할 날이 없다'며 사보를 마감했다."
+}
