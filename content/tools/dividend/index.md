@@ -41,6 +41,7 @@ readingTime: false
       <div style="font-size:14px;color:#555;">필요한 투자 원금</div>
       <div id="dv-principal" style="font-size:34px;font-weight:800;color:#047857;line-height:1.2;"></div>
       <div id="dv-monthly" style="font-size:16px;color:#065f46;font-weight:700;margin-top:6px;"></div>
+      <div id="dv-asset" style="font-size:14px;color:#065f46;margin-top:8px;padding-top:8px;border-top:1px dashed #a7f3d0;"></div>
     </div>
     <table style="width:100%;margin-top:12px;font-size:14.5px;border-collapse:collapse;"><tbody id="dv-rows"></tbody></table>
     <div style="margin-top:16px;font-weight:700;color:#047857;">📋 고배당 예시 (참고용)</div>
@@ -77,6 +78,7 @@ $('dv-go').onclick=function(){
   var monthly = r>0 ? remain*r/(Math.pow(1+r,n)-1) : remain/n; // 적립식 미래가치 역산 (만원)
   $('dv-principal').textContent=won(principal);
   $('dv-monthly').textContent=years+'년간 매달 '+won(Math.ceil(monthly))+' 씩';
+  $('dv-asset').textContent='💰 '+years+'년 뒤 주식 자산: '+won(principal)+' (이 자산이 월 '+won(tgt)+' 배당을 만들어요)';
   $('dv-rows').innerHTML=
     '<tr><td style="color:#555;">목표 월 배당</td><td>'+won(tgt)+'</td></tr>'
     +'<tr><td style="color:#555;">연 배당 (세전)</td><td>'+won(annualDiv)+'</td></tr>'
@@ -84,7 +86,10 @@ $('dv-go').onclick=function(){
     +'<tr><td style="color:#555;">가정 주가상승률</td><td>연 '+($('dv-growth').value)+'% (모으는 동안)</td></tr>'
     +'<tr><td style="color:#555;">필요 총 원금</td><td>'+won(principal)+'</td></tr>'
     +(have>0?'<tr><td style="color:#555;">현재 보유</td><td>'+won(have)+'</td></tr>':'')
-    +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>';
+    +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>'
+    +'<tr><td style="color:#555;">'+years+'년간 총 납입 원금</td><td>'+won(monthly*n+have)+'</td></tr>'
+    +'<tr style="background:#ecfdf5;"><td style="color:#047857;font-weight:700;">'+years+'년 뒤 주식 자산가치</td><td style="color:#047857;">'+won(principal)+'</td></tr>'
+    +'<tr><td style="color:#555;">└ 그중 순수익(복리)</td><td>+'+won(principal-(monthly*n+have))+'</td></tr>';
   $('dv-list').innerHTML=LIST.map(function(x){return '<tr><td style="color:#444;">'+x[0]+'</td><td>'+x[1]+'</td></tr>';}).join('');
   $('dv-out').style.display='block';
   $('dv-share').onclick=function(){
@@ -110,6 +115,7 @@ $('dv-go').onclick=function(){
 ## 배당금 계산기, 이렇게 계산해요
 
 - **필요 원금** = 목표 월 배당 × 12 ÷ 배당수익률. 예를 들어 월 100만원(연 1,200만원)을 연 4% 배당으로 받으려면 원금 **3억원**이 필요해요.
+- **N년 뒤 주식 자산가치** = 목표 원금에 도달한 그 자산이 곧 노후 자산이에요. 이 자산이 매달 목표 배당을 만들어내죠. 총 납입 원금과 복리 순수익도 함께 보여드려요.
 - **월 적립액** = 목표 기간 동안 그 원금을 모으기 위해 매달 넣어야 하는 금액. **모으는 동안의 총수익률(배당 재투자 + 주가 상승)**을 복리로 반영해 계산해요. 주가 상승률을 높게 잡을수록 매달 넣어야 할 돈은 줄어듭니다.
 
 ### 꼭 알아두세요
