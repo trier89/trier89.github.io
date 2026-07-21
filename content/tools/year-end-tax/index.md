@@ -9,7 +9,7 @@ toc: false
 readingTime: false
 ---
 
-연봉과 주요 공제 항목을 입력하면 **예상 결정세액**과 **환급/추가납부 예상액**을 간편하게 계산해요. (2026년 세율·간이 계산 — 실제와 차이가 날 수 있어요)
+연봉과 주요 공제 항목을 입력하면 **예상 결정세액**과 **환급/추가납부 예상액**을 간편하게 계산해요. (국세청 2026년 세율·공제 기준 — 간이 계산이라 실제와 차이가 날 수 있어요)
 
 <div class="pf-tool" style="max-width:560px;margin:0 auto;">
   <label style="display:block;font-weight:700;margin-bottom:6px;">총급여 (연봉, 만원)</label>
@@ -54,7 +54,16 @@ readingTime: false
 var $=function(id){return document.getElementById(id);};
 var v=function(id){return (parseFloat($(id).value)||0)*10000;}; // 만원→원
 function earnDed(g){return g<=5000000?g*0.7:g<=15000000?3500000+(g-5000000)*0.4:g<=45000000?7500000+(g-15000000)*0.15:g<=100000000?12000000+(g-45000000)*0.05:14750000+(g-100000000)*0.02;}
-function tax(base){base=Math.max(base,0);return base<=14000000?base*0.06:base<=50000000?840000+(base-14000000)*0.15:base<=88000000?6240000+(base-50000000)*0.24:base<=150000000?15360000+(base-88000000)*0.35:base<=300000000?37060000+(base-150000000)*0.38:base*0.4;}
+function tax(base){base=Math.max(base,0);
+  // 2026 종합소득세 누진공제(국세청): 6/15/24/35/38/40/42/45%
+  if(base<=14000000)return base*0.06;
+  if(base<=50000000)return base*0.15-1260000;
+  if(base<=88000000)return base*0.24-5760000;
+  if(base<=150000000)return base*0.35-15440000;
+  if(base<=300000000)return base*0.38-19940000;
+  if(base<=500000000)return base*0.40-25940000;
+  if(base<=1000000000)return base*0.42-35940000;
+  return base*0.45-65940000;}
 function won(w){if(w>=100000000){return (w/100000000).toFixed(2).replace(/\.?0+$/,'')+'억원';}return Math.round(w).toLocaleString()+'원';}
 $('yt-go').onclick=function(){
   var g=v('yt-salary');
@@ -80,7 +89,8 @@ $('yt-go').onclick=function(){
   var insCr=ins*0.12;
   var med=v('yt-med'); var medBase=Math.max(med-g*0.03,0); var medCr=medBase*0.15;
   var donate=v('yt-donate'); var donCr=Math.min(donate,g*0.3)*0.15;
-  var childCr=child>=1?(child===1?150000:child===2?300000:300000+(child-2)*300000):0;
+  // 자녀세액공제(국세청 2024 개정): 1명 15만, 2명 35만, 3명↑ 35만+30만/인
+  var childCr=child<=0?0:child===1?150000:child===2?350000:350000+(child-2)*300000;
   // 월세 세액공제: 총급여 5,500만↓ 17%, 7,000만↓ 15%, 한도 1,000만
   var rent=Math.min(v('yt-rent'),10000000);
   var rentCr=g<=55000000?rent*0.17:(g<=70000000?rent*0.15:0);
