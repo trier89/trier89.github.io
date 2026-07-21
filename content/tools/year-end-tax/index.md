@@ -47,6 +47,7 @@ readingTime: false
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">월세액 (연간)</span><input type="tel" id="yt-rent" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">고향사랑기부금</span><input type="tel" id="yt-hometown" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
+  <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-marry" style="width:18px;height:18px;"> 올해(2024~2026) 혼인신고했어요 <span style="color:#999;font-size:12px;">— 결혼세액공제 50만원(생애 1회)</span></label>
   <div style="margin-top:14px;font-weight:700;color:#7c3aed;">🏠 추가 소득공제 (연간, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
@@ -126,15 +127,17 @@ $('yt-go').onclick=function(){
   var insCr=ins*0.12;
   var med=v('yt-med'); var medBase=Math.max(med-g*0.03,0); var medCr=medBase*0.15;
   var donate=v('yt-donate'); var donCr=Math.min(donate,g*0.3)*0.15;
-  // 자녀세액공제(국세청 2024 개정): 1명 15만, 2명 35만, 3명↑ 35만+30만/인
-  var childCr=child<=0?0:child===1?150000:child===2?350000:350000+(child-2)*300000;
+  // 자녀세액공제(2025년 귀속 상향): 1명 25만, 2명 55만, 3명↑ 55만+40만/인 (8~20세)
+  var childCr=child<=0?0:child===1?250000:child===2?550000:550000+(child-2)*400000;
+  // 결혼세액공제(2024~2026 혼인신고분, 생애 1회 50만원)
+  var marryCr=$('yt-marry').checked?500000:0;
   // 월세 세액공제: 총급여 5,500만↓ 17%, 7,000만↓ 15%, 한도 1,000만
   var rent=Math.min(v('yt-rent'),10000000);
   var rentCr=g<=55000000?rent*0.17:(g<=70000000?rent*0.15:0);
   // 고향사랑기부: 10만원 이하 전액, 초과분 15%(상한 500만)
   var home=Math.min(v('yt-hometown'),5000000);
   var homeCr=Math.min(home,100000)+Math.max(home-100000,0)*0.15;
-  var credits=pensionCr+insCr+medCr+donCr+childCr+rentCr+homeCr;
+  var credits=pensionCr+insCr+medCr+donCr+childCr+rentCr+homeCr+marryCr;
   var stdCredit=130000;                    // 표준세액공제(특별공제 없을때) 근사
   var appliedCredit=Math.max(credits,stdCredit);
   var decided=Math.max(calcTax-appliedCredit,0);      // 결정세액
@@ -174,6 +177,7 @@ $('yt-go').onclick=function(){
     +(donCr>0?row('기부금',donCr,1):'')
     +(homeCr>0?row('고향사랑기부',homeCr,1):'')
     +(childCr>0?row('자녀 ('+child+'명)',childCr,1):'')
+    +(marryCr>0?row('결혼세액공제',marryCr,1):'')
     +(credits<stdCredit?row('표준세액공제 (특별공제 대신)',stdCredit,1):'')
     +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">세액공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(appliedCredit)+'</td></tr>'
     +'<tr class="hl"><td>⑥ 결정세액 (실제 낼 세금)</td><td>'+won(decided)+'</td></tr>';
