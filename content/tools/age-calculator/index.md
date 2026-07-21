@@ -39,6 +39,13 @@ readingTime: false
         <tr><td style="padding:9px 6px;border-bottom:1px solid #eee;color:#555;">다음 생일까지</td><td id="ac-bday" style="padding:9px 6px;border-bottom:1px solid #eee;font-weight:700;text-align:right;"></td></tr>
       </tbody>
     </table>
+    <div id="ac-otd" style="display:none;margin-top:20px;">
+      <h3 style="font-size:18px;margin:0 0 10px;">📰 내가 태어난 날, 세상에선</h3>
+      <div id="ac-events" style="font-size:14.5px;line-height:1.65;"></div>
+      <h3 style="font-size:18px;margin:18px 0 10px;">🎂 나와 생일이 같은 유명인</h3>
+      <div id="ac-births" style="font-size:14.5px;line-height:1.65;"></div>
+      <div style="font-size:12px;color:#999;margin-top:10px;">출처: 위키피디아 (영문) · 같은 월·일 기준</div>
+    </div>
   </div>
 </div>
 
@@ -88,7 +95,36 @@ readingTime: false
     $('ac-star').textContent=star(bd.getMonth()+1,bd.getDate());
     $('ac-bday').textContent=dleft===0?'오늘이 생일! 🎉':'D-'+dleft+' ('+(nb.getMonth()+1)+'월 '+nb.getDate()+'일)';
     $('ac-out').style.display='block';
+    loadOnThisDay(bd);
   };
+  // 그날의 사건 + 같은 생일 유명인 (위키미디어 무료 API, 브라우저 직접 호출)
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+  function loadOnThisDay(bd){
+    var mm=('0'+(bd.getMonth()+1)).slice(-2), dd=('0'+bd.getDate()).slice(-2);
+    var box=$('ac-otd'); box.style.display='block';
+    $('ac-events').innerHTML='불러오는 중…'; $('ac-births').innerHTML='불러오는 중…';
+    fetch('https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/events/'+mm+'/'+dd)
+      .then(function(r){return r.json();}).then(function(j){
+        var ev=(j.events||[]).filter(function(e){return e.year>=1930;}).sort(function(a,b){return b.year-a.year;});
+        var byear=bd.getFullYear();
+        ev.sort(function(a,b){return Math.abs(a.year-byear)-Math.abs(b.year-byear);});
+        var top=ev.slice(0,5).sort(function(a,b){return a.year-b.year;});
+        $('ac-events').innerHTML=top.length?top.map(function(e){
+          return '<div style="margin-bottom:6px;"><b style="color:#1d4ed8;">'+e.year+'</b> · '+esc(e.text)+'</div>';
+        }).join(''):'데이터가 없어요';
+      }).catch(function(){$('ac-events').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';});
+    fetch('https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/'+mm+'/'+dd)
+      .then(function(r){return r.json();}).then(function(j){
+        var bs=(j.births||[]).filter(function(e){return e.year>=1930;});
+        bs.sort(function(a,b){return a.year-b.year;});
+        var pick=[]; var step=Math.max(1,Math.floor(bs.length/8));
+        for(var i=0;i<bs.length&&pick.length<8;i+=step)pick.push(bs[i]);
+        pick.sort(function(a,b){return a.year-b.year;});
+        $('ac-births').innerHTML=pick.length?pick.map(function(e){
+          return '<div style="margin-bottom:6px;"><b style="color:#7c3aed;">'+e.year+'년생</b> · '+esc(e.text)+'</div>';
+        }).join(''):'데이터가 없어요';
+      }).catch(function(){$('ac-births').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';});
+  }
 })();
 </script>
 
