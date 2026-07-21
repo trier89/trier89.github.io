@@ -470,8 +470,8 @@ function beep(freq,t,dur,type,gainv){
 }
 function schedule(){
   var base=AC.currentTime+0.15;
-  notes.forEach(function(n){beep(n.freq,base+n.beat*BEAT/1000,0.18,'square',0.13);});
-  // 베이스/드럼
+  // 멜로디는 자동재생 안 함 — 플레이어가 노트를 맞출 때 그 음이 울려서 곡이 완성됨.
+  // 배경(베이스/드럼)만 가이드로 자동 재생.
   var lastBeat=notes[notes.length-1].beat;
   for(var b=0;b<=lastBeat;b+=1){beep(130.81,base+b*BEAT/1000,0.12,'triangle',0.16);}     // bass C3
   for(var b=0;b<=lastBeat;b+=0.5){beep(60,base+b*BEAT/1000,0.05,'sine',0.1);}             // kick
@@ -512,7 +512,7 @@ function hitLane(lane){
   if(state!=='play')return;
   var now=performance.now()-t0, best=null,bd=999;
   notes.forEach(function(n){if(n.hit||n.lane!==lane)return;var d=Math.abs(n.beat*BEAT-now);if(d<bd){bd=d;best=n;}});
-  if(best&&bd<160){best.hit=true;hitCnt++;var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,'#42b642');popup(bd<60?'PERFECT':'GOOD','#42b642');sync();}
+  if(best&&bd<160){best.hit=true;hitCnt++;beep(best.freq,AC.currentTime,0.2,'square',0.2);var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,'#42b642');popup(bd<60?'PERFECT':'GOOD','#42b642');sync();}
   else{combo=0;flash(lane,'#ef2029');popup('MISS','#ef2029');sync();}
 }
 function finish(){state='over';cancelAnimationFrame(raf);
@@ -534,7 +534,7 @@ RHYTHM_BODY = '''<div id="wrap">
   <canvas id="cv" width="320" height="480"></canvas>
   <div id="overlay">
     <h2>RHYTHM</h2>
-    <p>노트가 판정선에 닿는 순간 <b>D · F · G · J · K</b> (또는 아래 버튼)을 눌러요!<br>타이밍이 정확할수록 고득점 · 콤보를 이어가세요.<br><span style="color:#7fb069;">음악은 브라우저가 직접 연주해요 (저작권 프리 🎶)</span></p>
+    <p>노트가 판정선에 닿을 때 <b>D · F · G · J · K</b>(또는 버튼)를 눌러요!<br><b style="color:#e0c07e;">노트를 맞추면 그 음이 울려서 멜로디가 완성돼요.</b><br>많이 맞출수록 곡이 온전해지고 고득점 · 콤보!<br><span style="color:#7fb069;">배경 비트는 자동, 멜로디는 당신이 연주 (저작권 프리 🎶)</span></p>
     <button id="start">▶ 시작 (소리 켜기)</button>
   </div>
 </div>
