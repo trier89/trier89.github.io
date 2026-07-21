@@ -26,12 +26,13 @@ readingTime: false
   </div>
   <div id="ac-out" style="display:none;margin-top:18px;">
     <div style="text-align:center;padding:18px;border-radius:12px;background:#eff6ff;">
-      <div style="font-size:15px;color:#555;">만 나이</div>
+      <div style="font-size:15px;color:#555;">만 나이 <span style="color:#999;font-size:13px;">(만 나이 통일법 · 일명 "윤석열 나이")</span></div>
       <div id="ac-age" style="font-size:42px;font-weight:800;color:#1d4ed8;line-height:1.2;"></div>
       <div id="ac-agesub" style="font-size:14px;color:#666;"></div>
     </div>
     <table style="width:100%;margin-top:14px;border-collapse:collapse;font-size:15px;">
       <tbody>
+        <tr><td style="padding:9px 6px;border-bottom:1px solid #eee;color:#555;">세는 나이 (기존 한국 나이)</td><td id="ac-kage" style="padding:9px 6px;border-bottom:1px solid #eee;font-weight:700;text-align:right;"></td></tr>
         <tr><td style="padding:9px 6px;border-bottom:1px solid #eee;color:#555;">연 나이 (올해 − 출생연도)</td><td id="ac-yage" style="padding:9px 6px;border-bottom:1px solid #eee;font-weight:700;text-align:right;"></td></tr>
         <tr><td style="padding:9px 6px;border-bottom:1px solid #eee;color:#555;">살아온 날</td><td id="ac-days" style="padding:9px 6px;border-bottom:1px solid #eee;font-weight:700;text-align:right;"></td></tr>
         <tr><td style="padding:9px 6px;border-bottom:1px solid #eee;color:#555;">띠</td><td id="ac-zodiac" style="padding:9px 6px;border-bottom:1px solid #eee;font-weight:700;text-align:right;"></td></tr>
@@ -87,6 +88,7 @@ readingTime: false
     var dleft=Math.round((nb-sd)/86400000);
     $('ac-age').textContent='만 '+age+'세';
     $('ac-agesub').textContent='만 '+months+'개월 · '+(hadBirthday?'올해 생일 지남':'올해 생일 전');
+    $('ac-kage').textContent=(sd.getFullYear()-bd.getFullYear()+1)+'살';
     $('ac-yage').textContent=(sd.getFullYear()-bd.getFullYear())+'세';
     $('ac-days').textContent=days.toLocaleString()+'일째';
     $('ac-zodiac').textContent=ANIMALS[bd.getFullYear()%12]+'띠 ('+bd.getFullYear()+'년생)';
@@ -112,7 +114,8 @@ readingTime: false
 
 - **만 나이** = 현재 연도 − 출생 연도 (단, 올해 생일이 아직 안 지났으면 1을 뺌)
 - **연 나이** = 현재 연도 − 출생 연도 (병역법·청소년보호법 등 일부 법령에서 사용)
-- 예전의 "세는 나이"(태어나자마자 1살, 새해마다 +1)는 공식적으로 폐지되었습니다.
+- **세는 나이**(기존 한국 나이): 태어나자마자 1살, 새해마다 +1. 공식적으론 폐지됐지만 일상에선 여전히 쓰입니다.
+- 만 나이 통일법으로 한두 살 "어려진" 나이를 흔히 **"윤석열 나이"**라고 부르기도 합니다 — 위 계산기의 만 나이가 바로 그것입니다.
 
 ### 자주 묻는 질문
 
