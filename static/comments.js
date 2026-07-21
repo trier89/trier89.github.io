@@ -44,13 +44,14 @@
       +'</div>';
 
     var listEl=document.getElementById('pf-list');
-    db.collection('comments').where('page','==',PAGE).orderBy('ts','desc').limit(200)
+    db.collection('comments').where('page','==',PAGE).limit(300)
       .onSnapshot(function(snap){
         document.getElementById('pf-count').textContent='('+snap.size+')';
         if(snap.empty){listEl.innerHTML='<div style="color:#9c9a94;font-size:14px;padding:8px 0;">첫 댓글을 남겨보세요 ✨</div>';return;}
+        var arr=[];snap.forEach(function(doc){arr.push(doc.data());});
+        arr.sort(function(a,b){var ta=a.ts&&a.ts.toMillis?a.ts.toMillis():0,tb=b.ts&&b.ts.toMillis?b.ts.toMillis():0;return tb-ta;});
         var html='';
-        snap.forEach(function(doc){
-          var c=doc.data();
+        arr.forEach(function(c){
           var when=c.ts&&c.ts.toDate?c.ts.toDate():new Date();
           var ds=(when.getMonth()+1)+'.'+when.getDate()+' '+('0'+when.getHours()).slice(-2)+':'+('0'+when.getMinutes()).slice(-2);
           html+='<div style="border-bottom:1px solid #2e2e2c;padding:10px 0;">'
