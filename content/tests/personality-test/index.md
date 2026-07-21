@@ -3,7 +3,8 @@ title: "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (�
 description: "MBTI로 널리 알려진 4가지 성격 지표에 확신형/민감형(A/T) 축까지, 24문항으로 내 유형·장단점·조심할 점·상황별 리액션·궁합을 알아보세요. 무료, 광고식 회원가입 없음."
 date: 2026-07-21
 slug: "personality-test"
-categories: ["도구"]
+aliases: ["/tools/personality-test/"]
+categories: ["심리테스트"]
 tags: ["성격유형 테스트", "MBTI", "성격 테스트", "무료 성격검사", "16가지 성격"]
 toc: false
 readingTime: false

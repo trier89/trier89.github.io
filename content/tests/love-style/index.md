@@ -89,7 +89,7 @@ function render(typeKey,shared){
       :'<button onclick="location.href=location.pathname" style="flex:1;padding:13px;border:2px solid #e11d48;border-radius:10px;background:#fff;color:#be123c;font-weight:700;font-size:15px;cursor:pointer;">다시 하기</button>'
        +'<button id="lt-share" style="flex:1;padding:13px;border:0;border-radius:10px;background:#e11d48;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">결과 공유하기</button>')
     +'</div>'
-    +'<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14px;">다른 테스트도 → <a href="/tests/">심리테스트</a> · <a href="/tools/personality-test/">16 성격유형</a></div>';
+    +'<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14px;">다른 테스트도 → <a href="/tests/">심리테스트</a> · <a href="/tests/personality-test/">16 성격유형</a></div>';
   $('lt-result').style.display='block';
   if(shared){var mine=$('lt-mine');if(mine)mine.onclick=function(){location.href=location.pathname;};}
   else{$('lt-share').onclick=function(){
