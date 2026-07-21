@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>픽셀 인베이더 — 에디슨의 게임방 | 계획대로 느긋하게</title>
+<meta name="description" content="레트로 픽셀 우주 슈팅 게임. 편대로 내려오는 외계 함대를 막아내세요 — 갤러그 스타일 무료 웹게임.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<style>
+:root{--bg:#262624;--panel:#181816;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--green:#7fb069;--yellow:#e0c07e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,monospace;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px 8px;touch-action:none;}
+h1{font-size:17px;color:var(--coral);margin:6px 0 2px;}
+.sub{color:var(--dim);font-size:12.5px;margin-bottom:10px;}
+#wrap{position:relative;}
+canvas{background:#0d0d10;border:2px solid var(--line);border-radius:10px;display:block;image-rendering:pixelated;max-width:100%;}
+.hud{display:flex;justify-content:space-between;width:100%;max-width:480px;font-size:13px;color:var(--dim);margin-top:8px;}
+.hud b{color:var(--yellow);}
+.foot{margin-top:14px;font-size:12.5px;color:var(--dim);text-align:center;line-height:1.8;}
+.foot a{color:var(--coral);text-decoration:none;}
+#overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(13,13,16,.82);border-radius:10px;text-align:center;}
+#overlay h2{color:var(--coral);font-size:22px;letter-spacing:2px;}
+#overlay p{color:var(--dim);font-size:13px;margin:10px 14px;line-height:1.8;}
+#overlay button{background:var(--coral);border:0;border-radius:8px;color:#1e1e2e;font:inherit;font-weight:700;padding:12px 26px;cursor:pointer;font-size:15px;margin-top:6px;}
+</style>
+</head>
+<body>
+<h1>🕹️ 픽셀 인베이더</h1>
+<div class="sub">← → 키 또는 드래그로 이동 · 발사는 자동!</div>
+<div id="wrap">
+  <canvas id="cv" width="480" height="600"></canvas>
+  <div id="overlay">
+    <h2>PIXEL INVADERS</h2>
+    <p>편대로 내려오는 외계 함대를 막아내세요.<br>웨이브가 오를수록 빨라집니다.</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span>SCORE <b id="sc">0</b></span><span>WAVE <b id="wv">1</b></span><span>LIVES <b id="lv">3</b></span><span>BEST <b id="hi">0</b></span></div>
+<div class="foot">
+  <div>🎮 <a href="/games/number-baseball/">숫자야구</a> · 🏠 <a href="/">에디슨의 놀이터</a></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+var W=480,H=600;
+var scE=document.getElementById('sc'),wvE=document.getElementById('wv'),lvE=document.getElementById('lv'),hiE=document.getElementById('hi');
+var overlay=document.getElementById('overlay'), startBtn=document.getElementById('start');
+var hi=+localStorage.getItem('pixinv_hi')||0; hiE.textContent=hi;
+var state='idle', score, wave, lives, ship, shots, eShots, fleet, dir, stepT, particles, invuln, diveT;
+
+// 픽셀 스프라이트 (1=본체색 2=포인트색)
+var SHIP=[ '0010100','0111110','1111111','1101011' ];
+var AL1=[ '0100010','0111110','1101011','1111111','0100010','1000001' ];
+var AL2=[ '0011100','0111110','1101011','1111111','0101010','1010101' ];
+function drawSprite(rows,x,y,px,c1,c2){
+  for(var r=0;r<rows.length;r++)for(var c=0;c<rows[r].length;c++){
+    var v=rows[r][c]; if(v==='0')continue;
+    ctx.fillStyle=v==='1'?c1:c2;
+    ctx.fillRect(x+c*px,y+r*px,px,px);
+  }
+}
+function newFleet(){
+  fleet=[]; var cols=8, rows=4;
+  var drop=Math.min((wave-1)*10,60);           // 웨이브마다 시작 위치가 내려옴
+  for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){
+    fleet.push({hx:40+c*50, hy:60+drop+r*40, alive:true, type:r%2, dive:null});
+  }
+  dir=1; stepT=0; diveT=120;
+}
+function reset(){
+  score=0; wave=1; lives=3;
+  ship={x:W/2,y:H-46}; shots=[]; eShots=[]; particles=[]; invuln=0;
+  newFleet(); sync();
+}
+function sync(){scE.textContent=score;wvE.textContent=wave;lvE.textContent=lives;hiE.textContent=hi;}
+var keys={};
+addEventListener('keydown',function(e){keys[e.code]=true;if(e.code==='Space')e.preventDefault();});
+addEventListener('keyup',function(e){keys[e.code]=false;});
+// 터치: 드래그 이동 + 자동발사
+var touching=false;
+cv.addEventListener('touchstart',function(e){touching=true;moveTouch(e);e.preventDefault();});
+cv.addEventListener('touchmove',function(e){moveTouch(e);e.preventDefault();});
+cv.addEventListener('touchend',function(){touching=false;});
+function moveTouch(e){
+  var rect=cv.getBoundingClientRect();
+  var x=(e.touches[0].clientX-rect.left)*(W/rect.width);
+  ship.x=Math.max(20,Math.min(W-20,x));
+}
+var fireT=0;
+function fire(){ shots.push({x:ship.x,y:ship.y-14}); }
+function boom(x,y,c){for(var i=0;i<10;i++)particles.push({x:x,y:y,vx:(Math.random()-0.5)*4,vy:(Math.random()-0.5)*4,t:18,c:c});}
+var last=0;
+function loop(ts){
+  if(state!=='play')return;
+  requestAnimationFrame(loop);
+  var dt=Math.min((ts-last)/16.7,3); last=ts;
+  // 이동
+  if(keys.ArrowLeft)ship.x-=5*dt; if(keys.ArrowRight)ship.x+=5*dt;
+  ship.x=Math.max(20,Math.min(W-20,ship.x));
+  fireT-=dt;
+  if(fireT<=0){fire();fireT=14;}   // 전면 자동발사(캐주얼 UX)
+  // 함대 스텝 (웨이브 갈수록 급가속: 22→5)
+  stepT+=dt;
+  var speed=Math.max(22-wave*3,5);
+  if(stepT>speed){
+    stepT=0;
+    var minX=1e9,maxX=-1e9;
+    fleet.forEach(function(a){if(a.alive&&!a.dive){minX=Math.min(minX,a.hx);maxX=Math.max(maxX,a.hx);}});
+    if(maxX+dir*14>W-30||minX+dir*14<30){dir*=-1;fleet.forEach(function(a){a.hy+=16;});}
+    else fleet.forEach(function(a){a.hx+=dir*14;});
+    var alive=fleet.filter(function(a){return a.alive;});
+    if(alive.length&&Math.random()<Math.min(0.55+wave*0.08,0.95)){
+      var s=alive[Math.floor(Math.random()*alive.length)];
+      var pos=s.dive||{x:s.hx,y:s.hy};
+      eShots.push({x:pos.x,y:pos.y+16});
+    }
+  }
+  // 급강하(갤러그): 웨이브 2부터, 갈수록 자주·여러 대
+  diveT-=dt;
+  if(wave>=2&&diveT<=0){
+    diveT=Math.max(150-wave*14,45);
+    var cand=fleet.filter(function(a){return a.alive&&!a.dive;});
+    var n=Math.min(1+Math.floor(wave/3),3);
+    for(var k=0;k<n&&cand.length;k++){
+      var pick=cand.splice(Math.floor(Math.random()*cand.length),1)[0];
+      pick.dive={x:pick.hx,y:pick.hy,t:0,amp:40+Math.random()*50};
+    }
+  }
+  fleet.forEach(function(a){
+    if(!a.alive||!a.dive)return;
+    a.dive.t+=dt;
+    a.dive.y+=(2.6+wave*0.35)*dt;
+    a.dive.x+=Math.sin(a.dive.t/9)*a.dive.amp/22*dt + (ship.x>a.dive.x?0.6:-0.6)*dt;
+    if(a.dive.t%22<dt&&Math.random()<0.5)eShots.push({x:a.dive.x,y:a.dive.y+14});
+    if(invuln<=0&&Math.abs(a.dive.x-ship.x)<18&&Math.abs(a.dive.y-ship.y)<14){
+      lives--;invuln=90;boom(ship.x,ship.y,'#d97757');a.alive=false;boom(a.dive.x,a.dive.y,'#e0c07e');sync();
+      if(lives<=0)gameOver();
+    }
+    if(a.dive.y>H+24)a.dive=null;               // 편대 복귀
+  });
+  shots.forEach(function(s){s.y-=9*dt;});
+  eShots.forEach(function(s){s.y+=(3.2+wave*0.35)*dt;});
+  shots=shots.filter(function(s){return s.y>-20;});
+  eShots=eShots.filter(function(s){return s.y<H+20;});
+  // 충돌
+  shots.forEach(function(s){
+    fleet.forEach(function(a){
+      if(!a.alive)return;
+      var pos=a.dive||{x:a.hx,y:a.hy};
+      if(Math.abs(s.x-pos.x)<16&&Math.abs(s.y-pos.y)<14){
+        a.alive=false;s.y=-99;
+        score+=(a.dive?30:(a.type?15:10))*wave;   // 다이버 보너스 + 웨이브 배수
+        boom(pos.x,pos.y,'#e0c07e');sync();
+      }
+    });
+  });
+  if(invuln>0)invuln-=dt;
+  eShots.forEach(function(s){
+    if(invuln<=0&&Math.abs(s.x-ship.x)<14&&Math.abs(s.y-ship.y)<12){
+      s.y=H+99;lives--;invuln=90;boom(ship.x,ship.y,'#d97757');sync();
+      if(lives<=0)gameOver();
+    }
+  });
+  // 함대 바닥 도달
+  fleet.forEach(function(a){if(a.alive&&!a.dive&&a.hy>H-80)gameOver();});
+  // 웨이브 클리어
+  if(fleet.every(function(a){return !a.alive;})){wave++;score+=100*wave;newFleet();sync();}
+  particles.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.t--;});
+  particles=particles.filter(function(p){return p.t>0;});
+  // 렌더
+  ctx.clearRect(0,0,W,H);
+  // 별
+  ctx.fillStyle='#2a2a30';
+  for(var i=0;i<40;i++){ctx.fillRect((i*137+((ts/40)|0)*(i%3+1))%W, (i*211)%H, 2,2);}
+  if(invuln<=0||((ts/80)|0)%2===0) drawSprite(SHIP,ship.x-21,ship.y-12,6,'#7fb069','#e8e6e3');
+  fleet.forEach(function(a){
+    if(!a.alive)return;
+    var pos=a.dive||{x:a.hx,y:a.hy};
+    var sp=a.type?AL2:AL1;
+    drawSprite(sp,pos.x-14,pos.y-12,4, a.type?'#d97757':'#7ea6e0', '#e0c07e');
+  });
+  ctx.fillStyle='#e8e6e3'; shots.forEach(function(s){ctx.fillRect(s.x-2,s.y-8,4,10);});
+  ctx.fillStyle='#d97757'; eShots.forEach(function(s){ctx.fillRect(s.x-2,s.y,4,10);});
+  particles.forEach(function(p){ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,3,3);});
+}
+function gameOver(){
+  state='over';
+  if(score>hi){hi=score;localStorage.setItem('pixinv_hi',hi);}
+  sync();
+  overlay.style.display='flex';
+  overlay.querySelector('h2').textContent='GAME OVER';
+  overlay.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b> · 웨이브 '+wave+'<br>최고기록 '+hi;
+  startBtn.textContent='다시 도전';
+}
+startBtn.onclick=function(){
+  overlay.style.display='none';
+  reset(); state='play'; last=performance.now();
+  requestAnimationFrame(loop);
+};
+})();
+</script>
+</body>
+</html>
