@@ -15,7 +15,7 @@ readingTime: false
   <label style="display:block;font-weight:700;margin-bottom:6px;">총급여 (연봉, 만원)</label>
   <input type="tel" id="yt-salary" inputmode="numeric" placeholder="예: 5000" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;">
   <div style="display:flex;gap:10px;margin-top:12px;">
-    <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">부양가족 (본인 포함)</span><input type="tel" id="yt-fam" inputmode="numeric" value="1" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
+    <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">부양가족 (본인 포함) <span style="color:#999;font-weight:400;font-size:12px;">부모=60세↑·소득100만↓</span></span><input type="tel" id="yt-fam" inputmode="numeric" value="1" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
     <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">20세 이하 자녀</span><input type="tel" id="yt-child" inputmode="numeric" value="0" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
   </div>
   <label style="display:block;margin-top:14px;"><span style="display:block;font-weight:700;margin-bottom:6px;">원천징수세율 <span style="color:#999;font-weight:400;font-size:13px;">(회사에 신청한 비율)</span></span>
@@ -224,6 +224,8 @@ $('yt-go').onclick=function(){
     tips.push('🌱 <b>청년(만19~34세)이고 총급여 5천만원 이하</b>면 「청년형 장기펀드」에 넣은 돈의 40%(연 600만원 한도 → 최대 240만원)를 소득공제받아요. 정부 지원 상품이에요.');}
   if(v('yt-housing')===0){
     tips.push('🏠 <b>무주택 세대주</b>라면 「주택청약종합저축」 납입액의 40%(연 300만원 한도)를 소득공제받아요. 청약 기회 + 절세 둘 다 챙기세요.');}
+  // 부모님(직계존속) 부양가족 공제 자격
+  tips.push('👵 <b>부모님을 부양가족(150만원 공제)에 넣는 조건</b><br>· <b>나이</b>: 만 60세 이상(2025년 귀속 기준 1965년생 이전). ※함께 안 살아도, 형제 중 실제 부양하는 1명이 공제.<br>· <b>소득</b>: 연간 <b>소득금액 100만원 이하</b>(근로소득만 있으면 총급여 500만원 이하).<br>· <b>연금 받으셔도 가능</b>: 국민연금 등 공적연금은 <b>연 약 516만원(월 43만원) 이하</b>면 소득요건 충족. <b>기초연금은 비과세</b>라 아무리 받아도 소득에 안 잡혀요(공제 가능).<br>· <b>일용직이면 소득 무관</b>: 일용근로소득은 분리과세(그때그때 세금 끝)라 소득금액에 안 들어가요 → 얼마를 버셔도 공제 가능.');
   // 고향사랑 꿀팁
   if(home===0){tips.push('🎁 <b>고향사랑기부 10만원</b>은 전액 세액공제 + 답례품(3만원 상당)까지 받아요. 사실상 이득이라 안 하면 손해!');}
   $('yt-tips').innerHTML='<div style="font-weight:700;color:#b45309;margin-bottom:8px;">🎯 나를 위한 절세 팁</div>'+tips.map(function(x){return '<div style="padding:10px 12px;background:#fffbeb;border-radius:8px;margin-bottom:6px;font-size:14px;line-height:1.6;">'+x+'</div>';}).join('');
