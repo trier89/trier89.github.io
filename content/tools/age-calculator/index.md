@@ -13,10 +13,14 @@ readingTime: false
 
 <div id="agecalc" style="max-width:560px;margin:0 auto;">
   <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
-    <label style="flex:1 1 220px;display:block;">
+    <div style="flex:1 1 100%;">
       <span style="display:block;font-weight:700;margin-bottom:6px;">생년월일</span>
-      <input type="date" id="ac-birth" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;" max="2100-12-31">
-    </label>
+      <div style="display:flex;gap:8px;">
+        <select id="ac-y" style="flex:1.3;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;background:#fff;"></select>
+        <select id="ac-m" style="flex:1;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;background:#fff;"></select>
+        <select id="ac-d" style="flex:1;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;background:#fff;"></select>
+      </div>
+    </div>
     <label style="flex:1 1 220px;display:block;">
       <span style="display:block;font-weight:700;margin-bottom:6px;">기준일 (기본: 오늘)</span>
       <input type="date" id="ac-base" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;">
@@ -45,13 +49,29 @@ readingTime: false
 (function(){
   var $=function(id){return document.getElementById(id);};
   $('ac-base').value = new Date().toISOString().slice(0,10);
+  // 생년월일 = 드롭다운 3개 (모바일 date picker가 '일' 선택이 안 되는 기기 대응 + 과거 연도 찾기 편의)
+  var ySel=$('ac-y'), mSel=$('ac-m'), dSel=$('ac-d');
+  var nowY=new Date().getFullYear();
+  function opt(sel,v,t){var o=document.createElement('option');o.value=v;o.textContent=t;sel.appendChild(o);}
+  opt(ySel,'','년');opt(mSel,'','월');opt(dSel,'','일');
+  for(var y=nowY;y>=1900;y--)opt(ySel,y,y+'년');
+  for(var m=1;m<=12;m++)opt(mSel,m,m+'월');
+  function fillDays(){
+    var y=+ySel.value||2000, m=+mSel.value||1;
+    var dmax=new Date(y,m,0).getDate(), cur=+dSel.value||0;
+    while(dSel.options.length>1)dSel.remove(1);
+    for(var d=1;d<=dmax;d++)opt(dSel,d,d+'일');
+    if(cur&&cur<=dmax)dSel.value=cur;
+  }
+  fillDays();
+  ySel.onchange=fillDays; mSel.onchange=fillDays;
   var ANIMALS=['원숭이','닭','개','돼지','쥐','소','호랑이','토끼','용','뱀','말','양'];
   var STARS=[[120,'염소자리'],[219,'물병자리'],[321,'물고기자리'],[420,'양자리'],[521,'황소자리'],[622,'쌍둥이자리'],[723,'게자리'],[823,'사자자리'],[923,'처녀자리'],[1023,'천칭자리'],[1123,'전갈자리'],[1222,'사수자리'],[1232,'염소자리']];
   function star(m,d){var k=m*100+d;for(var i=0;i<STARS.length;i++){if(k<STARS[i][0])return STARS[i][1];}return '염소자리';}
   $('ac-go').onclick=function(){
-    var b=$('ac-birth').value, s=$('ac-base').value;
-    if(!b){alert('생년월일을 입력해 주세요');return;}
-    var bd=new Date(b+'T00:00:00'), sd=new Date((s||new Date().toISOString().slice(0,10))+'T00:00:00');
+    var s=$('ac-base').value;
+    if(!ySel.value||!mSel.value||!dSel.value){alert('생년월일을 입력해 주세요');return;}
+    var bd=new Date(+ySel.value,+mSel.value-1,+dSel.value), sd=new Date((s||new Date().toISOString().slice(0,10))+'T00:00:00');
     if(sd<bd){alert('기준일이 생년월일보다 빠릅니다');return;}
     var age=sd.getFullYear()-bd.getFullYear();
     var hadBirthday=(sd.getMonth()>bd.getMonth())||(sd.getMonth()===bd.getMonth()&&sd.getDate()>=bd.getDate());
