@@ -45,15 +45,19 @@
       +'</div>';
 
     var listEl=document.getElementById('pf-list');
-    db.collection('comments').where('page','==',PAGE).limit(300)
-      .onSnapshot(function(snap){
-        document.getElementById('pf-count').textContent='('+snap.size+')';
-        if(snap.empty){listEl.innerHTML='<div style="color:#9c9a94;font-size:14px;padding:8px 0;">첫 댓글을 남겨보세요 ✨</div>';return;}
-        var arr=[];snap.forEach(function(doc){arr.push(doc.data());});
-        arr.sort(function(a,b){var ta=a.ts&&a.ts.toMillis?a.ts.toMillis():0,tb=b.ts&&b.ts.toMillis?b.ts.toMillis():0;return tb-ta;});
+    // 읽기는 REST(안정) — SDK Listen 스트림은 일부 네트워크서 막힘. 쓰기만 SDK.
+    var REST='https://firestore.googleapis.com/v1/projects/'+cfg.projectId+'/databases/(default)/documents/comments?pageSize=300&key='+cfg.apiKey;
+    function gv(f){f=f||{};return f.stringValue!==undefined?f.stringValue:(f.timestampValue!==undefined?f.timestampValue:'');}
+    function loadComments(){
+      fetch(REST).then(function(r){return r.json();}).then(function(d){
+        var arr=(d.documents||[]).map(function(x){var f=x.fields||{};return {page:gv(f.page),nick:gv(f.nick),text:gv(f.text),ts:gv(f.ts)};})
+          .filter(function(c){return c.page===PAGE;});
+        arr.sort(function(a,b){return (b.ts||'').localeCompare(a.ts||'');});
+        document.getElementById('pf-count').textContent='('+arr.length+')';
+        if(!arr.length){listEl.innerHTML='<div style="color:#9c9a94;font-size:14px;padding:8px 0;">첫 댓글을 남겨보세요 ✨</div>';return;}
         var html='';
         arr.forEach(function(c){
-          var when=c.ts&&c.ts.toDate?c.ts.toDate():new Date();
+          var when=c.ts?new Date(c.ts):new Date();
           var ds=(when.getMonth()+1)+'.'+when.getDate()+' '+('0'+when.getHours()).slice(-2)+':'+('0'+when.getMinutes()).slice(-2);
           html+='<div style="border-bottom:1px solid #2e2e2c;padding:10px 0;">'
               +'<div style="font-size:13px;"><b style="color:#7ea6e0;">'+esc(c.nick||'익명')+'</b> <span style="color:#7f7d77;font-size:12px;">'+ds+'</span></div>'
@@ -61,7 +65,9 @@
               +'</div>';
         });
         listEl.innerHTML=html;
-      }, function(err){listEl.innerHTML='<div style="color:#e07e7e;font-size:14px;">댓글을 불러오지 못했어요.</div>';console.warn(err);});
+      }).catch(function(err){listEl.innerHTML='<div style="color:#e07e7e;font-size:14px;">댓글을 불러오지 못했어요.</div>';console.warn(err);});
+    }
+    loadComments();
 
     document.getElementById('pf-send').onclick=function(){
       var nick=document.getElementById('pf-nick').value.trim();
@@ -79,7 +85,7 @@
       }).then(function(){
         localStorage.setItem('pf_last',Date.now());
         document.getElementById('pf-text').value='';
-        msg.textContent='등록됐어요! 고마워요 😊';btn.disabled=false;
+        msg.textContent='등록됐어요! 고마워요 😊';btn.disabled=false;setTimeout(loadComments,900);
       }).catch(function(e){msg.textContent='등록 실패 — 내용이 너무 길거나 잠시 후 시도해주세요.';btn.disabled=false;console.warn(e);});
     };
   }).catch(function(e){mount.innerHTML='<div style="color:#9c9a94;font-size:14px;">댓글 기능을 불러오지 못했어요.</div>';console.warn(e);});
