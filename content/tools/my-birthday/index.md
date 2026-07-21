@@ -29,7 +29,7 @@ readingTime: false
     <div id="bd-events" style="font-size:14.5px;line-height:1.65;"></div>
     <h3 style="font-size:18px;margin:18px 0 10px;">🎂 나와 생일이 같은 유명인</h3>
     <div id="bd-births" style="font-size:14.5px;line-height:1.65;"></div>
-    <div style="font-size:12px;color:#999;margin-top:10px;">출처: 한국어 위키백과 · 최근 60일 문서 조회수 기준 유명한 순</div>
+    <div style="font-size:12px;color:#6b7280;margin-top:10px;">출처: 한국어 위키백과 · 최근 60일 문서 조회수 기준 유명한 순</div>
     <button id="bd-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#7c3aed;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">📤 내 생일 이야기 공유하기</button>
     <div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14.5px;">
       🔢 내 <b>만 나이·띠·별자리·생일 D-day</b>가 궁금하다면 → <a href="/tools/age-calculator/">만나이 계산기</a>

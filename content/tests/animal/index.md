@@ -17,7 +17,7 @@ readingTime: false
   </div>
   <div id="an-quiz" style="display:none;">
     <div style="height:8px;background:#e0f2fe;border-radius:4px;margin-bottom:18px;"><div id="an-bar" style="height:8px;width:0;background:#0891b2;border-radius:4px;transition:width .3s;"></div></div>
-    <div id="an-qn" style="font-size:13px;color:#999;margin-bottom:6px;"></div>
+    <div id="an-qn" style="font-size:13px;color:#6b7280;margin-bottom:6px;"></div>
     <div id="an-q" style="font-size:19px;font-weight:700;line-height:1.5;min-height:56px;"></div>
     <div id="an-opts" style="margin-top:16px;display:flex;flex-direction:column;gap:10px;"></div>
   </div>

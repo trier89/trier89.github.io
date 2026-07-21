@@ -115,7 +115,7 @@ function renderResult(code,ident,barsHtml,shared){
   if(!TYPES[code]||!AT_DESC[ident]){code='INFP';ident='T';}
   var t=TYPES[code], at=AT_DESC[ident];
   function list(arr){return '<ul style="margin:6px 0 0;padding-left:20px;line-height:1.7;">'+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
-  var celebHtml = t.celeb ? '<h3 style="margin:20px 0 6px;font-size:17px;">⭐ 같은 유형 유명인</h3><div style="line-height:1.7;">'+t.celeb.name+' — '+t.celeb.note+'</div><div style="font-size:12px;color:#999;">방송·인터뷰에서 본인이 직접 밝힌 경우만 싣습니다 (계속 추가 중)</div>' : '<div style="font-size:12px;color:#999;margin-top:16px;">⭐ 같은 유형 유명인: 본인이 직접 밝힌 사례를 확인해 추가 중입니다</div>';
+  var celebHtml = t.celeb ? '<h3 style="margin:20px 0 6px;font-size:17px;">⭐ 같은 유형 유명인</h3><div style="line-height:1.7;">'+t.celeb.name+' — '+t.celeb.note+'</div><div style="font-size:12px;color:#6b7280;">방송·인터뷰에서 본인이 직접 밝힌 경우만 싣습니다 (계속 추가 중)</div>' : '<div style="font-size:12px;color:#6b7280;margin-top:16px;">⭐ 같은 유형 유명인: 본인이 직접 밝힌 사례를 확인해 추가 중입니다</div>';
   $('pt-result').innerHTML=
    '<div style="text-align:center;padding:22px;border-radius:14px;background:#ecfdf5;">'
    +'<div style="font-size:14px;color:#555;">당신의 유형은</div>'

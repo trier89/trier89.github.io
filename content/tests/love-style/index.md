@@ -17,7 +17,7 @@ readingTime: false
   </div>
   <div id="lt-quiz" style="display:none;">
     <div style="height:8px;background:#f1e5e8;border-radius:4px;margin-bottom:18px;"><div id="lt-bar" style="height:8px;width:0;background:#e11d48;border-radius:4px;transition:width .3s;"></div></div>
-    <div id="lt-qn" style="font-size:13px;color:#999;margin-bottom:6px;"></div>
+    <div id="lt-qn" style="font-size:13px;color:#6b7280;margin-bottom:6px;"></div>
     <div id="lt-q" style="font-size:19px;font-weight:700;line-height:1.5;min-height:56px;"></div>
     <div id="lt-opts" style="margin-top:16px;display:flex;flex-direction:column;gap:10px;"></div>
   </div>

@@ -26,7 +26,7 @@ readingTime: false
   </div>
   <div id="ac-out" style="display:none;margin-top:18px;">
     <div style="text-align:center;padding:18px;border-radius:12px;background:#eff6ff;">
-      <div style="font-size:15px;color:#555;">만 나이 <span style="color:#999;font-size:13px;">(만 나이 통일법 · 일명 "윤석열 나이")</span></div>
+      <div style="font-size:15px;color:#555;">만 나이 <span style="color:#6b7280;font-size:13px;">(만 나이 통일법 · 일명 "윤석열 나이")</span></div>
       <div id="ac-age" style="font-size:42px;font-weight:800;color:#1d4ed8;line-height:1.2;"></div>
       <div id="ac-agesub" style="font-size:14px;color:#666;"></div>
     </div>
