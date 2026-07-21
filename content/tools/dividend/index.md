@@ -38,7 +38,7 @@ readingTime: false
   <button id="dv-go" style="width:100%;margin-top:14px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-size:17px;font-weight:700;cursor:pointer;">계산하기</button>
   <div id="dv-out" style="display:none;margin-top:20px;">
     <div style="text-align:center;padding:20px;border-radius:12px;background:#ecfdf5;">
-      <div style="font-size:14px;color:#555;">필요한 투자 원금</div>
+      <div style="font-size:14px;color:#555;">내가 실제로 넣는 총 투입 원금</div>
       <div id="dv-principal" style="font-size:34px;font-weight:800;color:#047857;line-height:1.2;"></div>
       <div id="dv-monthly" style="font-size:16px;color:#065f46;font-weight:700;margin-top:6px;"></div>
       <div id="dv-asset" style="font-size:14px;color:#065f46;margin-top:8px;padding-top:8px;border-top:1px dashed #a7f3d0;"></div>
@@ -76,9 +76,10 @@ $('dv-go').onclick=function(){
   var fvHave=have*Math.pow(1+r,n); // 기존 자금의 미래가치
   var remain=Math.max(principal-fvHave,0);
   var monthly = r>0 ? remain*r/(Math.pow(1+r,n)-1) : remain/n; // 적립식 미래가치 역산 (만원)
-  $('dv-principal').textContent=won(principal);
-  $('dv-monthly').textContent=years+'년간 매달 '+won(Math.ceil(monthly))+' 씩';
-  $('dv-asset').innerHTML='💰 '+years+'년 뒤 주식 자산: <b>'+won(principal)+'</b><br>🔄 모으는 동안 배당은 전액 재투자(복리)로 불어나요';
+  var totalIn=monthly*n+have; // 실제 총 투입
+  $('dv-principal').textContent=won(totalIn);
+  $('dv-monthly').textContent=years+'년간 매달 '+won(Math.ceil(monthly))+' 씩'+(have>0?' (+시작자금 '+won(have)+')':'');
+  $('dv-asset').innerHTML='💰 '+years+'년 뒤 주식 자산: <b>'+won(principal)+'</b> <span style="color:#059669;">(내 돈 '+won(totalIn)+' → 복리로 '+won(principal)+')</span><br>🔄 이 자산이 매달 '+won(tgt)+' 배당을 만들고, 배당은 모으는 동안 전액 재투자돼요';
   $('dv-rows').innerHTML=
     '<tr><td style="color:#555;">목표 월 배당</td><td>'+won(tgt)+'</td></tr>'
     +'<tr><td style="color:#555;">연 배당 (세전)</td><td>'+won(annualDiv)+'</td></tr>'
@@ -86,7 +87,7 @@ $('dv-go').onclick=function(){
     +'<tr><td style="color:#555;">가정 주가상승률</td><td>연 '+($('dv-growth').value)+'% (모으는 동안)</td></tr>'
     +'<tr><td style="color:#555;">배당 재투자</td><td style="color:#047857;">✓ 전액 재투자(복리)</td></tr>'
     +'<tr><td style="color:#555;">모으는 동안 총수익률</td><td>연 '+((y+g)*100).toFixed(1)+'% <span style="color:#6b7280;font-weight:400;">(배당'+($('dv-yield').value)+'%+상승'+($('dv-growth').value)+'%)</span></td></tr>'
-    +'<tr><td style="color:#555;">필요 총 원금</td><td>'+won(principal)+'</td></tr>'
+    +'<tr><td style="color:#555;">목표 자산 (배당 발생 원천)</td><td>'+won(principal)+'</td></tr>'
     +(have>0?'<tr><td style="color:#555;">현재 보유</td><td>'+won(have)+'</td></tr>':'')
     +'<tr><td style="color:#555;">매달 적립액 ('+years+'년)</td><td>'+won(Math.ceil(monthly))+'</td></tr>'
     +'<tr><td style="color:#555;">'+years+'년간 총 납입 원금</td><td>'+won(monthly*n+have)+'</td></tr>'
