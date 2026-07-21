@@ -44,7 +44,7 @@ readingTime: false
       <div id="ac-events" style="font-size:14.5px;line-height:1.65;"></div>
       <h3 style="font-size:18px;margin:18px 0 10px;">🎂 나와 생일이 같은 유명인</h3>
       <div id="ac-births" style="font-size:14.5px;line-height:1.65;"></div>
-      <div style="font-size:12px;color:#999;margin-top:10px;">출처: 위키피디아 (영문) · 같은 월·일 기준</div>
+      <div style="font-size:12px;color:#999;margin-top:10px;">출처: 한국어 위키백과 · 같은 월·일 기준</div>
     </div>
   </div>
 </div>
@@ -97,33 +97,51 @@ readingTime: false
     $('ac-out').style.display='block';
     loadOnThisDay(bd);
   };
-  // 그날의 사건 + 같은 생일 유명인 (위키미디어 무료 API, 브라우저 직접 호출)
+  // 그날의 사건 + 같은 생일 유명인 — 한국어 위키백과 날짜 문서(사건/탄생 섹션) 파싱
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+  function cleanWiki(t){
+    return t.replace(/<ref[^>]*\/>/g,'').replace(/<ref[\s\S]*?<\/ref>/g,'')
+            .replace(/\{\{[\s\S]*?\}\}/g,'')
+            .replace(/\[\[(?:[^\]|]*\|)?([^\]]+)\]\]/g,'$1')
+            .replace(/'''?/g,'').replace(/<[^>]+>/g,'').trim();
+  }
+  function parseSection(wt,name){
+    var re=new RegExp('==\\s*'+name+'\\s*==\\n([\\s\\S]*?)(?:\\n==|$)');
+    var m=wt.match(re); if(!m)return [];
+    var out=[];
+    m[1].split('\n').forEach(function(line){
+      var lm=line.match(/^\*\s*\[\[(\d{3,4})년\]\]\s*[-–—]\s*(.+)/);
+      if(!lm)return;
+      var txt=cleanWiki(lm[2]).replace(/[.。]\s*$/,'');
+      if(txt)out.push({year:+lm[1],text:txt});
+    });
+    return out;
+  }
   function loadOnThisDay(bd){
-    var mm=('0'+(bd.getMonth()+1)).slice(-2), dd=('0'+bd.getDate()).slice(-2);
     var box=$('ac-otd'); box.style.display='block';
     $('ac-events').innerHTML='불러오는 중…'; $('ac-births').innerHTML='불러오는 중…';
-    fetch('https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/events/'+mm+'/'+dd)
+    var title=(bd.getMonth()+1)+'월_'+bd.getDate()+'일';
+    fetch('https://ko.wikipedia.org/w/api.php?action=parse&format=json&origin=*&prop=wikitext&page='+encodeURIComponent(title))
       .then(function(r){return r.json();}).then(function(j){
-        var ev=(j.events||[]).filter(function(e){return e.year>=1930;}).sort(function(a,b){return b.year-a.year;});
+        var wt=j.parse.wikitext['*'];
         var byear=bd.getFullYear();
+        var ev=parseSection(wt,'사건').filter(function(e){return e.year>=1930;});
         ev.sort(function(a,b){return Math.abs(a.year-byear)-Math.abs(b.year-byear);});
         var top=ev.slice(0,5).sort(function(a,b){return a.year-b.year;});
         $('ac-events').innerHTML=top.length?top.map(function(e){
           return '<div style="margin-bottom:6px;"><b style="color:#1d4ed8;">'+e.year+'</b> · '+esc(e.text)+'</div>';
-        }).join(''):'데이터가 없어요';
-      }).catch(function(){$('ac-events').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';});
-    fetch('https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/'+mm+'/'+dd)
-      .then(function(r){return r.json();}).then(function(j){
-        var bs=(j.births||[]).filter(function(e){return e.year>=1930;});
+        }).join(''):'이 날짜의 사건 데이터가 없어요';
+        var bs=parseSection(wt,'탄생').filter(function(e){return e.year>=1930;});
         bs.sort(function(a,b){return a.year-b.year;});
         var pick=[]; var step=Math.max(1,Math.floor(bs.length/8));
         for(var i=0;i<bs.length&&pick.length<8;i+=step)pick.push(bs[i]);
-        pick.sort(function(a,b){return a.year-b.year;});
         $('ac-births').innerHTML=pick.length?pick.map(function(e){
           return '<div style="margin-bottom:6px;"><b style="color:#7c3aed;">'+e.year+'년생</b> · '+esc(e.text)+'</div>';
-        }).join(''):'데이터가 없어요';
-      }).catch(function(){$('ac-births').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';});
+        }).join(''):'이 날짜의 탄생 데이터가 없어요';
+      }).catch(function(){
+        $('ac-events').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';
+        $('ac-births').textContent='불러오기 실패 — 잠시 후 다시 시도해 주세요';
+      });
   }
 })();
 </script>
