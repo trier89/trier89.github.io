@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숫자야구 — 에디슨의 게임방 | 계획대로 느긋하게</title>
+<meta name="description" content="터미널에서 즐기는 클래식 숫자야구 게임. 3자리 숫자를 추리하세요 — 스트라이크와 볼 힌트로 정답을 찾는 두뇌 게임.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<style>
+:root{--bg:#1e1e2e;--panel:#181825;--line:#313244;--txt:#cdd6f4;--dim:#7f849c;--green:#a6e3a1;--orange:#fab387;--red:#f38ba8;--blue:#89b4fa;--yellow:#f9e2af;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,monospace;font-size:15px;line-height:1.7;min-height:100vh;padding:24px 12px;}
+.term{max-width:640px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--line);}
+.dot{width:12px;height:12px;border-radius:50%;}
+.d1{background:#f38ba8;}.d2{background:#f9e2af;}.d3{background:#a6e3a1;}
+.bar-title{margin-left:8px;color:var(--dim);font-size:13px;}
+.body{padding:20px 18px 26px;}
+.ln{margin:3px 0;word-break:keep-all;}
+.p{color:var(--green);font-weight:700;}
+.dim{color:var(--dim);}
+.s{color:var(--green);font-weight:700;}
+.b{color:var(--yellow);font-weight:700;}
+.o{color:var(--red);font-weight:700;}
+.win{color:var(--orange);font-weight:700;}
+#log{min-height:120px;}
+.inputrow{display:flex;gap:8px;margin-top:14px;}
+#guess{flex:1;background:var(--bg);border:2px solid var(--line);border-radius:8px;color:var(--txt);font:inherit;padding:11px 14px;letter-spacing:6px;font-size:18px;}
+#guess:focus{outline:none;border-color:var(--orange);}
+button{background:var(--orange);border:0;border-radius:8px;color:#1e1e2e;font:inherit;font-weight:700;padding:11px 20px;cursor:pointer;}
+button:hover{filter:brightness(1.1);}
+.ghost{background:transparent;border:1px solid var(--line);color:var(--dim);}
+.foot{margin-top:22px;padding-top:14px;border-top:1px dashed var(--line);font-size:13px;color:var(--dim);}
+.foot a{color:var(--blue);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="term">
+  <div class="bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+    <span class="bar-title">에디슨@planfully: ~/games/숫자야구</span></div>
+  <div class="body">
+    <div class="ln"><span class="p">❯</span> ./숫자야구 --start</div>
+    <div class="ln dim">서로 다른 숫자 3자리를 맞혀보세요 (0~9).</div>
+    <div class="ln dim">⚾ 숫자·자리 일치 = <span class="s">S</span>트라이크 · 숫자만 있음 = <span class="b">B</span>볼 · 하나도 없음 = <span class="o">OUT</span></div>
+    <div id="log"></div>
+    <div class="inputrow">
+      <input id="guess" type="tel" inputmode="numeric" maxlength="3" placeholder="123" autocomplete="off">
+      <button id="go">치기</button>
+      <button id="reset" class="ghost">새 게임</button>
+    </div>
+    <div class="foot">
+      <div class="ln">🎮 <a href="/games/">게임방</a> · 🧰 <a href="/">에디슨의 터미널 홈</a></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var answer=[], tries=0, done=false;
+  function newGame(){
+    var pool=[0,1,2,3,4,5,6,7,8,9]; answer=[];
+    for(var i=0;i<3;i++){answer.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);}
+    tries=0; done=false; $('log').innerHTML='';
+    line('<span class="dim">새 게임 시작! 3자리를 입력하고 [치기]</span>');
+    $('guess').value=''; $('guess').focus();
+  }
+  function line(html){var d=document.createElement('div');d.className='ln';d.innerHTML=html;$('log').appendChild(d);d.scrollIntoView({block:'nearest'});}
+  function judge(){
+    if(done)return;
+    var v=$('guess').value.replace(/[^0-9]/g,'');
+    if(v.length!==3){line('<span class="o">! 숫자 3자리를 입력하세요</span>');return;}
+    if(new Set(v).size!==3){line('<span class="o">! 서로 다른 숫자여야 해요</span>');return;}
+    tries++;
+    var s=0,b=0;
+    for(var i=0;i<3;i++){
+      var d=+v[i];
+      if(answer[i]===d)s++;
+      else if(answer.indexOf(d)>-1)b++;
+    }
+    var res = s===3?'<span class="win">🎉 홈런! '+tries+'번 만에 정답 '+answer.join('')+'</span>'
+            : (s||b) ? ('<span class="s">'+s+'S</span> <span class="b">'+b+'B</span>')
+            : '<span class="o">OUT</span>';
+    line('<span class="p">❯</span> '+v+' → '+res);
+    if(s===3){
+      done=true;
+      var msg=tries<=4?'천재인데요?':tries<=7?'준수한 기록!':'끈기의 승리!';
+      line('<span class="dim">'+msg+' [새 게임]으로 다시 도전하거나 친구에게 자랑하세요</span>');
+      line('<button id="share" style="margin-top:6px;">기록 공유하기</button>');
+      document.getElementById('share').onclick=function(){
+        var t='숫자야구 '+tries+'번 만에 홈런! ⚾ 너도 도전 → https://planfully.ai.kr/games/number-baseball/';
+        if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}
+      };
+    }
+    $('guess').value=''; $('guess').focus();
+  }
+  $('go').onclick=judge;
+  $('guess').addEventListener('keydown',function(e){if(e.key==='Enter')judge();});
+  $('reset').onclick=newGame;
+  newGame();
+})();
+</script>
+</body>
+</html>
