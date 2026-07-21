@@ -433,5 +433,116 @@ write("tetris", shell("tetris", "테트리스 게임",
     "🟦 테트리스", "← → 이동 · ↑ 회전 · ↓ 내리기 · 스페이스 한 번에 · 모바일은 아래 버튼",
     TETRIS_BODY, TETRIS_JS))
 
+# ─────────────────────────────────────────────────────────────
+# 🎵 리듬 게임 (웹오디오 칩튠 = 저작권 프리)
+# ─────────────────────────────────────────────────────────────
+RHYTHM_JS = r'''
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var W=cv.width,H=cv.height,LANES=4,LW=W/LANES,HITY=H-70,SPEED=0.42; // px per ms
+var KEYS=['d','f','j','k'];
+var LANECOL=['#31c7ef','#f7d308','#ef2029','#42b642'];
+var scE=document.getElementById('sc'),cbE=document.getElementById('cb'),acE=document.getElementById('ac'),hiE=document.getElementById('hi');
+var ov=document.getElementById('overlay'),btn=document.getElementById('start');
+var hi=+localStorage.getItem('rhythm_hi')||0;hiE.textContent=hi;
+var AC,notes,active,score,combo,maxcombo,hitCnt,total,state='ready',t0,raf;
+// ── 곡(펜타토닉 칩튠) 생성: [beat, lane, freq] ──
+var BPM=128, BEAT=60000/BPM;
+var SCALE=[523.25,587.33,659.25,783.99,880.0]; // C5 D5 E5 G5 A5
+function buildSong(){
+  var pat=[0,2,1,3,2,4,3,1, 4,3,2,0,1,2,3,4, 0,1,2,3,4,3,2,1, 3,2,4,2,1,3,0,2];
+  var arr=[],b=0;
+  for(var rep=0;rep<4;rep++){
+    for(var i=0;i<pat.length;i++){
+      var idx=pat[i], lane=idx%LANES, freq=SCALE[idx];
+      arr.push({beat:b, lane:lane, freq:freq, hit:false});
+      b+= (i%4===3)?1:0.5;                 // 리듬감
+    }
+  }
+  return arr;
+}
+function beep(freq,t,dur,type,gainv){
+  var o=AC.createOscillator(),g=AC.createGain();
+  o.type=type||'square';o.frequency.value=freq;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(gainv||0.14,t+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0008,t+dur);
+  o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+dur+0.02);
+}
+function schedule(){
+  var base=AC.currentTime+0.15;
+  notes.forEach(function(n){beep(n.freq,base+n.beat*BEAT/1000,0.18,'square',0.13);});
+  // 베이스/드럼
+  var lastBeat=notes[notes.length-1].beat;
+  for(var b=0;b<=lastBeat;b+=1){beep(130.81,base+b*BEAT/1000,0.12,'triangle',0.16);}     // bass C3
+  for(var b=0;b<=lastBeat;b+=0.5){beep(60,base+b*BEAT/1000,0.05,'sine',0.1);}             // kick
+  t0=performance.now()+150;                 // 화면 노트 기준시각(오디오 base와 맞춤)
+}
+function start(){
+  if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
+  if(AC.state==='suspended')AC.resume();
+  ov.style.display='none';notes=buildSong();score=0;combo=0;maxcombo=0;hitCnt=0;total=notes.length;
+  sync();schedule();state='play';raf=requestAnimationFrame(loop);
+}
+function sync(){scE.textContent=score;cbE.textContent=combo;acE.textContent=(total?Math.round(hitCnt/Math.max(1,judged())*100):100)+'%';}
+var missCnt=0;function judged(){return hitCnt+missCnt;}
+function loop(t){
+  if(state!=='play')return;
+  ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,W,H);
+  for(var i=0;i<LANES;i++){ctx.fillStyle=i%2?'#141418':'#101014';ctx.fillRect(i*LW,0,LW,H);}
+  ctx.strokeStyle='#3e3e3a';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,HITY);ctx.lineTo(W,HITY);ctx.stroke();
+  for(var i=0;i<LANES;i++){ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(i*LW+4,HITY-4,LW-8,8);}
+  var now=t-t0, allDone=true;
+  notes.forEach(function(n){
+    var nt=n.beat*BEAT; var y=HITY-(nt-now)*SPEED;
+    if(!n.hit&&now-nt>140){n.hit=true;combo=0;missCnt++;flash(n.lane,'#ef2029');sync();}
+    if(!n.hit&&y>-20&&y<H+20){allDone=false;ctx.fillStyle=LANECOL[n.lane];ctx.beginPath();ctx.roundRect?ctx.roundRect(n.lane*LW+8,y-9,LW-16,18,5):ctx.rect(n.lane*LW+8,y-9,LW-16,18);ctx.fill();}
+    else if(!n.hit)allDone=false;
+  });
+  drawFx(t);
+  if(now>notes[notes.length-1].beat*BEAT+800){return finish();}
+  raf=requestAnimationFrame(loop);
+}
+var fx=[];
+function flash(lane,col){fx.push({lane:lane,col:col,t:performance.now()});}
+function drawFx(t){ctx.textAlign='center';for(var i=fx.length-1;i>=0;i--){var f=fx[i],a=1-(t-f.t)/300;if(a<=0){fx.splice(i,1);continue;}ctx.globalAlpha=a;ctx.fillStyle=f.col;ctx.fillRect(f.lane*LW,HITY-40,LW,80);ctx.globalAlpha=1;}}
+function hitLane(lane){
+  if(state!=='play')return;
+  var now=performance.now()-t0, best=null,bd=999;
+  notes.forEach(function(n){if(n.hit||n.lane!==lane)return;var d=Math.abs(n.beat*BEAT-now);if(d<bd){bd=d;best=n;}});
+  if(best&&bd<160){best.hit=true;hitCnt++;var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,bd<60?'#f7d308':'#42b642');sync();}
+}
+function finish(){state='over';cancelAnimationFrame(raf);
+  var acc=Math.round(hitCnt/total*100);
+  if(score>hi){hi=score;localStorage.setItem('rhythm_hi',hi);hiE.textContent=hi;}
+  ov.style.display='flex';ov.querySelector('h2').textContent='CLEAR! 🎵';
+  ov.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b> · 정확도 '+acc+'% · 최고콤보 '+maxcombo+'<br>최고기록 '+hi;
+  var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
+  b.textContent='📤 자랑하기';b.onclick=function(){var t='리듬게임 '+score+'점 (정확도 '+acc+'%)! 🎵 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  btn.textContent='다시 하기';
+}
+btn.onclick=start;
+document.addEventListener('keydown',function(e){var i=KEYS.indexOf(e.key.toLowerCase());if(i>=0){e.preventDefault();hitLane(i);}});
+function mkbtn(i){var b=document.getElementById('r'+i);if(b){var f=function(ev){ev.preventDefault();hitLane(i);};b.addEventListener('touchstart',f,{passive:false});b.addEventListener('mousedown',f);}}
+for(var i=0;i<LANES;i++)mkbtn(i);
+})();
+'''
+RHYTHM_BODY = '''<div id="wrap">
+  <canvas id="cv" width="320" height="480"></canvas>
+  <div id="overlay">
+    <h2>RHYTHM</h2>
+    <p>노트가 판정선에 닿는 순간 <b>D · F · J · K</b> (또는 아래 버튼)을 눌러요!<br>타이밍이 정확할수록 고득점 · 콤보를 이어가세요.<br><span style="color:#7fb069;">음악은 브라우저가 직접 연주해요 (저작권 프리 🎶)</span></p>
+    <button id="start">▶ 시작 (소리 켜기)</button>
+  </div>
+</div>
+<div class="hud"><span>SCORE <b id="sc">0</b></span><span>COMBO <b id="cb">0</b></span><span>ACC <b id="ac">100%</b></span><span>BEST <b id="hi">0</b></span></div>
+<div style="display:flex;gap:6px;justify-content:center;margin-top:12px;max-width:320px;margin-left:auto;margin-right:auto;">
+  <button id="r0" class="rbtn" style="border-color:#31c7ef;">D</button><button id="r1" class="rbtn" style="border-color:#f7d308;">F</button><button id="r2" class="rbtn" style="border-color:#ef2029;">J</button><button id="r3" class="rbtn" style="border-color:#42b642;">K</button>
+</div>
+<style>.rbtn{flex:1;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-size:18px;font-weight:700;height:56px;border-radius:10px;cursor:pointer;}.rbtn:active{background:#33332f;}</style>'''
+write("rhythm", shell("rhythm", "리듬 게임 (저작권 프리 음악)",
+    "노트를 박자에 맞춰 두드리는 리듬 액션 게임. 음악을 브라우저가 직접 합성해 저작권 걱정 없는 무료 웹게임.",
+    "🎵 리듬 게임", "D·F·J·K 또는 버튼으로 박자 맞추기 · 음악은 브라우저가 직접 연주(저작권 프리)",
+    RHYTHM_BODY, RHYTHM_JS))
+
 if __name__=="__main__":
     pass
