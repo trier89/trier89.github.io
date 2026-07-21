@@ -439,9 +439,9 @@ write("tetris", shell("tetris", "테트리스 게임",
 RHYTHM_JS = r'''
 (function(){
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
-var W=cv.width,H=cv.height,LANES=4,LW=W/LANES,HITY=H-70,SPEED=0.42; // px per ms
-var KEYS=['d','f','j','k'];
-var LANECOL=['#31c7ef','#f7d308','#ef2029','#42b642'];
+var W=cv.width,H=cv.height,LANES=5,LW=W/LANES,HITY=H-70,SPEED=0.42; // px per ms
+var KEYS=['d','f','g','j','k'];
+var LANECOL=['#31c7ef','#f7d308','#ef7921','#ef2029','#42b642'];
 var scE=document.getElementById('sc'),cbE=document.getElementById('cb'),acE=document.getElementById('ac'),hiE=document.getElementById('hi');
 var ov=document.getElementById('overlay'),btn=document.getElementById('start');
 var hi=+localStorage.getItem('rhythm_hi')||0;hiE.textContent=hi;
@@ -494,22 +494,26 @@ function loop(t){
   var now=t-t0, allDone=true;
   notes.forEach(function(n){
     var nt=n.beat*BEAT; var y=HITY-(nt-now)*SPEED;
-    if(!n.hit&&now-nt>140){n.hit=true;combo=0;missCnt++;flash(n.lane,'#ef2029');sync();}
+    if(!n.hit&&now-nt>140){n.hit=true;combo=0;missCnt++;sync();}
     if(!n.hit&&y>-20&&y<H+20){allDone=false;ctx.fillStyle=LANECOL[n.lane];ctx.beginPath();ctx.roundRect?ctx.roundRect(n.lane*LW+8,y-9,LW-16,18,5):ctx.rect(n.lane*LW+8,y-9,LW-16,18);ctx.fill();}
     else if(!n.hit)allDone=false;
   });
-  drawFx(t);
+  drawFx(t);drawPops(t);
   if(now>notes[notes.length-1].beat*BEAT+800){return finish();}
   raf=requestAnimationFrame(loop);
 }
 var fx=[];
 function flash(lane,col){fx.push({lane:lane,col:col,t:performance.now()});}
-function drawFx(t){ctx.textAlign='center';for(var i=fx.length-1;i>=0;i--){var f=fx[i],a=1-(t-f.t)/300;if(a<=0){fx.splice(i,1);continue;}ctx.globalAlpha=a;ctx.fillStyle=f.col;ctx.fillRect(f.lane*LW,HITY-40,LW,80);ctx.globalAlpha=1;}}
+function drawFx(t){ctx.textAlign='center';for(var i=fx.length-1;i>=0;i--){var f=fx[i],a=1-(t-f.t)/300;if(a<=0){fx.splice(i,1);continue;}ctx.globalAlpha=a*0.6;ctx.fillStyle=f.col;ctx.fillRect(f.lane*LW,HITY-40,LW,80);ctx.globalAlpha=1;}}
+var pops=[];
+function popup(txt,col){pops.push({txt:txt,col:col,t:performance.now()});}
+function drawPops(t){ctx.textAlign='center';for(var i=pops.length-1;i>=0;i--){var p=pops[i],e=(t-p.t)/500;if(e>=1){pops.splice(i,1);continue;}ctx.globalAlpha=1-e;ctx.fillStyle=p.col;ctx.font='bold '+(30+e*16)+'px sans-serif';ctx.fillText(p.txt,W/2,H*0.42);ctx.globalAlpha=1;}}
 function hitLane(lane){
   if(state!=='play')return;
   var now=performance.now()-t0, best=null,bd=999;
   notes.forEach(function(n){if(n.hit||n.lane!==lane)return;var d=Math.abs(n.beat*BEAT-now);if(d<bd){bd=d;best=n;}});
-  if(best&&bd<160){best.hit=true;hitCnt++;var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,bd<60?'#f7d308':'#42b642');sync();}
+  if(best&&bd<160){best.hit=true;hitCnt++;var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,'#42b642');popup(bd<60?'PERFECT':'GOOD','#42b642');sync();}
+  else{combo=0;flash(lane,'#ef2029');popup('MISS','#ef2029');sync();}
 }
 function finish(){state='over';cancelAnimationFrame(raf);
   var acc=Math.round(hitCnt/total*100);
@@ -530,13 +534,13 @@ RHYTHM_BODY = '''<div id="wrap">
   <canvas id="cv" width="320" height="480"></canvas>
   <div id="overlay">
     <h2>RHYTHM</h2>
-    <p>노트가 판정선에 닿는 순간 <b>D · F · J · K</b> (또는 아래 버튼)을 눌러요!<br>타이밍이 정확할수록 고득점 · 콤보를 이어가세요.<br><span style="color:#7fb069;">음악은 브라우저가 직접 연주해요 (저작권 프리 🎶)</span></p>
+    <p>노트가 판정선에 닿는 순간 <b>D · F · G · J · K</b> (또는 아래 버튼)을 눌러요!<br>타이밍이 정확할수록 고득점 · 콤보를 이어가세요.<br><span style="color:#7fb069;">음악은 브라우저가 직접 연주해요 (저작권 프리 🎶)</span></p>
     <button id="start">▶ 시작 (소리 켜기)</button>
   </div>
 </div>
 <div class="hud"><span>SCORE <b id="sc">0</b></span><span>COMBO <b id="cb">0</b></span><span>ACC <b id="ac">100%</b></span><span>BEST <b id="hi">0</b></span></div>
-<div style="display:flex;gap:6px;justify-content:center;margin-top:12px;max-width:320px;margin-left:auto;margin-right:auto;">
-  <button id="r0" class="rbtn" style="border-color:#31c7ef;">D</button><button id="r1" class="rbtn" style="border-color:#f7d308;">F</button><button id="r2" class="rbtn" style="border-color:#ef2029;">J</button><button id="r3" class="rbtn" style="border-color:#42b642;">K</button>
+<div style="display:flex;gap:5px;justify-content:center;margin-top:12px;max-width:340px;margin-left:auto;margin-right:auto;">
+  <button id="r0" class="rbtn" style="border-color:#31c7ef;">D</button><button id="r1" class="rbtn" style="border-color:#f7d308;">F</button><button id="r2" class="rbtn" style="border-color:#ef7921;">G</button><button id="r3" class="rbtn" style="border-color:#ef2029;">J</button><button id="r4" class="rbtn" style="border-color:#42b642;">K</button>
 </div>
 <style>.rbtn{flex:1;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-size:18px;font-weight:700;height:56px;border-radius:10px;cursor:pointer;}.rbtn:active{background:#33332f;}</style>'''
 write("rhythm", shell("rhythm", "리듬 게임 (저작권 프리 음악)",
