@@ -24,11 +24,11 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#20180f 60%);color
 .bubble{position:relative;background:#fbf6ec;color:#2a2015;font-size:11.5px;line-height:1.35;border-radius:10px;padding:6px 9px;margin:0 auto 4px;max-width:118px;box-shadow:0 3px 8px rgba(0,0,0,.35);animation:pop .5s ease both;}
 .bubble:after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fbf6ec;}
 @keyframes pop{from{transform:translateY(6px) scale(.85);opacity:0;}to{transform:none;opacity:1;}}
-.charimg{height:132px;width:auto;object-fit:contain;display:block;margin:0 auto;filter:drop-shadow(0 6px 5px rgba(0,0,0,.5));transition:transform .2s;}
+.charimg{height:130px;width:auto;object-fit:cover;object-position:top;aspect-ratio:1/1;border-radius:12px;background:#efe6d6;display:block;margin:0 auto;box-shadow:0 5px 12px rgba(0,0,0,.45);border:2px solid #5a4a30;transition:transform .2s;}
 .emp:hover .charimg{transform:translateY(-5px) scale(1.05);}
-.emp.good .charimg{filter:drop-shadow(0 6px 5px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(127,176,105,.55));}
-.emp.anxious .charimg{filter:drop-shadow(0 6px 5px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(224,184,120,.55));}
-.emp.bad .charimg{filter:drop-shadow(0 6px 5px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(224,122,95,.55));}
+.emp.good .charimg{border-color:#7fb069;}
+.emp.anxious .charimg{border-color:#e0b878;}
+.emp.bad .charimg{border-color:#e07a5f;}
 .name{font-weight:700;font-size:12.5px;margin-top:2px;}
 .role{color:var(--dim);font-size:10.5px;}
 .status{color:var(--gold);font-size:10.5px;line-height:1.25;}
@@ -74,7 +74,7 @@ function render(d){
     html+='<div class="floor '+(f.cls||'')+'"><span class="flabel">'+f.label+'</span><div class="desks">';
     Object.keys(emps).filter(function(k){return emps[k].floor===f.key;}).forEach(function(k){var e=emps[k];var m=MOOD[e.mood]||'';var img=IMG[k]||k;
       html+='<div class="emp '+m+'">'+(e.bubble?'<div class="bubble">'+esc(e.bubble)+'</div>':'')
-        +'<img class="charimg" src="chars/'+img+'_t.png" alt="'+esc(e.name)+'" loading="lazy">'
+        +'<img class="charimg" src="chars/'+img+'.png" alt="'+esc(e.name)+'" loading="lazy">'
         +'<div class="name">'+esc(e.name)+'</div><div class="role">'+esc(e.role)+'</div><div class="status">'+esc(e.status||'')+'</div></div>';});
     html+='</div></div>';
   });
