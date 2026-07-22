@@ -97,8 +97,14 @@ function isHoliday(){return HOLIDAYS_2026.indexOf(kstNow().toISOString().slice(0
 function isWeekend(){var w=dowKST();return w===0||w===6;}
 function isMarketDay(){return !isWeekend() && !isHoliday();}
 function inMin(m,a,b){return a<=b ? (m>=a&&m<b) : (m>=a||m<b);} // 자정 넘김 지원
-// 장 present 구간(KST·분): 시작30분전~종료30분후.  국장 08:30-16:00 / 미장 22:00-05:30(서머타임)
-var MKT={kr:[510,960], us:[1320,330]};
+// 장 present 구간(KST·분): 시작30분전~종료30분후.  국장 08:30-16:00
+// 미장은 미 서머타임(3월2째주일~11월1째주일)에 22:00-05:30, 표준시엔 23:30-06:30 자동전환
+var MKT={kr:[510,960]};
+function nthSunday(y,mo,n){var d=new Date(Date.UTC(y,mo,1));return 1+((7-d.getUTCDay())%7)+(n-1)*7;}
+function isUsDst(){var n=kstNow(),y=n.getFullYear(),mo=n.getMonth(),da=n.getDate();
+ if(mo>2&&mo<10)return true; if(mo<2||mo>10)return false;
+ if(mo===2)return da>=nthSunday(y,2,2); return da<nthSunday(y,10,1);}
+function usWin(){return isUsDst()?[1320,330]:[1380,390];}
 var BOSS_WEEK=[420,1380], BOSS_WKND=[510,570]; // 07:00-23:00 / 주말·공휴일 08:30-09:30
 // 사장 운동: 월수금 12:00-12:30 · 화 20:00-20:50 · 일 14:00-14:50
 var GYM=[{d:[1,3,5],w:[720,750]},{d:[2],w:[1200,1250]},{d:[0],w:[840,890]}];
@@ -111,7 +117,7 @@ function isPresent(k){
  var s=SCHED[k]; if(!s)return true;
  if(s==='boss'){var inw=inMin(nowMin(),bossWin()[0],bossWin()[1]); return k==='boss'?(inw||atGym('boss')):inw;}
  if(s.always)return true;
- if(s.market){if(!isMarketDay())return false; var w=MKT[s.market]; return inMin(nowMin(),w[0],w[1]);}
+ if(s.market){if(!isMarketDay())return false; var w=s.market==='us'?usWin():MKT.kr; return inMin(nowMin(),w[0],w[1]);}
  return true;
 }
 // 현재 위치(자리/헬스장). 사장 운동중엔 헬스장(코치 옆)
