@@ -4,18 +4,29 @@
 /tools/my-birthday/ 와 같은 데이터 소스 — 포스트 하단에 도구 링크로 상호 유입.
 출력: content/post/today-YYYYMMDD/index.md (이미 있으면 skip, 재실행 안전)
 """
-import re, json, datetime, urllib.request, urllib.parse
+import re, json, time, datetime, urllib.request, urllib.parse, urllib.error
 from pathlib import Path
 
 BLOG = Path(__file__).resolve().parent.parent
 API = "https://ko.wikipedia.org/w/api.php"
-UA = {"User-Agent": "planfully-lazy-blog/1.0 (daily history post)"}
+# 위키미디어는 명확한 연락처 UA를 요구 — 429/차단 완화
+UA = {"User-Agent": "planfully-lazy-blog/1.1 (https://planfully.ai.kr; make.our.story@gmail.com)"}
 
 
-def api(params):
+def api(params, tries=5):
     q = urllib.parse.urlencode({**params, "format": "json"})
     req = urllib.request.Request(f"{API}?{q}", headers=UA)
-    return json.loads(urllib.request.urlopen(req, timeout=30).read())
+    for t in range(tries):
+        try:
+            return json.loads(urllib.request.urlopen(req, timeout=30).read())
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 503) and t < tries - 1:
+                time.sleep(2 ** t); continue      # 1,2,4,8초 백오프
+            raise
+        except Exception:
+            if t < tries - 1:
+                time.sleep(2 ** t); continue
+            raise
 
 
 def clean_wiki(t):
@@ -99,7 +110,11 @@ def main():
     # 생일 '축하' 포스트이므로 사망 표기("(~1992년)") 인물은 제외
     births = [b for b in births if not re.search(r"[(（]~", b["text"])]
     titles = [b["title"] for b in births if b["title"]]
-    views = fetch_views(titles) if titles else {}
+    try:
+        views = fetch_views(titles) if titles else {}
+    except Exception as e:
+        print(f"fetch_views 실패(랭킹 생략): {e}")   # 조회수 랭킹 실패해도 포스트는 발행
+        views = {}
     for b in births:
         b["v"] = views.get(b["title"], 0) if b["title"] else 0
     births.sort(key=lambda b: -b["v"])
