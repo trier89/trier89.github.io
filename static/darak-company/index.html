@@ -13,15 +13,11 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 .brand{font-weight:800;font-size:21px;color:var(--gold);letter-spacing:-.01em;}
 .brand small{color:var(--dim);font-weight:400;font-size:12px;margin-left:8px;}
 .date{color:var(--dim);font-size:13px;font-variant-numeric:tabular-nums;}
-.layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:minmax(0,470px) 1fr;gap:18px;align-items:start;}
+.layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:minmax(0,490px) 1fr;gap:18px;align-items:start;}
 @media(max-width:800px){.layout{grid-template-columns:1fr;}}
 .stage{position:relative;width:100%;aspect-ratio:1024/1536;border-radius:14px;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.6);background:#2a2015;}
 .stage>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
-.emp{position:absolute;transform:translateX(-50%);z-index:2;}
-.emp .clip{width:100%;height:100%;overflow:hidden;}
-.emp .clip img{width:100%;height:auto;display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));}
-.emp:hover{z-index:6;}
-.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:4px;background:#fbf6ec;color:#2a2015;font-size:10.5px;line-height:1.28;font-weight:600;border-radius:9px;padding:4px 7px;width:max-content;max-width:108px;box-shadow:0 3px 9px rgba(0,0,0,.45);animation:pop .5s ease both;z-index:7;}
+.bubble{position:absolute;transform:translateX(-50%);background:#fbf6ec;color:#2a2015;font-size:10.5px;line-height:1.28;font-weight:600;border-radius:9px;padding:4px 8px;width:max-content;max-width:112px;box-shadow:0 3px 9px rgba(0,0,0,.45);animation:pop .5s ease both;z-index:5;text-align:center;}
 .bubble:after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#fbf6ec;}
 @keyframes pop{from{transform:translateX(-50%) translateY(5px) scale(.85);opacity:0;}to{transform:translateX(-50%);opacity:1;}}
 .floortag{position:absolute;left:6px;transform:translateY(-50%);background:rgba(23,16,10,.82);color:var(--gold);font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;z-index:3;letter-spacing:.02em;pointer-events:none;}
@@ -48,7 +44,7 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
   <div class="date" id="date"></div>
 </div>
 <div class="layout">
-  <div class="stage" id="stage"><img class="bg" src="chars/bldg3.png" alt="다락방 컴퍼니 사옥"></div>
+  <div class="stage" id="stage"><img class="bg" src="chars/scene.jpg" alt="다락방 컴퍼니 사옥"></div>
   <div class="side">
     <div class="card"><h3>📰 오늘의 회사</h3><div class="script" id="script">불러오는 중…</div></div>
     <div class="card"><h3>👥 직원 명단</h3><div class="roster" id="roster"></div></div>
@@ -60,32 +56,23 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
   <div>구경만 가능 · 지시는 사장님만</div>
 </div>
 <script>
-// 캐릭터 파일명 + 건물 내 위치. top/boxh = emp박스 상단·높이(무대높이%), w = 폭(무대너비%). 앉은 직원은 boxh가 상반신만 보이게 클립.
 var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',content:'trendy',pd:'pd',coach:'coach'};
-var POS={
-  boss:{x:46,top:16.2,boxh:8.8,w:11.72},
-  hr:{x:26,top:30.3,boxh:8.2,w:12.18}, sec:{x:56,top:30.3,boxh:8.2,w:12.8},
-  jay:{x:23.5,top:38,boxh:7,w:11.93}, kook:{x:40,top:38,boxh:7,w:11.18}, coin:{x:55.5,top:38,boxh:7,w:15.31},
-  content:{x:13,top:69,boxh:9,w:8.11}, pd:{x:35,top:65,boxh:8.5,w:13.85},
-  coach:{x:30,top:80,boxh:8.5,w:7.51}
-};
-var LABELS=[['🌿 옥상 정원',9],['대표실',22.5],['인사팀',36],['투자팀',48.5],['1층 로비',60.5],['지하1 · 콘텐츠팀',72.5],['지하2 · 헬스장',83.5],['지하3 · 서버실',93.5]];
+// 말풍선 앵커: [x%, 머리위 y%] — 장면 이미지에 구운 캐릭터 머리 위치
+var HEAD={boss:[42,15],hr:[26,28.5],sec:[54,28.5],jay:[22,41.5],kook:[40,41.5],coin:[57,41.5],content:[15,66],pd:[42,65.5],coach:[30,77]};
+var LABELS=[['🌿 옥상 정원',9],['대표실',22],['인사팀',35.5],['투자팀',48.5],['1층 로비',60.5],['지하1 · 콘텐츠팀',72.5],['지하2 · 헬스장',84],['지하3 · 서버실',94]];
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function render(d){
   document.getElementById('date').textContent=d.date+' · '+(d.weather||'');
   document.getElementById('script').textContent=d.daily_script||'';
   var emps=d.employees||{},stage=document.getElementById('stage');
-  var html='<img class="bg" src="chars/bldg3.png" alt="다락방 컴퍼니 사옥">';
+  var html='<img class="bg" src="chars/scene.jpg" alt="다락방 컴퍼니 사옥">';
   LABELS.forEach(function(L){html+='<span class="floortag" style="top:'+L[1]+'%">'+L[0]+'</span>';});
-  Object.keys(POS).forEach(function(k){
-    var e=emps[k]; if(!e) return; var p=POS[k]; var img=IMG[k]||k;
-    html+='<div class="emp" style="left:'+p.x+'%;top:'+p.top+'%;height:'+p.boxh+'%;width:'+p.w+'%">'
-      +(e.bubble?'<div class="bubble">'+esc(e.bubble)+'</div>':'')
-      +'<div class="clip"><img src="chars/'+img+'_cut.png" alt="'+esc(e.name)+'" title="'+esc(e.name)+' · '+esc(e.role)+'" loading="lazy"></div>'
-      +'</div>';
+  Object.keys(HEAD).forEach(function(k){
+    var e=emps[k]; if(!e||!e.bubble) return; var h=HEAD[k];
+    html+='<div class="bubble" style="left:'+h[0]+'%;bottom:'+(100-h[1])+'%">'+esc(e.bubble)+'</div>';
   });
   stage.innerHTML=html;
-  document.getElementById('roster').innerHTML=Object.keys(POS).map(function(k){var e=emps[k];if(!e)return '';var img=IMG[k]||k;
+  document.getElementById('roster').innerHTML=Object.keys(HEAD).map(function(k){var e=emps[k];if(!e)return '';var img=IMG[k]||k;
     return '<div class="rc"><div class="dot"><img src="chars/'+img+'_cut.png" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+'</div></div></div>';}).join('');
   document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
 }
