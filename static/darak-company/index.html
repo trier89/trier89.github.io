@@ -29,7 +29,7 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 .side{display:flex;flex-direction:column;gap:14px;}
 .card{background:var(--wall2);border:1px solid #52412c;border-radius:12px;padding:15px 16px;}
 .card h3{font-size:14px;color:var(--gold);margin-bottom:9px;}
-.script{font-size:13.5px;line-height:1.8;}
+.script{font-size:13.5px;line-height:1.8;white-space:pre-line;}
 .roster{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .rc{display:flex;gap:8px;align-items:flex-start;font-size:12px;}
 .rc .dot{width:26px;height:26px;border-radius:50%;overflow:hidden;flex:none;background:#2a2015;border:1.5px solid #6a583c;margin-top:2px;}
@@ -166,7 +166,7 @@ var CHAR_ASPECT={boss:.434,hr:.451,sec:.474,jay:.442,kook:.414,coin:.567,content
 function charW(k){return (CH[k].h*SCALE*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
 // ── 무대(캐릭터/말풍선) 1회 생성 후 위치만 갱신 ──
 var CUR=null, busy=false, built=false, CHKEYS=Object.keys(CH);
-var LOC={}, ELEVX=75, OFF={x:-16,base:.648};   // 엘베 통로(중앙서 우측 0.05) · 화면밖(1층 높이)
+var LOC={}, ELEVX=73, OFF={x:-16,base:.648};   // 엘베 통로(사용자 지정 73) · 화면밖(1층 높이)
 function empEl(k){return document.getElementById('emp-'+k);}
 function bubEl(k){return document.getElementById('bub-'+k);}
 function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
@@ -277,9 +277,10 @@ async function surpriseVisit(k,text){
 // ── 실시간 재생: 어제 그 시각의 로그가 지금 도착하면 그 직원이 말한다 ──
 var PLAYED={}, playInit=false;
 function evKey(e,i){return CUR.date+'|'+i+'|'+e.t+'|'+e.who;}
-function initPlayed(){ // 첫 로드: 이미 지난 이벤트는 재생 완료로 간주(폭주 방지)
+function initPlayed(){ // 첫 로드: 이미 지난 이벤트/보고는 완료로 간주(폭주 방지)
  var now=hhmmNow();
  (CUR.timeline||[]).forEach(function(e,i){if(e.t<=now)PLAYED[evKey(e,i)]=1;});
+ REPORT_AT.forEach(function(r){if(r.t<=now)REPORTED[CUR.date+'|'+r.t+'|'+r.k]=1;});
  playInit=true;
 }
 async function playbackTick(){
@@ -305,28 +306,64 @@ async function playbackTick(){
  }
 }
 
-// ── 대표실 보고(가끔) ──
-var BOSS_REPLIES=['그래, 고생했다 👍','좋아, 계속 그렇게','수고했다. 다음도 부탁해','오, 잘했네!'];
+// ── 대표실 보고 ──
+// 사장 반응은 성과(mood)에 따라 다르게 (2026-07-22 피드백)
+var BOSS_GOOD=['그래, 고생했다 👍','좋아, 계속 그렇게','오, 잘했네!','수고했다. 다음도 부탁해'];
+var BOSS_BAD=['음… 원인 정리해서 보고해','리스크 관리부터 다시 보자','아쉽네. 내일 만회하자','손실 요인 분석해 두게','무리한 진입은 없었나?'];
+var BOSS_NEUT=['그래, 꾸준함이 실력이다','무리하지 말고 가자','알겠다, 계속 지켜보자','현상 유지도 전략이지'];
+function bossReplyFor(key){var m=((CUR.employees||{})[key]||{}).mood||'neutral';
+ var pool=(m==='bad'||m==='anxious')?BOSS_BAD:((m==='good'||m==='hyper')?BOSS_GOOD:BOSS_NEUT);
+ return pool[(Math.random()*pool.length)|0];}
 function reportLine(key){var e=CUR.employees[key]||{};return (e.role||'')+' 보고 — '+(e.status||'이상 없습니다');}
-async function reportScene(){
- if(busy||!CUR||LOC.boss!=='in')return;
- var pool=CHKEYS.filter(function(k){return k!=='boss'&&LOC[k]==='in'&&CUR.employees[k];});
- if(!pool.length)return; var key=pool[(Math.random()*pool.length)|0];
- busy=true;
+async function doReport(key,intro){ // busy=true 상태에서 호출. 자리→대표실→보고→복귀
  var e=empEl(key),b=bubEl(key),home=CH[key],bossB=bubEl('boss');
  e.style.zIndex=7; if(b)b.style.zIndex=8;
- setBub(key,'사장님, 보고하러 왔습니다!'); await wait(500);
+ setBub(key,intro||'사장님, 보고하러 왔습니다!'); await wait(500);
  place(key,ELEVX,home.base,true); await wait(1500);
  place(key,ELEVX,0.26,true);      await wait(1800);
  place(key,53,0.26,true);         await wait(1500);
- setBub(key,reportLine(key)); if(bossB){bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];bossB.style.display='';}
+ setBub(key,reportLine(key)); if(bossB){bossB.textContent=bossReplyFor(key);bossB.style.display='';}
  await wait(3200);
  place(key,ELEVX,0.26,true);      await wait(1500);
  place(key,ELEVX,home.base,true); await wait(1800);
  place(key,home.x,home.base,true);await wait(1500);
  hideBub(key); if(bossB)bossB.style.display='none';
  e.style.zIndex=2; if(b)b.style.zIndex=6;
+}
+async function reportScene(){
+ if(busy||!CUR||LOC.boss!=='in')return;
+ var pool=CHKEYS.filter(function(k){return k!=='boss'&&LOC[k]==='in'&&CUR.employees[k];});
+ if(!pool.length)return; var key=pool[(Math.random()*pool.length)|0];
+ busy=true;
+ try{ await doReport(key); }catch(e){}
  busy=false;
+}
+
+// ── 장 마감 업무보고: 각 트레이더가 마감 시각에 사장께 당일 보고 (2026-07-22 피드백) ──
+var REPORT_AT=[
+ {t:'07:10',k:'jay', mkt:1, intro:'사장님, 미장 마감 보고입니다'},
+ {t:'09:05',k:'coin',       intro:'일일 정산 보고 왔습니다!'},
+ {t:'15:35',k:'kook',mkt:1, intro:'국장 마감 보고 드립니다'}];
+var REPORTED={};
+async function reportTick(){
+ if(busy||!CUR||!built||!playInit)return;
+ if(LOC.boss!=='in')return;
+ var now=hhmmNow();
+ for(var i=0;i<REPORT_AT.length;i++){var r=REPORT_AT[i],key=CUR.date+'|'+r.t+'|'+r.k;
+  if(r.t<=now&&!REPORTED[key]){
+   REPORTED[key]=1;
+   if(!CUR.employees[r.k])return;
+   if(r.mkt&&!isMarketDay())return; // 휴장일엔 장 마감 보고 없음
+   busy=true;
+   try{
+    var wasOut=(LOC[r.k]==='out');
+    if(wasOut){await walkIn(r.k);}
+    await doReport(r.k,r.intro);
+    if(wasOut){await walkOut(r.k);}
+   }catch(e){}
+   busy=false; return;
+  }
+ }
 }
 
 // ── 혼잣말/업무 말풍선: 한 번에 2명, 순차 ──
@@ -334,13 +371,13 @@ var IDLE={
  boss:['오늘 실적 어떻려나','다들 잘하고 있겠지','커피 한 잔 해야겠다','이번 달 목표는 지켜야 하는데','다음 분기 뭘 밀어볼까','회의는 짧을수록 좋지','고생한 만큼 챙겨줘야지','사무실이 조용하네, 좋다','오늘도 무탈하게 마무리하자','새 직원 하나 더 뽑을까','헬스 가야 하는데 자꾸 미루네','다들 밥은 먹었나'],
  hr:['사보 소재 없나…','오늘도 조용할 날이 없네','누가 사고 안 치나~','이건 꼭 기록해둬야지','제이 표정 봐, 각 나왔네','코인이 또 소리 지르네','오늘 헤드라인은 뭘로 뽑지','다 적고 있으니 조심들 하라고','이 회사 진짜 드라마야','사장님 오늘 기분 좋아 보이던데','커피값이 사보 원고료보다 비싸','받아쓰기만 해도 하루가 가네'],
  sec:['전 구간 정상입니다','이상 무…','오늘도 무탈하길','지연 없음, 좋습니다','채널 상태 양호','알림 하나 확인 중','조용한 게 제일입니다','로그 깨끗하네요','문제 생기면 바로 보고','밤사이 이상 없었습니다','숫자는 거짓말 안 하죠','다들 모르게 지켜보는 중'],
- jay:['오늘은 장 분위기 좋은데?','요즘 장이 말이 아니네..','5분이면 끝나겠다','밤새 지켜봐야지','지표가 애매하네','손절은 빠를수록 좋다','추세만 따라가면 돼','오늘은 관망이 답인가','데이터는 거짓말 안 해','프리마켓부터 각이 나오네','감정 빼고 숫자만 본다','또 새벽이네…'],
- kook:['국장은 언제 오르나','오늘도 관망이다','돌다리도 두들겨야지','확신 없으면 안 들어간다','코스피 답답하네','시뮬로 먼저 확인하자','조급하면 지는 거다','자리 지키는 것도 실력','오늘은 쉬어가는 날','기다림도 전략이지','무리한 베팅은 안 해','현금도 포지션이다'],
- coin:['펀딩비… 버틴다','난 언제 퇴근하지..','코인은 잠들지 않아','24시간 근무 실화냐','이번 펀딩 좋은데?','청산만 안 당하면 돼','가보자고!','변동성 오늘 미쳤네','롱이냐 숏이냐…','존버는 승리한다','잠 좀 자고 싶다…','차트가 나를 부른다'],
+ jay:['오늘은 장 분위기 좋은데?','요즘 장이 말이 아니네..','5분이면 끝나겠다','밤새 지켜봐야지','지표가 애매하네','손절은 빠를수록 좋다','추세만 따라가면 돼','오늘은 관망이 답인가','데이터는 거짓말 안 해','프리마켓부터 각이 나오네','감정 빼고 숫자만 본다','또 새벽이네…','변동성 오늘 미쳤네','오늘은 죽은 장인가?','오늘 한강 차가우려나..'],
+ kook:['국장은 언제 오르나','오늘도 관망이다','돌다리도 두들겨야지','확신 없으면 안 들어간다','코스피 답답하네','시뮬로 먼저 확인하자','조급하면 지는 거다','자리 지키는 것도 실력','오늘은 쉬어가는 날','기다림도 전략이지','무리한 베팅은 안 해','현금도 포지션이다','오늘은 죽은 장인가?','한강물 온도 검색은 금지다'],
+ coin:['펀딩비… 버틴다','난 언제 퇴근하지..','코인은 잠들지 않아','24시간 근무 실화냐','이번 펀딩 좋은데?','청산만 안 당하면 돼','가보자고!','변동성 오늘 미쳤네','롱이냐 숏이냐…','존버는 승리한다','잠 좀 자고 싶다…','차트가 나를 부른다','오늘 한강 차가우려나..','죽은 장엔 낚시나 할까'],
  content:['다음 글 뭐 쓰지~','오늘도 발행 완료!','트렌드 뭐 없나','이 키워드 폼 미쳤다','조회수 좀 터져라','제목이 반이지 제목이','요즘 이게 유행이래','발행 버튼 누를 때가 제일 짜릿','소재가 넘쳐서 문제야','검색유입 언제 터지냐','애드센스 승인 언제 나…','오늘 조회수 몇이지'],
  pd:['이 컷 다시 뽑아야 하나','렌더 언제 끝나..','(하기싫다..)','색감이 마음에 안 들어','자막 0.1초 밀렸다','여기 컷 하나면 살아나는데','BGM이 안 붙네','완벽할 때까지 못 올려','오늘도 밤샘각인가','이 장면 소름 돋게 만들 거야','미리보기 백 번은 봤다','렌더 돌려놓고 커피나'],
  coach:['이 회사는 밥시간이 없어..','단백질 챙겨 먹었어?!','오늘 대표님 식단 하셨을까?','물! 물부터 마셔!','한 세트 더 갈 수 있잖아','기록 안 하면 안 먹은 거야','오늘 운동 빼먹지 마','탄수 그만, 단백질 더!','계단으로 다녀 계단으로','근육은 배신 안 한다','치팅데이는 내일부터','스트레칭이라도 하라고'],
- lobby:['어서오세요, 다락방입니다!','손님이 없네~','퇴근하고 싶다..','오늘도 좋은 하루 되세요','방문객이 늘면 좋겠다','로비가 제일 바빠야 하는데','커피 향 좋다','길 잃으면 저한테 물어보세요','다들 바쁘게 오가네','미소는 기본이죠','오늘 첫 손님은 누굴까','안내데스크는 늘 대기 중'],
+ lobby:['어서오세요, 다락방입니다!','오늘 방문객 몇 분 오시려나','방명록 정리 중이에요','오늘도 좋은 하루 되세요','방문객이 늘면 좋겠다','요청 게시판 확인 중~','블로그 보고 오신 분 환영!','길 잃으면 저한테 물어보세요','오늘 첫 손님은 누굴까','미소는 기본이죠','문의 오면 바로 안내드려요','안내데스크는 늘 대기 중'],
  _def:['음…','오늘도 파이팅','언제 퇴근하지..','벌써 이 시간이네','커피 한 잔 할까','오늘도 무사히','조용하네']
 };
 function pickText(k){var e=(CUR.employees||{})[k]||{},w=e.bubble,id=IDLE[k]||IDLE._def;
@@ -363,12 +400,13 @@ function rotateBubbles(){
 }
 
 function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){
- if(CUR&&CUR.date!==d.date){PLAYED={};playInit=false;} // 자정 넘어 새 로그로 교체되면 재생상태 리셋
+ if(CUR&&CUR.date!==d.date){PLAYED={};REPORTED={};playInit=false;} // 자정 넘어 새 로그로 교체되면 재생상태 리셋
  CUR=d;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
 setInterval(tick,3000);
 setInterval(rotateBubbles,4500);
 setInterval(playbackTick,8000);
+setInterval(reportTick,20000);
 </script>
 </body>
 </html>
