@@ -247,20 +247,27 @@ RUNNER_JS = r'''
 (function(){
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 var W=cv.width,H=cv.height,GY=H-40;
-var py,vy,onG,dist,speed,obs,spawn,state='ready',hi=+localStorage.getItem('run_hi')||0,last;
+var py,vy,onG,dist,speed,obs,plats,spawn,platspawn,state='ready',hi=+localStorage.getItem('run_hi')||0,last;
 var hiE=document.getElementById('hi'),dE=document.getElementById('ds'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
 hiE.textContent=hi;
-function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=5.2;obs=[];spawn=55;}
+function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=5.2;obs=[];plats=[];spawn=55;platspawn=70;}
 function jump(){if(state==='play'&&onG){vy=-11.5;onG=false;}else if(state==='ready'||state==='over'){start();}}
-function addObs(){var h=20+Math.random()*42;obs.push({x:W+10,w:16+Math.random()*20,h:h});if(Math.random()<0.22)obs.push({x:W+10+40+Math.random()*40,w:16+Math.random()*16,h:18+Math.random()*30});}
+function addObs(){var tall=Math.random()<0.35;var h=tall?(46+Math.random()*34):(18+Math.random()*26);obs.push({x:W+10,w:16+Math.random()*18,h:h});if(Math.random()<0.25)obs.push({x:W+10+42+Math.random()*44,w:14+Math.random()*16,h:16+Math.random()*26});}
+function addPlat(){var y=GY-42-Math.random()*70;plats.push({x:W+10,y:y,w:48+Math.random()*52});}
 function loop(t){
   if(state!=='play')return;
   if(!last)last=t;var dt=Math.min((t-last)/16.7,3);last=t;
-  vy+=0.62*dt;py+=vy*dt;if(py>=GY-30){py=GY-30;vy=0;onG=true;}
+  var prevBottom=py+30;
+  vy+=0.62*dt;py+=vy*dt;onG=false;
+  if(py>=GY-30){py=GY-30;vy=0;onG=true;}
+  // 공중 디딤판 착지(낙하 중 위에서 내려올 때)
+  if(vy>0){for(var i=0;i<plats.length;i++){var pp=plats[i];if(34+26>pp.x&&34<pp.x+pp.w&&prevBottom<=pp.y+7&&py+30>=pp.y){py=pp.y-30;vy=0;onG=true;break;}}}
   dist+=speed*dt*0.1;speed+=0.0027*dt;
   spawn-=dt;if(spawn<=0){addObs();spawn=Math.max(26,72-speed*3);}
-  for(var i=obs.length-1;i>=0;i--){obs[i].x-=speed*dt;if(obs[i].x<-30)obs.splice(i,1);}
-  // 충돌
+  platspawn-=dt;if(platspawn<=0){addPlat();platspawn=52+Math.random()*40;}
+  for(var i=obs.length-1;i>=0;i--){obs[i].x-=speed*dt;if(obs[i].x<-40)obs.splice(i,1);}
+  for(var i=plats.length-1;i>=0;i--){plats[i].x-=speed*dt;if(plats[i].x<-120)plats.splice(i,1);}
+  // 충돌(장애물)
   var pl={x:34,y:py,w:26,h:30};
   for(var i=0;i<obs.length;i++){var o=obs[i];if(pl.x<o.x+o.w&&pl.x+pl.w>o.x&&pl.y+pl.h>GY-o.h){return over();}}
   draw();dE.textContent=Math.floor(dist)+'m';requestAnimationFrame(loop);
@@ -268,6 +275,7 @@ function loop(t){
 function draw(){
   ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,W,H);
   ctx.strokeStyle='#3e3e3a';ctx.beginPath();ctx.moveTo(0,GY+10);ctx.lineTo(W,GY+10);ctx.stroke();
+  ctx.fillStyle='#5a65ad';for(var j=0;j<plats.length;j++){var pp=plats[j];ctx.fillRect(pp.x,pp.y,pp.w,8);ctx.fillStyle='#7f8ad0';ctx.fillRect(pp.x,pp.y,pp.w,2);ctx.fillStyle='#5a65ad';}
   ctx.fillStyle='#e0c07e';ctx.fillRect(34,py,26,30);ctx.fillStyle='#0d0d10';ctx.fillRect(50,py+7,5,5);
   ctx.fillStyle='#d97757';for(var i=0;i<obs.length;i++){var o=obs[i];ctx.fillRect(o.x,GY-o.h+10,o.w,o.h);}
   ctx.fillStyle='#9c9a94';ctx.font='14px monospace';ctx.textAlign='left';ctx.fillText(Math.floor(dist)+'m',10,24);
@@ -290,7 +298,7 @@ RUNNER_BODY = '''<div id="wrap">
   <canvas id="cv" width="480" height="240"></canvas>
   <div id="overlay">
     <h2>RUNNER</h2>
-    <p>스페이스·↑·화면 탭으로 점프!<br>장애물을 피해 멀리 달리면 기록이 올라가요.</p>
+    <p>스페이스·↑·화면 탭으로 점프!<br>공중 디딤판을 밟고 장애물을 피해 멀리 달려요.</p>
     <button id="start">게임 시작</button>
   </div>
 </div>
@@ -452,7 +460,7 @@ RHYTHM_JS = r'''
 (function(){
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 var W=cv.width,H=cv.height,LANES=5,LW=W/LANES,HITY=H-70,SPEED=0.52; // px per ms
-var KEYS=['d','f','g','j','k'];
+var KEYS=['d','f',' ','j','k'];
 var LANECOL=['#31c7ef','#f7d308','#ef7921','#ef2029','#42b642'];
 var scE=document.getElementById('sc'),cbE=document.getElementById('cb'),acE=document.getElementById('ac'),hiE=document.getElementById('hi');
 var ov=document.getElementById('overlay'),btn=document.getElementById('start');
@@ -543,7 +551,7 @@ function finish(){state='over';cancelAnimationFrame(raf);
   btn.textContent='다시 하기';
 }
 btn.onclick=start;
-document.addEventListener('keydown',function(e){var i=KEYS.indexOf(e.key.toLowerCase());if(i>=0){e.preventDefault();hitLane(i);}});
+document.addEventListener('keydown',function(e){if(e.repeat)return;var k=(e.code==='Space'||e.key===' ')?' ':e.key.toLowerCase();var i=KEYS.indexOf(k);if(i>=0){e.preventDefault();if(state==='ready'||state==='over'){start();return;}hitLane(i);}});
 function mkbtn(i){var b=document.getElementById('r'+i);if(b){var f=function(ev){ev.preventDefault();hitLane(i);};b.addEventListener('touchstart',f,{passive:false});b.addEventListener('mousedown',f);}}
 for(var i=0;i<LANES;i++)mkbtn(i);
 })();
@@ -552,18 +560,18 @@ RHYTHM_BODY = '''<div id="wrap">
   <canvas id="cv" width="320" height="480"></canvas>
   <div id="overlay">
     <h2>RHYTHM</h2>
-    <p>노트가 판정선에 닿을 때 <b>D · F · G · J · K</b>(또는 버튼)를 눌러요!<br><b style="color:#e0c07e;">노트를 맞추면 그 음이 울려서 멜로디가 완성돼요.</b><br>많이 맞출수록 곡이 온전해지고 고득점 · 콤보!<br><span style="color:#7fb069;">배경 비트는 자동, 멜로디는 당신이 연주 (저작권 프리 🎶)</span></p>
+    <p>노트가 판정선에 닿을 때 <b>D · F · SPACE · J · K</b>(또는 버튼)를 눌러요!<br><b style="color:#e0c07e;">노트를 맞추면 그 음이 울려서 멜로디가 완성돼요.</b><br>많이 맞출수록 곡이 온전해지고 고득점 · 콤보!<br><span style="color:#7fb069;">배경 비트는 자동, 멜로디는 당신이 연주 (저작권 프리 🎶)</span></p>
     <button id="start">▶ 시작 (소리 켜기)</button>
   </div>
 </div>
 <div class="hud"><span>SCORE <b id="sc">0</b></span><span>COMBO <b id="cb">0</b></span><span>ACC <b id="ac">100%</b></span><span>BEST <b id="hi">0</b></span></div>
 <div style="display:flex;gap:5px;justify-content:center;margin-top:12px;max-width:340px;margin-left:auto;margin-right:auto;">
-  <button id="r0" class="rbtn" style="border-color:#31c7ef;">D</button><button id="r1" class="rbtn" style="border-color:#f7d308;">F</button><button id="r2" class="rbtn" style="border-color:#ef7921;">G</button><button id="r3" class="rbtn" style="border-color:#ef2029;">J</button><button id="r4" class="rbtn" style="border-color:#42b642;">K</button>
+  <button id="r0" class="rbtn" style="border-color:#31c7ef;">D</button><button id="r1" class="rbtn" style="border-color:#f7d308;">F</button><button id="r2" class="rbtn" style="border-color:#ef7921;font-size:12px;">SPACE</button><button id="r3" class="rbtn" style="border-color:#ef2029;">J</button><button id="r4" class="rbtn" style="border-color:#42b642;">K</button>
 </div>
 <style>.rbtn{flex:1;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-size:18px;font-weight:700;height:56px;border-radius:10px;cursor:pointer;}.rbtn:active{background:#33332f;}</style>'''
 write("rhythm", shell("rhythm", "리듬 게임 (저작권 프리 음악)",
     "노트를 박자에 맞춰 두드리는 리듬 액션 게임. 음악을 브라우저가 직접 합성해 저작권 걱정 없는 무료 웹게임.",
-    "🎵 리듬 게임", "D·F·J·K 또는 버튼으로 박자 맞추기 · 음악은 브라우저가 직접 연주(저작권 프리)",
+    "🎵 리듬 게임", "D·F·SPACE·J·K 또는 버튼으로 박자 맞추기 · 음악은 브라우저가 직접 연주(저작권 프리)",
     RHYTHM_BODY, RHYTHM_JS))
 
 if __name__=="__main__":
