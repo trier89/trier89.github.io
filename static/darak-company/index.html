@@ -142,13 +142,13 @@ async function reportScene(){
  var bossB=document.getElementById('bub-boss'), obb=bossB?bossB.textContent:'';
  e.style.zIndex=7; if(b)b.style.zIndex=8;
  setBub(key,'사장님, 보고하러 왔습니다!'); await wait(500);
- moveEmp(key,74,home.base); await wait(1600);
- moveEmp(key,74,0.26);     await wait(2000);
+ moveEmp(key,70,home.base); await wait(1600);
+ moveEmp(key,70,0.26);     await wait(2000);
  moveEmp(key,53,0.26);     await wait(1600);
  setBub(key,reportLine(key)); if(bossB)bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];
  await wait(3400);
- moveEmp(key,74,0.26);     await wait(1600);
- moveEmp(key,74,home.base); await wait(2000);
+ moveEmp(key,70,0.26);     await wait(1600);
+ moveEmp(key,70,home.base); await wait(2000);
  moveEmp(key,home.x,home.base); await wait(1600);
  if(bossB)bossB.textContent=obb; setBub(key,orig);
  e.style.zIndex=2; if(b)b.style.zIndex=6;
