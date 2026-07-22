@@ -152,7 +152,7 @@ var CHAR_ASPECT={boss:.434,hr:.451,sec:.474,jay:.442,kook:.414,coin:.567,content
 function charW(k){return (CH[k].h*SCALE*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
 // ── 무대(캐릭터/말풍선) 1회 생성 후 위치만 갱신 ──
 var CUR=null, busy=false, built=false, CHKEYS=Object.keys(CH);
-var LOC={}, ELEVX=70, OFF={x:-16,base:.648};   // 엘베 중앙라인 · 화면밖(1층 높이)
+var LOC={}, ELEVX=75, OFF={x:-16,base:.648};   // 엘베 통로(중앙서 우측 0.05) · 화면밖(1층 높이)
 function empEl(k){return document.getElementById('emp-'+k);}
 function bubEl(k){return document.getElementById('bub-'+k);}
 function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
