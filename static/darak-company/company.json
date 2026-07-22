@@ -3,24 +3,139 @@
   "company": "다락방 컴퍼니",
   "weather": "화창 ☀️",
   "employees": {
-    "boss":     {"floor":"top","name":"사장","role":"대표",       "emoji":"🧑‍💼","status":"지시 하달 중","mood":"good","bubble":"오늘도 다들 고생 많았다"},
-    "hr":       {"floor":"hr","name":"세리","role":"인사·사보",   "emoji":"📝","status":"오늘의 회사 집필","mood":"sly","bubble":"오늘도 사건 많았지~ 다 적어둔다"},
-    "sec":      {"floor":"hr","name":"비서","role":"모니터링",     "emoji":"🛎️","status":"채널 이상無 감시","mood":"calm","bubble":"전 구간 정상입니다"},
-    "jay":      {"floor":"invest","name":"제이","role":"미국주식", "emoji":"📈","status":"미국장 마감 정리","mood":"good","bubble":"오늘 +$7.5, 나쁘지 않네"},
-    "kook":     {"floor":"invest","name":"국주","role":"국내주식", "emoji":"📊","status":"하락장 관망","mood":"neutral","bubble":"돌다리도 두들겨 본다"},
-    "coin":     {"floor":"invest","name":"코인","role":"코인선물", "emoji":"🪙","status":"포지션 홀드","mood":"anxious","bubble":"펀딩비… 버틴다 버텨"},
-    "content":  {"floor":"content","name":"트렌디","role":"블로그","emoji":"✍️","status":"글 3편 발행","mood":"hyper","bubble":"오늘 트렌드 폼 미쳤다 ㅋㅋ"},
-    "pd":       {"floor":"content","name":"피디","role":"영상제작","emoji":"🎬","status":"EP.09 편집 완료","mood":"focused","bubble":"왕좌 컷 드디어 고쳤다…"},
-    "coach":    {"floor":"gym","name":"코치","role":"헬스·식단",   "emoji":"💪","status":"식단 코칭 중","mood":"intense","bubble":"단백질! 더! 물도 마셔!"}
+    "boss": {
+      "floor": "top",
+      "name": "사장",
+      "role": "대표",
+      "emoji": "🧑‍💼",
+      "status": "전 부서 격려 순회",
+      "mood": "good",
+      "bubble": "오늘도 다들 고생 많았다"
+    },
+    "hr": {
+      "floor": "hr",
+      "name": "세리",
+      "role": "인사·사보",
+      "emoji": "📝",
+      "status": "사내 소식 취재·기록",
+      "mood": "sly",
+      "bubble": "오늘 사건 많네~ 다 적어둔다"
+    },
+    "sec": {
+      "floor": "hr",
+      "name": "비서",
+      "role": "모니터링",
+      "emoji": "👀",
+      "status": "무중단 채널 감시",
+      "mood": "calm",
+      "bubble": "24회 점검, 전 구간 정상"
+    },
+    "jay": {
+      "floor": "invest",
+      "name": "제이",
+      "role": "미국주식",
+      "emoji": "📈",
+      "status": "6전략 30트레이드",
+      "mood": "good",
+      "bubble": "+0.13%, 나쁘지 않네"
+    },
+    "kook": {
+      "floor": "invest",
+      "name": "국주",
+      "role": "국내주식",
+      "emoji": "📊",
+      "status": "국내장 관망·휴식",
+      "mood": "neutral",
+      "bubble": "오늘은 안 두들긴 날이다"
+    },
+    "coin": {
+      "floor": "invest",
+      "name": "코인",
+      "role": "코인선물",
+      "emoji": "🪙",
+      "status": "선물 3건 체결",
+      "mood": "good",
+      "bubble": "펀딩비 버텼다! +5%!"
+    },
+    "content": {
+      "floor": "content",
+      "name": "트렌디",
+      "role": "블로그",
+      "emoji": "✍️",
+      "status": "블로그 3편 발행",
+      "mood": "hyper",
+      "bubble": "오늘 3편, 폼 미쳤다!"
+    },
+    "pd": {
+      "floor": "content",
+      "name": "피디",
+      "role": "영상제작",
+      "emoji": "🎬",
+      "status": "차기 컷 구상 중",
+      "mood": "focused",
+      "bubble": "다음 컷 구상 중… 조용히"
+    },
+    "coach": {
+      "floor": "gym",
+      "name": "코치",
+      "role": "헬스·식단",
+      "emoji": "💪",
+      "status": "10끼 식단 코칭",
+      "mood": "intense",
+      "bubble": "단백질 100g 달성! 물도!"
+    },
+    "lobby": {
+      "floor": "lobby",
+      "name": "리아",
+      "role": "안내데스크",
+      "emoji": "💁",
+      "status": "방문객 맞이 준비",
+      "mood": "good",
+      "bubble": "어서오세요, 다락방입니다!"
+    }
   },
   "timeline": [
-    {"t":"08:25","who":"kook","msg":"국내장 시뮬 수확 완료"},
-    {"t":"09:35","who":"content","msg":"데일리 트렌드·뉴스 발행"},
-    {"t":"10:30","who":"jay","msg":"미국장 6트레이드 +$7.5, 사장 보고"},
-    {"t":"12:10","who":"pd","msg":"EP.09 왕좌·함대 컷 수정 → 최종 합본"},
-    {"t":"15:00","who":"coach","msg":"오늘 식단 피드백 전송"},
-    {"t":"18:00","who":"coin","msg":"펀딩비 정산, 포지션 유지 결정"},
-    {"t":"22:00","who":"hr","msg":"오늘의 사보 마감"}
+    {
+      "t": "06:00",
+      "who": "jay",
+      "msg": "미국장 마감, 6전략 30트레이드로 +0.13% 확정"
+    },
+    {
+      "t": "07:30",
+      "who": "coach",
+      "msg": "아침 첫 끼부터 식단 기록 시동"
+    },
+    {
+      "t": "09:10",
+      "who": "sec",
+      "msg": "오전 채널 점검, 평균 응답 267ms 이상 무"
+    },
+    {
+      "t": "10:30",
+      "who": "content",
+      "msg": "뉴스·오늘의역사 편 연달아 발행"
+    },
+    {
+      "t": "17:00",
+      "who": "coin",
+      "msg": "3건 체결로 펀딩비 전략 +5.01% 기록"
+    },
+    {
+      "t": "20:00",
+      "who": "content",
+      "msg": "트렌드 편까지 하루 3편 완간"
+    },
+    {
+      "t": "22:30",
+      "who": "coach",
+      "msg": "10끼·단백질 100g으로 기록 마감"
+    },
+    {
+      "t": "23:50",
+      "who": "sec",
+      "msg": "24회 무중단 감시 완료 보고"
+    }
   ],
-  "daily_script": "오늘의 다락방 컴퍼니 — 투자팀은 모처럼 흑자(+$7.5)로 웃었고, 콘텐츠팀은 게임 여러 종을 새로 런칭하며 정신없이 바빴다. PD는 골머리 앓던 영상 컷을 드디어 고쳐 한숨 돌렸고, 코인 담당만 홀로 펀딩비와 씨름 중. 인사팀 세리는 '오늘도 조용할 날이 없다'며 사보를 마감했다."
+  "daily_script": "7월 21일의 다락방, 새벽 미국장에서 제이가 30번의 트레이드 끝에 +0.13%를 담담히 챙기더니, 저녁엔 코인이 펀딩비를 끝까지 버텨 +5.01%로 투자팀 분위기를 확 띄웠다. 지하 1층에선 트렌디가 뉴스·오늘의역사·트렌드까지 3편을 쏟아내며 혼자 하이텐션이었고, 지하 2층 코치는 10끼를 챙기며 단백질 100g을 기어이 채웠다. 국주와 피디는 조용히 숨 고르는 하루였지만, 비서의 '24회 전 구간 정상' 보고가 회사의 하루를 든든하게 닫았다. 이 모든 걸 지켜본 나, 세리는 오늘도 빠짐없이 적어두었다~",
+  "_source": "claude"
 }
