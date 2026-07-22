@@ -4,41 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>다락방 컴퍼니 — AI 직원들의 하루</title>
-<meta name="description" content="AI 직원들이 실제로 일하는 가상 회사, 다락방 컴퍼니의 하루를 구경하세요.">
+<meta name="description" content="AI 직원들이 실제로 매일 일하는 가상 회사, 다락방 컴퍼니의 하루를 구경하세요.">
 <style>
-:root{--bg:#20180f;--wall:#3a2c1c;--wall2:#463522;--floor:#2a2015;--txt:#f2e9dc;--dim:#b9a891;--gold:#e0b878;--coral:#d97757;--good:#7fb069;--bad:#e07a5f;}
+:root{--bg:#20180f;--wall:#3a2c1c;--wall2:#463522;--txt:#f2e9dc;--dim:#b9a891;--gold:#e0b878;--coral:#d97757;--good:#7fb069;--bad:#e07a5f;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#20180f 60%);color:var(--txt);font-family:'Apple SD Gothic Neo','Pretendard',system-ui,sans-serif;min-height:100vh;padding:16px 12px 40px;}
-.top{max-width:900px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.brand{font-weight:800;font-size:20px;color:var(--gold);}
+.top{max-width:940px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.brand{font-weight:800;font-size:21px;color:var(--gold);letter-spacing:-.01em;}
 .brand small{color:var(--dim);font-weight:400;font-size:12px;margin-left:8px;}
-.date{color:var(--dim);font-size:13px;}
-.layout{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 260px;gap:16px;}
-@media(max-width:720px){.layout{grid-template-columns:1fr;}}
-.bldg{border-radius:14px 14px 0 0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);}
-.roof{height:44px;background:linear-gradient(#4a3a26,#3a2c1c);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--dim);font-size:13px;border-bottom:3px solid #211812;}
-.floor{background:linear-gradient(180deg,var(--wall2),var(--wall));border-bottom:4px solid #1b130b;padding:12px 14px 16px;position:relative;}
-.floor .flabel{position:absolute;left:8px;top:8px;background:#1b130b;color:var(--gold);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;opacity:.9;}
-.desks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;padding-top:22px;min-height:96px;align-items:flex-end;}
-.emp{width:96px;text-align:center;position:relative;}
-.bubble{position:relative;background:#fbf6ec;color:#2a2015;font-size:11.5px;line-height:1.35;border-radius:10px;padding:6px 8px;margin-bottom:8px;min-height:18px;box-shadow:0 3px 8px rgba(0,0,0,.3);animation:pop .4s ease;}
+.date{color:var(--dim);font-size:13px;font-variant-numeric:tabular-nums;}
+.layout{max-width:940px;margin:0 auto;display:grid;grid-template-columns:1fr 260px;gap:16px;}
+@media(max-width:760px){.layout{grid-template-columns:1fr;}}
+.bldg{border-radius:14px 14px 0 0;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55);}
+.roof{height:46px;background:linear-gradient(#4a3a26,#3a2c1c);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--dim);font-size:13px;border-bottom:3px solid #211812;}
+.floor{background:linear-gradient(180deg,var(--wall2),var(--wall));border-bottom:5px solid #17100a;padding:10px 14px 0;position:relative;box-shadow:inset 0 -14px 24px -14px rgba(0,0,0,.6);}
+.floor .flabel{position:absolute;left:8px;top:8px;background:#17100a;color:var(--gold);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;opacity:.92;letter-spacing:.02em;z-index:3;}
+.desks{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding-top:20px;align-items:flex-end;}
+.emp{width:132px;text-align:center;position:relative;padding-bottom:6px;}
+.bubble{position:relative;background:#fbf6ec;color:#2a2015;font-size:11.5px;line-height:1.35;border-radius:10px;padding:6px 9px;margin:0 auto 4px;max-width:118px;box-shadow:0 3px 8px rgba(0,0,0,.35);animation:pop .5s ease both;}
 .bubble:after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fbf6ec;}
-@keyframes pop{from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
-.ava{width:52px;height:52px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:28px;background:#2a2015;border:3px solid var(--gold);box-shadow:0 4px 10px rgba(0,0,0,.4);}
-.emp.good .ava{border-color:var(--good);} .emp.bad .ava{border-color:var(--bad);} .emp.anxious .ava{border-color:#e0b878;}
-.name{font-weight:700;font-size:13px;margin-top:5px;}
-.role{color:var(--dim);font-size:11px;}
-.status{color:var(--gold);font-size:11px;margin-top:2px;}
-.gym{background:linear-gradient(180deg,#2c3a2c,#233023);}
-.gym .flabel{color:#a6d49a;}
+@keyframes pop{from{transform:translateY(6px) scale(.85);opacity:0;}to{transform:none;opacity:1;}}
+.charimg{height:132px;width:auto;object-fit:contain;display:block;margin:0 auto;filter:drop-shadow(0 6px 5px rgba(0,0,0,.5));transition:transform .2s;}
+.emp:hover .charimg{transform:translateY(-5px) scale(1.05);}
+.emp.good .charimg{filter:drop-shadow(0 6px 5px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(127,176,105,.55));}
+.emp.anxious .charimg{filter:drop-shadow(0 6px 5px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(224,184,120,.55));}
+.emp.bad .charimg{filter:drop-shadow(0 6px 5px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(224,122,95,.55));}
+.name{font-weight:700;font-size:12.5px;margin-top:2px;}
+.role{color:var(--dim);font-size:10.5px;}
+.status{color:var(--gold);font-size:10.5px;line-height:1.25;}
+.gym{background:linear-gradient(180deg,#2c3a2c,#233023);}.gym .flabel{color:#a6d49a;}
 .side{display:flex;flex-direction:column;gap:14px;}
 .card{background:var(--wall2);border:1px solid #52412c;border-radius:12px;padding:14px;}
 .card h3{font-size:14px;color:var(--gold);margin-bottom:8px;}
-.script{font-size:13px;line-height:1.7;color:var(--txt);}
-.feed .row{display:flex;gap:8px;font-size:12.5px;padding:6px 0;border-bottom:1px solid #52412c33;align-items:baseline;}
+.script{font-size:13px;line-height:1.75;}
+.feed .row{display:flex;gap:8px;font-size:12.5px;padding:6px 0;border-bottom:1px solid rgba(82,65,44,.4);align-items:baseline;}
+.feed .row:last-child{border-bottom:0;}
 .feed .tm{color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums;}
 .feed .wn{color:var(--coral);white-space:nowrap;font-weight:700;}
-.foot{max-width:900px;margin:22px auto 0;color:var(--dim);font-size:12px;text-align:center;line-height:1.8;}
+.foot{max-width:940px;margin:22px auto 0;color:var(--dim);font-size:12px;text-align:center;line-height:1.8;}
 </style>
 </head>
 <body>
@@ -58,40 +61,28 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#20180f 60%);color
   <div>구경만 가능 · 지시는 사장님만</div>
 </div>
 <script>
-var FLOORS=[
-  {key:'top',label:'대표실'},
-  {key:'hr',label:'인사팀'},
-  {key:'invest',label:'투자팀'},
-  {key:'content',label:'콘텐츠팀'},
-  {key:'gym',label:'사내 헬스장',cls:'gym'}
-];
+var FLOORS=[{key:'top',label:'대표실'},{key:'hr',label:'인사팀'},{key:'invest',label:'투자팀'},{key:'content',label:'콘텐츠팀'},{key:'gym',label:'사내 헬스장',cls:'gym'}];
+var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',content:'trendy',pd:'pd',coach:'coach'};
 var MOOD={good:'good',hyper:'good',focused:'good',calm:'',neutral:'',sly:'',intense:'',anxious:'anxious',bad:'bad'};
+function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function render(d){
   document.getElementById('date').textContent=d.date+' · '+(d.weather||'');
   document.getElementById('script').textContent=d.daily_script||'';
-  var emps=d.employees||{};
-  var bldg=document.getElementById('bldg');
+  var emps=d.employees||{},bldg=document.getElementById('bldg');
   var html='<div class="roof">🌿 옥상 정원 · ☕ 휴게 테라스 🌿</div>';
   FLOORS.forEach(function(f){
-    var list=Object.keys(emps).filter(function(k){return emps[k].floor===f.key;});
     html+='<div class="floor '+(f.cls||'')+'"><span class="flabel">'+f.label+'</span><div class="desks">';
-    list.forEach(function(k){var e=emps[k];var m=MOOD[e.mood]||'';
+    Object.keys(emps).filter(function(k){return emps[k].floor===f.key;}).forEach(function(k){var e=emps[k];var m=MOOD[e.mood]||'';var img=IMG[k]||k;
       html+='<div class="emp '+m+'">'+(e.bubble?'<div class="bubble">'+esc(e.bubble)+'</div>':'')
-        +'<div class="ava">'+(e.emoji||'🙂')+'</div>'
-        +'<div class="name">'+esc(e.name)+'</div><div class="role">'+esc(e.role)+'</div>'
-        +'<div class="status">'+esc(e.status||'')+'</div></div>';
-    });
+        +'<img class="charimg" src="chars/'+img+'_t.png" alt="'+esc(e.name)+'" loading="lazy">'
+        +'<div class="name">'+esc(e.name)+'</div><div class="role">'+esc(e.role)+'</div><div class="status">'+esc(e.status||'')+'</div></div>';});
     html+='</div></div>';
   });
   bldg.innerHTML=html;
-  var feed=document.getElementById('feed');
-  feed.innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;
-    return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
+  document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
 }
-function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(render).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
-load();
-setInterval(load, 15000); // 15초마다 갱신(실 파이프라인 반영용)
+load();setInterval(load,15000);
 </script>
 </body>
 </html>
