@@ -58,15 +58,15 @@ var W=cv.width,H=cv.height,GY=H-40;
 var py,vy,onG,dist,speed,obs,spawn,state='ready',hi=+localStorage.getItem('run_hi')||0,last;
 var hiE=document.getElementById('hi'),dE=document.getElementById('ds'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
 hiE.textContent=hi;
-function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=4.2;obs=[];spawn=60;}
+function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=5.2;obs=[];spawn=55;}
 function jump(){if(state==='play'&&onG){vy=-11.5;onG=false;}else if(state==='ready'||state==='over'){start();}}
-function addObs(){var h=18+Math.random()*30;obs.push({x:W+10,w:16+Math.random()*14,h:h});}
+function addObs(){var h=20+Math.random()*42;obs.push({x:W+10,w:16+Math.random()*20,h:h});if(Math.random()<0.22)obs.push({x:W+10+40+Math.random()*40,w:16+Math.random()*16,h:18+Math.random()*30});}
 function loop(t){
   if(state!=='play')return;
   if(!last)last=t;var dt=Math.min((t-last)/16.7,3);last=t;
   vy+=0.62*dt;py+=vy*dt;if(py>=GY-30){py=GY-30;vy=0;onG=true;}
-  dist+=speed*dt*0.1;speed+=0.0016*dt;
-  spawn-=dt;if(spawn<=0){addObs();spawn=Math.max(38,80-speed*3);}
+  dist+=speed*dt*0.1;speed+=0.0027*dt;
+  spawn-=dt;if(spawn<=0){addObs();spawn=Math.max(26,72-speed*3);}
   for(var i=obs.length-1;i>=0;i--){obs[i].x-=speed*dt;if(obs[i].x<-30)obs.splice(i,1);}
   // 충돌
   var pl={x:34,y:py,w:26,h:30};

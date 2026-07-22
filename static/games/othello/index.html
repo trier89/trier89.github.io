@@ -74,14 +74,26 @@ function next(){
   if(!moves(bd,1).length&&!moves(bd,2).length){return end();}
   if(turn===2){setTimeout(ai,550);}
 }
+var WT=[[120,-25,20,5,5,20,-25,120],[-25,-45,-5,-3,-3,-5,-45,-25],[20,-5,15,3,3,15,-5,20],[5,-3,3,3,3,3,-3,5],[5,-3,3,3,3,3,-3,5],[20,-5,15,3,3,15,-5,20],[-25,-45,-5,-3,-3,-5,-45,-25],[120,-25,20,5,5,20,-25,120]];
+function applyB(b,x,y,p){var nb=b.map(function(r){return r.slice();});var f=flips(nb,x,y,p);nb[y][x]=p;f.forEach(function(c){nb[c[1]][c[0]]=p;});return nb;}
+function evalB(b){var s=0,e=0;for(var y=0;y<N;y++)for(var x=0;x<N;x++){if(b[y][x]===2){s+=WT[y][x];e++;}else if(b[y][x]===1){s-=WT[y][x];e--;}}
+  s+=(moves(b,2).length-moves(b,1).length)*6;                 // 기동력
+  return s;}
+function mm(b,p,depth,al,be){
+  var m1=moves(b,1).length,m2=moves(b,2).length;
+  if(depth===0||(!m1&&!m2))return evalB(b);
+  var mv=moves(b,p);
+  if(!mv.length)return mm(b,3-p,depth-1,al,be);
+  if(p===2){var best=-1e9;for(var i=0;i<mv.length;i++){var v=mm(applyB(b,mv[i][0],mv[i][1],2),1,depth-1,al,be);if(v>best)best=v;if(best>al)al=best;if(al>=be)break;}return best;}
+  var w=1e9;for(var i=0;i<mv.length;i++){var v=mm(applyB(b,mv[i][0],mv[i][1],1),2,depth-1,al,be);if(v<w)w=v;if(w<be)be=w;if(al>=be)break;}return w;}
 function ai(){
   var mv=moves(bd,2);
   if(!mv.length){turn=1;draw();next();return;}
-  mv.sort(function(a,b){return flips(bd,b[0],b[1],2).length-flips(bd,a[0],a[1],2).length;});
-  // 모서리 우선
-  var corner=mv.filter(function(m){return (m[0]===0||m[0]===7)&&(m[1]===0||m[1]===7);});
-  var pick=corner.length?corner[0]:mv[0];
-  play(pick[0],pick[1],2);turn=1;draw();
+  var empties=0;for(var y=0;y<N;y++)for(var x=0;x<N;x++)if(!bd[y][x])empties++;
+  var depth=empties<=10?empties:4;                            // 종반엔 완전탐색
+  var best=mv[0],bv=-1e9;
+  for(var i=0;i<mv.length;i++){var v=mm(applyB(bd,mv[i][0],mv[i][1],2),1,depth,-1e9,1e9);if(v>bv){bv=v;best=mv[i];}}
+  play(best[0],best[1],2);turn=1;draw();
   if(!moves(bd,1).length&&moves(bd,2).length){turn=2;draw();next();}else next();
 }
 function end(){over=true;draw();var a=count(1),b=count(2);info.innerHTML='<b style="color:#d97757">'+(a>b?'🎉 승리!':a<b?'아쉽게 패배':'무승부')+'</b> ('+a+':'+b+')';}

@@ -58,7 +58,7 @@ button:hover{background:var(--coral-soft);}
 
 (function(){
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
-var W=cv.width,H=cv.height,LANES=5,LW=W/LANES,HITY=H-70,SPEED=0.42; // px per ms
+var W=cv.width,H=cv.height,LANES=5,LW=W/LANES,HITY=H-70,SPEED=0.52; // px per ms
 var KEYS=['d','f','g','j','k'];
 var LANECOL=['#31c7ef','#f7d308','#ef7921','#ef2029','#42b642'];
 var scE=document.getElementById('sc'),cbE=document.getElementById('cb'),acE=document.getElementById('ac'),hiE=document.getElementById('hi');
@@ -66,7 +66,7 @@ var ov=document.getElementById('overlay'),btn=document.getElementById('start');
 var hi=+localStorage.getItem('rhythm_hi')||0;hiE.textContent=hi;
 var AC,notes,active,score,combo,maxcombo,hitCnt,total,state='ready',t0,raf;
 // ── 곡(펜타토닉 칩튠) 생성: [beat, lane, freq] ──
-var BPM=128, BEAT=60000/BPM;
+var BPM=148, BEAT=60000/BPM;
 var SCALE=[523.25,587.33,659.25,783.99,880.0]; // C5 D5 E5 G5 A5
 function buildSong(){
   var pat=[0,2,1,3,2,4,3,1, 4,3,2,0,1,2,3,4, 0,1,2,3,4,3,2,1, 3,2,4,2,1,3,0,2];
@@ -75,7 +75,9 @@ function buildSong(){
     for(var i=0;i<pat.length;i++){
       var idx=pat[i], lane=idx%LANES, freq=SCALE[idx];
       arr.push({beat:b, lane:lane, freq:freq, hit:false});
-      b+= (i%4===3)?1:0.5;                 // 리듬감
+      // 후반 반복일수록 동시(화음) 노트를 섞어 난이도 상승
+      if(rep>=1 && i%8===4){var l2=(lane+2)%LANES;arr.push({beat:b, lane:l2, freq:SCALE[l2], hit:false});}
+      b+= (i%4===3)?0.75:0.5;               // 더 촘촘한 리듬
     }
   }
   return arr;

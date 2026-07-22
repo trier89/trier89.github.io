@@ -60,10 +60,10 @@ button:hover{background:var(--coral-soft);}
 <script>
 
 (function(){
-var EMOJI=['🍎','🍌','🍇','🍒','🥝','🍑','🍉','🍓','🥥','🍍','🥑','🍋'];
+var EMOJI=['🍎','🍌','🍇','🍒','🥝','🍑','🍉','🍓','🥥','🍍','🥑','🍋','🍈','🫐','🍊','🥭','🍅','🌶'];
 var grid=document.getElementById('grid'),movesE=document.getElementById('mv'),hiE=document.getElementById('hi'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
 var hi=+localStorage.getItem('mem_hi')||0; hiE.textContent=hi?hi:'-';
-var cards,first,lock,moves,matched,size=4;
+var cards,first,lock,moves,matched,size=6;
 function build(){
   var pairs=size*size/2, pool=EMOJI.slice(0,pairs), deck=pool.concat(pool);
   for(var i=deck.length-1;i>0;i--){var j=(Math.random()*(i+1))|0;var t=deck[i];deck[i]=deck[j];deck[j]=t;}
@@ -84,7 +84,7 @@ function flip(c){
     first.classList.add('done');c.classList.add('done');matched+=2;first=null;lock=false;
     if(matched===cards.length)win();
   } else {
-    var a=first,b=c;setTimeout(function(){a.classList.remove('open');b.classList.remove('open');first=null;lock=false;},700);
+    var a=first,b=c;setTimeout(function(){a.classList.remove('open');b.classList.remove('open');first=null;lock=false;},600);
   }
 }
 function win(){
