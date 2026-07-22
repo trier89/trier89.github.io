@@ -88,27 +88,35 @@ var LABELS=[['🌿 옥상 정원',9],['대표실',22.5],['인사팀',36],['투�
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function daysSince(d){var t=new Date(d+'T00:00:00+09:00');return Math.max(0,Math.floor((new Date()-t)/86400000));}
 
-// ── 24시간 시간대별 근무 스케줄 (KST) ──
+// ── 근무 스케줄 (KST · 분단위 · 요일) ──
 function kstNow(){return new Date(Date.now()+ (new Date().getTimezoneOffset()+540)*60000);}
-function curHour(){return kstNow().getHours();}
+function nowMin(){var n=kstNow();return n.getHours()*60+n.getMinutes();}
+function dowKST(){return kstNow().getDay();}   // 0=일 … 6=토
 var HOLIDAYS_2026=['2026-01-01','2026-02-16','2026-02-17','2026-02-18','2026-03-01','2026-03-02','2026-05-05','2026-05-24','2026-05-25','2026-06-06','2026-07-17','2026-08-15','2026-08-17','2026-09-24','2026-09-25','2026-09-26','2026-09-28','2026-10-03','2026-10-05','2026-10-09','2026-12-25'];
-function isMarketDay(){var n=kstNow();var dow=n.getDay();if(dow===0||dow===6)return false;var s=n.toISOString().slice(0,10);return HOLIDAYS_2026.indexOf(s)<0;}
-function inWin(h,a,b){return a<=b ? (h>=a&&h<b) : (h>=a||h<b);} // 자정 넘김 지원
-// work: 근무시간대 [시작,끝] / mkt: 장 열린 날만 / always: 24시간
-var SCHED={
- boss:{work:[8,20], gym:[18,19]},        // 사장 사무실, 저녁 운동
- hr:{work:[9,22]}, sec:{always:true},     // 세리 종일, 비서(감시) 24h
- jay:{work:[22,5], mkt:true},             // 미장=저녁~새벽, 장 열린 날
- kook:{work:[9,16], mkt:true},            // 국장=낮, 장 열린 날
- coin:{always:true},                       // 코인 24h
- content:{work:[9,19]}, pd:{work:[10,20]}, // 콘텐츠팀
- coach:{work:[6,23]},                      // 코치=헬스장 운영시간
- lobby:{work:[9,18]}                       // 안내데스크
-};
-function isPresent(k){var s=SCHED[k];if(!s)return true;if(s.always)return true;if(s.mkt&&!isMarketDay())return false;return inWin(curHour(),s.work[0],s.work[1]);}
-function atGym(k){var s=SCHED[k];return s&&s.gym&&inWin(curHour(),s.gym[0],s.gym[1]);}
-// 현재 위치(집/헬스장). 사장 운동중엔 헬스장(코치 옆)
-function curPos(k){var c=CH[k];if(atGym(k))return{x:36,base:.88,h:c.h};return c;}
+function isHoliday(){return HOLIDAYS_2026.indexOf(kstNow().toISOString().slice(0,10))>=0;}
+function isWeekend(){var w=dowKST();return w===0||w===6;}
+function isMarketDay(){return !isWeekend() && !isHoliday();}
+function inMin(m,a,b){return a<=b ? (m>=a&&m<b) : (m>=a||m<b);} // 자정 넘김 지원
+// 장 present 구간(KST·분): 시작30분전~종료30분후.  국장 08:30-16:00 / 미장 22:00-05:30(서머타임)
+var MKT={kr:[510,960], us:[1320,330]};
+var BOSS_WEEK=[420,1380], BOSS_WKND=[510,570]; // 07:00-23:00 / 주말·공휴일 08:30-09:30
+// 사장 운동: 월수금 12:00-12:30 · 화 20:00-20:50 · 일 14:00-14:50
+var GYM=[{d:[1,3,5],w:[720,750]},{d:[2],w:[1200,1250]},{d:[0],w:[840,890]}];
+// 'boss'=사장과 동행 / market=장 열린날 그 시간만 / always=24시간
+var SCHED={boss:'boss',sec:'boss',content:'boss',hr:'boss',coach:'boss',
+ lobby:{always:1},coin:{always:1},pd:{always:1},jay:{market:'us'},kook:{market:'kr'}};
+function bossWin(){return (isWeekend()||isHoliday())?BOSS_WKND:BOSS_WEEK;}
+function atGym(k){if(k!=='boss')return false;var m=nowMin(),w=dowKST();return GYM.some(function(g){return g.d.indexOf(w)>=0&&inMin(m,g.w[0],g.w[1]);});}
+function isPresent(k){
+ var s=SCHED[k]; if(!s)return true;
+ if(s==='boss'){var inw=inMin(nowMin(),bossWin()[0],bossWin()[1]); return k==='boss'?(inw||atGym('boss')):inw;}
+ if(s.always)return true;
+ if(s.market){if(!isMarketDay())return false; var w=MKT[s.market]; return inMin(nowMin(),w[0],w[1]);}
+ return true;
+}
+// 현재 위치(자리/헬스장). 사장 운동중엔 헬스장(코치 옆)
+function curPos(k){var c=CH[k];if(k==='boss'&&atGym('boss'))return{x:34,base:.88,h:c.h};return c;}
+function desiredLoc(k){if(!isPresent(k))return 'out'; if(k==='boss'&&atGym('boss'))return 'gym'; return 'in';}
 
 function render(d){
  document.getElementById('date').innerHTML=d.date+' · <b>'+(d.weather||'')+'</b>';
@@ -123,23 +131,12 @@ function render(d){
   if(f.prop)fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(deskTop+.004))*100)+'%;width:'+(f.pw*SCALE*100)+'%;height:'+(f.pw*SCALE*PA[f.prop]*100)+'%"><img src="chars/'+f.prop+'_cut.png?v=3" alt=""></div>';
  });
  document.getElementById('furni').innerHTML=fh;
- // 캐릭터 스프라이트
- var ch='';
- Object.keys(CH).forEach(function(k){if(!emps[k]||!isPresent(k))return;var c=curPos(k);var img=IMG[k]||k;
-  ch+='<div class="emp" id="emp-'+k+'" style="left:'+c.x+'%;bottom:'+((1-c.base)*100)+'%;width:'+charW(k)+'%"><img src="chars/'+img+'_cut.png?v=3" alt="'+esc(emps[k].name)+'"></div>';
- });
- document.getElementById('chars').innerHTML=ch;
- // 말풍선
- var bh='';
- Object.keys(CH).forEach(function(k){var e=emps[k];if(!e||!e.bubble||!isPresent(k))return;var c=curPos(k);var headTop=c.base-c.h;
-  bh+='<div class="bubble" id="bub-'+k+'" style="left:'+c.x+'%;bottom:'+((1-headTop)*100+1)+'%">'+esc(e.bubble)+'</div>';
- });
- document.getElementById('bubbles').innerHTML=bh;
- rotateBubbles(true);
+ // 캐릭터 무대 (최초 1회 생성, 이후 위치/출퇴근 이동은 tick가 관리)
+ ensureStage(emps);
  // 명단
  document.getElementById('roster').innerHTML=Object.keys(CH).map(function(k){var e=emps[k];if(!e)return '';var img=IMG[k]||k;
   var hire=e.hire?'<div class="rh">🗓 '+e.hire+' 입사 · D+'+daysSince(e.hire)+'</div>':'';
-  var away=isPresent(k)?'':(atGym(k)?' <span style="color:#a6d49a">· 운동중</span>':' <span style="color:#8a6a4a">· 자리비움</span>');
+  var away=atGym(k)?' <span style="color:#a6d49a">· 운동중</span>':(isPresent(k)?'':(SCHED[k]&&SCHED[k].market?' <span style="color:#8a6a4a">· 장마감·퇴근</span>':' <span style="color:#8a6a4a">· 퇴근</span>'));
   return '<div class="rc" style="'+(isPresent(k)?'':'opacity:.55')+'"><div class="dot"><img src="chars/'+img+'_cut.png?v=3" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+away+'</div>'+hire+'</div></div>';}).join('');
  // 타임라인
  document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
@@ -147,53 +144,135 @@ function render(d){
 // 캐릭터 폭%: 실제 컷 비율(h*1.5*aspect)
 var CHAR_ASPECT={boss:.434,hr:.451,sec:.474,jay:.442,kook:.414,coin:.567,content:.601,pd:.513,coach:.589,lobby:.502};
 function charW(k){return (CH[k].h*SCALE*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
-// ── 직원 이동 연출(대표실 보고) ──
-var CUR=null, busy=false;
+// ── 무대(캐릭터/말풍선) 1회 생성 후 위치만 갱신 ──
+var CUR=null, busy=false, built=false, CHKEYS=Object.keys(CH);
+var LOC={}, ELEVX=70, OFF={x:-16,base:.648};   // 엘베 중앙라인 · 화면밖(1층 높이)
+function empEl(k){return document.getElementById('emp-'+k);}
+function bubEl(k){return document.getElementById('bub-'+k);}
 function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
-function moveEmp(key,x,base){var e=document.getElementById('emp-'+key),b=document.getElementById('bub-'+key);
- if(e){e.style.left=x+'%';e.style.bottom=((1-base)*100)+'%';}
- if(b){b.style.left=x+'%';b.style.bottom=((1-(base-CH[key].h))*100+1)+'%';}}
-function setBub(key,txt){var b=document.getElementById('bub-'+key);if(b){b.textContent=txt;b.style.display='';}}
-function reportLine(key){var e=CUR.employees[key]||{};return (e.role||'')+' 보고 — '+(e.status||'이상 없습니다');}
+function place(k,x,base,anim){
+ var e=empEl(k),b=bubEl(k),h=CH[k].h; if(!e)return;
+ var tr=anim?'left 1.6s ease-in-out, bottom 1.6s ease-in-out, opacity .5s':'none';
+ e.style.transition=tr; e.style.left=x+'%'; e.style.bottom=((1-base)*100)+'%';
+ if(b){b.style.transition=tr; b.style.left=x+'%'; b.style.bottom=((1-(base-h))*100+1)+'%';}
+}
+function ensureStage(emps){
+ if(built)return;
+ var ch='',bh='';
+ CHKEYS.forEach(function(k){var img=IMG[k]||k,nm=(emps[k]&&emps[k].name)||k;
+  ch+='<div class="emp" id="emp-'+k+'" style="width:'+charW(k)+'%"><img src="chars/'+img+'_cut.png?v=3" alt="'+esc(nm)+'"></div>';
+  bh+='<div class="bubble" id="bub-'+k+'" style="display:none"></div>';});
+ document.getElementById('chars').innerHTML=ch;
+ document.getElementById('bubbles').innerHTML=bh;
+ built=true;
+ CHKEYS.forEach(function(k){var d=desiredLoc(k); LOC[k]=d;
+  var p=(d==='out')?OFF:curPos(k); place(k,p.x,p.base,false);
+  empEl(k).style.opacity=(d==='out')?0:1;});
+}
+function setBub(k,txt){var b=bubEl(k);if(b){b.textContent=txt;b.style.display='';}}
+function hideBub(k){var b=bubEl(k);if(b)b.style.display='none';}
+
+// ── 출퇴근/운동 이동 (엘베 경유) ──
+function seatOf(k){return LOC[k]==='gym'?{x:34,base:.88}:CH[k];}
+async function walkOut(k){                 // 자리→(수평)엘베→(수직)1층→(수평)화면밖
+ var s=seatOf(k);
+ setBub(k,'수고하세요~'); await wait(800);
+ place(k,ELEVX,s.base,true); await wait(1700);
+ place(k,ELEVX,OFF.base,true); await wait(1700);
+ hideBub(k); place(k,OFF.x,OFF.base,true); empEl(k).style.opacity=0; await wait(1700);
+}
+async function walkIn(k){                  // 화면밖→(수평)1층엘베→(수직)해당층→(수평)자리
+ var s=CH[k];
+ place(k,OFF.x,OFF.base,false); empEl(k).style.opacity=0; await wait(60);
+ empEl(k).style.opacity=1;
+ place(k,ELEVX,OFF.base,true); await wait(1700);
+ place(k,ELEVX,s.base,true); await wait(1700);
+ place(k,s.x,s.base,true); await wait(1600);
+ setBub(k,'출근했습니다!'); await wait(1100); hideBub(k);
+}
+async function walkGym(going){             // 사장 자리↔헬스장
+ var s=CH.boss, g={x:34,base:.88};
+ if(going){ setBub('boss','운동 좀 하고 오지'); await wait(800);
+  place('boss',ELEVX,s.base,true); await wait(1600);
+  place('boss',ELEVX,g.base,true); await wait(1600);
+  place('boss',g.x,g.base,true); await wait(1500); hideBub('boss');
+ } else {
+  place('boss',ELEVX,g.base,true); await wait(1600);
+  place('boss',ELEVX,s.base,true); await wait(1600);
+  place('boss',s.x,s.base,true); await wait(1500);
+ }
+}
+async function tick(){
+ if(busy||!CUR||!built)return;
+ for(var i=0;i<CHKEYS.length;i++){var k=CHKEYS[i], d=desiredLoc(k), cur=LOC[k];
+  if(d===cur)continue;
+  busy=true;
+  try{
+   if(d==='out') await walkOut(k);
+   else if(d==='gym') await walkGym(true);
+   else if(cur==='gym') await walkGym(false);
+   else await walkIn(k);
+   LOC[k]=d;
+  }catch(e){}
+  busy=false; return;
+ }
+ if(Math.random()<0.22) reportScene();      // 이동 없으면 가끔 대표실 보고
+}
+
+// ── 대표실 보고(가끔) ──
 var BOSS_REPLIES=['그래, 고생했다 👍','좋아, 계속 그렇게','수고했다. 다음도 부탁해','오, 잘했네!'];
+function reportLine(key){var e=CUR.employees[key]||{};return (e.role||'')+' 보고 — '+(e.status||'이상 없습니다');}
 async function reportScene(){
- if(busy||!CUR)return;
- var pool=['jay','kook','coin','content','pd','coach','sec','hr'].filter(function(k){return CUR.employees[k]&&document.getElementById('emp-'+k);});
+ if(busy||!CUR||LOC.boss!=='in')return;
+ var pool=CHKEYS.filter(function(k){return k!=='boss'&&LOC[k]==='in'&&CUR.employees[k];});
  if(!pool.length)return; var key=pool[(Math.random()*pool.length)|0];
  busy=true;
- var e=document.getElementById('emp-'+key),b=document.getElementById('bub-'+key),home=CH[key];
- var orig=(CUR.employees[key]||{}).bubble||'';
- var bossB=document.getElementById('bub-boss'), obb=bossB?bossB.textContent:'';
+ var e=empEl(key),b=bubEl(key),home=CH[key],bossB=bubEl('boss');
  e.style.zIndex=7; if(b)b.style.zIndex=8;
  setBub(key,'사장님, 보고하러 왔습니다!'); await wait(500);
- moveEmp(key,70,home.base); await wait(1600);
- moveEmp(key,70,0.26);     await wait(2000);
- moveEmp(key,53,0.26);     await wait(1600);
- setBub(key,reportLine(key)); if(bossB)bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];
- await wait(3400);
- moveEmp(key,70,0.26);     await wait(1600);
- moveEmp(key,70,home.base); await wait(2000);
- moveEmp(key,home.x,home.base); await wait(1600);
- if(bossB)bossB.textContent=obb; setBub(key,orig);
+ place(key,ELEVX,home.base,true); await wait(1500);
+ place(key,ELEVX,0.26,true);      await wait(1800);
+ place(key,53,0.26,true);         await wait(1500);
+ setBub(key,reportLine(key)); if(bossB){bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];bossB.style.display='';}
+ await wait(3200);
+ place(key,ELEVX,0.26,true);      await wait(1500);
+ place(key,ELEVX,home.base,true); await wait(1800);
+ place(key,home.x,home.base,true);await wait(1500);
+ hideBub(key); if(bossB)bossB.style.display='none';
  e.style.zIndex=2; if(b)b.style.zIndex=6;
  busy=false;
 }
-// ── 말풍선 순환: 한 번에 사장 + 2명만 말해 화면이 정신없지 않게 ──
+
+// ── 혼잣말/업무 말풍선: 한 번에 2명, 순차 ──
+var IDLE={
+ boss:['오늘 실적 어떻려나','다들 잘하고 있겠지','커피 한 잔 해야겠다'],
+ hr:['사보 소재 없나…','오늘도 조용할 날이 없네','누가 사고 안 치나~'],
+ sec:['전 구간 정상입니다','이상 무…','오늘도 무탈하길'],
+ jay:['오늘은 장 분위기가 좋은데?','요즘 장이 말이 아니네..','5분이면 끝나겠다'],
+ kook:['국장은 언제 오르나','오늘도 관망이다','돌다리도 두들겨야지'],
+ coin:['펀딩비… 버틴다','난 언제 퇴근하지..','코인은 잠들지 않아'],
+ content:['다음 글 뭐 쓰지~','오늘도 발행 완료!','트렌드 뭐 없나'],
+ pd:['이 컷 다시 뽑아야 하나','렌더 언제 끝나..','(하기싫다..)'],
+ coach:['이 회사는 밥시간이 없어..','단백질 챙겨 먹었어?!','오늘 대표님 식단 하셨을까?'],
+ lobby:['어서오세요, 다락방입니다!','손님이 없네~','퇴근하고 싶다..'],
+ _def:['음…','오늘도 파이팅','언제 퇴근하지..']
+};
+function pickText(k){var e=(CUR.employees||{})[k]||{},w=e.bubble,id=IDLE[k]||IDLE._def;
+ if(w&&Math.random()<0.4)return w; return id[(Math.random()*id.length)|0];}
 var bubIdx=0;
-function rotateBubbles(reset){
- if(busy)return; if(!CUR||!CUR.employees)return;
- if(reset)bubIdx=0;
- var bb=document.getElementById('bub-boss'); if(bb)bb.style.display='';
- var keys=Object.keys(CH).filter(function(k){return k!=='boss'&&CUR.employees[k]&&CUR.employees[k].bubble&&isPresent(k)&&document.getElementById('bub-'+k);});
+function rotateBubbles(){
+ if(busy||!CUR||!built)return;
+ var keys=CHKEYS.filter(function(k){return LOC[k]==='in'||LOC[k]==='gym';});
+ CHKEYS.forEach(function(k){if(keys.indexOf(k)<0)hideBub(k);});
  var show={};
- if(keys.length){for(var i=0;i<Math.min(2,keys.length);i++){show[keys[(bubIdx+i)%keys.length]]=1;}bubIdx=(bubIdx+2)%keys.length;}
- keys.forEach(function(k){var b=document.getElementById('bub-'+k);if(b)b.style.display=show[k]?'':'none';});
+ if(keys.length){for(var i=0;i<Math.min(2,keys.length);i++){show[keys[(bubIdx+i)%keys.length]]=1;} bubIdx=(bubIdx+2)%keys.length;}
+ keys.forEach(function(k){var b=bubEl(k);if(!b)return; if(show[k]){b.textContent=pickText(k);b.style.display='';}else b.style.display='none';});
 }
-function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){CUR=d;if(busy)return;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
+
+function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){CUR=d;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
+setInterval(tick,3000);
 setInterval(rotateBubbles,4500);
-setTimeout(reportScene,4000);
-setInterval(reportScene,24000);
 </script>
 </body>
 </html>
