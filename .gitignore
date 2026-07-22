@@ -9,3 +9,8 @@ scripts/news-cron.log
 *.env
 **/.env
 !*.env.example
+
+# 키 로테이션 백업(옛 키 포함) 절대 커밋 금지
+.env.bak*
+*.env.bak*
+**/.env.bak*
