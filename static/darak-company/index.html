@@ -236,10 +236,11 @@ async function tick(){
   }catch(e){}
   busy=false; return;
  }
- // 이동 없으면: 가끔 대표실 보고 / 부재중이지만 일한 봇은 갑자기 출근해서 처리
- var r=Math.random();
- if(r<0.18) reportScene();
- else if(r<0.34) surpriseVisit();
+}
+// 연출용 랜덤: 5초마다 10% 확률로 가벼운 대표실 보고 (2026-07-22 사용자 지정)
+function ambientTick(){
+ if(busy||!CUR||!built)return;
+ if(Math.random()<0.10) reportScene();
 }
 
 // ── 일 받으면 갑자기 출근: 부재중이어도 실제 일한 봇이 잠깐 나와 처리하고 퇴근 ──
@@ -404,6 +405,7 @@ function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.js
  CUR=d;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
 setInterval(tick,3000);
+setInterval(ambientTick,5000);
 setInterval(rotateBubbles,4500);
 setInterval(playbackTick,8000);
 setInterval(reportTick,20000);
