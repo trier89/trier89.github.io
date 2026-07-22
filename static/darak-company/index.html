@@ -222,7 +222,35 @@ async function tick(){
   }catch(e){}
   busy=false; return;
  }
- if(Math.random()<0.22) reportScene();      // 이동 없으면 가끔 대표실 보고
+ // 이동 없으면: 가끔 대표실 보고 / 부재중이지만 일한 봇은 갑자기 출근해서 처리
+ var r=Math.random();
+ if(r<0.18) reportScene();
+ else if(r<0.34) surpriseVisit();
+}
+
+// ── 일 받으면 갑자기 출근: 부재중이어도 실제 일한 봇이 잠깐 나와 처리하고 퇴근 ──
+function eventMsgFor(k){
+ if(!CUR||!CUR.timeline)return null;
+ var evs=CUR.timeline.filter(function(t){return t.who===k&&t.msg;});
+ if(!evs.length)return null;
+ return evs[(Math.random()*evs.length)|0].msg;
+}
+async function surpriseVisit(){
+ if(busy||!CUR)return;
+ // 지금 부재중(스케줄상 out)인데 어제 이 시간대 실제로 일한 기록이 있는 봇
+ var cands=CHKEYS.filter(function(k){return k!=='boss'&&LOC[k]==='out'&&eventMsgFor(k);});
+ if(!cands.length)return;
+ var k=cands[(Math.random()*cands.length)|0], msg=eventMsgFor(k);
+ busy=true;
+ try{
+  await walkIn(k);                       // 갑자기 출근(엘베 경유)
+  setBub(k,'급한 일이 있어서…'); await wait(1200);
+  setBub(k,msg); await wait(3600);       // 실제 한 일 표시
+  setBub(k,'처리 완료, 이만 가보겠습니다'); await wait(1500);
+  await walkOut(k);                      // 다시 퇴근
+  hideBub(k);
+ }catch(e){}
+ busy=false;                             // LOC[k]는 여전히 'out'
 }
 
 // ── 대표실 보고(가끔) ──
@@ -264,7 +292,10 @@ var IDLE={
  _def:['음…','오늘도 파이팅','언제 퇴근하지..']
 };
 function pickText(k){var e=(CUR.employees||{})[k]||{},w=e.bubble,id=IDLE[k]||IDLE._def;
- if(w&&Math.random()<0.4)return w; return id[(Math.random()*id.length)|0];}
+ var ev=eventMsgFor(k),r=Math.random();
+ if(ev&&r<0.28)return ev;         // 실제 한 일
+ if(w&&r<0.55)return w;           // 오늘의 한마디
+ return id[(Math.random()*id.length)|0];}  // 혼잣말
 var bubIdx=0;
 function rotateBubbles(){
  if(busy||!CUR||!built)return;
