@@ -71,18 +71,18 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',content:'trendy',pd:'pd',coach:'coach',lobby:'lobby'};
 // 캐릭터 홈(발끝 좌표): x%, base(발끝 y frac), h(키 frac)
 var CH={
- boss:{x:44,base:.282,h:.12}, hr:{x:27,base:.405,h:.115}, sec:{x:55,base:.405,h:.115},
+ boss:{x:44,base:.26,h:.12}, hr:{x:27,base:.375,h:.115}, sec:{x:55,base:.375,h:.115},
  jay:{x:24,base:.52,h:.115}, kook:{x:41,base:.52,h:.115}, coin:{x:58,base:.52,h:.115},
- content:{x:17,base:.782,h:.11}, pd:{x:44,base:.782,h:.115},
- coach:{x:30,base:.88,h:.105}, lobby:{x:47,base:.665,h:.115}
+ content:{x:17,base:.762,h:.11}, pd:{x:44,base:.762,h:.115},
+ coach:{x:30,base:.88,h:.105}, lobby:{x:47,base:.648,h:.115}
 };
 // 책상+소품 (전경). base=바닥, dw/dh=책상 폭/높이(frac), prop/pw
 var IN=.01, PA={laptopback:.527, monitorback:.635};
 var FUR={
- boss:{x:44,base:.282,dw:.19,dh:.05,prop:'laptopback',pw:.05},
- hr:{x:27,base:.405,dw:.145,dh:.048,prop:'laptopback',pw:.045}, sec:{x:55,base:.405,dw:.145,dh:.048,prop:'laptopback',pw:.045},
+ boss:{x:44,base:.26,dw:.19,dh:.05,prop:'laptopback',pw:.05},
+ hr:{x:27,base:.375,dw:.145,dh:.048,prop:'laptopback',pw:.045}, sec:{x:55,base:.375,dw:.145,dh:.048,prop:'laptopback',pw:.045},
  jay:{x:24,base:.52,dw:.13,dh:.048,prop:'monitorback',pw:.04}, kook:{x:41,base:.52,dw:.13,dh:.048,prop:'monitorback',pw:.04}, coin:{x:58,base:.52,dw:.14,dh:.048,prop:'monitorback',pw:.04},
- content:{x:17,base:.782,dw:.145,dh:.048,prop:'laptopback',pw:.045}, pd:{x:44,base:.782,dw:.155,dh:.048,prop:'laptopback',pw:.048}
+ content:{x:17,base:.762,dw:.145,dh:.048,prop:'laptopback',pw:.045}, pd:{x:44,base:.762,dw:.155,dh:.048,prop:'laptopback',pw:.048}
 };
 var LABELS=[['🌿 옥상 정원',9],['대표실',22.5],['인사팀',36],['투자팀',47],['1층 로비',58.5],['지하1 · 콘텐츠팀',70.5],['지하2 · 헬스장',82],['지하3 · 서버실',93]];
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
@@ -142,13 +142,13 @@ async function reportScene(){
  var bossB=document.getElementById('bub-boss'), obb=bossB?bossB.textContent:'';
  e.style.zIndex=7; if(b)b.style.zIndex=8;
  setBub(key,'사장님, 보고하러 왔습니다!'); await wait(500);
- moveEmp(key,66,home.base); await wait(1600);
- moveEmp(key,66,0.282);     await wait(2000);
- moveEmp(key,53,0.282);     await wait(1600);
+ moveEmp(key,74,home.base); await wait(1600);
+ moveEmp(key,74,0.26);     await wait(2000);
+ moveEmp(key,53,0.26);     await wait(1600);
  setBub(key,reportLine(key)); if(bossB)bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];
  await wait(3400);
- moveEmp(key,66,0.282);     await wait(1600);
- moveEmp(key,66,home.base); await wait(2000);
+ moveEmp(key,74,0.26);     await wait(1600);
+ moveEmp(key,74,home.base); await wait(2000);
  moveEmp(key,home.x,home.base); await wait(1600);
  if(bossB)bossB.textContent=obb; setBub(key,orig);
  e.style.zIndex=2; if(b)b.style.zIndex=6;
