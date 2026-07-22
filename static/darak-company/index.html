@@ -17,20 +17,13 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 .layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:minmax(0,490px) 1fr;gap:18px;align-items:start;}
 @media(max-width:800px){.layout{grid-template-columns:1fr;}}
 .stage{position:relative;width:100%;aspect-ratio:1024/1536;border-radius:14px;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.6);background:#0b0d13;}
-/* 배경 레이어(날씨·계절) */
-.sky{position:absolute;left:0;right:0;top:0;height:62%;transition:background 1.2s;}
-.ground{position:absolute;left:0;right:0;bottom:0;height:38%;transition:background 1.2s;}
-.scene-hill{position:absolute;left:0;right:0;top:44%;height:20%;opacity:.85;transition:background 1.2s;}
-.wfx{position:absolute;inset:0;pointer-events:none;z-index:5;}
-.grade{position:absolute;inset:0;pointer-events:none;z-index:4;transition:background 1.2s;mix-blend-mode:soft-light;}
-.sun{position:absolute;border-radius:50%;pointer-events:none;z-index:0;transition:opacity 1.2s;}
 .building{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:1;}
 .emp{position:absolute;transform:translateX(-50%);z-index:2;pointer-events:none;transition:left 1.4s ease-in-out, bottom 1.8s ease-in-out;}
 .emp img{width:100%;height:auto;display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.4));}
 .furni{position:absolute;transform:translateX(-50%);z-index:3;pointer-events:none;}
 .furni img{width:100%;height:100%;display:block;object-fit:fill;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3));}
-.bubble{position:absolute;transform:translateX(-50%);background:#fbf6ec;color:#2a2015;font-size:10.5px;line-height:1.28;font-weight:600;border-radius:9px;padding:4px 8px;width:max-content;max-width:112px;box-shadow:0 3px 9px rgba(0,0,0,.45);z-index:6;text-align:center;transition:left 1.4s ease-in-out, bottom 1.8s ease-in-out;}
-.bubble:after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#fbf6ec;}
+.bubble{position:absolute;transform:translateX(-50%);background:#fbf6ec;color:#2a2015;font-size:9px;line-height:1.25;font-weight:600;border-radius:8px;padding:3px 6px;width:max-content;max-width:96px;box-shadow:0 2px 7px rgba(0,0,0,.4);z-index:6;text-align:center;transition:left 1.4s ease-in-out, bottom 1.8s ease-in-out;}
+.bubble:after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#fbf6ec;}
 .floortag{position:absolute;left:6px;transform:translateY(-50%);background:rgba(23,16,10,.82);color:var(--gold);font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;z-index:4;letter-spacing:.02em;pointer-events:none;}
 .side{display:flex;flex-direction:column;gap:14px;}
 .card{background:var(--wall2);border:1px solid #52412c;border-radius:12px;padding:15px 16px;}
@@ -57,13 +50,7 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 </div>
 <div class="layout">
   <div class="stage" id="stage">
-    <div class="sky" id="sky"></div>
-    <div class="scene-hill" id="hill"></div>
-    <div class="ground" id="ground"></div>
-    <div class="sun" id="sun"></div>
-    <div class="grade" id="grade"></div>
-    <canvas class="wfx" id="wfx" width="410" height="615"></canvas>
-    <img class="building" src="chars/bldg6_t.png" alt="다락방 컴퍼니 사옥">
+    <img class="building" src="chars/bldg6.png" alt="다락방 컴퍼니 사옥">
     <div id="furni"></div>
     <div id="chars"></div>
     <div id="bubbles"></div>
@@ -83,80 +70,26 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',content:'trendy',pd:'pd',coach:'coach',lobby:'lobby'};
 // 캐릭터 홈(발끝 좌표): x%, base(발끝 y frac), h(키 frac)
 var CH={
- boss:{x:44,base:.30,h:.12}, hr:{x:27,base:.42,h:.115}, sec:{x:55,base:.42,h:.115},
- jay:{x:24,base:.52,h:.115}, kook:{x:41,base:.52,h:.115}, coin:{x:58,base:.52,h:.115},
- content:{x:17,base:.76,h:.11}, pd:{x:44,base:.76,h:.115},
- coach:{x:30,base:.88,h:.105}, lobby:{x:47,base:.645,h:.115}
+ boss:{x:44,base:.298,h:.12}, hr:{x:27,base:.418,h:.115}, sec:{x:55,base:.418,h:.115},
+ jay:{x:24,base:.538,h:.115}, kook:{x:41,base:.538,h:.115}, coin:{x:58,base:.538,h:.115},
+ content:{x:17,base:.758,h:.11}, pd:{x:44,base:.758,h:.115},
+ coach:{x:30,base:.878,h:.105}, lobby:{x:47,base:.643,h:.115}
 };
 // 책상+소품 (전경). base=바닥, dw/dh=책상 폭/높이(frac), prop/pw
-var IN=.01, PA={laptopback:.527, monitorback:.635};
+var IN=.008, PA={laptopback:.527, monitorback:.635};
 var FUR={
- boss:{x:44,base:.30,dw:.19,dh:.05,prop:'laptopback',pw:.05},
- hr:{x:27,base:.42,dw:.145,dh:.048,prop:'laptopback',pw:.045}, sec:{x:55,base:.42,dw:.145,dh:.048,prop:'laptopback',pw:.045},
- jay:{x:24,base:.52,dw:.13,dh:.048,prop:'monitorback',pw:.04}, kook:{x:41,base:.52,dw:.13,dh:.048,prop:'monitorback',pw:.04}, coin:{x:58,base:.52,dw:.14,dh:.048,prop:'monitorback',pw:.04},
- content:{x:17,base:.76,dw:.145,dh:.048,prop:'laptopback',pw:.045}, pd:{x:44,base:.76,dw:.155,dh:.048,prop:'laptopback',pw:.048}
+ boss:{x:44,base:.298,dw:.19,dh:.05,prop:'laptopback',pw:.05},
+ hr:{x:27,base:.418,dw:.145,dh:.048,prop:'laptopback',pw:.045}, sec:{x:55,base:.418,dw:.145,dh:.048,prop:'laptopback',pw:.045},
+ jay:{x:24,base:.538,dw:.13,dh:.048,prop:'monitorback',pw:.04}, kook:{x:41,base:.538,dw:.13,dh:.048,prop:'monitorback',pw:.04}, coin:{x:58,base:.538,dw:.14,dh:.048,prop:'monitorback',pw:.04},
+ content:{x:17,base:.758,dw:.145,dh:.048,prop:'laptopback',pw:.045}, pd:{x:44,base:.758,dw:.155,dh:.048,prop:'laptopback',pw:.048}
 };
 var LABELS=[['🌿 옥상 정원',9],['대표실',22.5],['인사팀',36],['투자팀',47],['1층 로비',58.5],['지하1 · 콘텐츠팀',70.5],['지하2 · 헬스장',82],['지하3 · 서버실',93]];
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function daysSince(d){var t=new Date(d+'T00:00:00+09:00');return Math.max(0,Math.floor((new Date()-t)/86400000));}
 
-// ── 날씨·계절 배경 ──
-function seasonOf(m){return (m===12||m<=2)?'winter':m<=5?'spring':m<=8?'summer':'autumn';}
-function weatherOf(txt){txt=txt||'';if(/눈|설/.test(txt))return'snow';if(/비|우/.test(txt))return'rain';if(/흐림|구름|흐/.test(txt))return'cloud';if(/밤|야간/.test(txt))return'night';return'sunny';}
-var SEASON_HILL={spring:'#8bbf6a',summer:'#4f9c4a',autumn:'#c88a3c',winter:'#cdd6df'};
-var SEASON_GROUND={spring:'linear-gradient(#5a4326,#3a2c17)',summer:'linear-gradient(#54402a,#332310)',autumn:'linear-gradient(#5a3f22,#33230f)',winter:'linear-gradient(#6b5f52,#3c3128)'};
-function skyGrad(w,season){
- var map={
-  sunny:'linear-gradient(#7ec8f0 0%,#bfe6f7 60%,#e9f6fb 100%)',
-  cloud:'linear-gradient(#9fb0bd 0%,#c3cdd4 70%,#dfe6ea 100%)',
-  rain:'linear-gradient(#5a6b78 0%,#7d8b96 70%,#95a2ab 100%)',
-  snow:'linear-gradient(#aab8c6 0%,#cdd8e2 60%,#eef3f7 100%)',
-  night:'linear-gradient(#12203a 0%,#26344f 70%,#3a4763 100%)'
- };
- if(season==='autumn'&&w==='sunny')return'linear-gradient(#8fc0e6 0%,#d8e4d0 70%,#f2ecd6 100%)';
- return map[w]||map.sunny;
-}
-var wfxState={type:'none',parts:[]},wctx;
-function setWeatherSeason(weatherTxt){
- var now=new Date(); var season=seasonOf(now.getMonth()+1);
- var w=weatherOf(weatherTxt);
- document.getElementById('sky').style.background=skyGrad(w,season);
- document.getElementById('hill').style.background='linear-gradient(to top, '+SEASON_HILL[season]+' 0%, transparent 100%)';
- document.getElementById('ground').style.background=SEASON_GROUND[season];
- // 전체 분위기 색보정(soft-light)
- var GRADE={sunny:'rgba(255,225,160,.45)',cloud:'rgba(150,160,172,.55)',rain:'rgba(70,95,120,.72)',snow:'rgba(205,222,240,.5)',night:'rgba(18,26,66,.9)'};
- var g=GRADE[w]||GRADE.sunny;
- if(w==='sunny'&&season==='autumn')g='rgba(255,190,110,.5)';
- if(w==='sunny'&&season==='winter')g='rgba(200,220,245,.4)';
- document.getElementById('grade').style.background=g;
- // 해/달
- var sun=document.getElementById('sun');
- if(w==='sunny'){sun.style.cssText='position:absolute;z-index:0;left:74%;top:4%;width:14%;height:9%;border-radius:50%;background:radial-gradient(circle,#fff6d8,rgba(255,240,190,.5) 45%,transparent 72%);opacity:1;';}
- else if(w==='night'){sun.style.cssText='position:absolute;z-index:0;left:76%;top:5%;width:8%;height:5.3%;border-radius:50%;background:radial-gradient(circle,#eef2ff,rgba(210,220,255,.4) 55%,transparent 75%);opacity:1;';}
- else{sun.style.opacity='0';}
- // 파티클
- var cv=document.getElementById('wfx'); wctx=cv.getContext('2d');
- wfxState.type=(w==='rain')?'rain':(w==='snow'||season==='winter'&&w!=='sunny')?'snow':'none';
- wfxState.parts=[];
- var n=wfxState.type==='rain'?90:wfxState.type==='snow'?70:0;
- for(var i=0;i<n;i++)wfxState.parts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,s:1+Math.random()*2,r:1+Math.random()*2});
-}
-function wfxLoop(){
- if(!wctx){requestAnimationFrame(wfxLoop);return;}
- var cv=wctx.canvas; wctx.clearRect(0,0,cv.width,cv.height);
- if(wfxState.type==='rain'){wctx.strokeStyle='rgba(180,200,220,.5)';wctx.lineWidth=1.2;
-  wfxState.parts.forEach(function(p){wctx.beginPath();wctx.moveTo(p.x,p.y);wctx.lineTo(p.x-2,p.y+9*p.s);wctx.stroke();p.y+=9*p.s;p.x-=1.4;if(p.y>cv.height){p.y=-8;p.x=Math.random()*cv.width;}});}
- else if(wfxState.type==='snow'){wctx.fillStyle='rgba(255,255,255,.85)';
-  wfxState.parts.forEach(function(p){wctx.beginPath();wctx.arc(p.x,p.y,p.r,0,7);wctx.fill();p.y+=0.7*p.s;p.x+=Math.sin(p.y/28)*0.5;if(p.y>cv.height){p.y=-6;p.x=Math.random()*cv.width;}});}
- requestAnimationFrame(wfxLoop);
-}
-requestAnimationFrame(wfxLoop);
-
 function render(d){
- var seasonTxt={winter:'겨울',spring:'봄',summer:'여름',autumn:'가을'}[seasonOf(new Date().getMonth()+1)];
- document.getElementById('date').innerHTML=d.date+' · <b>'+(d.weather||'')+'</b> · '+seasonTxt;
+ document.getElementById('date').innerHTML=d.date+' · <b>'+(d.weather||'')+'</b>';
  document.getElementById('script').textContent=d.daily_script||'';
- setWeatherSeason(d.weather);
  var emps=d.employees||{};
  // 층 라벨
  document.getElementById('labels').innerHTML=LABELS.map(function(L){return '<span class="floortag" style="top:'+L[1]+'%">'+L[0]+'</span>';}).join('');
@@ -186,8 +119,8 @@ function render(d){
  // 타임라인
  document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
 }
-// 캐릭터 폭%: 이미지 비율 근사 (h*1.5*aspect). aspect는 대략 0.45 가정, 개별 미세조정 생략
-var CHAR_ASPECT={boss:.43,hr:.45,sec:.47,jay:.44,kook:.41,coin:.57,content:.60,pd:.51,coach:.59,lobby:.48};
+// 캐릭터 폭%: 실제 컷 비율(h*1.5*aspect)
+var CHAR_ASPECT={boss:.434,hr:.451,sec:.474,jay:.442,kook:.414,coin:.567,content:.601,pd:.513,coach:.589,lobby:.502};
 function charW(k){return (CH[k].h*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
 // ── 직원 이동 연출(대표실 보고) ──
 var CUR=null, busy=false;
@@ -208,12 +141,12 @@ async function reportScene(){
  var bossB=document.getElementById('bub-boss'), obb=bossB?bossB.textContent:'';
  e.style.zIndex=7; if(b)b.style.zIndex=8;
  setBub(key,'사장님, 보고하러 왔습니다!'); await wait(500);
- moveEmp(key,66,home.base); await wait(1600);     // → 엘리베이터
- moveEmp(key,66,0.30);      await wait(2000);      // → 대표실 층
- moveEmp(key,53,0.30);      await wait(1600);      // → 사장 옆
+ moveEmp(key,66,home.base); await wait(1600);
+ moveEmp(key,66,0.298);     await wait(2000);
+ moveEmp(key,53,0.298);     await wait(1600);
  setBub(key,reportLine(key)); if(bossB)bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];
  await wait(3400);
- moveEmp(key,66,0.30);      await wait(1600);      // 복귀
+ moveEmp(key,66,0.298);     await wait(1600);
  moveEmp(key,66,home.base); await wait(2000);
  moveEmp(key,home.x,home.base); await wait(1600);
  if(bossB)bossB.textContent=obb; setBub(key,orig);
@@ -222,8 +155,8 @@ async function reportScene(){
 }
 function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){CUR=d;if(busy)return;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
-setTimeout(reportScene,4000);              // 첫 연출
-setInterval(reportScene,24000);            // 이후 24초마다
+setTimeout(reportScene,4000);
+setInterval(reportScene,24000);
 </script>
 </body>
 </html>
