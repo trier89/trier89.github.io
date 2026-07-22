@@ -16,8 +16,9 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 .date b{color:var(--gold);}
 .layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:minmax(0,490px) 1fr;gap:18px;align-items:start;}
 @media(max-width:800px){.layout{grid-template-columns:1fr;}}
-.stage{position:relative;width:100%;aspect-ratio:1024/1536;border-radius:14px;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.6);background:#0b0d13;}
-.building{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:1;}
+/* 건물 이미지 자체가 무대 크기를 정의 → 스프라이트가 이미지에 정확히 고정 */
+.stage{position:relative;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.6);background:#0b0d13;font-size:0;}
+.building{position:relative;display:block;width:100%;height:auto;z-index:1;}
 .emp{position:absolute;transform:translateX(-50%);z-index:2;pointer-events:none;transition:left 1.4s ease-in-out, bottom 1.8s ease-in-out;}
 .emp img{width:100%;height:auto;display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.4));}
 .furni{position:absolute;transform:translateX(-50%);z-index:3;pointer-events:none;}
