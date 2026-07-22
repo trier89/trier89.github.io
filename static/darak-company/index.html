@@ -60,7 +60,7 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
   <div class="side">
     <div class="card"><h3>📰 오늘의 회사</h3><div class="script" id="script">불러오는 중…</div></div>
     <div class="card"><h3>👥 직원 명단</h3><div class="roster" id="roster"></div></div>
-    <div class="card feed"><h3>🕑 오늘의 타임라인</h3><div id="feed"></div></div>
+    <div class="card feed"><h3>🕑 작업 로그 (전일 기록·실시간 재생)</h3><div id="feed"></div></div>
   </div>
 </div>
 <div class="foot">
@@ -125,7 +125,7 @@ function curPos(k){var c=CH[k];if(k==='boss'&&atGym('boss'))return{x:34,base:.88
 function desiredLoc(k){if(!isPresent(k))return 'out'; if(k==='boss'&&atGym('boss'))return 'gym'; return 'in';}
 
 function render(d){
- document.getElementById('date').innerHTML=d.date+' · <b>'+(d.weather||'')+'</b>';
+ document.getElementById('date').innerHTML=d.date+' 기록 실시간 재생 · <b>'+(d.weather||'')+'</b>';
  document.getElementById('script').textContent=d.daily_script||'';
  var emps=d.employees||{};
  // 층 라벨
@@ -144,8 +144,22 @@ function render(d){
   var hire=e.hire?'<div class="rh">🗓 '+e.hire+' 입사 · D+'+daysSince(e.hire)+'</div>':'';
   var away=atGym(k)?' <span style="color:#a6d49a">· 운동중</span>':(isPresent(k)?'':(SCHED[k]&&SCHED[k].market?' <span style="color:#8a6a4a">· 장마감·퇴근</span>':' <span style="color:#8a6a4a">· 퇴근</span>'));
   return '<div class="rc" style="'+(isPresent(k)?'':'opacity:.55')+'"><div class="dot"><img src="chars/'+img+'_cut.png?v=3" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+away+'</div>'+hire+'</div></div>';}).join('');
- // 타임라인
- document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
+ // 타임라인(어제 로그를 오늘 시각으로 재생 — 지난 것만, 최신이 위)
+ renderFeed();
+}
+function hhmmNow(){var n=kstNow();return ('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2);}
+function renderFeed(){
+ if(!CUR)return;
+ var emps=CUR.employees||{},now=hhmmNow();
+ var past=(CUR.timeline||[]).filter(function(t){return t.t<=now;});
+ var html=past.slice().reverse().map(function(t,i){
+  var who=emps[t.who]?emps[t.who].name:t.who;
+  return '<div class="row"'+(i===0?' style="background:rgba(255,220,140,.08)"':'')+'><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';
+ }).join('');
+ var rest=(CUR.timeline||[]).length-past.length;
+ if(rest>0)html+='<div class="row" style="opacity:.45"><span class="tm">'+now+'</span><span class="wn">·</span><span>이후 일정 '+rest+'건 대기 중…</span></div>';
+ if(!past.length&&!rest)html='<div class="row"><span>기록된 로그가 없어요.</span></div>';
+ document.getElementById('feed').innerHTML=html;
 }
 // 캐릭터 폭%: 실제 컷 비율(h*1.5*aspect)
 var CHAR_ASPECT={boss:.434,hr:.451,sec:.474,jay:.442,kook:.414,coin:.567,content:.601,pd:.513,coach:.589,lobby:.502};
@@ -229,28 +243,66 @@ async function tick(){
 }
 
 // ── 일 받으면 갑자기 출근: 부재중이어도 실제 일한 봇이 잠깐 나와 처리하고 퇴근 ──
-function eventMsgFor(k){
- if(!CUR||!CUR.timeline)return null;
- var evs=CUR.timeline.filter(function(t){return t.who===k&&t.msg;});
- if(!evs.length)return null;
- return evs[(Math.random()*evs.length)|0].msg;
+// 이미 지난(t<=지금) 이벤트만 — 재생 전 미리 말하지 않는다
+function pastEventsFor(k){
+ if(!CUR||!CUR.timeline)return [];
+ var now=hhmmNow();
+ return CUR.timeline.filter(function(t){return t.who===k&&t.msg&&t.t<=now;});
 }
-async function surpriseVisit(){
+function eventMsgFor(k){
+ var evs=pastEventsFor(k);
+ if(!evs.length)return null;
+ var e=Math.random()<0.5?evs[evs.length-1]:evs[(Math.random()*evs.length)|0];
+ return e.line||e.msg;
+}
+async function surpriseVisit(k,text){
  if(busy||!CUR)return;
- // 지금 부재중(스케줄상 out)인데 어제 이 시간대 실제로 일한 기록이 있는 봇
- var cands=CHKEYS.filter(function(k){return k!=='boss'&&LOC[k]==='out'&&eventMsgFor(k);});
- if(!cands.length)return;
- var k=cands[(Math.random()*cands.length)|0], msg=eventMsgFor(k);
+ if(!k){ // 랜덤 호출(과거 이벤트 있는 부재자)
+  var cands=CHKEYS.filter(function(c){return c!=='boss'&&LOC[c]==='out'&&pastEventsFor(c).length;});
+  if(!cands.length)return;
+  k=cands[(Math.random()*cands.length)|0]; text=eventMsgFor(k);
+ }
  busy=true;
  try{
   await walkIn(k);                       // 갑자기 출근(엘베 경유)
   setBub(k,'급한 일이 있어서…'); await wait(1200);
-  setBub(k,msg); await wait(3600);       // 실제 한 일 표시
+  setBub(k,text); await wait(3600);      // 실제 한 일 표시
   setBub(k,'처리 완료, 이만 가보겠습니다'); await wait(1500);
   await walkOut(k);                      // 다시 퇴근
   hideBub(k);
  }catch(e){}
  busy=false;                             // LOC[k]는 여전히 'out'
+}
+
+// ── 실시간 재생: 어제 그 시각의 로그가 지금 도착하면 그 직원이 말한다 ──
+var PLAYED={}, playInit=false;
+function evKey(e,i){return CUR.date+'|'+i+'|'+e.t+'|'+e.who;}
+function initPlayed(){ // 첫 로드: 이미 지난 이벤트는 재생 완료로 간주(폭주 방지)
+ var now=hhmmNow();
+ (CUR.timeline||[]).forEach(function(e,i){if(e.t<=now)PLAYED[evKey(e,i)]=1;});
+ playInit=true;
+}
+async function playbackTick(){
+ if(!CUR||!built)return;
+ if(!playInit){initPlayed();return;}
+ renderFeed();
+ if(busy)return;
+ var now=hhmmNow();
+ var due=[];
+ (CUR.timeline||[]).forEach(function(e,i){
+  if(e.t<=now&&!PLAYED[evKey(e,i)])due.push([e,i]);
+ });
+ if(!due.length)return;
+ var e=due[0][0]; PLAYED[evKey(due[0][0],due[0][1])]=1;
+ var k=e.who, text=e.line||e.msg;
+ if(!empEl(k))return;
+ if(LOC[k]==='in'||LOC[k]==='gym'){
+  busy=true;
+  try{ setBub(k,text); await wait(7000); hideBub(k); }catch(err){}
+  busy=false;
+ }else if(LOC[k]==='out'){
+  await surpriseVisit(k,text);
+ }
 }
 
 // ── 대표실 보고(가끔) ──
@@ -310,10 +362,13 @@ function rotateBubbles(){
  keys.forEach(function(k){var b=bubEl(k);if(!b)return; if(show[k]){b.textContent=pickText(k);b.style.display='';}else b.style.display='none';});
 }
 
-function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){CUR=d;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
+function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){
+ if(CUR&&CUR.date!==d.date){PLAYED={};playInit=false;} // 자정 넘어 새 로그로 교체되면 재생상태 리셋
+ CUR=d;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
 setInterval(tick,3000);
 setInterval(rotateBubbles,4500);
+setInterval(playbackTick,8000);
 </script>
 </body>
 </html>
