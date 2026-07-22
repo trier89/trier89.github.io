@@ -31,6 +31,8 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 .rc .dot img{width:100%;height:100%;object-fit:cover;object-position:top;}
 .rc .rn{font-weight:700;}
 .rc .rr{color:var(--dim);font-size:10.5px;}
+.rc .rh{color:#8a7a5c;font-size:9.5px;margin-top:1px;font-variant-numeric:tabular-nums;}
+.rc{align-items:flex-start;}.rc .dot{margin-top:2px;}
 .feed .row{display:flex;gap:8px;font-size:12.5px;padding:6px 0;border-bottom:1px solid rgba(82,65,44,.4);align-items:baseline;}
 .feed .row:last-child{border-bottom:0;}
 .feed .tm{color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums;}
@@ -61,6 +63,7 @@ var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',conte
 var HEAD={boss:[44,18],hr:[27,30.5],sec:[55,30.5],jay:[24,40.5],kook:[41,40.5],coin:[58,40.5],lobby:[47,53],content:[17,65],pd:[44,64.5],coach:[30,77.5]};
 var LABELS=[['🌿 옥상 정원',9],['대표실',23],['인사팀',36],['투자팀',47],['1층 로비',58.5],['지하1 · 콘텐츠팀',70.5],['지하2 · 헬스장',82],['지하3 · 서버실',93]];
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+function daysSince(d){var t=new Date(d+'T00:00:00+09:00');var now=new Date();return Math.max(0,Math.floor((now-t)/86400000));}
 function render(d){
   document.getElementById('date').textContent=d.date+' · '+(d.weather||'');
   document.getElementById('script').textContent=d.daily_script||'';
@@ -73,7 +76,8 @@ function render(d){
   });
   stage.innerHTML=html;
   document.getElementById('roster').innerHTML=Object.keys(HEAD).map(function(k){var e=emps[k];if(!e)return '';var img=IMG[k]||k;
-    return '<div class="rc"><div class="dot"><img src="chars/'+img+'_cut.png" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+'</div></div></div>';}).join('');
+    var hire=e.hire?'<div class="rh">🗓 '+e.hire+' 입사 · D+'+daysSince(e.hire)+'</div>':'';
+    return '<div class="rc"><div class="dot"><img src="chars/'+img+'_cut.png" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+'</div>'+hire+'</div></div>';}).join('');
   document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
 }
 function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(render).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
