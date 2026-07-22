@@ -135,6 +135,7 @@ function render(d){
   bh+='<div class="bubble" id="bub-'+k+'" style="left:'+c.x+'%;bottom:'+((1-headTop)*100+1)+'%">'+esc(e.bubble)+'</div>';
  });
  document.getElementById('bubbles').innerHTML=bh;
+ rotateBubbles(true);
  // 명단
  document.getElementById('roster').innerHTML=Object.keys(CH).map(function(k){var e=emps[k];if(!e)return '';var img=IMG[k]||k;
   var hire=e.hire?'<div class="rh">🗓 '+e.hire+' 입사 · D+'+daysSince(e.hire)+'</div>':'';
@@ -177,8 +178,20 @@ async function reportScene(){
  e.style.zIndex=2; if(b)b.style.zIndex=6;
  busy=false;
 }
+// ── 말풍선 순환: 한 번에 사장 + 2명만 말해 화면이 정신없지 않게 ──
+var bubIdx=0;
+function rotateBubbles(reset){
+ if(busy)return; if(!CUR||!CUR.employees)return;
+ if(reset)bubIdx=0;
+ var bb=document.getElementById('bub-boss'); if(bb)bb.style.display='';
+ var keys=Object.keys(CH).filter(function(k){return k!=='boss'&&CUR.employees[k]&&CUR.employees[k].bubble&&isPresent(k)&&document.getElementById('bub-'+k);});
+ var show={};
+ if(keys.length){for(var i=0;i<Math.min(2,keys.length);i++){show[keys[(bubIdx+i)%keys.length]]=1;}bubIdx=(bubIdx+2)%keys.length;}
+ keys.forEach(function(k){var b=document.getElementById('bub-'+k);if(b)b.style.display=show[k]?'':'none';});
+}
 function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){CUR=d;if(busy)return;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
+setInterval(rotateBubbles,4500);
 setTimeout(reportScene,4000);
 setInterval(reportScene,24000);
 </script>
