@@ -189,8 +189,41 @@ function render(d){
 // 캐릭터 폭%: 이미지 비율 근사 (h*1.5*aspect). aspect는 대략 0.45 가정, 개별 미세조정 생략
 var CHAR_ASPECT={boss:.43,hr:.45,sec:.47,jay:.44,kook:.41,coin:.57,content:.60,pd:.51,coach:.59,lobby:.48};
 function charW(k){return (CH[k].h*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
-function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(render).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
+// ── 직원 이동 연출(대표실 보고) ──
+var CUR=null, busy=false;
+function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function moveEmp(key,x,base){var e=document.getElementById('emp-'+key),b=document.getElementById('bub-'+key);
+ if(e){e.style.left=x+'%';e.style.bottom=((1-base)*100)+'%';}
+ if(b){b.style.left=x+'%';b.style.bottom=((1-(base-CH[key].h))*100+1)+'%';}}
+function setBub(key,txt){var b=document.getElementById('bub-'+key);if(b){b.textContent=txt;b.style.display='';}}
+function reportLine(key){var e=CUR.employees[key]||{};return (e.role||'')+' 보고 — '+(e.status||'이상 없습니다');}
+var BOSS_REPLIES=['그래, 고생했다 👍','좋아, 계속 그렇게','수고했다. 다음도 부탁해','오, 잘했네!'];
+async function reportScene(){
+ if(busy||!CUR)return;
+ var pool=['jay','kook','coin','content','pd','coach','sec','hr'].filter(function(k){return CUR.employees[k]&&document.getElementById('emp-'+k);});
+ if(!pool.length)return; var key=pool[(Math.random()*pool.length)|0];
+ busy=true;
+ var e=document.getElementById('emp-'+key),b=document.getElementById('bub-'+key),home=CH[key];
+ var orig=(CUR.employees[key]||{}).bubble||'';
+ var bossB=document.getElementById('bub-boss'), obb=bossB?bossB.textContent:'';
+ e.style.zIndex=7; if(b)b.style.zIndex=8;
+ setBub(key,'사장님, 보고하러 왔습니다!'); await wait(500);
+ moveEmp(key,66,home.base); await wait(1600);     // → 엘리베이터
+ moveEmp(key,66,0.30);      await wait(2000);      // → 대표실 층
+ moveEmp(key,53,0.30);      await wait(1600);      // → 사장 옆
+ setBub(key,reportLine(key)); if(bossB)bossB.textContent=BOSS_REPLIES[(Math.random()*BOSS_REPLIES.length)|0];
+ await wait(3400);
+ moveEmp(key,66,0.30);      await wait(1600);      // 복귀
+ moveEmp(key,66,home.base); await wait(2000);
+ moveEmp(key,home.x,home.base); await wait(1600);
+ if(bossB)bossB.textContent=obb; setBub(key,orig);
+ e.style.zIndex=2; if(b)b.style.zIndex=6;
+ busy=false;
+}
+function load(){fetch('company.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){CUR=d;if(busy)return;render(d);}).catch(function(){document.getElementById('script').textContent='데이터를 불러오지 못했어요.';});}
 load();setInterval(load,60000);
+setTimeout(reportScene,4000);              // 첫 연출
+setInterval(reportScene,24000);            // 이후 24초마다
 </script>
 </body>
 </html>
