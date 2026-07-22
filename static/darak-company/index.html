@@ -58,8 +58,8 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 <script>
 var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',content:'trendy',pd:'pd',coach:'coach'};
 // 말풍선 앵커: [x%, 머리위 y%] — 장면 이미지에 구운 캐릭터 머리 위치
-var HEAD={boss:[42,15],hr:[26,28.5],sec:[54,28.5],jay:[22,41.5],kook:[40,41.5],coin:[57,41.5],content:[15,66],pd:[42,65.5],coach:[30,77]};
-var LABELS=[['🌿 옥상 정원',9],['대표실',22],['인사팀',35.5],['투자팀',48.5],['1층 로비',60.5],['지하1 · 콘텐츠팀',72.5],['지하2 · 헬스장',84],['지하3 · 서버실',94]];
+var HEAD={boss:[44,18],hr:[27,30.5],sec:[55,30.5],jay:[24,40.5],kook:[41,40.5],coin:[58,40.5],content:[17,65],pd:[44,64.5],coach:[30,77.5]};
+var LABELS=[['🌿 옥상 정원',9],['대표실',23],['인사팀',36],['투자팀',47],['1층 로비',58.5],['지하1 · 콘텐츠팀',70.5],['지하2 · 헬스장',82],['지하3 · 서버실',93]];
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function render(d){
   document.getElementById('date').textContent=d.date+' · '+(d.weather||'');
