@@ -51,7 +51,7 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 </div>
 <div class="layout">
   <div class="stage" id="stage">
-    <img class="building" src="chars/bldg6.png" alt="다락방 컴퍼니 사옥">
+    <img class="building" src="chars/bldg6.png?v=3" alt="다락방 컴퍼니 사옥">
     <div id="furni"></div>
     <div id="chars"></div>
     <div id="bubbles"></div>
@@ -97,14 +97,14 @@ function render(d){
  // 책상+소품(전경)
  var fh='';
  Object.keys(FUR).forEach(function(k){var f=FUR[k];var deskTop=(f.base-IN)-f.dh;
-  fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(f.base-IN))*100)+'%;width:'+(f.dw*100)+'%;height:'+(f.dh*100)+'%"><img src="chars/desk_solid_cut.png" alt=""></div>';
-  if(f.prop)fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(deskTop+.004))*100)+'%;width:'+(f.pw*100)+'%;height:'+(f.pw*PA[f.prop]*100)+'%"><img src="chars/'+f.prop+'_cut.png" alt=""></div>';
+  fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(f.base-IN))*100)+'%;width:'+(f.dw*100)+'%;height:'+(f.dh*100)+'%"><img src="chars/desk_solid_cut.png?v=3" alt=""></div>';
+  if(f.prop)fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(deskTop+.004))*100)+'%;width:'+(f.pw*100)+'%;height:'+(f.pw*PA[f.prop]*100)+'%"><img src="chars/'+f.prop+'_cut.png?v=3" alt=""></div>';
  });
  document.getElementById('furni').innerHTML=fh;
  // 캐릭터 스프라이트
  var ch='';
  Object.keys(CH).forEach(function(k){if(!emps[k])return;var c=CH[k];var img=IMG[k]||k;
-  ch+='<div class="emp" id="emp-'+k+'" style="left:'+c.x+'%;bottom:'+((1-c.base)*100)+'%;width:'+charW(k)+'%"><img src="chars/'+img+'_cut.png" alt="'+esc(emps[k].name)+'"></div>';
+  ch+='<div class="emp" id="emp-'+k+'" style="left:'+c.x+'%;bottom:'+((1-c.base)*100)+'%;width:'+charW(k)+'%"><img src="chars/'+img+'_cut.png?v=3" alt="'+esc(emps[k].name)+'"></div>';
  });
  document.getElementById('chars').innerHTML=ch;
  // 말풍선
@@ -116,7 +116,7 @@ function render(d){
  // 명단
  document.getElementById('roster').innerHTML=Object.keys(CH).map(function(k){var e=emps[k];if(!e)return '';var img=IMG[k]||k;
   var hire=e.hire?'<div class="rh">🗓 '+e.hire+' 입사 · D+'+daysSince(e.hire)+'</div>':'';
-  return '<div class="rc"><div class="dot"><img src="chars/'+img+'_cut.png" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+'</div>'+hire+'</div></div>';}).join('');
+  return '<div class="rc"><div class="dot"><img src="chars/'+img+'_cut.png?v=3" alt=""></div><div><div class="rn">'+esc(e.name)+'</div><div class="rr">'+esc(e.role)+'</div>'+hire+'</div></div>';}).join('');
  // 타임라인
  document.getElementById('feed').innerHTML=(d.timeline||[]).map(function(t){var who=emps[t.who]?emps[t.who].name:t.who;return '<div class="row"><span class="tm">'+t.t+'</span><span class="wn">'+esc(who)+'</span><span>'+esc(t.msg)+'</span></div>';}).join('');
 }
