@@ -77,7 +77,7 @@ var CH={
  coach:{x:30,base:.88,h:.105}, lobby:{x:47,base:.648,h:.115}
 };
 // 책상+소품 (전경). base=바닥, dw/dh=책상 폭/높이(frac), prop/pw
-var IN=.01, PA={laptopback:.527, monitorback:.635};
+var SCALE=0.8; var IN=.01, PA={laptopback:.527, monitorback:.635};
 var FUR={
  boss:{x:44,base:.26,dw:.19,dh:.05,prop:'laptopback',pw:.05},
  hr:{x:27,base:.39,dw:.145,dh:.048,prop:'laptopback',pw:.045}, sec:{x:55,base:.39,dw:.145,dh:.048,prop:'laptopback',pw:.045},
@@ -96,9 +96,9 @@ function render(d){
  document.getElementById('labels').innerHTML=LABELS.map(function(L){return '<span class="floortag" style="top:'+L[1]+'%">'+L[0]+'</span>';}).join('');
  // 책상+소품(전경)
  var fh='';
- Object.keys(FUR).forEach(function(k){var f=FUR[k];var deskTop=(f.base-IN)-f.dh;
-  fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(f.base-IN))*100)+'%;width:'+(f.dw*100)+'%;height:'+(f.dh*100)+'%"><img src="chars/desk_solid_cut.png?v=3" alt=""></div>';
-  if(f.prop)fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(deskTop+.004))*100)+'%;width:'+(f.pw*100)+'%;height:'+(f.pw*PA[f.prop]*100)+'%"><img src="chars/'+f.prop+'_cut.png?v=3" alt=""></div>';
+ Object.keys(FUR).forEach(function(k){var f=FUR[k];var deskTop=(f.base-IN)-f.dh*SCALE;
+  fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(f.base-IN))*100)+'%;width:'+(f.dw*SCALE*100)+'%;height:'+(f.dh*SCALE*100)+'%"><img src="chars/desk_solid_cut.png?v=3" alt=""></div>';
+  if(f.prop)fh+='<div class="furni" style="left:'+f.x+'%;bottom:'+((1-(deskTop+.004))*100)+'%;width:'+(f.pw*SCALE*100)+'%;height:'+(f.pw*SCALE*PA[f.prop]*100)+'%"><img src="chars/'+f.prop+'_cut.png?v=3" alt=""></div>';
  });
  document.getElementById('furni').innerHTML=fh;
  // 캐릭터 스프라이트
@@ -122,7 +122,7 @@ function render(d){
 }
 // 캐릭터 폭%: 실제 컷 비율(h*1.5*aspect)
 var CHAR_ASPECT={boss:.434,hr:.451,sec:.474,jay:.442,kook:.414,coin:.567,content:.601,pd:.513,coach:.589,lobby:.502};
-function charW(k){return (CH[k].h*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
+function charW(k){return (CH[k].h*SCALE*(1536/1024)*(CHAR_ASPECT[k]||.48))*100;}
 // ── 직원 이동 연출(대표실 보고) ──
 var CUR=null, busy=false;
 function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
