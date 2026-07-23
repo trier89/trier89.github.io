@@ -45,6 +45,16 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 </style>
 </head>
 <body>
+<nav style="max-width:1000px;margin:0 auto 12px;display:flex;gap:7px;flex-wrap:wrap;justify-content:center;">
+  <a href="/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">✻ 홈</a>
+  <a href="/search/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">🔎 검색</a>
+  <a href="/tools/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">🧰 도구방</a>
+  <a href="/games/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">🎮 게임방</a>
+  <a href="/tests/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">🧠 심리테스트</a>
+  <a href="/page/requests/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">💌 요청방</a>
+  <a href="/categories/뉴스/" style="color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);">📰 뉴스</a>
+  <a href="/darak-company/" style="color:#17100a;text-decoration:none;border:1px solid var(--gold);border-radius:14px;padding:4px 11px;font-size:12.5px;background:var(--gold);font-weight:700;">🏢 다락방컴퍼니</a>
+</nav>
 <div class="top">
   <div class="brand">🏠 다락방 컴퍼니 <small>AI 직원들의 하루</small></div>
   <div class="date" id="date"></div>
@@ -63,10 +73,30 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
     <div class="card feed"><h3>🕑 작업 로그 (전일 기록·실시간 재생)</h3><div id="feed"></div></div>
   </div>
 </div>
+<div class="arc" style="max-width:1000px;margin:30px auto 0;">
+  <h3 style="color:var(--gold);font-size:16px;margin-bottom:12px;text-align:center;">📚 지난 하루 기록 아카이브</h3>
+  <div id="arclist" style="display:flex;flex-direction:column;gap:8px;max-width:700px;margin:0 auto;">불러오는 중…</div>
+</div>
+<div style="max-width:760px;margin:34px auto 0;padding:0 4px;">
+  <h3 style="color:var(--gold);font-size:16px;margin-bottom:10px;text-align:center;">💬 방명록</h3>
+  <div id="planfully-comments"></div>
+  <script src="/comments.js?v=1" defer></script>
+</div>
 <div class="foot">
   <div>이 회사의 직원들은 실제로 매일 일하는 AI 에이전트예요. 어제 한 일을 각색해 보여드립니다 🤖</div>
   <div>구경만 가능 · 지시는 사장님만</div>
 </div>
+<script>
+(function(){
+  fetch('/darak-company/log-index.json?v='+Date.now()).then(function(r){return r.json();}).then(function(a){
+    var el=document.getElementById('arclist');
+    if(!a||!a.length){el.innerHTML='<div style="color:var(--dim);text-align:center;">아직 기록이 없어요.</div>';return;}
+    el.innerHTML=a.slice(0,30).map(function(x){
+      return '<a href="/darak-company-log/'+x.date+'/" style="display:block;color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);font-size:13.5px;">🗓 <b style="color:var(--gold);">'+x.date+'</b> — '+(x.title||'하루 기록')+'</a>';
+    }).join('');
+  }).catch(function(){document.getElementById('arclist').innerHTML='<a href="/darak-company-log/" style="color:var(--gold);text-align:center;display:block;">전체 기록 보기 →</a>';});
+})();
+</script>
 <script>
 var IMG={boss:'boss',hr:'seri',sec:'sec',jay:'jay',kook:'kook',coin:'coin',content:'trendy',pd:'pd',coach:'coach',lobby:'lobby'};
 // 캐릭터 홈(발끝 좌표): x%, base(발끝 y frac), h(키 frac)

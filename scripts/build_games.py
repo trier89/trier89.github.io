@@ -53,6 +53,7 @@ button:hover{{background:var(--coral-soft);}}
 <div class="sub">{sub}</div>
 {body}
 <div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+<div style="max-width:760px;margin:22px auto 0;padding:0 12px;"><h3 style="text-align:center;color:#e8e6e3;font-size:15px;margin-bottom:8px;">💬 방명록</h3><div id="planfully-comments"></div><script src="/comments.js?v=1" defer></script></div>
 <script>
 {js}
 </script>
