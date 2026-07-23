@@ -38,6 +38,8 @@ var TYPES={
   F1:{n:"디오니소스",emoji:"🍷",d:"자유와 흥의 신. 어디서든 즐거움을 만들고 순간을 만끽해요. 틀에 얽매이지 않는 낙천적 자유인입니다.",good:["넘치는 에너지","즐거움을 전파","자유로운 발상"],watch:["즉흥에 치우침","마무리도 챙기기","절제의 균형"],like:"축제 같은 자리, 새로운 자극"},
   F2:{n:"아르테미스",emoji:"🏹",d:"사냥과 달의 여신. 독립적이고 자기 세계가 뚜렷해요. 혼자여도 강하고, 자유를 무엇보다 소중히 여깁니다.",good:["강한 독립심","뚜렷한 소신","자유로운 정신"],watch:["거리를 두는 편","가끔 곁을 내주기","고집 완화"],like:"내 페이스, 자연과 자유"}
 };
+// 각 신의 캐릭터 이미지 (우리 그리스신화 영상 캐릭터 아트)
+var IMG={P1:'zeus',P2:'hades',W1:'apollo',W2:'athena',L1:'aphrodite',L2:'hestia',F1:'dionysus',F2:'artemis'};
 var CODEMAP={P1:'a',P2:'b',W1:'c',W2:'d',L1:'e',L2:'f',F1:'g',F2:'h'};
 var FROMCODE={a:'P1',b:'P2',c:'W1',d:'W2',e:'L1',f:'L2',g:'F1',h:'F2'};
 // 각 선택지 = (에너지 E/I, 영역 P/W/L/F) 태그
@@ -83,7 +85,8 @@ function render(key,shared){
   function list(a){return '<ul style="margin:6px 0 0;padding-left:20px;line-height:1.7;">'+a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
   $('gg-result').innerHTML=
     '<div style="text-align:center;padding:24px;border-radius:14px;background:#f5f3ff;">'
-    +'<div style="font-size:52px;">'+t.emoji+'</div>'
+    +'<img src="/tests/greek-god/'+(IMG[key]||'zeus')+'.jpg" alt="'+t.n+'" style="width:180px;height:180px;object-fit:cover;border-radius:14px;box-shadow:0 4px 16px rgba(91,33,182,.25);margin-bottom:10px;" loading="lazy">'
+    +'<div style="font-size:30px;">'+t.emoji+'</div>'
     +'<div style="font-size:26px;font-weight:800;color:#5b21b6;">나는 '+t.n+'型</div></div>'
     +(shared?'<div style="text-align:center;margin:10px 0;padding:10px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:14px;">친구가 공유한 결과예요 ⚡ 당신과 닮은 신은?</div>':'')
     +'<p style="line-height:1.75;margin-top:14px;">'+t.d+'</p>'
