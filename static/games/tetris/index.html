@@ -104,6 +104,35 @@ document.addEventListener('keydown',function(e){if(state!=='play')return;var k=e
 function bind(id,fn){var b=document.getElementById(id);if(b)b.onclick=function(){if(state!=='play')return;fn();draw();};}
 bind('t-l',function(){if(!collide(px-1,py,cur))px--;});bind('t-r',function(){if(!collide(px+1,py,cur))px++;});
 bind('t-rot',rotate);bind('t-d',down);bind('t-drop',hard);
+
+// 모바일 제스처: 캔버스를 손으로 끌어 좌우이동, 탭하면 회전, 아래로 쓸면 낙하 (2026-07-23)
+(function(){
+  var sx=0,sy=0,lastX=0,moved=false,st=0;
+  function cw(){return cv.getBoundingClientRect().width/COLS;}  // 화면상 한 칸 폭
+  cv.addEventListener('touchstart',function(e){
+    if(state!=='play')return;
+    var t=e.touches[0];sx=lastX=t.clientX;sy=t.clientY;moved=false;st=Date.now();
+    e.preventDefault();
+  },{passive:false});
+  cv.addEventListener('touchmove',function(e){
+    if(state!=='play')return;
+    var t=e.touches[0],w=cw(),dx=t.clientX-lastX;
+    while(Math.abs(dx)>=w){                      // 한 칸 폭 넘게 끌 때마다 한 칸 이동
+      if(dx>0){if(!collide(px+1,py,cur))px++;dx-=w;lastX+=w;}
+      else{if(!collide(px-1,py,cur))px--;dx+=w;lastX-=w;}
+      moved=true;draw();
+    }
+    if((t.clientY-sy)>w*1.2&&Math.abs(t.clientX-sx)<w){ down();sy=t.clientY;moved=true;draw(); } // 아래로 끌면 한 칸 낙하
+    e.preventDefault();
+  },{passive:false});
+  cv.addEventListener('touchend',function(e){
+    if(state!=='play')return;
+    var t=e.changedTouches[0],w=cw(),adx=Math.abs(t.clientX-sx),dy=t.clientY-sy,dt=Date.now()-st;
+    if(!moved&&adx<w*0.6&&Math.abs(dy)<w*0.6&&dt<400){ rotate();draw(); }       // 탭 = 회전
+    else if(dy>w*4&&adx<w&&dt<300){ hard();draw(); }                            // 빠르게 아래로 쓸기 = 하드드롭
+    e.preventDefault();
+  },{passive:false});
+})();
 })();
 
 </script>
