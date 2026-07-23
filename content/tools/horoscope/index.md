@@ -42,6 +42,35 @@ var LOVE=['설레는 신호가 있어요. 솔직한 표현이 통해요.','오�
 var MONEY=['지출을 점검하기 좋은 날. 새는 돈을 잡아요.','뜻밖의 수입 가능성. 기회를 놓치지 마세요.','투자는 신중히. 확실한 것만 보세요.','아끼면 목돈이 보여요. 작은 절약이 쌓여요.','금전 정보가 들어와요. 메모해 두면 도움 돼요.','계획 소비가 유리한 날. 충동구매 주의.'];
 var HEALTH=['가벼운 산책이 컨디션을 살려요.','수분 섭취와 휴식이 필요해요.','스트레칭으로 몸을 풀어주세요.','충분한 수면이 최고의 보약이에요.','과식 주의. 소화에 신경 써요.','마음의 여유가 몸을 편하게 해요.'];
 var COLORS=['빨강','주황','노랑','초록','파랑','보라','흰색','검정','분홍','하늘'];
+// ── 띠별 결과: 처음 만든 fortune 도구의 리치 포맷을 이식(2026-07-23 사용자 요청) ──
+var ZOD_EM=['🐭','🐮','🐯','🐰','🐲','🐍','🐴','🐑','🐵','🐔','🐶','🐷'];
+var ZTOTAL=['막힌 일이 술술 풀리는 날이에요. 미뤄둔 일에 도전해보세요.','조용하지만 알찬 하루. 작은 성취가 쌓입니다.','뜻밖의 좋은 소식이 찾아올 수 있어요. 연락을 기다려보세요.','서두르면 실수가 생겨요. 오늘은 천천히 가는 게 이득입니다.','주변의 도움으로 일이 잘 풀려요. 감사 인사를 잊지 마세요.','새로운 인연이나 기회가 문을 두드립니다. 마음을 열어보세요.','컨디션이 좋아 무엇을 해도 흐름을 탑니다. 자신감을 가지세요.','작은 오해가 생길 수 있으니 말은 한 번 더 생각하고 하세요.'];
+var ZMONEY=['예상치 못한 지출 주의! 오늘은 지갑을 닫으세요.','작은 재물운이 들어와요. 미뤄둔 정산을 챙기세요.','투자·계약은 하루 미루는 게 좋아요.','생각지 못한 곳에서 이득이 생깁니다.'];
+var ZLOVE=['솔직한 표현이 관계를 가깝게 만들어요.','혼자만의 시간이 오히려 매력을 키우는 날.','오래 연락 없던 사람에게서 소식이 올 수도.','작은 배려가 큰 감동으로 돌아옵니다.'];
+var ZHEALTH=['가벼운 산책이 컨디션을 끌어올려요.','충분한 수분과 휴식이 필요한 날.','눈과 어깨의 피로에 신경 쓰세요.','평소보다 활력이 넘치는 하루입니다.'];
+var ZDIRS=['동쪽','서쪽','남쪽','북쪽','동남쪽','남서쪽'];
+function zrng(seed){var x=Math.sin(seed)*10000;return x-Math.floor(x);}
+function zpick(arr,seed){return arr[Math.floor(zrng(seed)*arr.length)];}
+function zscore(seed){return 1+Math.floor(zrng(seed)*5);}
+function zbar(label,sc,color){return '<div style="margin:8px 0;"><div style="display:flex;justify-content:space-between;font-size:13.5px;"><span>'+label+'</span><span style="color:'+color+';font-weight:700;">'+'★'.repeat(sc)+'☆'.repeat(5-sc)+'</span></div><div style="height:8px;background:#e5e7eb;border-radius:4px;margin-top:6px;overflow:hidden;"><div style="height:8px;border-radius:4px;width:'+(sc*20)+'%;background:'+color+';"></div></div></div>';}
+function daySeedZ(){var d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
+function renderZodiac(zi){
+  var base=daySeedZ()+zi*97, nm=ZOD[zi], em=ZOD_EM[zi];
+  var sTot=zscore(base+1),sMon=zscore(base+2),sLov=zscore(base+3),sHea=zscore(base+4);
+  var luckyNum=1+Math.floor(zrng(base+5)*45), color=zpick(COLORS,base+6), dir=zpick(ZDIRS,base+7);
+  var h='<div style="padding:16px 18px;border-radius:12px;margin-bottom:12px;background:#f5f3ff;text-align:center;">'
+    +'<div style="font-size:30px;">'+em+'</div>'
+    +'<div style="font-weight:800;font-size:18px;color:#5b21b6;">'+nm+'띠 오늘의 운세</div>'
+    +'<div style="margin-top:8px;font-size:15px;line-height:1.7;">'+zpick(ZTOTAL,base+8)+'</div></div>';
+  h+='<div style="padding:16px 18px;border-radius:12px;margin-bottom:12px;background:#fafafa;border:1px solid #eee;">'
+    +zbar('총운',sTot,'#7c3aed')+zbar('재물운',sMon,'#059669')+zbar('애정운',sLov,'#e11d48')+zbar('건강운',sHea,'#0891b2')
+    +'<div style="margin-top:10px;font-size:14px;line-height:1.8;color:#444;">💰 '+zpick(ZMONEY,base+9)+'<br>💕 '+zpick(ZLOVE,base+10)+'<br>🌿 '+zpick(ZHEALTH,base+11)+'</div></div>';
+  h+='<div style="padding:16px 18px;border-radius:12px;background:#ecfdf5;display:flex;justify-content:space-around;text-align:center;font-size:14px;">'
+    +'<div><div style="color:#888;font-size:12px;">행운의 숫자</div><b style="font-size:20px;color:#047857;">'+luckyNum+'</b></div>'
+    +'<div><div style="color:#888;font-size:12px;">행운의 색</div><b style="font-size:18px;color:#047857;">'+color+'</b></div>'
+    +'<div><div style="color:#888;font-size:12px;">행운의 방향</div><b style="font-size:18px;color:#047857;">'+dir+'</b></div></div>';
+  return h;
+}
 STARS.forEach(function(s){$('hs-star-sel').add(new Option(s,s));});
 ZOD.forEach(function(s){$('hs-zodiac-sel').add(new Option(s+'띠',s));});
 function hash(s){var h=5;for(var i=0;i<s.length;i++)h=(h*33+s.charCodeAt(i))%2000003;return h;}
@@ -60,6 +89,10 @@ var out=$('hs-out');
   if(t==='tarot'){
     var c=TAROT[Math.floor(Math.random()*TAROT.length)];
     out.innerHTML='<div style="text-align:center;"><div style="font-size:40px;">🃏</div><div style="font-size:19px;font-weight:800;color:#7c3aed;margin:6px 0;">'+c[0]+'</div><div style="font-size:15px;color:#333;line-height:1.6;">'+c[1]+'</div></div>';
+  } else if(t==='zodiac'){
+    // 띠별 = fortune 리치 포맷
+    var zi=$('hs-zodiac-sel').selectedIndex;
+    out.innerHTML=renderZodiac(zi);
   } else {
     var sel=$('hs-'+t+'-sel').value, s=seed+sel;
     var score=hash(s+'g')%41+59; // 59~99
@@ -83,4 +116,4 @@ var out=$('hs-out');
 - **총운·애정·금전·건강** 네 가지와 행운의 숫자·색을 함께 봐요.
 - **타로**는 뽑을 때마다 한 장씩 나와요. 마음속 질문을 떠올리고 뽑아 보세요.
 - 재미로 보는 운세예요. 좋은 운세는 힘을 주고, 아쉬운 운세는 조심하라는 신호로 가볍게 받아들여요 🍀
-- 생년월일로 보는 [사주·운세](/tools/fortune/)도 있어요.
+- 더 많은 도구는 [도구방](/tools/)에서 만나요.
