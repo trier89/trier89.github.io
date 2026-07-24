@@ -1,24 +1,24 @@
 {
- "today": 4,
- "today_pv": 22,
- "total": 85,
+ "today": 0,
+ "today_pv": 0,
+ "total": 86,
  "yesterday": {
-  "users": 24,
-  "new": 15,
-  "pv": 81,
-  "sessions": 31
+  "users": 5,
+  "new": 4,
+  "pv": 26,
+  "sessions": 11
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 185,
-   "eng": 1436,
+   "views": 201,
+   "eng": 1627,
    "avg_sec": 8
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 51,
-   "eng": 688,
+   "views": 54,
+   "eng": 708,
    "avg_sec": 13
   },
   {
@@ -35,9 +35,9 @@
   },
   {
    "title": "💌 요청방 — 에디슨에게 만들어달라고 하기",
-   "views": 21,
-   "eng": 1085,
-   "avg_sec": 52
+   "views": 22,
+   "eng": 1086,
+   "avg_sec": 49
   }
  ],
  "top_dwell": [
@@ -49,9 +49,9 @@
   },
   {
    "title": "💌 요청방 — 에디슨에게 만들어달라고 하기",
-   "views": 21,
-   "eng": 1085,
-   "avg_sec": 52
+   "views": 22,
+   "eng": 1086,
+   "avg_sec": 49
   },
   {
    "title": "배당금 계산기 — 월 배당 목표로 필요 원금·월 적립액 (노후·파이어족)",
@@ -72,5 +72,5 @@
    "avg_sec": 26
   }
  ],
- "updated": "2026-07-24 23:53"
+ "updated": "2026-07-25 00:53"
 }
