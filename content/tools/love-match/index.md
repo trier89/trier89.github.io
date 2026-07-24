@@ -32,6 +32,7 @@ readingTime: false
 <script>
 (function(){
 var $=function(id){return document.getElementById(id);};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function hash(s){var h=7;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))%1000003;}return h;}
 // 이름궁합
 $('lm-name-go').onclick=function(){
@@ -40,7 +41,7 @@ $('lm-name-go').onclick=function(){
   var key=[a,b].sort().join('♥');
   var pct=hash(key)%60+40;   // 40~99
   var msg = pct>=90?'천생연분! 서로에게 딱이에요 💞':pct>=75?'꽤 잘 어울려요. 좋은 인연이에요 💗':pct>=60?'노력하면 잘 맞아요. 대화가 열쇠예요 🙂':'다른 매력이 끌릴 수 있어요. 천천히 알아가요 🌱';
-  $('lm-name-out').innerHTML='<div style="font-size:14px;color:#555;">'+a+' ♥ '+b+'</div><div style="font-size:38px;font-weight:800;color:#be185d;margin:4px 0;">'+pct+'%</div><div style="font-size:14px;color:#333;">'+msg+'</div>';
+  $('lm-name-out').innerHTML='<div style="font-size:14px;color:#555;">'+esc(a)+' ♥ '+esc(b)+'</div><div style="font-size:38px;font-weight:800;color:#be185d;margin:4px 0;">'+pct+'%</div><div style="font-size:14px;color:#333;">'+msg+'</div>';
   $('lm-name-out').style.display='block';
 };
 // MBTI

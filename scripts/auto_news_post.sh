@@ -1,6 +1,7 @@
 #!/bin/bash
 # Daily news auto-posting script for planfully-lazy blog
-# Runs on Mac mini via crontab, uses Claude Max for analysis
+# Runs on Mac mini via crontab. Analysis: tries Claude CLI, falls back to OpenAI gpt-4o-mini
+# (NOTE: Claude CLI is currently logged out on this Mac, so OpenAI is used every run — re-login `claude` to restore Claude quality).
 
 BLOG_ROOT="/Users/minim/projects/planfully-lazy"
 SCRIPTS_DIR="$BLOG_ROOT/scripts"
@@ -17,6 +18,8 @@ export GH_TOKEN
 export PATH="/Users/minim/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 LOG_FILE="$SCRIPTS_DIR/news-cron.log"
+# 로그 로테이션: 1MB 넘으면 마지막 800줄만 유지
+[ -f "$LOG_FILE" ] && [ "$(wc -c < "$LOG_FILE")" -gt 1048576 ] && tail -n 800 "$LOG_FILE" > "$LOG_FILE.tmp" && mv "$LOG_FILE.tmp" "$LOG_FILE"
 echo "=== $(date) ===" >> "$LOG_FILE"
 
 # Skip if already posted today
@@ -26,7 +29,7 @@ if [ -f "$POST_DIR/index.md" ]; then
     $PYTHON "$SCRIPTS_DIR/today_in_history.py" >> "$LOG_FILE" 2>&1 || true
     cd "$BLOG_ROOT"
     git add content/post/today-* content/post/trends-* >> "$LOG_FILE" 2>&1 || true
-    git diff --cached --quiet || { git commit -m "Add today-in-history: $DATE" >> "$LOG_FILE" 2>&1; git push >> "$LOG_FILE" 2>&1; }
+    git diff --cached --quiet || { git commit -m "Add today-in-history: $DATE" >> "$LOG_FILE" 2>&1; git push origin main >> "$LOG_FILE" 2>&1; }
     exit 0
 fi
 
@@ -120,7 +123,7 @@ cd "$BLOG_ROOT"
 git add "content/post/news-$DATE/" >> "$LOG_FILE" 2>&1
 git add content/post/today-* content/post/trends-* >> "$LOG_FILE" 2>&1 || true
 git commit -m "Add daily news: $DATE" >> "$LOG_FILE" 2>&1
-git push >> "$LOG_FILE" 2>&1
+git push origin main >> "$LOG_FILE" 2>&1
 
 echo "Done! Post published: news-$DATE" >> "$LOG_FILE"
 rm -f "/tmp/news_raw_$DATE.json" "/tmp/news_prompt_$DATE.txt"

@@ -1,4 +1,7 @@
 #!/bin/bash
+GA_LOG=/Users/minim/projects/planfully-lazy/scripts/ga/ga-stats.log  # 로그 로테이션(1MB↑ → 마지막 500줄)
+[ -f "$GA_LOG" ] && [ "$(wc -c < "$GA_LOG")" -gt 1048576 ] && tail -n 500 "$GA_LOG" > "$GA_LOG.tmp" && mv "$GA_LOG.tmp" "$GA_LOG"
+
 # 시간당 GA4 방문자 통계 → static/stats.json → 커밋/푸시 (홈 배지 갱신)
 export HOME=/Users/minim
 export PATH="/Users/minim/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
