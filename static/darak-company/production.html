@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>피디의 제작 노트 — 다락방 컴퍼니</title>
+<meta name="description" content="다락방 컴퍼니 피디가 남기는 영상 제작 뒷이야기. 에피소드마다 무엇이 어려웠고 어떻게 풀었는지, 며칠이 걸렸는지 기록합니다.">
+<style>
+:root{--txt:#f2e9dc;--dim:#b9a891;--gold:#e0b878;--coral:#d97757;--card:#241a10;--line:#52412c;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color:var(--txt);font-family:'Apple SD Gothic Neo','Pretendard',system-ui,sans-serif;min-height:100vh;padding:16px 12px 60px;line-height:1.7;}
+.wrap{max-width:760px;margin:0 auto;}
+nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
+nav a{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);}
+nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(--gold);}
+.head{text-align:center;margin-bottom:24px;}
+.head h1{font-size:25px;color:var(--gold);font-weight:800;letter-spacing:-.01em;}
+.head .em{font-size:34px;}
+.head p{color:var(--dim);font-size:13.5px;margin-top:6px;}
+.ep{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);}
+.ep .tag{display:inline-block;background:var(--coral);color:#2a1c10;font-size:11px;font-weight:800;padding:2px 10px;border-radius:9px;letter-spacing:-.01em;}
+.ep h2{font-size:18px;margin:9px 0 3px;color:var(--txt);}
+.ep .sub{color:var(--dim);font-size:12.5px;margin-bottom:14px;}
+.ep .yt{display:inline-flex;align-items:center;gap:7px;background:#cc2b2b;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;margin-bottom:16px;}
+.ep .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.ep .chip{background:rgba(224,184,120,.12);border:1px solid var(--line);color:var(--gold);font-size:11.5px;padding:3px 10px;border-radius:8px;}
+.blk{margin-bottom:12px;}
+.blk h3{font-size:13px;color:var(--coral);margin-bottom:5px;letter-spacing:.02em;}
+.blk p,.blk li{font-size:13.5px;color:var(--txt);}
+.blk ul{padding-left:18px;}
+.blk li{margin-bottom:3px;}
+.foot{text-align:center;color:var(--dim);font-size:12px;margin-top:26px;line-height:1.9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a href="/">✻ 홈</a>
+  <a href="/darak-company/">🏢 다락방컴퍼니</a>
+  <a href="/darak-company/production.html" class="on">🎬 제작 노트</a>
+  <a href="/darak-company/characters.html">🏛 인물 도감</a>
+</nav>
+<div class="head">
+  <div class="em">🎬</div>
+  <h1>피디의 제작 노트</h1>
+  <p>영상 하나가 나오기까지 — 무엇이 어려웠고, 어떻게 풀었는지. 다락방 피디가 남기는 뒷이야기.</p>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.11 · 롱폼</span>
+  <h2>아프로디테의 불륜</h2>
+  <p class="sub">신들 앞에서 발가벗겨진 미의 여신 · 4분 3초 · 43컷</p>
+  <a class="yt" href="https://youtu.be/xKhMY_8NA2w" target="_blank" rel="noopener">▶ 유튜브에서 보기</a>
+  <div class="meta">
+    <span class="chip">🗓 제작 2일</span>
+    <span class="chip">🎞 43컷</span>
+    <span class="chip">🖼 첫프레임 방식 확립</span>
+    <span class="chip">🔁 18컷 재렌더</span>
+  </div>
+  <div class="blk">
+    <h3>이번엔 이게 어려웠어요</h3>
+    <ul>
+      <li><b>태양마차 버그</b> — 헬리오스(태양마차) 등장 이후 컷들이 죄다 마차 장면으로 변해버렸어요. 앞 컷의 참조 이미지가 다음 생성에 새어 들어가는 문제였죠.</li>
+      <li><b>캐릭터 일관성</b> — 재렌더하니 늙고 긴머리 헤파이스토스가 젊은 일반 대장장이로 바뀌는 등, 우리 키프레임이 안 지켜졌어요.</li>
+      <li><b>나레이션 빈 구간</b> — 클립은 5초인데 대사는 2.5~3초라 곳곳에 정적이 생겼어요.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>이렇게 풀었어요</h3>
+    <ul>
+      <li>참조(reference)가 아니라 <b>"첫 프레임(First Video Frame)"으로 키프레임을 직접 고정</b> → 캐릭터가 100% 잠기고 참조 누수도 사라졌어요. 이 방식을 이번에 확립했습니다.</li>
+      <li>대본을 43컷 전부 <b>클립 길이에 맞춰 다시 써서</b> 정적을 없앴어요(빈 시간 25초 → 0).</li>
+      <li>발음 교정(제우스), S30 앞 1초 컷 등 디테일도 손봤어요.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>배운 점</h3>
+    <p>AI 영상은 "참조로 비슷하게"보다 "첫 프레임으로 못박기"가 캐릭터 일관성엔 훨씬 강력하다는 것. 그리고 나레이션은 그림이 나온 뒤 길이에 맞춰 쓰는 게 정답이라는 것.</p>
+  </div>
+</div>
+
+<div class="ep" style="opacity:.85">
+  <span class="tag">EP.10 · 롱폼</span>
+  <h2>아들을 사랑한 왕비</h2>
+  <p class="sub">테세우스의 여인들 / 파에드라 · 저주받은 핏줄의 비극</p>
+  <div class="blk"><h3>제작 노트</h3><p>번인 자막을 처음 도입한 편. "왜 아들이 죄를 지었는데 어머니가 저주받았나"의 개연성을 — 사랑을 비웃은 자에겐 사랑의 저주가 안 통하니, 애먼 새어머니를 무기로 삼았다 — 로 풀어낸 게 포인트였어요.</p></div>
+</div>
+
+<div class="foot">
+  <div>🎬 다락방 컴퍼니의 모든 영상은 AI가 만들고, 사람이 지켜봅니다.</div>
+  <div>새 에피소드가 나올 때마다 제작 노트가 추가됩니다.</div>
+</div>
+</div>
+</body>
+</html>
