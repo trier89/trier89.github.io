@@ -124,20 +124,19 @@ def main():
 title: "오늘 무슨 일이 있었을까? — {now.month}월 {now.day}일"
 date: {now:%Y-%m-%d}T07:30:00+09:00
 categories: ["오늘의 역사"]
-tags: ["오늘의 역사", "역사 속 오늘", "{now.month}월 {now.day}일", "유명인 생일"]
+tags: ["오늘의 역사", "역사 속 오늘", "{now.month}월 {now.day}일", "역사 속 인물"]
 ---
 
-{now.month}월 {now.day}일, 역사 속 오늘 일어난 일들과 오늘 생일을 맞은 유명인들을 모았습니다.
+{now.month}월 {now.day}일, 역사 속 오늘 일어난 일들과 오늘 태어난 인물들을 모았습니다.
 
 ## 📰 역사 속 오늘
 """]
     for e in events:
         md.append(f"- **{e['year']}년** — {e['text']}")
-    md.append("\n## 🎂 오늘 생일인 유명인\n")
-    md.append("생일 축하합니다! 🎉\n")
+    md.append("\n## 📅 오늘 태어난 인물\n")
+    md.append("역사 속 오늘, 이날 태어난 인물들입니다.\n")
     for b in top_births:
-        age = now.year - b["year"]
-        md.append(f"- **{b['year']}년생** ({age}세) — {b['text']}")
+        md.append(f"- **{b['year']}년** — {b['text']}")
     md.append(f"""
 ---
 
