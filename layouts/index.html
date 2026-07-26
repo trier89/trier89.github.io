@@ -59,7 +59,7 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
 <body>
 <div class="wrap">
   <div class="welcome">
-    <div class="wtitle"><span class="star">✻</span>어서 오세요, 계획대로 느긋하게입니다!</div>
+    <h1 class="wtitle" style="margin:0;"><span class="star">✻</span>어서 오세요, 계획대로 느긋하게입니다!</h1>
     <div class="wsub"><span id="typed"></span><span class="cursor"></span></div>
   </div>
   <div class="visitors" id="visitors" style="display:none;"></div>
@@ -79,9 +79,10 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   <div class="sec">
     <div class="shead"><a href="/tools/">🧰 도구방 →</a> <span class="dim">인기 도구</span></div>
     <div class="grid">
-      <a class="card" href="/tools/age-calculator/"><div class="emoji">🔢</div><div class="cname">만나이 계산기</div><div class="cdesc">만나이·띠·별자리·생일 D-day·정년·국민연금</div></a>
-      <a class="card" href="/tools/salary-calculator/"><div class="emoji">💰</div><div class="cname">연봉계산기</div><div class="cdesc">4대보험·세금 뗀 실수령액 + 연봉 역산</div></a>
-      <a class="card" href="/tools/dividend/"><div class="emoji">💵</div><div class="cname">배당금 계산기</div><div class="cdesc">월 배당 목표 → 필요 원금·월 적립액 (노후)</div></a>
+      {{ range first 3 (where .Site.RegularPages "Section" "tools").ByDate.Reverse }}
+      {{ $name := .Title }}{{ if in $name "—" }}{{ $name = trim (index (split $name "—") 0) " " }}{{ end }}
+      <a class="card" href="{{ .RelPermalink }}"><div class="emoji">🧰</div><div class="cname">{{ $name }}</div><div class="cdesc">{{ .Params.description | truncate 42 }}</div></a>
+      {{ end }}
       <a class="card" href="/tools/" style="display:flex;align-items:center;justify-content:center;border-style:dashed;"><div><div class="emoji">➕</div><div class="cname">도구방 더보기 →</div></div></a>
     </div>
   </div>
@@ -103,6 +104,18 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
       <a class="card" href="/tests/love-style/"><div class="emoji">💕</div><div class="cname">연애 스타일 테스트</div><div class="cdesc">12문항으로 알아보는 내 연애 유형 · 결과 공유</div></a>
       <a class="card" href="/tests/animal/"><div class="emoji">🐾</div><div class="cname">나는 무슨 동물?</div><div class="cdesc">성향으로 알아보는 8가지 동물 유형 · 결과 공유</div></a>
       <a class="card" href="/tests/" style="display:flex;align-items:center;justify-content:center;border-style:dashed;"><div><div class="emoji">➕</div><div class="cname">심리테스트 더보기 →</div></div></a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="shead"><a href="/categories/뉴스/">📰 양면뉴스 · 트렌드 →</a> <span class="dim">한 사건, 양쪽 시각 + 지금 뜨는 이야기</span></div>
+    <div class="grid">
+      {{ range first 2 (where (where .Site.RegularPages "Section" "post") "Params.categories" "intersect" (slice "뉴스")).ByDate.Reverse }}
+      <a class="card" href="{{ .RelPermalink }}"><div class="emoji">📰</div><div class="cname">{{ .Title }}</div><div class="cdesc">{{ .Params.description | truncate 46 }}</div></a>
+      {{ end }}
+      {{ range first 2 (where (where .Site.RegularPages "Section" "post") "Params.categories" "intersect" (slice "트렌드")).ByDate.Reverse }}
+      <a class="card" href="{{ .RelPermalink }}"><div class="emoji">🔍</div><div class="cname">{{ .Title }}</div><div class="cdesc">{{ .Params.description | truncate 46 }}</div></a>
+      {{ end }}
     </div>
   </div>
 
