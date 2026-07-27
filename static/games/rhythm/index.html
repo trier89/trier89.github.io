@@ -155,7 +155,8 @@ function finish(){state='over';cancelAnimationFrame(raf);
   btn.textContent='다시 하기';
 }
 btn.onclick=start;
-document.addEventListener('keydown',function(e){if(e.repeat)return;var k=(e.code==='Space'||e.key===' ')?' ':e.key.toLowerCase();var i=KEYS.indexOf(k);if(i>=0){e.preventDefault();if(state==='ready'||state==='over'){start();return;}hitLane(i);}});
+var CODEMAP={KeyD:0,KeyF:1,Space:2,KeyJ:3,KeyK:4};
+document.addEventListener('keydown',function(e){if(e.repeat)return;var i=(e.code in CODEMAP)?CODEMAP[e.code]:KEYS.indexOf((e.key===' '?' ':(e.key||'').toLowerCase()));if(i>=0){e.preventDefault();if(state==='ready'||state==='over'){start();return;}hitLane(i);}});
 function mkbtn(i){var b=document.getElementById('r'+i);if(b){var f=function(ev){ev.preventDefault();hitLane(i);};b.addEventListener('touchstart',f,{passive:false});b.addEventListener('mousedown',f);}}
 for(var i=0;i<LANES;i++)mkbtn(i);
 })();
