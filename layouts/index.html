@@ -77,7 +77,7 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   </div>
 
   <div class="sec">
-    <div class="shead"><a href="/tools/">🧰 도구방 →</a> <span class="dim">인기 도구</span></div>
+    <div class="shead"><a href="/tools/">🧰 도구방 →</a> <span class="dim">새로 나온 도구</span></div>
     <div class="grid">
       {{ range first 3 (where .Site.RegularPages "Section" "tools").ByDate.Reverse }}
       {{ $name := .Title }}{{ if in $name "—" }}{{ $name = trim (index (split $name "—") 0) " " }}{{ end }}
@@ -88,11 +88,11 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   </div>
 
     <div class="sec">
-    <div class="shead"><a href="/games/">🎮 게임방 →</a> <span class="dim">인기 게임</span></div>
+    <div class="shead"><a href="/games/">🎮 게임방 →</a> <span class="dim">새로 나온 게임</span></div>
     <div class="grid">
-      <a class="card" href="/games/pixel-invaders/"><div class="emoji">👾</div><div class="cname">픽셀 인베이더</div><div class="cdesc">레트로 우주 슈팅 — 급강하 함대를 막아라</div></a>
-      <a class="card" href="/games/breakout/"><div class="emoji">🧱</div><div class="cname">벽돌깨기</div><div class="cdesc">공을 튕겨 벽돌 부수기 — 레벨업마다 가속</div></a>
-      <a class="card" href="/games/minesweeper/"><div class="emoji">💣</div><div class="cname">지뢰찾기</div><div class="cdesc">숫자 힌트로 지뢰 피하기 — 3단계 난이도</div></a>
+      {{ range first 3 .Site.Data.games }}
+      <a class="card" href="{{ .url }}"><div class="emoji">{{ .emoji }}</div><div class="cname">{{ .name }}</div><div class="cdesc">{{ .desc | truncate 44 }}</div></a>
+      {{ end }}
       <a class="card" href="/games/" style="display:flex;align-items:center;justify-content:center;border-style:dashed;"><div><div class="emoji">➕</div><div class="cname">게임방 더보기 →</div></div></a>
     </div>
   </div>
