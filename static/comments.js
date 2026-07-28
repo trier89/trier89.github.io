@@ -26,6 +26,7 @@
     try{ db.settings({experimentalAutoDetectLongPolling:true, merge:true}); }catch(e){}
     var auth = firebase.auth();
     auth.signInAnonymously().catch(function(e){console.warn('anon auth',e);});
+    var myUid=null;   // 익명 인증 uid — 본인 댓글 삭제버튼 판단용
 
     var esc=function(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;};
     var COOL=30000;
@@ -50,7 +51,7 @@
     function gv(f){f=f||{};return f.stringValue!==undefined?f.stringValue:(f.timestampValue!==undefined?f.timestampValue:'');}
     function loadComments(){
       fetch(REST).then(function(r){return r.json();}).then(function(d){
-        var arr=(d.documents||[]).map(function(x){var f=x.fields||{};return {page:gv(f.page),nick:gv(f.nick),text:gv(f.text),ts:gv(f.ts)};})
+        var arr=(d.documents||[]).map(function(x){var f=x.fields||{};return {id:(x.name||'').split('/').pop(),page:gv(f.page),nick:gv(f.nick),text:gv(f.text),ts:gv(f.ts),uid:gv(f.uid)};})
           .filter(function(c){return c.page===PAGE;});
         arr.sort(function(a,b){return (b.ts||'').localeCompare(a.ts||'');});
         document.getElementById('pf-count').textContent='('+arr.length+')';
@@ -59,8 +60,12 @@
         arr.forEach(function(c){
           var when=c.ts?new Date(c.ts):new Date();
           var ds=(when.getMonth()+1)+'.'+when.getDate()+' '+('0'+when.getHours()).slice(-2)+':'+('0'+when.getMinutes()).slice(-2);
+          var mine=(c.uid&&c.uid===myUid);
           html+='<div style="border-bottom:1px solid #2e2e2c;padding:10px 0;">'
-              +'<div style="font-size:13px;"><b style="color:#7ea6e0;">'+esc(c.nick||'익명')+'</b> <span style="color:#7f7d77;font-size:12px;">'+ds+'</span></div>'
+              +'<div style="font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:8px;">'
+              +'<span><b style="color:#7ea6e0;">'+esc(c.nick||'익명')+'</b> <span style="color:#7f7d77;font-size:12px;">'+ds+'</span></span>'
+              +(mine?'<button class="pf-del" data-id="'+esc(c.id)+'" style="flex:0 0 auto;background:transparent;border:1px solid #5a3a3a;color:#e07e7e;font:inherit;font-size:11px;padding:2px 9px;border-radius:6px;cursor:pointer;">삭제</button>':'')
+              +'</div>'
               +'<div style="font-size:14.5px;color:#e8e6e3;margin-top:3px;white-space:pre-wrap;word-break:break-word;">'+esc(c.text||'')+'</div>'
               +'</div>';
         });
@@ -68,6 +73,19 @@
       }).catch(function(err){listEl.innerHTML='<div style="color:#e07e7e;font-size:14px;">댓글을 불러오지 못했어요.</div>';console.warn(err);});
     }
     loadComments();
+    // 익명 인증 완료되면 재렌더(본인 댓글에 삭제버튼 노출)
+    auth.onAuthStateChanged(function(u){myUid=u?u.uid:null;loadComments();});
+    // 본인 댓글 삭제 (이벤트 위임). 서버 규칙이 uid 일치만 허용하므로 남의 댓글은 눌러도 거부됨.
+    listEl.addEventListener('click',function(e){
+      var b=(e.target&&e.target.closest)?e.target.closest('.pf-del'):null;
+      if(!b)return;
+      var id=b.getAttribute('data-id');
+      if(!id||!auth.currentUser)return;
+      if(!confirm('이 댓글을 삭제할까요?'))return;
+      b.disabled=true;b.textContent='삭제 중…';
+      db.collection('comments').doc(id).delete().then(function(){loadComments();})
+        .catch(function(err){b.disabled=false;b.textContent='삭제';alert('삭제하지 못했어요 — 본인이 작성한 댓글만 삭제할 수 있어요.');console.warn(err);});
+    });
 
     document.getElementById('pf-send').onclick=function(){
       var nick=document.getElementById('pf-nick').value.trim();
