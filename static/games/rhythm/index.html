@@ -107,7 +107,28 @@ function start(){
   if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
   if(AC.state==='suspended')AC.resume();
   ov.style.display='none';notes=buildSong();score=0;combo=0;maxcombo=0;hitCnt=0;total=notes.length;
-  sync();schedule();state='play';raf=requestAnimationFrame(loop);
+  sync();state='count';countdown(function(){schedule();state='play';raf=requestAnimationFrame(loop);});
+}
+// 시작 전 3·2·1·START! 카운트다운 (너무 바로 시작 방지). state='count'라 키/버튼은 무시됨(hitLane이 state!=='play'면 return).
+function countdown(cb){
+  var seq=['3','2','1','START!'],i=0;
+  function drawField(){
+    ctx.fillStyle='#12120f';ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#e0c07e';ctx.lineWidth=4;ctx.shadowColor='#e0c07e';ctx.shadowBlur=14;
+    ctx.beginPath();ctx.moveTo(0,HITY);ctx.lineTo(W,HITY);ctx.stroke();ctx.shadowBlur=0;
+    for(var j=0;j<LANES;j++){ctx.strokeStyle=LANECOL[j];ctx.lineWidth=3;ctx.beginPath();ctx.arc(j*LW+LW/2,HITY,LW*0.34,0,7);ctx.stroke();}
+  }
+  function step(){
+    drawField();
+    var txt=seq[i],go=(txt==='START!');
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle=go?'#7fb069':'#e0c07e';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=20;
+    ctx.font='bold '+(go?54:120)+'px sans-serif';ctx.fillText(txt,W/2,H*0.42);
+    ctx.shadowBlur=0;ctx.textBaseline='alphabetic';
+    if(AC){beep(go?659.25:440,AC.currentTime+0.01,go?0.18:0.1,'sine',0.13);}
+    i++;setTimeout(i<seq.length?step:cb,go?650:750);
+  }
+  step();
 }
 function sync(){scE.textContent=score;cbE.textContent=combo;acE.textContent=(total?Math.round(hitCnt/Math.max(1,judged())*100):100)+'%';}
 var missCnt=0;function judged(){return hitCnt+missCnt;}
