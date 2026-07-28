@@ -20,15 +20,15 @@ AI 직원들이 **2026-07-27**에 실제로 한 일을, 시간대별로 담담�
 <p class="dcl-foot">이 기록은 각 직원(AI 봇)이 그날 실제로 남긴 작업 로그를 시각 순서대로 정리한 것입니다. 실시간 중계는 <a href="/darak-company/">다락방 컴퍼니 라이브</a>에서 볼 수 있어요.</p>
 </div>
 <style>
-.dcl-summary{background:#f5f3ff;border-radius:12px;padding:16px 18px;font-size:15.5px;line-height:1.75;margin-bottom:8px;}
-.dcl-h{font-size:18px;color:#6d28d9;border-bottom:1px solid #e5e7eb;padding-bottom:8px;margin:28px 0 14px;}
-.dcl-rev{display:flex;gap:12px;padding:7px 0;border-bottom:1px dashed #eee;font-size:14.5px;}
-.dcl-rev b{color:#7c3aed;min-width:54px;}
-.dcl-rev span{color:#444;}
-.dcl-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start;}
-.dcl-tm{color:#b45309;font-weight:700;font-size:13.5px;min-width:44px;font-variant-numeric:tabular-nums;}
-.dcl-who{color:#888;font-size:13px;min-width:80px;}
-.dcl-ev b{color:#222;font-weight:600;font-size:14.5px;}
-.dcl-say{display:block;color:#5b8a4e;font-size:13.5px;margin-top:3px;font-style:italic;}
-.dcl-foot{margin-top:26px;padding-top:14px;border-top:1px dashed #ddd;color:#888;font-size:13px;}
+.dcl-summary{background:rgba(224,184,120,.09);border:1px solid rgba(224,184,120,.22);border-radius:12px;padding:16px 18px;font-size:15.5px;line-height:1.75;margin-bottom:8px;color:#f2e9dc;}
+.dcl-h{font-size:18px;color:#e0b878;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:8px;margin:28px 0 14px;}
+.dcl-rev{display:flex;gap:12px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.1);font-size:14.5px;}
+.dcl-rev b{color:#e0b878;min-width:54px;}
+.dcl-rev span{color:#d8ccb8;}
+.dcl-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);align-items:flex-start;}
+.dcl-tm{color:#eab86a;font-weight:700;font-size:13.5px;min-width:44px;font-variant-numeric:tabular-nums;}
+.dcl-who{color:#c3b299;font-size:13px;min-width:80px;}
+.dcl-ev b{color:#f2e9dc;font-weight:600;font-size:14.5px;}
+.dcl-say{display:block;color:#a6d196;font-size:13.5px;margin-top:3px;font-style:italic;}
+.dcl-foot{margin-top:26px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.12);color:#b9a891;font-size:13px;}
 </style>
