@@ -69,7 +69,7 @@ button:hover{background:var(--coral-soft);}
 </div>
 <div class="hud"><span>SCORE <b id="sc">0</b></span><span>COMBO <b id="cb">0</b></span><span>ACC <b id="ac">100%</b></span><span>BEST <b id="hi">0</b></span></div>
 <div id="btnrow" style="display:flex;gap:5px;justify-content:center;margin-top:12px;max-width:360px;margin-left:auto;margin-right:auto;"></div>
-<style>.rbtn{flex:1;min-width:0;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-weight:700;height:56px;border-radius:10px;cursor:pointer;}.rbtn:active,.rbtn.hold{background:#33332f;}</style>
+<style>.rbtn{flex:1;min-width:0;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-weight:700;height:56px;border-radius:10px;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;}.rbtn:active,.rbtn.hold{background:#33332f;}</style>
 <div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
 <script>
 
@@ -104,17 +104,17 @@ function seqParse(str){
 }
 // ── 6곡 (전부 저작권 만료 클래식/동요, 음높이+박자 이식) ──
 var SONGS=[
-  {name:'반짝반짝 작은별', by:'모차르트', stars:1, bpm:100, mood:'🌟 동요',
+  {name:'반짝반짝 작은별', by:'모차르트', stars:1, bpm:100, mood:'🌟 동요', reps:3,
    seq:'C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2 G5 G5 F5 F5 E5 E5 D5/2 G5 G5 F5 F5 E5 E5 D5/2 C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2'},
-  {name:'환희의 송가', by:'베토벤 교향곡 9번', stars:1, bpm:120, mood:'🎉 합창',
+  {name:'환희의 송가', by:'베토벤 교향곡 9번', stars:1, bpm:120, mood:'🎉 합창', reps:5,
    seq:'E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 E5/1.5 D5/0.5 D5/2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5/1.5 C5/0.5 C5/2'},
-  {name:'엘리제를 위하여', by:'베토벤', stars:3, bpm:76, mood:'🌙 서정',
+  {name:'엘리제를 위하여', by:'베토벤', stars:3, bpm:76, mood:'🌙 서정', reps:4,
    seq:'E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 G#4/0.5 B4/0.5 C5/1.5 R/0.5 E4/0.5 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 C5/0.5 B4/0.5 A4/2'},
-  {name:'캐논', by:'파헬벨', stars:2, bpm:90, mood:'💐 우아',
+  {name:'캐논', by:'파헬벨', stars:2, bpm:90, mood:'💐 우아', reps:3,
    seq:'F#5/2 E5/2 D5/2 C#5/2 B4/2 A4/2 B4/2 C#5/2 D5 F#5 A5 F#5 G5 E5 C#5 E5 D5 B4 G4 B4 A4 F#4 D4 F#4 F#5/2 E5/2 D5/2 C#5/2'},
-  {name:'터키행진곡', by:'모차르트', stars:3, bpm:132, mood:'⚡ 질주',
+  {name:'터키행진곡', by:'모차르트', stars:3, bpm:132, mood:'⚡ 질주', reps:6,
    seq:'B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 C6 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/2'},
-  {name:'봄 (사계 1악장)', by:'비발디', stars:2, bpm:104, mood:'🌸 경쾌',
+  {name:'봄 (사계 1악장)', by:'비발디', stars:2, bpm:104, mood:'🌸 경쾌', reps:4,
    seq:'E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2'}
 ];
 
@@ -139,10 +139,17 @@ function assignLanes(list,lanes){
 }
 // ── 곡 + 난이도 → 노트 배열 ──
 function buildNotes(song,diff,lanes){
-  var seq=seqParse(song.seq),base=[],b=0;
+  // 한 소절(phrase) 파싱 → reps회 반복해 곡 길이 확보(≈70~85초). rep 인덱스 기록.
+  var seq=seqParse(song.seq),phrase=[],pb=0;
   for(var i=0;i<seq.length;i++){
-    if(seq[i].nm!=='R')base.push({beat:b,pitch:N(seq[i].nm),dur:seq[i].dur});
-    b+=seq[i].dur;
+    if(seq[i].nm!=='R')phrase.push({beat:pb,pitch:N(seq[i].nm),dur:seq[i].dur});
+    pb+=seq[i].dur;
+  }
+  var reps=song.reps||2, base=[];
+  for(var r=0;r<reps;r++){
+    for(var p0=0;p0<phrase.length;p0++){
+      base.push({beat:phrase[p0].beat+r*pb,pitch:phrase[p0].pitch,dur:phrase[p0].dur,rep:r});
+    }
   }
   var list;
   if(diff==='easy')list=base.filter(function(n,i){return i%2===0;}); // 절반 샘플링(듬성)
@@ -155,6 +162,13 @@ function buildNotes(song,diff,lanes){
         extra.push({beat:p.beat,pitch:p.pitch*Math.pow(2,4/12),dur:Math.min(p.dur,1),lane:(p.lane+2)%lanes});}
     }
     list=list.concat(extra);
+  } else if(diff==='normal' && reps>1){                             // 반복 지루함 방지: 마지막 소절만 화음 살짝
+    var extraN=[];
+    for(var m=0;m<list.length;m++){var pn=list[m];
+      if(pn.rep===reps-1 && m%4===0){
+        extraN.push({beat:pn.beat,pitch:pn.pitch*Math.pow(2,3/12),dur:Math.min(pn.dur,1),lane:(pn.lane+1)%lanes});}
+    }
+    list=list.concat(extraN);
   }
   // 런타임 필드 초기화
   list.forEach(function(n){n.hit=false;n.done=false;n.holding=false;n.lastTick=0;n.tailBeat=n.beat+n.dur;n.hold=(n.dur>=1.5);});
@@ -185,11 +199,14 @@ function holdTone(freq){
 function stopTone(s){if(!s)return;try{var t=AC.currentTime;s.g.gain.cancelScheduledValues(t);s.g.gain.setValueAtTime(s.g.gain.value||0.001,t);s.g.gain.exponentialRampToValueAtTime(0.0008,t+0.08);s.o.stop(t+0.12);}catch(e){}}
 
 function schedule(){
-  var base=AC.currentTime+0.15;
+  // 리드인: 첫 노트가 맨 위에서 판정선까지 내려오는 시간(HITY/SPEED) + 준비 여유(600ms).
+  // 이래야 3·2·1 후 노트가 위에서 차분히 내려와 칠 수 있음(바로 판정선에 안 뜸).
+  var lead=HITY/SPEED+600;
+  var base=AC.currentTime+lead/1000;   // 배경비트도 리드인 후 시작(노트와 동기)
   // 멜로디는 자동재생 안 함 — 플레이어가 맞출 때 그 음이 울려 곡이 완성됨. 배경(베이스/킥)만 가이드.
   for(var b=0;b<=songEnd;b+=1){beep(130.81,base+b*BEAT/1000,0.12,'triangle',0.15);}   // bass C3
   for(var b=0;b<=songEnd;b+=0.5){beep(60,base+b*BEAT/1000,0.05,'sine',0.1);}          // kick
-  t0=performance.now()+150;                                                            // 화면 노트 기준시각(오디오 base와 동기)
+  t0=performance.now()+lead;                                                           // 화면 노트 기준시각(리드인 반영, 오디오 base와 동기)
 }
 
 // ── 하단 버튼 row (키수에 맞게 재생성) ──
@@ -202,18 +219,20 @@ function buildButtons(){
     b.style.borderColor=LANECOL[i];
     b.style.fontSize=(KEYSETS[LANES].labels[i].length>2?11:fs)+'px';
     btnrow.appendChild(b);
-    (function(idx,el){
-      var down=function(ev){ev.preventDefault();hitLane(idx);};
-      var up=function(ev){ev.preventDefault();releaseLane(idx);};
-      el.addEventListener('touchstart',down,{passive:false});
-      el.addEventListener('mousedown',down);
-      el.addEventListener('touchend',up,{passive:false});
-      el.addEventListener('touchcancel',up,{passive:false});
-      el.addEventListener('mouseup',up);
-      el.addEventListener('mouseleave',up);
-    })(i,b);
   }
 }
+// 입력 층은 btnrow에 위임 바인딩(1회). 버튼 DOM은 매 판마다 재생성되지만 btnrow는 유지되므로 리스너 존속.
+function setBtn(lane,on){var el=document.getElementById('r'+lane);if(el)el.classList.toggle('hold',on);}
+function laneAtPoint(x,y){var el=document.elementFromPoint(x,y);while(el&&el!==btnrow){if(el.classList&&el.classList.contains('rbtn'))return +el.id.slice(1);el=el.parentNode;}return -1;}
+var touchLane={};  // touch.identifier → lane. 손가락마다 독립 추적 → 롱노트 홀드 중 다른 레인 탭 동시 가능
+btnrow.addEventListener('touchstart',function(e){e.preventDefault();for(var i=0;i<e.changedTouches.length;i++){var tc=e.changedTouches[i],lane=laneAtPoint(tc.clientX,tc.clientY);if(lane>=0){touchLane[tc.identifier]=lane;setBtn(lane,true);hitLane(lane);}}},{passive:false});
+btnrow.addEventListener('touchmove',function(e){e.preventDefault();},{passive:false});
+function endTouch(e){e.preventDefault();for(var i=0;i<e.changedTouches.length;i++){var tc=e.changedTouches[i];if(tc.identifier in touchLane){var lane=touchLane[tc.identifier];delete touchLane[tc.identifier];setBtn(lane,false);releaseLane(lane);}}}
+btnrow.addEventListener('touchend',endTouch,{passive:false});
+btnrow.addEventListener('touchcancel',endTouch,{passive:false});
+var mouseLane=-1;  // 데스크톱 단일 포인터
+btnrow.addEventListener('mousedown',function(e){var lane=laneAtPoint(e.clientX,e.clientY);if(lane>=0){e.preventDefault();mouseLane=lane;setBtn(lane,true);hitLane(lane);}});
+document.addEventListener('mouseup',function(){if(mouseLane>=0){setBtn(mouseLane,false);releaseLane(mouseLane);mouseLane=-1;}});
 
 // ── 선택 화면 ──
 function showSelect(){
@@ -408,10 +427,10 @@ function laneFromEvent(e){
 }
 function inputFocused(t){var tag=(t&&t.tagName||'').toLowerCase();return tag==='input'||tag==='textarea'||tag==='select'||(t&&t.isContentEditable);}
 document.addEventListener('keydown',function(e){
-  if(e.repeat)return;
   if(inputFocused(e.target))return;       // 댓글 등 입력창 포커스 시 게임키 무시
   var i=laneFromEvent(e);if(i<0||i>=LANES)return;
-  e.preventDefault();
+  e.preventDefault();                     // ★게임키는 repeat 포함 항상 스크롤 방지 — SPACE 홀드(롱노트) 시 반복 keydown이 페이지 스크롤시키던 버그 수정
+  if(e.repeat)return;                     // 반복 이벤트는 판정 스킵(홀드는 keyup까지 유지)
   if(state==='play')hitLane(i);           // 시작은 선택화면의 버튼으로만
 });
 document.addEventListener('keyup',function(e){
