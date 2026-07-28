@@ -3,10 +3,10 @@
  "today_pv": 0,
  "total": 93,
  "yesterday": {
-  "users": 0,
-  "new": 0,
-  "pv": 0,
-  "sessions": 0
+  "users": 8,
+  "new": 4,
+  "pv": 190,
+  "sessions": 16
  },
  "top_views": [
   {
@@ -72,5 +72,5 @@
    "avg_sec": 25
   }
  ],
- "updated": "2026-07-29 04:03"
+ "updated": "2026-07-29 05:03"
 }
