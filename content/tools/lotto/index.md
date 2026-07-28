@@ -46,6 +46,13 @@ readingTime: false
 .lt-summary .lt-sum-body span{background:#f4f6f8;border-radius:20px;padding:3px 10px;font-size:12px;color:#42505c;}
 .lt-summary .lt-sum-body span.hit{background:#dcfce7;color:#166534;font-weight:700;}
 .lt-summary .lt-sum-note{margin-top:6px;font-size:11px;color:#aaa;line-height:1.5;}
+.lt-auto-btn{margin-top:10px;background:#fff;border:1px solid #d97706;color:#b45309;border-radius:9px;padding:8px 14px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;}
+.lt-auto-btn:hover{background:#fff7ed;}
+.lt-auto-btn:disabled{opacity:.6;cursor:default;}
+.lt-auto-msg{margin-top:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 12px;font-size:12px;color:#166534;line-height:1.55;}
+.lt-auto-msg b{color:#15803d;}
+.lt-auto-warn{margin-top:5px;font-size:11px;color:#92600a;line-height:1.5;}
+.lt-auto-warn b{color:#92600a;}
 .lt-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:520px){.lt-stat-grid{grid-template-columns:1fr;}}
 .lt-stat-box{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;}
@@ -79,7 +86,31 @@ function ballClass(n){return n<=10?"c1":n<=20?"c2":n<=30?"c3":n<=40?"c4":"c5";}
 function ball(n,extra){return '<div class="lt-ball '+ballClass(n)+(extra?' '+extra:'')+'">'+n+'</div>';}
 function ballsHtml(nums,sm){var h='<div class="lt-balls">';nums.forEach(function(n){h+=ball(n,sm?'sm':'');});return h+'</div>';}
 
-var H=null, curN=100, curK=3, curM=20;
+var H=null, curN=100, curK=3, curM=20, autoMsg="";
+
+/* 현재 선택 구간(최근 M경기)에서 K∈{0..6}×N∈{30,50,100,200,300} 전수 백테스트 →
+   우선순위: 5등↑ 맞은 회차 수 → 게임당 평균 일치. 최고 조합을 설정에 자동 적용. */
+function runAutoFind(){
+  var latest=H[H.length-1].round;
+  var M=Math.min(curM,latest-1);
+  var best=null;
+  [0,1,2,3,4,5,6].forEach(function(K){
+    var Ns=K===0?[100]:[30,50,100,200,300]; /* K=0(완전랜덤)은 N 무의미 → 1회만 */
+    Ns.forEach(function(N){
+      var win=0,matchTot=0;
+      for(var R=latest;R>latest-M&&R>=2;R--){
+        var rec=recommend(H,R,{N:N,K:K}),actual=H[R-1],bestRank=0;
+        rec.games.forEach(function(g){var gr=grade(g.nums,actual.nums,actual.bonus);matchTot+=gr.match;if(gr.rank&&(bestRank===0||gr.rank<bestRank))bestRank=gr.rank;});
+        if(bestRank)win++;
+      }
+      var cand={K:K,N:N,win:win,avg:matchTot/(M*5)};
+      if(!best||cand.win>best.win||(cand.win===best.win&&cand.avg>best.avg))best=cand;
+    });
+  });
+  curK=best.K;curN=best.N;
+  autoMsg='최근 '+M+'경기 기준 최고 성적: <b>K='+best.K+', N='+best.N+'</b>'+(best.K===0?' (완전 랜덤)':'')+' — 5등↑ '+best.win+'회 · 게임당 평균 '+best.avg.toFixed(2)+'개 (과거 기준·예측 아님)';
+  renderReco();
+}
 
 /* 최근 M경기(회차) 요약 실적: 현재 K·N 설정으로 각 회차를 결정론적 재현 → 등수별 집계만 */
 function renderSummary(){
@@ -100,10 +131,13 @@ function renderSummary(){
   var mopt=opts.map(function(m){return '<option value="'+m+'"'+(m===curM?' selected':'')+'>'+m+'</option>';}).join('');
   function chip(label,cnt){return '<span'+(cnt>0?' class="hit"':'')+'>'+label+' '+cnt+'회</span>';}
   var body=chip('🥇1등',tally[1])+chip('🥈2등',tally[2])+chip('🥉3등',tally[3])+chip('4등',tally[4])+chip('5등',tally[5])+'<span>미당첨 '+tally.none+'회</span>';
+  var autoBlock=autoMsg?'<div class="lt-auto-msg">✅ '+autoMsg+'<div class="lt-auto-warn">⚠️ 이 값은 고른 구간의 <b>과거 결과에 맞춘 것</b>이라 다음 회차 당첨확률을 높이지 않아요(과최적화).</div></div>':'';
   $('lt-summary').innerHTML='<div class="lt-sum-head">📋 최근 <select id="lt-mselect">'+mopt+'</select>경기 이 추천의 성적 <span style="font-weight:400;color:#999;">(K='+curK+'·N='+curN+')</span></div>'+
     '<div class="lt-sum-body">'+body+'</div>'+
-    '<div class="lt-sum-note">현재 설정으로 과거 회차를 그대로 재현해 실제 당첨과 대조한 집계예요(3개 이상 맞은 회차 '+bestMatchCnt+'회). 로또는 무작위라 대부분 미당첨입니다.</div>';
-  $('lt-mselect').addEventListener('change',function(){curM=parseInt(this.value,10);renderSummary();});
+    '<div class="lt-sum-note">현재 설정으로 과거 회차를 그대로 재현해 실제 당첨과 대조한 집계예요(3개 이상 맞은 회차 '+bestMatchCnt+'회). 로또는 무작위라 대부분 미당첨입니다.</div>'+
+    '<button id="lt-auto" class="lt-auto-btn">🔍 최고 K·N 자동 찾기</button>'+autoBlock;
+  $('lt-mselect').addEventListener('change',function(){curM=parseInt(this.value,10);autoMsg="";renderSummary();});
+  $('lt-auto').addEventListener('click',function(){var b=this;b.textContent='계산 중…';b.disabled=true;setTimeout(runAutoFind,20);});
 }
 
 function renderReco(){
@@ -119,9 +153,9 @@ function renderReco(){
   $('lt-set').innerHTML='<div class="lt-ctrl"><span>확률 기반 번호 수(K):</span><select id="lt-kselect">'+kopt+'</select></div>'+
     '<div class="lt-ctrl"><span>최근 표본(N): <b id="lt-nval">'+curN+'</b>회</span><input type="range" id="lt-nslider" min="30" max="300" step="10" value="'+curN+'"></div>'+
     '<div class="lt-set-note">한 게임 6개 중 K개는 최근 '+curN+'회+역대 전체 출현확률 블렌드로, 나머지 '+(6-curK)+'개는 랜덤으로 채워요(K=0이면 완전 랜덤). 같은 회차·설정이면 추천이 항상 동일해요.</div>';
-  $('lt-kselect').addEventListener('change',function(){curK=parseInt(this.value,10);renderReco();});
+  $('lt-kselect').addEventListener('change',function(){curK=parseInt(this.value,10);autoMsg="";renderReco();});
   $('lt-nslider').addEventListener('input',function(){$('lt-nval').textContent=this.value;});
-  $('lt-nslider').addEventListener('change',function(){curN=parseInt(this.value,10);renderReco();});
+  $('lt-nslider').addEventListener('change',function(){curN=parseInt(this.value,10);autoMsg="";renderReco();});
   renderSummary();
 }
 
