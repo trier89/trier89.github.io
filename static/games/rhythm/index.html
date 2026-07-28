@@ -103,6 +103,35 @@ function N(name){
 function seqParse(str){
   return str.trim().split(/\s+/).map(function(tok){var p=tok.split('/');return {nm:p[0],dur:p[1]?parseFloat(p[1]):1};});
 }
+// ── 화성(원곡 반주 화음) 시스템 ──
+// 코드심볼(예: 'Am','E7','F#m','G7')→구성 음(피치클래스). 각 곡의 실제 화성진행을 코드로 인코딩.
+var CHORDQ={'':[0,4,7],'m':[0,3,7],'7':[0,4,7,10],'m7':[0,3,7,10],'maj7':[0,4,7,11],'dim':[0,3,6],'sus4':[0,5,7],'6':[0,4,7,9]};
+var PCROOT={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+function chordPcs(sym){
+  var m=/^([A-G])(#|b)?(.*)$/.exec(sym);if(!m)return[0,4,7];
+  var root=PCROOT[m[1]]+(m[2]==='#'?1:m[2]==='b'?-1:0);
+  var q=CHORDQ[m[3]||'']||[0,4,7];
+  return q.map(function(x){return((root+x)%12+12)%12;});
+}
+function buildChords(str){                                  // "Am:8 E:4 ..." → 코드 세그먼트 타임라인
+  var segs=[],b=0;
+  str.trim().split(/\s+/).forEach(function(tok){var p=tok.split(':');var dur=p[1]?parseFloat(p[1]):2;segs.push({start:b,end:b+dur,pcs:chordPcs(p[0])});b+=dur;});
+  return segs;
+}
+function chordAt(segs,beat){                                // 그 beat에 울리는 코드(넘어가면 마지막 코드로 clamp)
+  for(var i=0;i<segs.length;i++){if(beat>=segs[i].start&&beat<segs[i].end)return segs[i].pcs;}
+  return segs[segs.length-1].pcs;
+}
+var CONS_IV={3:1,4:1,5:1,7:1,8:1,9:1,12:1};                 // 협화 음정(m3·M3·P4·P5·m6·M6·옥타브)
+// 멜로디음 아래에서, 그 코드의 '실제 구성음' 중 협화 음정으로 가장 가까운 음을 화음으로. 없으면 완전5도 아래.
+function harmonyFreq(melFreq,pcs){
+  var melMidi=Math.round(69+12*Math.log(melFreq/440)/Math.LN2);
+  for(var d=3;d<=19;d++){
+    var mm=melMidi-d, pc=((mm%12)+12)%12;
+    if(pcs.indexOf(pc)>=0){var iv=d%12;if(iv===0)iv=12;if(CONS_IV[iv])return 440*Math.pow(2,(mm-69)/12);}
+  }
+  return melFreq*Math.pow(2,-7/12);
+}
 // ── 6곡 (전부 저작권 만료 클래식/동요, 음높이+박자를 원곡 리듬대로 이식 · 다중섹션 진행) ──
 // 각 seq는 단순반복이 아니라 서로 다른 파트(주제/대비/변주/에피소드)를 이어붙인 곡 전체 흐름.
 var SONGS=[
@@ -125,6 +154,19 @@ var SONGS=[
   {name:'봄 (사계 1악장)', by:'비발디', stars:2, bpm:104, mood:'🌸 경쾌',
    seq:'E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2 E6 E6 E6 G#6/1.5 F#6/0.5 E6/2 B5 A5 G#5 F#5 E5 D#5 E5/2 B4/2 B5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 C#6/0.5 B5/0.25 A5/0.25 B5/0.25 A5/0.25 G#5/0.5 F#5/0.5 E5/1 F#5/0.5 G#5/0.5 A5/0.5 B5/0.5 C#6/0.5 B5/0.5 A5/0.5 G#5/0.5 F#5/1 E5/1 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2'}
 ];
+
+// ── 각 곡의 실제 화성진행(원곡 반주 화음)을 코드 심볼로 인코딩. hard 난이도의 동시노트는 이 코드톤에서 생성. ──
+// 반짝반짝(C: I-IV-V) · 환희(C: I-V7) · 엘리제(Am: i-V(-iv)) · 캐논(D: 그 유명한 D-A-Bm-F#m-G-D-G-A 순환)
+// · 터키(Am 주제 i-V / A장조 에피소드 I-V) · 봄(E: I-V)
+var CHORDS=[
+  'C:4 F:2 C:2 F:2 C:2 G:2 C:2 C:2 F:2 C:2 G:2 C:2 F:2 C:2 G:2 C:4 F:2 C:2 F:2 C:2 G:2 C:2 C:4 F:2 C:2 F:2 C:2 G:2 C:2 C:2 F:2 C:2 G:2 C:2 F:2 C:2 G:2 C:4 F:2 C:2 F:2 C:2 G:2 C:2',
+  'C:2 G7:2 G7:2 C:2 C:2 C:2 G7:2 C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 G7:2 C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 G7:2 C:2 C:2 G7:2 G7:2 C:2 C:2 C:2 G7:2 C:2 G:2 C:2 G7:2 C:2 G7:2 C:2 C:2 G:2 C:2 G7:2 G7:2 C:2 C:2 C:2 G7:2 C:2',
+  'Am:8 E:4 Am:4 Am:6 E:2 Am:2.5 Am:2 Dm:2 Am:2 E:2 Am:8 E:4 Am:4 Am:6 E:2 Am:2.5 Am:4 E:4 Am:8 E:4 Am:4 Am:6 E:2 Am:2.5',
+  'D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2 D:2 A:2 Bm:2 F#m:2 G:2 D:2 G:2 A:2',
+  'Am:8 E:4 Am:8 E:3 Am:8 E:4 Am:6 A:4 E:4 A:4 E:4 A:2 Am:8 E:4 Am:8 E:3 A:4 E:4 A:3.5 Am:8 E:4 Am:8 E:3',
+  'E:8 B:8 E:8 B:6 E:8 B:4 E:5 E:8 B:2 E:3 E:8 B:8 E:8 B:6'
+];
+SONGS.forEach(function(s,i){s.chordSegs=buildChords(CHORDS[i]);});
 
 // 선택 상태
 var sel={song:0,keys:5,speed:1.0,diff:'normal'};
@@ -157,24 +199,20 @@ function buildNotes(song,diff,lanes){
   if(diff==='easy')list=base.filter(function(n,i){return i%2===0;}); // 절반 샘플링(듬성)
   else list=base.slice();                                            // 보통/어려움 = 전체
   assignLanes(list,lanes);
-  if(diff==='hard'){                                                 // 화음(동시) 노트 — 항상 in-key 협화
-    // 고정 장3도(불협 위험) 대신, 그 곡의 실제 음계(distinct pitch set) 안에서 '3도 아래'(3~5반음) 음을
-    // 골라 화음. 장/단3도 모두 조성 내 협화. 못 찾으면 완전5도 아래(어느 조성이든 협화)로 폴백.
+  if(diff==='hard'&&song.chordSegs){                                 // 화음(동시) 노트 = 그 곡의 실제 반주 화음 코드톤
+    // 알고리즘 3도가 아니라, 각 beat에 울리는 원곡 코드의 실제 구성음을 멜로디 아래 협화 위치로 골라 화음.
     var uniq=[];list.forEach(function(n){if(uniq.indexOf(n.pitch)<0)uniq.push(n.pitch);});uniq.sort(function(a,b){return a-b;});
     var U=uniq.length, extra=[];
     for(var j=0;j<list.length;j++){
       if(j%3!==2)continue;
-      var p=list[j], cp=null, cd=9, ci=-1;
-      for(var u=0;u<U;u++){
-        var semi=12*Math.log(p.pitch/uniq[u])/Math.LN2;            // >0 : uniq[u]가 멜로디음보다 아래
-        if(semi>=2.5&&semi<=5.5){var dd=Math.abs(semi-3.5);if(dd<cd){cd=dd;cp=uniq[u];ci=u;}}
-      }
-      var clane;
-      if(cp!==null){clane=(U>1)?Math.round(ci/(U-1)*(lanes-1)):(lanes>>1);}  // 다이어토닉 3도: 랭크→레인 매핑
-      else{cp=p.pitch*Math.pow(2,-7/12);clane=(p.lane-2+lanes)%lanes;}       // 폴백: 완전5도 아래
-      if(clane===p.lane)clane=(clane+1)%lanes;                               // 같은 레인 충돌 회피
+      var p=list[j];
+      var pcs=chordAt(song.chordSegs,p.beat);                        // 그 순간의 원곡 화음
+      var hp=harmonyFreq(p.pitch,pcs);                               // 그 코드의 실제 코드톤(멜로디 아래·협화)
+      var r=0;while(r<U&&uniq[r]<hp-0.01)r++;                        // 화음음의 레인 = 멜로디 음역 내 랭크 매핑
+      var clane=(U>1)?Math.round(Math.min(r,U-1)/(U-1)*(lanes-1)):(lanes>>1);
+      if(clane===p.lane)clane=(clane+1)%lanes;                       // 같은 레인 충돌 회피
       if(clane===p.lane)clane=(clane+2)%lanes;
-      extra.push({beat:p.beat,pitch:cp,dur:Math.min(p.dur,1),lane:clane});
+      extra.push({beat:p.beat,pitch:hp,dur:Math.min(p.dur,1),lane:clane});
     }
     list=list.concat(extra);
   }
