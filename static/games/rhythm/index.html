@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>리듬 게임 (저작권 프리 음악) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
-<meta name="description" content="노트를 박자에 맞춰 두드리는 리듬 액션 게임. 음악을 브라우저가 직접 합성해 저작권 걱정 없는 무료 웹게임.">
+<title>리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
+<meta name="description" content="반짝반짝 작은별·엘리제를 위하여·터키행진곡 등 저작권 만료 클래식 명곡을 직접 연주하는 선택형 리듬 게임. 곡·키·속도·난이도를 고르고 롱노트까지, 브라우저가 직접 합성해 저작권 걱정 없는 무료 웹게임.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
@@ -16,15 +16,33 @@ h1{font-size:22px;margin-top:6px;}
 .sub{color:var(--dim);font-size:13px;margin:6px 0 14px;}
 canvas{background:#0d0d10;border:2px solid var(--line);border-radius:10px;display:block;margin:0 auto;max-width:100%;touch-action:none;}
 #wrap{position:relative;display:inline-block;}
-#overlay{position:absolute;inset:0;background:rgba(13,13,16,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:20px;}
-#overlay h2{color:var(--coral);font-size:22px;margin-bottom:10px;}
-#overlay p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.7;}
+#overlay{position:absolute;inset:0;background:rgba(13,13,16,.94);display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;border-radius:10px;padding:12px 12px;overflow-y:auto;}
+#ovin{width:100%;margin:auto 0;}
+#overlay h2{color:var(--coral);font-size:22px;margin-bottom:10px;text-align:center;}
+#overlay p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.7;text-align:center;}
 button{background:var(--coral);border:0;border-radius:8px;color:#fff;font:inherit;font-weight:700;padding:11px 22px;cursor:pointer;}
 button:hover{background:var(--coral-soft);}
 .hud{display:flex;gap:18px;justify-content:center;margin-top:14px;color:var(--dim);font-size:14px;flex-wrap:wrap;}
 .hud b{color:var(--yellow);}
 .foot{margin-top:28px;padding-top:16px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px;}
 .foot a{color:var(--coral);text-decoration:none;}
+/* ── 선택 화면 ── */
+.selttl{color:var(--coral);font-size:15px;font-weight:800;text-align:center;margin:2px 0 8px;}
+.songlist{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;}
+.song{display:flex;align-items:center;gap:6px;background:#17171a;border:2px solid #2b2b28;border-radius:9px;padding:6px 8px;cursor:pointer;text-align:left;transition:.12s;}
+.song:hover{border-color:#55534d;}
+.song.sel{border-color:var(--coral);background:#2a201c;box-shadow:0 0 0 1px var(--coral) inset;}
+.song .snm{font-size:12.5px;font-weight:700;color:#e8e6e3;flex:1;line-height:1.25;}
+.song .sby{font-size:10px;color:var(--dim);}
+.song .sst{font-size:10px;color:var(--yellow);white-space:nowrap;}
+.song .sbpm{font-size:9.5px;color:#7fb069;white-space:nowrap;}
+.optrow{display:flex;align-items:center;gap:6px;margin:5px 0;}
+.optrow .olab{font-size:11px;color:var(--dim);width:42px;text-align:left;flex-shrink:0;}
+.chips{display:flex;gap:4px;flex:1;flex-wrap:wrap;}
+.chip{flex:1;min-width:0;background:#17171a;border:2px solid #2b2b28;border-radius:7px;color:#cfcdc7;font-size:11.5px;font-weight:700;padding:6px 2px;cursor:pointer;white-space:nowrap;}
+.chip.sel{border-color:var(--coral);background:var(--coral);color:#fff;}
+.gostart{width:100%;margin-top:10px;font-size:15px;padding:12px;}
+.selhint{color:#7fb069;font-size:10.5px;text-align:center;margin-top:8px;line-height:1.5;}
 </style>
 </head>
 <body>
@@ -44,49 +62,112 @@ button:hover{background:var(--coral-soft);}
   </nav>
 </div>
 <h1>🎵 리듬 게임</h1>
-<div class="sub">D·F·SPACE·J·K 또는 버튼으로 박자 맞추기 · 음악은 브라우저가 직접 연주(저작권 프리)</div>
+<div class="sub">클래식 명곡을 골라 직접 연주 · 곡·키·속도·난이도 선택 · 음악은 브라우저가 직접 합성(저작권 프리)</div>
 <div id="wrap">
   <canvas id="cv" width="320" height="480"></canvas>
-  <div id="overlay">
-    <h2>RHYTHM</h2>
-    <p>노트가 판정선에 닿을 때 <b>D · F · SPACE · J · K</b>(또는 버튼)를 눌러요!<br><b style="color:#e0c07e;">노트를 맞추면 그 음이 울려서 멜로디가 완성돼요.</b><br>많이 맞출수록 곡이 온전해지고 고득점 · 콤보!<br><span style="color:#7fb069;">배경 비트는 자동, 멜로디는 당신이 연주 (저작권 프리 🎶)</span></p>
-    <button id="start">▶ 시작 (소리 켜기)</button>
-  </div>
+  <div id="overlay"><div id="ovin"></div></div>
 </div>
 <div class="hud"><span>SCORE <b id="sc">0</b></span><span>COMBO <b id="cb">0</b></span><span>ACC <b id="ac">100%</b></span><span>BEST <b id="hi">0</b></span></div>
-<div style="display:flex;gap:5px;justify-content:center;margin-top:12px;max-width:340px;margin-left:auto;margin-right:auto;">
-  <button id="r0" class="rbtn" style="border-color:#31c7ef;">D</button><button id="r1" class="rbtn" style="border-color:#f7d308;">F</button><button id="r2" class="rbtn" style="border-color:#ef7921;font-size:12px;">SPACE</button><button id="r3" class="rbtn" style="border-color:#ef2029;">J</button><button id="r4" class="rbtn" style="border-color:#42b642;">K</button>
-</div>
-<style>.rbtn{flex:1;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-size:18px;font-weight:700;height:56px;border-radius:10px;cursor:pointer;}.rbtn:active{background:#33332f;}</style>
+<div id="btnrow" style="display:flex;gap:5px;justify-content:center;margin-top:12px;max-width:360px;margin-left:auto;margin-right:auto;"></div>
+<style>.rbtn{flex:1;min-width:0;background:#1f1f1d;border:2px solid #3e3e3a;color:#e8e6e3;font-weight:700;height:56px;border-radius:10px;cursor:pointer;}.rbtn:active,.rbtn.hold{background:#33332f;}</style>
 <div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
 <script>
 
 (function(){
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
-var W=cv.width,H=cv.height,LANES=5,LW=W/LANES,HITY=H-70,SPEED=0.52; // px per ms
-var KEYS=['d','f',' ','j','k'];
-var LANECOL=['#31c7ef','#f7d308','#ef7921','#ef2029','#42b642'];
+var W=cv.width,H=cv.height,HITY=H-70,BASESPEED=0.52; // px per ms (보통 기준)
 var scE=document.getElementById('sc'),cbE=document.getElementById('cb'),acE=document.getElementById('ac'),hiE=document.getElementById('hi');
-var ov=document.getElementById('overlay'),btn=document.getElementById('start');
+var ov=document.getElementById('overlay'),ovin=document.getElementById('ovin'),btnrow=document.getElementById('btnrow');
 var hi=+localStorage.getItem('rhythm_hi')||0;hiE.textContent=hi;
-var AC,notes,active,score,combo,maxcombo,hitCnt,total,state='ready',t0,raf;
-// ── 곡(펜타토닉 칩튠) 생성: [beat, lane, freq] ──
-var BPM=148, BEAT=60000/BPM;
-var SCALE=[523.25,587.33,659.25,783.99,880.0]; // C5 D5 E5 G5 A5
-function buildSong(){
-  var pat=[0,2,1,3,2,4,3,1, 4,3,2,0,1,2,3,4, 0,1,2,3,4,3,2,1, 3,2,4,2,1,3,0,2];
-  var arr=[],b=0;
-  for(var rep=0;rep<4;rep++){
-    for(var i=0;i<pat.length;i++){
-      var idx=pat[i], lane=idx%LANES, freq=SCALE[idx];
-      arr.push({beat:b, lane:lane, freq:freq, hit:false});
-      // 후반 반복일수록 동시(화음) 노트를 섞어 난이도 상승
-      if(rep>=1 && i%8===4){var l2=(lane+2)%LANES;arr.push({beat:b, lane:l2, freq:SCALE[l2], hit:false});}
-      b+= (i%4===3)?0.75:0.5;               // 더 촘촘한 리듬
-    }
-  }
-  return arr;
+
+// ── 키 구성 (5키 / 7키) ──
+var KEYSETS={
+  5:{keys:['d','f',' ','j','k'],labels:['D','F','SPACE','J','K'],
+     code:{KeyD:0,KeyF:1,Space:2,KeyJ:3,KeyK:4},
+     col:['#31c7ef','#f7d308','#ef7921','#ef2029','#42b642']},
+  7:{keys:['s','d','f',' ','j','k','l'],labels:['S','D','F','SPACE','J','K','L'],
+     code:{KeyS:0,KeyD:1,KeyF:2,Space:3,KeyJ:4,KeyK:5,KeyL:6},
+     col:['#31c7ef','#7b6cff','#f7d308','#ef7921','#ff5ea8','#ef2029','#42b642']}
+};
+// 런타임 파라미터(키 선택 시 설정)
+var LANES=5,LW=W/5,KEYS=KEYSETS[5].keys,CODEMAP=KEYSETS[5].code,LANECOL=KEYSETS[5].col;
+
+// ── 음이름 → 주파수 (A4=440 평균율) ──
+function N(name){
+  var m=/^([A-G])(#?)(-?\d)$/.exec(name);if(!m)return 440;
+  var base={C:-9,D:-7,E:-5,F:-4,G:-2,A:0,B:2};
+  var s=base[m[1]]+(m[2]?1:0)+(+m[3]-4)*12;
+  return 440*Math.pow(2,s/12);
 }
+function seqParse(str){
+  return str.trim().split(/\s+/).map(function(tok){var p=tok.split('/');return {nm:p[0],dur:p[1]?parseFloat(p[1]):1};});
+}
+// ── 6곡 (전부 저작권 만료 클래식/동요, 음높이+박자 이식) ──
+var SONGS=[
+  {name:'반짝반짝 작은별', by:'모차르트', stars:1, bpm:100, mood:'🌟 동요',
+   seq:'C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2 G5 G5 F5 F5 E5 E5 D5/2 G5 G5 F5 F5 E5 E5 D5/2 C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2'},
+  {name:'환희의 송가', by:'베토벤 교향곡 9번', stars:1, bpm:120, mood:'🎉 합창',
+   seq:'E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 E5/1.5 D5/0.5 D5/2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5/1.5 C5/0.5 C5/2'},
+  {name:'엘리제를 위하여', by:'베토벤', stars:3, bpm:76, mood:'🌙 서정',
+   seq:'E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 G#4/0.5 B4/0.5 C5/1.5 R/0.5 E4/0.5 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 C5/0.5 B4/0.5 A4/2'},
+  {name:'캐논', by:'파헬벨', stars:2, bpm:90, mood:'💐 우아',
+   seq:'F#5/2 E5/2 D5/2 C#5/2 B4/2 A4/2 B4/2 C#5/2 D5 F#5 A5 F#5 G5 E5 C#5 E5 D5 B4 G4 B4 A4 F#4 D4 F#4 F#5/2 E5/2 D5/2 C#5/2'},
+  {name:'터키행진곡', by:'모차르트', stars:3, bpm:132, mood:'⚡ 질주',
+   seq:'B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 C6 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/2'},
+  {name:'봄 (사계 1악장)', by:'비발디', stars:2, bpm:104, mood:'🌸 경쾌',
+   seq:'E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2'}
+];
+
+// 선택 상태
+var sel={song:0,keys:5,speed:1.0,diff:'normal'};
+var SPEEDS=[{lab:'느림',v:0.7},{lab:'보통',v:1.0},{lab:'빠름',v:1.4}];
+var DIFFS=[{id:'easy',lab:'쉬움'},{id:'normal',lab:'보통'},{id:'hard',lab:'어려움'}];
+var DIFFWIN={easy:200,normal:160,hard:110};
+
+// ── 런타임 게임 상태 ──
+var AC,notes,score,combo,maxcombo,hitCnt,missCnt,total,state='ready',t0,raf;
+var BEAT,SPEED,WINDOW,songEnd,holdingNote,lanePitch;
+
+// ── 음높이 → 레인 균등 매핑 (낮은음→왼쪽, 높은음→오른쪽) ──
+function assignLanes(list,lanes){
+  var uniq=[];list.forEach(function(n){if(uniq.indexOf(n.pitch)<0)uniq.push(n.pitch);});
+  uniq.sort(function(a,b){return a-b;});
+  list.forEach(function(n){
+    var idx=uniq.indexOf(n.pitch);
+    n.lane=(uniq.length>1)?Math.round(idx/(uniq.length-1)*(lanes-1)):(lanes>>1);
+  });
+}
+// ── 곡 + 난이도 → 노트 배열 ──
+function buildNotes(song,diff,lanes){
+  var seq=seqParse(song.seq),base=[],b=0;
+  for(var i=0;i<seq.length;i++){
+    if(seq[i].nm!=='R')base.push({beat:b,pitch:N(seq[i].nm),dur:seq[i].dur});
+    b+=seq[i].dur;
+  }
+  var list;
+  if(diff==='easy')list=base.filter(function(n,i){return i%2===0;}); // 절반 샘플링(듬성)
+  else list=base.slice();                                            // 보통/어려움 = 전체
+  assignLanes(list,lanes);
+  if(diff==='hard'){                                                 // 화음(동시) 노트 추가
+    var extra=[];
+    for(var j=0;j<list.length;j++){
+      if(j%3===2){var p=list[j];
+        extra.push({beat:p.beat,pitch:p.pitch*Math.pow(2,4/12),dur:Math.min(p.dur,1),lane:(p.lane+2)%lanes});}
+    }
+    list=list.concat(extra);
+  }
+  // 런타임 필드 초기화
+  list.forEach(function(n){n.hit=false;n.done=false;n.holding=false;n.lastTick=0;n.tailBeat=n.beat+n.dur;n.hold=(n.dur>=1.5);});
+  list.sort(function(a,b){return a.beat-b.beat||a.lane-b.lane;});
+  // 레인별 대표 음(빈 탭 소리용)
+  lanePitch=[];var cnt=[];
+  for(var k=0;k<lanes;k++){lanePitch[k]=0;cnt[k]=0;}
+  list.forEach(function(n){lanePitch[n.lane]+=n.pitch;cnt[n.lane]++;});
+  for(var k2=0;k2<lanes;k2++){lanePitch[k2]=cnt[k2]?lanePitch[k2]/cnt[k2]:440*Math.pow(2,(k2-lanes/2)/6);}
+  return list;
+}
+
+// ── 오디오 합성 ──
 function beep(freq,t,dur,type,gainv){
   var o=AC.createOscillator(),g=AC.createGain();
   o.type=type||'square';o.frequency.value=freq;
@@ -94,29 +175,105 @@ function beep(freq,t,dur,type,gainv){
   g.gain.exponentialRampToValueAtTime(0.0008,t+dur);
   o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+dur+0.02);
 }
+function holdTone(freq){
+  var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;
+  o.type='square';o.frequency.value=freq;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.15,t+0.02);
+  o.connect(g);g.connect(AC.destination);o.start();
+  return {o:o,g:g};
+}
+function stopTone(s){if(!s)return;try{var t=AC.currentTime;s.g.gain.cancelScheduledValues(t);s.g.gain.setValueAtTime(s.g.gain.value||0.001,t);s.g.gain.exponentialRampToValueAtTime(0.0008,t+0.08);s.o.stop(t+0.12);}catch(e){}}
+
 function schedule(){
   var base=AC.currentTime+0.15;
-  // 멜로디는 자동재생 안 함 — 플레이어가 노트를 맞출 때 그 음이 울려서 곡이 완성됨.
-  // 배경(베이스/드럼)만 가이드로 자동 재생.
-  var lastBeat=notes[notes.length-1].beat;
-  for(var b=0;b<=lastBeat;b+=1){beep(130.81,base+b*BEAT/1000,0.12,'triangle',0.16);}     // bass C3
-  for(var b=0;b<=lastBeat;b+=0.5){beep(60,base+b*BEAT/1000,0.05,'sine',0.1);}             // kick
-  t0=performance.now()+150;                 // 화면 노트 기준시각(오디오 base와 맞춤)
+  // 멜로디는 자동재생 안 함 — 플레이어가 맞출 때 그 음이 울려 곡이 완성됨. 배경(베이스/킥)만 가이드.
+  for(var b=0;b<=songEnd;b+=1){beep(130.81,base+b*BEAT/1000,0.12,'triangle',0.15);}   // bass C3
+  for(var b=0;b<=songEnd;b+=0.5){beep(60,base+b*BEAT/1000,0.05,'sine',0.1);}          // kick
+  t0=performance.now()+150;                                                            // 화면 노트 기준시각(오디오 base와 동기)
 }
+
+// ── 하단 버튼 row (키수에 맞게 재생성) ──
+function buildButtons(){
+  btnrow.innerHTML='';
+  var fs=LANES>=7?12:16;
+  for(var i=0;i<LANES;i++){
+    var b=document.createElement('button');b.className='rbtn';b.id='r'+i;
+    b.textContent=KEYSETS[LANES].labels[i];
+    b.style.borderColor=LANECOL[i];
+    b.style.fontSize=(KEYSETS[LANES].labels[i].length>2?11:fs)+'px';
+    btnrow.appendChild(b);
+    (function(idx,el){
+      var down=function(ev){ev.preventDefault();hitLane(idx);};
+      var up=function(ev){ev.preventDefault();releaseLane(idx);};
+      el.addEventListener('touchstart',down,{passive:false});
+      el.addEventListener('mousedown',down);
+      el.addEventListener('touchend',up,{passive:false});
+      el.addEventListener('touchcancel',up,{passive:false});
+      el.addEventListener('mouseup',up);
+      el.addEventListener('mouseleave',up);
+    })(i,b);
+  }
+}
+
+// ── 선택 화면 ──
+function showSelect(){
+  state='ready';cancelAnimationFrame(raf);
+  var h='';
+  h+='<div class="selttl">🎵 곡을 골라 직접 연주하세요</div>';
+  h+='<div class="songlist">';
+  for(var i=0;i<SONGS.length;i++){var s=SONGS[i];
+    h+='<div class="song'+(sel.song===i?' sel':'')+'" data-song="'+i+'">'
+      +'<span class="snm">'+s.name+'<br><span class="sby">'+s.mood+' · '+s.by+'</span></span>'
+      +'<span class="sst">'+'⭐'.repeat(s.stars)+'</span>'
+      +'<span class="sbpm">'+s.bpm+' BPM</span></div>';
+  }
+  h+='</div>';
+  h+='<div class="optrow"><span class="olab">키</span><div class="chips" data-opt="keys">'
+    +'<div class="chip'+(sel.keys===5?' sel':'')+'" data-v="5">5키</div>'
+    +'<div class="chip'+(sel.keys===7?' sel':'')+'" data-v="7">7키</div></div></div>';
+  h+='<div class="optrow"><span class="olab">속도</span><div class="chips" data-opt="speed">';
+  for(var j=0;j<SPEEDS.length;j++)h+='<div class="chip'+(sel.speed===SPEEDS[j].v?' sel':'')+'" data-v="'+SPEEDS[j].v+'">'+SPEEDS[j].lab+'</div>';
+  h+='</div></div>';
+  h+='<div class="optrow"><span class="olab">난이도</span><div class="chips" data-opt="diff">';
+  for(var k=0;k<DIFFS.length;k++)h+='<div class="chip'+(sel.diff===DIFFS[k].id?' sel':'')+'" data-v="'+DIFFS[k].id+'">'+DIFFS[k].lab+'</div>';
+  h+='</div></div>';
+  h+='<button class="gostart" id="gostart">▶ 시작 (소리 켜기)</button>';
+  h+='<div class="selhint">노트를 맞추면 그 음이 울려 멜로디가 완성돼요.<br>긴 음표는 <b style="color:#e0c07e">롱노트</b> — 눌러서 끝까지 홀드! (저작권 프리 🎶)</div>';
+  ovin.innerHTML=h;ov.style.display='flex';
+
+  ovin.querySelectorAll('.song').forEach(function(el){el.onclick=function(){sel.song=+el.getAttribute('data-song');showSelect();};});
+  ovin.querySelectorAll('.chip').forEach(function(el){el.onclick=function(){
+    var opt=el.parentNode.getAttribute('data-opt'),v=el.getAttribute('data-v');
+    if(opt==='keys')sel.keys=+v;else if(opt==='speed')sel.speed=+v;else if(opt==='diff')sel.diff=v;
+    showSelect();
+  };});
+  document.getElementById('gostart').onclick=start;
+}
+
 function start(){
   if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
   if(AC.state==='suspended')AC.resume();
-  ov.style.display='none';notes=buildSong();score=0;combo=0;maxcombo=0;hitCnt=0;total=notes.length;
-  sync();state='count';countdown(function(){schedule();state='play';raf=requestAnimationFrame(loop);});
+  // 키 파라미터 적용
+  var ks=KEYSETS[sel.keys];LANES=sel.keys;LW=W/LANES;KEYS=ks.keys;CODEMAP=ks.code;LANECOL=ks.col;
+  buildButtons();
+  var song=SONGS[sel.song];
+  BEAT=60000/song.bpm;SPEED=BASESPEED*sel.speed;WINDOW=DIFFWIN[sel.diff];
+  notes=buildNotes(song,sel.diff,LANES);
+  holdingNote=[];for(var i=0;i<LANES;i++)holdingNote[i]=null;
+  songEnd=0;notes.forEach(function(n){if(n.tailBeat>songEnd)songEnd=n.tailBeat;});
+  score=0;combo=0;maxcombo=0;hitCnt=0;missCnt=0;total=notes.length;
+  ov.style.display='none';sync();
+  state='count';countdown(function(){schedule();state='play';raf=requestAnimationFrame(loop);});
+  gtag('event','rhythm_start',{song:song.name,keys:sel.keys,diff:sel.diff,speed:sel.speed});
 }
-// 시작 전 3·2·1·START! 카운트다운 (너무 바로 시작 방지). state='count'라 키/버튼은 무시됨(hitLane이 state!=='play'면 return).
+// 3·2·1·START! 카운트다운 (state='count'라 hitLane/releaseLane 무시됨)
 function countdown(cb){
   var seq=['3','2','1','START!'],i=0;
   function drawField(){
     ctx.fillStyle='#12120f';ctx.fillRect(0,0,W,H);
     ctx.strokeStyle='#e0c07e';ctx.lineWidth=4;ctx.shadowColor='#e0c07e';ctx.shadowBlur=14;
     ctx.beginPath();ctx.moveTo(0,HITY);ctx.lineTo(W,HITY);ctx.stroke();ctx.shadowBlur=0;
-    for(var j=0;j<LANES;j++){ctx.strokeStyle=LANECOL[j];ctx.lineWidth=3;ctx.beginPath();ctx.arc(j*LW+LW/2,HITY,LW*0.34,0,7);ctx.stroke();}
+    for(var j=0;j<LANES;j++){ctx.strokeStyle=LANECOL[j];ctx.lineWidth=3;ctx.beginPath();ctx.arc(j*LW+LW/2,HITY,LW*0.3,0,7);ctx.stroke();}
   }
   function step(){
     drawField();
@@ -130,26 +287,49 @@ function countdown(cb){
   }
   step();
 }
-function sync(){scE.textContent=score;cbE.textContent=combo;acE.textContent=(total?Math.round(hitCnt/Math.max(1,judged())*100):100)+'%';}
-var missCnt=0;function judged(){return hitCnt+missCnt;}
+function sync(){scE.textContent=score;cbE.textContent=combo;acE.textContent=(Math.round(hitCnt/Math.max(1,hitCnt+missCnt)*100))+'%';}
+
+function rr(x,y,w,h,r){if(ctx.roundRect){ctx.beginPath();ctx.roundRect(x,y,w,h,r);}else{ctx.beginPath();ctx.rect(x,y,w,h);}}
+
 function loop(t){
   if(state!=='play')return;
   ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,W,H);
   for(var i=0;i<LANES;i++){ctx.fillStyle=i%2?'#141418':'#101014';ctx.fillRect(i*LW,0,LW,H);}
-  // 판정선 강조: 글로우 밴드 + 밝은 라인 + 레인별 타겟 링
+  // 판정선
   ctx.fillStyle='rgba(224,192,126,.10)';ctx.fillRect(0,HITY-22,W,44);
   ctx.strokeStyle='#e0c07e';ctx.lineWidth=4;ctx.shadowColor='#e0c07e';ctx.shadowBlur=14;ctx.beginPath();ctx.moveTo(0,HITY);ctx.lineTo(W,HITY);ctx.stroke();ctx.shadowBlur=0;
-  for(var i=0;i<LANES;i++){ctx.strokeStyle=LANECOL[i];ctx.lineWidth=3;ctx.beginPath();ctx.arc(i*LW+LW/2,HITY,LW*0.34,0,7);ctx.stroke();}
+  for(var i=0;i<LANES;i++){
+    ctx.strokeStyle=LANECOL[i];ctx.lineWidth=3;ctx.beginPath();ctx.arc(i*LW+LW/2,HITY,LW*0.3,0,7);ctx.stroke();
+    if(holdingNote[i]){ctx.fillStyle=LANECOL[i];ctx.globalAlpha=0.28;ctx.fillRect(i*LW,0,LW,H);ctx.globalAlpha=1;} // 홀드 중 레인 밝게
+  }
   ctx.fillStyle='#e0c07e';ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText('▼ 여기서 맞춰요 ▼',W/2,HITY-28);
-  var now=t-t0, allDone=true;
+
+  var now=t-t0;
   notes.forEach(function(n){
-    var nt=n.beat*BEAT; var y=HITY-(nt-now)*SPEED;
-    if(!n.hit&&now-nt>140){n.hit=true;combo=0;missCnt++;sync();}
-    if(!n.hit&&y>-20&&y<H+20){allDone=false;ctx.fillStyle=LANECOL[n.lane];ctx.beginPath();ctx.roundRect?ctx.roundRect(n.lane*LW+8,y-9,LW-16,18,5):ctx.rect(n.lane*LW+8,y-9,LW-16,18);ctx.fill();}
-    else if(!n.hit)allDone=false;
+    if(n.done)return;
+    var headT=n.beat*BEAT, y=HITY-(headT-now)*SPEED;
+    if(n.hold){
+      // 홀드 중 자동 성공: 꼬리를 지나서도 계속 누르고 있으면 성공 처리
+      if(n.holding){
+        if(now - n.lastTick>120){score+=5;n.lastTick=now;sync();}      // 홀드 점수 틱(콤보 유지)
+        if(now>=n.tailBeat*BEAT+WINDOW){finishHold(n,true);return;}
+      } else if(!n.hit && now-headT>WINDOW){ n.done=true;missCnt++;combo=0;sync();return; } // 머리 놓침
+      // 렌더: 머리~꼬리 바
+      var tailY=HITY-(n.tailBeat*BEAT-now)*SPEED;
+      var by=n.holding?HITY:y, top=Math.min(tailY,by), bot=Math.max(tailY,by);
+      if(bot>-20&&top<H+20){
+        ctx.fillStyle=LANECOL[n.lane];ctx.globalAlpha=n.holding?0.55:0.32;
+        rr(n.lane*LW+10,top,LW-20,Math.max(6,bot-top),7);ctx.fill();ctx.globalAlpha=1;
+        // 머리 캡
+        ctx.fillStyle=LANECOL[n.lane];rr(n.lane*LW+8,by-9,LW-16,18,5);ctx.fill();
+      }
+    } else {
+      if(!n.hit && now-headT>WINDOW){n.done=true;missCnt++;combo=0;sync();return;}
+      if(y>-20&&y<H+20){ctx.fillStyle=LANECOL[n.lane];rr(n.lane*LW+8,y-9,LW-16,18,5);ctx.fill();}
+    }
   });
   drawFx(t);drawPops(t);
-  if(now>notes[notes.length-1].beat*BEAT+800){return finish();}
+  if(now>songEnd*BEAT+900)return finish();
   raf=requestAnimationFrame(loop);
 }
 var fx=[];
@@ -158,28 +338,91 @@ function drawFx(t){ctx.textAlign='center';for(var i=fx.length-1;i>=0;i--){var f=
 var pops=[];
 function popup(txt,col){pops.push({txt:txt,col:col,t:performance.now()});}
 function drawPops(t){ctx.textAlign='center';for(var i=pops.length-1;i>=0;i--){var p=pops[i],e=(t-p.t)/500;if(e>=1){pops.splice(i,1);continue;}ctx.globalAlpha=1-e;ctx.fillStyle=p.col;ctx.font='bold '+(30+e*16)+'px sans-serif';ctx.fillText(p.txt,W/2,H*0.42);ctx.globalAlpha=1;}}
+
+// 홀드 종료 처리(성공/실패)
+function finishHold(n,ok){
+  n.holding=false;n.done=true;stopTone(n.snd);n.snd=null;holdingNote[n.lane]=null;
+  if(ok){hitCnt++;combo++;maxcombo=Math.max(maxcombo,combo);score+=120*(1+((combo/10)|0));flash(n.lane,'#42b642');popup('CLEAR','#42b642');}
+  else{missCnt++;combo=0;flash(n.lane,'#ef2029');popup('MISS','#ef2029');}
+  sync();
+}
+
+// 누름(탭 판정 / 롱노트 머리 시작)
 function hitLane(lane){
   if(state!=='play')return;
-  beep(SCALE[lane%SCALE.length],AC.currentTime,0.2,'square',0.2);  // 버튼 누르면 무조건 그 음이 남(악기처럼)
-  var now=performance.now()-t0, best=null,bd=999;
-  notes.forEach(function(n){if(n.hit||n.lane!==lane)return;var d=Math.abs(n.beat*BEAT-now);if(d<bd){bd=d;best=n;}});
-  if(best&&bd<160){best.hit=true;hitCnt++;var pts=bd<60?100:bd<110?60:30;combo++;maxcombo=Math.max(maxcombo,combo);score+=pts*(1+((combo/10)|0));flash(lane,'#42b642');popup(bd<60?'PERFECT':'GOOD','#42b642');sync();}
-  else{combo=0;flash(lane,'#ef2029');popup('MISS','#ef2029');sync();}
+  var now=performance.now()-t0, best=null,bd=WINDOW+1;
+  notes.forEach(function(n){
+    if(n.done||n.lane!==lane)return;
+    if(n.hold&&n.hit)return; // 이미 홀드 중인 머리 제외
+    var d=Math.abs(n.beat*BEAT-now);if(d<bd){bd=d;best=n;}
+  });
+  if(best&&bd<=WINDOW){
+    if(best.hold){
+      best.hit=true;best.holding=true;best.lastTick=now;holdingNote[lane]=best;
+      best.snd=holdTone(best.pitch);flash(lane,LANECOL[lane]);popup('HOLD','#e0c07e');
+    } else {
+      best.done=true;hitCnt++;combo++;maxcombo=Math.max(maxcombo,combo);
+      var pts=bd<WINDOW*0.4?100:bd<WINDOW*0.7?60:30;
+      score+=pts*(1+((combo/10)|0));
+      beep(best.pitch,AC.currentTime,0.22,'square',0.2);   // 맞춘 음이 울려 멜로디 완성
+      flash(lane,'#42b642');popup(bd<WINDOW*0.4?'PERFECT':'GOOD','#42b642');
+    }
+    sync();
+  } else {
+    beep(lanePitch[lane]||440,AC.currentTime,0.18,'square',0.16); // 빗나가도 악기처럼 소리는 남
+    combo=0;flash(lane,'#ef2029');popup('MISS','#ef2029');sync();
+  }
 }
-function finish(){state='over';cancelAnimationFrame(raf);
-  var acc=Math.round(hitCnt/total*100);
+// 뗌(롱노트 꼬리 판정)
+function releaseLane(lane){
+  if(state!=='play')return;
+  var n=holdingNote[lane];if(!n)return;
+  var now=performance.now()-t0, tail=n.tailBeat*BEAT;
+  finishHold(n, now>=tail-WINDOW);   // 꼬리 근처면 성공, 너무 일찍 놓으면 실패
+}
+
+function finish(){
+  state='over';cancelAnimationFrame(raf);
+  // 남은 홀드 정리
+  if(holdingNote)for(var i=0;i<holdingNote.length;i++){if(holdingNote[i]){stopTone(holdingNote[i].snd);holdingNote[i]=null;}}
+  var acc=Math.round(hitCnt/Math.max(1,total)*100), song=SONGS[sel.song];
   if(score>hi){hi=score;localStorage.setItem('rhythm_hi',hi);hiE.textContent=hi;}
-  ov.style.display='flex';ov.querySelector('h2').textContent='CLEAR! 🎵';
-  ov.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b> · 정확도 '+acc+'% · 최고콤보 '+maxcombo+'<br>최고기록 '+hi;
-  var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
-  b.textContent='📤 자랑하기';b.onclick=function(){var t='리듬게임 '+score+'점 (정확도 '+acc+'%)! 🎵 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
-  btn.textContent='다시 하기';
+  var h='<h2>CLEAR! 🎵</h2>';
+  h+='<p><b style="color:#e0c07e">'+song.name+'</b> · '+DIFFS.filter(function(d){return d.id===sel.diff;})[0].lab+' · '+sel.keys+'키<br>'
+    +'점수 <b style="color:#e0c07e">'+score+'</b> · 정확도 '+acc+'% · 최고콤보 '+maxcombo+'<br>최고기록 '+hi+'</p>';
+  h+='<button id="again" class="gostart">🔁 다시 선택</button>';
+  h+='<button id="g-share" style="width:100%;margin-top:8px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:10px;border-radius:8px;cursor:pointer;font:inherit;">📤 자랑하기</button>';
+  ovin.innerHTML=h;ov.style.display='flex';
+  document.getElementById('again').onclick=showSelect;
+  document.getElementById('g-share').onclick=function(){
+    var txt='리듬게임 「'+song.name+'」 '+score+'점 (정확도 '+acc+'%)! 🎵 '+location.origin+location.pathname;
+    if(navigator.share){navigator.share({text:txt});}else{navigator.clipboard.writeText(txt).then(function(){alert('복사됐어요!');});}
+  };
+  gtag('event','rhythm_clear',{song:song.name,score:score,acc:acc});
 }
-btn.onclick=start;
-var CODEMAP={KeyD:0,KeyF:1,Space:2,KeyJ:3,KeyK:4};
-document.addEventListener('keydown',function(e){if(e.repeat)return;var t=e.target,tag=(t&&t.tagName||'').toLowerCase();if(tag==='input'||tag==='textarea'||tag==='select'||(t&&t.isContentEditable))return;/* 댓글 등 입력창 포커스 시 게임키 무시 */var i=(e.code in CODEMAP)?CODEMAP[e.code]:KEYS.indexOf((e.key===' '?' ':(e.key||'').toLowerCase()));if(i>=0){e.preventDefault();if(state==='ready'||state==='over'){start();return;}hitLane(i);}});
-function mkbtn(i){var b=document.getElementById('r'+i);if(b){var f=function(ev){ev.preventDefault();hitLane(i);};b.addEventListener('touchstart',f,{passive:false});b.addEventListener('mousedown',f);}}
-for(var i=0;i<LANES;i++)mkbtn(i);
+
+// ── 물리 키 입력 (iPad CODEMAP 매핑 + 댓글 입력창 포커스 가드) ──
+function laneFromEvent(e){
+  if(e.code in CODEMAP)return CODEMAP[e.code];
+  return KEYS.indexOf(e.key===' '?' ':(e.key||'').toLowerCase());
+}
+function inputFocused(t){var tag=(t&&t.tagName||'').toLowerCase();return tag==='input'||tag==='textarea'||tag==='select'||(t&&t.isContentEditable);}
+document.addEventListener('keydown',function(e){
+  if(e.repeat)return;
+  if(inputFocused(e.target))return;       // 댓글 등 입력창 포커스 시 게임키 무시
+  var i=laneFromEvent(e);if(i<0||i>=LANES)return;
+  e.preventDefault();
+  if(state==='play')hitLane(i);           // 시작은 선택화면의 버튼으로만
+});
+document.addEventListener('keyup',function(e){
+  if(inputFocused(e.target))return;
+  var i=laneFromEvent(e);if(i<0||i>=LANES)return;
+  if(state==='play'){e.preventDefault();releaseLane(i);}
+});
+
+// 초기화
+buildButtons();
+showSelect();
 })();
 
 </script>
