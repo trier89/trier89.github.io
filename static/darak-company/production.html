@@ -30,6 +30,13 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
 .trk{font-size:11.5px;padding:3px 10px;border-radius:8px;border:1px solid var(--line);background:rgba(224,184,120,.10);color:var(--gold);}
 .trk.prod{background:rgba(217,119,87,.18);color:var(--coral);border-color:var(--coral);}
 .trk.plan{background:rgba(185,168,145,.08);color:var(--dim);}
+.channel{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#17100a;font-weight:800;text-decoration:none;font-size:13px;padding:8px 16px;border-radius:11px;margin-top:14px;box-shadow:0 6px 18px rgba(224,184,120,.18);}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.lnk{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:9px;border:1px solid var(--gold);color:var(--gold);background:rgba(224,184,120,.14);transition:background .15s;}
+.lnk:hover{background:rgba(224,184,120,.26);}
+.lnk.soon{border-style:dashed;border-color:var(--line);color:var(--dim);background:rgba(255,255,255,.03);cursor:default;font-weight:600;}
+.lnk.soon:hover{background:rgba(255,255,255,.05);}
+.lnk .soonlbl{font-size:10.5px;font-weight:500;opacity:.85;}
 .blk{margin-bottom:12px;}
 .blk h3{font-size:13px;color:var(--coral);margin-bottom:5px;letter-spacing:.02em;}
 .blk p,.blk li{font-size:13.5px;color:var(--txt);}
@@ -54,12 +61,17 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <div class="legend">
     <span>🎬 롱폼 · 📱 숏폼(크레파스) · <span style="color:var(--coral)">제작중</span> · <span style="color:var(--dim)">예정</span></span>
   </div>
+  <div><a class="channel" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 다락방 채널 바로가기</a></div>
 </div>
 
 <div class="ep">
   <span class="tag">EP.12 · 제작중</span>
   <h2>미다스의 손</h2>
   <p class="sub">황금이 된 모든 것의 저주 · 롱폼 36컷 기획 · 키프레임 완료, 클립 렌더 중</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="12" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="12" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk prod">🎬 롱폼 제작중</span>
     <span class="trk plan">📱 숏폼 예정</span>
@@ -86,7 +98,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.11 · 발행</span>
   <h2>아프로디테의 불륜</h2>
   <p class="sub">신들 앞에서 발가벗겨진 미의 여신 · 롱폼 4분 3초 · 43컷</p>
-  <a class="yt" href="https://youtu.be/xKhMY_8NA2w" target="_blank" rel="noopener">▶ 유튜브에서 보기</a>
+  <div class="links">
+    <a class="lnk" data-ep="11" data-track="long" href="https://youtu.be/xKhMY_8NA2w" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk soon" data-ep="11" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -122,6 +137,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.10 · 발행</span>
   <h2>아들을 사랑한 왕비</h2>
   <p class="sub">테세우스의 여인들 / 파에드라 · 저주받은 핏줄의 비극</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="10" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="10" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -144,6 +163,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.09 · 발행</span>
   <h2>다이달로스와 이카로스</h2>
   <p class="sub">태양에 녹은 밀랍 날개 · 콜드오픈 + 4막</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="09" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="09" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -170,6 +193,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.08 · 발행</span>
   <h2>테세우스와 미노타우로스</h2>
   <p class="sub">미궁 · 아리아드네의 실타래 · 잊어버린 흰 돛</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="08" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="08" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -192,6 +219,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.07 · 발행</span>
   <h2>헤라클레스와 네메아 사자</h2>
   <p class="sub">영웅의 시대 개막 · 열두 과업의 시작</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="07" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="07" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -213,6 +244,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.06 · 발행</span>
   <h2>페르세우스와 메두사</h2>
   <p class="sub">영웅의 시대의 개막 · 장편 실험 33컷</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="06" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="06" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -234,6 +269,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.05 · 발행</span>
   <h2>대홍수</h2>
   <p class="sub">데우칼리온과 피라 · 씻어낸 세상과 다시 세운 인류</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="05" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="05" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -255,6 +294,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.04 · 발행</span>
   <h2>판도라의 상자</h2>
   <p class="sub">인류에게 보낸 아름다운 함정 · 바닥에 남은 희망</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="04" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="04" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -276,6 +319,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.03 · 발행</span>
   <h2>불을 훔친 신</h2>
   <p class="sub">프로메테우스 · 인간을 위한 배신</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="03" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="03" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -297,6 +344,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.02 · 발행</span>
   <h2>왕좌를 노린 괴물</h2>
   <p class="sub">티폰 · 가장 두려운 밤을 지나야 진짜 왕이 된다</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="02" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="02" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
@@ -318,6 +369,10 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   <span class="tag">EP.01 · 발행</span>
   <h2>자식을 삼킨 아버지</h2>
   <p class="sub">번개창의 기원 · 시리즈의 시작</p>
+  <div class="links">
+    <a class="lnk soon" data-ep="01" data-track="long" href="#" onclick="return false;">▶ 롱폼 보기 <span class="soonlbl">· 링크 준비중</span></a>
+    <a class="lnk soon" data-ep="01" data-track="short" href="#" onclick="return false;">▶ 숏폼(크레파스) 보기 <span class="soonlbl">· 링크 준비중</span></a>
+  </div>
   <div class="tracks">
     <span class="trk">🎬 롱폼 발행</span>
     <span class="trk">📱 숏폼 발행</span>
