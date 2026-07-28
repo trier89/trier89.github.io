@@ -1,76 +1,76 @@
 {
- "today": 8,
- "today_pv": 91,
+ "today": 0,
+ "today_pv": 0,
  "total": 93,
  "yesterday": {
-  "users": 3,
-  "new": 0,
-  "pv": 20,
-  "sessions": 5
+  "users": 8,
+  "new": 4,
+  "pv": 161,
+  "sessions": 16
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 187,
-   "eng": 1188,
+   "views": 166,
+   "eng": 1076,
    "avg_sec": 6
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 51,
-   "eng": 665,
-   "avg_sec": 13
+   "views": 79,
+   "eng": 709,
+   "avg_sec": 9
   },
   {
    "title": "도구방",
-   "views": 44,
-   "eng": 927,
-   "avg_sec": 21
+   "views": 31,
+   "eng": 783,
+   "avg_sec": 25
   },
   {
    "title": "심리테스트",
    "views": 30,
-   "eng": 219,
+   "eng": 213,
    "avg_sec": 7
   },
   {
-   "title": "배당금 계산기 — 월 배당 목표로 필요 원금·월 적립액 (노후·파이어족)",
+   "title": "뉴스",
    "views": 19,
-   "eng": 740,
-   "avg_sec": 39
+   "eng": 46,
+   "avg_sec": 2
   }
  ],
  "top_dwell": [
   {
    "title": "지뢰찾기 — 에디슨의 게임방 | 계획대로 느긋하게",
-   "views": 10,
-   "eng": 2654,
-   "avg_sec": 265
+   "views": 11,
+   "eng": 2763,
+   "avg_sec": 251
   },
   {
-   "title": "배당금 계산기 — 월 배당 목표로 필요 원금·월 적립액 (노후·파이어족)",
-   "views": 19,
-   "eng": 740,
-   "avg_sec": 39
+   "title": "리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 11,
+   "eng": 905,
+   "avg_sec": 82
   },
   {
-   "title": "💌 요청방 — 에디슨에게 만들어달라고 하기",
-   "views": 13,
-   "eng": 424,
-   "avg_sec": 33
-  },
-  {
-   "title": "연애 스타일 테스트 — 나는 어떤 연애를 할까?",
-   "views": 17,
-   "eng": 450,
-   "avg_sec": 26
+   "title": "리듬 게임 (저작권 프리 음악) — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 15,
+   "eng": 543,
+   "avg_sec": 36
   },
   {
    "title": "도구방",
-   "views": 44,
-   "eng": 927,
-   "avg_sec": 21
+   "views": 31,
+   "eng": 783,
+   "avg_sec": 25
+  },
+  {
+   "title": "💌 요청방 — 에디슨에게 만들어달라고 하기",
+   "views": 15,
+   "eng": 301,
+   "avg_sec": 20
   }
  ],
- "updated": "2026-07-28 23:02"
+ "updated": "2026-07-29 00:02"
 }
