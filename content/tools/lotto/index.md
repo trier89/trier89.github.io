@@ -9,7 +9,7 @@ toc: false
 readingTime: false
 ---
 
-<div class="pf-tool" id="lt-tool"><div id="lt-loading" style="text-align:center;padding:40px 0;color:#999;">불러오는 중…</div><div id="lt-body" style="display:none;"><div id="lt-reco"></div><div class="lt-honest">🎲 로또는 완전한 <b>무작위 추첨</b>이에요. 이 추천은 <b>재미·참고용</b>이며 <b>당첨을 보장하지 않아요.</b></div><details id="lt-set-wrap" class="lt-fold"><summary>⚙️ 설정 (확률 번호 수·표본 범위)</summary><div id="lt-set" class="lt-fold-in"></div></details><details id="lt-stats-wrap" class="lt-fold"><summary>📊 번호 통계 자세히 보기</summary><div id="lt-stats" class="lt-fold-in"></div></details></div></div>
+<div class="pf-tool" id="lt-tool"><div id="lt-loading" style="text-align:center;padding:40px 0;color:#999;">불러오는 중…</div><div id="lt-body" style="display:none;"><div id="lt-reco"></div><div id="lt-summary" class="lt-summary"></div><div class="lt-honest">🎲 로또는 완전한 <b>무작위 추첨</b>이에요. 이 추천은 <b>재미·참고용</b>이며 <b>당첨을 보장하지 않아요.</b></div><details id="lt-set-wrap" class="lt-fold"><summary>⚙️ 설정 (확률 번호 수·표본 범위)</summary><div id="lt-set" class="lt-fold-in"></div></details><details id="lt-stats-wrap" class="lt-fold"><summary>📊 번호 통계 자세히 보기</summary><div id="lt-stats" class="lt-fold-in"></div></details></div></div>
 
 <style>
 #lt-tool{max-width:560px;}
@@ -39,6 +39,13 @@ readingTime: false
 .lt-set-note{font-size:11.5px;color:#999;margin-top:8px;line-height:1.6;}
 .lt-honest{margin-top:14px;font-size:12px;line-height:1.6;color:#8a6d00;background:#fff8e6;border-radius:10px;padding:11px 13px;text-align:center;}
 .lt-honest b{color:#8a6d00;}
+.lt-summary{margin-top:12px;font-size:12.5px;color:#555;}
+.lt-summary .lt-sum-head{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-weight:700;color:#444;}
+.lt-summary select{padding:3px 6px;border:1px solid #ddd;border-radius:7px;font:inherit;font-size:12px;}
+.lt-summary .lt-sum-body{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px;}
+.lt-summary .lt-sum-body span{background:#f4f6f8;border-radius:20px;padding:3px 10px;font-size:12px;color:#42505c;}
+.lt-summary .lt-sum-body span.hit{background:#dcfce7;color:#166534;font-weight:700;}
+.lt-summary .lt-sum-note{margin-top:6px;font-size:11px;color:#aaa;line-height:1.5;}
 .lt-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:520px){.lt-stat-grid{grid-template-columns:1fr;}}
 .lt-stat-box{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;}
@@ -63,6 +70,8 @@ function maxRun(g){var mx=1,run=1;for(var i=1;i<g.length;i++){if(g[i]===g[i-1]+1
 function sameSet(a,b){for(var i=0;i<6;i++)if(a[i]!==b[i])return false;return true;}
 function passes(g,lastDraw,level){if(level>=3)return true;var oc=oddCount(g),sm=sumOf(g);if(level<2){if(maxRun(g)>=3)return false;}if(level<1){if(oc<2||oc>4)return false;if(sm<100||sm>175)return false;if(lastDraw&&sameSet(g,lastDraw))return false;}else{if(oc<1||oc>5)return false;if(sm<90||sm>185)return false;}return true;}
 function recommend(history,R,opts){opts=opts||{};var N=opts.N==null?100:opts.N;var G=5;var K=opts.K==null?3:opts.K;var alpha=opts.alpha==null?0.45:opts.alpha;var seed=opts.seed==null?R:opts.seed;var rng=mulberry32(seed);var weights=buildWeights(history,R,N,alpha);var lastDraw=null;for(var i=history.length-1;i>=0;i--)if(history[i].round<R){lastDraw=history[i].nums.slice().sort(function(a,b){return a-b;});break;}var games=[],seen={};for(var gi=0;gi<G;gi++){var g=null;for(var level=0;level<=3;level++){for(var t=0;t<120;t++){var cand=drawGame(weights,rng,K);var key=cand.join(",");if(passes(cand,lastDraw,level)&&!seen[key]){g=cand;break;}}if(g)break;}if(!g)g=drawGame(weights,rng,K);seen[g.join(",")]=1;games.push({nums:g,odd:oddCount(g),even:6-oddCount(g),sum:sumOf(g),K:K});}return{round:R,N:N,G:G,K:K,alpha:alpha,games:games};}
+/* 게임 채점 → 등수(6=1등,5+보너스=2등,5=3등,4=4등,3=5등,else 0) */
+function grade(gameNums,actualNums,bonus){var set={},i;for(i=0;i<actualNums.length;i++)set[actualNums[i]]=1;var m=0;for(i=0;i<gameNums.length;i++)if(set[gameNums[i]])m++;var bonusMatch=gameNums.indexOf(bonus)>=0;var rank=0;if(m===6)rank=1;else if(m===5&&bonusMatch)rank=2;else if(m===5)rank=3;else if(m===4)rank=4;else if(m===3)rank=5;return{match:m,rank:rank};}
 
 /* ===== UI ===== */
 var $=function(id){return document.getElementById(id);};
@@ -70,7 +79,32 @@ function ballClass(n){return n<=10?"c1":n<=20?"c2":n<=30?"c3":n<=40?"c4":"c5";}
 function ball(n,extra){return '<div class="lt-ball '+ballClass(n)+(extra?' '+extra:'')+'">'+n+'</div>';}
 function ballsHtml(nums,sm){var h='<div class="lt-balls">';nums.forEach(function(n){h+=ball(n,sm?'sm':'');});return h+'</div>';}
 
-var H=null, curN=100, curK=3;
+var H=null, curN=100, curK=3, curM=20;
+
+/* 최근 M경기(회차) 요약 실적: 현재 K·N 설정으로 각 회차를 결정론적 재현 → 등수별 집계만 */
+function renderSummary(){
+  var latest=H[H.length-1].round;
+  var maxM=latest-1;
+  var opts=[10,20,50,100].filter(function(m){return m<=maxM;});
+  if(opts.indexOf(curM)<0)curM=opts[0]||10;
+  var M=Math.min(curM,maxM);
+  var tally={1:0,2:0,3:0,4:0,5:0,none:0}, bestMatchCnt=0;
+  for(var R=latest;R>latest-M&&R>=2;R--){
+    var rec=recommend(H,R,{N:curN,K:curK});
+    var actual=H[R-1];
+    var bestRank=0,bestMatch=0;
+    rec.games.forEach(function(g){var gr=grade(g.nums,actual.nums,actual.bonus);if(gr.match>bestMatch)bestMatch=gr.match;if(gr.rank&&(bestRank===0||gr.rank<bestRank))bestRank=gr.rank;});
+    if(bestRank)tally[bestRank]++;else tally.none++;
+    if(bestMatch>=3)bestMatchCnt++;
+  }
+  var mopt=opts.map(function(m){return '<option value="'+m+'"'+(m===curM?' selected':'')+'>'+m+'</option>';}).join('');
+  function chip(label,cnt){return '<span'+(cnt>0?' class="hit"':'')+'>'+label+' '+cnt+'회</span>';}
+  var body=chip('🥇1등',tally[1])+chip('🥈2등',tally[2])+chip('🥉3등',tally[3])+chip('4등',tally[4])+chip('5등',tally[5])+'<span>미당첨 '+tally.none+'회</span>';
+  $('lt-summary').innerHTML='<div class="lt-sum-head">📋 최근 <select id="lt-mselect">'+mopt+'</select>경기 이 추천의 성적 <span style="font-weight:400;color:#999;">(K='+curK+'·N='+curN+')</span></div>'+
+    '<div class="lt-sum-body">'+body+'</div>'+
+    '<div class="lt-sum-note">현재 설정으로 과거 회차를 그대로 재현해 실제 당첨과 대조한 집계예요(3개 이상 맞은 회차 '+bestMatchCnt+'회). 로또는 무작위라 대부분 미당첨입니다.</div>';
+  $('lt-mselect').addEventListener('change',function(){curM=parseInt(this.value,10);renderSummary();});
+}
 
 function renderReco(){
   var nextR=H[H.length-1].round+1;
@@ -88,6 +122,7 @@ function renderReco(){
   $('lt-kselect').addEventListener('change',function(){curK=parseInt(this.value,10);renderReco();});
   $('lt-nslider').addEventListener('input',function(){$('lt-nval').textContent=this.value;});
   $('lt-nslider').addEventListener('change',function(){curN=parseInt(this.value,10);renderReco();});
+  renderSummary();
 }
 
 var statsDone=false;
