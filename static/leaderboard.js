@@ -64,6 +64,22 @@
     });
   }
 
+  // uid별로 묶어 최고점 기록(문서) 1개만 유지. lowerBetter면 최저점.
+  // 표시 닉·점수 = 그 최고점 문서에 등록된 값 그대로(닉 override 없음). uid 없는 옛 기록은 각각 유지.
+  function dedupByUid(arr, lowerBetter){
+    var best={};
+    arr.forEach(function(s){
+      var key = s.uid || ('__id_'+s.id);
+      var e = best[key];
+      if(!e){ best[key]=s; return; }
+      var better = lowerBetter ? (s.score<e.score) : (s.score>e.score);
+      if(better) best[key]=s;
+      else if(s.score===e.score && (s.ts||'')<(e.ts||'')) best[key]=s; // 동점이면 먼저 세운 기록
+    });
+    var out=[]; for(var k in best){ if(best.hasOwnProperty(k)) out.push(best[k]); }
+    return out;
+  }
+
   // ── 스타일(1회 주입) ──
   var STYLE = ''
   +'.pfr-ov{position:fixed;inset:0;z-index:99999;background:rgba(10,10,13,.82);display:flex;align-items:center;justify-content:center;padding:16px;font-family:"SF Mono","D2Coding",Menlo,Consolas,"Apple SD Gothic Neo",monospace;-webkit-tap-highlight-color:transparent;}'
@@ -90,13 +106,26 @@
   +'.pfr-sc{flex:0 0 auto;color:#e0c07e;font-weight:700;}'
   +'.pfr-empty{color:#9c9a94;font-size:13px;text-align:center;padding:14px 0;}'
   +'.pfr-close2{display:block;width:100%;margin-top:14px;background:transparent;border:1px solid #3e3e3a;border-radius:10px;color:#e8e6e3;font:inherit;padding:11px;cursor:pointer;}'
-  +'.pfr-close2:hover{border-color:#5a5852;}';
+  +'.pfr-close2:hover{border-color:#5a5852;}'
+  // 광고 예약 슬롯: 랭킹·버튼과 확실히 분리(위쪽 여백+구분선). 애드센스 승인 전엔 숨김(display:none).
+  +'.pfr-ad{display:none;margin-top:26px;padding-top:18px;border-top:1px dashed #3e3e3a;text-align:center;}'
+  +'.pfr-ad-lab{color:#7f7d77;font-size:10.5px;letter-spacing:1.5px;margin-bottom:8px;}'
+  +'.pfr-ad-slot{min-height:0;width:100%;max-width:100%;overflow:hidden;}';
 
   var styleInjected=false;
   function injectStyle(){ if(styleInjected)return; var st=document.createElement('style');st.textContent=STYLE;document.head.appendChild(st);styleInjected=true; }
 
   var root=null;
-  function closeModal(){ if(root&&root.parentNode)root.parentNode.removeChild(root); root=null; }
+  // 모달이 열려 있는 동안 게임(문서 레벨 리스너)으로 키가 새어 들어가는 것을 차단.
+  // snake·runner처럼 게임오버 상태에서 키 입력으로 재시작되는 게임이 모달 뒤에서 다시 돌아
+  // 0점으로 재종료→PFRank.end 재호출되는 버그를 원천 차단한다.
+  function blockGameKeys(e){ if(root && !root.contains(e.target)) e.stopImmediatePropagation(); }
+  function closeModal(){
+    if(root&&root.parentNode)root.parentNode.removeChild(root);
+    root=null;
+    document.removeEventListener('keydown',blockGameKeys,true);
+    document.removeEventListener('keyup',blockGameKeys,true);
+  }
 
   function medal(rk){ return rk===1?'🥇':rk===2?'🥈':rk===3?'🥉':rk; }
 
@@ -104,6 +133,7 @@
   function renderRanking(container, gameId, opts, highlightId){
     container.innerHTML='<div class="pfr-rank-h">🏆 '+esc(opts.label||'랭킹')+' TOP 10</div><div class="pfr-empty">랭킹 불러오는 중…</div>';
     fetchScores(gameId).then(function(arr){
+      arr=dedupByUid(arr, opts.lowerBetter);       // uid별 최고점 1개
       arr.sort(function(a,b){
         if(a.score!==b.score) return opts.lowerBetter?(a.score-b.score):(b.score-a.score);
         return (a.ts||'').localeCompare(b.ts||''); // 동점이면 먼저 등록한 사람 우위
@@ -135,11 +165,12 @@
   }
 
   function end(gameId, score, opts){
+    if(root)return;          // 재진입 가드: 결과 모달이 이미 열려 있으면 무시(모달 뒤 재시작→0점 덮어쓰기 방지)
+    if(!gameId)return;
     opts=opts||{};
     if(opts.unit===undefined)opts.unit='점';
     score=Number(score); if(!isFinite(score))score=0;
     score=Math.round(score);
-    if(!gameId)return;
     injectStyle();
     ensureSDK().catch(function(e){console.warn('[PFRank] sdk',e);}); // 미리 로그인 워밍
 
@@ -158,8 +189,22 @@
       +'<div class="pfr-btns"><button class="pfr-submit">🏆 등록</button><button class="pfr-skip">건너뛰기</button></div>'
       +'</div>'
       +'<div class="pfr-rank"></div>'
+      // ── 광고 예약 슬롯(모달 최하단, 랭킹·버튼과 분리) ─────────────────────────
+      // 애드센스 승인 후: (1) 아래 .pfr-ad 의 display 를 block 으로(예: id로 켜기)
+      //                  (2) 주석의 <ins> 를 살려 data-ad-slot 채우고
+      //                  (3) (window.adsbygoogle=window.adsbygoogle||[]).push({}) 호출
+      // 지금은 승인 전이라 비워둠(브로큰 광고코드 넣지 않음).
+      +'<div class="pfr-ad" id="pfr-ad" aria-hidden="true">'
+      +'<div class="pfr-ad-lab">광고</div>'
+      +'<div class="pfr-ad-slot" id="pfr-ad-slot">'
+      +'<!-- 여기에 ad unit 삽입:'
+      +' <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3894434364783200" data-ad-slot="SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins> -->'
+      +'</div>'
+      +'</div>'
       +'</div>';
     document.body.appendChild(root);
+    document.addEventListener('keydown',blockGameKeys,true);
+    document.addEventListener('keyup',blockGameKeys,true);
 
     var box=root.querySelector('.pfr-box');
     var nickEl=root.querySelector('.pfr-nick');
@@ -174,6 +219,17 @@
 
     root.querySelector('.pfr-x').onclick=closeModal;
     root.addEventListener('mousedown',function(e){ if(e.target===root)closeModal(); });
+
+    // 유효 점수(0 초과)가 아니면 등록 폼을 숨기고 랭킹만 표시 — 버그성/무의미 0점 저장 차단
+    if(!(score>0)){
+      formEl.style.display='none';
+      var note=document.createElement('div');
+      note.style.cssText='color:#9c9a94;font-size:12.5px;text-align:center;margin-bottom:2px;';
+      note.textContent='이번 점수는 랭킹 등록 대상이 아니에요.';
+      rankEl.parentNode.insertBefore(note,rankEl);
+      renderRanking(rankEl,gameId,opts,null);
+      return;
+    }
 
     skipEl.onclick=function(){ formEl.style.display='none'; renderRanking(rankEl,gameId,opts,null); };
 

@@ -487,7 +487,7 @@ function finish(){
     if(navigator.share){navigator.share({text:txt});}else{navigator.clipboard.writeText(txt).then(function(){alert('복사됐어요!');});}
   };
   gtag('event','rhythm_clear',{song:song.name,score:score,acc:acc});
-  if(window.PFRank)PFRank.end('rhythm',score,{label:'리듬 게임',unit:'점'});
+  if(window.PFRank){var _dl=DIFFS.filter(function(d){return d.id===sel.diff;})[0].lab;PFRank.end('rhythm-'+sel.song+'-'+sel.diff,score,{label:'리듬 · '+song.name+' ('+_dl+')',unit:'점'});}
 }
 
 // ── 물리 키 입력 (iPad CODEMAP 매핑 + 댓글 입력창 포커스 가드) ──

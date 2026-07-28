@@ -65,27 +65,47 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menl
       {id:'breakout',name:'🧱 벽돌깨기',unit:'점',low:false},
       {id:'snake',name:'🐍 지렁이',unit:'점',low:false},
       {id:'runner',name:'🏃 러너',unit:'m',low:false},
-      {id:'rhythm',name:'🎵 리듬',unit:'점',low:false},
+      {id:'rhythm',name:'🎵 리듬',unit:'점',low:false,prefix:true,rhythm:true},
       {id:'tetris',name:'🟦 테트리스',unit:'점',low:false},
       {id:'othello',name:'⚪ 오셀로',unit:'개',low:false},
       {id:'memory',name:'🃏 카드뒤집기',unit:'수',low:true},
       {id:'number-baseball',name:'⚾ 숫자야구',unit:'회',low:true},
       {id:'minesweeper',name:'💣 지뢰찾기',unit:'초',low:true,prefix:true}
     ];
+    // rhythm gameId = rhythm-<곡인덱스>-<난이도> → 티커 라벨용 곡명/난이도 매핑
+    var RSONGS=['반짝반짝 작은별','환희의 송가','엘리제를 위하여','캐논','터키행진곡','봄'];
+    var RDIFF={easy:'쉬움',normal:'보통',hard:'어려움'};
     var REST='https://firestore.googleapis.com/v1/projects/planfully-b373d/databases/(default)/documents/scores?pageSize=300&key=AIzaSyDkV9Lngwtkw6s8o_ZusDRBL5qjkHOv9vA';
     var box=document.getElementById('hof-ticker'),el=document.getElementById('hof-txt');
     function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+    // uid별 최고점 문서 1개만(닉·점수 그대로). uid 없는 옛 기록은 각각 유지.
+    function dedup(pool,low){
+      var best={};
+      pool.forEach(function(r){
+        var key=r.uid||('__'+(r.id||(r.nick+':'+r.score)));
+        var e=best[key];
+        if(!e||(low?r.score<e.score:r.score>e.score))best[key]=r;
+      });
+      var out=[];for(var k in best){if(best.hasOwnProperty(k))out.push(best[k]);}
+      return out;
+    }
     fetch(REST).then(function(r){return r.json();}).then(function(d){
       var docs=(d.documents||[]).map(function(x){var f=x.fields||{};
         var sc=f.score?(f.score.integerValue!==undefined?+f.score.integerValue:(f.score.doubleValue!==undefined?+f.score.doubleValue:NaN)):NaN;
-        return {game:(f.game&&f.game.stringValue)||'',nick:(f.nick&&f.nick.stringValue)||'익명',score:sc};
+        return {game:(f.game&&f.game.stringValue)||'',nick:(f.nick&&f.nick.stringValue)||'익명',score:sc,uid:(f.uid&&f.uid.stringValue)||'',id:(x.name||'').split('/').pop()};
       }).filter(function(r){return r.game&&!isNaN(r.score);});
       var lines=[];
       GAMES.forEach(function(g){
         var pool=docs.filter(function(r){return g.prefix?r.game.indexOf(g.id)===0:r.game===g.id;});
         if(!pool.length)return;
+        pool=dedup(pool,g.low);
         pool.sort(function(a,b){return g.low?a.score-b.score:b.score-a.score;});
-        lines.push(g.name+' 1위 · '+esc(pool[0].nick)+' '+pool[0].score+g.unit);
+        var top=pool[0], name=g.name;
+        if(g.rhythm){
+          var m=/^rhythm-(\d+)-(\w+)$/.exec(top.game);
+          if(m){name=g.name+'('+(RSONGS[+m[1]]||('곡'+m[1]))+'·'+(RDIFF[m[2]]||m[2])+')';}
+        }
+        lines.push(name+' 1위 · '+esc(top.nick)+' '+top.score+g.unit);
       });
       if(!lines.length)return;
       box.style.display='flex';
