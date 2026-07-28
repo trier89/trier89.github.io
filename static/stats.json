@@ -1,7 +1,7 @@
 {
- "today": 6,
- "today_pv": 50,
- "total": 91,
+ "today": 7,
+ "today_pv": 58,
+ "total": 92,
  "yesterday": {
   "users": 3,
   "new": 0,
@@ -72,5 +72,5 @@
    "avg_sec": 21
   }
  ],
- "updated": "2026-07-28 20:02"
+ "updated": "2026-07-28 22:02"
 }
