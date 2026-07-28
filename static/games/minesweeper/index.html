@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#262624;--panel:#181816;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--green:#7fb069;--yellow:#e0c07e;--blue:#7ea6e0;--red:#e07e7e;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -144,6 +145,7 @@ function win(){
   if(!_sb){_sb=document.createElement('button');_sb.id='m-share';_sb.style.cssText='display:block;margin:10px auto 0;background:transparent;border:1px solid #3e3e3a;border-radius:8px;color:#e8e6e3;font:inherit;padding:8px 16px;cursor:pointer;';$('msg').after(_sb);}
   _sb.textContent='📤 기록 자랑하기';
   _sb.onclick=function(){var t='지뢰찾기 '+R+'×'+C+' '+sec+'초 클리어! 💣 나 이겨봐 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  if(window.PFRank)PFRank.end('minesweeper-'+R+'x'+C,sec,{label:'지뢰찾기 '+R+'×'+C,lowerBetter:true,unit:'초'});
 }
 $('new').onclick=newGame;
 $('level').onchange=newGame;

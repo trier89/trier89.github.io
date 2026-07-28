@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -448,6 +449,7 @@ function finish(){
     if(navigator.share){navigator.share({text:txt});}else{navigator.clipboard.writeText(txt).then(function(){alert('복사됐어요!');});}
   };
   gtag('event','rhythm_clear',{song:song.name,score:score,acc:acc});
+  if(window.PFRank)PFRank.end('rhythm',score,{label:'리듬 게임',unit:'점'});
 }
 
 // ── 물리 키 입력 (iPad CODEMAP 매핑 + 댓글 입력창 포커스 가드) ──

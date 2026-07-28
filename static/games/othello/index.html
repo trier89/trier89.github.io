@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -101,7 +102,8 @@ function ai(){
   play(best[0],best[1],2);turn=1;draw();
   if(!moves(bd,1).length&&moves(bd,2).length){turn=2;draw();next();}else next();
 }
-function end(){over=true;draw();var a=count(1),b=count(2);info.innerHTML='<b style="color:#d97757">'+(a>b?'🎉 승리!':a<b?'아쉽게 패배':'무승부')+'</b> ('+a+':'+b+')';}
+function end(){over=true;draw();var a=count(1),b=count(2);info.innerHTML='<b style="color:#d97757">'+(a>b?'🎉 승리!':a<b?'아쉽게 패배':'무승부')+'</b> ('+a+':'+b+')';
+  if(a>b&&window.PFRank)PFRank.end('othello',a,{label:'오셀로 (AI 상대 승리·내 돌 수)',unit:'개'});}
 cv.addEventListener('click',function(e){
   if(over||turn!==1)return;var rect=cv.getBoundingClientRect();var sx=cv.width/rect.width;
   var x=(((e.clientX-rect.left)*sx)/S)|0,y=(((e.clientY-rect.top)*sx)/S)|0;

@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -88,7 +89,8 @@ function loop(t){
 function over(){state='over';if(score>hi){hi=score;localStorage.setItem('snake_hi',hi);hiE.textContent=hi;}
   ov.style.display='flex';ov.querySelector('h2').textContent='GAME OVER';
   ov.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b><br>최고기록 '+hi;
-  share('스네이크에서 '+score+'점');btn.textContent='다시 도전';}
+  share('스네이크에서 '+score+'점');btn.textContent='다시 도전';
+  if(window.PFRank)PFRank.end('snake',score,{label:'지렁이 게임',unit:'점'});}
 function start(){ov.style.display='none';reset();state='play';tick=0;requestAnimationFrame(loop);}
 btn.onclick=start;
 function set(x,y){if(x===-dir.x&&y===-dir.y)return;ndir={x:x,y:y};}

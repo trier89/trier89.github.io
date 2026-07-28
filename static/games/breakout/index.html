@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#262624;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--green:#7fb069;--yellow:#e0c07e;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -168,6 +169,7 @@ function gameOver(){
   _sb.textContent='📤 점수 자랑하기';
   _sb.onclick=function(){var t='벽돌깨기에서 '+score+"점 (레벨 "+level+")" +'! 나 이겨봐 🕹️ '+location.origin+location.pathname; if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
   startBtn.textContent='다시 도전';
+  if(window.PFRank)PFRank.end('breakout',score,{label:'벽돌깨기',unit:'점'});
 }
 startBtn.onclick=function(){
   overlay.style.display='none';

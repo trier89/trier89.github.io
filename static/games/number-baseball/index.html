@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#1e1e2e;--panel:#181825;--line:#313244;--txt:#cdd6f4;--dim:#7f849c;--green:#a6e3a1;--orange:#fab387;--red:#f38ba8;--blue:#89b4fa;--yellow:#f9e2af;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -108,6 +109,7 @@ button:hover{filter:brightness(1.1);}
         var t='숫자야구 '+tries+'번 만에 홈런! ⚾ 너도 도전 → https://planfully.ai.kr/games/number-baseball/';
         if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}
       };
+      if(window.PFRank)PFRank.end('number-baseball',tries,{label:'숫자야구',lowerBetter:true,unit:'회'});
     }
     $('guess').value=''; $('guess').focus();
   }

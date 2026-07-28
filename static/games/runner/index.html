@@ -8,6 +8,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
 <style>
 :root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -98,7 +99,8 @@ function over(){state='over';var d=Math.floor(dist);if(d>hi){hi=d;localStorage.s
   ov.querySelector('p').innerHTML='<b style="color:#e0c07e">'+d+'m</b> 달렸어요!<br>최고기록 '+hi+'m';
   var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
   b.textContent='📤 자랑하기';b.onclick=function(){var t='러너에서 '+d+'m 달렸어요! 🏃 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
-  btn.textContent='다시 도전';}
+  btn.textContent='다시 도전';
+  if(window.PFRank)PFRank.end('runner',d,{label:'점프 러너',unit:'m'});}
 function start(){ov.style.display='none';reset();state='play';last=0;requestAnimationFrame(loop);}
 btn.onclick=start;
 document.addEventListener('keydown',function(e){if(e.key===' '||e.key==='ArrowUp'){e.preventDefault();jump();}});

@@ -22,6 +22,18 @@ service cloud.firestore {
                     && resource.data.uid == request.auth.uid;
     }
 
+    // 게임 리더보드: 익명 인증만 생성 허용(수정·삭제 금지), 필드·크기·타입 검증
+    match /scores/{id} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['game','nick','score','uid','ts'])
+        && request.resource.data.game is string && request.resource.data.game.size() <= 30
+        && request.resource.data.nick is string && request.resource.data.nick.size() >= 1 && request.resource.data.nick.size() <= 20
+        && request.resource.data.score is number;
+      allow update, delete: if false;
+    }
+
     // 그 외 모든 경로 완전 차단(백스톱)
     match /{document=**} {
       allow read, write: if false;
