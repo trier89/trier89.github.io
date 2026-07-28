@@ -156,7 +156,7 @@ function finish(){state='over';cancelAnimationFrame(raf);
 }
 btn.onclick=start;
 var CODEMAP={KeyD:0,KeyF:1,Space:2,KeyJ:3,KeyK:4};
-document.addEventListener('keydown',function(e){if(e.repeat)return;var i=(e.code in CODEMAP)?CODEMAP[e.code]:KEYS.indexOf((e.key===' '?' ':(e.key||'').toLowerCase()));if(i>=0){e.preventDefault();if(state==='ready'||state==='over'){start();return;}hitLane(i);}});
+document.addEventListener('keydown',function(e){if(e.repeat)return;var t=e.target,tag=(t&&t.tagName||'').toLowerCase();if(tag==='input'||tag==='textarea'||tag==='select'||(t&&t.isContentEditable))return;/* 댓글 등 입력창 포커스 시 게임키 무시 */var i=(e.code in CODEMAP)?CODEMAP[e.code]:KEYS.indexOf((e.key===' '?' ':(e.key||'').toLowerCase()));if(i>=0){e.preventDefault();if(state==='ready'||state==='over'){start();return;}hitLane(i);}});
 function mkbtn(i){var b=document.getElementById('r'+i);if(b){var f=function(ev){ev.preventDefault();hitLane(i);};b.addEventListener('touchstart',f,{passive:false});b.addEventListener('mousedown',f);}}
 for(var i=0;i<LANES;i++)mkbtn(i);
 })();
