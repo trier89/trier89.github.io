@@ -47,8 +47,53 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menl
 <div class="wrap">
   <div class="welcome">
     <div class="wtitle">🎮 게임방</div>
-    <div class="wsub">설치 없이 바로 즐기는 무료 웹게임 — 최고기록은 브라우저에 저장돼요</div>
+    <div class="wsub">설치 없이 바로 즐기는 무료 웹게임 — 게임 끝나면 아이디 등록해 랭킹에 도전!</div>
   </div>
+  <div class="hof-ticker" id="hof-ticker" title="게임별 1등 명예의 전당" style="display:none;">
+    <span class="hof-badge">🥇 명예의 전당</span>
+    <span class="hof-txt" id="hof-txt"></span>
+  </div>
+  <style>
+  .hof-ticker{display:flex;align-items:center;gap:9px;margin-top:14px;border:1px solid var(--line);border-radius:20px;padding:8px 15px;background:var(--panel);font-size:13px;overflow:hidden;}
+  .hof-ticker .hof-badge{flex:0 0 auto;color:var(--yellow);font-weight:700;}
+  .hof-ticker .hof-txt{color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .45s ease;min-width:0;}
+  </style>
+  <script>
+  (function(){
+    var GAMES=[
+      {id:'pixel-invaders',name:'👾 인베이더',unit:'점',low:false},
+      {id:'breakout',name:'🧱 벽돌깨기',unit:'점',low:false},
+      {id:'snake',name:'🐍 지렁이',unit:'점',low:false},
+      {id:'runner',name:'🏃 러너',unit:'m',low:false},
+      {id:'rhythm',name:'🎵 리듬',unit:'점',low:false},
+      {id:'tetris',name:'🟦 테트리스',unit:'점',low:false},
+      {id:'othello',name:'⚪ 오셀로',unit:'개',low:false},
+      {id:'memory',name:'🃏 카드뒤집기',unit:'수',low:true},
+      {id:'number-baseball',name:'⚾ 숫자야구',unit:'회',low:true},
+      {id:'minesweeper',name:'💣 지뢰찾기',unit:'초',low:true,prefix:true}
+    ];
+    var REST='https://firestore.googleapis.com/v1/projects/planfully-b373d/databases/(default)/documents/scores?pageSize=300&key=AIzaSyDkV9Lngwtkw6s8o_ZusDRBL5qjkHOv9vA';
+    var box=document.getElementById('hof-ticker'),el=document.getElementById('hof-txt');
+    function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+    fetch(REST).then(function(r){return r.json();}).then(function(d){
+      var docs=(d.documents||[]).map(function(x){var f=x.fields||{};
+        var sc=f.score?(f.score.integerValue!==undefined?+f.score.integerValue:(f.score.doubleValue!==undefined?+f.score.doubleValue:NaN)):NaN;
+        return {game:(f.game&&f.game.stringValue)||'',nick:(f.nick&&f.nick.stringValue)||'익명',score:sc};
+      }).filter(function(r){return r.game&&!isNaN(r.score);});
+      var lines=[];
+      GAMES.forEach(function(g){
+        var pool=docs.filter(function(r){return g.prefix?r.game.indexOf(g.id)===0:r.game===g.id;});
+        if(!pool.length)return;
+        pool.sort(function(a,b){return g.low?a.score-b.score:b.score-a.score;});
+        lines.push(g.name+' 1위 · '+esc(pool[0].nick)+' '+pool[0].score+g.unit);
+      });
+      if(!lines.length)return;
+      box.style.display='flex';
+      var i=0;function show(){el.style.opacity=0;setTimeout(function(){el.innerHTML=lines[i%lines.length];el.style.opacity=1;},450);i++;}
+      show();if(lines.length>1)setInterval(show,4000);
+    }).catch(function(){});
+  })();
+  </script>
   <div class="grid">
     <a class="card" href="/games/pixel-invaders/">
       <div class="emoji">👾</div>
