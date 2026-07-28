@@ -102,20 +102,27 @@ function N(name){
 function seqParse(str){
   return str.trim().split(/\s+/).map(function(tok){var p=tok.split('/');return {nm:p[0],dur:p[1]?parseFloat(p[1]):1};});
 }
-// ── 6곡 (전부 저작권 만료 클래식/동요, 음높이+박자 이식) ──
+// ── 6곡 (전부 저작권 만료 클래식/동요, 음높이+박자를 원곡 리듬대로 이식 · 다중섹션 진행) ──
+// 각 seq는 단순반복이 아니라 서로 다른 파트(주제/대비/변주/에피소드)를 이어붙인 곡 전체 흐름.
 var SONGS=[
-  {name:'반짝반짝 작은별', by:'모차르트', stars:1, bpm:100, mood:'🌟 동요', reps:3,
-   seq:'C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2 G5 G5 F5 F5 E5 E5 D5/2 G5 G5 F5 F5 E5 E5 D5/2 C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2'},
-  {name:'환희의 송가', by:'베토벤 교향곡 9번', stars:1, bpm:120, mood:'🎉 합창', reps:5,
-   seq:'E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 E5/1.5 D5/0.5 D5/2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5/1.5 C5/0.5 C5/2'},
-  {name:'엘리제를 위하여', by:'베토벤', stars:3, bpm:76, mood:'🌙 서정', reps:4,
-   seq:'E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 G#4/0.5 B4/0.5 C5/1.5 R/0.5 E4/0.5 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 C5/0.5 B4/0.5 A4/2'},
-  {name:'캐논', by:'파헬벨', stars:2, bpm:90, mood:'💐 우아', reps:3,
-   seq:'F#5/2 E5/2 D5/2 C#5/2 B4/2 A4/2 B4/2 C#5/2 D5 F#5 A5 F#5 G5 E5 C#5 E5 D5 B4 G4 B4 A4 F#4 D4 F#4 F#5/2 E5/2 D5/2 C#5/2'},
-  {name:'터키행진곡', by:'모차르트', stars:3, bpm:132, mood:'⚡ 질주', reps:6,
-   seq:'B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 C6 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/2'},
-  {name:'봄 (사계 1악장)', by:'비발디', stars:2, bpm:104, mood:'🌸 경쾌', reps:4,
-   seq:'E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2'}
+  // 반짝반짝: A(주제)→B(대비 소절)→A → 옥타브 낮춘 변주 a→b → A 복귀 (ABA + 저음변주). 4분음표 위주.
+  {name:'반짝반짝 작은별', by:'모차르트', stars:1, bpm:100, mood:'🌟 동요',
+   seq:'C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2 G5 G5 F5 F5 E5 E5 D5/2 G5 G5 F5 F5 E5 E5 D5/2 C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2 C4 C4 G4 G4 A4 A4 G4/2 F4 F4 E4 E4 D4 D4 C4/2 G4 G4 F4 F4 E4 E4 D4/2 G4 G4 F4 F4 E4 E4 D4/2 C5 C5 G5 G5 A5 A5 G5/2 F5 F5 E5 E5 D5 D5 C5/2'},
+  // 환희: 저음 도입(a a')→고음 주제(a a')→대비 브리지(b)→A 복귀. 4분음표+점4분/8분+2분.
+  {name:'환희의 송가', by:'베토벤 교향곡 9번', stars:1, bpm:120, mood:'🎉 합창',
+   seq:'E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 E4/1.5 D4/0.5 D4/2 E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 D4/1.5 C4/0.5 C4/2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 E5/1.5 D5/0.5 D5/2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5/1.5 C5/0.5 C5/2 D5 D5 E5 C5 D5 E5/0.5 F5/0.5 E5 C5 D5 E5/0.5 F5/0.5 E5 D5 C5 D5 G4/2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5/1.5 C5/0.5 C5/2'},
+  // 엘리제: A 주제(16분 아르페지오)→상행 연결구→A→하행 연결구→A (론도 A t1 A t2 A).
+  {name:'엘리제를 위하여', by:'베토벤', stars:3, bpm:76, mood:'🌙 서정',
+   seq:'E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 G#4/0.5 B4/0.5 C5/1.5 R/0.5 E4/0.5 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 C5/0.5 B4/0.5 A4/2 A4/0.5 C5/0.5 E5/0.5 A5/0.5 B4/0.5 D5/0.5 F5/0.5 A5/0.5 C5/0.5 B4/0.5 A4/0.5 G#4/0.5 A4/1 E4/1 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 G#4/0.5 B4/0.5 C5/1.5 R/0.5 E4/0.5 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 C5/0.5 B4/0.5 A4/2 C5/0.5 B4/0.5 A4/0.5 G#4/0.5 F4/0.5 E4/0.5 D#4/0.5 E4/0.5 F4/0.5 G#4/0.5 B4/0.5 D5/0.5 C5/1 B4/1 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 G#4/0.5 B4/0.5 C5/1.5 R/0.5 E4/0.5 E5/0.5 D#5/0.5 E5/0.5 D#5/0.5 E5/0.5 B4/0.5 D5/0.5 C5/0.5 A4/1.5 R/0.5 C4/0.5 E4/0.5 A4/0.5 B4/1.5 R/0.5 E4/0.5 C5/0.5 B4/0.5 A4/2'},
+  // 캐논: 동일 화성진행 위 변주 — 2분→4분→8분→16분으로 점점 화려해졌다 다시 2분으로 마무리.
+  {name:'캐논', by:'파헬벨', stars:2, bpm:90, mood:'💐 우아',
+   seq:'F#5/2 E5/2 D5/2 C#5/2 B4/2 A4/2 B4/2 C#5/2 D5 F#5 A5 F#5 C#5 E5 A5 E5 B4 D5 F#5 D5 A4 C#5 F#5 C#5 B4 D5 G5 D5 A4 D5 F#5 D5 B4 D5 G5 D5 C#5 E5 A5 E5 F#5/0.5 E5/0.5 D5/0.5 C#5/0.5 D5/0.5 E5/0.5 F#5/0.5 G5/0.5 A5/0.5 G5/0.5 F#5/0.5 E5/0.5 D5/0.5 C#5/0.5 B4/0.5 A4/0.5 B4/0.5 C#5/0.5 D5/0.5 E5/0.5 F#5/0.5 G5/0.5 A5/0.5 B5/0.5 A5/0.5 G5/0.5 F#5/0.5 E5/0.5 D5/0.5 C#5/0.5 B4/0.5 A4/0.5 G4/0.5 A4/0.5 B4/0.5 C#5/0.5 D5/0.5 E5/0.5 F#5/0.5 G5/0.5 F#5/0.5 E5/0.5 D5/0.5 C#5/0.5 B4/0.5 A4/0.5 G4/0.5 F#4/0.5 G4/0.5 B4/0.5 D5/0.5 G5/0.5 F#5/0.5 D5/0.5 B4/0.5 G4/0.5 A4/0.5 C#5/0.5 E5/0.5 A5/0.5 G5/0.5 E5/0.5 C#5/0.5 A4/0.5 D5/0.25 E5/0.25 F#5/0.25 G5/0.25 A5/0.25 G5/0.25 F#5/0.25 E5/0.25 C#5/0.25 D5/0.25 E5/0.25 F#5/0.25 G5/0.25 F#5/0.25 E5/0.25 D5/0.25 B4/0.5 D5/0.5 F#5/0.5 A5/0.5 G5/0.5 E5/0.5 C#5/0.5 E5/0.5 D5/0.5 C#5/0.5 B4/0.5 A4/0.5 G4/0.5 F#4/0.5 E4/0.5 D4/0.5 F#5/2 E5/2 D5/2 C#5/2 B4/2 A4/2 B4/2 C#5/2'},
+  // 터키행진곡: A(주 리듬 16분)→A 저음역→B(A장조 에피소드)→A→B 변주(16분)→A. 특유의 빠른 리듬.
+  {name:'터키행진곡', by:'모차르트', stars:3, bpm:132, mood:'⚡ 질주',
+   seq:'B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 C6 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/2 B3/0.5 A3/0.5 G#3/0.5 A3/0.5 C4 D4/0.5 C4/0.5 B3/0.5 C4/0.5 E4 F4/0.5 E4/0.5 D#4/0.5 E4/0.5 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 B3/0.5 A3/0.5 G#3/0.5 A3/0.5 C4 E4/2 A5/0.5 C6/0.5 E6/0.5 C6/0.5 A5/0.5 C6/0.5 E6/0.5 C6/0.5 A5 E5 A5/0.5 B5/0.5 C6/0.5 A5/0.5 B5 E5 B5/0.5 C6/0.5 D6/0.5 B5/0.5 C6 A5 C6/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/2 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 C6 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/2 A5/0.25 B5/0.25 C6/0.25 D6/0.25 E6/0.25 D6/0.25 C6/0.25 B5/0.25 A5/0.5 E5/0.5 C6/0.25 B5/0.25 A5/0.25 G#5/0.25 A5 E5 A5/0.25 B5/0.25 C6/0.25 D6/0.25 E6/0.5 C6/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/2 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 F5/0.5 E5/0.5 D#5/0.5 E5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 C6 B4/0.5 A4/0.5 G#4/0.5 A4/0.5 C5 D5/0.5 C5/0.5 B4/0.5 C5/0.5 E5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 A5/2'},
+  // 봄/사계: 리토르넬로 주제(f)→같은 주제 옥타브 위 에코→새 지저귐 에피소드→리토르넬로 복귀.
+  {name:'봄 (사계 1악장)', by:'비발디', stars:2, bpm:104, mood:'🌸 경쾌',
+   seq:'E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2 E6 E6 E6 G#6/1.5 F#6/0.5 E6/2 B5 A5 G#5 F#5 E5 D#5 E5/2 B4/2 B5/0.5 A5/0.5 B5/0.5 A5/0.5 G#5/0.5 A5/0.5 B5/0.5 C#6/0.5 B5/0.25 A5/0.25 B5/0.25 A5/0.25 G#5/0.5 F#5/0.5 E5/1 F#5/0.5 G#5/0.5 A5/0.5 B5/0.5 C#6/0.5 B5/0.5 A5/0.5 G#5/0.5 F#5/1 E5/1 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 E5 E5 E5 G#5/1.5 F#5/0.5 E5/2 B5 A5 G#5 F#5 E5 D#5 E5 F#5 G#5 F#5 E5 D#5 E5/2 B4/2'}
 ];
 
 // 선택 상태
@@ -139,17 +146,11 @@ function assignLanes(list,lanes){
 }
 // ── 곡 + 난이도 → 노트 배열 ──
 function buildNotes(song,diff,lanes){
-  // 한 소절(phrase) 파싱 → reps회 반복해 곡 길이 확보(≈70~85초). rep 인덱스 기록.
-  var seq=seqParse(song.seq),phrase=[],pb=0;
+  // 곡 전체(다중섹션)를 원곡 리듬대로 파싱. 반복 없이 seq 그대로가 곡의 진행.
+  var seq=seqParse(song.seq),base=[],b=0;
   for(var i=0;i<seq.length;i++){
-    if(seq[i].nm!=='R')phrase.push({beat:pb,pitch:N(seq[i].nm),dur:seq[i].dur});
-    pb+=seq[i].dur;
-  }
-  var reps=song.reps||2, base=[];
-  for(var r=0;r<reps;r++){
-    for(var p0=0;p0<phrase.length;p0++){
-      base.push({beat:phrase[p0].beat+r*pb,pitch:phrase[p0].pitch,dur:phrase[p0].dur,rep:r});
-    }
+    if(seq[i].nm!=='R')base.push({beat:b,pitch:N(seq[i].nm),dur:seq[i].dur});
+    b+=seq[i].dur;
   }
   var list;
   if(diff==='easy')list=base.filter(function(n,i){return i%2===0;}); // 절반 샘플링(듬성)
@@ -162,13 +163,6 @@ function buildNotes(song,diff,lanes){
         extra.push({beat:p.beat,pitch:p.pitch*Math.pow(2,4/12),dur:Math.min(p.dur,1),lane:(p.lane+2)%lanes});}
     }
     list=list.concat(extra);
-  } else if(diff==='normal' && reps>1){                             // 반복 지루함 방지: 마지막 소절만 화음 살짝
-    var extraN=[];
-    for(var m=0;m<list.length;m++){var pn=list[m];
-      if(pn.rep===reps-1 && m%4===0){
-        extraN.push({beat:pn.beat,pitch:pn.pitch*Math.pow(2,3/12),dur:Math.min(pn.dur,1),lane:(pn.lane+1)%lanes});}
-    }
-    list=list.concat(extraN);
   }
   // 런타임 필드 초기화
   list.forEach(function(n){n.hit=false;n.done=false;n.holding=false;n.lastTick=0;n.tailBeat=n.beat+n.dur;n.hold=(n.dur>=1.5);});
@@ -181,19 +175,41 @@ function buildNotes(song,diff,lanes){
   return list;
 }
 
-// ── 오디오 합성 ──
-function beep(freq,t,dur,type,gainv){
-  var o=AC.createOscillator(),g=AC.createGain();
-  o.type=type||'square';o.frequency.value=freq;
-  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(gainv||0.14,t+0.01);
-  g.gain.exponentialRampToValueAtTime(0.0008,t+dur);
-  o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+dur+0.02);
+// ── 오디오 합성 (피아노풍: 기본음+배음 겹침 + 빠른 어택·지수 감쇠 + 밝기 감쇠 필터) ──
+var pianoWave;
+function initPiano(){
+  // 배음 계수(피아노 근사): 기본음1 + 2·3·4…배음 점감. PeriodicWave로 한 오실레이터에 배음 겹침.
+  var real=new Float32Array([0,1,0.55,0.33,0.18,0.11,0.07,0.04,0.02]);
+  var imag=new Float32Array(real.length);
+  pianoWave=AC.createPeriodicWave(real,imag);
 }
+// 피아노 타건음: 어택 ~0.004s → 지수 감쇠(서스테인 평탄부 없음), 로우패스가 시간에 따라 닫혀 타건감.
+function piano(freq,t,gainv,dec){
+  var o=AC.createOscillator(),g=AC.createGain(),f=AC.createBiquadFilter();
+  o.setPeriodicWave(pianoWave);o.frequency.value=freq;
+  var pk=gainv||0.2, d=dec||1.4;
+  f.type='lowpass';f.frequency.setValueAtTime(Math.min(9000,freq*7),t);f.frequency.exponentialRampToValueAtTime(Math.max(700,freq*2),t+d);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(pk,t+0.004);      // 빠른 타건 어택
+  g.gain.exponentialRampToValueAtTime(0.0001,t+d);      // 지수 감쇠(피아노 여운)
+  o.connect(f);f.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+0.05);
+}
+// 둔탁한 킥: 피치 급강하 사인 + 아주 짧은 감쇠.
+function kick(t){
+  var o=AC.createOscillator(),g=AC.createGain();
+  o.type='sine';o.frequency.setValueAtTime(115,t);o.frequency.exponentialRampToValueAtTime(45,t+0.09);
+  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.12,t+0.006);g.gain.exponentialRampToValueAtTime(0.0001,t+0.16);
+  o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+0.18);
+}
+// 롱노트 홀드음: 피아노 타건 후 약한 서스테인 유지(페달 밟은 느낌 — 게임 홀드 피드백용 절충).
 function holdTone(freq){
-  var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;
-  o.type='square';o.frequency.value=freq;
-  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.15,t+0.02);
-  o.connect(g);g.connect(AC.destination);o.start();
+  var o=AC.createOscillator(),g=AC.createGain(),f=AC.createBiquadFilter(),t=AC.currentTime;
+  o.setPeriodicWave(pianoWave);o.frequency.value=freq;
+  f.type='lowpass';f.frequency.setValueAtTime(freq*7,t);f.frequency.exponentialRampToValueAtTime(freq*2.2,t+1.2);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.2,t+0.004);     // 타건
+  g.gain.exponentialRampToValueAtTime(0.08,t+1.1);      // 감쇠 후 약한 서스테인
+  o.connect(f);f.connect(g);g.connect(AC.destination);o.start();
   return {o:o,g:g};
 }
 function stopTone(s){if(!s)return;try{var t=AC.currentTime;s.g.gain.cancelScheduledValues(t);s.g.gain.setValueAtTime(s.g.gain.value||0.001,t);s.g.gain.exponentialRampToValueAtTime(0.0008,t+0.08);s.o.stop(t+0.12);}catch(e){}}
@@ -204,8 +220,8 @@ function schedule(){
   var lead=HITY/SPEED+600;
   var base=AC.currentTime+lead/1000;   // 배경비트도 리드인 후 시작(노트와 동기)
   // 멜로디는 자동재생 안 함 — 플레이어가 맞출 때 그 음이 울려 곡이 완성됨. 배경(베이스/킥)만 가이드.
-  for(var b=0;b<=songEnd;b+=1){beep(130.81,base+b*BEAT/1000,0.12,'triangle',0.15);}   // bass C3
-  for(var b=0;b<=songEnd;b+=0.5){beep(60,base+b*BEAT/1000,0.05,'sine',0.1);}          // kick
+  for(var b=0;b<=songEnd;b+=1){piano(130.81,base+b*BEAT/1000,0.08,0.7);}              // bass 피아노 저음풍
+  for(var b=0;b<=songEnd;b+=1){kick(base+b*BEAT/1000);}                               // kick 둔탁
   t0=performance.now()+lead;                                                           // 화면 노트 기준시각(리드인 반영, 오디오 base와 동기)
 }
 
@@ -272,6 +288,7 @@ function showSelect(){
 function start(){
   if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
   if(AC.state==='suspended')AC.resume();
+  if(!pianoWave)initPiano();
   // 키 파라미터 적용
   var ks=KEYSETS[sel.keys];LANES=sel.keys;LW=W/LANES;KEYS=ks.keys;CODEMAP=ks.code;LANECOL=ks.col;
   buildButtons();
@@ -301,7 +318,7 @@ function countdown(cb){
     ctx.fillStyle=go?'#7fb069':'#e0c07e';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=20;
     ctx.font='bold '+(go?54:120)+'px sans-serif';ctx.fillText(txt,W/2,H*0.42);
     ctx.shadowBlur=0;ctx.textBaseline='alphabetic';
-    if(AC){beep(go?659.25:440,AC.currentTime+0.01,go?0.18:0.1,'sine',0.13);}
+    if(AC&&pianoWave){piano(go?659.25:440,AC.currentTime+0.01,go?0.22:0.16,go?0.5:0.35);}
     i++;setTimeout(i<seq.length?step:cb,go?650:750);
   }
   step();
@@ -383,12 +400,12 @@ function hitLane(lane){
       best.done=true;hitCnt++;combo++;maxcombo=Math.max(maxcombo,combo);
       var pts=bd<WINDOW*0.4?100:bd<WINDOW*0.7?60:30;
       score+=pts*(1+((combo/10)|0));
-      beep(best.pitch,AC.currentTime,0.22,'square',0.2);   // 맞춘 음이 울려 멜로디 완성
+      piano(best.pitch,AC.currentTime,0.24,1.5);   // 맞춘 음이 피아노로 울려 멜로디 완성
       flash(lane,'#42b642');popup(bd<WINDOW*0.4?'PERFECT':'GOOD','#42b642');
     }
     sync();
   } else {
-    beep(lanePitch[lane]||440,AC.currentTime,0.18,'square',0.16); // 빗나가도 악기처럼 소리는 남
+    piano(lanePitch[lane]||440,AC.currentTime,0.10,0.4); // 빗나가면 짧고 약한 피아노음
     combo=0;flash(lane,'#ef2029');popup('MISS','#ef2029');sync();
   }
 }
