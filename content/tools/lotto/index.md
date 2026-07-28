@@ -9,7 +9,7 @@ toc: false
 readingTime: false
 ---
 
-<div class="pf-tool" id="lt-tool"><div id="lt-loading" style="text-align:center;padding:40px 0;color:#999;">불러오는 중…</div><div id="lt-body" style="display:none;"><div id="lt-reco"></div><div id="lt-summary" class="lt-summary"></div><div class="lt-honest">🎲 로또는 완전한 <b>무작위 추첨</b>이에요. 이 추천은 <b>재미·참고용</b>이며 <b>당첨을 보장하지 않아요.</b></div><details id="lt-set-wrap" class="lt-fold"><summary>⚙️ 설정 (확률 번호 수·표본 범위)</summary><div id="lt-set" class="lt-fold-in"></div></details><details id="lt-stats-wrap" class="lt-fold"><summary>📊 번호 통계 자세히 보기</summary><div id="lt-stats" class="lt-fold-in"></div></details></div></div>
+<div class="pf-tool" id="lt-tool"><div id="lt-loading" style="text-align:center;padding:40px 0;color:#999;">불러오는 중…</div><div id="lt-body" style="display:none;"><div id="lt-reco"></div><div class="lt-honest">🎲 로또는 완전한 <b>무작위 추첨</b>이에요. 이 추천은 <b>재미·참고용</b>이며 <b>당첨을 보장하지 않아요.</b></div><section class="lt-sec"><h3 class="lt-sec-h">🔢 꼭 넣을 번호 <span>(선택 · 최대 6개)</span></h3><div id="lt-fix"></div></section><section class="lt-sec"><h3 class="lt-sec-h">⚙️ 생성 설정</h3><div id="lt-set"></div></section><section class="lt-sec"><h3 class="lt-sec-h">📋 요약 실적 <span>(과거 백테스트)</span></h3><div id="lt-summary" class="lt-summary"></div></section><section class="lt-sec"><h3 class="lt-sec-h">📊 번호 통계 <span>(역대 누적)</span></h3><div id="lt-stats"></div></section></div></div>
 
 <style>
 #lt-tool{max-width:560px;}
@@ -27,13 +27,21 @@ readingTime: false
 .lt-game .idx{font-weight:800;color:#d97706;width:22px;flex:0 0 auto;font-size:16px;}
 .lt-game .tag{font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap;}
 #lt-reco{background:#fffaf5;border:1px solid #ffe2cc;border-radius:14px;padding:20px 16px 14px;}
-.lt-fold{margin-top:12px;border:1px solid #eee;border-radius:10px;background:#fafafa;}
-.lt-fold>summary{cursor:pointer;font-weight:700;font-size:13px;color:#666;padding:11px 14px;list-style:none;}
-.lt-fold>summary::-webkit-details-marker{display:none;}
-.lt-fold>summary::before{content:"▸ ";color:#bbb;}
-.lt-fold[open]>summary::before{content:"▾ ";}
-.lt-fold-in{padding:2px 14px 14px;}
+.lt-sec{margin-top:22px;padding-top:16px;border-top:1px solid #eee;}
+.lt-sec-h{margin:0 0 12px;font-size:13.5px;font-weight:800;color:#333;}
+.lt-sec-h span{font-weight:400;font-size:11.5px;color:#aaa;}
 .lt-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:#555;margin:6px 0;}
+.lt-ctrl select{padding:5px 8px;border:1px solid #ddd;border-radius:8px;font:inherit;font-size:12.5px;}
+.lt-fix-help{font-size:12px;color:#888;margin-bottom:9px;line-height:1.5;}
+.lt-fix-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;max-width:420px;}
+@media(max-width:480px){.lt-fix-grid{grid-template-columns:repeat(7,1fr);}}
+.lt-fc{border:1px solid #e2e2e2;background:#fff;border-radius:8px;padding:7px 0;font:inherit;font-size:12.5px;font-weight:700;color:#666;cursor:pointer;text-align:center;}
+.lt-fc:hover{border-color:#d97706;}
+.lt-fc.on{color:#fff;border-color:transparent;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+.lt-fc.on.c1{background:#fbc400;color:#5c4700;}.lt-fc.on.c2{background:#69c8f2;color:#08405c;}.lt-fc.on.c3{background:#ff7272;color:#fff;}.lt-fc.on.c4{background:#8b95a1;color:#fff;}.lt-fc.on.c5{background:#b0d840;color:#3a4d0a;}
+.lt-fix-sel{margin-top:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#555;}
+.lt-fix-clear{background:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;padding:5px 11px;font:inherit;font-size:12px;cursor:pointer;color:#555;}
+.lt-fix-note6{margin-top:9px;font-size:11.5px;color:#b45309;background:#fff7ed;border-radius:8px;padding:8px 11px;}
 .lt-ctrl input[type=range]{flex:1;min-width:120px;accent-color:#d97706;}
 .lt-ctrl select{padding:5px 8px;border:1px solid #ddd;border-radius:8px;font:inherit;font-size:12.5px;}
 .lt-set-note{font-size:11.5px;color:#999;margin-top:8px;line-height:1.6;}
@@ -69,14 +77,23 @@ readingTime: false
 function mulberry32(seed){var a=seed>>>0;return function(){a|=0;a=(a+0x6D2B79F5)|0;var t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return ((t^(t>>>14))>>>0)/4294967296;};}
 function counts(rounds){var c=new Array(46).fill(0);for(var i=0;i<rounds.length;i++){var ns=rounds[i].nums;for(var k=0;k<ns.length;k++)c[ns[k]]++;}return c;}
 function normalize(c){var s=0,out=new Array(46).fill(0),i;for(i=1;i<=45;i++)s+=c[i];if(s===0){for(i=1;i<=45;i++)out[i]=1/45;return out;}for(i=1;i<=45;i++)out[i]=c[i]/s;return out;}
-function buildWeights(history,R,N,alpha){var prev=[];for(var i=0;i<history.length;i++)if(history[i].round<R)prev.push(history[i]);if(prev.length===0){var u=new Array(46).fill(0);for(var j=1;j<=45;j++)u[j]=1/45;return u;}var recent=(N&&N<prev.length)?prev.slice(prev.length-N):prev;var allN=normalize(counts(prev));var recN=normalize(counts(recent));var w=new Array(46).fill(0),sum=0,k;for(k=1;k<=45;k++){w[k]=alpha*recN[k]+(1-alpha)*allN[k];sum+=w[k];}for(k=1;k<=45;k++)w[k]/=sum;return w;}
-function drawGame(weights,rng,K){var pool=[],w=[],i;for(i=1;i<=45;i++){pool.push(i);w.push(weights[i]);}var pick=[];for(var d=0;d<K&&pick.length<6;d++){var tot=0,j;for(j=0;j<w.length;j++)tot+=w[j];var r=rng()*tot,acc=0,sel=0;for(j=0;j<w.length;j++){acc+=w[j];if(r<=acc){sel=j;break;}}pick.push(pool[sel]);pool.splice(sel,1);w.splice(sel,1);}while(pick.length<6&&pool.length>0){var idx=Math.floor(rng()*pool.length);pick.push(pool[idx]);pool.splice(idx,1);w.splice(idx,1);}return pick.sort(function(a,b){return a-b;});}
+/* 회차 누적빈도표: CUM[r][n] = 1..r회에서 번호 n 출현수. buildWeights를 O(45)로 만들어 큰 N/전체도 가볍게. */
+var CUM=null;
+function buildCum(){var latest=H[H.length-1].round,byR={};H.forEach(function(r){byR[r.round]=r;});CUM=new Array(latest+1);CUM[0]=new Array(46).fill(0);for(var r=1;r<=latest;r++){var c=CUM[r-1].slice(),row=byR[r];if(row)row.nums.forEach(function(n){c[n]++;});CUM[r]=c;}}
+function buildWeights(history,R,N,alpha){var prevLen=R-1;if(prevLen<=0){var u=new Array(46).fill(0);for(var j=1;j<=45;j++)u[j]=1/45;return u;}var pc=CUM[prevLen],recentStart=(N&&N<prevLen)?(prevLen-N):0,rb=CUM[recentStart];var allC=new Array(46).fill(0),recC=new Array(46).fill(0),i;for(i=1;i<=45;i++){allC[i]=pc[i];recC[i]=pc[i]-rb[i];}var allN=normalize(allC),recN=normalize(recC);var w=new Array(46).fill(0),sum=0,k;for(k=1;k<=45;k++){w[k]=alpha*recN[k]+(1-alpha)*allN[k];sum+=w[k];}for(k=1;k<=45;k++)w[k]/=sum;return w;}
+function drawGame(weights,rng,K,fixed){var pool=[],w=[],i;for(i=1;i<=45;i++){pool.push(i);w.push(weights[i]);}var pick=[];
+/* 1) 고정번호 먼저 포함(풀에서 제거) */
+(fixed||[]).forEach(function(f){var ix=pool.indexOf(f);if(ix>=0){pick.push(f);pool.splice(ix,1);w.splice(ix,1);}});
+/* 2) 남은 슬롯 중 K개까지 확률기반, 나머지 랜덤 */
+var remaining=6-pick.length,probCount=Math.min(K,remaining);
+for(var d=0;d<probCount&&pick.length<6;d++){var tot=0,j;for(j=0;j<w.length;j++)tot+=w[j];var r=rng()*tot,acc=0,sel=0;for(j=0;j<w.length;j++){acc+=w[j];if(r<=acc){sel=j;break;}}pick.push(pool[sel]);pool.splice(sel,1);w.splice(sel,1);}
+while(pick.length<6&&pool.length>0){var idx=Math.floor(rng()*pool.length);pick.push(pool[idx]);pool.splice(idx,1);w.splice(idx,1);}return pick.sort(function(a,b){return a-b;});}
 function oddCount(g){var n=0;for(var i=0;i<g.length;i++)if(g[i]%2===1)n++;return n;}
 function sumOf(g){var s=0;for(var i=0;i<g.length;i++)s+=g[i];return s;}
 function maxRun(g){var mx=1,run=1;for(var i=1;i<g.length;i++){if(g[i]===g[i-1]+1){run++;if(run>mx)mx=run;}else run=1;}return mx;}
 function sameSet(a,b){for(var i=0;i<6;i++)if(a[i]!==b[i])return false;return true;}
 function passes(g,lastDraw,level){if(level>=3)return true;var oc=oddCount(g),sm=sumOf(g);if(level<2){if(maxRun(g)>=3)return false;}if(level<1){if(oc<2||oc>4)return false;if(sm<100||sm>175)return false;if(lastDraw&&sameSet(g,lastDraw))return false;}else{if(oc<1||oc>5)return false;if(sm<90||sm>185)return false;}return true;}
-function recommend(history,R,opts){opts=opts||{};var N=opts.N==null?100:opts.N;var G=5;var K=opts.K==null?3:opts.K;var alpha=opts.alpha==null?0.45:opts.alpha;var seed=opts.seed==null?R:opts.seed;var rng=mulberry32(seed);var weights=buildWeights(history,R,N,alpha);var lastDraw=null;for(var i=history.length-1;i>=0;i--)if(history[i].round<R){lastDraw=history[i].nums.slice().sort(function(a,b){return a-b;});break;}var games=[],seen={};for(var gi=0;gi<G;gi++){var g=null;for(var level=0;level<=3;level++){for(var t=0;t<120;t++){var cand=drawGame(weights,rng,K);var key=cand.join(",");if(passes(cand,lastDraw,level)&&!seen[key]){g=cand;break;}}if(g)break;}if(!g)g=drawGame(weights,rng,K);seen[g.join(",")]=1;games.push({nums:g,odd:oddCount(g),even:6-oddCount(g),sum:sumOf(g),K:K});}return{round:R,N:N,G:G,K:K,alpha:alpha,games:games};}
+function recommend(history,R,opts){opts=opts||{};var N=opts.N==null?100:opts.N;var G=5;var K=opts.K==null?3:opts.K;var alpha=opts.alpha==null?0.45:opts.alpha;var fixed=opts.fixed||[];var seed=opts.seed==null?R:opts.seed;for(var fi=0;fi<fixed.length;fi++)seed=(seed*33+fixed[fi])|0;var rng=mulberry32(seed);var weights=buildWeights(history,R,N,alpha);var lastDraw=null;for(var i=history.length-1;i>=0;i--)if(history[i].round<R){lastDraw=history[i].nums.slice().sort(function(a,b){return a-b;});break;}var games=[],seen={};for(var gi=0;gi<G;gi++){var g=null;for(var level=0;level<=3;level++){for(var t=0;t<120;t++){var cand=drawGame(weights,rng,K,fixed);var key=cand.join(",");if(passes(cand,lastDraw,level)&&!seen[key]){g=cand;break;}}if(g)break;}if(!g)g=drawGame(weights,rng,K,fixed);seen[g.join(",")]=1;games.push({nums:g,odd:oddCount(g),even:6-oddCount(g),sum:sumOf(g),K:K});}return{round:R,N:N,G:G,K:K,alpha:alpha,games:games};}
 /* 게임 채점 → 등수(6=1등,5+보너스=2등,5=3등,4=4등,3=5등,else 0) */
 function grade(gameNums,actualNums,bonus){var set={},i;for(i=0;i<actualNums.length;i++)set[actualNums[i]]=1;var m=0;for(i=0;i<gameNums.length;i++)if(set[gameNums[i]])m++;var bonusMatch=gameNums.indexOf(bonus)>=0;var rank=0;if(m===6)rank=1;else if(m===5&&bonusMatch)rank=2;else if(m===5)rank=3;else if(m===4)rank=4;else if(m===3)rank=5;return{match:m,rank:rank};}
 
@@ -85,8 +102,10 @@ var $=function(id){return document.getElementById(id);};
 function ballClass(n){return n<=10?"c1":n<=20?"c2":n<=30?"c3":n<=40?"c4":"c5";}
 function ball(n,extra){return '<div class="lt-ball '+ballClass(n)+(extra?' '+extra:'')+'">'+n+'</div>';}
 function ballsHtml(nums,sm){var h='<div class="lt-balls">';nums.forEach(function(n){h+=ball(n,sm?'sm':'');});return h+'</div>';}
+function nLabel(n){return n>=9999?'전체':n;}
 
-var H=null, curN=100, curK=3, curM=20, autoMsg="";
+var H=null, curN=100, curK=3, curM=20, autoMsg="", fixedNums=[];
+var N_OPTS=[30,50,100,200,300,500,9999];
 
 /* 현재 선택 구간(최근 M경기)에서 K∈{0..6}×N∈{30,50,100,200,300} 전수 백테스트 →
    우선순위: 5등↑ 맞은 회차 수 → 게임당 평균 일치. 최고 조합을 설정에 자동 적용. */
@@ -95,7 +114,7 @@ function runAutoFind(){
   var M=Math.min(curM,latest-1);
   var best=null;
   [0,1,2,3,4,5,6].forEach(function(K){
-    var Ns=K===0?[100]:[30,50,100,200,300]; /* K=0(완전랜덤)은 N 무의미 → 1회만 */
+    var Ns=K===0?[100]:[30,50,100,200,300,500,9999]; /* K=0(완전랜덤)은 N 무의미 → 1회만 */
     Ns.forEach(function(N){
       var win=0,matchTot=0;
       for(var R=latest;R>latest-M&&R>=2;R--){
@@ -108,7 +127,7 @@ function runAutoFind(){
     });
   });
   curK=best.K;curN=best.N;
-  autoMsg='최근 '+M+'경기 기준 최고 성적: <b>K='+best.K+', N='+best.N+'</b>'+(best.K===0?' (완전 랜덤)':'')+' — 5등↑ '+best.win+'회 · 게임당 평균 '+best.avg.toFixed(2)+'개 (과거 기준·예측 아님)';
+  autoMsg='최근 '+M+'경기 기준 최고 성적: <b>K='+best.K+', N='+nLabel(best.N)+'</b>'+(best.K===0?' (완전 랜덤)':'')+' — 5등↑ '+best.win+'회 · 게임당 평균 '+best.avg.toFixed(2)+'개 (과거 기준·예측 아님)';
   renderReco();
 }
 
@@ -116,9 +135,9 @@ function runAutoFind(){
 function renderSummary(){
   var latest=H[H.length-1].round;
   var maxM=latest-1;
-  var opts=[10,20,50,100].filter(function(m){return m<=maxM;});
-  if(opts.indexOf(curM)<0)curM=opts[0]||10;
-  var M=Math.min(curM,maxM);
+  var opts=[10,20,50,100,200,300,500,99999].filter(function(m){return m<=maxM||m===99999;});
+  if(opts.indexOf(curM)<0)curM=20;
+  var M=(curM===99999)?maxM:Math.min(curM,maxM);
   var tally={1:0,2:0,3:0,4:0,5:0,none:0}, bestMatchCnt=0;
   for(var R=latest;R>latest-M&&R>=2;R--){
     var rec=recommend(H,R,{N:curN,K:curK});
@@ -128,21 +147,33 @@ function renderSummary(){
     if(bestRank)tally[bestRank]++;else tally.none++;
     if(bestMatch>=3)bestMatchCnt++;
   }
-  var mopt=opts.map(function(m){return '<option value="'+m+'"'+(m===curM?' selected':'')+'>'+m+'</option>';}).join('');
+  var mopt=opts.map(function(m){return '<option value="'+m+'"'+(m===curM?' selected':'')+'>'+(m===99999?'전체':m)+'</option>';}).join('');
   function chip(label,cnt){return '<span'+(cnt>0?' class="hit"':'')+'>'+label+' '+cnt+'회</span>';}
   var body=chip('🥇1등',tally[1])+chip('🥈2등',tally[2])+chip('🥉3등',tally[3])+chip('4등',tally[4])+chip('5등',tally[5])+'<span>미당첨 '+tally.none+'회</span>';
   var autoBlock=autoMsg?'<div class="lt-auto-msg">✅ '+autoMsg+'<div class="lt-auto-warn">⚠️ 이 값은 고른 구간의 <b>과거 결과에 맞춘 것</b>이라 다음 회차 당첨확률을 높이지 않아요(과최적화).</div></div>':'';
-  $('lt-summary').innerHTML='<div class="lt-sum-head">📋 최근 <select id="lt-mselect">'+mopt+'</select>경기 이 추천의 성적 <span style="font-weight:400;color:#999;">(K='+curK+'·N='+curN+')</span></div>'+
+  var fixNote=fixedNums.length?' 이 집계·자동찾기는 <b>고정번호를 뺀 순수 로직</b> 기준이에요.':'';
+  $('lt-summary').innerHTML='<div class="lt-sum-head">📋 최근 <select id="lt-mselect">'+mopt+'</select>경기 이 추천의 성적 <span style="font-weight:400;color:#999;">(K='+curK+'·N='+nLabel(curN)+')</span></div>'+
     '<div class="lt-sum-body">'+body+'</div>'+
-    '<div class="lt-sum-note">현재 설정으로 과거 회차를 그대로 재현해 실제 당첨과 대조한 집계예요(3개 이상 맞은 회차 '+bestMatchCnt+'회). 로또는 무작위라 대부분 미당첨입니다.</div>'+
+    '<div class="lt-sum-note">현재 설정으로 과거 회차를 그대로 재현해 실제 당첨과 대조한 집계예요(3개 이상 맞은 회차 '+bestMatchCnt+'회). 로또는 무작위라 대부분 미당첨입니다.'+fixNote+'</div>'+
     '<button id="lt-auto" class="lt-auto-btn">🔍 최고 K·N 자동 찾기</button>'+autoBlock;
   $('lt-mselect').addEventListener('change',function(){curM=parseInt(this.value,10);autoMsg="";renderSummary();});
   $('lt-auto').addEventListener('click',function(){var b=this;b.textContent='계산 중…';b.disabled=true;setTimeout(runAutoFind,20);});
 }
 
+/* 고정번호 픽커: 1~45 칩 토글, 최대 6개 */
+function renderFix(){
+  var chips='';
+  for(var n=1;n<=45;n++){var on=fixedNums.indexOf(n)>=0;chips+='<button class="lt-fc'+(on?' on '+ballClass(n):'')+'" data-n="'+n+'">'+n+'</button>';}
+  var sel=fixedNums.length?'<div class="lt-fix-sel">선택 '+fixedNums.length+'개: '+ballsHtml(fixedNums,true)+'<button class="lt-fix-clear" id="lt-fix-clear">모두 지우기</button></div>':'';
+  var note6=fixedNums.length===6?'<div class="lt-fix-note6">⚠️ 6개를 다 지정하면 5게임이 모두 똑같아져요.</div>':'';
+  $('lt-fix').innerHTML='<div class="lt-fix-help">넣고 싶은 번호를 눌러 고르세요. 각 추천 게임에 반드시 포함돼요. (비우면 일반 생성)</div><div class="lt-fix-grid">'+chips+'</div>'+sel+note6;
+  [].forEach.call(document.querySelectorAll('.lt-fc'),function(b){b.addEventListener('click',function(){var n=parseInt(b.getAttribute('data-n'),10);var ix=fixedNums.indexOf(n);if(ix>=0)fixedNums.splice(ix,1);else{if(fixedNums.length>=6)return;fixedNums.push(n);fixedNums.sort(function(a,b){return a-b;});}autoMsg="";renderFix();renderReco();});});
+  var cl=$('lt-fix-clear');if(cl)cl.addEventListener('click',function(){fixedNums=[];autoMsg="";renderFix();renderReco();});
+}
+
 function renderReco(){
   var nextR=H[H.length-1].round+1;
-  var rec=recommend(H,nextR,{N:curN,K:curK});
+  var rec=recommend(H,nextR,{N:curN,K:curK,fixed:fixedNums});
   var html='<h3 class="lt-h">🎯 이번 주 추천 5게임 · '+nextR+'회</h3>';
   rec.games.forEach(function(g,i){
     html+='<div class="lt-game"><span class="idx">'+String.fromCharCode(65+i)+'</span>'+ballsHtml(g.nums,false)+
@@ -150,12 +181,13 @@ function renderReco(){
   });
   $('lt-reco').innerHTML=html;
   var kopt='';for(var kk=0;kk<=6;kk++)kopt+='<option value="'+kk+'"'+(kk===curK?' selected':'')+'>'+kk+'개</option>';
-  $('lt-set').innerHTML='<div class="lt-ctrl"><span>확률 기반 번호 수(K):</span><select id="lt-kselect">'+kopt+'</select></div>'+
-    '<div class="lt-ctrl"><span>최근 표본(N): <b id="lt-nval">'+curN+'</b>회</span><input type="range" id="lt-nslider" min="30" max="300" step="10" value="'+curN+'"></div>'+
-    '<div class="lt-set-note">한 게임 6개 중 K개는 최근 '+curN+'회+역대 전체 출현확률 블렌드로, 나머지 '+(6-curK)+'개는 랜덤으로 채워요(K=0이면 완전 랜덤). 같은 회차·설정이면 추천이 항상 동일해요.</div>';
+  var nopt=N_OPTS.map(function(nn){return '<option value="'+nn+'"'+(nn===curN?' selected':'')+'>'+nLabel(nn)+(nn>=9999?'':'회')+'</option>';}).join('');
+  var fixCnt=fixedNums.length,remain=6-fixCnt,probShown=Math.min(curK,remain);
+  $('lt-set').innerHTML='<div class="lt-ctrl"><span>확률 기반 번호 수(K):</span><select id="lt-kselect">'+kopt+'</select><span style="color:#aaa;">/ 6개 중</span></div>'+
+    '<div class="lt-ctrl"><span>최근 표본(N):</span><select id="lt-nselect">'+nopt+'</select><span style="color:#aaa;">역대 '+H.length+'회까지</span></div>'+
+    '<div class="lt-set-note">한 게임 6개 중 '+(fixCnt?('고정 '+fixCnt+'개 + '):'')+probShown+'개는 최근 '+nLabel(curN)+(curN>=9999?' 회차':'회')+'+역대 전체 출현확률 블렌드로, 나머지 '+(remain-probShown)+'개는 랜덤으로 채워요(K=0이면 완전 랜덤). 같은 설정·입력이면 추천이 항상 동일해요.</div>';
   $('lt-kselect').addEventListener('change',function(){curK=parseInt(this.value,10);autoMsg="";renderReco();});
-  $('lt-nslider').addEventListener('input',function(){$('lt-nval').textContent=this.value;});
-  $('lt-nslider').addEventListener('change',function(){curN=parseInt(this.value,10);autoMsg="";renderReco();});
+  $('lt-nselect').addEventListener('change',function(){curN=parseInt(this.value,10);autoMsg="";renderReco();});
   renderSummary();
 }
 
@@ -192,9 +224,11 @@ function renderStats(){
 
 fetch('/data/lotto_history.json').then(function(r){return r.json();}).then(function(data){
   H=data.slice().sort(function(a,b){return a.round-b.round;});
+  buildCum();
   $('lt-loading').style.display='none';$('lt-body').style.display='block';
+  renderFix();
   renderReco();
-  $('lt-stats-wrap').addEventListener('toggle',function(){if(this.open)renderStats();});
+  renderStats();
 }).catch(function(){$('lt-loading').innerHTML='데이터를 불러오지 못했어요 😢 잠시 후 다시 시도해 주세요.';});
 })();
 </script>
