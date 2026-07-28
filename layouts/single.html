@@ -15,6 +15,23 @@
     </div>
     {{ .Content }}
   </article>
+  {{/* 2026-07-28 양면뉴스 시인성: 🔍시각A / 🔎시각B 를 색상구분 카드로 변환(기존·향후 글 자동적용) */}}
+  <style>
+  .pf-views{display:flex;gap:10px;margin:12px 0 8px;flex-wrap:wrap;}
+  .pf-view{flex:1 1 280px;padding:11px 13px;border-radius:10px;font-size:14px;line-height:1.62;border:1px solid var(--line);}
+  .pf-view b{display:block;font-size:12px;font-weight:700;margin-bottom:5px;letter-spacing:.3px;}
+  .pf-view-a{background:rgba(126,166,224,.10);border-left:3px solid var(--blue);}
+  .pf-view-a b{color:var(--blue);}
+  .pf-view-b{background:rgba(217,119,87,.11);border-left:3px solid var(--coral);}
+  .pf-view-b b{color:var(--coral-soft);}
+  </style>
+  <script>
+  (function(){var art=document.querySelector('article');if(!art)return;
+   art.querySelectorAll('li,p').forEach(function(el){var h=el.innerHTML;if(h.indexOf('시각 A')<0||h.indexOf('시각 B')<0)return;
+    el.innerHTML=h.replace(/<br\s*\/?>\s*🔍\s*시각\s*A\s*:\s*([\s\S]*?)<br\s*\/?>\s*🔎\s*시각\s*B\s*:\s*([\s\S]*?)\s*$/,
+     function(m,a,b){return '<div class="pf-views"><div class="pf-view pf-view-a"><b>🔍 시각 A · 긍정</b>'+a.trim()+'</div><div class="pf-view pf-view-b"><b>🔎 시각 B · 비판</b>'+b.trim()+'</div></div>';});
+   });})();
+  </script>
   <div class="pf-share" style="margin-top:26px;padding-top:16px;border-top:1px dashed var(--line);">
     <div style="font-size:13.5px;color:var(--dim);margin-bottom:8px;">📤 이 글 공유하기</div>
     <div id="pf-share-btns" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
