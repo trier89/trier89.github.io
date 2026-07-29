@@ -75,7 +75,22 @@ var QS=[
  ["명백히 친구가 잘못했는데 나머지가 다 그 친구 편이다",["분위기 봐서 그냥 다 같이 고개를 끄덕인다","s"],["혼자라도 '그건 네가 틀렸어' 직언한다","c"]],
  ["애인의 새 헤어스타일이 솔직히 정말 별로다",["'완전 잘 어울려!' 평화를 위한 거짓 리액션","s"],["'솔직히… 전이 나았어' 팩트를 전한다","c"]]
 ];
-var idx=0, tally={f:0,i:0,s:0,c:0}, order=['f','i','s','c'];
+// 결과 요약용 짧은 질문 라벨 + 고른 답 짧은 표기 [질문라벨, A답요약, B답요약]
+var LBL=[
+ ["주운 지갑","현금만 빼기","통째로 경찰서"],
+ ["평생 방귀","평생 못 뀌고 참기","아무데서나 시원하게"],
+ ["절친 비밀 폭로","폭로하고 1,000만원","무덤까지 침묵"],
+ ["연애 흑역사","내 흑역사 공개","애인 흑역사 알기"],
+ ["전 애인 밥약속","몰래 내가 만남","애인 만나는 거 지켜보기"],
+ ["내 험담 엿듣기","조용히 자리 뜸","바로 다가가 대면"],
+ ["5억 도박 버튼","눌러서 5억 도박","안전하게 3천만원"],
+ ["평생 소비 습관","착실 저축·건물주","즉흥 소비·아슬아슬"],
+ ["결혼 상대","설레지만 통장 마이너스","설렘 없지만 완벽"],
+ ["즉석 무대 댄스","구석에서 사진만","무대 위로 돌진"],
+ ["친구 잘못 직언","다 같이 고개 끄덕","혼자라도 직언"],
+ ["애인 새 헤어","거짓 리액션","팩트 전달"]
+];
+var idx=0, tally={f:0,i:0,s:0,c:0}, picks=[], order=['f','i','s','c'];
 function paint(btn,on){btn.style.borderColor=on?'var(--coral)':'var(--line)';btn.style.background=on?'rgba(217,119,87,.12)':'var(--panel)';}
 function show(){
   var q=QS[idx];
@@ -87,10 +102,10 @@ function show(){
   paint(a,false); paint(b,false);
   a.onmouseover=function(){paint(a,true);};a.onmouseout=function(){paint(a,false);};
   b.onmouseover=function(){paint(b,true);};b.onmouseout=function(){paint(b,false);};
-  a.onclick=function(){pick(q[1][1]);};
-  b.onclick=function(){pick(q[2][1]);};
+  a.onclick=function(){pick(0);};
+  b.onclick=function(){pick(1);};
 }
-function pick(t){tally[t]++;idx++;idx<QS.length?show():result();}
+function pick(side){var q=QS[idx];tally[q[side+1][1]]++;picks.push([idx,side]);idx++;idx<QS.length?show():result();}
 function winner(){var best='f',mx=-1;order.forEach(function(k){if(tally[k]>mx){mx=tally[k];best=k;}});return best;}
 function render(typeKey,shared){
   $('bg-intro').style.display='none';$('bg-quiz').style.display='none';
@@ -104,6 +119,18 @@ function render(typeKey,shared){
       +'<span style="flex:1;height:9px;background:var(--line);border-radius:5px;overflow:hidden;"><span style="display:block;height:9px;width:'+pct[k]+'%;background:'+(on?'var(--coral)':'#6a6a66')+';border-radius:5px;"></span></span>'
       +'<span style="width:38px;text-align:right;font-size:12px;'+(on?'font-weight:800;color:var(--coral-soft);':'color:var(--dim);')+'">'+pct[k]+'%</span></div>';
   }).join('');
+  // 내가 고른 선택들 (직접 푼 경우에만; 공유 진입은 picks 없음)
+  var picksBlock='';
+  if(!shared && picks.length===QS.length){
+    var rows=picks.map(function(p){var qi=p[0],side=p[1];var L=LBL[qi];
+      return '<div style="display:flex;align-items:baseline;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.5;">'
+        +'<span style="flex:0 0 auto;color:var(--dim);font-weight:700;min-width:132px;">Q'+(qi+1)+'. '+L[0]+'</span>'
+        +'<span style="flex:1;color:var(--coral-soft);font-weight:800;">✓ '+L[side+1]+'</span></div>';
+    }).join('');
+    picksBlock='<div style="margin:20px 0;padding:16px 18px;border-radius:12px;background:var(--panel);border:1px solid var(--line);">'
+      +'<div style="font-size:14px;font-weight:800;color:var(--coral-soft);margin-bottom:6px;">📝 내가 고른 선택들</div>'
+      +'<div style="font-size:12px;color:var(--dim);margin-bottom:8px;">이게 바로 나의 극한 취향 😏</div>'+rows+'</div>';
+  }
   var mt=TYPES[t.match.k], ms=TYPES[t.mis.k];
   $('bg-result').innerHTML=
     '<div style="text-align:center;padding:26px 18px;border-radius:16px;background:var(--panel);border:1px solid var(--line);">'
@@ -116,6 +143,7 @@ function render(typeKey,shared){
     +'<div style="margin:20px 0;padding:16px;border-radius:12px;background:var(--panel);border:1px solid var(--line);">'
       +'<div style="font-size:14px;font-weight:800;color:var(--coral-soft);margin-bottom:10px;">📊 나의 본성 지분</div>'+bars
     +'</div>'
+    +picksBlock
     +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;">'
       +'<div style="flex:1 1 240px;padding:13px 15px;border-radius:12px;background:rgba(217,119,87,.10);border:1px solid var(--line);font-size:14px;line-height:1.55;"><b style="color:var(--coral-soft);">🤝 찰떡궁합 '+mt.e+' '+mt.n+'</b><br>'+t.match.t+'</div>'
       +'<div style="flex:1 1 240px;padding:13px 15px;border-radius:12px;background:rgba(126,166,224,.10);border:1px solid var(--line);font-size:14px;line-height:1.55;"><b style="color:var(--blue);">⚡ 극과 극 '+ms.e+' '+ms.n+'</b><br>'+t.mis.t+'</div>'
@@ -142,7 +170,7 @@ function render(typeKey,shared){
   window.scrollTo({top:$('bg').offsetTop-20,behavior:'smooth'});
 }
 function result(){render(winner(),false);}
-function restart(){idx=0;tally={f:0,i:0,s:0,c:0};$('bg-result').style.display='none';$('bg-intro').style.display='none';$('bg-quiz').style.display='block';show();window.scrollTo({top:$('bg').offsetTop-20,behavior:'smooth'});}
+function restart(){idx=0;tally={f:0,i:0,s:0,c:0};picks=[];$('bg-result').style.display='none';$('bg-intro').style.display='none';$('bg-quiz').style.display='block';show();window.scrollTo({top:$('bg').offsetTop-20,behavior:'smooth'});}
 $('bg-start').onclick=function(){$('bg-intro').style.display='none';$('bg-quiz').style.display='block';show();};
 (function(){var m=location.search.match(/[?&]r=([fisc])/);if(m){render(m[1],true);}})();
 })();
