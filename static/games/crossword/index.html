@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>가로세로 낱말퀴즈(크로스워드) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
+<meta name="description" content="한글 가로세로 낱말퀴즈. 힌트를 보고 격자를 채우는 무료 웹 크로스워드. 쉬운 상식·일상 단어 퍼즐 3종, 클리어 기록 랭킹.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
+<style>
+:root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;padding:20px 14px;text-align:center;}
+h1{font-size:22px;margin-top:6px;}
+.sub{color:var(--dim);font-size:13px;margin:6px 0 14px;}
+button{background:var(--coral);border:0;border-radius:8px;color:#fff;font:inherit;font-weight:700;padding:11px 22px;cursor:pointer;}
+button:hover{background:var(--coral-soft);}
+/* 퍼즐 선택 */
+.psel{display:inline-flex;gap:4px;background:#1f1f1d;border:1px solid #3e3e3a;border-radius:10px;padding:3px;margin-bottom:14px;flex-wrap:wrap;}
+.psel button{background:transparent;border:0;color:#9c9a94;font:inherit;font-size:13px;font-weight:600;padding:6px 13px;border-radius:7px;cursor:pointer;}
+.psel button:hover{color:#e8e6e3;}
+.psel button.on{background:var(--coral);color:#fff;}
+.psel button.on:hover{background:var(--coral);}
+/* 현재 힌트 바 */
+#cur{max-width:520px;margin:0 auto 12px;min-height:44px;background:#1f1f1d;border:1px solid #3e3e3a;border-radius:10px;padding:9px 14px;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;color:#e8e6e3;}
+#cur b{color:var(--yellow);}
+/* 격자 */
+#board{display:inline-grid;gap:3px;background:#3e3e3a;border:3px solid #3e3e3a;border-radius:8px;padding:3px;touch-action:manipulation;margin:0 auto;}
+.cell{position:relative;width:clamp(38px,11vw,50px);height:clamp(38px,11vw,50px);background:#0d0d10;border-radius:4px;}
+.cell.black{background:transparent;}
+.cell .num{position:absolute;top:1px;left:3px;font-size:9px;color:#9c9a94;line-height:1;pointer-events:none;z-index:2;}
+.cell input{width:100%;height:100%;background:#151519;border:1px solid #2a2a30;border-radius:4px;color:#e8e6e3;font:inherit;font-weight:700;font-size:clamp(17px,5vw,22px);text-align:center;padding:0;caret-color:var(--coral);}
+.cell input:focus{outline:none;}
+.cell.hl input{background:#2a2620;border-color:#5c4a30;}
+.cell.active input{background:#3a2a20;border-color:var(--coral);}
+.cell.wrong input{background:#3a1c1c;border-color:#c05050;color:#e88;}
+.cell.ok input{color:var(--coral-soft);}
+/* 힌트 목록 */
+.clues{max-width:560px;margin:20px auto 0;display:flex;gap:16px;text-align:left;flex-wrap:wrap;justify-content:center;}
+.clues .col{flex:1 1 240px;min-width:220px;background:#1f1f1d;border:1px solid #3e3e3a;border-radius:10px;padding:12px 14px;}
+.clues h3{color:var(--coral);font-size:14px;margin-bottom:8px;}
+.clue{display:flex;gap:7px;padding:5px 6px;border-radius:6px;cursor:pointer;font-size:13.5px;color:#e8e6e3;}
+.clue:hover{background:#2a2a28;}
+.clue.on{background:#3a2a20;}
+.clue.done{color:#8f8d87;}
+.clue .cn{color:var(--yellow);font-weight:700;flex:0 0 auto;min-width:16px;}
+.clue .cn.done{color:#6f8f6f;}
+.hud{display:flex;gap:16px;justify-content:center;align-items:center;margin-top:16px;color:var(--dim);font-size:14px;flex-wrap:wrap;}
+.hud b{color:var(--yellow);}
+.hud button.sec{background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 16px;border-radius:8px;font-weight:600;}
+.hud button.sec:hover{background:#2a2a28;}
+#msg{min-height:20px;margin-top:12px;font-size:14px;color:var(--yellow);font-weight:700;}
+.foot{margin-top:28px;padding-top:16px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px;}
+.foot a{color:var(--coral);text-decoration:none;}
+</style>
+</head>
+<body>
+<!--pf-topnav-injected-->
+<div style="max-width:760px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #3e3e3a;padding:10px 12px 12px;">
+  <a href="/" style="color:#d97757;font-weight:800;font-size:15px;text-decoration:none;">✻ 계획대로 느긋하게</a>
+  <nav style="display:flex;gap:5px;flex-wrap:wrap;">
+    <a href="/search/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🔎 검색</a>
+    <a href="/tools/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧰 도구방</a>
+    <a href="/games/" style="color:#d97757;text-decoration:none;border:1px solid #d97757;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🎮 게임방</a>
+    <a href="/tests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧠 심리테스트</a>
+    <a href="/page/requests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">💌 요청방</a>
+    <a href="/categories/트렌드/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🔍 트렌드</a>
+    <a href="/categories/오늘의-역사/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🏛 역사</a>
+    <a href="/categories/뉴스/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">📰 뉴스</a>
+    <a href="/darak-company/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🏢 다락방컴퍼니</a>
+  </nav>
+</div>
+<h1>🔤 가로세로 낱말퀴즈</h1>
+<div class="sub">힌트를 보고 격자를 채우세요 · 칸 클릭 → 입력(가로↔세로 전환) · 힌트 클릭 → 단어 강조 · 한 칸에 한 글자</div>
+
+<div class="psel" id="psel"></div>
+<div id="cur">칸이나 힌트를 골라 시작하세요.</div>
+
+<div id="board"></div>
+
+<div class="hud">
+  <span>⏱ <b id="timer">0:00</b></span>
+  <button class="sec" id="btnCheck" style="background:var(--coral);border:0;color:#fff;">정답 확인</button>
+  <button class="sec" id="btnClear">지우기</button>
+</div>
+<div id="msg"></div>
+
+<div class="clues" id="clues"></div>
+
+<div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+
+<script>
+(function(){
+// ─────────────────────────────────────────────────────────────
+// 내장 퍼즐 (오리지널 창작, 쉬운 상식·일상 단어)
+//  · answer 는 한글 음절 문자열, 각 음절이 한 칸.
+//  · 교차 지점은 verify 로 사전 검증됨(모든 연속 칸이 실제 단어).
+// ─────────────────────────────────────────────────────────────
+var PUZZLES=[
+  { id:'a', name:'생활 낱말', rows:4, cols:5,
+    across:[
+      {r:0,c:0,answer:'김치',clue:'배추·무를 소금에 절여 담그는 한국 대표 발효 음식'},
+      {r:1,c:1,answer:'약국',clue:'약사가 있고 약을 파는 곳'},
+      {r:2,c:2,answer:'수박',clue:'여름에 먹는, 겉은 초록 속은 빨간 큰 과일'},
+      {r:3,c:3,answer:'수건',clue:'물기를 닦는 천, 목욕이나 세수 뒤에 쓰는 것'}
+    ],
+    down:[
+      {r:0,c:1,answer:'치약',clue:'칫솔에 짜서 이를 닦을 때 쓰는 것'},
+      {r:1,c:2,answer:'국수',clue:'밀가루로 길게 뽑아 삶아 먹는 면 요리'},
+      {r:2,c:3,answer:'박수',clue:'손뼉을 쳐서 환영하거나 칭찬하는 것'}
+    ] },
+  { id:'b', name:'상식 낱말', rows:4, cols:5,
+    across:[
+      {r:0,c:0,answer:'포도',clue:'송이로 열리는 보라색 과일, 와인의 재료'},
+      {r:1,c:1,answer:'시계',clue:'시간을 알려 주는 도구'},
+      {r:2,c:2,answer:'단추',clue:'옷을 여밀 때 구멍에 끼우는 작고 동그란 것'},
+      {r:3,c:3,answer:'석유',clue:'땅속에서 뽑아 자동차 연료 등으로 쓰는 기름'}
+    ],
+    down:[
+      {r:0,c:1,answer:'도시',clue:'사람이 많이 모여 사는 큰 고장'},
+      {r:1,c:2,answer:'계단',clue:'오르내릴 수 있게 층층이 만든 발판'},
+      {r:2,c:3,answer:'추석',clue:'음력 8월 15일, 한가위라고도 부르는 명절'}
+    ] },
+  { id:'c', name:'과학 상식', rows:4, cols:4,
+    across:[
+      {r:0,c:0,answer:'두부',clue:'콩을 갈아 굳혀 만든 부드럽고 하얀 음식'},
+      {r:1,c:1,answer:'자석',clue:'쇠붙이를 끌어당기는 물건, N극과 S극이 있는'},
+      {r:2,c:2,answer:'유리',clue:'투명하고 잘 깨지는, 창문에 끼우는 재료'}
+    ],
+    down:[
+      {r:0,c:1,answer:'부자',clue:'재산이나 돈이 아주 많은 사람'},
+      {r:1,c:2,answer:'석유',clue:'땅속에서 뽑아 연료로 쓰는 기름'},
+      {r:2,c:3,answer:'리본',clue:'선물 포장이나 머리에 매는 장식용 끈'}
+    ] }
+];
+
+// ── DOM ──
+var boardEl=document.getElementById('board'),
+    cluesEl=document.getElementById('clues'),
+    pselEl=document.getElementById('psel'),
+    curEl=document.getElementById('cur'),
+    msgEl=document.getElementById('msg'),
+    timerEl=document.getElementById('timer');
+
+// ── 상태 ──
+var P, grid, cells, words, cellNum, active, cleared,
+    t0=0, tick=null, running=false;
+
+function isSyll(ch){ if(!ch)return false; var x=ch.charCodeAt(0); return x>=0xAC00&&x<=0xD7A3; }
+
+// 퍼즐 선택 버튼
+PUZZLES.forEach(function(p,i){
+  var b=document.createElement('button');
+  b.textContent=(i+1)+'. '+p.name;
+  b.onclick=function(){ load(i); [].forEach.call(pselEl.children,function(x){x.classList.remove('on');}); b.classList.add('on'); };
+  pselEl.appendChild(b);
+});
+pselEl.children[0].classList.add('on');
+
+// ── 퍼즐 로드 ──
+function load(idx){
+  stopTimer(); running=false; t0=0; timerEl.textContent='0:00';
+  P=PUZZLES[idx]; cleared=false; active=null;
+  msgEl.textContent=''; curEl.innerHTML='칸이나 힌트를 골라 시작하세요.';
+
+  // 정답 격자 + 검은칸 마스크 구성
+  grid=[]; for(var r=0;r<P.rows;r++){ grid.push(new Array(P.cols).fill(null)); }
+  words=[];
+  function place(entry,dir){
+    var w={dir:dir,r:entry.r,c:entry.c,answer:entry.answer,clue:entry.clue,cells:[]};
+    for(var k=0;k<entry.answer.length;k++){
+      var rr=entry.r+(dir==='down'?k:0), cc=entry.c+(dir==='across'?k:0);
+      grid[rr][cc]=entry.answer[k];
+      w.cells.push([rr,cc]);
+    }
+    words.push(w); return w;
+  }
+  (P.across||[]).forEach(function(e){ place(e,'across'); });
+  (P.down||[]).forEach(function(e){ place(e,'down'); });
+
+  // 번호 매기기(읽기 순서: 가로/세로 시작 칸)
+  cellNum=[]; for(var r=0;r<P.rows;r++){ cellNum.push(new Array(P.cols).fill(0)); }
+  var n=0;
+  for(var r=0;r<P.rows;r++)for(var c=0;c<P.cols;c++){
+    if(grid[r][c]===null) continue;
+    var aStart=(c===0||grid[r][c-1]===null)&&(c+1<P.cols&&grid[r][c+1]!==null);
+    var dStart=(r===0||grid[r-1][c]===null)&&(r+1<P.rows&&grid[r+1][c]!==null);
+    if(aStart||dStart){ n++; cellNum[r][c]=n; }
+  }
+  // 단어에 번호 연결
+  words.forEach(function(w){ w.num=cellNum[w.r][w.c]; });
+
+  buildBoard();
+  buildClues();
+}
+
+function buildBoard(){
+  boardEl.innerHTML='';
+  boardEl.style.gridTemplateColumns='repeat('+P.cols+', auto)';
+  cells=[]; for(var r=0;r<P.rows;r++){ cells.push(new Array(P.cols).fill(null)); }
+  for(var r=0;r<P.rows;r++)for(var c=0;c<P.cols;c++){
+    var d=document.createElement('div'); d.className='cell';
+    if(grid[r][c]===null){ d.className='cell black'; boardEl.appendChild(d); continue; }
+    if(cellNum[r][c]){ var s=document.createElement('span'); s.className='num'; s.textContent=cellNum[r][c]; d.appendChild(s); }
+    var inp=document.createElement('input');
+    inp.type='text'; inp.maxLength=1; inp.autocomplete='off'; inp.autocapitalize='off';
+    inp.setAttribute('inputmode','text'); inp.setAttribute('aria-label','('+(r+1)+','+(c+1)+') 칸');
+    inp.dataset.r=r; inp.dataset.c=c;
+    bindInput(inp,r,c);
+    d.appendChild(inp);
+    cells[r][c]={el:d,inp:inp};
+    boardEl.appendChild(d);
+  }
+}
+
+// 한 칸 입력 처리(한글 IME 조합 대응)
+function bindInput(inp,r,c){
+  var composing=false;
+  inp.addEventListener('focus',function(){ focusCell(r,c,false); });
+  inp.addEventListener('mousedown',function(){
+    // 이미 이 칸에 있으면 방향 전환
+    if(active&&active.r===r&&active.c===c){ toggleDir(r,c); }
+  });
+  inp.addEventListener('compositionstart',function(){ composing=true; });
+  inp.addEventListener('compositionend',function(e){ composing=false; handle(e.target.value); });
+  inp.addEventListener('input',function(e){ if(!composing) handle(e.target.value); });
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Backspace'){
+      if(inp.value===''){ e.preventDefault(); step(-1); }
+      else { setWrong(r,c,false); markOk(r,c); }
+    } else if(e.key==='ArrowRight'){ e.preventDefault(); move(r,c,0,1); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); move(r,c,0,-1); }
+    else if(e.key==='ArrowDown'){ e.preventDefault(); move(r,c,1,0); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); move(r,c,-1,0); }
+    else if(e.key==='Enter'){ e.preventDefault(); check(); }
+  });
+  function handle(v){
+    if(cleared) return;
+    startTimer();
+    if(v.length>1){ v=v.slice(-1); inp.value=v; }
+    setWrong(r,c,false);
+    if(v===''){ return; }
+    if(isSyll(v)){ inp.value=v; markOk(r,c); step(1); }
+    else { inp.value=''; }   // 완성된 한글 음절만 허용
+  }
+}
+
+function markOk(r,c){ /* 정답확인 전에는 색 표시 안 함(자리표시만) */ }
+
+// 활성 칸/방향
+function focusCell(r,c,doFocus){
+  if(!cells[r]||!cells[r][c]) return;
+  var dir=(active&&active.dir)?active.dir:'across';
+  // 그 방향 단어가 없으면 다른 방향
+  if(!wordAt(r,c,dir)) dir=(dir==='across'?'down':'across');
+  if(!wordAt(r,c,dir)) return;
+  active={r:r,c:c,dir:dir};
+  render();
+  if(doFocus) cells[r][c].inp.focus();
+}
+function toggleDir(r,c){
+  var other=(active.dir==='across'?'down':'across');
+  if(wordAt(r,c,other)){ active.dir=other; render(); }
+}
+function wordAt(r,c,dir){
+  for(var i=0;i<words.length;i++){
+    var w=words[i]; if(w.dir!==dir) continue;
+    for(var k=0;k<w.cells.length;k++){ if(w.cells[k][0]===r&&w.cells[k][1]===c) return w; }
+  }
+  return null;
+}
+function activeWord(){ return active?wordAt(active.r,active.c,active.dir):null; }
+
+// 다음/이전 칸으로 이동(현재 단어 내)
+function step(dir){
+  var w=activeWord(); if(!w) return;
+  var idx=-1;
+  for(var k=0;k<w.cells.length;k++){ if(w.cells[k][0]===active.r&&w.cells[k][1]===active.c){ idx=k; break; } }
+  var ni=idx+dir;
+  if(ni<0||ni>=w.cells.length){ return; }
+  var nc=w.cells[ni]; active.r=nc[0]; active.c=nc[1]; render(); cells[nc[0]][nc[1]].inp.focus();
+}
+// 격자 이동(방향키): 다음 흰 칸으로
+function move(r,c,dr,dc){
+  var nr=r+dr,nc=c+dc;
+  while(nr>=0&&nr<P.rows&&nc>=0&&nc<P.cols){
+    if(grid[nr][nc]!==null){ active={r:nr,c:nc,dir:(dr!==0?'down':'across')}; if(!wordAt(nr,nc,active.dir))active.dir=(active.dir==='across'?'down':'across'); render(); cells[nr][nc].inp.focus(); return; }
+    nr+=dr; nc+=dc;
+  }
+}
+
+function setWrong(r,c,on){ if(cells[r]&&cells[r][c]) cells[r][c].el.classList.toggle('wrong',!!on); }
+
+// 하이라이트/현재 힌트 갱신
+function render(){
+  for(var r=0;r<P.rows;r++)for(var c=0;c<P.cols;c++){
+    if(!cells[r]||!cells[r][c])continue;
+    cells[r][c].el.classList.remove('hl','active');
+  }
+  var w=activeWord();
+  if(w){
+    w.cells.forEach(function(cc){ cells[cc[0]][cc[1]].el.classList.add('hl'); });
+    if(active) cells[active.r][active.c].el.classList.add('active');
+    curEl.innerHTML='<b>'+(w.dir==='across'?'가로':'세로')+' '+w.num+'.</b> '+esc(w.clue);
+  }
+  // 힌트 목록 활성 표시
+  [].forEach.call(cluesEl.querySelectorAll('.clue'),function(el){
+    el.classList.toggle('on', w && el.dataset.dir===w.dir && +el.dataset.num===w.num);
+  });
+}
+
+function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+
+// 힌트 목록
+function buildClues(){
+  function list(title,dir){
+    var col=document.createElement('div'); col.className='col';
+    col.innerHTML='<h3>'+title+'</h3>';
+    words.filter(function(w){return w.dir===dir;})
+         .sort(function(a,b){return a.num-b.num;})
+         .forEach(function(w){
+      var row=document.createElement('div'); row.className='clue';
+      row.dataset.dir=dir; row.dataset.num=w.num;
+      row.innerHTML='<span class="cn">'+w.num+'</span><span>'+esc(w.clue)+'</span>';
+      row.onclick=function(){ selectWord(w); };
+      col.appendChild(row);
+    });
+    return col;
+  }
+  cluesEl.innerHTML='';
+  cluesEl.appendChild(list('가로 열쇠','across'));
+  cluesEl.appendChild(list('세로 열쇠','down'));
+}
+function selectWord(w){
+  // 첫 빈 칸(없으면 첫 칸)으로 포커스
+  var target=w.cells[0];
+  for(var k=0;k<w.cells.length;k++){ var cc=w.cells[k]; if(cells[cc[0]][cc[1]].inp.value===''){ target=cc; break; } }
+  active={r:target[0],c:target[1],dir:w.dir};
+  render(); cells[target[0]][target[1]].inp.focus();
+}
+
+// ── 타이머 ──
+function startTimer(){ if(running||cleared)return; running=true; t0=Date.now()-0; tick=setInterval(paint,500); paint(); }
+function stopTimer(){ if(tick){clearInterval(tick);tick=null;} running=false; }
+function elapsed(){ return t0?Math.floor((Date.now()-t0)/1000):0; }
+function paint(){ var s=elapsed(); timerEl.textContent=Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+
+// ── 정답 확인 ──
+function check(){
+  if(cleared)return;
+  var empty=0,wrong=0;
+  for(var r=0;r<P.rows;r++)for(var c=0;c<P.cols;c++){
+    if(grid[r][c]===null)continue;
+    var v=cells[r][c].inp.value;
+    if(v===''){ empty++; setWrong(r,c,false); continue; }
+    if(v!==grid[r][c]){ wrong++; setWrong(r,c,true); }
+    else setWrong(r,c,false);
+  }
+  if(empty>0){ msgEl.style.color='var(--yellow)'; msgEl.textContent='아직 빈 칸이 '+empty+'개 남았어요.'; return; }
+  if(wrong>0){ msgEl.style.color='#e88'; msgEl.textContent='틀린 칸이 '+wrong+'개 있어요. (빨간 칸 확인)'; return; }
+  win();
+}
+
+function win(){
+  cleared=true; stopTimer();
+  var s=elapsed();
+  // 완성 표시
+  for(var r=0;r<P.rows;r++)for(var c=0;c<P.cols;c++){ if(grid[r][c]!==null){ cells[r][c].el.classList.remove('wrong','hl','active'); cells[r][c].el.classList.add('ok'); cells[r][c].inp.blur(); } }
+  msgEl.style.color='var(--coral)';
+  msgEl.textContent='🎉 클리어! '+Math.floor(s/60)+'분 '+(s%60)+'초';
+  if(window.PFRank) PFRank.end('crossword-'+P.id, s, {label:'가로세로 '+P.name, unit:'초', lowerBetter:true});
+}
+
+// ── 지우기 ──
+document.getElementById('btnClear').onclick=function(){
+  if(cleared){ load(indexOf()); return; }
+  for(var r=0;r<P.rows;r++)for(var c=0;c<P.cols;c++){ if(grid[r][c]!==null){ cells[r][c].inp.value=''; setWrong(r,c,false); } }
+  msgEl.textContent='';
+};
+document.getElementById('btnCheck').onclick=check;
+function indexOf(){ for(var i=0;i<PUZZLES.length;i++)if(PUZZLES[i]===P)return i; return 0; }
+
+// 첫 퍼즐 로드
+load(0);
+})();
+</script>
+
+<div style="max-width:760px;margin:22px auto 0;padding:0 12px;"><h3 style="text-align:center;color:#e8e6e3;font-size:15px;margin-bottom:8px;">💬 방명록</h3><div id="planfully-comments"></div><script src="/comments.js?v=1" defer></script></div>
+</body>
+</html>

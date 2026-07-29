@@ -74,21 +74,58 @@ var SHAPES=[[],
 [[5,5,0],[0,5,5]],           // Z
 [[6,0,0],[6,6,6]],           // J
 [[0,0,7],[7,7,7]]];          // L
+// T조각은 SRS(Super Rotation System)를 위해 4개 회전상태를 고정 3x3로 표현 → 중심이 항상 (1,1)이라 코너판정 안정적 (2026-07-29 T스핀 지원)
+var T_STATES=[
+  [[0,3,0],[3,3,3],[0,0,0]],  // 0 spawn (위로 뾰족)
+  [[0,3,0],[0,3,3],[0,3,0]],  // 1 R (오른쪽)
+  [[0,0,0],[3,3,3],[0,3,0]],  // 2 (아래)
+  [[0,3,0],[3,3,0],[0,3,0]]]; // 3 L (왼쪽)
+// SRS JLSTZ 킥테이블(시계방향 전환용), 화면좌표(y는 아래로 증가)로 미리 부호 반영
+var KICKS_CW={
+  0:[[0,0],[-1,0],[-1,-1],[0,2],[-1,2]],
+  1:[[0,0],[1,0],[1,1],[0,-2],[1,-2]],
+  2:[[0,0],[1,0],[1,-1],[0,2],[1,2]],
+  3:[[0,0],[-1,0],[-1,1],[0,-2],[-1,2]]};
 var grid,cur,px,py,score,lines,level,hi=+localStorage.getItem('tetris_hi')||0,state='ready',drop,acc,bag=[];
+var curType,rotState,lastRot,lastKick,msgEl;
 var scE=document.getElementById('sc'),lnE=document.getElementById('ln'),lvE=document.getElementById('lv'),hiE=document.getElementById('hi'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
 hiE.textContent=hi;
 function newGrid(){grid=[];for(var y=0;y<ROWS;y++)grid.push(new Array(COLS).fill(0));}
 function nextPiece(){if(!bag.length){bag=[1,2,3,4,5,6,7];for(var i=bag.length-1;i>0;i--){var j=(Math.random()*(i+1))|0;var t=bag[i];bag[i]=bag[j];bag[j]=t;}}return bag.pop();}
-function spawn(){cur=SHAPES[nextPiece()].map(function(r){return r.slice();});px=((COLS-cur[0].length)/2)|0;py=0;if(collide(px,py,cur))over();}
+function spawn(){var t=nextPiece();curType=t;rotState=0;lastRot=false;lastKick=-1;cur=(t===3?T_STATES[0]:SHAPES[t]).map(function(r){return r.slice();});px=((COLS-cur[0].length)/2)|0;py=0;if(collide(px,py,cur))over();}
 function collide(nx,ny,sh){for(var y=0;y<sh.length;y++)for(var x=0;x<sh[y].length;x++){if(sh[y][x]){var gx=nx+x,gy=ny+y;if(gx<0||gx>=COLS||gy>=ROWS||(gy>=0&&grid[gy][gx]))return true;}}return false;}
 function merge(){for(var y=0;y<cur.length;y++)for(var x=0;x<cur[y].length;x++){if(cur[y][x]&&py+y>=0)grid[py+y][px+x]=cur[y][x];}}
-function rotate(){var n=cur.length,m=cur[0].length,r=[];for(var x=0;x<m;x++){r.push([]);for(var y=n-1;y>=0;y--)r[x].push(cur[y][x]);}
-  var nx=px;if(collide(px,py,r)){if(!collide(px-1,py,r))nx=px-1;else if(!collide(px+1,py,r))nx=px+1;else return;}px=nx;cur=r;}
-function clearLines(){var c=0;for(var y=ROWS-1;y>=0;y--){if(grid[y].every(function(v){return v;})){grid.splice(y,1);grid.unshift(new Array(COLS).fill(0));c++;y++;}}
-  if(c){lines+=c;score+=[0,100,300,500,800][c]*level;level=1+((lines/8)|0);drop=Math.max(55,460-(level-1)*45);sync();}}
+function rotate(){
+  if(curType===3){ // T조각: SRS 킥테이블로 회전(벽·바닥·블록에 붙어도 킥으로 성립)
+    var nr=(rotState+1)%4,r=T_STATES[nr],ks=KICKS_CW[rotState];
+    for(var i=0;i<ks.length;i++){var kx=px+ks[i][0],ky=py+ks[i][1];if(!collide(kx,ky,r)){px=kx;py=ky;cur=r;rotState=nr;lastRot=true;lastKick=i;return;}}
+    return; // 5개 킥 모두 실패 → 회전 취소
+  }
+  var n=cur.length,m=cur[0].length,r=[];for(var x=0;x<m;x++){r.push([]);for(var y=n-1;y>=0;y--)r[x].push(cur[y][x]);}
+  var nx=px;if(collide(px,py,r)){if(!collide(px-1,py,r))nx=px-1;else if(!collide(px+1,py,r))nx=px+1;else return;}px=nx;cur=r;lastRot=true;}
+// T스핀 코너 판정: 벽·바닥·기존블록이면 막힘(true), 천장(y<0)은 비어있음으로 간주
+function occ(x,y){if(x<0||x>=COLS||y>=ROWS)return true;if(y<0)return false;return grid[y][x]!==0;}
+// 3-코너 룰: 중심 기준 4대각 중 3개↑ 막힘 → T스핀. 정면 2코너 모두 막힘=정식(2), 아니면 mini(1). 0=아님
+function tspinType(){
+  var A=occ(px,py),Bc=occ(px+2,py),C=occ(px,py+2),D=occ(px+2,py+2);
+  var cnt=(A?1:0)+(Bc?1:0)+(C?1:0)+(D?1:0);if(cnt<3)return 0;
+  var f1,f2;if(rotState===0){f1=A;f2=Bc;}else if(rotState===1){f1=Bc;f2=D;}else if(rotState===2){f1=C;f2=D;}else{f1=A;f2=C;}
+  var full=(f1&&f2);if(lastKick===4)full=true; // 마지막 킥이 큰 킥(TST/fin)이면 정식 T스핀
+  return full?2:1;}
+function lockPiece(){var ts=(curType===3&&lastRot)?tspinType():0;merge();clearLines(ts);spawn();}
+function clearLines(ts){var c=0;for(var y=ROWS-1;y>=0;y--){if(grid[y].every(function(v){return v;})){grid.splice(y,1);grid.unshift(new Array(COLS).fill(0));c++;y++;}}
+  if(ts){ // T스핀 보너스 (정식/미니) + 화면 표시
+    score+=(ts===2?[400,800,1200,1600][c]:[100,200,400,400][c])*level;
+    flashMsg(msgFor(ts,c));
+  }else if(c){score+=[0,100,300,500,800][c]*level;}
+  if(c){lines+=c;level=1+((lines/8)|0);drop=Math.max(55,460-(level-1)*45);}
+  if(ts||c)sync();}
+function msgFor(ts,c){var n=['','SINGLE','DOUBLE','TRIPLE'][c];if(!c)return ts===2?'T-SPIN!':'MINI T-SPIN!';return (ts===2?'T-SPIN ':'MINI T-SPIN ')+n+'!';}
+function flashMsg(txt){if(!msgEl){msgEl=document.createElement('div');msgEl.style.cssText='position:absolute;left:0;right:0;top:36%;text-align:center;font-size:24px;font-weight:800;color:#e0c07e;text-shadow:0 2px 8px #000,0 0 12px rgba(217,119,87,.6);pointer-events:none;transition:opacity .5s;z-index:5;';document.getElementById('wrap').appendChild(msgEl);}
+  msgEl.textContent=txt;msgEl.style.opacity='1';clearTimeout(msgEl._t);msgEl._t=setTimeout(function(){msgEl.style.opacity='0';},900);}
 function sync(){scE.textContent=score;lnE.textContent=lines;lvE.textContent=level;}
-function down(){if(collide(px,py+1,cur)){merge();clearLines();spawn();}else py++;}
-function hard(){while(!collide(px,py+1,cur))py++;down();}
+function down(){if(collide(px,py+1,cur)){lockPiece();}else{py++;lastRot=false;}}
+function hard(){var m=false;while(!collide(px,py+1,cur)){py++;m=true;}if(m)lastRot=false;down();}
 function draw(){
   ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,cv.width,cv.height);
   for(var y=0;y<ROWS;y++)for(var x=0;x<COLS;x++){if(grid[y][x])cell(x,y,grid[y][x]);}
@@ -106,10 +143,10 @@ function over(){state='over';if(score>hi){hi=score;localStorage.setItem('tetris_
 function start(){ov.style.display='none';newGrid();score=0;lines=0;level=1;drop=460;acc=0;bag=[];sync();spawn();state='play';requestAnimationFrame(loop);}
 btn.onclick=start;
 document.addEventListener('keydown',function(e){if(state!=='play')return;var k=e.key;
-  if(k==='ArrowLeft'){if(!collide(px-1,py,cur))px--;}else if(k==='ArrowRight'){if(!collide(px+1,py,cur))px++;}
+  if(k==='ArrowLeft'){if(!collide(px-1,py,cur)){px--;lastRot=false;}}else if(k==='ArrowRight'){if(!collide(px+1,py,cur)){px++;lastRot=false;}}
   else if(k==='ArrowDown'){down();}else if(k==='ArrowUp'){rotate();}else if(k===' '){hard();}else return;e.preventDefault();draw();});
 function bind(id,fn){var b=document.getElementById(id);if(b)b.onclick=function(){if(state!=='play')return;fn();draw();};}
-bind('t-l',function(){if(!collide(px-1,py,cur))px--;});bind('t-r',function(){if(!collide(px+1,py,cur))px++;});
+bind('t-l',function(){if(!collide(px-1,py,cur)){px--;lastRot=false;}});bind('t-r',function(){if(!collide(px+1,py,cur)){px++;lastRot=false;}});
 bind('t-rot',rotate);bind('t-d',down);bind('t-drop',hard);
 
 // 모바일 제스처: 캔버스를 손으로 끌어 좌우이동, 탭하면 회전, 아래로 쓸면 낙하 (2026-07-23)
@@ -125,8 +162,8 @@ bind('t-rot',rotate);bind('t-d',down);bind('t-drop',hard);
     if(state!=='play')return;
     var t=e.touches[0],w=cw(),dx=t.clientX-lastX;
     while(Math.abs(dx)>=w){                      // 한 칸 폭 넘게 끌 때마다 한 칸 이동
-      if(dx>0){if(!collide(px+1,py,cur))px++;dx-=w;lastX+=w;}
-      else{if(!collide(px-1,py,cur))px--;dx+=w;lastX-=w;}
+      if(dx>0){if(!collide(px+1,py,cur)){px++;lastRot=false;}dx-=w;lastX+=w;}
+      else{if(!collide(px-1,py,cur)){px--;lastRot=false;}dx+=w;lastX-=w;}
       moved=true;draw();
     }
     if((t.clientY-sy)>w*1.2&&Math.abs(t.clientX-sx)<w){ down();sy=t.clientY;moved=true;draw(); } // 아래로 끌면 한 칸 낙하

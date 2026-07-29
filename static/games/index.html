@@ -70,7 +70,12 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menl
       {id:'othello',name:'⚪ 오셀로',unit:'개',low:false},
       {id:'memory',name:'🃏 카드뒤집기',unit:'수',low:true},
       {id:'number-baseball',name:'⚾ 숫자야구',unit:'회',low:true},
-      {id:'minesweeper',name:'💣 지뢰찾기',unit:'초',low:true,prefix:true}
+      {id:'minesweeper',name:'💣 지뢰찾기',unit:'초',low:true,prefix:true},
+      {id:'gomoku',name:'⚫ 오목',unit:'수',low:true},
+      {id:'pacman',name:'🟡 팩맨',unit:'점',low:false},
+      {id:'suika',name:'🍉 수박게임',unit:'점',low:false},
+      {id:'nonogram',name:'🧩 노노그램',unit:'초',low:true,prefix:true},
+      {id:'crossword',name:'✏️ 가로세로',unit:'초',low:true,prefix:true}
     ];
     // rhythm gameId = rhythm-<곡인덱스>-<난이도> → 티커 라벨용 곡명/난이도 매핑
     var RSONGS=['반짝반짝 작은별','환희의 송가','엘리제를 위하여','캐논','터키행진곡','봄'];
@@ -170,10 +175,25 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menl
       <div class="cname">리듬 게임</div>
       <div class="cdesc">박자에 맞춰 노트 두드리기 — 음악을 브라우저가 직접 연주(저작권 프리)</div>
     </a>
-    <a class="card soon" href="#">
+    <a class="card" href="/games/pacman/">
+      <div class="emoji">🟡</div>
+      <div class="cname">팩맨</div>
+      <div class="cdesc">미로에서 유령을 피해 점 먹기 — 방향키·스와이프·D패드, 파워펠릿으로 반격</div>
+    </a>
+    <a class="card" href="/games/suika/">
+      <div class="emoji">🍉</div>
+      <div class="cname">수박게임</div>
+      <div class="cdesc">과일을 떨어뜨려 같은 과일끼리 합치기 — 수박까지 키우면 최고점</div>
+    </a>
+    <a class="card" href="/games/nonogram/">
       <div class="emoji">🧩</div>
-      <div class="cname">팩맨·노노그램·가로세로 (준비 중)</div>
-      <div class="cdesc">계속 추가되는 중이에요 — 팩맨·노노그램·가로세로퀴즈</div>
+      <div class="cname">노노그램</div>
+      <div class="cdesc">가로·세로 숫자 힌트로 칸을 칠해 그림 완성 — 피크로스 퍼즐</div>
+    </a>
+    <a class="card" href="/games/crossword/">
+      <div class="emoji">✏️</div>
+      <div class="cname">가로세로 낱말퀴즈</div>
+      <div class="cdesc">힌트를 보고 낱말을 채우는 한글 크로스워드 — 빠르게 풀수록 상위</div>
     </a>
   </div>
   <div class="foot">

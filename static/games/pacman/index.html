@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>팩맨(Pac-Man) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
+<meta name="description" content="미로 속 도트를 먹고 유령을 피하는 클래식 팩맨(Pac-Man). 방향키·스와이프·버튼으로 조작하는 무료 웹게임.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
+<style>
+:root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--coral-soft:#e89b7f;--yellow:#e0c07e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.6;min-height:100vh;padding:20px 14px;text-align:center;}
+h1{font-size:22px;margin-top:6px;}
+.sub{color:var(--dim);font-size:13px;margin:6px 0 14px;}
+canvas{background:#0d0d10;border:2px solid var(--line);border-radius:10px;display:block;margin:0 auto;max-width:100%;touch-action:none;}
+#wrap{position:relative;display:inline-block;}
+#overlay{position:absolute;inset:0;background:rgba(13,13,16,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:20px;}
+#overlay h2{color:var(--coral);font-size:22px;margin-bottom:10px;}
+#overlay p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.7;}
+button{background:var(--coral);border:0;border-radius:8px;color:#fff;font:inherit;font-weight:700;padding:11px 22px;cursor:pointer;}
+button:hover{background:var(--coral-soft);}
+.hud{display:flex;gap:18px;justify-content:center;margin-top:14px;color:var(--dim);font-size:14px;flex-wrap:wrap;}
+.hud b{color:var(--yellow);}
+#pad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(3,56px);gap:6px;justify-content:center;margin:16px auto 0;}
+#pad button{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:20px;padding:0;border-radius:10px;font-weight:700;}
+#pad button:active{background:var(--coral);color:#fff;}
+#pad .sp{visibility:hidden;}
+.foot{margin-top:28px;padding-top:16px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px;}
+.foot a{color:var(--coral);text-decoration:none;}
+</style>
+</head>
+<body>
+<!--pf-topnav-injected-->
+<div style="max-width:760px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #3e3e3a;padding:10px 12px 12px;">
+  <a href="/" style="color:#d97757;font-weight:800;font-size:15px;text-decoration:none;">✻ 계획대로 느긋하게</a>
+  <nav style="display:flex;gap:5px;flex-wrap:wrap;">
+    <a href="/search/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🔎 검색</a>
+    <a href="/tools/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧰 도구방</a>
+    <a href="/games/" style="color:#d97757;text-decoration:none;border:1px solid #d97757;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🎮 게임방</a>
+    <a href="/tests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧠 심리테스트</a>
+    <a href="/page/requests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">💌 요청방</a>
+    <a href="/categories/트렌드/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🔍 트렌드</a>
+    <a href="/categories/오늘의-역사/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🏛 역사</a>
+    <a href="/categories/뉴스/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">📰 뉴스</a>
+    <a href="/darak-company/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🏢 다락방컴퍼니</a>
+  </nav>
+</div>
+<h1>🟡 팩맨</h1>
+<div class="sub">방향키·WASD·스와이프·버튼으로 조작 · 도트를 먹고 유령을 피해요</div>
+<div id="wrap">
+  <canvas id="cv" width="380" height="420"></canvas>
+  <div id="overlay">
+    <h2>PAC-MAN</h2>
+    <p>방향키·WASD·스와이프·아래 버튼으로 이동해요.<br>도트를 전부 먹으면 클리어! 파워펠릿(큰 알)을 먹으면<br>잠깐 유령을 잡을 수 있어요. 목숨은 3개!</p>
+    <button id="start">게임 시작</button>
+  </div>
+</div>
+<div class="hud"><span>SCORE <b id="sc">0</b></span><span>BEST <b id="hi">0</b></span><span>LIFE <b id="lf">♥♥♥</b></span></div>
+<div id="pad">
+  <button class="sp"></button><button data-d="u">▲</button><button class="sp"></button>
+  <button data-d="l">◀</button><button class="sp"></button><button data-d="r">▶</button>
+  <button class="sp"></button><button data-d="d">▼</button><button class="sp"></button>
+</div>
+<div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+<script>
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var S=20,half=10;
+var RAW=[
+"###################",
+"#........#........#",
+"#o##.###.#.###.##o#",
+"#.................#",
+"#.##.#.##.##.#.##.#",
+"#....#.......#....#",
+"#.##.##.#.#.##.##.#",
+"#.....#.#.#.#.....#",
+"#.####.## ##.####.#",
+"#....#.#   #.#....#",
+"#....#.#   #.#....#",
+"#....#.#####.#....#",
+"#....#.......#....#",
+"#.##.##.#.#.##.##.#",
+"#........P........#",
+"#.##.#.##.##.#.##.#",
+"#....#.......#....#",
+"#o##.###.#.###.##o#",
+"#.................#",
+"#.######.#.######.#",
+"###################"];
+var W=RAW[0].length,H=RAW.length;
+var MAZE,total,eaten,score,lives,state='ready',fc=0,dieTimer=0,frUntil=0,ghostScore=200,submitted=false;
+var pacStart=[9,14];
+var GHOSTSTART=[[8,9],[10,9],[9,9],[9,10]];
+var GCOL=['#d97757','#e89b7f','#7fb0c9','#e0c07e'];
+var hi=+localStorage.getItem('pacman_hi')||0;
+var scE=document.getElementById('sc'),hiE=document.getElementById('hi'),lfE=document.getElementById('lf');
+var ov=document.getElementById('overlay'),btn=document.getElementById('start');
+hiE.textContent=hi;
+var DIRS=[{x:0,y:-1},{x:-1,y:0},{x:0,y:1},{x:1,y:0}]; // up,left,down,right
+var pac,ghosts;
+
+function buildMaze(){MAZE=RAW.map(function(r){return r.split('');});
+  total=0;for(var y=0;y<H;y++)for(var x=0;x<W;x++){var c=MAZE[y][x];if(c==='.'||c==='o')total++;if(c==='P')MAZE[y][x]=' ';}}
+function px(t){return t*S+half;}
+function cellOpen(tx,ty){if(ty<0||ty>=H||tx<0||tx>=W)return false;return MAZE[ty][tx]!=='#';}
+function isCenter(e){return ((e.x-half)%S===0)&&((e.y-half)%S===0);}
+function tileOf(e){return [(e.x-half)/S,(e.y-half)/S];}
+
+function resetPositions(){
+  pac={x:px(pacStart[0]),y:px(pacStart[1]),dir:null,want:null,speed:2};
+  ghosts=GHOSTSTART.map(function(g,i){return {id:i,x:px(g[0]),y:px(g[1]),dir:{x:0,y:-1},speed:2,fr:false,home:false};});
+}
+function newGame(){buildMaze();eaten=0;score=0;lives=3;frUntil=0;submitted=false;resetPositions();sync();}
+function sync(){scE.textContent=score;lfE.textContent=lives>0?Array(lives+1).join('♥'):'—';}
+
+function inBox(tx,ty){return tx>=8&&tx<=10&&ty>=8&&ty<=10;}
+function ghostTarget(e,tx,ty){
+  if(e.home)return [9,9];
+  if(inBox(tx,ty))return [9,7];
+  var pt=tileOf(pac);var pd=pac.dir||{x:0,y:0};
+  if(e.id===0)return pt;
+  if(e.id===1)return [pt[0]+pd.x*4,pt[1]+pd.y*4];
+  if(e.id===2)return [pt[0]+pd.x*2+2,pt[1]];
+  var dd=(pt[0]-tx)*(pt[0]-tx)+(pt[1]-ty)*(pt[1]-ty);
+  return dd>64?pt:[1,H-2];
+}
+function ghostDecide(e,tx,ty){
+  var rev=e.dir?{x:-e.dir.x,y:-e.dir.y}:null;
+  var opts=DIRS.filter(function(d){return cellOpen(tx+d.x,ty+d.y)&&!(rev&&d.x===rev.x&&d.y===rev.y);});
+  if(!opts.length)opts=DIRS.filter(function(d){return cellOpen(tx+d.x,ty+d.y);});
+  if(!opts.length)return e.dir;
+  if(e.fr&&!e.home)return opts[(Math.random()*opts.length)|0];
+  var tgt=ghostTarget(e,tx,ty),best=opts[0],bd=1e9;
+  for(var i=0;i<opts.length;i++){var nx=tx+opts[i].x,ny=ty+opts[i].y;var dist=(nx-tgt[0])*(nx-tgt[0])+(ny-tgt[1])*(ny-tgt[1]);if(dist<bd){bd=dist;best=opts[i];}}
+  return best;
+}
+function moveEntity(e,isPac){
+  if(isCenter(e)){
+    var tx=(e.x-half)/S,ty=(e.y-half)/S;
+    if(isPac){
+      if(e.want&&cellOpen(tx+e.want.x,ty+e.want.y))e.dir=e.want;
+      if(!(e.dir&&cellOpen(tx+e.dir.x,ty+e.dir.y)))e.dir=null;
+    }else{
+      if(e.home&&tx===9&&ty===9){e.home=false;e.fr=false;}
+      e.dir=ghostDecide(e,tx,ty);
+    }
+  }
+  if(e.dir){e.x+=e.dir.x*e.speed;e.y+=e.dir.y*e.speed;}
+}
+function frighten(){frUntil=performance.now()+7000;ghostScore=200;
+  ghosts.forEach(function(g){if(!g.home){g.fr=true;if(g.dir)g.dir={x:-g.dir.x,y:-g.dir.y};}});}
+function eatAt(){
+  if(!isCenter(pac))return;var tx=(pac.x-half)/S,ty=(pac.y-half)/S;var c=MAZE[ty][tx];
+  if(c==='.'){MAZE[ty][tx]=' ';score+=10;eaten++;sync();}
+  else if(c==='o'){MAZE[ty][tx]=' ';score+=50;eaten++;frighten();sync();}
+}
+function checkCollisions(){
+  for(var i=0;i<ghosts.length;i++){var g=ghosts[i];
+    if(Math.abs(g.x-pac.x)<11&&Math.abs(g.y-pac.y)<11){
+      if(g.fr&&!g.home){score+=ghostScore;ghostScore*=2;g.home=true;g.fr=false;g.dir={x:0,y:1};sync();}
+      else if(!g.home){return loseLife();}
+    }
+  }
+}
+function loseLife(){lives--;sync();if(lives<=0){return over();}state='dying';dieTimer=45;}
+function respawn(){resetPositions();frUntil=0;state='play';requestAnimationFrame(frame);}
+
+function endSubmit(){if(submitted)return;submitted=true;if(window.PFRank)PFRank.end('pacman',score,{label:'팩맨'});}
+function over(){state='over';if(score>hi){hi=score;localStorage.setItem('pacman_hi',hi);hiE.textContent=hi;}
+  ov.style.display='flex';ov.querySelector('h2').textContent='GAME OVER';
+  ov.querySelector('p').innerHTML='점수 <b style="color:#e0c07e">'+score+'</b><br>최고기록 '+hi;
+  btn.textContent='다시 도전';share('팩맨에서 '+score+'점');endSubmit();}
+function win(){state='win';if(score>hi){hi=score;localStorage.setItem('pacman_hi',hi);hiE.textContent=hi;}
+  ov.style.display='flex';ov.querySelector('h2').textContent='🎉 CLEAR!';
+  ov.querySelector('p').innerHTML='미로를 모두 먹었어요!<br>점수 <b style="color:#e0c07e">'+score+'</b> · 최고기록 '+hi;
+  btn.textContent='다시 플레이';share('팩맨 클리어! '+score+'점');endSubmit();}
+
+function frame(){
+  if(state!=='play'&&state!=='dying'){draw();return;}
+  fc++;
+  if(state==='play'){
+    if(frUntil&&performance.now()>frUntil){frUntil=0;ghosts.forEach(function(g){if(!g.home)g.fr=false;});}
+    moveEntity(pac,true);eatAt();
+    for(var i=0;i<ghosts.length;i++){var g=ghosts[i];if(g.fr&&!g.home&&fc%3===0){}else moveEntity(g,false);}
+    checkCollisions();
+    if(state==='play'&&eaten>=total)return win();
+  }else if(state==='dying'){dieTimer--;if(dieTimer<=0)return respawn();}
+  draw();
+  if(state==='play'||state==='dying')requestAnimationFrame(frame);
+}
+
+function draw(){
+  ctx.fillStyle='#0d0d10';ctx.fillRect(0,0,cv.width,cv.height);
+  for(var y=0;y<H;y++)for(var x=0;x<W;x++){var c=MAZE[y][x];
+    if(c==='#'){ctx.fillStyle='#2f3c73';roundRect(x*S+2,y*S+2,S-4,S-4,4);ctx.fill();ctx.strokeStyle='#4a5aa8';ctx.lineWidth=1;ctx.stroke();}
+    else if(c==='.'){ctx.fillStyle='#d97757';ctx.beginPath();ctx.arc(x*S+half,y*S+half,2.2,0,7);ctx.fill();}
+    else if(c==='o'){if((fc>>3)%2===0){ctx.fillStyle='#e0c07e';ctx.beginPath();ctx.arc(x*S+half,y*S+half,5.2,0,7);ctx.fill();}}
+  }
+  // pac
+  if(state!=='dying'||((dieTimer>>2)%2===0)){
+    var open=0.28*Math.abs(Math.sin(fc*0.22));var a=0;var d=pac.dir||{x:1,y:0};
+    if(d.x===1)a=0;else if(d.x===-1)a=Math.PI;else if(d.y===1)a=Math.PI/2;else if(d.y===-1)a=-Math.PI/2;
+    ctx.fillStyle='#e0c07e';ctx.beginPath();ctx.moveTo(pac.x,pac.y);
+    ctx.arc(pac.x,pac.y,half-1.5,a+open*Math.PI,a-open*Math.PI+Math.PI*2);ctx.closePath();ctx.fill();
+  }
+  // ghosts
+  var blink=frUntil&&(frUntil-performance.now()<2000)&&((fc>>2)%2===0);
+  for(var i=0;i<ghosts.length;i++){var g=ghosts[i];drawGhost(g,blink);}
+}
+function drawGhost(g,blink){
+  var r=half-1.5,x=g.x,y=g.y;
+  var body=g.home?'#6b6f8a':(g.fr?(blink?'#e8e6e3':'#3b6ea5'):GCOL[g.id]);
+  ctx.fillStyle=body;ctx.beginPath();
+  ctx.arc(x,y-1,r,Math.PI,0);
+  ctx.lineTo(x+r,y+r-1);
+  var n=3;for(var k=0;k<n;k++){var x0=x+r-(2*r/n)*k;var x1=x+r-(2*r/n)*(k+0.5);var x2=x+r-(2*r/n)*(k+1);ctx.lineTo(x1,y+r-4);ctx.lineTo(x2,y+r-1);}
+  ctx.closePath();ctx.fill();
+  // eyes
+  var ex=(g.dir?g.dir.x:0)*1.6,ey=(g.dir?g.dir.y:0)*1.6;
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(x-3.2,y-1,2.4,0,7);ctx.arc(x+3.2,y-1,2.4,0,7);ctx.fill();
+  ctx.fillStyle=g.fr?'#e8e6e3':'#1b2340';if(!g.fr){ctx.beginPath();ctx.arc(x-3.2+ex,y-1+ey,1.2,0,7);ctx.arc(x+3.2+ex,y-1+ey,1.2,0,7);ctx.fill();}
+}
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+
+function start(){ov.style.display='none';newGame();state='play';fc=0;requestAnimationFrame(frame);}
+btn.onclick=start;
+function setWant(x,y){if(state==='ready'||state==='over'||state==='win'){start();}pac&&(pac.want={x:x,y:y});}
+document.addEventListener('keydown',function(e){var k=e.key;
+  if(k==='ArrowUp'||k==='w')setWant(0,-1);else if(k==='ArrowDown'||k==='s')setWant(0,1);
+  else if(k==='ArrowLeft'||k==='a')setWant(-1,0);else if(k==='ArrowRight'||k==='d')setWant(1,0);
+  else return;e.preventDefault();});
+Array.prototype.forEach.call(document.querySelectorAll('#pad button[data-d]'),function(b){
+  b.addEventListener('click',function(){var d=b.getAttribute('data-d');setWant(d==='l'?-1:d==='r'?1:0,d==='u'?-1:d==='d'?1:0);});});
+var tx0,ty0;
+cv.addEventListener('touchstart',function(e){tx0=e.touches[0].clientX;ty0=e.touches[0].clientY;},{passive:true});
+cv.addEventListener('touchmove',function(e){if(tx0==null)return;var dx=e.touches[0].clientX-tx0,dy=e.touches[0].clientY-ty0;
+  if(Math.abs(dx)+Math.abs(dy)<22)return;if(Math.abs(dx)>Math.abs(dy))setWant(dx>0?1:-1,0);else setWant(0,dy>0?1:-1);tx0=null;e.preventDefault();},{passive:false});
+function share(msg){var b=document.getElementById('g-share');if(!b){b=document.createElement('button');b.id='g-share';b.style.cssText='margin-top:10px;background:transparent;border:1px solid #3e3e3a;color:#e8e6e3;padding:9px 18px;border-radius:8px;cursor:pointer;font:inherit;';ov.appendChild(b);}
+  b.textContent='📤 점수 자랑하기';b.onclick=function(){var t=msg+'! 나 이겨봐 🟡 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};}
+buildMaze();draw();
+})();
+</script>
+<div style="max-width:760px;margin:22px auto 0;padding:0 12px;"><h3 style="text-align:center;color:#e8e6e3;font-size:15px;margin-bottom:8px;">💬 방명록</h3><div id="planfully-comments"></div><script src="/comments.js?v=1" defer></script></div>
+</body>
+</html>

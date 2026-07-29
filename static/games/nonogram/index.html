@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>노노그램(피크로스) — 에디슨의 게임방 | 계획대로 느긋하게</title>
+<meta name="description" content="무료 노노그램(피크로스) 퍼즐 웹게임. 행·열 숫자 힌트로 숨은 픽셀아트를 완성하세요 — 5×5부터 15×15까지, X표시 모드 지원.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
+<script src="/leaderboard.js" defer></script>
+<style>
+:root{--bg:#262624;--panel:#181816;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--green:#7fb069;--yellow:#e0c07e;--blue:#7ea6e0;--red:#e07e7e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,monospace;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 8px;}
+h1{font-size:17px;color:var(--coral);margin:4px 0 2px;}
+.sub{color:var(--dim);font-size:12.5px;margin-bottom:10px;text-align:center;line-height:1.7;}
+.hud{display:flex;gap:12px;font-size:14px;color:var(--dim);margin-bottom:10px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.hud b{color:var(--yellow);}
+select,button{background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--txt);font:inherit;padding:7px 12px;cursor:pointer;}
+button.primary{background:var(--coral);border:0;color:#1e1e2e;font-weight:700;}
+button.mode{min-width:112px;}
+button.mode.mark{background:var(--blue);border:0;color:#1e1e2e;font-weight:700;}
+#wrap{overflow:auto;max-width:100%;padding:2px;}
+#board{display:grid;background:var(--panel);padding:8px;border-radius:10px;border:1px solid var(--line);touch-action:manipulation;margin:0 auto;}
+.corner{background:transparent;}
+.hint{color:var(--dim);font-weight:700;display:flex;user-select:none;-webkit-user-select:none;}
+.hint.col{flex-direction:column;align-items:center;justify-content:flex-end;line-height:1.05;padding-bottom:3px;}
+.hint.row{flex-direction:row;align-items:center;justify-content:flex-end;gap:5px;padding-right:5px;}
+.hint.done{color:#5a5a55;}
+.cell{background:#3a3a36;cursor:pointer;user-select:none;-webkit-user-select:none;position:relative;border-radius:2px;display:flex;align-items:center;justify-content:center;}
+.cell.g5{border-top:1px solid #4a4a45;}
+.cell.g5l{border-left:1px solid #4a4a45;}
+.cell:hover{outline:1px solid #55554e;outline-offset:-1px;}
+.cell.fill{background:var(--txt);}
+.cell.mark::after{content:'✕';color:var(--dim);font-size:0.72em;font-weight:700;}
+.foot{margin-top:14px;font-size:12.5px;color:var(--dim);text-align:center;line-height:1.8;}
+.foot a{color:var(--coral);text-decoration:none;}
+#msg{height:24px;font-size:14px;margin-top:10px;font-weight:700;text-align:center;}
+</style>
+</head>
+<body>
+<!--pf-topnav-injected-->
+<div style="max-width:760px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid #3e3e3a;padding:10px 12px 12px;">
+  <a href="/" style="color:#d97757;font-weight:800;font-size:15px;text-decoration:none;">✻ 계획대로 느긋하게</a>
+  <nav style="display:flex;gap:5px;flex-wrap:wrap;">
+    <a href="/search/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🔎 검색</a>
+    <a href="/tools/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧰 도구방</a>
+    <a href="/games/" style="color:#d97757;text-decoration:none;border:1px solid #d97757;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🎮 게임방</a>
+    <a href="/tests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🧠 심리테스트</a>
+    <a href="/page/requests/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">💌 요청방</a>
+    <a href="/categories/트렌드/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🔍 트렌드</a>
+    <a href="/categories/오늘의-역사/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🏛 역사</a>
+    <a href="/categories/뉴스/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">📰 뉴스</a>
+    <a href="/darak-company/" style="color:#e8e6e3;text-decoration:none;border:1px solid #3e3e3a;border-radius:14px;padding:4px 10px;font-size:12px;background:#1f1f1d;">🏢 다락방컴퍼니</a>
+  </nav>
+</div>
+
+<h1>🎨 노노그램 (피크로스)</h1>
+<div class="sub">행·열 숫자 힌트대로 칸을 칠해 숨은 그림을 완성하세요.<br>클릭 = 칠하기 · 우클릭 = ✕ 표시 · 모바일은 <b style="color:var(--blue)">모드 버튼</b>으로 전환</div>
+<div class="hud">
+  <select id="size">
+    <option value="5">쉬움 5×5</option>
+    <option value="10" selected>보통 10×10</option>
+    <option value="15">어려움 15×15</option>
+  </select>
+  <select id="puzzle"></select>
+  <button id="mode" class="mode primary">🖌 칠하기</button>
+  <span>⏱ <b id="time">0</b>s</span>
+  <button id="new" class="primary">다시</button>
+</div>
+<div id="wrap"><div id="board"></div></div>
+<div id="msg"></div>
+<div class="foot"><div>🎮 <a href="/games/">게임방</a> · 🏠 <a href="/">에디슨의 놀이터</a></div></div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+
+// ── 내장 퍼즐 (오리지널 창작 픽셀아트). '1'=칠, '0'=빈칸 ──
+var PUZZLES = {
+  5: [
+    {name:'하트', g:["01010","11111","11111","01110","00100"]},
+    {name:'다이아몬드', g:["00100","01110","11111","01110","00100"]},
+    {name:'십자', g:["00100","00100","11111","00100","00100"]},
+    {name:'글자 A', g:["01110","10001","11111","10001","10001"]},
+    {name:'화살표', g:["00100","01110","10101","00100","00100"]}
+  ],
+  10: [
+    {name:'유령', g:[
+      "0011111100","0111111110","1101101101","1101101101","1111111111",
+      "1111111111","1111111111","1111111111","1011011011","1001001001"]},
+    {name:'버섯', g:[
+      "0001111000","0011111100","0111111110","1111111111","1111111111",
+      "0110110110","0000110000","0000110000","0001111000","0000000000"]},
+    {name:'집', g:[
+      "0000110000","0001111000","0011111100","0111111110","1111111111",
+      "1110110111","1100110011","1101111011","1101001011","1111111111"]},
+    {name:'음표', g:[
+      "0000011110","0000010010","0000010010","0000010010","0000010010",
+      "0110010010","1111011110","1111011110","0110001100","0000000000"]},
+    {name:'물고기', g:[
+      "0000011000","0000111100","0011111110","0111101111","1111111111",
+      "0111101111","0011111110","0000111100","0000011000","0000000000"]}
+  ],
+  15: [
+    {name:'나무', g:[
+      "000000100000000","000001110000000","000011111000000","000111111100000",
+      "001111111110000","011111111111000","111111111111100","001111111110000",
+      "000111111100000","000011111000000","000000110000000","000000110000000",
+      "000000110000000","000001111000000","000000000000000"]},
+    {name:'별', g:[
+      "000000100000000","000000100000000","000001110000000","000001110000000",
+      "111111111111111","011111111111110","001111111111100","000111111111000",
+      "000111111111000","001110111011100","011100010001110","011000000000110",
+      "010000000000010","000000000000000","000000000000000"]},
+    {name:'로봇', g:[
+      "000011111100000","000010000100000","000010110100000","000010000100000",
+      "000011111100000","000001111000000","000111111110000","001110110111000",
+      "011110110111100","011110110111100","011111111111100","000110000110000",
+      "000110000110000","000111000111000","000000000000000"]}
+  ]
+};
+
+var N, sol, cur, mode='fill', timer, sec, started, done;
+// cur[i]: 0=빈칸, 1=칠, 2=✕
+
+function cellSize(){ if(N<=5)return 34; if(N<=10)return 26; return 20; }
+
+function lineHints(arr){
+  var out=[], run=0;
+  for(var i=0;i<arr.length;i++){
+    if(arr[i]){run++;} else if(run){out.push(run);run=0;}
+  }
+  if(run)out.push(run);
+  if(!out.length)out.push(0);
+  return out;
+}
+
+function rowHints(r){ var a=[]; for(var c=0;c<N;c++)a.push(sol[r*N+c]); return lineHints(a); }
+function colHints(c){ var a=[]; for(var r=0;r<N;r++)a.push(sol[r*N+c]); return lineHints(a); }
+
+function populatePuzzles(){
+  var sz=+$('size').value, sel=$('puzzle');
+  sel.innerHTML='';
+  PUZZLES[sz].forEach(function(p,i){
+    var o=document.createElement('option');o.value=i;o.textContent=p.name;sel.appendChild(o);
+  });
+}
+
+function build(){
+  var sz=+$('size').value;
+  N=sz;
+  var pi=+$('puzzle').value||0;
+  var pz=PUZZLES[sz][pi];
+  sol=[];
+  for(var r=0;r<N;r++)for(var c=0;c<N;c++)sol.push(pz.g[r].charAt(c)==='1'?1:0);
+  cur=new Array(N*N).fill(0);
+  started=false;done=false;sec=0;mode='fill';
+  clearInterval(timer);$('time').textContent='0';$('msg').textContent='';
+  setModeBtn();
+
+  var cs=cellSize();
+  // 힌트 폭/높이: 그리드 크기에 비례
+  var rowHintW = Math.round(cs*2.6);
+  var colHintH = Math.round(cs*2.6);
+  var fs = Math.max(9, Math.round(cs*0.5));
+  var b=$('board');
+  b.innerHTML='';
+  b.style.gridTemplateColumns = rowHintW+'px repeat('+N+','+cs+'px)';
+  b.style.gridTemplateRows = colHintH+'px repeat('+N+','+cs+'px)';
+  b.style.fontSize = fs+'px';
+
+  // 좌상단 코너
+  var corner=document.createElement('div');corner.className='corner';b.appendChild(corner);
+  // 열 힌트
+  for(var c=0;c<N;c++){
+    var ch=document.createElement('div');ch.className='hint col';ch.id='ch'+c;
+    colHints(c).forEach(function(n){var s=document.createElement('span');s.textContent=n;ch.appendChild(s);});
+    b.appendChild(ch);
+  }
+  // 각 행: 행힌트 + 칸들
+  for(var r=0;r<N;r++){
+    var rh=document.createElement('div');rh.className='hint row';rh.id='rh'+r;
+    rowHints(r).forEach(function(n){var s=document.createElement('span');s.textContent=n;rh.appendChild(s);});
+    b.appendChild(rh);
+    for(var c2=0;c2<N;c2++){
+      var d=document.createElement('div');
+      d.className='cell'+((r%5===0&&r>0)?' g5':'')+((c2%5===0&&c2>0)?' g5l':'');
+      d.id='k'+(r*N+c2);
+      (function(i){
+        d.addEventListener('click',function(){onTap(i);});
+        d.addEventListener('contextmenu',function(e){e.preventDefault();onMark(i);});
+      })(r*N+c2);
+      b.appendChild(d);
+    }
+  }
+  updateHintDone();
+}
+
+function startTimer(){
+  if(started)return;
+  started=true;
+  timer=setInterval(function(){sec++;$('time').textContent=sec;},1000);
+}
+
+function render(i){
+  var el=$('k'+i);if(!el)return;
+  el.classList.toggle('fill',cur[i]===1);
+  el.classList.toggle('mark',cur[i]===2);
+}
+
+function onTap(i){
+  if(done)return;
+  startTimer();
+  if(mode==='fill'){
+    if(cur[i]===2)return;              // ✕ 표시된 칸은 칠하기 무시
+    cur[i]=cur[i]===1?0:1;
+  }else{
+    cur[i]=cur[i]===2?0:2;
+  }
+  render(i);
+  updateHintDone();
+  checkWin();
+}
+
+function onMark(i){                     // 우클릭 = 항상 ✕ 토글
+  if(done)return;
+  startTimer();
+  cur[i]=cur[i]===2?0:2;
+  render(i);
+  updateHintDone();
+}
+
+// 힌트가 이미 만족된 줄은 흐리게 표시 (칠한 칸 패턴이 정답 줄 패턴과 일치할 때)
+function lineFilledHints(getVal){
+  var out=[],run=0;
+  for(var i=0;i<N;i++){ if(getVal(i)===1){run++;} else if(run){out.push(run);run=0;} }
+  if(run)out.push(run);
+  if(!out.length)out.push(0);
+  return out;
+}
+function sameArr(a,b){ if(a.length!==b.length)return false; for(var i=0;i<a.length;i++)if(a[i]!==b[i])return false; return true; }
+function updateHintDone(){
+  for(var r=0;r<N;r++){
+    var f=lineFilledHints(function(c){return cur[r*N+c];});
+    $('rh'+r).classList.toggle('done',sameArr(f,rowHints(r)));
+  }
+  for(var c=0;c<N;c++){
+    var f2=lineFilledHints(function(r){return cur[r*N+c];});
+    $('ch'+c).classList.toggle('done',sameArr(f2,colHints(c)));
+  }
+}
+
+function checkWin(){
+  for(var i=0;i<N*N;i++){
+    var want=sol[i]===1;
+    var got=cur[i]===1;
+    if(want!==got)return;               // 정답 칸이 모두 칠해지고, 오답 칸은 비어야 완성
+  }
+  win();
+}
+
+function win(){
+  done=true;clearInterval(timer);
+  $('msg').innerHTML='🎉 완성! '+sec+'초 — <b style="color:var(--yellow)">'+PUZZLES[N][+$('puzzle').value||0].name+'</b>';
+  $('msg').style.color='var(--green)';
+  var key='nono_best_'+N;
+  var best=+localStorage.getItem(key)||0;
+  if(!best||sec<best){localStorage.setItem(key,sec);$('msg').innerHTML+=' <span style="color:var(--coral)">신기록!</span>';}
+  var _sb=$('n-share');
+  if(!_sb){_sb=document.createElement('button');_sb.id='n-share';_sb.style.cssText='display:block;margin:10px auto 0;background:transparent;border:1px solid #3e3e3a;border-radius:8px;color:#e8e6e3;font:inherit;padding:8px 16px;cursor:pointer;';$('msg').after(_sb);}
+  _sb.textContent='📤 기록 자랑하기';
+  _sb.onclick=function(){var t='노노그램 '+N+'×'+N+' '+sec+'초 완성! 🎨 나 이겨봐 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  if(window.PFRank)PFRank.end('nonogram-'+N,sec,{label:'노노그램 '+N,unit:'초',lowerBetter:true});
+}
+
+function setModeBtn(){
+  var btn=$('mode');
+  if(mode==='fill'){btn.textContent='🖌 칠하기';btn.className='mode primary';}
+  else{btn.textContent='✕ 표시';btn.className='mode mark';}
+}
+function toggleMode(){mode=mode==='fill'?'mark':'fill';setModeBtn();}
+
+$('mode').onclick=toggleMode;
+$('new').onclick=build;
+$('puzzle').onchange=build;
+$('size').onchange=function(){populatePuzzles();build();};
+
+populatePuzzles();
+build();
+})();
+</script>
+<div style="max-width:760px;margin:22px auto 0;padding:0 12px;"><h3 style="text-align:center;color:#e8e6e3;font-size:15px;margin-bottom:8px;">💬 방명록</h3><div id="planfully-comments"></div><script src="/comments.js?v=1" defer></script></div>
+</body>
+</html>
