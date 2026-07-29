@@ -1,10 +1,10 @@
 ---
-title: "로또 번호 생성기 — 확률 기반 추천 5게임"
-description: "역대 당첨번호를 분석해 확률 가중(최근+역대 블렌드)으로 이번 주 5게임을 추천해요. 로또는 무작위 추첨이라 당첨을 보장하지 않는 재미·참고용 도구."
+title: "무료 로또 번호 생성기 — 확률 기반 추천 5게임"
+description: "무료 로또 번호 추천·생성기. 역대 당첨번호를 분석해 확률 가중(최근+역대 블렌드)으로 이번 주 5게임을 무료로 추천해요. 로또는 무작위 추첨이라 당첨을 보장하지 않는 재미·참고용 도구."
 date: 2026-07-29
 slug: "lotto"
 categories: ["도구"]
-tags: ["로또 번호 생성기", "로또 번호 추천", "로또 통계", "로또 당첨번호", "로또 확률"]
+tags: ["무료 로또 번호 생성기", "로또 번호 생성기", "로또 번호 추천", "로또 통계", "로또 당첨번호", "로또 확률"]
 toc: false
 readingTime: false
 ---
@@ -26,6 +26,19 @@ readingTime: false
 .lt-game:last-child{border-bottom:none;}
 .lt-game .idx{font-weight:800;color:#d97706;width:22px;flex:0 0 auto;font-size:16px;}
 .lt-game .tag{font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap;}
+/* 게임 6볼은 항상 한 줄 유지, 모바일에선 볼·간격 축소해 화면폭 안에 */
+#lt-reco .lt-balls{flex-wrap:nowrap;}
+@media(max-width:440px){
+  #lt-reco .lt-game{gap:6px;padding:12px 2px;}
+  #lt-reco .lt-game .idx{width:15px;font-size:13px;}
+  #lt-reco .lt-balls{gap:4px;}
+  #lt-reco .lt-ball{width:30px;height:30px;font-size:12.5px;}
+  #lt-reco .lt-game .tag{flex-basis:100%;margin-left:21px;margin-top:2px;}
+}
+@media(max-width:344px){
+  #lt-reco .lt-ball{width:27px;height:27px;font-size:11.5px;}
+  #lt-reco .lt-balls{gap:3px;}
+}
 #lt-reco{background:#fffaf5;border:1px solid #ffe2cc;border-radius:14px;padding:20px 16px 14px;}
 .lt-sec{margin-top:22px;padding-top:16px;border-top:1px solid #eee;}
 .lt-sec-h{margin:0 0 12px;font-size:13.5px;font-weight:800;color:#333;}
