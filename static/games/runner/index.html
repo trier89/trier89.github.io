@@ -61,11 +61,13 @@ button:hover{background:var(--coral-soft);}
 (function(){
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 var W=cv.width,H=cv.height,GY=H-40;
-var py,vy,onG,dist,speed,obs,plats,spawn,platspawn,state='ready',hi=+localStorage.getItem('run_hi')||0,last;
+var py,vy,onG,dist,speed,obs,plats,spawn,platspawn,jumpBuf=0,coyote=0,state='ready',hi=+localStorage.getItem('run_hi')||0,last;
 var hiE=document.getElementById('hi'),dE=document.getElementById('ds'),ov=document.getElementById('overlay'),btn=document.getElementById('start');
 hiE.textContent=hi;
-function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=5.2;obs=[];plats=[];spawn=55;platspawn=70;}
-function jump(){if(state==='play'&&onG){vy=-11.5;onG=false;}else if(state==='ready'||state==='over'){start();}}
+function reset(){py=GY-30;vy=0;onG=true;dist=0;speed=5.2;obs=[];plats=[];spawn=55;platspawn=70;jumpBuf=0;coyote=0;}
+function doJump(){vy=-11.5;onG=false;coyote=0;jumpBuf=0;}
+// 착지 직전/직후 눌러도 씹히지 않게: 접지 or 코요테타임이면 즉시, 아니면 잠깐 버퍼
+function jump(){if(state==='play'){if(onG||coyote>0){doJump();}else{jumpBuf=9;}}else if(state==='ready'||state==='over'){start();}}
 function addObs(){var tall=Math.random()<0.35;var h=tall?(46+Math.random()*34):(18+Math.random()*26);obs.push({x:W+10,w:16+Math.random()*18,h:h});if(Math.random()<0.25)obs.push({x:W+10+42+Math.random()*44,w:14+Math.random()*16,h:16+Math.random()*26});}
 function addPlat(){var y=GY-42-Math.random()*70;plats.push({x:W+10,y:y,w:48+Math.random()*52});}
 function loop(t){
@@ -76,6 +78,9 @@ function loop(t){
   if(py>=GY-30){py=GY-30;vy=0;onG=true;}
   // 공중 디딤판 착지(낙하 중 위에서 내려올 때)
   if(vy>0){for(var i=0;i<plats.length;i++){var pp=plats[i];if(34+26>pp.x&&34<pp.x+pp.w&&prevBottom<=pp.y+7&&py+30>=pp.y){py=pp.y-30;vy=0;onG=true;break;}}}
+  // 코요테 타임(접지 직후 잠깐 점프 허용) + 점프 버퍼(착지 직전 누른 점프를 착지 순간 실행)
+  if(onG){coyote=6;}else if(coyote>0){coyote-=dt;}
+  if(jumpBuf>0){if(onG){doJump();}else{jumpBuf-=dt;}}
   dist+=speed*dt*0.1;speed+=0.0027*dt;
   spawn-=dt;if(spawn<=0){addObs();spawn=Math.max(26,72-speed*3);}
   platspawn-=dt;if(platspawn<=0){addPlat();platspawn=52+Math.random()*40;}
