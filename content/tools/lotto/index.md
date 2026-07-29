@@ -52,7 +52,8 @@ readingTime: false
 .lt-summary select{padding:3px 6px;border:1px solid #ddd;border-radius:7px;font:inherit;font-size:12px;}
 .lt-summary .lt-sum-body{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px;}
 .lt-summary .lt-sum-body span{background:#f4f6f8;border-radius:20px;padding:3px 10px;font-size:12px;color:#42505c;}
-.lt-summary .lt-sum-body span.hit{background:#dcfce7;color:#166534;font-weight:700;}
+.lt-summary .lt-sum-body span.hit{background:#eef6ee;color:#4b7a52;font-weight:600;}
+.lt-summary .lt-sum-body span.hit4{background:#fef3c7;color:#92400e;font-weight:800;border:1px solid #fcd34d;}
 .lt-summary .lt-sum-note{margin-top:6px;font-size:11px;color:#aaa;line-height:1.5;}
 .lt-auto-btn{margin-top:10px;background:#fff;border:1px solid #d97706;color:#b45309;border-radius:9px;padding:8px 14px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;}
 .lt-auto-btn:hover{background:#fff7ed;}
@@ -61,6 +62,8 @@ readingTime: false
 .lt-auto-msg b{color:#15803d;}
 .lt-auto-warn{margin-top:5px;font-size:11px;color:#92600a;line-height:1.5;}
 .lt-auto-warn b{color:#92600a;}
+.lt-auto-warn-strong{margin-top:7px;font-size:11.5px;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:7px 10px;line-height:1.55;}
+.lt-auto-warn-strong b{color:#b91c1c;}
 .lt-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:520px){.lt-stat-grid{grid-template-columns:1fr;}}
 .lt-stat-box{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;}
@@ -104,7 +107,7 @@ function ball(n,extra){return '<div class="lt-ball '+ballClass(n)+(extra?' '+ext
 function ballsHtml(nums,sm){var h='<div class="lt-balls">';nums.forEach(function(n){h+=ball(n,sm?'sm':'');});return h+'</div>';}
 function nLabel(n){return n>=9999?'전체':n;}
 
-var H=null, curN=100, curK=3, curM=20, autoMsg="", fixedNums=[];
+var H=null, curN=100, curK=3, curM=20, autoMsg="", autoStrong=false, fixedNums=[];
 var N_OPTS=[30,50,100,200,300,500,9999];
 
 /* 현재 선택 구간(최근 M경기)에서 K∈{0..6}×N∈{30,50,100,200,300} 전수 백테스트 →
@@ -116,18 +119,25 @@ function runAutoFind(){
   [0,1,2,3,4,5,6].forEach(function(K){
     var Ns=K===0?[100]:[30,50,100,200,300,500,9999]; /* K=0(완전랜덤)은 N 무의미 → 1회만 */
     Ns.forEach(function(N){
-      var win=0,matchTot=0;
+      var win4=0,win5=0,matchTot=0;
       for(var R=latest;R>latest-M&&R>=2;R--){
         var rec=recommend(H,R,{N:N,K:K}),actual=H[R-1],bestRank=0;
         rec.games.forEach(function(g){var gr=grade(g.nums,actual.nums,actual.bonus);matchTot+=gr.match;if(gr.rank&&(bestRank===0||gr.rank<bestRank))bestRank=gr.rank;});
-        if(bestRank)win++;
+        if(bestRank){win5++;if(bestRank<=4)win4++;} /* bestRank<=4 = 4개↑ 일치 = 4등↑ */
       }
-      var cand={K:K,N:N,win:win,avg:matchTot/(M*5)};
-      if(!best||cand.win>best.win||(cand.win===best.win&&cand.avg>best.avg))best=cand;
+      /* 우선순위: 4등↑ 회차수 → 5등↑ 회차수 → 게임당 평균일치 */
+      var cand={K:K,N:N,win4:win4,win5:win5,avg:matchTot/(M*5)};
+      if(!best||cand.win4>best.win4||(cand.win4===best.win4&&cand.win5>best.win5)||(cand.win4===best.win4&&cand.win5===best.win5&&cand.avg>best.avg))best=cand;
     });
   });
   curK=best.K;curN=best.N;
-  autoMsg='최근 '+M+'경기 기준 최고 성적: <b>K='+best.K+', N='+nLabel(best.N)+'</b>'+(best.K===0?' (완전 랜덤)':'')+' — 5등↑ '+best.win+'회 · 게임당 평균 '+best.avg.toFixed(2)+'개 (과거 기준·예측 아님)';
+  if(best.win4>0){
+    autoStrong=true;
+    autoMsg='최근 '+M+'경기 기준 <b>4등↑ 최다: K='+best.K+', N='+nLabel(best.N)+'</b>'+(best.K===0?' (완전 랜덤)':'')+' — 4등↑ '+best.win4+'회 · 5등↑ '+best.win5+'회 · 게임당 평균 '+best.avg.toFixed(2)+'개 (과거 기준·예측 아님)';
+  }else{
+    autoStrong=false;
+    autoMsg='이 구간엔 <b>4등↑(4개 일치) 기록이 없어</b> 5등(3개↑) 기준으로 대체했어요: <b>K='+best.K+', N='+nLabel(best.N)+'</b>'+(best.K===0?' (완전 랜덤)':'')+' — 5등↑ '+best.win5+'회 · 게임당 평균 '+best.avg.toFixed(2)+'개 (과거 기준·예측 아님)';
+  }
   renderReco();
 }
 
@@ -148,9 +158,10 @@ function renderSummary(){
     if(bestMatch>=3)bestMatchCnt++;
   }
   var mopt=opts.map(function(m){return '<option value="'+m+'"'+(m===curM?' selected':'')+'>'+(m===99999?'전체':m)+'</option>';}).join('');
-  function chip(label,cnt){return '<span'+(cnt>0?' class="hit"':'')+'>'+label+' '+cnt+'회</span>';}
-  var body=chip('🥇1등',tally[1])+chip('🥈2등',tally[2])+chip('🥉3등',tally[3])+chip('4등',tally[4])+chip('5등',tally[5])+'<span>미당첨 '+tally.none+'회</span>';
-  var autoBlock=autoMsg?'<div class="lt-auto-msg">✅ '+autoMsg+'<div class="lt-auto-warn">⚠️ 이 값은 고른 구간의 <b>과거 결과에 맞춘 것</b>이라 다음 회차 당첨확률을 높이지 않아요(과최적화).</div></div>':'';
+  function chip(label,cnt,strong){var cls=cnt>0?(strong?' class="hit4"':' class="hit"'):'';return '<span'+cls+'>'+label+' '+cnt+'회</span>';}
+  var body=chip('🥇1등',tally[1],true)+chip('🥈2등',tally[2],true)+chip('🥉3등',tally[3],true)+chip('4등',tally[4],true)+chip('5등',tally[5],false)+'<span>미당첨 '+tally.none+'회</span>';
+  var strongWarn=autoStrong?'<div class="lt-auto-warn lt-auto-warn-strong">⚠️ <b>4등+는 매우 드물어서</b>(게임당 약 1/733) 이 “최고 K·N”은 사실상 <b>과거의 우연</b>이에요. 다음 회차 확률과 무관합니다.</div>':'';
+  var autoBlock=autoMsg?'<div class="lt-auto-msg">✅ '+autoMsg+strongWarn+'<div class="lt-auto-warn">⚠️ 이 값은 고른 구간의 <b>과거 결과에 맞춘 것</b>이라 다음 회차 당첨확률을 높이지 않아요(과최적화).</div></div>':'';
   var fixNote=fixedNums.length?' 이 집계·자동찾기는 <b>고정번호를 뺀 순수 로직</b> 기준이에요.':'';
   $('lt-summary').innerHTML='<div class="lt-sum-head">📋 최근 <select id="lt-mselect">'+mopt+'</select>경기 이 추천의 성적 <span style="font-weight:400;color:#999;">(K='+curK+'·N='+nLabel(curN)+')</span></div>'+
     '<div class="lt-sum-body">'+body+'</div>'+
