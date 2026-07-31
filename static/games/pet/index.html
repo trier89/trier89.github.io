@@ -126,6 +126,12 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 
 <div class="toast" id="toast"></div>
 <div class="ov" id="ov"><div class="card2"><canvas id="ovc" width="130" height="130"></canvas><h3 id="ovTitle"></h3><p id="ovDesc"></p><div class="btns" id="ovBtns"></div></div></div>
+<div class="ov" id="mg"><div class="card2" style="max-width:320px;">
+  <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--txt);font-weight:700;margin-bottom:6px;"><span>🎾 공놀이</span><span id="mgInfo">점수 0 · 12s</span></div>
+  <canvas id="mgc" width="260" height="200" style="width:100%;height:auto;background:var(--lcd);border-radius:8px;image-rendering:pixelated;cursor:pointer;"></canvas>
+  <p style="color:var(--dim);font-size:12px;margin:8px 0 10px;">움직이는 공을 탭해서 튕겨요! 많이 튕길수록 행복 UP</p>
+  <div class="btns"><button class="alt" id="mgQuit">그만하기</button></div>
+</div></div>
 
 <script>
 /* ===== 스프라이트 이미지 로더 ===== */
@@ -279,7 +285,28 @@ function feedWith(id){var f=FOODS[id];if(rightFood(id)){pet.hunger=clamp(pet.hun
   else{pet.hunger=clamp(pet.hunger+7);pet.happy=clamp(pet.happy-7);toast('입에 안 맞나 봐요…');}
   pet.hungerZeroAt=0;pet.ateAt=Date.now();pet.pooped=0;
   foodItem={e:f.e,x:(walkX>=0?-1:1)*(24+Math.random()*14)};startAnim('walkeat',f.e);after();}
-function play(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+18);pet.hunger=clamp(pet.hunger-7);pet.tired=clamp((pet.tired||0)+8);pet.div=clamp(pet.div+1);startAnim('play');after();}
+var mgState=null;
+function play(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');playGame();}
+function playGame(){var c=document.getElementById('mgc'),cw=c.width,ch=c.height;
+  mgState={score:0,time:12000,start:Date.now(),ball:{x:cw/2,y:40,vx:2.4,vy:0,r:15},alive:true};
+  document.getElementById('mg').classList.add('show');
+  c.onpointerdown=function(ev){if(!mgState)return;var rect=c.getBoundingClientRect();var mx=(ev.clientX-rect.left)*(cw/rect.width),my=(ev.clientY-rect.top)*(ch/rect.height);
+    var b=mgState.ball,dx=mx-b.x,dy=my-b.y;if(dx*dx+dy*dy<(b.r+14)*(b.r+14)){mgState.score++;var ang=(-0.5-Math.random())*Math.PI;b.vx=Math.cos(ang)*(2.8+Math.random());b.vy=-Math.abs(Math.sin(ang))*4.5-1;}};
+  requestAnimationFrame(mgLoop);}
+function mgLoop(){if(!mgState||!mgState.alive)return;var c=document.getElementById('mgc'),cw=c.width,ch=c.height,g=c.getContext('2d');g.imageSmoothingEnabled=false;
+  var now=Date.now(),b=mgState.ball;b.x+=b.vx;b.y+=b.vy;b.vy+=0.16;
+  if(b.x<b.r){b.x=b.r;b.vx=Math.abs(b.vx);}if(b.x>cw-b.r){b.x=cw-b.r;b.vx=-Math.abs(b.vx);}
+  if(b.y>ch-b.r){b.y=ch-b.r;b.vy=-Math.abs(b.vy)*0.82;b.vx*=0.98;}if(b.y<b.r){b.y=b.r;b.vy=Math.abs(b.vy);}
+  g.fillStyle='#a7c56f';g.fillRect(0,0,cw,ch);g.fillStyle='rgba(0,0,0,.04)';for(var y=0;y<ch;y+=3)g.fillRect(0,y,cw,1);
+  g.fillStyle='rgba(43,58,26,.5)';g.fillRect(10,ch-8,cw-20,2);
+  drawPet(g,curImgKey(),cw/2,ch-26,42,1,1);
+  g.font=(b.r*2)+'px monospace';g.fillText('🎾',b.x-b.r,b.y+b.r*0.85);
+  var rem=Math.max(0,mgState.time-(now-mgState.start));
+  document.getElementById('mgInfo').textContent='점수 '+mgState.score+' · '+Math.ceil(rem/1000)+'s';
+  if(rem<=0){endGame();return;}requestAnimationFrame(mgLoop);}
+function endGame(){if(!mgState)return;var sc=mgState.score;mgState.alive=false;mgState=null;document.getElementById('mg').classList.remove('show');
+  var hp=Math.min(30,6+sc*2);pet.happy=clamp(pet.happy+hp);pet.tired=clamp((pet.tired||0)+10);pet.hunger=clamp(pet.hunger-6);pet.div=clamp(pet.div+Math.min(6,Math.floor(sc/3)));
+  save();paint();surprise(curImgKey(),'🎾 재밌었어요!','공을 '+sc+'번 튕겼어요! 행복 +'+hp+(sc>=8?' 🏆':''),[{t:'좋아',c:closeOv}]);}
 function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);startAnim('pet');after();}
 function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=100;pet.happy=clamp(pet.happy+4);startAnim('clean');toast('반짝반짝 목욕 완료! 🧽');after();}
 function cleanPoop(){if(pet.stage==='egg'||!alive())return;if(pcount()===0)return toast('치울 똥이 없어요');pet.poopSpots=[];pet.happy=clamp(pet.happy+3);pet.clean=clamp(pet.clean+8);startAnim('clean');toast('똥을 싹 치웠어요! 🧹');after();}
@@ -335,6 +362,7 @@ document.getElementById('btnCode').onclick=function(){var code=btoa(unescape(enc
 document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터 다시 시작할까요? (도감 유지)'))resetPet();};
 var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
 document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnPoop').onclick=cleanPoop;document.getElementById('btnSleep').onclick=sleepAct;document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
+document.getElementById('mgQuit').onclick=endGame;
 cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
 /* ===== 테스트 모드 (?test) ===== */
 if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.search) 로 되돌림) */var db=document.getElementById('devbar');db.style.display='block';
