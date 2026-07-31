@@ -4,43 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
-<meta name="description" content="그리스신화 신수를 알에서 부화시켜 키우는 픽셀 다마고치. 알→덩어리→아기→청년→성체 5단계, 잘 키우면 히드라·페가수스 같은 신수, 못 키우면 평범한 동물. 신성 게이지·샘물 도박·행운 아이템. 같은 브라우저면 이어서 키움. 무료.">
+<meta name="description" content="그리스신화 신수를 알에서 부화시켜 일주일간 키우는 픽셀 다마고치. 알→덩어리→아기→청년→성체 5단계, 잘 키우면 히드라·페가수스 신수, 못 키우면 평범한 동물. 신성 게이지·샘물 도박·굶어죽음. 같은 브라우저면 이어서 키움. 무료.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
 <style>
 :root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--yellow:#e0c07e;
-  --shell:#e6b34a;--shell2:#caa03e;--lcd:#9fbf6b;--lcdink:#2b3a1a;--div:#c98adf;}
+  --shell:#e6b34a;--shell2:#c99a34;--lcd:#a7c56f;--lcdink:#2b3a1a;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.7;min-height:100vh;padding:18px 12px 48px;}
-.wrap{max-width:460px;margin:0 auto;}
-.topnav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:10px 4px 12px;margin-bottom:12px;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.7;min-height:100vh;padding:16px 12px 44px;}
+.wrap{max-width:440px;margin:0 auto;}
+.topnav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:8px 4px 10px;margin-bottom:12px;}
 .topnav a.home{color:var(--coral);font-weight:800;font-size:15px;text-decoration:none;}
 .topnav nav{display:flex;gap:5px;flex-wrap:wrap;}
 .topnav nav a{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:4px 9px;font-size:12px;background:var(--panel);}
 .topnav nav a.on{color:var(--coral);border-color:var(--coral);}
 h1{font-size:18px;text-align:center;margin:2px 0;}
-.sub{text-align:center;color:var(--dim);font-size:12px;margin-bottom:14px;}
-.device{background:linear-gradient(160deg,var(--shell),var(--shell2));border-radius:44% 44% 40% 40%/40% 40% 44% 44%;padding:22px 20px 18px;box-shadow:inset 0 3px 10px rgba(255,255,255,.35),inset 0 -6px 14px rgba(0,0,0,.22),0 12px 30px rgba(0,0,0,.4);}
-.brand{text-align:center;color:#7a5e18;font-weight:800;font-size:11px;letter-spacing:2px;margin-bottom:7px;}
-.screen{background:var(--lcd);border:6px solid #2a2620;border-radius:12px;padding:6px;box-shadow:inset 0 0 0 2px #3a3a30,inset 0 0 18px rgba(0,0,0,.18);position:relative;}
-.screen canvas{display:block;width:100%;height:auto;image-rendering:pixelated;border-radius:4px;}
+.sub{text-align:center;color:var(--dim);font-size:12px;margin-bottom:12px;}
+/* 다마고치 케이스: 라운드렉트, 내용 다 담김 */
+.device{background:linear-gradient(165deg,var(--shell),var(--shell2));border-radius:34px 34px 40px 40px;padding:20px 18px 16px;box-shadow:inset 0 3px 10px rgba(255,255,255,.32),inset 0 -6px 14px rgba(0,0,0,.22),0 12px 30px rgba(0,0,0,.4);border:2px solid rgba(120,90,20,.35);}
+.brand{text-align:center;color:#7a5e18;font-weight:800;font-size:11px;letter-spacing:2px;margin-bottom:8px;}
+.screen{background:var(--lcd);border:6px solid #2a2620;border-radius:12px;padding:6px;position:relative;box-shadow:inset 0 0 0 2px #3a3a30,inset 0 0 18px rgba(0,0,0,.16);}
+.screen canvas{display:block;width:100%;height:auto;image-rendering:pixelated;border-radius:4px;background:var(--lcd);}
 .stagebar{position:absolute;top:9px;left:10px;right:10px;display:flex;justify-content:space-between;font-size:9px;color:#3a4a24;font-weight:700;pointer-events:none;}
 .stagebar span{opacity:.4;}.stagebar span.on{opacity:1;color:#1c2a10;}
+.grow{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:9.5px;color:#3a4a24;font-weight:700;pointer-events:none;}
 .stats{display:flex;gap:6px;margin-top:10px;}
-.stat{flex:1;background:rgba(0,0,0,.14);border-radius:7px;padding:5px 7px;}
-.stat .lab{font-size:10px;color:#5c4a16;font-weight:700;display:flex;justify-content:space-between;}
+.stat{flex:1;background:rgba(0,0,0,.13);border-radius:7px;padding:5px 7px;}
+.stat .lab{font-size:9.5px;color:#5c4a16;font-weight:700;display:flex;justify-content:space-between;}
 .bar{height:8px;background:rgba(0,0,0,.18);border-radius:6px;margin-top:3px;overflow:hidden;}
 .bar>i{display:block;height:100%;border-radius:6px;transition:width .4s;}
 .bar.hunger>i{background:linear-gradient(90deg,#e07b45,#f0b06a);}
 .bar.happy>i{background:linear-gradient(90deg,#d94f7a,#f08bb0);}
+.bar.clean>i{background:linear-gradient(90deg,#4f9bd9,#8bd0f0);}
 .bar.div>i{background:linear-gradient(90deg,#9a55c9,#d4a0ef);}
 .divrow{margin-top:8px;background:rgba(120,60,160,.12);border:1px solid rgba(160,110,200,.4);border-radius:8px;padding:6px 9px;}
 .pad{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px;}
-.btn{background:linear-gradient(180deg,#fff5db,#e9d29a);border:2px solid #a5842f;border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:19px;color:#5c4a16;box-shadow:0 3px 0 #a5842f,inset 0 1px 3px rgba(255,255,255,.6);user-select:none;transition:transform .06s,box-shadow .06s;}
+.btn{background:linear-gradient(180deg,#fff5db,#e9d29a);border:2px solid #a5842f;border-radius:16px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#5c4a16;box-shadow:0 3px 0 #a5842f,inset 0 1px 3px rgba(255,255,255,.55);user-select:none;transition:transform .06s,box-shadow .06s;}
 .btn:active{transform:translateY(3px);box-shadow:0 0 0 #a5842f,inset 0 1px 3px rgba(0,0,0,.2);}
-.btn .t{font-size:9px;font-weight:800;margin-top:1px;}
-.btn.item{grid-column:span 2;aspect-ratio:auto;border-radius:22px;padding:8px;flex-direction:row;gap:6px;font-size:15px;}
+.btn .t{font-size:9px;font-weight:800;margin-top:2px;}
+.btn.item{grid-column:span 2;flex-direction:row;gap:6px;font-size:14px;border-radius:20px;}
 .btn:disabled{opacity:.4;pointer-events:none;}
 .info{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--dim);line-height:1.7;}
 .info b{color:var(--txt);}
@@ -49,53 +52,48 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 .att span{width:19px;height:19px;border-radius:5px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;background:rgba(0,0,0,.15);}
 .att span.done{background:var(--coral);border-color:var(--coral);color:#fff;}
 .dex{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;}
-.dex .slot{border:1px solid var(--line);border-radius:7px;background:var(--lcd);padding:3px;text-align:center;opacity:.4;}
+.dex .slot{border:1px solid var(--line);border-radius:7px;background:#f3eee2;padding:4px 3px;text-align:center;opacity:.4;}
 .dex .slot.got{opacity:1;box-shadow:0 0 0 2px var(--coral);}
-.dex .slot canvas{width:100%;height:auto;image-rendering:pixelated;}
+.dex .slot img{width:100%;height:34px;object-fit:contain;image-rendering:pixelated;}
 .dex .slot .dn{font-size:8.5px;color:#2b3a1a;font-weight:700;margin-top:1px;}
+.dex .slot.q{display:flex;align-items:center;justify-content:center;height:52px;color:#8a9a6a;font-size:18px;}
 .minor{color:var(--dim);font-size:11.5px;}
 .linkbtn{background:none;border:1px solid var(--line);color:var(--coral);border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit;}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#000;color:#fff;padding:10px 18px;border-radius:22px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:50;max-width:90%;text-align:center;}
 .toast.show{opacity:.95;transform:translateX(-50%) translateY(0);}
-.foot{margin-top:26px;padding-top:14px;border-top:1px dashed var(--line);color:var(--dim);font-size:12.5px;line-height:1.9;text-align:center;}
+.foot{margin-top:24px;padding-top:14px;border-top:1px dashed var(--line);color:var(--dim);font-size:12.5px;line-height:1.9;text-align:center;}
 .foot a{color:var(--coral);text-decoration:none;}
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;z-index:60;padding:20px;}
 .ov.show{display:flex;}
 .card2{background:linear-gradient(160deg,#2a2a27,#1b1b19);border:1px solid var(--coral);border-radius:16px;padding:22px;max-width:340px;width:100%;text-align:center;}
-.card2 canvas{image-rendering:pixelated;width:120px;height:120px;margin:6px auto;display:block;background:var(--lcd);border-radius:8px;}
+.card2 canvas{image-rendering:pixelated;width:130px;height:130px;margin:6px auto;display:block;background:var(--lcd);border-radius:8px;}
 .card2 h3{color:var(--yellow);font-size:18px;margin:6px 0;}
 .card2 p{color:var(--dim);font-size:13px;margin-bottom:14px;line-height:1.6;}
 .card2 .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
 .card2 button{border:none;border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;}
-.card2 .go{background:var(--coral);color:#fff;}
-.card2 .alt{background:#3a3a36;color:var(--txt);}
+.card2 .go{background:var(--coral);color:#fff;}.card2 .alt{background:#3a3a36;color:var(--txt);}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="topnav">
-  <a class="home" href="/">✻ 계획대로 느긋하게</a>
-  <nav><a href="/games/" class="on">🎮 게임방</a><a href="/tests/">🧠 테스트</a><a href="/tools/">🧰 도구방</a></nav>
-</div>
+<div class="topnav"><a class="home" href="/">✻ 계획대로 느긋하게</a><nav><a href="/games/" class="on">🎮 게임방</a><a href="/tests/">🧠 테스트</a><a href="/tools/">🧰 도구방</a></nav></div>
 <h1>🥚 신수 키우기</h1>
-<div class="sub">알을 부화시켜 키워요 · 잘 키우면 ✨신수, 못 키우면 평범한 동물 · 다시 와도 이어서</div>
+<div class="sub">일주일간 키워요 · 잘 키우면 ✨신수, 방치하면 굶어죽거나 평범한 동물 · 다시 와도 이어서</div>
 
 <div class="device">
   <div class="brand">DARAKBANG · 神獸</div>
-  <div class="screen">
-    <div class="stagebar" id="stagebar"></div>
-    <canvas id="lcd" width="132" height="116"></canvas>
-  </div>
+  <div class="screen"><div class="stagebar" id="stagebar"></div><canvas id="lcd" width="140" height="120"></canvas><div class="grow" id="growTxt"></div></div>
   <div class="stats">
     <div class="stat"><div class="lab"><span>🍖 배고픔</span><span id="vH">0</span></div><div class="bar hunger"><i id="bH"></i></div></div>
     <div class="stat"><div class="lab"><span>💖 행복</span><span id="vP">0</span></div><div class="bar happy"><i id="bP"></i></div></div>
+    <div class="stat"><div class="lab"><span>🧼 청결</span><span id="vC">0</span></div><div class="bar clean"><i id="bC"></i></div></div>
   </div>
-  <div class="divrow"><div class="lab" style="display:flex;justify-content:space-between;font-size:10.5px;color:#c9a0e0;font-weight:700;"><span>✨ 신성 (神性)</span><span id="vD">0</span></div><div class="bar div" style="margin-top:4px;"><i id="bD"></i></div></div>
+  <div class="divrow"><div class="lab" style="display:flex;justify-content:space-between;font-size:10.5px;color:#c9a0e0;font-weight:700;"><span>✨ 신성 (神性) — 높을수록 신수 확률↑</span><span id="vD">0</span></div><div class="bar div" style="margin-top:4px;"><i id="bD"></i></div></div>
   <div class="pad">
     <button class="btn" id="btnFeed">🍖<span class="t">밥주기</span></button>
     <button class="btn" id="btnPlay">🎾<span class="t">놀기</span></button>
     <button class="btn" id="btnPet">✋<span class="t">쓰다듬기</span></button>
-    <button class="btn" id="btnSleep">💤<span class="t">재우기</span></button>
+    <button class="btn" id="btnClean">🧽<span class="t">씻기기</span></button>
     <button class="btn item" id="btnSpring">💧 신비한 샘물 <span class="minor" id="springN" style="color:#7a5e18;"></span></button>
     <button class="btn item" id="btnLuck">🍀 행운의 부적 <span class="minor" id="luckN" style="color:#7a5e18;"></span></button>
   </div>
@@ -104,181 +102,146 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 <div class="info">
   <div class="row"><span><b id="petName">알</b> · <span id="stageBadge" class="minor"></span></span><span class="minor" id="ageTxt"></span></div>
   <div style="margin-top:8px;"><span class="minor">🗓 출석 (연속 <b id="streak">0</b>일) · 매일 오면 🍀+💧 지급</span><div class="att" id="attRow"></div></div>
-  <div style="margin-top:10px;"><span class="minor">📖 도감 (모은 신수·동물)</span><div class="dex" id="dexRow"></div></div>
+  <div style="margin-top:10px;"><span class="minor">📖 도감</span><div class="dex" id="dexRow"></div></div>
   <div class="row" style="margin-top:12px;"><button class="linkbtn" id="btnCode">💾 세이브 코드</button><button class="linkbtn" id="btnReset">🥚 새 알</button></div>
-  <div class="minor" style="margin-top:8px;line-height:1.6;">아기까진 저절로 자라요. 청년기부터가 진짜! 잘 돌보고 샘물·부적으로 <b>신성</b>을 높여야 신수가 돼요. 방치하면 평범한 동물로 자라요. 같은 브라우저면 이어짐(기기 옮길 땐 세이브 코드).</div>
+  <div class="minor" style="margin-top:8px;line-height:1.6;">아기까진 저절로 자라요. <b>청년기부터</b> 신성에 따라 갈려요 — 잘 돌보고 샘물·부적으로 신성을 높이면 신수! 방치하면 굶어죽거나(💀) 평범한 동물이 돼요. 성장은 <b>실제 시간</b>으로 진행돼서 매일 들러야 해요(총 일주일). 같은 브라우저면 이어짐.</div>
 </div>
-
 <div class="foot">🎮 <a href="/games/">게임방 더 보기</a> · 🏛 <a href="https://www.youtube.com/@darakbang" target="_blank" rel="noopener">다락방 그리스신화</a><br>에디슨이 만든 무료 웹게임</div>
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ov" id="ov"><div class="card2">
-  <canvas id="ovc" width="24" height="24"></canvas>
-  <h3 id="ovTitle"></h3><p id="ovDesc"></p>
-  <div class="btns" id="ovBtns"></div>
-</div></div>
+<div class="ov" id="ov"><div class="card2"><canvas id="ovc" width="130" height="130"></canvas><h3 id="ovTitle"></h3><p id="ovDesc"></p><div class="btns" id="ovBtns"></div></div></div>
 
-<script src="/games/pet/sprites.js"></script>
 <script>
-/* ===== 렌더 ===== */
-var PAL=Object.assign({'X':'#2b3a1a','o':'#5c7038','.':null},window.SPR_PAL||{});
-var cv=document.getElementById('lcd'),cx=cv.getContext('2d');var PXW=cv.width,PXH=cv.height;
-function drawSprite(ctx,spr,cxpx,cypx,scale){
-  if(!spr)return;var w=spr[0].length,h=spr.length;var ox=Math.round(cxpx-w*scale/2),oy=Math.round(cypx-h*scale/2);
-  for(var y=0;y<h;y++){var row=spr[y];for(var x=0;x<row.length;x++){var c=row[x];var col=PAL[c];if(col===undefined)col=PAL['X'];if(c==='.'||c===' ')continue;ctx.fillStyle=col||PAL['X'];ctx.fillRect(ox+x*scale,oy+y*scale,scale,scale);}}
-}
-var bob=0,tick=0,fx=[];
-function lcdClear(){cx.fillStyle='#9fbf6b';cx.fillRect(0,0,PXW,PXH);cx.fillStyle='rgba(0,0,0,0.035)';for(var y=0;y<PXH;y+=2)cx.fillRect(0,y,PXW,1);}
-function render(){
-  lcdClear();var spr=currentSprite();var sc=5;
-  var cy=PXH/2+Math.round(Math.sin(bob)*3)+2;
-  drawSprite(cx,spr,PXW/2,cy,sc);
-  cx.fillStyle='rgba(43,58,26,.5)';cx.fillRect(16,PXH-10,PXW-32,2);
-  for(var i=fx.length-1;i>=0;i--){var f=fx[i];cx.font='12px monospace';cx.fillStyle='#2b3a1a';cx.fillText(f.ch,f.x,f.y);f.y-=0.8;f.life--;if(f.life<=0)fx.splice(i,1);}
-  cx.font='9px monospace';cx.fillStyle='#2b3a1a';
-  if(pet.stage!=='egg'){if(pet.hunger<25)cx.fillText('🍽',6,PXH-6);if(pet.happy<25)cx.fillText('💧',PXW-16,PXH-6);if(sleeping)cx.fillText('Z',PXW-14,16);}
-}
-function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*26)-13),y:PXH/2-8,life:38});}
+/* ===== 스프라이트 이미지 로더 ===== */
+var IMG={}, imgReady={};
+function loadImg(key,src){var im=new Image();im.onload=function(){imgReady[key]=true;};im.src=src;IMG[key]=im;}
+var BASE='/games/pet/sprites/';
+['snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python','egg','blob','snake_baby','snake_juv'].forEach(function(k){loadImg(k,BASE+k+'.png');});
 
-/* ===== 데이터: 뱀 라인(완성) — 이후 라인 추가 ===== */
-var FAMILY={
-  snake:{ename:'뱀', baby:'snake_baby', juvA:'snake_juvA', juvB:'snake_juvB',
-    adults:{ AA:{spr:'hydra',name:'히드라',divine:true,desc:'머리 셋 달린 전설의 물뱀! 최고의 신수예요 ✨'},
-             AB:{spr:'twinsnake',name:'쌍두사',desc:'머리가 둘 달린 진귀한 뱀. 신수엔 못 미쳤지만 멋져요.'},
-             BA:{spr:'rattlesnake',name:'방울뱀',desc:'꼬리 방울을 딸랑이는 평범한 뱀이 됐어요.'},
-             BB:{spr:'python',name:'구렁이',desc:'커다랗고 순한 구렁이가 됐어요. 이것도 귀엽죠.'} } }
-};
+/* ===== 데이터: 뱀 라인 ===== */
+var FAMILY={ snake:{ename:'뱀', baby:'snake_baby', juvA:'snake_juv', juvB:'snake_juv',
+  adults:{ AA:{img:'snake_hydra',name:'히드라',divine:true,end:'god',desc:'머리 셋 달린 전설의 물뱀! 최고의 신수예요.'},
+           AB:{img:'snake_twinsnake',name:'쌍두사',end:'indep',desc:'머리 둘 달린 진귀한 뱀. 신수엔 못 미쳤지만 씩씩하게 독립했어요.'},
+           BA:{img:'snake_rattlesnake',name:'방울뱀',end:'hunt',desc:'방울뱀이 됐어요. 조심성이 없어 그만…'},
+           BB:{img:'snake_python',name:'구렁이',end:'runaway',desc:'커다란 구렁이가 됐지만, 홀로 집을 나가버렸어요.'} } } };
 var DEXORDER=[['snake','AA'],['snake','AB'],['snake','BA'],['snake','BB']];
+var END_TXT={god:'✨ 신이 데려갔어요! 신수가 되어 신들의 곁으로 입양됐어요. 최고의 결말!',
+  indep:'🌿 씩씩하게 독립했어요. 무난한 해피엔딩!',
+  hunt:'🏹 조심성이 없어 사냥당하고 말았어요… 다음엔 더 잘 돌봐줘요.',
+  runaway:'🚪 불량하게 자라 집을 나가버렸어요… 아쉬워요.'};
+
+/* ===== 렌더 ===== */
+var cv=document.getElementById('lcd'),cx=cv.getContext('2d');var PXW=cv.width,PXH=cv.height;
+cx.imageSmoothingEnabled=false;
+var bob=0,tick=0,fx=[],walkX=0,walkDir=1;
+function lcdClear(){cx.imageSmoothingEnabled=false;cx.fillStyle='#a7c56f';cx.fillRect(0,0,PXW,PXH);cx.fillStyle='rgba(0,0,0,0.03)';for(var y=0;y<PXH;y+=2)cx.fillRect(0,y,PXW,1);}
+function curImgKey(){var F=FAMILY[pet.fam]||FAMILY.snake;
+  if(pet.stage==='egg')return 'egg';if(pet.stage==='blob')return 'blob';if(pet.stage==='baby')return F.baby;
+  if(pet.stage==='juv')return pet.pathJ==='A'?F.juvA:F.juvB;if(pet.stage==='adult'){var a=F.adults[pet.pathA];return a?a.img:'blob';}return 'blob';}
+function drawPet(ctx,key,cxp,cyp,size){var im=IMG[key];if(im&&imgReady[key]){var r=im.width/im.height;var w=size,h=size/r;if(h>size){h=size;w=size*r;}ctx.drawImage(im,Math.round(cxp-w/2),Math.round(cyp-h/2),Math.round(w),Math.round(h));}
+  else{ctx.fillStyle='#5c7038';ctx.beginPath();ctx.arc(cxp,cyp,size*0.35,0,7);ctx.fill();}}
+function render(){lcdClear();
+  var key=curImgKey();var size=Math.min(86,PXH-30);
+  // 아기 이후 화면 안 돌아다니기
+  var wander=(pet.stage==='baby'||pet.stage==='juv');
+  if(wander&&!sleeping&&tick%4===0){walkX+=walkDir*1.1;if(walkX>26){walkX=26;walkDir=-1;}if(walkX<-26){walkX=-26;walkDir=1;}}
+  var cxp=PXW/2+(wander?walkX:0);var cyp=PXH/2+Math.round(Math.sin(bob)*2)+3;
+  if(sleeping){cx.font='11px monospace';cx.fillStyle='#2b3a1a';cx.fillText('💤',cxp+size*0.3,cyp-size*0.3);}
+  drawPet(cx,key,cxp,cyp,size);
+  cx.fillStyle='rgba(43,58,26,.5)';cx.fillRect(18,PXH-12,PXW-36,2);
+  for(var i=fx.length-1;i>=0;i--){var f=fx[i];cx.font='13px monospace';cx.fillStyle='#2b3a1a';cx.fillText(f.ch,f.x,f.y);f.y-=0.8;f.life--;if(f.life<=0)fx.splice(i,1);}
+  cx.font='10px monospace';cx.fillStyle='#2b3a1a';
+  if(pet.stage!=='egg'&&pet.stage!=='dead'){if(pet.hunger<25)cx.fillText('🍽',6,PXH-6);if(pet.clean<30)cx.fillText('💩',PXW-16,PXH-16);}
+  if(pet.stage==='dead'){cx.font='30px monospace';cx.fillStyle='#2b3a1a';cx.textAlign='center';cx.fillText('💀',PXW/2,PXH/2+10);cx.textAlign='left';}
+}
+function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*24)-12),y:PXH/2-6,life:36});}
 
 /* ===== 상태 ===== */
-var KEY='darak_pet_v2';var pet=null,sleeping=false;
-function fresh(){return {fam:'snake',stage:'egg',sub:'',hunger:60,happy:60,exp:0,div:0,
-  born:Date.now(),last:Date.now(),clicks:0,streak:0,lastAttend:0,attendDays:[],dex:[],
-  spring:0,luck:0,pathJ:'',pathA:''};}
+var KEY='darak_pet_v3';var pet=null,sleeping=false;
+var STAGE_HRS={blob:12,baby:48,juv:96};var STARVE_HRS=24;
+function fresh(){return {fam:'snake',stage:'egg',hunger:60,happy:60,clean:80,div:0,
+  born:Date.now(),last:Date.now(),stageAt:Date.now(),hungerZeroAt:0,clicks:0,streak:0,lastAttend:0,attendDays:[],dex:[],spring:0,luck:0,pathJ:'',pathA:''};}
 function clamp(v){return Math.max(0,Math.min(100,Math.round(v)));}
-function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.stage)pet=s;}catch(e){}
-  if(!pet)pet=fresh();applyOffline();attend();save();}
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.stage)pet=s;}catch(e){}if(!pet)pet=fresh();applyOffline();attend();growCheck();save();}
 function save(){pet.last=Date.now();try{localStorage.setItem(KEY,JSON.stringify(pet));}catch(e){}}
-function applyOffline(){var mins=Math.min((Date.now()-(pet.last||Date.now()))/60000,48*60);if(mins<1)return;
-  if(pet.stage!=='egg'){pet.hunger=clamp(pet.hunger-mins/60*8);pet.happy=clamp(pet.happy-mins/60*5);
-    if(pet.hunger<15||pet.happy<15)pet.div=clamp(pet.div-Math.floor(mins/120)*2);
-    if(mins>30)setTimeout(function(){toast('자는 동안 배고파졌어요!');},700);}
-  // 자동성장(아기까지): 시간 경과로 exp
-  if(pet.stage==='blob'||pet.stage==='baby')pet.exp+=Math.floor(mins/30);
-}
+function applyOffline(){if(pet.stage==='egg'||pet.stage==='dead')return;var now=Date.now();var mins=Math.min((now-(pet.last||now))/60000,72*60);if(mins<1)return;
+  pet.hunger=clamp(pet.hunger-mins/60*7);pet.happy=clamp(pet.happy-mins/60*4);pet.clean=clamp(pet.clean-mins/60*3);
+  if(pet.hunger<15||pet.happy<15||pet.clean<15)pet.div=clamp(pet.div-Math.floor(mins/120)*2);
+  // 굶주림 사망 판정
+  if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=now-mins*60000;if((now-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
+  if(mins>30&&pet.stage!=='dead')setTimeout(function(){toast('자는 동안 배고파졌어요!');},700);}
 function attend(){var t=new Date();t.setHours(0,0,0,0);t=t.getTime();if(pet.lastAttend===t)return;
-  pet.streak=(pet.lastAttend===t-86400000)?pet.streak+1:1;pet.lastAttend=t;
-  var slot=(pet.streak-1)%7;pet.attendDays=pet.attendDays||[];if(pet.streak%7===1&&pet.streak>1)pet.attendDays=[];
-  if(pet.attendDays.indexOf(slot)<0)pet.attendDays.push(slot);
+  pet.streak=(pet.lastAttend===t-86400000)?pet.streak+1:1;pet.lastAttend=t;var slot=(pet.streak-1)%7;pet.attendDays=pet.attendDays||[];if(pet.streak%7===1&&pet.streak>1)pet.attendDays=[];if(pet.attendDays.indexOf(slot)<0)pet.attendDays.push(slot);
   pet.spring=(pet.spring||0)+1;pet.luck=(pet.luck||0)+1;
-  if(pet.stage!=='egg'){pet.hunger=clamp(pet.hunger+10);
-    setTimeout(function(){toast('🗓 출석! 🍀부적+💧샘물 지급 (연속 '+pet.streak+'일)');},1000);}
-}
+  if(pet.stage!=='egg'&&pet.stage!=='dead'){pet.hunger=clamp(pet.hunger+10);setTimeout(function(){toast('🗓 출석! 🍀부적+💧샘물 지급 (연속 '+pet.streak+'일)');},1000);}}
 
-/* ===== 스프라이트 선택 ===== */
-function currentSprite(){var F=FAMILY[pet.fam]||FAMILY.snake;
-  if(pet.stage==='egg')return SPR.egg;
-  if(pet.stage==='blob')return SPR.blob;
-  if(pet.stage==='baby')return SPR[F.baby];
-  if(pet.stage==='juv')return SPR[pet.pathJ==='A'?F.juvA:F.juvB];
-  if(pet.stage==='adult'){var a=F.adults[pet.pathA];return a?SPR[a.spr]:SPR.blob;}
-  return SPR.blob;
-}
-function petName(){var F=FAMILY[pet.fam];
-  if(pet.stage==='egg')return '알';if(pet.stage==='blob')return '정체불명의 덩어리';
-  if(pet.stage==='baby')return '아기 '+F.ename;if(pet.stage==='juv')return '청년 '+F.ename+(pet.pathJ==='A'?' (건강함)':'');
-  if(pet.stage==='adult')return F.adults[pet.pathA].name;return '?';}
-
-/* ===== 성장 로직 ===== */
+/* ===== 성장(시간 기반) ===== */
 var STAGES=['egg','blob','baby','juv','adult'];
-function stageIdx(){return STAGES.indexOf(pet.stage);}
-function grow(){
-  if(pet.stage==='blob'&&pet.exp>=12){pet.stage='baby';pet.exp=0;save();paint();
-    surprise(currentSprite(),'🐣 아기 '+FAMILY[pet.fam].ename+'!','어떤 동물인지 드러나기 시작했어요! 여기서부턴 어떻게 키우느냐가 중요해요.',[{t:'키우기',c:closeOv}]);addDexMaybe();}
-  else if(pet.stage==='baby'&&pet.exp>=40){ // 아기→청년: 1차 갈림(신성)
-    pet.pathJ=pet.div>=45?'A':'B';pet.stage='juv';pet.exp=0;save();paint();
-    var msg=pet.pathJ==='A'?'신성이 깃들어 건강한 청년으로 자랐어요! 이대로 잘 키우면 신수가 될지도?':'청년기에 접어들었어요. 신성이 조금 부족했지만 아직 기회는 있어요!';
-    surprise(currentSprite(),'✨ 청년기!',msg,[{t:'계속',c:closeOv}]);}
-  else if(pet.stage==='juv'&&pet.exp>=55){ // 청년→성체: 2차 갈림
-    var second=pet.div>=60?'A':'B';pet.pathA=pet.pathJ+second;pet.stage='adult';save();paint();
-    var a=FAMILY[pet.fam].adults[pet.pathA];
-    var t=a.divine?('🎉 신수 '+a.name+' 탄생!'):('🐾 '+a.name+'(으)로 자랐어요');
-    surprise(currentSprite(),t,a.desc+(a.divine?'':' 다시 도전하면 신수가 될 수 있어요!'),[{t:a.divine?'자랑하기':'다시 키우기',c:a.divine?closeOv:null},{t:'계속 보기',c:closeOv}]);
-    addDexMaybe();gtag('event','pet_adult',{form:a.name});}
-}
-function gainExp(n){if(pet.stage==='egg')return;pet.exp+=n;grow();}
-function addDexMaybe(){if(pet.stage!=='adult')return;var id=pet.fam+'_'+pet.pathA;if((pet.dex||[]).indexOf(id)<0){pet.dex.push(id);save();}}
+function stageIdx(){return Math.max(0,STAGES.indexOf(pet.stage));}
+function hrsInStage(){return (Date.now()-(pet.stageAt||pet.born))/3600000;}
+function growCheck(){if(pet.stage==='dead'||pet.stage==='egg'||pet.stage==='adult')return;
+  var h=hrsInStage();
+  if(pet.stage==='blob'&&h>=STAGE_HRS.blob){toStage('baby');surprise('baby','🐣 아기 '+FAMILY[pet.fam].ename+'!','드디어 뭔지 드러났어요! 여기서부턴 어떻게 키우느냐가 중요해요.',[{t:'키우기',c:closeOv}]);}
+  else if(pet.stage==='baby'&&h>=STAGE_HRS.baby){pet.pathJ=pet.div>=45?'A':'B';toStage('juv');surprise(curImgKey(),'✨ 청년기!',pet.pathJ==='A'?'신성이 깃들어 건강하게 자랐어요! 이대로면 신수도 노려볼 만해요.':'청년기예요. 신성이 조금 부족했지만 아직 기회는 있어요!',[{t:'계속',c:closeOv}]);}
+  else if(pet.stage==='juv'&&h>=STAGE_HRS.juv){var second=pet.div>=60?'A':'B';pet.pathA=pet.pathJ+second;toStage('adult');var a=FAMILY[pet.fam].adults[pet.pathA];
+    surprise(a.img,(a.divine?'🎉 신수 '+a.name+'!':'🐾 '+a.name),a.desc+'\n\n'+END_TXT[a.end],[{t:'도감 보기',c:closeOv},{t:'새로 키우기',c:function(){resetPet();closeOv();}}]);addDex();gtag('event','pet_adult',{form:a.name,divine:!!a.divine});}}
+function toStage(s){pet.stage=s;pet.stageAt=Date.now();save();paint();}
+function die(){pet.stage='dead';save();paint();setTimeout(function(){surprise('blob','💀 이런…','돌보지 않아 굶어죽고 말았어요. 다마고치는 매일 챙겨야 해요. 새 알로 다시 시작할까요?',[{t:'새 알 받기',c:function(){resetPet();closeOv();}}]);},400);}
+function addDex(){var id=pet.fam+'_'+pet.pathA;if((pet.dex||[]).indexOf(id)<0){pet.dex.push(id);save();}}
+function resetPet(){var dex=pet.dex||[];pet=fresh();pet.dex=dex;save();paint();}
 
 /* ===== 액션 ===== */
-function afterAct(){save();paint();}
-function feed(){if(pet.stage==='egg')return hatch();if(sleeping)return wake();
-  if(pet.hunger>=98)return toast('배가 불러요');pet.hunger=clamp(pet.hunger+22);pet.happy=clamp(pet.happy+3);pet.div=clamp(pet.div+2);gainExp(4);pushFx('🍖');afterAct();}
-function play(){if(pet.stage==='egg')return hatch();if(sleeping)return wake();
-  if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+20);pet.hunger=clamp(pet.hunger-6);pet.div=clamp(pet.div+3);gainExp(6);pushFx('🎾');afterAct();}
-function petAct(){if(pet.stage==='egg')return hatch();if(sleeping)return wake();
-  pet.happy=clamp(pet.happy+10);pet.div=clamp(pet.div+2);gainExp(3);pushFx('💖');afterAct();}
-function sleepAct(){if(pet.stage==='egg')return hatch();sleeping=!sleeping;if(!sleeping)pet.happy=clamp(pet.happy+6);toast(sleeping?'쿨쿨… (다시 누르면 깨우기)':'잘 잤어요 ☀️');afterAct();}
-function wake(){sleeping=false;afterAct();}
-function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){pet.stage='blob';pet.exp=0;pet.hunger=70;pet.happy=70;save();paint();
-    surprise(SPR.blob,'부화! 그런데…','알에서 정체불명의 덩어리가 나왔어요! 뭐가 될지는 아직 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}
-  else{toast('알이 흔들려요… ('+pet.clicks+'/3)');save();paint();}}
-// 신비한 샘물: 랜덤(독/신성)
-function spring(){if(pet.stage==='egg'||pet.stage==='blob')return toast('아직 일러요 (청년기부터 효과 커요)');
-  if((pet.spring||0)<=0)return toast('샘물이 없어요. 출석하면 생겨요 💧');pet.spring--;
-  var luckBonus=Math.min(0.35,(pet.luck>0?0.12:0)+0);// 부적 소지 시 좋은 확률↑(사용은 별도)
-  var good=Math.random()<(0.5+luckBonus);
-  if(good){var g=18+Math.floor(Math.random()*22);pet.div=clamp(pet.div+g);pushFx('🌟');
-    surprise(currentSprite(),'🌟 신성한 샘물이었다!','신성이 +'+g+' 올랐어요! 신수에 가까워졌어요.',[{t:'좋아',c:closeOv}]);}
-  else{var d=12+Math.floor(Math.random()*16);pet.div=clamp(pet.div-d);pet.happy=clamp(pet.happy-8);pushFx('☠️');
-    surprise(currentSprite(),'☠️ 독이 든 물이었다…','신성이 -'+d+' 떨어졌어요. 도박은 위험해요!',[{t:'아이고',c:closeOv}]);}
-  afterAct();}
-// 행운의 부적: 다음 샘물 좋은 확률↑ + 즉시 소량 신성
-function luck(){if((pet.luck||0)<=0)return toast('부적이 없어요. 출석하면 생겨요 🍀');pet.luck--;
-  pet.div=clamp(pet.div+6);pushFx('🍀');toast('🍀 행운의 기운! 신성 +6, 다음 샘물 운이 좋아져요');afterAct();}
+function alive(){return pet.stage!=='dead';}
+function after(){save();paint();}
+function feed(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger>=98)return toast('배가 불러요');pet.hunger=clamp(pet.hunger+22);pet.happy=clamp(pet.happy+3);pet.div=clamp(pet.div+2);pet.hungerZeroAt=0;pushFx('🍖');after();}
+function play(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+18);pet.hunger=clamp(pet.hunger-6);pet.div=clamp(pet.div+3);pushFx('🎾');after();}
+function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);pet.div=clamp(pet.div+2);pushFx('💖');after();}
+function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=clamp(pet.clean+30);pet.happy=clamp(pet.happy+4);pet.div=clamp(pet.div+2);pushFx('🫧');toast('깨끗해졌어요!');after();}
+function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){toStage('blob');pet.hunger=70;pet.happy=70;surprise('blob','부화! 그런데…','알에서 정체불명 덩어리가 나왔어요! 뭐가 될지는 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}else{toast('알이 흔들려요… ('+pet.clicks+'/3)');after();}}
+function sleepAct(){if(pet.stage==='egg'||!alive())return;sleeping=!sleeping;if(!sleeping)pet.happy=clamp(pet.happy+5);toast(sleeping?'쿨쿨… (다시 누르면 깨우기)':'잘 잤어요 ☀️');after();}
+function wake(){sleeping=false;after();}
+function spring(){if(!alive())return;if(pet.stage==='egg'||pet.stage==='blob')return toast('아직 일러요(청년기부터 효과 커요)');if((pet.spring||0)<=0)return toast('샘물이 없어요. 출석하면 생겨요 💧');pet.spring--;
+  var good=Math.random()<(0.5+(pet.luckActive?0.3:0));pet.luckActive=false;
+  if(good){var g=18+Math.floor(Math.random()*22);pet.div=clamp(pet.div+g);pushFx('🌟');surprise(curImgKey(),'🌟 신성한 샘물!','신성 +'+g+'! 신수에 가까워졌어요.',[{t:'좋아',c:closeOv}]);}
+  else{var d=12+Math.floor(Math.random()*16);pet.div=clamp(pet.div-d);pet.happy=clamp(pet.happy-8);pushFx('☠️');surprise(curImgKey(),'☠️ 독이 든 물…','신성 -'+d+'. 도박은 위험해요!',[{t:'아이고',c:closeOv}]);}
+  after();}
+function luck(){if(!alive())return;if((pet.luck||0)<=0)return toast('부적이 없어요. 출석하면 생겨요 🍀');pet.luck--;pet.div=clamp(pet.div+6);pet.luckActive=true;pushFx('🍀');toast('🍀 다음 샘물 운이 좋아져요! 신성 +6');after();}
 
 /* ===== UI ===== */
+function fmtRemain(){if(pet.stage==='egg')return '알을 톡톡 두드려요';if(pet.stage==='adult')return '다 자랐어요';if(pet.stage==='dead')return '';
+  var tot=STAGE_HRS[pet.stage]||0;var rem=Math.max(0,tot-hrsInStage());if(rem<=0)return '곧 성장!';
+  if(rem>=24)return '다음 성장까지 '+(rem/24).toFixed(1)+'일';if(rem>=1)return '다음 성장까지 '+Math.ceil(rem)+'시간';return '다음 성장까지 '+Math.ceil(rem*60)+'분';}
+function petName(){var F=FAMILY[pet.fam];if(pet.stage==='egg')return '알';if(pet.stage==='blob')return '정체불명의 덩어리';if(pet.stage==='dead')return '별이 된 아이';if(pet.stage==='baby')return '아기 '+F.ename;if(pet.stage==='juv')return '청년 '+F.ename;if(pet.stage==='adult')return F.adults[pet.pathA].name;return '?';}
 function paint(){
-  document.getElementById('vH').textContent=pet.hunger;document.getElementById('vP').textContent=pet.happy;document.getElementById('vD').textContent=pet.div;
-  document.getElementById('bH').style.width=pet.hunger+'%';document.getElementById('bP').style.width=pet.happy+'%';document.getElementById('bD').style.width=pet.div+'%';
+  document.getElementById('vH').textContent=pet.hunger;document.getElementById('vP').textContent=pet.happy;document.getElementById('vC').textContent=pet.clean;document.getElementById('vD').textContent=pet.div;
+  document.getElementById('bH').style.width=pet.hunger+'%';document.getElementById('bP').style.width=pet.happy+'%';document.getElementById('bC').style.width=pet.clean+'%';document.getElementById('bD').style.width=pet.div+'%';
   document.getElementById('petName').textContent=petName();
-  var sb={egg:'🥚 알',blob:'🫧 덩어리',baby:'🐣 아기',juv:'🌿 청년',adult:'⭐ 성체'}[pet.stage];
-  document.getElementById('stageBadge').textContent=sb;
+  document.getElementById('stageBadge').textContent={egg:'🥚 알',blob:'🫧 덩어리',baby:'🐣 아기',juv:'🌿 청년',adult:'⭐ 성체',dead:'💀'}[pet.stage];
   document.getElementById('ageTxt').textContent='함께한 지 '+Math.floor((Date.now()-pet.born)/86400000)+'일';
   document.getElementById('streak').textContent=pet.streak||0;
-  document.getElementById('springN').textContent=pet.spring?('×'+pet.spring):'(없음)';
-  document.getElementById('luckN').textContent=pet.luck?('×'+pet.luck):'(없음)';
-  // 단계바
-  var sbEl=document.getElementById('stagebar');var names=['알','덩어리','아기','청년','성체'];
-  sbEl.innerHTML=names.map(function(n,i){return '<span class="'+(i===stageIdx()?'on':'')+'">'+n+'</span>';}).join('');
-  // 출석
+  document.getElementById('springN').textContent=pet.spring?('×'+pet.spring):'(없음)';document.getElementById('luckN').textContent=pet.luck?('×'+pet.luck):'(없음)';
+  document.getElementById('growTxt').textContent=fmtRemain();
+  var names=['알','덩어리','아기','청년','성체'];document.getElementById('stagebar').innerHTML=names.map(function(n,i){return '<span class="'+(i===stageIdx()?'on':'')+'">'+n+'</span>';}).join('');
   var ar=document.getElementById('attRow');ar.innerHTML='';for(var i=0;i<7;i++){var s=document.createElement('span');var d=(pet.attendDays||[]).indexOf(i)>=0;s.className=d?'done':'';s.textContent=d?'✓':(i+1);ar.appendChild(s);}
-  // 도감
-  var dr=document.getElementById('dexRow');dr.innerHTML='';DEXORDER.forEach(function(pr){var fam=pr[0],pa=pr[1];var a=FAMILY[fam].adults[pa];var id=fam+'_'+pa;var got=(pet.dex||[]).indexOf(id)>=0;
-    var slot=document.createElement('div');slot.className='slot'+(got?' got':'');
-    var c=document.createElement('canvas');c.width=20;c.height=20;var cc=c.getContext('2d');cc.fillStyle='#9fbf6b';cc.fillRect(0,0,20,20);if(got)drawSprite(cc,SPR[a.spr],10,10,1);
-    slot.appendChild(c);var nm=document.createElement('div');nm.className='dn';nm.textContent=got?a.name:'???';slot.appendChild(nm);dr.appendChild(slot);});
-  // 버튼 활성
-  document.getElementById('btnSpring').disabled=!(pet.spring>0)&&pet.stage!=='egg'?false:(pet.spring<=0);
+  var dr=document.getElementById('dexRow');dr.innerHTML='';DEXORDER.forEach(function(pr){var a=FAMILY[pr[0]].adults[pr[1]];var got=(pet.dex||[]).indexOf(pr[0]+'_'+pr[1])>=0;var slot=document.createElement('div');slot.className='slot'+(got?' got':'');if(got){var im=document.createElement('img');im.src=BASE+a.img+'.png';slot.appendChild(im);var nm=document.createElement('div');nm.className='dn';nm.textContent=a.name;slot.appendChild(nm);}else{slot.className+=' q';slot.textContent='?';}dr.appendChild(slot);});
 }
 /* ===== 오버레이 ===== */
-var ovc=document.getElementById('ovc');
-function surprise(spr,title,desc,btns){var c=document.getElementById('ovc');c.width=24;c.height=24;var g=c.getContext('2d');g.fillStyle='#9fbf6b';g.fillRect(0,0,24,24);drawSprite(g,spr,12,12,1);
-  document.getElementById('ovTitle').textContent=title;document.getElementById('ovDesc').textContent=desc;
-  var bw=document.getElementById('ovBtns');bw.innerHTML='';(btns||[{t:'확인',c:closeOv}]).forEach(function(b,i){var el=document.createElement('button');el.className=i===0?'go':'alt';el.textContent=b.t;el.onclick=b.c||closeOv;bw.appendChild(el);});
-  document.getElementById('ov').classList.add('show');}
+function surprise(imgKey,title,desc,btns){var c=document.getElementById('ovc');var g=c.getContext('2d');g.imageSmoothingEnabled=false;g.fillStyle='#a7c56f';g.fillRect(0,0,130,130);var im=IMG[imgKey];if(im&&imgReady[imgKey]){var r=im.width/im.height,w=110,h=110/r;if(h>110){h=110;w=110*r;}g.drawImage(im,65-w/2,65-h/2,w,h);}
+  document.getElementById('ovTitle').textContent=title;document.getElementById('ovDesc').textContent=desc;var bw=document.getElementById('ovBtns');bw.innerHTML='';(btns||[{t:'확인',c:closeOv}]).forEach(function(b,i){var el=document.createElement('button');el.className=i===0?'go':'alt';el.textContent=b.t;el.onclick=b.c||closeOv;bw.appendChild(el);});document.getElementById('ov').classList.add('show');}
 function closeOv(){document.getElementById('ov').classList.remove('show');}
-/* ===== 세이브코드/리셋 ===== */
-document.getElementById('btnCode').onclick=function(){var code=btoa(unescape(encodeURIComponent(JSON.stringify(pet))));var inp=prompt('세이브 코드예요. 복사해두면 다른 기기에서 불러올 수 있어요.\n다른 코드를 붙여넣으면 그 상태로 불러옵니다:',code);if(inp&&inp!==code){try{var p=JSON.parse(decodeURIComponent(escape(atob(inp.trim()))));if(p&&p.stage){pet=p;save();paint();toast('불러왔어요!');}}catch(e){toast('코드가 올바르지 않아요');}}};
-document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터 다시 시작할까요? (도감은 유지)')){var dex=pet.dex||[];pet=fresh();pet.dex=dex;save();paint();toast('새 알을 받았어요 🥚');}};
-/* ===== 토스트 ===== */
+document.getElementById('btnCode').onclick=function(){var code=btoa(unescape(encodeURIComponent(JSON.stringify(pet))));var inp=prompt('세이브 코드예요. 복사해두면 다른 기기에서 불러와요.\n다른 코드 붙여넣으면 그 상태로 불러옵니다:',code);if(inp&&inp!==code){try{var p=JSON.parse(decodeURIComponent(escape(atob(inp.trim()))));if(p&&p.stage){pet=p;save();paint();toast('불러왔어요!');}}catch(e){toast('코드가 올바르지 않아요');}}};
+document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터 다시 시작할까요? (도감 유지)'))resetPet();};
 var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
-/* ===== 바인딩 ===== */
-document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petAct;document.getElementById('btnSleep').onclick=sleepAct;
-document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
-cv.onclick=function(){if(pet.stage==='egg')hatch();else petAct();};
+document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
+cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
 load();paint();
-setInterval(function(){bob+=0.15;tick++;if(tick%600===0&&pet.stage!=='egg'&&!sleeping){pet.hunger=clamp(pet.hunger-1);if(tick%1800===0)pet.happy=clamp(pet.happy-1);if(pet.stage==='blob'||pet.stage==='baby')gainExp(1);save();paint();}render();},100);
+setInterval(function(){bob+=0.15;tick++;
+  if(tick%600===0&&pet.stage!=='egg'&&pet.stage!=='dead'&&!sleeping){pet.hunger=clamp(pet.hunger-1);if(tick%1200===0){pet.happy=clamp(pet.happy-1);pet.clean=clamp(pet.clean-1);}
+    if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=Date.now();if((Date.now()-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
+    growCheck();save();paint();}
+  if(tick%100===0)paint();
+  render();},100);
 render();
 </script>
 </body>
