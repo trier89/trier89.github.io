@@ -318,13 +318,15 @@ setInterval(function(){bob+=0.15;tick++;
   if(tick%600===0&&pet.stage!=='egg'&&pet.stage!=='dead'&&!sleeping){pet.hunger=clamp(pet.hunger-Math.max(1,Math.round(HUNGER_RATE[pet.stage]||1)));if(tick%1200===0){pet.happy=clamp(pet.happy-1);pet.clean=clamp(pet.clean-1);}
     if(tick%1200===0&&pet.happy<65)pet.div=clamp(pet.div-1); // 신성 유지 어렵게(행복 낮으면 감소)
     // 💩 똥: 밥 먹고 일정시간 후(어릴수록 자주) + 똥 있으면 청결·행복·신성 하락
-    var poopMins=(pet.stage==='baby')?1.2:(pet.stage==='juv')?3:5;
-    if(pet.ateAt&&!pet.pooped&&(Date.now()-pet.ateAt)/60000>=poopMins&&pcount()<5){addPoop();pet.pooped=1;toast('💩 똥을 쌌어요! 똥치우기로 치워요');}
     if(pcount()>0){pet.clean=clamp(pet.clean-pcount()*2);pet.happy=clamp(pet.happy-pcount());if(tick%1200===0)pet.div=clamp(pet.div-pcount());}
     if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=Date.now();if((Date.now()-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
     pet.tired=clamp((pet.tired||0)+2);if((pet.tired||0)>=98){sleeping=true;toast('너무 피곤해서 잠들었어요 😴');}
     growCheck();save();paint();}
   if(tick%600===0&&sleeping&&pet.stage!=='egg'&&pet.stage!=='dead'){pet.tired=clamp((pet.tired||0)-14);if((pet.tired||0)<=0){sleeping=false;pet.happy=clamp(pet.happy+5);}growCheck();save();paint();}
+  // 💩 먹고 잠시 뒤 배설(5초마다 체크·짧은 대기)
+  if(tick%50===0&&pet.ateAt&&!pet.pooped&&pet.stage!=='egg'&&pet.stage!=='dead'&&pet.stage!=='gone'&&!sleeping){
+    var pm=(pet.stage==='baby')?0.5:(pet.stage==='juv')?1.2:2;
+    if((Date.now()-pet.ateAt)/60000>=pm&&pcount()<5){addPoop();pet.pooped=1;toast('💩 똥을 쌌어요! 똥치우기로 치워요');save();paint();}}
   if(tick%100===0)paint();
   render();},100);
 render();
