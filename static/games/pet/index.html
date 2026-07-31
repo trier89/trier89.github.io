@@ -143,25 +143,44 @@ var END_TXT={god:'✨ 신이 데려갔어요! 신수가 되어 신들의 곁으�
 /* ===== 렌더 ===== */
 var cv=document.getElementById('lcd'),cx=cv.getContext('2d');var PXW=cv.width,PXH=cv.height;
 cx.imageSmoothingEnabled=false;
-var bob=0,tick=0,fx=[],walkX=0,walkDir=1;
+var bob=0,tick=0,fx=[],walkX=0,walkDir=1,anim=null,hopT=0;
+function startAnim(type,emoji){anim={type:type,e:emoji||'',t:0,dur:type==='eat'?30:(type==='play'?28:22)};}
 function lcdClear(){cx.imageSmoothingEnabled=false;cx.fillStyle='#a7c56f';cx.fillRect(0,0,PXW,PXH);cx.fillStyle='rgba(0,0,0,0.03)';for(var y=0;y<PXH;y+=2)cx.fillRect(0,y,PXW,1);}
 function curImgKey(){var F=FAMILY[pet.fam]||FAMILY.snake;
   if(pet.stage==='egg')return 'egg';if(pet.stage==='blob')return 'blob';if(pet.stage==='baby')return F.baby;
   if(pet.stage==='juv')return pet.pathJ==='A'?F.juvA:F.juvB;if(pet.stage==='adult'){var a=F.adults[pet.pathA];return a?a.img:'blob';}return 'blob';}
-function drawPet(ctx,key,cxp,cyp,size){var im=IMG[key];if(im&&imgReady[key]){var r=im.width/im.height;var w=size,h=size/r;if(h>size){h=size;w=size*r;}ctx.drawImage(im,Math.round(cxp-w/2),Math.round(cyp-h/2),Math.round(w),Math.round(h));}
+function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1;if(im&&imgReady[key]){var r=im.width/im.height;var w=size*scale,h=w/r;if(h>size*scale){h=size*scale;w=h*r;}ctx.save();ctx.translate(Math.round(cxp),Math.round(cyp));if(flip<0)ctx.scale(-1,1);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();}
   else{ctx.fillStyle='#5c7038';ctx.beginPath();ctx.arc(cxp,cyp,size*0.35,0,7);ctx.fill();}}
 function render(){lcdClear();
-  var key=curImgKey();var size=Math.min(86,PXH-30);
-  // 아기 이후 화면 안 돌아다니기
-  var wander=(pet.stage==='baby'||pet.stage==='juv');
-  if(wander&&!sleeping&&tick%4===0){walkX+=walkDir*1.1;if(walkX>26){walkX=26;walkDir=-1;}if(walkX<-26){walkX=-26;walkDir=1;}}
-  var cxp=PXW/2+(wander?walkX:0);var cyp=PXH/2+Math.round(Math.sin(bob)*2)+3;
-  if(sleeping){cx.font='11px monospace';cx.fillStyle='#2b3a1a';cx.fillText('💤',cxp+size*0.3,cyp-size*0.3);}
-  drawPet(cx,key,cxp,cyp,size);
+  var key=curImgKey();var size=Math.min(84,PXH-30);
+  var active=(pet.stage!=='egg'&&pet.stage!=='dead');
+  var scale=1,offX=(active?walkX:0),offY=Math.round(Math.sin(bob)*2),flip=walkDir;
+  // 생기있는 아이들 이동(액션 중 아닐 때)
+  if(active&&!sleeping&&!anim){
+    if(tick%3===0){walkX+=walkDir*1.0;if(walkX>30){walkX=30;walkDir=-1;}if(walkX<-30){walkX=-30;walkDir=1;}}
+    if(tick%70===0&&Math.random()<0.5)walkDir*=-1;
+    if(hopT>0){hopT--;offY-=Math.abs(Math.sin((22-hopT)/22*Math.PI))*11;}
+    else if(tick%50===0&&Math.random()<0.6)hopT=22;
+    offX=walkX;
+  }
+  // 액션 애니
+  var foodD=null,heartD=false,bubbleD=false;
+  if(anim){anim.t++;var p=anim.t/anim.dur;
+    if(anim.type==='eat'){foodD={e:anim.e,x:PXW/2+offX+32-p*32,y:PXH/2+offY};if(p>0.55)scale=1+Math.sin((p-0.55)*Math.PI*4.5)*0.13;}
+    else if(anim.type==='play'){offY-=Math.abs(Math.sin(p*Math.PI*3))*17;}
+    else if(anim.type==='pet'){heartD=true;offX+=Math.sin(anim.t*0.7)*3;}
+    else if(anim.type==='clean'){bubbleD=true;}
+    if(anim.t>=anim.dur)anim=null;}
+  var cxp=PXW/2+offX,cyp=PXH/2+offY+3;
+  if(sleeping){cx.font='12px monospace';cx.fillStyle='#2b3a1a';cx.fillText('💤',cxp+size*0.32,cyp-size*0.34);}
+  drawPet(cx,key,cxp,cyp,size,flip,scale);
   cx.fillStyle='rgba(43,58,26,.5)';cx.fillRect(18,PXH-12,PXW-36,2);
+  if(foodD){cx.font='16px monospace';cx.fillText(foodD.e,foodD.x-8,foodD.y+5);}
+  if(heartD){cx.font='12px monospace';for(var k=0;k<3;k++)cx.fillText('💗',cxp-16+k*13,cyp-size*0.42-((anim.t*1.2+k*7)%24));}
+  if(bubbleD){cx.font='11px monospace';for(var k=0;k<4;k++)cx.fillText('🫧',cxp-20+k*12,cyp-6-((anim.t*1.6+k*8)%32));}
   for(var i=fx.length-1;i>=0;i--){var f=fx[i];cx.font='13px monospace';cx.fillStyle='#2b3a1a';cx.fillText(f.ch,f.x,f.y);f.y-=0.8;f.life--;if(f.life<=0)fx.splice(i,1);}
   cx.font='10px monospace';cx.fillStyle='#2b3a1a';
-  if(pet.stage!=='egg'&&pet.stage!=='dead'){if(pet.hunger<25)cx.fillText('🍽',6,PXH-6);if(pet.clean<30)cx.fillText('💩',PXW-16,PXH-16);}
+  if(active){if(pet.hunger<25)cx.fillText('🍽',6,PXH-6);if(pet.clean<30)cx.fillText('💩',PXW-16,PXH-16);}
   if(pet.stage==='dead'){cx.font='30px monospace';cx.fillStyle='#2b3a1a';cx.textAlign='center';cx.fillText('💀',PXW/2,PXH/2+10);cx.textAlign='left';}
 }
 function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*24)-12),y:PXH/2-6,life:36});}
@@ -169,13 +188,17 @@ function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*24)-12),y:PXH/2-6,l
 /* ===== 상태 ===== */
 var KEY='darak_pet_v3';var pet=null,sleeping=false;
 var STAGE_HRS={blob:12,baby:48,juv:96};var STARVE_HRS=24;
+var HUNGER_RATE={egg:0,blob:1.4,baby:1.9,juv:1.4,adult:1.0,dead:0}; // 어릴수록 자주 배고픔
 function fresh(){return {fam:'snake',stage:'egg',hunger:60,happy:60,clean:80,div:0,
   born:Date.now(),last:Date.now(),stageAt:Date.now(),hungerZeroAt:0,clicks:0,streak:0,lastAttend:0,attendDays:[],dex:[],spring:0,luck:0,pathJ:'',pathA:''};}
 function clamp(v){return Math.max(0,Math.min(100,Math.round(v)));}
 function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.stage)pet=s;}catch(e){}if(!pet)pet=fresh();applyOffline();attend();growCheck();save();}
 function save(){pet.last=Date.now();try{localStorage.setItem(KEY,JSON.stringify(pet));}catch(e){}}
 function applyOffline(){if(pet.stage==='egg'||pet.stage==='dead')return;var now=Date.now();var mins=Math.min((now-(pet.last||now))/60000,72*60);if(mins<1)return;
-  pet.hunger=clamp(pet.hunger-mins/60*7);pet.happy=clamp(pet.happy-mins/60*4);pet.clean=clamp(pet.clean-mins/60*3);
+  var hr=HUNGER_RATE[pet.stage]||1;
+  pet.hunger=clamp(pet.hunger-mins/60*7*hr);pet.happy=clamp(pet.happy-mins/60*4);pet.clean=clamp(pet.clean-mins/60*3);
+  // 신성은 오프라인 동안 서서히 감소(행복 낮으면 더) — 유지가 어렵게
+  pet.div=clamp(pet.div-mins/60*(pet.happy<50?1.2:0.5));
   if(pet.hunger<15||pet.happy<15||pet.clean<15)pet.div=clamp(pet.div-Math.floor(mins/120)*2);
   // 굶주림 사망 판정
   if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=now-mins*60000;if((now-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
@@ -192,8 +215,8 @@ function hrsInStage(){return (Date.now()-(pet.stageAt||pet.born))/3600000;}
 function growCheck(){if(pet.stage==='dead'||pet.stage==='egg'||pet.stage==='adult')return;
   var h=hrsInStage();
   if(pet.stage==='blob'&&h>=STAGE_HRS.blob){toStage('baby');surprise('baby','🐣 아기 '+FAMILY[pet.fam].ename+'!','드디어 뭔지 드러났어요! 여기서부턴 어떻게 키우느냐가 중요해요.',[{t:'키우기',c:closeOv}]);}
-  else if(pet.stage==='baby'&&h>=STAGE_HRS.baby){pet.pathJ=pet.div>=45?'A':'B';toStage('juv');surprise(curImgKey(),'✨ 청년기!',pet.pathJ==='A'?'신성이 깃들어 건강하게 자랐어요! 이대로면 신수도 노려볼 만해요.':'청년기예요. 신성이 조금 부족했지만 아직 기회는 있어요!',[{t:'계속',c:closeOv}]);}
-  else if(pet.stage==='juv'&&h>=STAGE_HRS.juv){var second=pet.div>=60?'A':'B';pet.pathA=pet.pathJ+second;toStage('adult');var a=FAMILY[pet.fam].adults[pet.pathA];
+  else if(pet.stage==='baby'&&h>=STAGE_HRS.baby){pet.pathJ=pet.div>=58?'A':'B';toStage('juv');surprise(curImgKey(),'✨ 청년기!',pet.pathJ==='A'?'신성이 깃들어 건강하게 자랐어요! 이대로면 신수도 노려볼 만해요.':'청년기예요. 신성이 조금 부족했지만 아직 기회는 있어요!',[{t:'계속',c:closeOv}]);}
+  else if(pet.stage==='juv'&&h>=STAGE_HRS.juv){var second=pet.div>=74?'A':'B';pet.pathA=pet.pathJ+second;toStage('adult');var a=FAMILY[pet.fam].adults[pet.pathA];
     surprise(a.img,(a.divine?'🎉 신수 '+a.name+'!':'🐾 '+a.name),a.desc+'\n\n'+END_TXT[a.end],[{t:'도감 보기',c:closeOv},{t:'새로 키우기',c:function(){resetPet();closeOv();}}]);addDex();gtag('event','pet_adult',{form:a.name,divine:!!a.divine});}}
 function toStage(s){pet.stage=s;pet.stageAt=Date.now();save();paint();}
 function die(){pet.stage='dead';save();paint();setTimeout(function(){surprise('blob','💀 이런…','돌보지 않아 굶어죽고 말았어요. 다마고치는 매일 챙겨야 해요. 새 알로 다시 시작할까요?',[{t:'새 알 받기',c:function(){resetPet();closeOv();}}]);},400);}
@@ -203,10 +226,22 @@ function resetPet(){var dex=pet.dex||[];pet=fresh();pet.dex=dex;save();paint();}
 /* ===== 액션 ===== */
 function alive(){return pet.stage!=='dead';}
 function after(){save();paint();}
-function feed(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger>=98)return toast('배가 불러요');pet.hunger=clamp(pet.hunger+22);pet.happy=clamp(pet.happy+3);pet.div=clamp(pet.div+2);pet.hungerZeroAt=0;pushFx('🍖');after();}
-function play(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+18);pet.hunger=clamp(pet.hunger-6);pet.div=clamp(pet.div+3);pushFx('🎾');after();}
-function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);pet.div=clamp(pet.div+2);pushFx('💖');after();}
-function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=clamp(pet.clean+30);pet.happy=clamp(pet.happy+4);pet.div=clamp(pet.div+2);pushFx('🫧');toast('깨끗해졌어요!');after();}
+/* 먹이 시스템 (나이·식성) */
+var DIET={snake:'carn'};
+var FOODS={milk:{e:'🍼',n:'우유'},insect:{e:'🐛',n:'벌레'},mouse:{e:'🐁',n:'쥐'},grass:{e:'🌿',n:'풀'}};
+function rightFood(id){var st=pet.stage,diet=DIET[pet.fam]||'carn';
+  if(st==='baby')return id==='milk';
+  if(diet==='carn')return (st==='juv')?(id==='insect'):(id==='mouse'||id==='insect');
+  return id==='grass';}
+function feed(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger>=98)return toast('배가 불러요');
+  surprise(curImgKey(),'🍽 무엇을 줄까요?','나이·식성에 맞는 먹이를 줘야 잘 먹어요! ('+({baby:'아기=우유',juv:'청년 육식=벌레',adult:'성체 육식=쥐'}[pet.stage]||'')+')',
+    [['milk','🍼 우유'],['insect','🐛 벌레'],['mouse','🐁 쥐'],['grass','🌿 풀']].map(function(o){return {t:o[1],c:function(){feedWith(o[0]);closeOv();}};}));}
+function feedWith(id){var f=FOODS[id];if(rightFood(id)){pet.hunger=clamp(pet.hunger+26);pet.happy=clamp(pet.happy+6);toast('냠냠! 잘 먹어요');}
+  else{pet.hunger=clamp(pet.hunger+7);pet.happy=clamp(pet.happy-7);toast('입에 안 맞나 봐요…');}
+  pet.hungerZeroAt=0;startAnim('eat',f.e);after();}
+function play(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+18);pet.hunger=clamp(pet.hunger-7);pet.div=clamp(pet.div+1);startAnim('play');after();}
+function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);startAnim('pet');after();}
+function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=clamp(pet.clean+34);pet.happy=clamp(pet.happy+4);startAnim('clean');toast('깨끗해졌어요!');after();}
 function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){toStage('blob');pet.hunger=70;pet.happy=70;surprise('blob','부화! 그런데…','알에서 정체불명 덩어리가 나왔어요! 뭐가 될지는 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}else{toast('알이 흔들려요… ('+pet.clicks+'/3)');after();}}
 function sleepAct(){if(pet.stage==='egg'||!alive())return;sleeping=!sleeping;if(!sleeping)pet.happy=clamp(pet.happy+5);toast(sleeping?'쿨쿨… (다시 누르면 깨우기)':'잘 잤어요 ☀️');after();}
 function wake(){sleeping=false;after();}
@@ -255,7 +290,8 @@ if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.s
   document.getElementById('dReset').onclick=function(){resetPet();toast('🔄 리셋');};}
 load();paint();
 setInterval(function(){bob+=0.15;tick++;
-  if(tick%600===0&&pet.stage!=='egg'&&pet.stage!=='dead'&&!sleeping){pet.hunger=clamp(pet.hunger-1);if(tick%1200===0){pet.happy=clamp(pet.happy-1);pet.clean=clamp(pet.clean-1);}
+  if(tick%600===0&&pet.stage!=='egg'&&pet.stage!=='dead'&&!sleeping){pet.hunger=clamp(pet.hunger-Math.max(1,Math.round(HUNGER_RATE[pet.stage]||1)));if(tick%1200===0){pet.happy=clamp(pet.happy-1);pet.clean=clamp(pet.clean-1);}
+    if(tick%1200===0&&pet.happy<65)pet.div=clamp(pet.div-1); // 신성 유지 어렵게(행복 낮으면 감소)
     if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=Date.now();if((Date.now()-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
     growCheck();save();paint();}
   if(tick%100===0)paint();
