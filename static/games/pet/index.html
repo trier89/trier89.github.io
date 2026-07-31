@@ -98,8 +98,7 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
     <button class="btn" id="btnClean">🧽<span class="t">씻기기</span></button>
     <button class="btn" id="btnPoop">🧹<span class="t">똥치우기</span></button>
     <button class="btn" id="btnSleep">💤<span class="t">재우기</span></button>
-    <button class="btn item" id="btnSpring">💧 신비한 샘물 <span class="minor" id="springN" style="color:#7a5e18;"></span></button>
-    <button class="btn item" id="btnLuck">🍀 행운의 부적 <span class="minor" id="luckN" style="color:#7a5e18;"></span></button>
+    <button class="btn item" id="btnBag" style="grid-column:span 4;border-radius:20px;">🎒 가방 열기 <span class="minor" id="bagN" style="color:#7a5e18;"></span></button>
   </div>
 </div>
 
@@ -131,6 +130,11 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
   <canvas id="mgc" width="260" height="200" style="width:100%;height:auto;background:var(--lcd);border-radius:8px;image-rendering:pixelated;cursor:pointer;"></canvas>
   <p style="color:var(--dim);font-size:12px;margin:8px 0 10px;">움직이는 공을 탭해서 튕겨요! 많이 튕길수록 행복 UP</p>
   <div class="btns"><button class="alt" id="mgQuit">그만하기</button></div>
+</div></div>
+<div class="ov" id="bag"><div class="card2" style="max-width:320px;">
+  <div style="color:var(--yellow);font-weight:800;font-size:16px;margin-bottom:10px;">🎒 가방</div>
+  <div id="bagList"></div>
+  <div class="btns" style="margin-top:12px;"><button class="alt" id="bagClose">닫기</button></div>
 </div></div>
 
 <script>
@@ -305,7 +309,7 @@ function mgLoop(){if(!mgState||!mgState.alive)return;var c=document.getElementBy
   document.getElementById('mgInfo').textContent='점수 '+mgState.score+' · '+Math.ceil(rem/1000)+'s';
   if(rem<=0){endGame();return;}requestAnimationFrame(mgLoop);}
 function endGame(){if(!mgState)return;var sc=mgState.score;mgState.alive=false;mgState=null;document.getElementById('mg').classList.remove('show');
-  var hp=Math.min(30,6+sc*2);pet.happy=clamp(pet.happy+hp);pet.tired=clamp((pet.tired||0)+10);pet.hunger=clamp(pet.hunger-6);pet.div=clamp(pet.div+Math.min(6,Math.floor(sc/3)));
+  var hp=Math.min(32,7+sc*2);pet.happy=clamp(pet.happy+hp);pet.tired=clamp((pet.tired||0)+10);pet.hunger=clamp(pet.hunger-6);/* 놀기는 행복만(신성 X) */
   save();paint();surprise(curImgKey(),'🎾 재밌었어요!','공을 '+sc+'번 튕겼어요! 행복 +'+hp+(sc>=8?' 🏆':''),[{t:'좋아',c:closeOv}]);}
 function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);startAnim('pet');after();}
 function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=100;pet.happy=clamp(pet.happy+4);startAnim('clean');toast('반짝반짝 목욕 완료! 🧽');after();}
@@ -334,6 +338,17 @@ var EVENTS=[
 function fireEvent(){if(anim||document.getElementById('ov').classList.contains('show')||sleeping)return;
   var ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];pushFx(ev.e);
   surprise(curImgKey(),ev.e+' '+ev.t,ev.d,ev.ch.map(function(c){return {t:c.t,c:function(){c.fn();closeOv();save();paint();}};}));}
+/* ===== 아이템 가방 ===== */
+function openBag(){var items=[
+  {e:'💧',n:'신비한 샘물',cnt:pet.spring||0,d:'마시면 랜덤 — 신성 대박 or 독 (도박!)',use:spring},
+  {e:'🍀',n:'행운의 부적',cnt:pet.luck||0,d:'다음 샘물 운↑ + 신성 +6',use:luck}];
+  var list=document.getElementById('bagList');list.innerHTML='';var any=false;
+  items.forEach(function(it){any=true;var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px;border:1px solid #3e3e3a;border-radius:8px;margin-bottom:6px;text-align:left;'+(it.cnt<=0?'opacity:.4;':'');
+    row.innerHTML='<span style="font-size:22px;">'+it.e+'</span><div style="flex:1;"><div style="color:#e8e6e3;font-weight:700;font-size:13px;">'+it.n+' ×'+it.cnt+'</div><div style="color:#9c9a94;font-size:11px;">'+it.d+'</div></div>';
+    var b=document.createElement('button');b.className='go';b.textContent='사용';b.style.cssText='padding:6px 12px;font-size:12px;';if(it.cnt<=0)b.disabled=true;
+    b.onclick=function(){document.getElementById('bag').classList.remove('show');it.use();};row.appendChild(b);list.appendChild(row);});
+  if(!any)list.innerHTML='<div style="color:#9c9a94;">가방이 비었어요</div>';
+  document.getElementById('bag').classList.add('show');}
 
 /* ===== UI ===== */
 function fmtRemain(){if(pet.stage==='egg')return '알을 톡톡 두드려요';if(pet.stage==='dead')return '';if(pet.stage==='gone')return '새 알을 받아보세요';
@@ -348,7 +363,7 @@ function paint(){
   document.getElementById('stageBadge').textContent={dead:'💀',gone:'🪹 빈 둥지'}[pet.stage]||'';
   document.getElementById('ageTxt').textContent='함께한 지 '+Math.floor((Date.now()-pet.born)/86400000)+'일';
   document.getElementById('streak').textContent=pet.streak||0;
-  document.getElementById('springN').textContent=pet.spring?('×'+pet.spring):'(없음)';document.getElementById('luckN').textContent=pet.luck?('×'+pet.luck):'(없음)';
+  document.getElementById('bagN').textContent='💧'+(pet.spring||0)+' 🍀'+(pet.luck||0);
   document.getElementById('growTxt').textContent=fmtRemain();
   document.getElementById('stagebar').innerHTML='';/* 성장단계 표시 숨김(사장님) */
   var ar=document.getElementById('attRow');ar.innerHTML='';for(var i=0;i<7;i++){var s=document.createElement('span');var d=(pet.attendDays||[]).indexOf(i)>=0;s.className=d?'done':'';s.textContent=d?'✓':(i+1);ar.appendChild(s);}
@@ -363,6 +378,7 @@ document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터
 var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
 document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnPoop').onclick=cleanPoop;document.getElementById('btnSleep').onclick=sleepAct;document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
 document.getElementById('mgQuit').onclick=endGame;
+document.getElementById('btnBag').onclick=openBag;document.getElementById('bagClose').onclick=function(){document.getElementById('bag').classList.remove('show');};
 cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
 /* ===== 테스트 모드 (?test) ===== */
 if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.search) 로 되돌림) */var db=document.getElementById('devbar');db.style.display='block';
