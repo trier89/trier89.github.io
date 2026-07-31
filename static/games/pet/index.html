@@ -111,6 +111,7 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
   <div style="display:flex;gap:6px;flex-wrap:wrap;">
     <button class="linkbtn" id="dNext">⏩ 다음 단계</button>
     <button class="linkbtn" id="dDiv">✨ 신성+30</button>
+    <button class="linkbtn" id="dPoop">💩 똥싸기</button>
     <button class="linkbtn" id="dStarve">💀 배고픔0→죽음</button>
     <button class="linkbtn" id="dReset">🔄 리셋</button>
   </div>
@@ -152,7 +153,7 @@ function curImgKey(){var F=FAMILY[pet.fam]||FAMILY.snake;
 function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1;if(im&&imgReady[key]){var r=im.width/im.height;var w=size*scale,h=w/r;if(h>size*scale){h=size*scale;w=h*r;}ctx.save();ctx.translate(Math.round(cxp),Math.round(cyp));if(flip<0)ctx.scale(-1,1);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();}
   else{ctx.fillStyle='#5c7038';ctx.beginPath();ctx.arc(cxp,cyp,size*0.35,0,7);ctx.fill();}}
 function render(){lcdClear();
-  var key=curImgKey();var size=Math.min(84,PXH-30);
+  var key=curImgKey();var size=Math.min(52,PXH-54);
   var active=(pet.stage!=='egg'&&pet.stage!=='dead');
   var scale=1,offX=(active?walkX:0),offY=Math.round(Math.sin(bob)*2),flip=walkDir;
   // 생기있는 아이들 이동(액션 중 아닐 때)
@@ -179,8 +180,9 @@ function render(){lcdClear();
   if(heartD){cx.font='12px monospace';for(var k=0;k<3;k++)cx.fillText('💗',cxp-16+k*13,cyp-size*0.42-((anim.t*1.2+k*7)%24));}
   if(bubbleD){cx.font='11px monospace';for(var k=0;k<4;k++)cx.fillText('🫧',cxp-20+k*12,cyp-6-((anim.t*1.6+k*8)%32));}
   for(var i=fx.length-1;i>=0;i--){var f=fx[i];cx.font='13px monospace';cx.fillStyle='#2b3a1a';cx.fillText(f.ch,f.x,f.y);f.y-=0.8;f.life--;if(f.life<=0)fx.splice(i,1);}
-  cx.font='10px monospace';cx.fillStyle='#2b3a1a';
-  if(active){if(pet.hunger<25)cx.fillText('🍽',6,PXH-6);if(pet.clean<30)cx.fillText('💩',PXW-16,PXH-16);}
+  cx.fillStyle='#2b3a1a';
+  if(active){cx.font='10px monospace';if(pet.hunger<25)cx.fillText('🍽',6,15);if(pet.clean<30&&!pet.poops)cx.fillText('🦟',PXW-16,15);
+    if(pet.poops>0){cx.font='13px monospace';for(var pk=0;pk<pet.poops;pk++)cx.fillText('💩',20+pk*26,PXH-10);}}
   if(pet.stage==='dead'){cx.font='30px monospace';cx.fillStyle='#2b3a1a';cx.textAlign='center';cx.fillText('💀',PXW/2,PXH/2+10);cx.textAlign='left';}
 }
 function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*24)-12),y:PXH/2-6,life:36});}
@@ -189,7 +191,7 @@ function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*24)-12),y:PXH/2-6,l
 var KEY='darak_pet_v3';var pet=null,sleeping=false;
 var STAGE_HRS={blob:12,baby:48,juv:96};var STARVE_HRS=24;
 var HUNGER_RATE={egg:0,blob:1.4,baby:1.9,juv:1.4,adult:1.0,dead:0}; // 어릴수록 자주 배고픔
-function fresh(){return {fam:'snake',stage:'egg',hunger:60,happy:60,clean:80,div:0,
+function fresh(){return {fam:'snake',stage:'egg',hunger:60,happy:60,clean:80,div:0,poops:0,ateAt:0,pooped:0,
   born:Date.now(),last:Date.now(),stageAt:Date.now(),hungerZeroAt:0,clicks:0,streak:0,lastAttend:0,attendDays:[],dex:[],spring:0,luck:0,pathJ:'',pathA:''};}
 function clamp(v){return Math.max(0,Math.min(100,Math.round(v)));}
 function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.stage)pet=s;}catch(e){}if(!pet)pet=fresh();applyOffline();attend();growCheck();save();}
@@ -199,6 +201,8 @@ function applyOffline(){if(pet.stage==='egg'||pet.stage==='dead')return;var now=
   pet.hunger=clamp(pet.hunger-mins/60*7*hr);pet.happy=clamp(pet.happy-mins/60*4);pet.clean=clamp(pet.clean-mins/60*3);
   // 신성은 오프라인 동안 서서히 감소(행복 낮으면 더) — 유지가 어렵게
   pet.div=clamp(pet.div-mins/60*(pet.happy<50?1.2:0.5));
+  var poopEvery=(pet.stage==='baby')?55:(pet.stage==='juv')?140:230; // 어릴수록 자주
+  pet.poops=Math.min(4,(pet.poops||0)+Math.floor(mins/poopEvery));if(pet.poops>0)pet.clean=clamp(pet.clean-pet.poops*10);
   if(pet.hunger<15||pet.happy<15||pet.clean<15)pet.div=clamp(pet.div-Math.floor(mins/120)*2);
   // 굶주림 사망 판정
   if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=now-mins*60000;if((now-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
@@ -234,14 +238,15 @@ function rightFood(id){var st=pet.stage,diet=DIET[pet.fam]||'carn';
   if(diet==='carn')return (st==='juv')?(id==='insect'):(id==='mouse'||id==='insect');
   return id==='grass';}
 function feed(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger>=98)return toast('배가 불러요');
-  surprise(curImgKey(),'🍽 무엇을 줄까요?','나이·식성에 맞는 먹이를 줘야 잘 먹어요! ('+({baby:'아기=우유',juv:'청년 육식=벌레',adult:'성체 육식=쥐'}[pet.stage]||'')+')',
-    [['milk','🍼 우유'],['insect','🐛 벌레'],['mouse','🐁 쥐'],['grass','🌿 풀']].map(function(o){return {t:o[1],c:function(){feedWith(o[0]);closeOv();}};}));}
+  var opts=(pet.stage==='baby')?[['milk','🍼 우유']]:[['milk','🍼 우유'],['insect','🐛 벌레'],['mouse','🐁 쥐'],['grass','🌿 풀']];
+  var hint=(pet.stage==='baby')?'아기는 우유만 먹을 수 있어요!':('나이·식성에 맞는 먹이를 줘야 잘 먹어요! ('+({juv:'청년 육식=벌레',adult:'성체 육식=쥐'}[pet.stage]||'')+')');
+  surprise(curImgKey(),'🍽 무엇을 줄까요?',hint,opts.map(function(o){return {t:o[1],c:function(){feedWith(o[0]);closeOv();}};}));}
 function feedWith(id){var f=FOODS[id];if(rightFood(id)){pet.hunger=clamp(pet.hunger+26);pet.happy=clamp(pet.happy+6);toast('냠냠! 잘 먹어요');}
   else{pet.hunger=clamp(pet.hunger+7);pet.happy=clamp(pet.happy-7);toast('입에 안 맞나 봐요…');}
-  pet.hungerZeroAt=0;startAnim('eat',f.e);after();}
+  pet.hungerZeroAt=0;pet.ateAt=Date.now();pet.pooped=0;startAnim('eat',f.e);after();}
 function play(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+18);pet.hunger=clamp(pet.hunger-7);pet.div=clamp(pet.div+1);startAnim('play');after();}
 function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);startAnim('pet');after();}
-function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=clamp(pet.clean+34);pet.happy=clamp(pet.happy+4);startAnim('clean');toast('깨끗해졌어요!');after();}
+function clean(){if(pet.stage==='egg'||!alive())return;var had=pet.poops>0;pet.poops=0;pet.clean=100;pet.happy=clamp(pet.happy+4);startAnim('clean');toast(had?'똥 치우고 깨끗해졌어요! 🧽':'반짝반짝 깨끗해요!');after();}
 function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){toStage('blob');pet.hunger=70;pet.happy=70;surprise('blob','부화! 그런데…','알에서 정체불명 덩어리가 나왔어요! 뭐가 될지는 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}else{toast('알이 흔들려요… ('+pet.clicks+'/3)');after();}}
 function sleepAct(){if(pet.stage==='egg'||!alive())return;sleeping=!sleeping;if(!sleeping)pet.happy=clamp(pet.happy+5);toast(sleeping?'쿨쿨… (다시 누르면 깨우기)':'잘 잤어요 ☀️');after();}
 function wake(){sleeping=false;after();}
@@ -286,12 +291,17 @@ if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.s
     if(pet.stage==='egg'){pet.clicks=3;hatch();return;}
     pet.stageAt=Date.now()-((STAGE_HRS[pet.stage]||1)+1)*3600000;growCheck();};
   document.getElementById('dDiv').onclick=function(){pet.div=clamp(pet.div+30);after();toast('✨ 신성 +30 → '+pet.div);};
+  document.getElementById('dPoop').onclick=function(){if((pet.poops||0)<4){pet.poops=(pet.poops||0)+1;pet.clean=clamp(pet.clean-22);after();toast('💩 똥 +1 (씻기기로 치워요)');}};
   document.getElementById('dStarve').onclick=function(){pet.hunger=0;pet.hungerZeroAt=Date.now()-(STARVE_HRS+1)*3600000;die();};
   document.getElementById('dReset').onclick=function(){resetPet();toast('🔄 리셋');};}
 load();paint();
 setInterval(function(){bob+=0.15;tick++;
   if(tick%600===0&&pet.stage!=='egg'&&pet.stage!=='dead'&&!sleeping){pet.hunger=clamp(pet.hunger-Math.max(1,Math.round(HUNGER_RATE[pet.stage]||1)));if(tick%1200===0){pet.happy=clamp(pet.happy-1);pet.clean=clamp(pet.clean-1);}
     if(tick%1200===0&&pet.happy<65)pet.div=clamp(pet.div-1); // 신성 유지 어렵게(행복 낮으면 감소)
+    // 💩 똥: 밥 먹고 일정시간 후(어릴수록 자주) + 똥 있으면 청결·행복·신성 하락
+    var poopMins=(pet.stage==='baby')?1.2:(pet.stage==='juv')?3:5;
+    if(pet.ateAt&&!pet.pooped&&(Date.now()-pet.ateAt)/60000>=poopMins&&(pet.poops||0)<4){pet.poops=(pet.poops||0)+1;pet.pooped=1;pet.clean=clamp(pet.clean-22);toast('💩 똥을 쌌어요! 씻겨주세요');}
+    if(pet.poops>0){pet.clean=clamp(pet.clean-pet.poops*2);pet.happy=clamp(pet.happy-pet.poops);if(tick%1200===0)pet.div=clamp(pet.div-pet.poops);}
     if(pet.hunger<=0){if(!pet.hungerZeroAt)pet.hungerZeroAt=Date.now();if((Date.now()-pet.hungerZeroAt)/3600000>=STARVE_HRS)die();}else pet.hungerZeroAt=0;
     growCheck();save();paint();}
   if(tick%100===0)paint();
