@@ -130,7 +130,7 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 /* ===== 스프라이트 이미지 로더 ===== */
 var IMG={}, imgReady={};
 function loadImg(key,src){var im=new Image();im.onload=function(){imgReady[key]=true;};im.src=src;IMG[key]=im;}
-var BASE='/games/pet/sprites/';var SVER='?s=5';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
+var BASE='/games/pet/sprites/';var SVER='?s=6';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
 var BASE_KEYS=['egg','blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'];
 BASE_KEYS.forEach(function(k){loadImg(k,BASE+k+'.png'+SVER);});
 // 포즈 변형(각 단계별 _sleep/_slither) — 파일 있으면 자동 사용
@@ -164,7 +164,8 @@ function curImgKey(){var b=baseKey();if(pet.stage==='egg'||pet.stage==='dead'||p
   return b;}
 function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1;if(im&&imgReady[key]){var r=im.width/im.height;
   // 높이 기준 스케일(모든 포즈 비슷한 크기), 가로만 상한
-  var h=size*scale,w=h*r,maxW=size*scale*2.1;if(w>maxW){w=maxW;h=w/r;}
+  var longMode=/python_slither/.test(key); // 구렁이 기는(얇고 긴) 포즈만 크게
+  var h=size*scale,w=h*r,maxW=longMode?PXW*0.94:(size*scale*2.1);if(w>maxW){w=maxW;h=w/r;}
   ctx.save();ctx.translate(Math.round(cxp),Math.round(cyp));if(flip<0)ctx.scale(-1,1);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();}
   else{ctx.fillStyle='#5c7038';ctx.beginPath();ctx.arc(cxp,cyp,size*0.35,0,7);ctx.fill();}}
 function render(){lcdClear();
