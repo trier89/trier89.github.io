@@ -130,7 +130,7 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 /* ===== 스프라이트 이미지 로더 ===== */
 var IMG={}, imgReady={};
 function loadImg(key,src){var im=new Image();im.onload=function(){imgReady[key]=true;};im.src=src;IMG[key]=im;}
-var BASE='/games/pet/sprites/';var SVER='?s=3';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
+var BASE='/games/pet/sprites/';var SVER='?s=4';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
 var BASE_KEYS=['egg','blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'];
 BASE_KEYS.forEach(function(k){loadImg(k,BASE+k+'.png'+SVER);});
 // 포즈 변형(각 단계별 _sleep/_slither) — 파일 있으면 자동 사용
