@@ -106,6 +106,15 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
   <div class="row" style="margin-top:12px;"><button class="linkbtn" id="btnCode">💾 세이브 코드</button><button class="linkbtn" id="btnReset">🥚 새 알</button></div>
   <div class="minor" style="margin-top:8px;line-height:1.6;">아기까진 저절로 자라요. <b>청년기부터</b> 신성에 따라 갈려요 — 잘 돌보고 샘물·부적으로 신성을 높이면 신수! 방치하면 굶어죽거나(💀) 평범한 동물이 돼요. 성장은 <b>실제 시간</b>으로 진행돼서 매일 들러야 해요(총 일주일). 같은 브라우저면 이어짐.</div>
 </div>
+<div id="devbar" style="display:none;margin-top:12px;background:#141412;border:1px dashed #6a6a5a;border-radius:10px;padding:10px 12px;">
+  <div style="font-size:11px;color:#c9a94a;font-weight:700;margin-bottom:6px;">🔧 테스트 모드 (개발자용)</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+    <button class="linkbtn" id="dNext">⏩ 다음 단계</button>
+    <button class="linkbtn" id="dDiv">✨ 신성+30</button>
+    <button class="linkbtn" id="dStarve">💀 배고픔0→죽음</button>
+    <button class="linkbtn" id="dReset">🔄 리셋</button>
+  </div>
+</div>
 <div class="foot">🎮 <a href="/games/">게임방 더 보기</a> · 🏛 <a href="https://www.youtube.com/@darakbang" target="_blank" rel="noopener">다락방 그리스신화</a><br>에디슨이 만든 무료 웹게임</div>
 </div>
 
@@ -235,6 +244,15 @@ document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터
 var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
 document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
 cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
+/* ===== 테스트 모드 (?test) ===== */
+if(/test/i.test(location.search)){var db=document.getElementById('devbar');db.style.display='block';
+  document.getElementById('dNext').onclick=function(){
+    if(pet.stage==='dead'||pet.stage==='adult'){resetPet();toast('새 알로 리셋');return;}
+    if(pet.stage==='egg'){pet.clicks=3;hatch();return;}
+    pet.stageAt=Date.now()-((STAGE_HRS[pet.stage]||1)+1)*3600000;growCheck();};
+  document.getElementById('dDiv').onclick=function(){pet.div=clamp(pet.div+30);after();toast('✨ 신성 +30 → '+pet.div);};
+  document.getElementById('dStarve').onclick=function(){pet.hunger=0;pet.hungerZeroAt=Date.now()-(STARVE_HRS+1)*3600000;die();};
+  document.getElementById('dReset').onclick=function(){resetPet();toast('🔄 리셋');};}
 load();paint();
 setInterval(function(){bob+=0.15;tick++;
   if(tick%600===0&&pet.stage!=='egg'&&pet.stage!=='dead'&&!sleeping){pet.hunger=clamp(pet.hunger-1);if(tick%1200===0){pet.happy=clamp(pet.happy-1);pet.clean=clamp(pet.clean-1);}
