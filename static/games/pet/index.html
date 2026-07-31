@@ -130,12 +130,12 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 /* ===== 스프라이트 이미지 로더 ===== */
 var IMG={}, imgReady={};
 function loadImg(key,src){var im=new Image();im.onload=function(){imgReady[key]=true;};im.src=src;IMG[key]=im;}
-var BASE='/games/pet/sprites/';
+var BASE='/games/pet/sprites/';var SVER='?s=3';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
 var BASE_KEYS=['egg','blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'];
-BASE_KEYS.forEach(function(k){loadImg(k,BASE+k+'.png');});
+BASE_KEYS.forEach(function(k){loadImg(k,BASE+k+'.png'+SVER);});
 // 포즈 변형(각 단계별 _sleep/_slither) — 파일 있으면 자동 사용
-['blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'].forEach(function(k){loadImg(k+'_sleep',BASE+k+'_sleep.png');loadImg(k+'_slither',BASE+k+'_slither.png');});
-loadImg('snake_sleep',BASE+'snake_sleep.png');loadImg('snake_slither',BASE+'snake_slither.png'); // 성체 공용 폴백
+['blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'].forEach(function(k){loadImg(k+'_sleep',BASE+k+'_sleep.png'+SVER);loadImg(k+'_slither',BASE+k+'_slither.png'+SVER);});
+loadImg('snake_sleep',BASE+'snake_sleep.png'+SVER);loadImg('snake_slither',BASE+'snake_slither.png'+SVER); // 성체 공용 폴백
 
 /* ===== 데이터: 뱀 라인 ===== */
 var FAMILY={ snake:{ename:'뱀', baby:'snake_baby', juvA:'snake_juv', juvB:'snake_juv',
@@ -164,7 +164,8 @@ function curImgKey(){var b=baseKey();if(pet.stage==='egg'||pet.stage==='dead'||p
   return b;}
 function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1;if(im&&imgReady[key]){var r=im.width/im.height;
   // 높이 기준 스케일(모든 포즈 비슷한 크기), 가로만 상한
-  var h=size*scale,w=h*r,maxW=Math.min(PXW*0.86,size*scale*3.2);if(w>maxW){w=maxW;h=w/r;}
+  var longMode=/python_slither/.test(key); // 구렁이 기는 것만 길게, 나머지는 원래대로
+  var h=size*scale,w=h*r,maxW=longMode?Math.min(PXW*0.8,size*scale*3.0):(size*scale*2.1);if(w>maxW){w=maxW;h=w/r;}
   ctx.save();ctx.translate(Math.round(cxp),Math.round(cyp));if(flip<0)ctx.scale(-1,1);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();}
   else{ctx.fillStyle='#5c7038';ctx.beginPath();ctx.arc(cxp,cyp,size*0.35,0,7);ctx.fill();}}
 function render(){lcdClear();
@@ -302,7 +303,7 @@ function paint(){
   document.getElementById('growTxt').textContent=fmtRemain();
   document.getElementById('stagebar').innerHTML='';/* 성장단계 표시 숨김(사장님) */
   var ar=document.getElementById('attRow');ar.innerHTML='';for(var i=0;i<7;i++){var s=document.createElement('span');var d=(pet.attendDays||[]).indexOf(i)>=0;s.className=d?'done':'';s.textContent=d?'✓':(i+1);ar.appendChild(s);}
-  var dr=document.getElementById('dexRow');dr.innerHTML='';DEXORDER.forEach(function(pr){var a=FAMILY[pr[0]].adults[pr[1]];var got=(pet.dex||[]).indexOf(pr[0]+'_'+pr[1])>=0;var slot=document.createElement('div');slot.className='slot'+(got?' got':'');if(got){var im=document.createElement('img');im.src=BASE+a.img+'.png';slot.appendChild(im);var nm=document.createElement('div');nm.className='dn';nm.textContent=a.name;slot.appendChild(nm);}else{slot.className+=' q';slot.textContent='?';}dr.appendChild(slot);});
+  var dr=document.getElementById('dexRow');dr.innerHTML='';DEXORDER.forEach(function(pr){var a=FAMILY[pr[0]].adults[pr[1]];var got=(pet.dex||[]).indexOf(pr[0]+'_'+pr[1])>=0;var slot=document.createElement('div');slot.className='slot'+(got?' got':'');if(got){var im=document.createElement('img');im.src=BASE+a.img+'.png'+SVER;slot.appendChild(im);var nm=document.createElement('div');nm.className='dn';nm.textContent=a.name;slot.appendChild(nm);}else{slot.className+=' q';slot.textContent='?';}dr.appendChild(slot);});
 }
 /* ===== 오버레이 ===== */
 function surprise(imgKey,title,desc,btns){var c=document.getElementById('ovc');var g=c.getContext('2d');g.imageSmoothingEnabled=false;g.fillStyle='#a7c56f';g.fillRect(0,0,130,130);var im=IMG[imgKey];if(im&&imgReady[imgKey]){var r=im.width/im.height,w=110,h=110/r;if(h>110){h=110;w=110*r;}g.drawImage(im,65-w/2,65-h/2,w,h);}
