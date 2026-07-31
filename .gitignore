@@ -16,8 +16,11 @@ scripts/news-cron.log
 **/.env.bak*
 
 # 보안 강화(2026-07-24 점검): 크리덴셜 임베드 파일·로그·캐시 커밋 차단
-scripts/ga/ga_report.py      # GA4 서비스계정 크리덴셜 임베드 — 절대 커밋 금지
-scripts/set_tavily_key.sh    # 키 로테이션 헬퍼
+# (gitignore는 인라인 주석 미지원 → 주석은 별도 줄에)
+# GA4 서비스계정 크리덴셜 임베드 — 절대 커밋 금지
+scripts/ga/ga_report.py
+# 키 로테이션 헬퍼
+scripts/set_tavily_key.sh
 *.log
 **/*.log
 scripts/ga/launchd.err

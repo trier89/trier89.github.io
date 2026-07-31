@@ -141,20 +141,48 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 /* ===== 스프라이트 이미지 로더 ===== */
 var IMG={}, imgReady={};
 function loadImg(key,src){var im=new Image();im.onload=function(){imgReady[key]=true;};im.src=src;IMG[key]=im;}
-var BASE='/games/pet/sprites/';var SVER='?s=6';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
-var BASE_KEYS=['egg','blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'];
+var BASE='/games/pet/sprites/';var SVER='?s=7';/* 스프라이트 캐시버스터 — 이미지 교체 시 숫자 올림 */
+var BASE_KEYS=['egg','blob',
+ 'snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python',
+ 'lion_baby','lion_juv','lion_chimera','lion_lion','lion_liondog','lion_pom',
+ 'horse_baby','horse_juv','horse_pegasus','horse_horse','horse_donkey','horse_giraffe',
+ 'leopard_baby','leopard_juv','leopard_dio','leopard_leopard','leopard_wildcat','leopard_cat',
+ 'bird_baby','bird_juv','bird_owl','bird_horned','bird_scops','bird_sparrow'];
 BASE_KEYS.forEach(function(k){loadImg(k,BASE+k+'.png'+SVER);});
 // 포즈 변형(각 단계별 _sleep/_slither) — 파일 있으면 자동 사용
 ['blob','snake_baby','snake_juv','snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python'].forEach(function(k){loadImg(k+'_sleep',BASE+k+'_sleep.png'+SVER);loadImg(k+'_slither',BASE+k+'_slither.png'+SVER);});
 loadImg('snake_sleep',BASE+'snake_sleep.png'+SVER);loadImg('snake_slither',BASE+'snake_slither.png'+SVER); // 성체 공용 폴백
 
 /* ===== 데이터: 뱀 라인 ===== */
-var FAMILY={ snake:{ename:'뱀', baby:'snake_baby', juvA:'snake_juv', juvB:'snake_juv',
-  adults:{ AA:{img:'snake_hydra',name:'히드라',divine:true,end:'god',desc:'머리 셋 달린 전설의 물뱀! 최고의 신수예요.'},
-           AB:{img:'snake_twinsnake',name:'쌍두사',end:'indep',desc:'머리 둘 달린 진귀한 뱀. 신수엔 못 미쳤지만 씩씩하게 독립했어요.'},
-           BA:{img:'snake_rattlesnake',name:'방울뱀',end:'hunt',desc:'방울뱀이 됐어요. 조심성이 없어 그만…'},
-           BB:{img:'snake_python',name:'구렁이',end:'runaway',desc:'커다란 구렁이가 됐지만, 홀로 집을 나가버렸어요.'} } } };
-var DEXORDER=[['snake','AA'],['snake','AB'],['snake','BA'],['snake','BB']];
+var FAMILY={
+ snake:{ename:'뱀',baby:'snake_baby',juvA:'snake_juv',juvB:'snake_juv',adults:{
+   AA:{img:'snake_hydra',name:'히드라',divine:true,end:'god',desc:'머리 셋 달린 전설의 물뱀! 최고의 신수예요.'},
+   AB:{img:'snake_twinsnake',name:'쌍두사',end:'indep',desc:'머리 둘 달린 진귀한 뱀. 씩씩하게 독립했어요.'},
+   BA:{img:'snake_rattlesnake',name:'방울뱀',end:'hunt',desc:'방울뱀이 됐어요. 조심성이 없어 그만…'},
+   BB:{img:'snake_python',name:'구렁이',end:'runaway',desc:'커다란 구렁이가 됐지만 집을 나가버렸어요.'}}},
+ lion:{ename:'사자',baby:'lion_baby',juvA:'lion_juv',juvB:'lion_juv',adults:{
+   AA:{img:'lion_chimera',name:'키마이라',divine:true,end:'god',desc:'사자+염소+뱀의 전설 괴물! 최고의 신수.'},
+   AB:{img:'lion_lion',name:'사자',end:'indep',desc:'늠름한 사자가 되어 독립했어요.'},
+   BA:{img:'lion_liondog',name:'사자개',end:'hunt',desc:'사자인 줄 알았는데… 사자개가 됐어요 ㅋ'},
+   BB:{img:'lion_pom',name:'포메라니안',end:'runaway',desc:'응?! 포메라니안이 됐어요 ㅋㅋ'}}},
+ horse:{ename:'말',baby:'horse_baby',juvA:'horse_juv',juvB:'horse_juv',adults:{
+   AA:{img:'horse_pegasus',name:'페가수스',divine:true,end:'god',desc:'날개 달린 천마! 신들의 사랑을 받아요.'},
+   AB:{img:'horse_horse',name:'말',end:'indep',desc:'튼튼한 말이 되어 독립했어요.'},
+   BA:{img:'horse_donkey',name:'당나귀',end:'hunt',desc:'당나귀가 됐어요.'},
+   BB:{img:'horse_giraffe',name:'기린',end:'runaway',desc:'목이 쭉쭉 늘어나 기린이 됐어요 ㅋ'}}},
+ leopard:{ename:'표범',baby:'leopard_baby',juvA:'leopard_juv',juvB:'leopard_juv',adults:{
+   AA:{img:'leopard_dio',name:'디오니소스 표범',divine:true,end:'god',desc:'술의 신의 신성한 표범!'},
+   AB:{img:'leopard_leopard',name:'표범',end:'indep',desc:'날렵한 표범이 되어 독립했어요.'},
+   BA:{img:'leopard_wildcat',name:'삵',end:'hunt',desc:'삵이 됐어요.'},
+   BB:{img:'leopard_cat',name:'고양이',end:'runaway',desc:'애옹~ 그냥 고양이가 됐어요 ㅋ'}}},
+ bird:{ename:'새',baby:'bird_baby',juvA:'bird_juv',juvB:'bird_juv',adults:{
+   AA:{img:'bird_owl',name:'아테나 올빼미',divine:true,end:'god',desc:'지혜의 여신 아테나의 신성한 올빼미!'},
+   AB:{img:'bird_horned',name:'부엉이',end:'indep',desc:'멋진 부엉이가 되어 독립했어요.'},
+   BA:{img:'bird_scops',name:'소쩍새',end:'hunt',desc:'소쩍새가 됐어요.'},
+   BB:{img:'bird_sparrow',name:'참새',end:'runaway',desc:'짹짹~ 참새가 됐어요.'}}}
+};
+var FKEYS=['snake','lion','horse','leopard','bird'];
+var DEXORDER=[];FKEYS.forEach(function(f){['AA','AB','BA','BB'].forEach(function(p){DEXORDER.push([f,p]);});});
 var END_TXT={god:'✨ 신이 데려갔어요! 신수가 되어 신들의 곁으로 입양됐어요. 최고의 결말!',
   indep:'🌿 씩씩하게 독립했어요. 무난한 해피엔딩!',
   hunt:'🏹 조심성이 없어 사냥당하고 말았어요… 다음엔 더 잘 돌봐줘요.',
@@ -170,8 +198,8 @@ function baseKey(){var F=FAMILY[pet.fam]||FAMILY.snake;
   if(pet.stage==='egg')return 'egg';if(pet.stage==='blob')return 'blob';if(pet.stage==='baby')return F.baby;
   if(pet.stage==='juv')return pet.pathJ==='A'?F.juvA:F.juvB;if(pet.stage==='adult'){var a=F.adults[pet.pathA];return a?a.img:'blob';}return 'blob';}
 function curImgKey(){var b=baseKey();if(pet.stage==='egg'||pet.stage==='dead'||pet.stage==='gone')return b;
-  if(sleeping){if(imgReady[b+'_sleep'])return b+'_sleep';if(imgReady['snake_sleep'])return 'snake_sleep';}
-  else if(petMoving){if(imgReady[b+'_slither'])return b+'_slither';if(imgReady['snake_slither'])return 'snake_slither';}
+  if(sleeping){if(imgReady[b+'_sleep'])return b+'_sleep';if(pet.fam==='snake'&&imgReady['snake_sleep'])return 'snake_sleep';}
+  else if(petMoving){if(imgReady[b+'_slither'])return b+'_slither';if(pet.fam==='snake'&&imgReady['snake_slither'])return 'snake_slither';}
   return b;}
 function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1;if(im&&imgReady[key]){var r=im.width/im.height;
   // 높이 기준 스케일(모든 포즈 비슷한 크기), 가로만 상한
@@ -275,7 +303,7 @@ function resetPet(){var dex=pet.dex||[];pet=fresh();pet.dex=dex;save();paint();}
 function alive(){return pet.stage!=='dead';}
 function after(){save();paint();}
 /* 먹이 시스템 (나이·식성) */
-var DIET={snake:'carn'};
+var DIET={snake:'carn',lion:'carn',leopard:'carn',horse:'herb',bird:'omni'};
 var FOODS={milk:{e:'🍼',n:'우유'},insect:{e:'🐛',n:'벌레'},mouse:{e:'🐁',n:'쥐'},grass:{e:'🌿',n:'풀'}};
 function rightFood(id){var st=pet.stage,diet=DIET[pet.fam]||'carn';
   if(st==='baby')return id==='milk';
@@ -314,7 +342,7 @@ function endGame(){if(!mgState)return;var sc=mgState.score;mgState.alive=false;m
 function petA(){if(pet.stage==='egg')return hatch();if(!alive())return;if(sleeping)return wake();pet.happy=clamp(pet.happy+9);startAnim('pet');after();}
 function clean(){if(pet.stage==='egg'||!alive())return;pet.clean=100;pet.happy=clamp(pet.happy+4);startAnim('clean');toast('반짝반짝 목욕 완료! 🧽');after();}
 function cleanPoop(){if(pet.stage==='egg'||!alive())return;if(pcount()===0)return toast('치울 똥이 없어요');pet.poopSpots=[];pet.happy=clamp(pet.happy+3);pet.clean=clamp(pet.clean+8);startAnim('clean');toast('똥을 싹 치웠어요! 🧹');after();}
-function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){toStage('blob');pet.hunger=70;pet.happy=70;surprise('blob','부화! 그런데…','알에서 정체불명 덩어리가 나왔어요! 뭐가 될지는 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}else{toast('알이 흔들려요… ('+pet.clicks+'/3)');after();}}
+function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){pet.fam=FKEYS[Math.floor(Math.random()*FKEYS.length)];toStage('blob');pet.hunger=70;pet.happy=70;surprise('blob','부화! 그런데…','알에서 정체불명 덩어리가 나왔어요! 뭐가 될지는 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}else{toast('알이 흔들려요… ('+pet.clicks+'/3)');after();}}
 function sleepAct(){if(pet.stage==='egg'||!alive())return;
   if(!sleeping){if((pet.tired||0)<40)return toast('아직 안 졸려요! (피곤해야 자요 😴)');sleeping=true;toast('쿨쿨… 잘 자요 (다시 누르면 깨우기)');}
   else{sleeping=false;pet.happy=clamp(pet.happy+5);toast('잘 잤어요 ☀️');}after();}
