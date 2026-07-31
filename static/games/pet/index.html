@@ -116,6 +116,7 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
     <button class="linkbtn" id="dNext">⏩ 다음 단계</button>
     <button class="linkbtn" id="dDiv">✨ 신성+30</button>
     <button class="linkbtn" id="dPoop">💩 똥싸기</button>
+    <button class="linkbtn" id="dEvent">🎲 이벤트</button>
     <button class="linkbtn" id="dStarve">💀 배고픔0→죽음</button>
     <button class="linkbtn" id="dReset">🔄 리셋</button>
   </div>
@@ -293,6 +294,19 @@ function spring(){if(!alive())return;if(pet.stage==='egg'||pet.stage==='blob')re
   else{var d=12+Math.floor(Math.random()*16);pet.div=clamp(pet.div-d);pet.happy=clamp(pet.happy-8);pushFx('☠️');surprise(curImgKey(),'☠️ 독이 든 물…','신성 -'+d+'. 도박은 위험해요!',[{t:'아이고',c:closeOv}]);}
   after();}
 function luck(){if(!alive())return;if((pet.luck||0)<=0)return toast('부적이 없어요. 출석하면 생겨요 🍀');pet.luck--;pet.div=clamp(pet.div+6);pet.luckActive=true;pushFx('🍀');toast('🍀 다음 샘물 운이 좋아져요! 신성 +6');after();}
+/* ===== 랜덤 이벤트 (청년기부터 툭툭) ===== */
+var EVENTS=[
+ {e:'🌈',t:'무지개가 떴어요!',d:'하늘에 신비한 무지개가 걸렸어요. 기운을 받아볼까요?',ch:[{t:'기운 받기',fn:function(){pet.div=clamp(pet.div+12);pet.happy=clamp(pet.happy+8);toast('✨ 신성 +12!');}},{t:'그냥 구경',fn:function(){pet.happy=clamp(pet.happy+4);}}]},
+ {e:'⛈️',t:'번개폭풍이 친다!',d:'무시무시한 번개폭풍! 맞설까요, 숨을까요?',ch:[{t:'용감히 맞선다',fn:function(){if(Math.random()<0.5){pet.div=clamp(pet.div+18);toast('⚡ 용감했어요! 신성 +18');}else{pet.happy=clamp(pet.happy-12);pet.div=clamp(pet.div-6);toast('너무 무서웠어요…');}}},{t:'숨는다',fn:function(){pet.happy=clamp(pet.happy-4);}}]},
+ {e:'🦋',t:'나비가 날아왔어요',d:'예쁜 나비가 팔랑팔랑 다가와요!',ch:[{t:'같이 논다',fn:function(){pet.happy=clamp(pet.happy+13);pet.tired=clamp((pet.tired||0)+6);toast('즐거워요! 🦋');}}]},
+ {e:'🍄',t:'이상한 버섯 발견!',d:'수상하게 생긴 버섯이... 먹어볼까요?',ch:[{t:'먹어본다',fn:function(){if(Math.random()<0.5){pet.div=clamp(pet.div+14);toast('🌟 신비한 버섯! 신성 +14');}else{pet.happy=clamp(pet.happy-10);pet.clean=clamp(pet.clean-10);toast('🤢 배탈났어요…');}}},{t:'안 먹는다',fn:function(){}}]},
+ {e:'✨',t:'신비한 빛이 감돌아요',d:'따뜻한 빛이 신수를 살포시 감싸요.',ch:[{t:'받아들인다',fn:function(){pet.div=clamp(pet.div+10);toast('✨ 신성 +10');}}]},
+ {e:'💰',t:'반짝이는 걸 주웠어요!',d:'땅에서 뭔가 반짝! 주워볼까요?',ch:[{t:'줍는다',fn:function(){pet.luck=(pet.luck||0)+1;toast('🍀 행운의 부적 +1!');}},{t:'냅둔다',fn:function(){}}]},
+ {e:'🌟',t:'별똥별이 떨어졌어요',d:'소원을 빌면 신성이 오를지도?',ch:[{t:'소원 빈다',fn:function(){pet.div=clamp(pet.div+8);pet.happy=clamp(pet.happy+6);toast('🌠 소원을 빌었어요! 신성 +8');}}]}
+];
+function fireEvent(){if(anim||document.getElementById('ov').classList.contains('show')||sleeping)return;
+  var ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];pushFx(ev.e);
+  surprise(curImgKey(),ev.e+' '+ev.t,ev.d,ev.ch.map(function(c){return {t:c.t,c:function(){c.fn();closeOv();save();paint();}};}));}
 
 /* ===== UI ===== */
 function fmtRemain(){if(pet.stage==='egg')return '알을 톡톡 두드려요';if(pet.stage==='dead')return '';if(pet.stage==='gone')return '새 알을 받아보세요';
@@ -330,6 +344,7 @@ if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.s
     pet.stageAt=Date.now()-((STAGE_HRS[pet.stage]||1)+1)*3600000;growCheck();};
   document.getElementById('dDiv').onclick=function(){pet.div=clamp(pet.div+30);after();toast('✨ 신성 +30 → '+pet.div);};
   document.getElementById('dPoop').onclick=function(){addPoop();after();toast('💩 똥 +1 (똥치우기로 치워요)');};
+  document.getElementById('dEvent').onclick=function(){fireEvent();};
   document.getElementById('dStarve').onclick=function(){pet.hunger=0;pet.hungerZeroAt=Date.now()-(STARVE_HRS+1)*3600000;die();};
   document.getElementById('dReset').onclick=function(){resetPet();toast('🔄 리셋');};}
 load();paint();
@@ -346,6 +361,8 @@ setInterval(function(){bob+=0.15;tick++;
   if(tick%50===0&&pet.ateAt&&!pet.pooped&&pet.stage!=='egg'&&pet.stage!=='dead'&&pet.stage!=='gone'&&!sleeping){
     var pm=(pet.stage==='baby')?0.5:(pet.stage==='juv')?1.2:2;
     if((Date.now()-pet.ateAt)/60000>=pm&&pcount()<5){addPoop();pet.pooped=1;toast('💩 똥을 쌌어요! 똥치우기로 치워요');save();paint();}}
+  // 🎲 랜덤 이벤트(청년기부터 가끔)
+  if(tick%600===0&&(pet.stage==='juv'||pet.stage==='adult')&&!sleeping&&Math.random()<0.28)fireEvent();
   if(tick%100===0)paint();
   render();},100);
 render();
