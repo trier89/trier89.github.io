@@ -245,7 +245,7 @@ var toastT;function toast(m){var t=document.getElementById('toast');t.textConten
 document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
 cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
 /* ===== 테스트 모드 (?test) ===== */
-if(/test/i.test(location.search)){var db=document.getElementById('devbar');db.style.display='block';
+if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.search) 로 되돌림) */var db=document.getElementById('devbar');db.style.display='block';
   document.getElementById('dNext').onclick=function(){
     if(pet.stage==='dead'||pet.stage==='adult'){resetPet();toast('새 알로 리셋');return;}
     if(pet.stage==='egg'){pet.clicks=3;hatch();return;}
