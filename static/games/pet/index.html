@@ -131,7 +131,8 @@ h1{font-size:18px;text-align:center;margin:2px 0;}
 var IMG={}, imgReady={};
 function loadImg(key,src){var im=new Image();im.onload=function(){imgReady[key]=true;};im.src=src;IMG[key]=im;}
 var BASE='/games/pet/sprites/';
-['snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python','egg','blob','snake_baby','snake_juv'].forEach(function(k){loadImg(k,BASE+k+'.png');});
+['snake_hydra','snake_twinsnake','snake_rattlesnake','snake_python','egg','blob','snake_baby','snake_juv',
+ 'snake_sleep','snake_slither','snake_baby_sleep','snake_baby_slither'].forEach(function(k){loadImg(k,BASE+k+'.png');});
 
 /* ===== 데이터: 뱀 라인 ===== */
 var FAMILY={ snake:{ename:'뱀', baby:'snake_baby', juvA:'snake_juv', juvB:'snake_juv',
@@ -148,12 +149,17 @@ var END_TXT={god:'✨ 신이 데려갔어요! 신수가 되어 신들의 곁으�
 /* ===== 렌더 ===== */
 var cv=document.getElementById('lcd'),cx=cv.getContext('2d');var PXW=cv.width,PXH=cv.height;
 cx.imageSmoothingEnabled=false;
-var bob=0,tick=0,fx=[],walkX=0,walkDir=1,anim=null,hopT=0;
+var bob=0,tick=0,fx=[],walkX=0,walkDir=1,anim=null,hopT=0,petMoving=false,moveT=0;
 function startAnim(type,emoji){anim={type:type,e:emoji||'',t:0,dur:type==='eat'?30:(type==='play'?28:22)};}
 function lcdClear(){cx.imageSmoothingEnabled=false;cx.fillStyle='#a7c56f';cx.fillRect(0,0,PXW,PXH);cx.fillStyle='rgba(0,0,0,0.03)';for(var y=0;y<PXH;y+=2)cx.fillRect(0,y,PXW,1);}
-function curImgKey(){var F=FAMILY[pet.fam]||FAMILY.snake;
+function baseKey(){var F=FAMILY[pet.fam]||FAMILY.snake;
   if(pet.stage==='egg')return 'egg';if(pet.stage==='blob')return 'blob';if(pet.stage==='baby')return F.baby;
   if(pet.stage==='juv')return pet.pathJ==='A'?F.juvA:F.juvB;if(pet.stage==='adult'){var a=F.adults[pet.pathA];return a?a.img:'blob';}return 'blob';}
+function curImgKey(){var b=baseKey();if(pet.stage==='egg'||pet.stage==='blob'||pet.stage==='dead'||pet.stage==='gone')return b;
+  var isBaby=(pet.stage==='baby');
+  if(sleeping){var sk=isBaby?'snake_baby_sleep':'snake_sleep';if(imgReady[sk])return sk;}
+  else if(petMoving){var mk=isBaby?'snake_baby_slither':'snake_slither';if(imgReady[mk])return mk;}
+  return b;}
 function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1;if(im&&imgReady[key]){var r=im.width/im.height;var w=size*scale,h=w/r;if(h>size*scale){h=size*scale;w=h*r;}ctx.save();ctx.translate(Math.round(cxp),Math.round(cyp));if(flip<0)ctx.scale(-1,1);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();}
   else{ctx.fillStyle='#5c7038';ctx.beginPath();ctx.arc(cxp,cyp,size*0.35,0,7);ctx.fill();}}
 function render(){lcdClear();
@@ -162,13 +168,12 @@ function render(){lcdClear();
   var active=(pet.stage!=='egg'&&pet.stage!=='dead');
   var scale=1,offX=(active?walkX:0),offY=Math.round(Math.sin(bob)*2),flip=walkDir;
   // 생기있는 아이들 이동(액션 중 아닐 때)
-  if(active&&!sleeping&&!anim){
-    if(tick%3===0){walkX+=walkDir*1.0;if(walkX>30){walkX=30;walkDir=-1;}if(walkX<-30){walkX=-30;walkDir=1;}}
-    if(tick%70===0&&Math.random()<0.5)walkDir*=-1;
-    if(hopT>0){hopT--;offY-=Math.abs(Math.sin((22-hopT)/22*Math.PI))*11;}
-    else if(tick%50===0&&Math.random()<0.6)hopT=22;
+  if(active&&!sleeping&&!anim){moveT++;
+    if(petMoving){if(tick%2===0){walkX+=walkDir*1.2;if(walkX>32){walkX=32;walkDir=-1;}if(walkX<-32){walkX=-32;walkDir=1;}}if(moveT>30){petMoving=false;moveT=0;}}
+    else{if(moveT>24){petMoving=true;moveT=0;if(Math.random()<0.5)walkDir*=-1;}
+      if(hopT>0){hopT--;offY-=Math.abs(Math.sin((22-hopT)/22*Math.PI))*10;}else if(moveT===12&&Math.random()<0.5)hopT=22;}
     offX=walkX;
-  }
+  } else petMoving=false;
   // 액션 애니
   var foodD=null,heartD=false,bubbleD=false;
   if(anim){anim.t++;var p=anim.t/anim.dur;
