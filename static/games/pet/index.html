@@ -4,498 +4,281 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게</title>
-<meta name="description" content="그리스신화 신수를 알에서 부화시켜 키우는 픽셀 다마고치. 밥 주고 놀아주며 성장·진화. 같은 브라우저면 다시 와도 이어서 키워요. 설치 없이 무료.">
+<meta name="description" content="그리스신화 신수를 알에서 부화시켜 키우는 픽셀 다마고치. 알→덩어리→아기→청년→성체 5단계, 잘 키우면 히드라·페가수스 같은 신수, 못 키우면 평범한 동물. 신성 게이지·샘물 도박·행운 아이템. 같은 브라우저면 이어서 키움. 무료.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
 <style>
 :root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--yellow:#e0c07e;
-  --shell:#e6b34a;--shell2:#caa03e;--lcd:#9fbf6b;--lcd2:#8fb05c;--lcdink:#2b3a1a;}
+  --shell:#e6b34a;--shell2:#caa03e;--lcd:#9fbf6b;--lcdink:#2b3a1a;--div:#c98adf;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.7;min-height:100vh;padding:20px 12px 48px;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.7;min-height:100vh;padding:18px 12px 48px;}
 .wrap{max-width:460px;margin:0 auto;}
-.topnav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:10px 4px 12px;margin-bottom:14px;}
+.topnav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:10px 4px 12px;margin-bottom:12px;}
 .topnav a.home{color:var(--coral);font-weight:800;font-size:15px;text-decoration:none;}
 .topnav nav{display:flex;gap:5px;flex-wrap:wrap;}
 .topnav nav a{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:4px 9px;font-size:12px;background:var(--panel);}
 .topnav nav a.on{color:var(--coral);border-color:var(--coral);}
-h1{font-size:19px;text-align:center;margin:2px 0 2px;}
-.sub{text-align:center;color:var(--dim);font-size:12.5px;margin-bottom:16px;}
-
-/* 다마고치 셸 */
-.device{background:linear-gradient(160deg,var(--shell),var(--shell2));border-radius:44% 44% 40% 40%/40% 40% 44% 44%;padding:26px 22px 20px;box-shadow:inset 0 3px 10px rgba(255,255,255,.35),inset 0 -6px 14px rgba(0,0,0,.22),0 12px 30px rgba(0,0,0,.4);border:2px solid rgba(0,0,0,.15);}
-.brand{text-align:center;color:#7a5e18;font-weight:800;font-size:11px;letter-spacing:2px;margin-bottom:8px;}
-.screen{background:var(--lcd);border:6px solid #2a2620;border-radius:12px;padding:8px;box-shadow:inset 0 0 0 2px #3a3a30,inset 0 0 18px rgba(0,0,0,.18);}
-.screen canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges;border-radius:4px;}
-/* 스탯바 */
-.stats{display:flex;gap:8px;margin-top:12px;}
-.stat{flex:1;background:rgba(0,0,0,.14);border-radius:8px;padding:6px 8px;}
-.stat .lab{font-size:10.5px;color:#5c4a16;font-weight:700;display:flex;justify-content:space-between;}
-.bar{height:9px;background:rgba(0,0,0,.18);border-radius:6px;margin-top:4px;overflow:hidden;}
-.bar > i{display:block;height:100%;border-radius:6px;transition:width .4s;}
-.bar.hunger > i{background:linear-gradient(90deg,#e07b45,#f0b06a);}
-.bar.happy > i{background:linear-gradient(90deg,#d94f7a,#f08bb0);}
-.bar.grow > i{background:linear-gradient(90deg,#4f9bd9,#8bd0f0);}
-/* 버튼 */
-.pad{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;}
-.btn{background:linear-gradient(180deg,#fff5db,#e9d29a);border:2px solid #a5842f;border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:#5c4a16;box-shadow:0 3px 0 #a5842f,inset 0 1px 3px rgba(255,255,255,.6);user-select:none;transition:transform .06s,box-shadow .06s;}
+h1{font-size:18px;text-align:center;margin:2px 0;}
+.sub{text-align:center;color:var(--dim);font-size:12px;margin-bottom:14px;}
+.device{background:linear-gradient(160deg,var(--shell),var(--shell2));border-radius:44% 44% 40% 40%/40% 40% 44% 44%;padding:22px 20px 18px;box-shadow:inset 0 3px 10px rgba(255,255,255,.35),inset 0 -6px 14px rgba(0,0,0,.22),0 12px 30px rgba(0,0,0,.4);}
+.brand{text-align:center;color:#7a5e18;font-weight:800;font-size:11px;letter-spacing:2px;margin-bottom:7px;}
+.screen{background:var(--lcd);border:6px solid #2a2620;border-radius:12px;padding:6px;box-shadow:inset 0 0 0 2px #3a3a30,inset 0 0 18px rgba(0,0,0,.18);position:relative;}
+.screen canvas{display:block;width:100%;height:auto;image-rendering:pixelated;border-radius:4px;}
+.stagebar{position:absolute;top:9px;left:10px;right:10px;display:flex;justify-content:space-between;font-size:9px;color:#3a4a24;font-weight:700;pointer-events:none;}
+.stagebar span{opacity:.4;}.stagebar span.on{opacity:1;color:#1c2a10;}
+.stats{display:flex;gap:6px;margin-top:10px;}
+.stat{flex:1;background:rgba(0,0,0,.14);border-radius:7px;padding:5px 7px;}
+.stat .lab{font-size:10px;color:#5c4a16;font-weight:700;display:flex;justify-content:space-between;}
+.bar{height:8px;background:rgba(0,0,0,.18);border-radius:6px;margin-top:3px;overflow:hidden;}
+.bar>i{display:block;height:100%;border-radius:6px;transition:width .4s;}
+.bar.hunger>i{background:linear-gradient(90deg,#e07b45,#f0b06a);}
+.bar.happy>i{background:linear-gradient(90deg,#d94f7a,#f08bb0);}
+.bar.div>i{background:linear-gradient(90deg,#9a55c9,#d4a0ef);}
+.divrow{margin-top:8px;background:rgba(120,60,160,.12);border:1px solid rgba(160,110,200,.4);border-radius:8px;padding:6px 9px;}
+.pad{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px;}
+.btn{background:linear-gradient(180deg,#fff5db,#e9d29a);border:2px solid #a5842f;border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:19px;color:#5c4a16;box-shadow:0 3px 0 #a5842f,inset 0 1px 3px rgba(255,255,255,.6);user-select:none;transition:transform .06s,box-shadow .06s;}
 .btn:active{transform:translateY(3px);box-shadow:0 0 0 #a5842f,inset 0 1px 3px rgba(0,0,0,.2);}
-.btn .t{font-size:9.5px;font-weight:800;margin-top:1px;}
-.btn:disabled{opacity:.45;pointer-events:none;}
-/* 하단 정보 */
-.info{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--dim);line-height:1.7;}
+.btn .t{font-size:9px;font-weight:800;margin-top:1px;}
+.btn.item{grid-column:span 2;aspect-ratio:auto;border-radius:22px;padding:8px;flex-direction:row;gap:6px;font-size:15px;}
+.btn:disabled{opacity:.4;pointer-events:none;}
+.info{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--dim);line-height:1.7;}
 .info b{color:var(--txt);}
 .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
 .att{display:flex;gap:3px;margin-top:6px;}
-.att span{width:20px;height:20px;border-radius:5px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;background:rgba(0,0,0,.15);}
+.att span{width:19px;height:19px;border-radius:5px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;background:rgba(0,0,0,.15);}
 .att span.done{background:var(--coral);border-color:var(--coral);color:#fff;}
-.dex{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
-.dex .slot{width:44px;height:44px;border:1px solid var(--line);border-radius:8px;background:var(--lcd);display:flex;align-items:center;justify-content:center;opacity:.35;}
+.dex{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;}
+.dex .slot{border:1px solid var(--line);border-radius:7px;background:var(--lcd);padding:3px;text-align:center;opacity:.4;}
 .dex .slot.got{opacity:1;box-shadow:0 0 0 2px var(--coral);}
+.dex .slot canvas{width:100%;height:auto;image-rendering:pixelated;}
+.dex .slot .dn{font-size:8.5px;color:#2b3a1a;font-weight:700;margin-top:1px;}
 .minor{color:var(--dim);font-size:11.5px;}
 .linkbtn{background:none;border:1px solid var(--line);color:var(--coral);border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit;}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#000;color:#fff;padding:10px 18px;border-radius:22px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:50;max-width:90%;text-align:center;}
-.toast.show{opacity:.94;transform:translateX(-50%) translateY(0);}
-.foot{margin-top:30px;padding-top:14px;border-top:1px dashed var(--line);color:var(--dim);font-size:12.5px;line-height:1.9;text-align:center;}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#000;color:#fff;padding:10px 18px;border-radius:22px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:50;max-width:90%;text-align:center;}
+.toast.show{opacity:.95;transform:translateX(-50%) translateY(0);}
+.foot{margin-top:26px;padding-top:14px;border-top:1px dashed var(--line);color:var(--dim);font-size:12.5px;line-height:1.9;text-align:center;}
 .foot a{color:var(--coral);text-decoration:none;}
-/* 부화/진화 오버레이 */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:60;padding:20px;}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;z-index:60;padding:20px;}
 .ov.show{display:flex;}
-.card2{background:linear-gradient(160deg,#2a2a27,#1b1b19);border:1px solid var(--coral);border-radius:16px;padding:24px 22px;max-width:340px;width:100%;text-align:center;}
+.card2{background:linear-gradient(160deg,#2a2a27,#1b1b19);border:1px solid var(--coral);border-radius:16px;padding:22px;max-width:340px;width:100%;text-align:center;}
 .card2 canvas{image-rendering:pixelated;width:120px;height:120px;margin:6px auto;display:block;background:var(--lcd);border-radius:8px;}
 .card2 h3{color:var(--yellow);font-size:18px;margin:6px 0;}
-.card2 p{color:var(--dim);font-size:13px;margin-bottom:12px;}
-.card2 .go{background:var(--coral);color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+.card2 p{color:var(--dim);font-size:13px;margin-bottom:14px;line-height:1.6;}
+.card2 .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.card2 button{border:none;border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+.card2 .go{background:var(--coral);color:#fff;}
+.card2 .alt{background:#3a3a36;color:var(--txt);}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="topnav">
   <a class="home" href="/">✻ 계획대로 느긋하게</a>
-  <nav>
-    <a href="/games/" class="on">🎮 게임방</a>
-    <a href="/tests/">🧠 테스트</a>
-    <a href="/tools/">🧰 도구방</a>
-  </nav>
+  <nav><a href="/games/" class="on">🎮 게임방</a><a href="/tests/">🧠 테스트</a><a href="/tools/">🧰 도구방</a></nav>
 </div>
-
 <h1>🥚 신수 키우기</h1>
-<div class="sub">그리스신화 신수를 알에서 부화시켜 키워요 · 다시 와도 이어서 키움</div>
+<div class="sub">알을 부화시켜 키워요 · 잘 키우면 ✨신수, 못 키우면 평범한 동물 · 다시 와도 이어서</div>
 
 <div class="device">
   <div class="brand">DARAKBANG · 神獸</div>
-  <div class="screen"><canvas id="lcd" width="128" height="112"></canvas></div>
-
+  <div class="screen">
+    <div class="stagebar" id="stagebar"></div>
+    <canvas id="lcd" width="132" height="116"></canvas>
+  </div>
   <div class="stats">
     <div class="stat"><div class="lab"><span>🍖 배고픔</span><span id="vH">0</span></div><div class="bar hunger"><i id="bH"></i></div></div>
     <div class="stat"><div class="lab"><span>💖 행복</span><span id="vP">0</span></div><div class="bar happy"><i id="bP"></i></div></div>
-    <div class="stat"><div class="lab"><span>⭐ 성장</span><span id="vG">0</span></div><div class="bar grow"><i id="bG"></i></div></div>
   </div>
-
+  <div class="divrow"><div class="lab" style="display:flex;justify-content:space-between;font-size:10.5px;color:#c9a0e0;font-weight:700;"><span>✨ 신성 (神性)</span><span id="vD">0</span></div><div class="bar div" style="margin-top:4px;"><i id="bD"></i></div></div>
   <div class="pad">
     <button class="btn" id="btnFeed">🍖<span class="t">밥주기</span></button>
     <button class="btn" id="btnPlay">🎾<span class="t">놀기</span></button>
     <button class="btn" id="btnPet">✋<span class="t">쓰다듬기</span></button>
     <button class="btn" id="btnSleep">💤<span class="t">재우기</span></button>
+    <button class="btn item" id="btnSpring">💧 신비한 샘물 <span class="minor" id="springN" style="color:#7a5e18;"></span></button>
+    <button class="btn item" id="btnLuck">🍀 행운의 부적 <span class="minor" id="luckN" style="color:#7a5e18;"></span></button>
   </div>
 </div>
 
 <div class="info">
-  <div class="row"><span><b id="petName">알</b> · <span id="stageBadge" class="minor">단계</span></span><span class="minor" id="ageTxt"></span></div>
-  <div style="margin-top:8px;"><span class="minor">🗓 출석 (연속 <b id="streak">0</b>일)</span><div class="att" id="attRow"></div></div>
-  <div style="margin-top:10px;"><span class="minor">📖 신수 도감</span><div class="dex" id="dexRow"></div></div>
-  <div class="row" style="margin-top:12px;">
-    <button class="linkbtn" id="btnCode">💾 세이브 코드</button>
-    <button class="linkbtn" id="btnReset">🥚 새로 시작</button>
-  </div>
-  <div class="minor" style="margin-top:8px;line-height:1.6;">같은 브라우저로 다시 오면 이어서 키워요. 자는 동안에도 배고파지니 자주 들러주세요! (기기 옮길 땐 세이브 코드 사용)</div>
+  <div class="row"><span><b id="petName">알</b> · <span id="stageBadge" class="minor"></span></span><span class="minor" id="ageTxt"></span></div>
+  <div style="margin-top:8px;"><span class="minor">🗓 출석 (연속 <b id="streak">0</b>일) · 매일 오면 🍀+💧 지급</span><div class="att" id="attRow"></div></div>
+  <div style="margin-top:10px;"><span class="minor">📖 도감 (모은 신수·동물)</span><div class="dex" id="dexRow"></div></div>
+  <div class="row" style="margin-top:12px;"><button class="linkbtn" id="btnCode">💾 세이브 코드</button><button class="linkbtn" id="btnReset">🥚 새 알</button></div>
+  <div class="minor" style="margin-top:8px;line-height:1.6;">아기까진 저절로 자라요. 청년기부터가 진짜! 잘 돌보고 샘물·부적으로 <b>신성</b>을 높여야 신수가 돼요. 방치하면 평범한 동물로 자라요. 같은 브라우저면 이어짐(기기 옮길 땐 세이브 코드).</div>
 </div>
 
-<div class="foot">
-  🎮 <a href="/games/">게임방 더 보기</a> · 🏛 <a href="https://www.youtube.com/@darakbang" target="_blank" rel="noopener">다락방 그리스신화</a><br>
-  에디슨이 만든 무료 웹게임 · 설치 없이 플레이
-</div>
+<div class="foot">🎮 <a href="/games/">게임방 더 보기</a> · 🏛 <a href="https://www.youtube.com/@darakbang" target="_blank" rel="noopener">다락방 그리스신화</a><br>에디슨이 만든 무료 웹게임</div>
 </div>
 
 <div class="toast" id="toast"></div>
 <div class="ov" id="ov"><div class="card2">
   <canvas id="ovc" width="24" height="24"></canvas>
-  <h3 id="ovTitle">축하해요!</h3>
-  <p id="ovDesc"></p>
-  <button class="go" id="ovGo">계속 키우기</button>
+  <h3 id="ovTitle"></h3><p id="ovDesc"></p>
+  <div class="btns" id="ovBtns"></div>
 </div></div>
 
+<script src="/games/pet/sprites.js"></script>
 <script>
-/* ===================== 픽셀 스프라이트 (신수 = 아기 올빼미 MVP) =====================
-   각 스프라이트는 16x16, 문자 팔레트: '.'=투명 'X'=먹색 'o'=연한먹 '*'=포인트(부리/눈빛) */
-var PAL={'X':'#2b3a1a','o':'#5a7038','*':'#c98a2e','.':null,'#':'#2b3a1a'};
-function S(rows){return rows;}
-var SPR={
-egg:S([
-"................",
-"......XXXX......",
-".....XooooX.....",
-"....XooooooX....",
-"...XooXooooX....",
-"...XoooooXooX...",
-"..XooooooooooX..",
-"..XoXooooooooX..",
-"..XoooooXooooX..",
-"..XooooooooooX..",
-"..XoooXoooooXX..",
-"...XooooooooX...",
-"...XoooooooXX...",
-"....XoooooX.....",
-".....XXXXX......",
-"................"]),
-// 아기 올빼미 (기본)
-baby:S([
-"................",
-"...X........X...",
-"..XXX......XXX..",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX..",
-".Xo*XoooX*ooX...",
-".XoXXXoXXXXoX...",
-".Xo*XoooX*ooX...",
-".Xooooo*oooooX..",
-".Xoooo***ooooX..",
-".XXooooooooXX...",
-"..XXoooooo XX...",
-"...XXXXXXXX.....",
-"....X....X.....",
-"...XXX..XXX.....",
-"................"]),
-// 아기 - 배고픔(눈 처짐)
-baby_hungry:S([
-"................",
-"...X........X...",
-"..XXX......XXX..",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX..",
-".XooXoooooXooX..",
-".XoXoXoooXoXoX..",
-".XooXoooooXooX..",
-".XoooooXoooooX..",
-".Xooooo ooooX...",
-".XXoooooooXX....",
-"..XXo~~~~oXX....",
-"...XXXXXXXX.....",
-"....X....X......",
-"...XXX..XXX.....",
-"................"]),
-// 아기 - 신남/행복(반짝 눈)
-baby_happy:S([
-"........*.......",
-"...X..*.....X...",
-"..XXX......XXX..",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX*.",
-".XoXXXoooXXXoX..",
-".XXXXXoXoXXXXX..",
-".XoXXXoooXXXoX..",
-".Xooooo*oooooX..",
-".Xoooo   ooooX..",
-".XXooo o oooXX..",
-"..XXoo   ooXX...",
-"...XXXXXXXX.....",
-"....X....X......",
-"...XXX..XXX....*",
-"................"]),
-// 아기 - 삐침/시무룩
-baby_sad:S([
-"................",
-"...X........X...",
-"..XXX......XXX..",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX..",
-".XoXXooooooXXoX.",
-".XooXoooooXooX..",
-".XoXXooooooXXoX.",
-".XoooooXoooooX..",
-".Xooo~~~~~oooX..",
-".XXooo~~~ooXX...",
-"..XXoooooooXX...",
-"...XXXXXXXX.....",
-"....X....X......",
-"...XXX..XXX.....",
-"................"]),
-// 아기 - 잠
-baby_sleep:S([
-"..............zZ",
-"...X.......X.z..",
-"..XXX.....XXX...",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX..",
-".Xoo~~~oo~~~oX..",
-".Xooooooooooo X.",
-".Xooooo*oooooX..",
-".XoooooooooooX..",
-".XoooooooooooX..",
-".XXoooooooooXX..",
-"..XXoooooooXX...",
-"...XXXXXXXX.....",
-"....X....X......",
-"...XXX..XXX.....",
-"................"]),
-// 성체 - 일반 올빼미(아테나 신수): 더 큼/투구깃
-owl:S([
-".....*....*.....",
-"....XXX..XXX....",
-"...XXXXXXXXXX...",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX..",
-".Xo*XXoooXX*oX..",
-".XoXXXoXoXXXoX..",
-".Xo*XXoooXX*oX..",
-"XXoooooo*ooooXX.",
-"XXooooo***oooXX.",
-".XXoooooooooXX..",
-".XXXoooooooXXX..",
-"..XXXXXXXXXX....",
-"..XX.X..X.XX....",
-".XXX.XX.XX.XXX..",
-"................"]),
-// 성체 - 레어(빛나는): 반짝 다수 + 왕관깃
-owl_rare:S([
-"...*.*..*.*.*...",
-"..*XXX..XXX*....",
-"...XXXXXXXXXX*..",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX*.",
-"*Xo*XXoooXX*oX..",
-".XoXXX*X*XXXoX..",
-".Xo*XXoooXX*oX*.",
-"XXoooo*o*ooooXX.",
-"XXooo**o**oooXX.",
-"*XXoooooooooXX*.",
-".XXXoooooooXXX..",
-"..XXXXXXXXXX..*.",
-".*XX.X..X.XX....",
-".XXX.XX.XX.XXX..",
-"...*......*....."]),
-// 성체 - 삐친(방치): 등돌림 느낌 눈
-owl_sulk:S([
-".....X....X.....",
-"....XXX..XXX....",
-"...XXXXXXXXXX...",
-"..XXXXXXXXXXXX..",
-".XXoooooooooXX..",
-".XooXXoooXXooX..",
-".XoXooXoXooXoX..",
-".XooXXoooXXooX..",
-"XXooooo~ooooo XX",
-"XXoooo~~~oooo XX",
-".XXooo~~~oooXX..",
-".XXXoooooooXXX..",
-"..XXXXXXXXXX....",
-"..XX.X..X.XX....",
-".XXX.XX.XX.XXX..",
-"................"])
-};
-/* ===================== 렌더 ===================== */
-var cv=document.getElementById('lcd'),cx=cv.getContext('2d');
-var PXW=cv.width, PXH=cv.height; // 128x112
-function drawSprite(ctx,spr,ox,oy,scale){
-  for(var y=0;y<spr.length;y++){var row=spr[y];for(var x=0;x<row.length;x++){var c=row[x];
-    if(c==='~'){ctx.fillStyle='#2b3a1a';ctx.fillRect(ox+x*scale,oy+y*scale+scale-1,scale,1);continue;}
-    if(c==='z'||c==='Z'){ctx.fillStyle='#2b3a1a';ctx.font=(scale*3)+'px monospace';ctx.fillText(c,ox+x*scale,oy+y*scale+scale*2);continue;}
-    var col=PAL[c];if(col){ctx.fillStyle=col;ctx.fillRect(ox+x*scale,oy+y*scale,scale,scale);}}}
+/* ===== 렌더 ===== */
+var PAL=Object.assign({'X':'#2b3a1a','o':'#5c7038','.':null},window.SPR_PAL||{});
+var cv=document.getElementById('lcd'),cx=cv.getContext('2d');var PXW=cv.width,PXH=cv.height;
+function drawSprite(ctx,spr,cxpx,cypx,scale){
+  if(!spr)return;var w=spr[0].length,h=spr.length;var ox=Math.round(cxpx-w*scale/2),oy=Math.round(cypx-h*scale/2);
+  for(var y=0;y<h;y++){var row=spr[y];for(var x=0;x<row.length;x++){var c=row[x];var col=PAL[c];if(col===undefined)col=PAL['X'];if(c==='.'||c===' ')continue;ctx.fillStyle=col||PAL['X'];ctx.fillRect(ox+x*scale,oy+y*scale,scale,scale);}}
 }
-function lcdClear(){cx.fillStyle='#9fbf6b';cx.fillRect(0,0,PXW,PXH);
-  // 은은한 스캔도트
-  cx.fillStyle='rgba(0,0,0,0.035)';for(var y=0;y<PXH;y+=2){cx.fillRect(0,y,PXW,1);}}
 var bob=0,tick=0,fx=[];
+function lcdClear(){cx.fillStyle='#9fbf6b';cx.fillRect(0,0,PXW,PXH);cx.fillStyle='rgba(0,0,0,0.035)';for(var y=0;y<PXH;y+=2)cx.fillRect(0,y,PXW,1);}
 function render(){
-  lcdClear();
-  var spr=currentSprite();
-  var scale=6; var w=16*scale, h=16*scale;
-  var ox=Math.round((PXW-w)/2), oy=Math.round((PXH-h)/2)+Math.round(Math.sin(bob)*3)-4;
-  drawSprite(cx,spr,ox,oy,scale);
-  // 바닥선
-  cx.fillStyle='rgba(43,58,26,.55)';cx.fillRect(14,PXH-12,PXW-28,2);
-  // 이펙트(밥·하트 등)
-  for(var i=fx.length-1;i>=0;i--){var f=fx[i];cx.fillStyle='#2b3a1a';cx.font='12px monospace';cx.fillText(f.ch,f.x,f.y);f.y-=0.8;f.life--;if(f.life<=0)fx.splice(i,1);}
-  // 상태 아이콘(배고픔/행복 낮으면 표시)
-  cx.font='10px monospace';cx.fillStyle='#2b3a1a';
-  if(pet.stage!=='egg'){
-    if(pet.hunger<25){cx.fillText('🍽',6,14);}
-    if(pet.happy<25){cx.fillText('💧',PXW-18,14);}
-    if(sleeping){cx.fillText('Z',PXW-16,PXH-14);}
-  }
+  lcdClear();var spr=currentSprite();var sc=5;
+  var cy=PXH/2+Math.round(Math.sin(bob)*3)+2;
+  drawSprite(cx,spr,PXW/2,cy,sc);
+  cx.fillStyle='rgba(43,58,26,.5)';cx.fillRect(16,PXH-10,PXW-32,2);
+  for(var i=fx.length-1;i>=0;i--){var f=fx[i];cx.font='12px monospace';cx.fillStyle='#2b3a1a';cx.fillText(f.ch,f.x,f.y);f.y-=0.8;f.life--;if(f.life<=0)fx.splice(i,1);}
+  cx.font='9px monospace';cx.fillStyle='#2b3a1a';
+  if(pet.stage!=='egg'){if(pet.hunger<25)cx.fillText('🍽',6,PXH-6);if(pet.happy<25)cx.fillText('💧',PXW-16,PXH-6);if(sleeping)cx.fillText('Z',PXW-14,16);}
 }
-function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*30)-15),y:PXH/2-10,life:40});}
+function pushFx(ch){fx.push({ch:ch,x:PXW/2-6+((Math.random()*26)-13),y:PXH/2-8,life:38});}
 
-/* ===================== 게임 상태 ===================== */
-var KEY='darak_pet_v1';
-var pet=null, sleeping=false;
-function freshPet(){return {species:'owl',name:'신수 알',stage:'egg',hunger:60,happy:60,exp:0,
-  born:Date.now(),last:Date.now(),clicks:0,streak:0,lastAttend:0,attendDays:[],dex:[],cares:0,neglect:0,evolved:null};}
+/* ===== 데이터: 뱀 라인(완성) — 이후 라인 추가 ===== */
+var FAMILY={
+  snake:{ename:'뱀', baby:'snake_baby', juvA:'snake_juvA', juvB:'snake_juvB',
+    adults:{ AA:{spr:'hydra',name:'히드라',divine:true,desc:'머리 셋 달린 전설의 물뱀! 최고의 신수예요 ✨'},
+             AB:{spr:'twinsnake',name:'쌍두사',desc:'머리가 둘 달린 진귀한 뱀. 신수엔 못 미쳤지만 멋져요.'},
+             BA:{spr:'rattlesnake',name:'방울뱀',desc:'꼬리 방울을 딸랑이는 평범한 뱀이 됐어요.'},
+             BB:{spr:'python',name:'구렁이',desc:'커다랗고 순한 구렁이가 됐어요. 이것도 귀엽죠.'} } }
+};
+var DEXORDER=[['snake','AA'],['snake','AB'],['snake','BA'],['snake','BB']];
 
-function load(){
-  try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.stage){pet=s;}}catch(e){}
-  if(!pet)pet=freshPet();
-  applyOffline();
-  checkAttendance();
-  save();
-}
-function save(){pet.last=Date.now();try{localStorage.setItem(KEY,JSON.stringify(pet));}catch(e){}}
-
-function applyOffline(){
-  var now=Date.now();var mins=Math.min((now-(pet.last||now))/60000, 48*60); // 최대 48시간
-  if(mins<1)return;
-  // 시간당 배고픔 -8, 행복 -5 (자는 동안도 서서히)
-  var dh=mins/60*8, dp=mins/60*5;
-  if(pet.stage!=='egg'){
-    pet.hunger=clamp(pet.hunger-dh);pet.happy=clamp(pet.happy-dp);
-    if(pet.hunger<15||pet.happy<15)pet.neglect+=Math.floor(mins/120);
-    if(mins>30)setTimeout(function(){toast('"'+petTitle()+'가 자는 동안 배고파졌어요!"');},600);
-  }
-}
-function checkAttendance(){
-  var today=new Date();today.setHours(0,0,0,0);var t=today.getTime();
-  if(pet.lastAttend===t)return;
-  var yest=t-86400000;
-  pet.streak=(pet.lastAttend===yest)?(pet.streak+1):1;
-  pet.lastAttend=t;
-  var slot=(pet.streak-1)%7;
-  pet.attendDays=pet.attendDays||[];
-  if(pet.attendDays.indexOf(slot)<0)pet.attendDays.push(slot);
-  if(pet.streak%7===1&&pet.streak>1)pet.attendDays=[0];
-  // 출석 보상: 밥 +12
-  if(pet.stage!=='egg'){pet.hunger=clamp(pet.hunger+12);setTimeout(function(){toast('🗓 출석 보상! 밥 +12 (연속 '+pet.streak+'일)');},1100);}
-}
+/* ===== 상태 ===== */
+var KEY='darak_pet_v2';var pet=null,sleeping=false;
+function fresh(){return {fam:'snake',stage:'egg',sub:'',hunger:60,happy:60,exp:0,div:0,
+  born:Date.now(),last:Date.now(),clicks:0,streak:0,lastAttend:0,attendDays:[],dex:[],
+  spring:0,luck:0,pathJ:'',pathA:''};}
 function clamp(v){return Math.max(0,Math.min(100,Math.round(v)));}
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.stage)pet=s;}catch(e){}
+  if(!pet)pet=fresh();applyOffline();attend();save();}
+function save(){pet.last=Date.now();try{localStorage.setItem(KEY,JSON.stringify(pet));}catch(e){}}
+function applyOffline(){var mins=Math.min((Date.now()-(pet.last||Date.now()))/60000,48*60);if(mins<1)return;
+  if(pet.stage!=='egg'){pet.hunger=clamp(pet.hunger-mins/60*8);pet.happy=clamp(pet.happy-mins/60*5);
+    if(pet.hunger<15||pet.happy<15)pet.div=clamp(pet.div-Math.floor(mins/120)*2);
+    if(mins>30)setTimeout(function(){toast('자는 동안 배고파졌어요!');},700);}
+  // 자동성장(아기까지): 시간 경과로 exp
+  if(pet.stage==='blob'||pet.stage==='baby')pet.exp+=Math.floor(mins/30);
+}
+function attend(){var t=new Date();t.setHours(0,0,0,0);t=t.getTime();if(pet.lastAttend===t)return;
+  pet.streak=(pet.lastAttend===t-86400000)?pet.streak+1:1;pet.lastAttend=t;
+  var slot=(pet.streak-1)%7;pet.attendDays=pet.attendDays||[];if(pet.streak%7===1&&pet.streak>1)pet.attendDays=[];
+  if(pet.attendDays.indexOf(slot)<0)pet.attendDays.push(slot);
+  pet.spring=(pet.spring||0)+1;pet.luck=(pet.luck||0)+1;
+  if(pet.stage!=='egg'){pet.hunger=clamp(pet.hunger+10);
+    setTimeout(function(){toast('🗓 출석! 🍀부적+💧샘물 지급 (연속 '+pet.streak+'일)');},1000);}
+}
 
-var NAMES={owl:'아테나 올빼미',pegasus:'페가수스',hydra:'히드라',lion:'네메아 사자'};
-function petTitle(){return pet.name||NAMES[pet.species]||'신수';}
-function currentSprite(){
+/* ===== 스프라이트 선택 ===== */
+function currentSprite(){var F=FAMILY[pet.fam]||FAMILY.snake;
   if(pet.stage==='egg')return SPR.egg;
-  if(sleeping)return SPR.baby_sleep;
-  if(pet.stage==='baby'){
-    if(pet.hunger<25)return SPR.baby_hungry;
-    if(pet.happy<25)return SPR.baby_sad;
-    if(pet.happy>75)return SPR.baby_happy;
-    return SPR.baby;
-  }
-  // adult
-  if(pet.evolved==='rare')return SPR.owl_rare;
-  if(pet.evolved==='sulk')return SPR.owl_sulk;
-  return SPR.owl;
+  if(pet.stage==='blob')return SPR.blob;
+  if(pet.stage==='baby')return SPR[F.baby];
+  if(pet.stage==='juv')return SPR[pet.pathJ==='A'?F.juvA:F.juvB];
+  if(pet.stage==='adult'){var a=F.adults[pet.pathA];return a?SPR[a.spr]:SPR.blob;}
+  return SPR.blob;
 }
+function petName(){var F=FAMILY[pet.fam];
+  if(pet.stage==='egg')return '알';if(pet.stage==='blob')return '정체불명의 덩어리';
+  if(pet.stage==='baby')return '아기 '+F.ename;if(pet.stage==='juv')return '청년 '+F.ename+(pet.pathJ==='A'?' (건강함)':'');
+  if(pet.stage==='adult')return F.adults[pet.pathA].name;return '?';}
 
-/* ===================== 액션 ===================== */
-function gain(exp){pet.exp+=exp;pet.cares++;checkEvolve();}
-function feed(){if(sleeping)return wake();
-  if(pet.stage==='egg')return hatchClick();
-  if(pet.hunger>=98)return toast('배가 불러요 🍖');
-  pet.hunger=clamp(pet.hunger+22);pet.happy=clamp(pet.happy+3);gain(4);pushFx('🍖');toast(petTitle()+'가 냠냠 먹었어요');afterAct();}
-function play(){if(sleeping)return wake();
-  if(pet.stage==='egg')return hatchClick();
-  if(pet.hunger<12)return toast('너무 배고파서 못 놀아요 🍖');
-  pet.happy=clamp(pet.happy+20);pet.hunger=clamp(pet.hunger-6);gain(6);pushFx('🎾');toast('신나게 놀았어요!');afterAct();}
-function petAct(){if(sleeping)return wake();
-  if(pet.stage==='egg')return hatchClick();
-  pet.happy=clamp(pet.happy+10);gain(3);pushFx('💖');toast('기분이 좋아졌어요 💖');afterAct();}
-function sleepAct(){if(pet.stage==='egg')return hatchClick();
-  sleeping=!sleeping;
-  if(sleeping){toast('쿨쿨… 재우는 중 (다시 누르면 깨우기)');}else{pet.happy=clamp(pet.happy+6);toast('잘 잤어요! ☀️');}
-  afterAct();}
-function wake(){sleeping=false;afterAct();}
+/* ===== 성장 로직 ===== */
+var STAGES=['egg','blob','baby','juv','adult'];
+function stageIdx(){return STAGES.indexOf(pet.stage);}
+function grow(){
+  if(pet.stage==='blob'&&pet.exp>=12){pet.stage='baby';pet.exp=0;save();paint();
+    surprise(currentSprite(),'🐣 아기 '+FAMILY[pet.fam].ename+'!','어떤 동물인지 드러나기 시작했어요! 여기서부턴 어떻게 키우느냐가 중요해요.',[{t:'키우기',c:closeOv}]);addDexMaybe();}
+  else if(pet.stage==='baby'&&pet.exp>=40){ // 아기→청년: 1차 갈림(신성)
+    pet.pathJ=pet.div>=45?'A':'B';pet.stage='juv';pet.exp=0;save();paint();
+    var msg=pet.pathJ==='A'?'신성이 깃들어 건강한 청년으로 자랐어요! 이대로 잘 키우면 신수가 될지도?':'청년기에 접어들었어요. 신성이 조금 부족했지만 아직 기회는 있어요!';
+    surprise(currentSprite(),'✨ 청년기!',msg,[{t:'계속',c:closeOv}]);}
+  else if(pet.stage==='juv'&&pet.exp>=55){ // 청년→성체: 2차 갈림
+    var second=pet.div>=60?'A':'B';pet.pathA=pet.pathJ+second;pet.stage='adult';save();paint();
+    var a=FAMILY[pet.fam].adults[pet.pathA];
+    var t=a.divine?('🎉 신수 '+a.name+' 탄생!'):('🐾 '+a.name+'(으)로 자랐어요');
+    surprise(currentSprite(),t,a.desc+(a.divine?'':' 다시 도전하면 신수가 될 수 있어요!'),[{t:a.divine?'자랑하기':'다시 키우기',c:a.divine?closeOv:null},{t:'계속 보기',c:closeOv}]);
+    addDexMaybe();gtag('event','pet_adult',{form:a.name});}
+}
+function gainExp(n){if(pet.stage==='egg')return;pet.exp+=n;grow();}
+function addDexMaybe(){if(pet.stage!=='adult')return;var id=pet.fam+'_'+pet.pathA;if((pet.dex||[]).indexOf(id)<0){pet.dex.push(id);save();}}
+
+/* ===== 액션 ===== */
 function afterAct(){save();paint();}
+function feed(){if(pet.stage==='egg')return hatch();if(sleeping)return wake();
+  if(pet.hunger>=98)return toast('배가 불러요');pet.hunger=clamp(pet.hunger+22);pet.happy=clamp(pet.happy+3);pet.div=clamp(pet.div+2);gainExp(4);pushFx('🍖');afterAct();}
+function play(){if(pet.stage==='egg')return hatch();if(sleeping)return wake();
+  if(pet.hunger<12)return toast('너무 배고파서 못 놀아요');pet.happy=clamp(pet.happy+20);pet.hunger=clamp(pet.hunger-6);pet.div=clamp(pet.div+3);gainExp(6);pushFx('🎾');afterAct();}
+function petAct(){if(pet.stage==='egg')return hatch();if(sleeping)return wake();
+  pet.happy=clamp(pet.happy+10);pet.div=clamp(pet.div+2);gainExp(3);pushFx('💖');afterAct();}
+function sleepAct(){if(pet.stage==='egg')return hatch();sleeping=!sleeping;if(!sleeping)pet.happy=clamp(pet.happy+6);toast(sleeping?'쿨쿨… (다시 누르면 깨우기)':'잘 잤어요 ☀️');afterAct();}
+function wake(){sleeping=false;afterAct();}
+function hatch(){pet.clicks++;pushFx('✨');if(pet.clicks>=3){pet.stage='blob';pet.exp=0;pet.hunger=70;pet.happy=70;save();paint();
+    surprise(SPR.blob,'부화! 그런데…','알에서 정체불명의 덩어리가 나왔어요! 뭐가 될지는 아직 몰라요. 잘 키워봐요 🌱',[{t:'키우기',c:closeOv}]);}
+  else{toast('알이 흔들려요… ('+pet.clicks+'/3)');save();paint();}}
+// 신비한 샘물: 랜덤(독/신성)
+function spring(){if(pet.stage==='egg'||pet.stage==='blob')return toast('아직 일러요 (청년기부터 효과 커요)');
+  if((pet.spring||0)<=0)return toast('샘물이 없어요. 출석하면 생겨요 💧');pet.spring--;
+  var luckBonus=Math.min(0.35,(pet.luck>0?0.12:0)+0);// 부적 소지 시 좋은 확률↑(사용은 별도)
+  var good=Math.random()<(0.5+luckBonus);
+  if(good){var g=18+Math.floor(Math.random()*22);pet.div=clamp(pet.div+g);pushFx('🌟');
+    surprise(currentSprite(),'🌟 신성한 샘물이었다!','신성이 +'+g+' 올랐어요! 신수에 가까워졌어요.',[{t:'좋아',c:closeOv}]);}
+  else{var d=12+Math.floor(Math.random()*16);pet.div=clamp(pet.div-d);pet.happy=clamp(pet.happy-8);pushFx('☠️');
+    surprise(currentSprite(),'☠️ 독이 든 물이었다…','신성이 -'+d+' 떨어졌어요. 도박은 위험해요!',[{t:'아이고',c:closeOv}]);}
+  afterAct();}
+// 행운의 부적: 다음 샘물 좋은 확률↑ + 즉시 소량 신성
+function luck(){if((pet.luck||0)<=0)return toast('부적이 없어요. 출석하면 생겨요 🍀');pet.luck--;
+  pet.div=clamp(pet.div+6);pushFx('🍀');toast('🍀 행운의 기운! 신성 +6, 다음 샘물 운이 좋아져요');afterAct();}
 
-function hatchClick(){
-  pet.clicks++;pushFx('✨');
-  if(pet.clicks>=3){
-    pet.stage='baby';pet.name='';pet.hunger=70;pet.happy=70;pet.exp=0;
-    save();paint();
-    surprise(SPR.baby,'부화 성공! 🐣','아테나의 아기 올빼미가 태어났어요! 밥 주고 놀아주며 키워보세요.');
-    addDex('baby');
-  }else{toast('알이 흔들려요… ('+pet.clicks+'/3) 톡톡 두드려요!');save();paint();}
-}
-
-/* ===================== 진화 ===================== */
-function checkEvolve(){
-  if(pet.stage==='baby' && pet.exp>=60){
-    pet.stage='adult';
-    // 분기: 방치 많으면 삐침, 행복 평균 높으면 레어, 아니면 일반
-    var kind = pet.neglect>=3 ? 'sulk' : (pet.happy>=72 && pet.neglect===0 ? 'rare':'normal');
-    pet.evolved=kind;
-    var spr = kind==='rare'?SPR.owl_rare:(kind==='sulk'?SPR.owl_sulk:SPR.owl);
-    var title = kind==='rare'?'✨ 빛나는 아테나 올빼미!':(kind==='sulk'?'😔 삐친 올빼미…':'🦉 아테나 올빼미 성체!');
-    var desc = kind==='rare'?'정성껏 돌봐서 레어 진화! 빛나는 신수가 됐어요. 자랑해도 좋아요!':(kind==='sulk'?'조금 외로웠나 봐요. 그래도 곁에 있어줘서 고마워해요.':'무럭무럭 자라 어엿한 성체가 됐어요!');
-    save();paint();
-    surprise(spr,title,desc);
-    addDex('owl_'+kind);
-  }
-}
-function addDex(id){pet.dex=pet.dex||[];if(pet.dex.indexOf(id)<0){pet.dex.push(id);save();}}
-
-/* ===================== UI 페인트 ===================== */
+/* ===== UI ===== */
 function paint(){
-  document.getElementById('vH').textContent=pet.hunger;
-  document.getElementById('vP').textContent=pet.happy;
-  document.getElementById('vG').textContent=Math.min(100,Math.round(pet.stage==='baby'?pet.exp/60*100:(pet.stage==='adult'?100:0)));
-  document.getElementById('bH').style.width=pet.hunger+'%';
-  document.getElementById('bP').style.width=pet.happy+'%';
-  document.getElementById('bG').style.width=(pet.stage==='baby'?Math.min(100,pet.exp/60*100):(pet.stage==='adult'?100:0))+'%';
-  document.getElementById('petName').textContent = pet.stage==='egg'?'신수 알':petTitle();
-  var sb={egg:'🥚 알',baby:'🐣 아기',adult:'🦉 성체'}[pet.stage];
-  document.getElementById('stageBadge').textContent=sb+(pet.evolved==='rare'?' ✨레어':(pet.evolved==='sulk'?' 삐침':''));
-  var days=Math.floor((Date.now()-pet.born)/86400000);
-  document.getElementById('ageTxt').textContent='함께한 지 '+days+'일';
+  document.getElementById('vH').textContent=pet.hunger;document.getElementById('vP').textContent=pet.happy;document.getElementById('vD').textContent=pet.div;
+  document.getElementById('bH').style.width=pet.hunger+'%';document.getElementById('bP').style.width=pet.happy+'%';document.getElementById('bD').style.width=pet.div+'%';
+  document.getElementById('petName').textContent=petName();
+  var sb={egg:'🥚 알',blob:'🫧 덩어리',baby:'🐣 아기',juv:'🌿 청년',adult:'⭐ 성체'}[pet.stage];
+  document.getElementById('stageBadge').textContent=sb;
+  document.getElementById('ageTxt').textContent='함께한 지 '+Math.floor((Date.now()-pet.born)/86400000)+'일';
   document.getElementById('streak').textContent=pet.streak||0;
-  // 출석 도장
-  var ar=document.getElementById('attRow');ar.innerHTML='';
-  for(var i=0;i<7;i++){var s=document.createElement('span');var done=(pet.attendDays||[]).indexOf(i)>=0;s.className=done?'done':'';s.textContent=done?'✓':(i+1);ar.appendChild(s);}
+  document.getElementById('springN').textContent=pet.spring?('×'+pet.spring):'(없음)';
+  document.getElementById('luckN').textContent=pet.luck?('×'+pet.luck):'(없음)';
+  // 단계바
+  var sbEl=document.getElementById('stagebar');var names=['알','덩어리','아기','청년','성체'];
+  sbEl.innerHTML=names.map(function(n,i){return '<span class="'+(i===stageIdx()?'on':'')+'">'+n+'</span>';}).join('');
+  // 출석
+  var ar=document.getElementById('attRow');ar.innerHTML='';for(var i=0;i<7;i++){var s=document.createElement('span');var d=(pet.attendDays||[]).indexOf(i)>=0;s.className=d?'done':'';s.textContent=d?'✓':(i+1);ar.appendChild(s);}
   // 도감
-  var dr=document.getElementById('dexRow');dr.innerHTML='';
-  var slots=[['baby','🐣'],['owl_normal','🦉'],['owl_rare','✨'],['owl_sulk','😔']];
-  slots.forEach(function(sl){var d=document.createElement('div');d.className='slot'+((pet.dex||[]).indexOf(sl[0])>=0?' got':'');d.textContent=(pet.dex||[]).indexOf(sl[0])>=0?sl[1]:'?';dr.appendChild(d);});
-  // 밥 잘 준 상태면 재우기 버튼 라벨 유지
+  var dr=document.getElementById('dexRow');dr.innerHTML='';DEXORDER.forEach(function(pr){var fam=pr[0],pa=pr[1];var a=FAMILY[fam].adults[pa];var id=fam+'_'+pa;var got=(pet.dex||[]).indexOf(id)>=0;
+    var slot=document.createElement('div');slot.className='slot'+(got?' got':'');
+    var c=document.createElement('canvas');c.width=20;c.height=20;var cc=c.getContext('2d');cc.fillStyle='#9fbf6b';cc.fillRect(0,0,20,20);if(got)drawSprite(cc,SPR[a.spr],10,10,1);
+    slot.appendChild(c);var nm=document.createElement('div');nm.className='dn';nm.textContent=got?a.name:'???';slot.appendChild(nm);dr.appendChild(slot);});
+  // 버튼 활성
+  document.getElementById('btnSpring').disabled=!(pet.spring>0)&&pet.stage!=='egg'?false:(pet.spring<=0);
 }
-
-/* ===================== 서프라이즈 오버레이 ===================== */
-var ovc=document.getElementById('ovc'),ovx=ovc.getContext('2d');
-function surprise(spr,title,desc){
-  ovx.fillStyle='#9fbf6b';ovx.fillRect(0,0,24,24);drawSprite(ovx,spr,0,0,1.5);
-  // 확대 렌더
-  var big=document.getElementById('ovc');big.width=24;big.height=24;
-  ovx.imageSmoothingEnabled=false;
-  document.getElementById('ovTitle').textContent=title;
-  document.getElementById('ovDesc').textContent=desc;
-  document.getElementById('ov').classList.add('show');
-  gtag('event','pet_milestone',{title:title});
-}
-document.getElementById('ovGo').onclick=function(){document.getElementById('ov').classList.remove('show');};
-
-/* ===================== 세이브 코드 ===================== */
-document.getElementById('btnCode').onclick=function(){
-  var code=btoa(unescape(encodeURIComponent(JSON.stringify(pet))));
-  var inp=prompt('세이브 코드입니다. 복사해두면 다른 기기에서 불러올 수 있어요.\n\n다른 코드를 붙여넣으면 그 상태로 불러옵니다:',code);
-  if(inp&&inp!==code){try{var p=JSON.parse(decodeURIComponent(escape(atob(inp.trim()))));if(p&&p.stage){pet=p;save();paint();toast('세이브 불러왔어요!');}}catch(e){toast('코드가 올바르지 않아요');}}
-};
-document.getElementById('btnReset').onclick=function(){
-  if(confirm('지금 신수를 두고 새 알부터 다시 시작할까요? (되돌릴 수 없어요)')){var dex=pet.dex||[];pet=freshPet();pet.dex=dex;save();paint();toast('새 알을 받았어요 🥚');}
-};
-
-/* ===================== 토스트 ===================== */
-var toastT;
-function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
-
-/* ===================== 루프 ===================== */
-document.getElementById('btnFeed').onclick=feed;
-document.getElementById('btnPlay').onclick=play;
-document.getElementById('btnPet').onclick=petAct;
-document.getElementById('btnSleep').onclick=sleepAct;
-cv.onclick=function(){if(pet.stage==='egg')hatchClick();else petAct();};
-
+/* ===== 오버레이 ===== */
+var ovc=document.getElementById('ovc');
+function surprise(spr,title,desc,btns){var c=document.getElementById('ovc');c.width=24;c.height=24;var g=c.getContext('2d');g.fillStyle='#9fbf6b';g.fillRect(0,0,24,24);drawSprite(g,spr,12,12,1);
+  document.getElementById('ovTitle').textContent=title;document.getElementById('ovDesc').textContent=desc;
+  var bw=document.getElementById('ovBtns');bw.innerHTML='';(btns||[{t:'확인',c:closeOv}]).forEach(function(b,i){var el=document.createElement('button');el.className=i===0?'go':'alt';el.textContent=b.t;el.onclick=b.c||closeOv;bw.appendChild(el);});
+  document.getElementById('ov').classList.add('show');}
+function closeOv(){document.getElementById('ov').classList.remove('show');}
+/* ===== 세이브코드/리셋 ===== */
+document.getElementById('btnCode').onclick=function(){var code=btoa(unescape(encodeURIComponent(JSON.stringify(pet))));var inp=prompt('세이브 코드예요. 복사해두면 다른 기기에서 불러올 수 있어요.\n다른 코드를 붙여넣으면 그 상태로 불러옵니다:',code);if(inp&&inp!==code){try{var p=JSON.parse(decodeURIComponent(escape(atob(inp.trim()))));if(p&&p.stage){pet=p;save();paint();toast('불러왔어요!');}}catch(e){toast('코드가 올바르지 않아요');}}};
+document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터 다시 시작할까요? (도감은 유지)')){var dex=pet.dex||[];pet=fresh();pet.dex=dex;save();paint();toast('새 알을 받았어요 🥚');}};
+/* ===== 토스트 ===== */
+var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
+/* ===== 바인딩 ===== */
+document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petAct;document.getElementById('btnSleep').onclick=sleepAct;
+document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
+cv.onclick=function(){if(pet.stage==='egg')hatch();else petAct();};
 load();paint();
-setInterval(function(){bob+=0.15;tick++;
-  // 실시간 완만 감소(1분마다 배고픔-1)
-  if(tick%600===0 && pet.stage!=='egg' && !sleeping){pet.hunger=clamp(pet.hunger-1);if(tick%1800===0)pet.happy=clamp(pet.happy-1);save();paint();}
-  render();
-},100);
+setInterval(function(){bob+=0.15;tick++;if(tick%600===0&&pet.stage!=='egg'&&!sleeping){pet.hunger=clamp(pet.hunger-1);if(tick%1800===0)pet.happy=clamp(pet.happy-1);if(pet.stage==='blob'||pet.stage==='baby')gainExp(1);save();paint();}render();},100);
 render();
 </script>
 </body>
