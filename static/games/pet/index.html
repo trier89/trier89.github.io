@@ -171,6 +171,7 @@ function drawPet(ctx,key,cxp,cyp,size,flip,scale){var im=IMG[key];scale=scale||1
 function render(){lcdClear();
   if(pet.stage==='gone'){cx.textAlign='center';cx.font='28px monospace';cx.fillStyle='#2b3a1a';cx.fillText('🪹',PXW/2,PXH/2-2);cx.font='9px monospace';cx.fillText('둥지가 비었어요',PXW/2,PXH/2+22);cx.fillText('아래 🥚 새 알을 받아보세요',PXW/2,PXH/2+34);cx.textAlign='left';return;}
   var key=curImgKey();var size=Math.min(58,PXH-48);
+  if(key==='snake_python')size=Math.round(size*0.8); // 통통 구렁이만 조금 작게(사장님)
   var active=(pet.stage!=='egg'&&pet.stage!=='dead');
   var scale=1,offX=(active?walkX:0),offY=Math.round(Math.sin(bob)*2),flip=walkDir;
   // 생기있는 아이들 이동(액션 중 아닐 때)
