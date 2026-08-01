@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "🔥 Day 02 — 비열과 열량"
 date: 2026-04-05
 description: "공조냉동 기초 Day 2"

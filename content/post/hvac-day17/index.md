@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 date: 2026-04-24
 description: "공조냉동 기초 Day 17"

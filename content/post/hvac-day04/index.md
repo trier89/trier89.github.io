@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "🌀 Day 04 — 열전달 3가지 (전도, 대류, 복사)"
 date: 2026-04-07
 description: "공조냉동 기초 Day 4"

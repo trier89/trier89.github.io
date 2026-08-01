@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "🌡️ Day 01 — 온도와 열"
 date: 2026-04-04
 description: "공조냉동 기초 Day 1"

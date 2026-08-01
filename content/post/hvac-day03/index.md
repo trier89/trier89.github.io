@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "💧 Day 03 — 현열과 잠열"
 date: 2026-04-06
 description: "공조냉동 기초 Day 3"

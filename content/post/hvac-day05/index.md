@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "🧱 Day 05 — 열관류와 U값"
 date: 2026-04-08
 description: "공조냉동 기초 Day 5"

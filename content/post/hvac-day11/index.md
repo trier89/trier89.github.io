@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "HVAC 열역학 스터디 — Day 11"
 date: 2026-04-15
 description: "공조냉동 기초 Day 11"
