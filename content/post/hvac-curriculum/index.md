@@ -2,7 +2,6 @@
 title: "공조냉동 기초 - 한 달 커리큘럼"
 date: 2026-04-03
 description: "공조냉동기술사 준비를 위한 기초 열역학 + 냉동 사이클 한 달 학습 계획"
-draft: true
 categories:
   - 프로젝트
 tags:

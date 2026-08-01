@@ -2,7 +2,6 @@
 title: "냉동기 성능 지표 및 변수 정리"
 date: 2026-04-02
 description: "냉동기 성능을 좌우하는 지표(COP, IPLV, kW/RT)와 관련 변수 정리"
-draft: true
 categories:
   - 프로젝트
 tags:
