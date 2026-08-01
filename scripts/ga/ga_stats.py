@@ -21,11 +21,13 @@ def build_stats():
     today = run_report(svc, [], ["activeUsers", "screenPageViews"], "today", "today", 1)
     yday = run_report(svc, [], ["activeUsers", "newUsers", "screenPageViews", "sessions"], "yesterday", "yesterday", 1)
     total = run_report(svc, [], ["activeUsers"], SITE_START, "today", 1)
+    total_sess = run_report(svc, [], ["sessions"], SITE_START, "today", 1)  # 누적 방문 횟수(재방문마다 증가)
     pages = run_report(svc, ["pageTitle"], ["screenPageViews", "userEngagementDuration"], "7daysAgo", "yesterday", 12)
 
     tv = today[0][1] if today else ["0", "0"]
     yv = yday[0][1] if yday else ["0", "0", "0", "0"]
     tot = _i(total[0][1][0]) if total else 0
+    tot_visits = _i(total_sess[0][1][0]) if total_sess else 0
 
     plist = []
     for d, m in pages:
@@ -36,7 +38,7 @@ def build_stats():
     top_dwell = sorted([p for p in plist if p["views"] >= 3], key=lambda x: -x["avg_sec"])[:5]
 
     stats = {
-        "today": _i(tv[0]), "today_pv": _i(tv[1]), "total": tot,
+        "today": _i(tv[0]), "today_pv": _i(tv[1]), "total": tot, "total_visits": tot_visits,
         "yesterday": {"users": _i(yv[0]), "new": _i(yv[1]), "pv": _i(yv[2]), "sessions": _i(yv[3])},
         "top_views": top_views, "top_dwell": top_dwell,
         "updated": datetime.datetime.now(KST).strftime("%Y-%m-%d %H:%M"),

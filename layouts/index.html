@@ -172,7 +172,8 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   fetch('/stats.json?h='+Math.floor(Date.now()/3600000)).then(function(r){return r.json();}).then(function(s){
     var el=document.getElementById('visitors');if(!el)return;
     el.innerHTML='<span>👥 오늘 <b>'+(s.today||0)+'</b>명</span><span class="vsep">·</span>'
-      +'<span>누적 <b>'+(s.total||0)+'</b>명 방문</span>'
+      +'<span>누적 방문 <b>'+((s.total_visits!=null?s.total_visits:s.total)||0)+'</b>회</span>'
+      +'<span class="vsep">·</span><span>순 방문자 '+(s.total||0)+'명</span>'
       +(s.yesterday?'<span class="vsep">·</span><span>어제 '+s.yesterday.users+'명</span>':'');
     el.style.display='flex';
   }).catch(function(){});
