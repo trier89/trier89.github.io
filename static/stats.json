@@ -2,7 +2,7 @@
  "today": 0,
  "today_pv": 0,
  "total": 99,
- "total_visits": 269,
+ "total_visits": 270,
  "yesterday": {
   "users": 3,
   "new": 0,
@@ -12,14 +12,14 @@
  "top_views": [
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 115,
-   "eng": 1002,
+   "views": 116,
+   "eng": 1004,
    "avg_sec": 9
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 112,
-   "eng": 1299,
+   "views": 113,
+   "eng": 1303,
    "avg_sec": 12
   },
   {
@@ -35,18 +35,18 @@
    "avg_sec": 66
   },
   {
-   "title": "심리테스트",
+   "title": "무료 IQ 테스트 — 15분 만에 알아보는 내 지능지수",
    "views": 21,
-   "eng": 50,
-   "avg_sec": 2
+   "eng": 3329,
+   "avg_sec": 159
   }
  ],
  "top_dwell": [
   {
    "title": "무료 IQ 테스트 — 15분 만에 알아보는 내 지능지수",
-   "views": 20,
+   "views": 21,
    "eng": 3329,
-   "avg_sec": 166
+   "avg_sec": 159
   },
   {
    "title": "점프 러너 게임 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -73,5 +73,5 @@
    "avg_sec": 53
   }
  ],
- "updated": "2026-08-03 01:10"
+ "updated": "2026-08-03 02:10"
 }
