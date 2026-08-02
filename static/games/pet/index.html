@@ -404,7 +404,7 @@ function closeOv(){document.getElementById('ov').classList.remove('show');}
 document.getElementById('btnCode').onclick=function(){var code=btoa(unescape(encodeURIComponent(JSON.stringify(pet))));var inp=prompt('세이브 코드예요. 복사해두면 다른 기기에서 불러와요.\n다른 코드 붙여넣으면 그 상태로 불러옵니다:',code);if(inp&&inp!==code){try{var p=JSON.parse(decodeURIComponent(escape(atob(inp.trim()))));if(p&&p.stage){pet=p;save();paint();toast('불러왔어요!');}}catch(e){toast('코드가 올바르지 않아요');}}};
 document.getElementById('btnReset').onclick=function(){if(confirm('새 알부터 다시 시작할까요? (도감 유지)'))resetPet();};
 var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
-document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnPoop').onclick=cleanPoop;document.getElementById('btnSleep').onclick=sleepAct;document.getElementById('btnSpring').onclick=spring;document.getElementById('btnLuck').onclick=luck;
+document.getElementById('btnFeed').onclick=feed;document.getElementById('btnPlay').onclick=play;document.getElementById('btnPet').onclick=petA;document.getElementById('btnClean').onclick=clean;document.getElementById('btnPoop').onclick=cleanPoop;document.getElementById('btnSleep').onclick=sleepAct;
 document.getElementById('mgQuit').onclick=endGame;
 document.getElementById('btnBag').onclick=openBag;document.getElementById('bagClose').onclick=function(){document.getElementById('bag').classList.remove('show');};
 cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
