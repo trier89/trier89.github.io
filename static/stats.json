@@ -6,14 +6,14 @@
  "yesterday": {
   "users": 3,
   "new": 0,
-  "pv": 38,
+  "pv": 39,
   "sessions": 6
  },
  "top_views": [
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 116,
-   "eng": 1004,
+   "views": 117,
+   "eng": 1008,
    "avg_sec": 9
   },
   {
@@ -73,5 +73,5 @@
    "avg_sec": 53
   }
  ],
- "updated": "2026-08-03 04:11"
+ "updated": "2026-08-03 05:11"
 }
