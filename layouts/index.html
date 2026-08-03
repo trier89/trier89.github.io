@@ -76,8 +76,7 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   (function(){var el=document.getElementById('tk-txt'),box=document.getElementById('pf-ticker');if(!el)return;
     fetch('/updates.json?v='+Date.now()).then(function(r){return r.json();}).then(function(list){
       if(!list||!list.length){if(box)box.style.display='none';return;}
-      var i=0;function show(){var u=list[i%list.length];el.style.opacity=0;setTimeout(function(){el.textContent=(u.date?u.date.slice(5).replace('-','.')+' · ':'')+u.text;el.style.opacity=1;},450);i++;}
-      show();if(list.length>1)setInterval(show,4200);
+      var u=list[0];el.textContent=(u.date?u.date.slice(5).replace('-','.')+' · ':'')+u.text;el.style.opacity=1;
     }).catch(function(){if(box)box.style.display='none';});})();
   </script>
   <div class="visitors" id="visitors" style="display:none;"></div>
