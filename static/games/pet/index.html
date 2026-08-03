@@ -409,7 +409,7 @@ document.getElementById('mgQuit').onclick=endGame;
 document.getElementById('btnBag').onclick=openBag;document.getElementById('bagClose').onclick=function(){document.getElementById('bag').classList.remove('show');};
 cv.onclick=function(){if(pet.stage==='egg')hatch();else if(alive())petA();};
 /* ===== 테스트 모드 (?test) ===== */
-if(true){/* 개발 중 임시: 항상 노출 (완성 시 /test/i.test(location.search) 로 되돌림) */var db=document.getElementById('devbar');db.style.display='block';
+if(/test/i.test(location.search)){/* 개발자 테스트바: ?test 파라미터 있을 때만 노출 */var db=document.getElementById('devbar');db.style.display='block';
   document.getElementById('dNext').onclick=function(){
     if(pet.stage==='dead'||pet.stage==='adult'){resetPet();toast('새 알로 리셋');return;}
     if(pet.stage==='egg'){pet.clicks=3;hatch();return;}
