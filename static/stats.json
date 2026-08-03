@@ -1,44 +1,44 @@
 {
- "today": 10,
- "today_pv": 49,
+ "today": 0,
+ "today_pv": 0,
  "total": 105,
  "total_visits": 287,
  "yesterday": {
-  "users": 3,
-  "new": 0,
-  "pv": 41,
-  "sessions": 6
+  "users": 10,
+  "new": 4,
+  "pv": 49,
+  "sessions": 17
  },
  "top_views": [
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 118,
-   "eng": 1008,
-   "avg_sec": 9
+   "views": 124,
+   "eng": 1047,
+   "avg_sec": 8
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 113,
-   "eng": 1303,
+   "views": 115,
+   "eng": 1369,
    "avg_sec": 12
   },
   {
-   "title": "리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 39,
-   "eng": 2035,
-   "avg_sec": 52
-  },
-  {
    "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 35,
-   "eng": 2317,
-   "avg_sec": 66
+   "views": 41,
+   "eng": 2447,
+   "avg_sec": 60
   },
   {
-   "title": "무료 IQ 테스트 — 15분 만에 알아보는 내 지능지수",
-   "views": 21,
-   "eng": 3329,
-   "avg_sec": 159
+   "title": "리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 40,
+   "eng": 2035,
+   "avg_sec": 51
+  },
+  {
+   "title": "심리테스트",
+   "views": 22,
+   "eng": 47,
+   "avg_sec": 2
   }
  ],
  "top_dwell": [
@@ -56,9 +56,9 @@
   },
   {
    "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 35,
-   "eng": 2317,
-   "avg_sec": 66
+   "views": 41,
+   "eng": 2447,
+   "avg_sec": 60
   },
   {
    "title": "숫자야구 — 에디슨의 게임방 | 계획대로 느긋하게",
@@ -73,5 +73,5 @@
    "avg_sec": 53
   }
  ],
- "updated": "2026-08-03 23:13"
+ "updated": "2026-08-04 00:13"
 }
