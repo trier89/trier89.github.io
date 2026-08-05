@@ -75,7 +75,6 @@ $('cl-go').onclick=function(){
    +row('완만한 감량 (−300)', Math.round(tdee-300).toLocaleString()+' kcal')
    +row('증량 (+400)', Math.round(tdee+400).toLocaleString()+' kcal','#1d4ed8')
    +row('권장 단백질 (체중×1.6g)', Math.round(w*1.6)+' g');
-
   // 감량 목표 플랜
   var goal=parseFloat($('cl-goal').value)||0, weeks=parseFloat($('cl-weeks').value)||0;
   if(goal>0 && weeks>0){
@@ -94,7 +93,6 @@ $('cl-go').onclick=function(){
     else { warn='✅ 건강한 감량 페이스예요(주 0.5~1% 권장 범위). 단백질·근력운동 챙기면 지방 위주로 빠져요.'; wc='#166534'; }
     $('cl-goalwarn').innerHTML=warn; $('cl-goalwarn').style.color=wc;
     $('cl-goalbox').style.display='block';
-
     // 매크로 배분(다이어트 목표칼로리 기준): 단백질 체중×1.8g, 지방 25%, 나머지 탄수
     var dietCal=Math.max(target, Math.round(bmr));   // BMR 밑으론 안 내려가게 표시
     var pg=Math.round(w*1.8), pk=pg*4;
@@ -107,7 +105,6 @@ $('cl-go').onclick=function(){
      +mrow('탄수화물 (나머지)', cg, ck, '#2563eb');
     $('cl-macro').style.display='block';
   } else { $('cl-goalbox').style.display='none'; $('cl-macro').style.display='none'; }
-
   $('cl-out').style.display='block';
 };
 })();
