@@ -1,25 +1,25 @@
 {
  "today": 1,
- "today_pv": 4,
+ "today_pv": 10,
  "total": 107,
  "total_visits": 299,
  "yesterday": {
   "users": 4,
-  "new": 1,
-  "pv": 27,
+  "new": 2,
+  "pv": 32,
   "sessions": 10
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 99,
-   "eng": 1543,
-   "avg_sec": 16
+   "views": 101,
+   "eng": 1562,
+   "avg_sec": 15
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 77,
-   "eng": 974,
+   "views": 78,
+   "eng": 1018,
    "avg_sec": 13
   },
   {
@@ -35,10 +35,10 @@
    "avg_sec": 159
   },
   {
-   "title": "리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 17,
-   "eng": 653,
-   "avg_sec": 38
+   "title": "심리테스트",
+   "views": 18,
+   "eng": 41,
+   "avg_sec": 2
   }
  ],
  "top_dwell": [
@@ -73,5 +73,5 @@
    "avg_sec": 53
   }
  ],
- "updated": "2026-08-05 15:03"
+ "updated": "2026-08-05 16:03"
 }
