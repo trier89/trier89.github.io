@@ -1,32 +1,32 @@
 {
- "today": 1,
- "today_pv": 13,
+ "today": 0,
+ "today_pv": 0,
  "total": 107,
  "total_visits": 300,
  "yesterday": {
-  "users": 4,
-  "new": 2,
-  "pv": 32,
-  "sessions": 10
+  "users": 1,
+  "new": 0,
+  "pv": 13,
+  "sessions": 3
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 101,
-   "eng": 1562,
-   "avg_sec": 15
+   "views": 87,
+   "eng": 798,
+   "avg_sec": 9
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 78,
-   "eng": 1018,
-   "avg_sec": 13
+   "views": 51,
+   "eng": 536,
+   "avg_sec": 11
   },
   {
    "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 42,
-   "eng": 2447,
-   "avg_sec": 58
+   "views": 43,
+   "eng": 2469,
+   "avg_sec": 57
   },
   {
    "title": "무료 IQ 테스트 — 15분 만에 알아보는 내 지능지수",
@@ -36,8 +36,8 @@
   },
   {
    "title": "심리테스트",
-   "views": 18,
-   "eng": 41,
+   "views": 16,
+   "eng": 39,
    "avg_sec": 2
   }
  ],
@@ -50,28 +50,28 @@
   },
   {
    "title": "지뢰찾기 — 에디슨의 게임방 | 계획대로 느긋하게",
-   "views": 9,
-   "eng": 1025,
-   "avg_sec": 114
-  },
-  {
-   "title": "수박게임 — 에디슨의 게임방 | 계획대로 느긋하게",
-   "views": 10,
-   "eng": 696,
-   "avg_sec": 70
+   "views": 5,
+   "eng": 518,
+   "avg_sec": 104
   },
   {
    "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 42,
-   "eng": 2447,
-   "avg_sec": 58
+   "views": 43,
+   "eng": 2469,
+   "avg_sec": 57
   },
   {
-   "title": "로또 번호 생성기 — 확률 기반 추천 5게임",
-   "views": 13,
-   "eng": 689,
-   "avg_sec": 53
+   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
+   "views": 5,
+   "eng": 238,
+   "avg_sec": 48
+  },
+  {
+   "title": "리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 10,
+   "eng": 435,
+   "avg_sec": 44
   }
  ],
- "updated": "2026-08-05 23:04"
+ "updated": "2026-08-06 00:04"
 }
