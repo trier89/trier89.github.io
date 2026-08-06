@@ -6,13 +6,13 @@
  "yesterday": {
   "users": 1,
   "new": 0,
-  "pv": 13,
+  "pv": 14,
   "sessions": 3
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 87,
+   "views": 88,
    "eng": 798,
    "avg_sec": 9
   },
@@ -73,5 +73,5 @@
    "avg_sec": 44
   }
  ],
- "updated": "2026-08-06 10:05"
+ "updated": "2026-08-06 11:06"
 }
