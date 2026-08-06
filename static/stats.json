@@ -2,25 +2,25 @@
  "today": 0,
  "today_pv": 0,
  "total": 109,
- "total_visits": 305,
+ "total_visits": 306,
  "yesterday": {
-  "users": 3,
+  "users": 4,
   "new": 2,
-  "pv": 6,
-  "sessions": 5
+  "pv": 8,
+  "sessions": 6
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 86,
-   "eng": 767,
+   "views": 87,
+   "eng": 781,
    "avg_sec": 9
   },
   {
    "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 43,
-   "eng": 2469,
-   "avg_sec": 57
+   "views": 44,
+   "eng": 2601,
+   "avg_sec": 59
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -50,9 +50,9 @@
   },
   {
    "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 43,
-   "eng": 2469,
-   "avg_sec": 57
+   "views": 44,
+   "eng": 2601,
+   "avg_sec": 59
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
@@ -73,5 +73,5 @@
    "avg_sec": 38
   }
  ],
- "updated": "2026-08-07 01:07"
+ "updated": "2026-08-07 02:07"
 }
