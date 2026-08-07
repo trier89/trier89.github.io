@@ -20,18 +20,23 @@ const lineColor=l=>LINE_COLORS[l]||'#888';
 
 // 화장실 카테고리 색상
 const CAT={
- station:{c:'#2f7de1',emoji:'🚇',label:'지하철역'},
- linked:{c:'#12b5cb',emoji:'🔵',label:'지하철 연결'},
- public:{c:'#2f9e6b',emoji:'🟢',label:'야외 공공'},
- starbucks:{c:'#00704A',emoji:'☕',label:'스타벅스'},
- dept:{c:'#c2185b',emoji:'🏬',label:'백화점'},
- mart:{c:'#e67e22',emoji:'🛒',label:'대형마트'},
- mine:{c:'#8a4fd6',emoji:'🔑',label:'내 등록'}
+ station:{c:'#1976D2',emoji:'🚇',mk:'🚇',label:'지하철역'},
+ linked:{c:'#00BCD4',emoji:'🔵',mk:'🚻',label:'지하철 연결'},
+ public:{c:'#43A047',emoji:'🟢',mk:'🚻',label:'야외 공공'},
+ starbucks:{c:'#00704A',emoji:'☕',mk:'☕',label:'스타벅스'},
+ dept:{c:'#D81B60',emoji:'🏬',mk:'🏬',label:'백화점'},
+ mart:{c:'#FB8C00',emoji:'🛒',mk:'🛒',label:'대형마트'},
+ mine:{c:'#8E24AA',emoji:'🔑',mk:'🔑',label:'내 등록'}
 };
 const toiletCat=p=>/역|지하상가|지하도|지하철|환승|스테이션/.test((p.nm||'')+(p.addr||''))?'linked':'public';
-// 프리미엄 카테고리 핀 마커(앱 아이콘 통일)
-const MARKER_ICONS={};
-['station','linked','public','starbucks','dept','mart','mine'].forEach(function(k){MARKER_ICONS[k]=L.icon({iconUrl:'marker-'+k+'.png',iconSize:[36,36],iconAnchor:[18,34],tooltipAnchor:[0,-30]});});
+// 카테고리 핀 마커 = 색 + 이모지 글리프(색 겹쳐도 구분됨)
+const _pinIcons={};
+function catPin(cat){
+ if(_pinIcons[cat])return _pinIcons[cat];
+ const c=CAT[cat]||CAT.public;
+ _pinIcons[cat]=L.divIcon({html:'<div class="pin catpin" style="background:'+c.c+'"><b>'+(c.mk||'🚻')+'</b></div>',className:'',iconSize:[32,32],iconAnchor:[16,30]});
+ return _pinIcons[cat];
+}
 let publicToilets=null, _ptLoad=null; // 지연 로드(무거운 파일)
 function loadPublic(){
  if(publicToilets)return Promise.resolve(publicToilets);
@@ -83,9 +88,15 @@ function drawNetwork(layer,opts){
  lineEdges().forEach(o=>L.polyline(o.seg,{color:lineColor(o.line),weight:opts.weight||4,opacity:.85,lineJoin:'round'}).addTo(layer));
  DATA.stations.forEach(st=>{
   if(!st.lat)return;
-  const mk=L.circleMarker([st.lat,st.lng],{radius:opts.radius||5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1})
-   .on('click',()=>showStation(st));
-  if(opts.labels)mk.bindTooltip(nm(st),{permanent:true,direction:'right',offset:[4,0],className:'net-lbl'});
+  let mk;
+  if(opts.gate){ // 게이트 안/밖 화장실 색구분(둘다=반반)
+   const hi=(st.toilets||[]).some(x=>x.gate==='in'), ho=(st.toilets||[]).some(x=>x.gate==='out');
+   const bg=(hi&&ho)?'linear-gradient(90deg,#2f9e6b 50%,#e08a2f 50%)':hi?'#2f9e6b':ho?'#e08a2f':'#b0b6bd';
+   mk=L.marker([st.lat,st.lng],{icon:L.divIcon({html:'<div style="width:14px;height:14px;border-radius:50%;background:'+bg+';border:2px solid #fff;box-shadow:0 0 0 1.5px '+lineColor(st.line)+'"></div>',className:'',iconSize:[14,14],iconAnchor:[7,7]})}).on('click',()=>showStation(st));
+  } else {
+   mk=L.circleMarker([st.lat,st.lng],{radius:opts.radius||5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1}).on('click',()=>showStation(st));
+  }
+  if(opts.labels)mk.bindTooltip(nm(st),{permanent:true,direction:'right',offset:[6,0],className:'net-lbl'});
   else mk.bindTooltip(nm(st),{direction:'top',offset:[0,-6],className:'st-tip'});
   mk.addTo(layer);
  });
@@ -129,7 +140,15 @@ function renderLine(){
   netLayer=L.layerGroup().addTo(netMap);
  }
  netLayer.clearLayers();
- drawNetwork(netLayer,{labels:true,radius:5});
+ drawNetwork(netLayer,{labels:true,radius:5,gate:true});
+ // 게이트 범례
+ let lg=document.getElementById('gate-legend');
+ if(!lg){lg=document.createElement('div');lg.id='gate-legend';document.getElementById('v-line').appendChild(lg);}
+ lg.innerHTML='<b>화장실 위치</b>'
+  +'<div class="gl"><i style="background:#2f9e6b"></i>게이트 안</div>'
+  +'<div class="gl"><i style="background:#e08a2f"></i>게이트 밖</div>'
+  +'<div class="gl"><i style="background:linear-gradient(90deg,#2f9e6b 50%,#e08a2f 50%)"></i>둘 다</div>'
+  +'<div class="gl"><i style="background:#b0b6bd"></i>정보없음</div>';
  setTimeout(()=>{netMap.invalidateSize();
   const pts=DATA.stations.filter(s=>s.lat).map(s=>[s.lat,s.lng]);
   if(pts.length)netMap.fitBounds(pts,{padding:[30,30]});
@@ -211,8 +230,33 @@ function addModal(){
 }
 $('#addBtn').onclick=addModal;
 
-/* 📍 내 주변 화장실 (현위치 기준 가까운 순) */
+/* 근처 화장실 렌더 (GPS 또는 지도중심 기준) */
 let nearLayer=L.layerGroup().addTo(map), userMk=null;
+function gatherCands(la,lo){
+ const cand=[];
+ DATA.stations.forEach(s=>{if(s.lat)cand.push({cat:'station',name:nm(s)+' '+s.line+t('lineNo'),lat:s.lat,lng:s.lng,d:kmDist(la,lo,s.lat,s.lng),st:s});});
+ publicToilets&&publicToilets.forEach(p=>cand.push({cat:p.cat||'public',name:p.nm||'공중화장실',lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr,hr:p.hr}));
+ (places||[]).forEach(p=>cand.push({cat:p.cat,name:p.nm,lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr}));
+ mine().forEach(m=>cand.push({cat:'mine',name:m.name||'내 화장실',lat:m.lat,lng:m.lng,d:kmDist(la,lo,m.lat,m.lng),mineObj:m}));
+ return cand;
+}
+function renderNearby(la,lo,fromMap){
+ let list=gatherCands(la,lo);
+ if(fromMap){const b=map.getBounds(); list=list.filter(c=>b.contains([c.lat,c.lng]));}
+ list.sort((a,b)=>a.d-b.d);
+ const near=list.slice(0,fromMap?80:30); window._near=near;
+ nearLayer.clearLayers();
+ near.forEach(c=>{L.marker([c.lat,c.lng],{icon:catPin(c.cat)}).bindTooltip(c.name,{direction:'top'}).on('click',()=>showToiletInfo(c)).addTo(nearLayer);});
+ showLegend(true);
+ const rows=near.slice(0,20).map((c,i)=>{const dist=c.d<1?Math.round(c.d*1000)+'m':c.d.toFixed(1)+'km';
+  return `<div class="card" style="cursor:pointer" onclick="showToiletInfo(window._near[${i}])">
+    <div class="row"><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${CAT[c.cat].label}</span><b style="margin-left:auto;color:var(--accent)">${dist}</b></div>
+    <div style="font-weight:700;margin-top:4px">${c.name}</div>${c.addr?`<div class="hint">${c.addr}</div>`:''}
+    <div class="hint" style="color:var(--accent);margin-top:4px">탭하면 정보·별점·경로 ›</div></div>`;}).join('');
+ const tip=TIPS[Math.floor(Math.abs(la*1000+lo*1000))%TIPS.length];
+ const tipCard=`<div class="nudge" style="cursor:pointer" onclick="showTips()">💡 ${tip} <span style="color:var(--accent);font-weight:700">팁 더보기 ›</span></div>`;
+ openSheet(`<div class="row"><h2>${fromMap?'🗺 이 지역 화장실':'📍 내 주변 화장실'}</h2></div><p class="hint">${fromMap?'현재 화면 안':'가까운 순'} · ${near.length}곳</p>${tipCard}${rows}`);
+}
 $('#nearBtn').onclick=()=>{
  if(!navigator.geolocation){showToast('위치 기능을 쓸 수 없어요','',null,3000);return;}
  $('#nearBtn').textContent='⏳';
@@ -221,33 +265,23 @@ $('#nearBtn').onclick=()=>{
   loadPublic(), loadPlaces()
  ]).then(([pos])=>{
   $('#nearBtn').textContent='📍'; go('map');
-  const la=pos.coords.latitude, lo=pos.coords.longitude;
-  lastUserPos=[la,lo];
+  const la=pos.coords.latitude, lo=pos.coords.longitude; lastUserPos=[la,lo];
   if(userMk)userMk.remove();
   userMk=L.marker([la,lo],{icon:L.divIcon({html:'<div style="width:16px;height:16px;border-radius:50%;background:#e0392f;border:3px solid #fff;box-shadow:0 0 0 4px rgba(224,57,47,.3)"></div>',className:'',iconSize:[16,16],iconAnchor:[8,8]})}).addTo(map);
-  const cand=[];
-  DATA.stations.forEach(s=>{if(s.lat)cand.push({cat:'station',name:nm(s)+' '+s.line+t('lineNo'),lat:s.lat,lng:s.lng,d:kmDist(la,lo,s.lat,s.lng),st:s});});
-  publicToilets.forEach(p=>cand.push({cat:p.cat||'public',name:p.nm||'공중화장실',lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr,hr:p.hr}));
-  (places||[]).forEach(p=>cand.push({cat:p.cat,name:p.nm,lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr}));
-  mine().forEach(m=>cand.push({cat:'mine',name:m.name||'내 화장실',lat:m.lat,lng:m.lng,d:kmDist(la,lo,m.lat,m.lng),mineObj:m}));
-  cand.sort((a,b)=>a.d-b.d);
-  const near=cand.slice(0,30); window._near=near;
-  nearLayer.clearLayers();
-  near.forEach((c,i)=>{
-   L.marker([c.lat,c.lng],{icon:MARKER_ICONS[c.cat]||MARKER_ICONS.public})
-    .bindTooltip(c.name,{direction:'top'}).on('click',()=>showToiletInfo(c)).addTo(nearLayer);});
-  map.setView([la,lo],16);
-  showLegend(true);
-  const rows=near.slice(0,15).map((c,i)=>{const dist=c.d<1?Math.round(c.d*1000)+'m':c.d.toFixed(1)+'km';
-   return `<div class="card" style="cursor:pointer" onclick="showToiletInfo(window._near[${i}])">
-     <div class="row"><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${CAT[c.cat].label}</span><b style="margin-left:auto;color:var(--accent)">${dist}</b></div>
-     <div style="font-weight:700;margin-top:4px">${c.name}</div>${c.addr?`<div class="hint">${c.addr}</div>`:''}
-     <div class="hint" style="color:var(--accent);margin-top:4px">탭하면 정보·별점·경로 ›</div></div>`;}).join('');
-  const tip=TIPS[Math.floor((la*1000+lo*1000))%TIPS.length];
-  const tipCard=`<div class="nudge" style="cursor:pointer" onclick="showTips()">💡 ${tip} <span style="color:var(--accent);font-weight:700">팁 더보기 ›</span></div>`;
-  openSheet(`<div class="row"><h2>📍 내 주변 화장실</h2></div><p class="hint">가까운 순 · ${near.length}곳</p>${tipCard}${rows}`);
+  map.setView([la,lo],16); renderNearby(la,lo,false); $('#areaBtn').classList.remove('on');
  }).catch(()=>{$('#nearBtn').textContent='📍';showToast('위치 권한을 허용해주세요','',null,3500);});
 };
+/* 🗺 이 지역 화장실 보기 (지도 이동 후) */
+$('#areaBtn').onclick=()=>{
+ $('#areaBtn').classList.remove('on');
+ Promise.all([loadPublic(),loadPlaces()]).then(()=>{const c=map.getCenter();renderNearby(c.lat,c.lng,true);});
+};
+let _moveT=null;
+map.on('moveend',()=>{
+ if(!document.querySelector('#v-map').classList.contains('on'))return;
+ if(map.getZoom()<14)return;
+ clearTimeout(_moveT);_moveT=setTimeout(()=>{$('#areaBtn').classList.add('on');},250);
+});
 /* 화장실 정보 시트(카테고리별) + 인앱 도보 경로(OSRM) */
 let lastUserPos=null;
 let routeLayer=L.layerGroup().addTo(map);
@@ -277,7 +311,8 @@ function routeTo(lat,lng,name){
    L.polyline(coords,{color:'#e0392f',weight:6,opacity:.85,lineJoin:'round'}).addTo(routeLayer);
    L.circleMarker([ula,ulo],{radius:7,color:'#fff',weight:3,fillColor:'#e0392f',fillOpacity:1}).addTo(routeLayer);
    go('map'); closeSheet(); map.fitBounds(coords,{padding:[70,70]});
-   const mins=Math.max(1,Math.round(rt.duration/60)), dist=rt.distance<1000?Math.round(rt.distance)+'m':(rt.distance/1000).toFixed(1)+'km';
+   // OSRM 공개서버는 도보요청에도 차량속도 반환 → 거리로 도보시간 직접계산(약 4.5km/h=75m/분)
+   const mins=Math.max(1,Math.round(rt.distance/75)), dist=rt.distance<1000?Math.round(rt.distance)+'m':(rt.distance/1000).toFixed(1)+'km';
    showToast(`🚶 ${name} · 도보 ${dist} 약 ${mins}분`, '경로 지우기', ()=>routeLayer.clearLayers(), 9000);
   }).catch(()=>showToast('경로 요청 실패','',null,3000));
 }
@@ -339,7 +374,8 @@ function doSearch(q){
  if(!q){suggEl.classList.remove('on');suggEl.innerHTML='';return;}
  const seen={},res=[];
  for(const s of DATA.stations){
-  if((s.name||'').toLowerCase().includes(q)){const k=s.name+'|'+s.line;if(!seen[k]){seen[k]=1;res.push(s);}}
+  const hay=((s.name||'')+' '+(s.name_en||'')+' '+(s.name_ja||'')+' '+(s.name_zh||'')).toLowerCase();
+  if(hay.includes(q)){const k=s.name+'|'+s.line;if(!seen[k]){seen[k]=1;res.push(s);}}
   if(res.length>=12)break;
  }
  if(!res.length){suggEl.innerHTML='<div class="sg" style="color:#9ca3af">검색 결과 없음</div>';suggEl.classList.add('on');return;}
