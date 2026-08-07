@@ -17,29 +17,60 @@ const pinLayer=L.layerGroup().addTo(map);
 
 const LINE_COLORS={'1':'#0052A4','2':'#00A84D','3':'#EF7C1C','4':'#00A5DE','5':'#996CAC','6':'#CD7C2F','7':'#747F00','8':'#E6186C'};
 const lineColor=l=>LINE_COLORS[l]||'#888';
+const kmDist=(a,b,c,d)=>{const R=6371,r=Math.PI/180,dLa=(c-a)*r,dLo=(d-b)*r,x=Math.sin(dLa/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x));};
+const GAP=2.6; // km: 인접역이 이보다 멀면 지선 점프로 보고 선 끊음
+
+// 호선별 폴리라인 세그먼트 계산(지선/순환 대응: stnNo순 vs 최근접 중 조각 적은쪽)
+function lineSegments(){
+ const byLine={};
+ DATA.stations.forEach(s=>{if(s.lat)(byLine[s.line]=byLine[s.line]||[]).push(s);});
+ const segByOrder=arr=>{const out=[];let seg=[];for(const s of arr){if(seg.length&&kmDist(seg[seg.length-1][0],seg[seg.length-1][1],s.lat,s.lng)>GAP){if(seg.length>1)out.push(seg);seg=[];}seg.push([s.lat,s.lng]);}if(seg.length>1)out.push(seg);return out;};
+ const segByNN=arr=>{const p=arr.map(s=>[s.lat,s.lng]);const used=Array(p.length).fill(false);const out=[];let cur=0;for(let i=1;i<p.length;i++)if(p[i][1]+p[i][0]<p[cur][1]+p[cur][0])cur=i;let seg=[cur];used[cur]=true;let rem=p.length-1;while(rem>0){const last=seg[seg.length-1];let best=-1,bd=1e9;for(let j=0;j<p.length;j++){if(used[j])continue;const dd=kmDist(p[last][0],p[last][1],p[j][0],p[j][1]);if(dd<bd){bd=dd;best=j;}}if(bd>GAP){if(seg.length>1)out.push(seg.map(i=>p[i]));seg=[best];}else seg.push(best);used[best]=true;rem--;}if(seg.length>1)out.push(seg.map(i=>p[i]));return out;};
+ const res=[];
+ Object.keys(byLine).forEach(ln=>{
+  const arr=byLine[ln].slice().sort((a,b)=>(a.no||0)-(b.no||0));
+  const a=segByOrder(arr),b=segByNN(arr);
+  (b.length<a.length?b:a).forEach(seg=>res.push({line:ln,seg}));
+ });
+ return res;
+}
+
+// 노선+역 그리기(지도/노선도 공용). labels=true면 역이름 상시표시.
+function drawNetwork(layer,opts){
+ opts=opts||{};
+ lineSegments().forEach(o=>L.polyline(o.seg,{color:lineColor(o.line),weight:opts.weight||4,opacity:.85,lineJoin:'round'}).addTo(layer));
+ DATA.stations.forEach(st=>{
+  if(!st.lat)return;
+  const mk=L.circleMarker([st.lat,st.lng],{radius:opts.radius||5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1})
+   .on('click',()=>showStation(st));
+  if(opts.labels)mk.bindTooltip(nm(st),{permanent:true,direction:'right',offset:[4,0],className:'net-lbl'});
+  else mk.bindTooltip(nm(st),{direction:'top',offset:[0,-6],className:'st-tip'});
+  mk.addTo(layer);
+ });
+}
 
 function renderPins(){
  pinLayer.clearLayers();
- // 1) 호선별 색깔 노선(역 순서대로 이어 그림)
- const byLine={};
- DATA.stations.forEach(s=>{if(s.lat)(byLine[s.line]=byLine[s.line]||[]).push(s);});
- Object.keys(byLine).forEach(ln=>{
-  const pts=byLine[ln].slice().sort((a,b)=>(a.no||0)-(b.no||0)).map(s=>[s.lat,s.lng]);
-  if(pts.length>1)L.polyline(pts,{color:lineColor(ln),weight:4,opacity:.85,lineJoin:'round'}).addTo(pinLayer);
- });
- // 2) 역 = 색깔 테두리 원(탭하면 화장실)
- DATA.stations.forEach(st=>{
-  if(!st.lat)return;
-  L.circleMarker([st.lat,st.lng],{radius:5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1})
-   .on('click',()=>showStation(st))
-   .bindTooltip(nm(st),{direction:'top',offset:[0,-6],className:'st-tip'})
-   .addTo(pinLayer);
- });
- // 3) 내 화장실
+ drawNetwork(pinLayer,{labels:false});
  mine().forEach(m=>{
   L.marker([m.lat,m.lng],{icon:L.divIcon({html:'<div class="pin" style="background:#8a7fd6"><b>🔑</b></div>',className:'',iconSize:[30,30],iconAnchor:[15,28]})})
    .on('click',()=>showMine(m)).addTo(pinLayer);
  });
+}
+
+// 노선도 탭 = 타일 없는 지도(흰 배경) + 색깔 노선 + 역이름
+let netMap=null, netLayer=null;
+function renderLine(){
+ if(!netMap){
+  netMap=L.map('lineMap',{zoomControl:true,attributionControl:false,minZoom:10,maxZoom:16}).setView([37.55,127.02],11);
+  netLayer=L.layerGroup().addTo(netMap);
+ }
+ netLayer.clearLayers();
+ drawNetwork(netLayer,{labels:true,radius:5});
+ setTimeout(()=>{netMap.invalidateSize();
+  const pts=DATA.stations.filter(s=>s.lat).map(s=>[s.lat,s.lng]);
+  if(pts.length)netMap.fitBounds(pts,{padding:[30,30]});
+ },60);
 }
 
 /* 시트 */
@@ -106,20 +137,6 @@ function addModal(){
 $('#addBtn').onclick=addModal;
 
 /* 노선도(간단 리스트형) */
-function renderLine(){
- const byLine={};
- DATA.stations.forEach(s=>{(byLine[s.line]=byLine[s.line]||[]).push(s);});
- $('#lineMap').innerHTML=Object.keys(byLine).sort().map(ln=>{
-  const c=lineColor(ln);
-  const sts=byLine[ln].slice().sort((a,b)=>(a.no||0)-(b.no||0));
-  return `
-  <div style="margin-bottom:22px">
-   <h3><span class="line-badge" style="background:${c}">${ln}${t('lineNo')}</span></h3>
-   <div class="line-col" style="border-left:4px solid ${c};margin-left:9px">${sts.map(s=>`
-    <div class="line-st" onclick="__pick('${s.id}')"><span class="dot" style="border-color:${c}"></span><span class="lbl">${nm(s)}</span>
-     <span class="mini">🚻 ${s.toilets.length}</span></div>`).join('')}</div>
-  </div>`;}).join('')||'<p class="hint">데이터 로딩 중…</p>';
-}
 window.__pick=id=>{const s=DATA.stations.find(x=>x.id===id);if(s){go('map');map.setView([s.lat,s.lng],15);showStation(s);}};
 
 /* 뷰 전환 */
@@ -136,7 +153,9 @@ function applyLang(){
  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
  $('#title').childNodes[0].nodeValue=t('title')+' 🚻';
  $('#subtitle').textContent=t('sub');
+ const se=$('#search');if(se)se.placeholder=t('search');
  renderPins();
+ if(netMap)renderLine();
 }
 $('#lang').onchange=e=>{lang=e.target.value;applyLang();};
 
@@ -146,6 +165,28 @@ $('#lang').onchange=e=>{lang=e.target.value;applyLang();};
  z.addEventListener('pointermove',e=>{if(!on)return;dy=Math.max(0,e.clientY-sy);if(dy>4)mv=true;s.style.transform='translateY('+dy+'px)';});
  z.addEventListener('pointerup',()=>{if(!on)return;on=false;s.style.transition='';s.style.transform='';if(dy>70||!mv)closeSheet();});
 })();
+
+/* 역 검색 */
+const searchEl=$('#search'),suggEl=$('#suggest');
+function doSearch(q){
+ q=(q||'').trim().toLowerCase();
+ if(!q){suggEl.classList.remove('on');suggEl.innerHTML='';return;}
+ const seen={},res=[];
+ for(const s of DATA.stations){
+  if((s.name||'').toLowerCase().includes(q)){const k=s.name+'|'+s.line;if(!seen[k]){seen[k]=1;res.push(s);}}
+  if(res.length>=12)break;
+ }
+ if(!res.length){suggEl.innerHTML='<div class="sg" style="color:#9ca3af">검색 결과 없음</div>';suggEl.classList.add('on');return;}
+ suggEl.innerHTML=res.map(s=>`<div class="sg" data-id="${s.id}"><span class="ln" style="background:${lineColor(s.line)}">${s.line}</span>${nm(s)}<span style="margin-left:auto;color:#9ca3af;font-size:12px">🚻${s.toilets.length}</span></div>`).join('');
+ suggEl.classList.add('on');
+ suggEl.querySelectorAll('.sg[data-id]').forEach(el=>el.onclick=()=>{
+  const s=DATA.stations.find(x=>x.id===el.dataset.id);
+  if(s){searchEl.value='';suggEl.classList.remove('on');go('map');map.setView([s.lat,s.lng],16);showStation(s);}
+ });
+}
+searchEl.addEventListener('input',e=>doSearch(e.target.value));
+searchEl.addEventListener('focus',e=>{if(e.target.value)doSearch(e.target.value);});
+document.addEventListener('click',e=>{if(!$('#searchWrap').contains(e.target))suggEl.classList.remove('on');});
 
 /* 부팅 */
 fetch('data.json').then(r=>r.json()).then(d=>{DATA=d;renderPins();applyLang();})
