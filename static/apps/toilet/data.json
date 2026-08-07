@@ -23,7 +23,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_3.png"
   },
   {
    "id": "0159",
@@ -104,7 +105,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_4.jpg"
   },
   {
    "id": "0150",
@@ -141,7 +143,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_10.gif"
   },
   {
    "id": "0151",
@@ -170,7 +173,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_9.jpg"
   },
   {
    "id": "0156",
@@ -190,7 +194,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_5.png"
   },
   {
    "id": "0157",
@@ -219,7 +224,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_2.jpg"
   },
   {
    "id": "0152",
@@ -257,7 +263,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_8.jpg"
   },
   {
    "id": "0153",
@@ -295,7 +302,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_7.jpg"
   },
   {
    "id": "0154",
@@ -315,7 +323,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_6.png"
   },
   {
    "id": "0158",
@@ -344,7 +353,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_1_1.gif"
   },
   {
    "id": "0222",
@@ -364,7 +374,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_26.gif"
   },
   {
    "id": "0214",
@@ -393,7 +404,8 @@
      "from": "2",
      "to": "3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_18.jpg"
   },
   {
    "id": "0212",
@@ -422,7 +434,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_16.gif"
   },
   {
    "id": "0223",
@@ -451,7 +464,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_27.gif"
   },
   {
    "id": "0232",
@@ -480,7 +494,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_36.jpg"
   },
   {
    "id": "0213",
@@ -513,7 +528,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_17.gif"
   },
   {
    "id": "0227",
@@ -542,7 +558,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_31.jpg"
   },
   {
    "id": "0237",
@@ -567,7 +584,8 @@
      "from": "B2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_44.jpg"
   },
   {
    "id": "0233",
@@ -596,7 +614,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_37.jpg"
   },
   {
    "id": "0247",
@@ -616,7 +635,8 @@
      "wheelchair": "N"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_39.jpg"
   },
   {
    "id": "0205",
@@ -645,7 +665,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_5.jpg"
   },
   {
    "id": "0210",
@@ -674,7 +695,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_10.jpg"
   },
   {
    "id": "0235",
@@ -703,7 +725,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_42.jpg"
   },
   {
    "id": "0225",
@@ -732,7 +755,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_29.jpg"
   },
   {
    "id": "0229",
@@ -761,7 +785,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_33.jpg"
   },
   {
    "id": "0226",
@@ -807,7 +832,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_30.jpg"
   },
   {
    "id": "0219",
@@ -836,7 +862,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_23.gif"
   },
   {
    "id": "0207",
@@ -873,7 +900,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_7.jpg"
   },
   {
    "id": "0228",
@@ -910,7 +938,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_32.gif"
   },
   {
    "id": "0224",
@@ -939,7 +968,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_28.jpg"
   },
   {
    "id": "0220",
@@ -968,7 +998,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_24.gif"
   },
   {
    "id": "0211",
@@ -997,7 +1028,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_15.gif"
   },
   {
    "id": "0201",
@@ -1035,7 +1067,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_1.jpg"
   },
   {
    "id": "0245",
@@ -1055,7 +1088,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_12.jpg"
   },
   {
    "id": "0206",
@@ -1084,7 +1118,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_6.jpg"
   },
   {
    "id": "0231",
@@ -1113,7 +1148,8 @@
      "from": "3",
      "to": "2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_35.jpg"
   },
   {
    "id": "0234",
@@ -1151,7 +1187,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_38.jpg"
   },
   {
    "id": "0230",
@@ -1180,7 +1217,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_34.jpg"
   },
   {
    "id": "0246",
@@ -1200,7 +1238,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_14.jpg"
   },
   {
    "id": "0249",
@@ -1229,7 +1268,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_41.jpg"
   },
   {
    "id": "0240",
@@ -1258,7 +1298,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_47.gif"
   },
   {
    "id": "0242",
@@ -1287,7 +1328,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_49.jpg"
   },
   {
    "id": "0248",
@@ -1316,7 +1358,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_40.jpg"
   },
   {
    "id": "0221",
@@ -1345,7 +1388,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_25.gif"
   },
   {
    "id": "0236",
@@ -1374,7 +1418,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_43.gif"
   },
   {
    "id": "0208",
@@ -1411,7 +1456,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_8.jpg"
   },
   {
    "id": "0244",
@@ -1431,7 +1477,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_11.jpg"
   },
   {
    "id": "0250",
@@ -1491,7 +1538,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_13.jpg"
   },
   {
    "id": "0203",
@@ -1511,7 +1559,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_3.gif"
   },
   {
    "id": "0204",
@@ -1540,7 +1589,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_4.gif"
   },
   {
    "id": "0202",
@@ -1569,7 +1619,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_2.gif"
   },
   {
    "id": "0241",
@@ -1598,7 +1649,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_48.gif"
   },
   {
    "id": "0216",
@@ -1635,7 +1687,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_20.jpg"
   },
   {
    "id": "0215",
@@ -1664,7 +1717,8 @@
      "from": "2",
      "to": "3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_19.jpg"
   },
   {
    "id": "0217",
@@ -1693,7 +1747,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_21.png"
   },
   {
    "id": "0218",
@@ -1731,7 +1786,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_22.jpg"
   },
   {
    "id": "0243",
@@ -1768,7 +1824,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_50.jpg"
   },
   {
    "id": "0209",
@@ -1797,7 +1854,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_9.jpg"
   },
   {
    "id": "0238",
@@ -1830,7 +1888,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_45.gif"
   },
   {
    "id": "0239",
@@ -1867,7 +1926,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_2_46.gif"
   },
   {
    "id": "0340",
@@ -1921,7 +1981,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_32.jpg"
   },
   {
    "id": "0317",
@@ -1966,7 +2027,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_9.gif"
   },
   {
    "id": "0341",
@@ -2012,7 +2074,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_33.jpg"
   },
   {
    "id": "0330",
@@ -2041,7 +2104,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_22.gif"
   },
   {
    "id": "0310",
@@ -2070,7 +2134,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_2.jpg"
   },
   {
    "id": "0324",
@@ -2099,7 +2164,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_16.jpg"
   },
   {
    "id": "0331",
@@ -2128,7 +2194,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_23.jpg"
   },
   {
    "id": "0313",
@@ -2157,7 +2224,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_5.jpg"
   },
   {
    "id": "0337",
@@ -2186,7 +2254,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_29.jpg"
   },
   {
    "id": "0335",
@@ -2223,7 +2292,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_27.jpg"
   },
   {
    "id": "0334",
@@ -2252,7 +2322,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_26.jpg"
   },
   {
    "id": "0316",
@@ -2293,7 +2364,8 @@
      "from": "B2",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_8.jpg"
   },
   {
    "id": "0322",
@@ -2330,7 +2402,8 @@
      "from": "B2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_14.jpg"
   },
   {
    "id": "0333",
@@ -2359,7 +2432,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_25.jpg"
   },
   {
    "id": "0315",
@@ -2379,7 +2453,8 @@
      "wheelchair": "N"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_7.jpg"
   },
   {
    "id": "0312",
@@ -2408,7 +2483,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_4.jpg"
   },
   {
    "id": "0339",
@@ -2445,7 +2521,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_31.jpg"
   },
   {
    "id": "0327",
@@ -2474,7 +2551,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_19.jpg"
   },
   {
    "id": "0318",
@@ -2519,7 +2597,8 @@
      "from": "B4",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_10.gif"
   },
   {
    "id": "0326",
@@ -2560,7 +2639,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_18.jpg"
   },
   {
    "id": "0323",
@@ -2589,7 +2669,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_15.jpg"
   },
   {
    "id": "0332",
@@ -2618,7 +2699,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_24.gif"
   },
   {
    "id": "0311",
@@ -2647,7 +2729,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_3.jpg"
   },
   {
    "id": "0342",
@@ -2701,7 +2784,8 @@
      "from": "B2",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_34.jpg"
   },
   {
    "id": "0325",
@@ -2739,7 +2823,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_17.jpg"
   },
   {
    "id": "0320",
@@ -2764,7 +2849,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_12.gif"
   },
   {
    "id": "0338",
@@ -2793,7 +2879,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_30.jpg"
   },
   {
    "id": "0328",
@@ -2822,7 +2909,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_20.jpg"
   },
   {
    "id": "0319",
@@ -2868,7 +2956,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_11.gif"
   },
   {
    "id": "0336",
@@ -2897,7 +2986,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_28.jpg"
   },
   {
    "id": "0314",
@@ -2926,7 +3016,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_3_6.jpg"
   },
   {
    "id": "0417",
@@ -2955,7 +3046,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_9.jpg"
   },
   {
    "id": "0434",
@@ -2984,7 +3076,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_26.jpg"
   },
   {
    "id": "0411",
@@ -3021,7 +3114,8 @@
      "from": "3",
      "to": "2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_3.jpg"
   },
   {
    "id": "0421",
@@ -3066,7 +3160,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_13.gif"
   },
   {
    "id": "0422",
@@ -3112,7 +3207,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_14.jpg"
   },
   {
    "id": "0431",
@@ -3132,7 +3228,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_23.jpg"
   },
   {
    "id": "0424",
@@ -3169,7 +3266,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_16.gif"
   },
   {
    "id": "0415",
@@ -3198,7 +3296,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_7.png"
   },
   {
    "id": "0416",
@@ -3227,7 +3326,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_8.jpg"
   },
   {
    "id": "0409",
@@ -3273,7 +3373,8 @@
      "from": "3",
      "to": "2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_1.gif"
   },
   {
    "id": "0433",
@@ -3324,7 +3425,8 @@
      "from": "B2",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_25.gif"
   },
   {
    "id": "0428",
@@ -3353,7 +3455,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_20.jpg"
   },
   {
    "id": "0410",
@@ -3390,7 +3493,8 @@
      "from": "3",
      "to": "2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_2.jpg"
   },
   {
    "id": "0426",
@@ -3427,7 +3531,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_18.jpg"
   },
   {
    "id": "0418",
@@ -3456,7 +3561,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_10.jpg"
   },
   {
    "id": "0414",
@@ -3485,7 +3591,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_6.jpg"
   },
   {
    "id": "0427",
@@ -3505,7 +3612,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_19.jpg"
   },
   {
    "id": "0429",
@@ -3534,7 +3642,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_21.jpg"
   },
   {
    "id": "0413",
@@ -3563,7 +3672,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_5.jpg"
   },
   {
    "id": "0430",
@@ -3592,7 +3702,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_22.jpg"
   },
   {
    "id": "0412",
@@ -3621,7 +3732,8 @@
      "from": "2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_4.jpg"
   },
   {
    "id": "0432",
@@ -3650,7 +3762,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_24.jpg"
   },
   {
    "id": "0423",
@@ -3695,7 +3808,8 @@
      "from": "B2",
      "to": "B4"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_15.jpg"
   },
   {
    "id": "0419",
@@ -3724,7 +3838,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_11.jpg"
   },
   {
    "id": "0420",
@@ -3753,7 +3868,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_12.jpg"
   },
   {
    "id": "0425",
@@ -3790,7 +3906,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_4_17.jpg"
   },
   {
    "id": "2549",
@@ -3831,7 +3948,8 @@
      "from": "B4",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_39.jpg"
   },
   {
    "id": "2562",
@@ -3885,7 +4003,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_52.jpg"
   },
   {
    "id": "2559",
@@ -3914,7 +4033,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_49.jpg"
   },
   {
    "id": "2512",
@@ -3934,7 +4054,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_2.jpg"
   },
   {
    "id": "2560",
@@ -3963,7 +4084,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_50.jpg"
   },
   {
    "id": "2553",
@@ -3992,7 +4114,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_43.jpg"
   },
   {
    "id": "2530",
@@ -4037,7 +4160,8 @@
      "from": "B2",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_20.jpg"
   },
   {
    "id": "2547",
@@ -4074,7 +4198,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_37.jpg"
   },
   {
    "id": "2534",
@@ -4111,7 +4236,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_24.jpg"
   },
   {
    "id": "2545",
@@ -4140,7 +4266,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_35.jpg"
   },
   {
    "id": "2551",
@@ -4169,7 +4296,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_41.jpg"
   },
   {
    "id": "2550",
@@ -4202,7 +4330,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_40.jpg"
   },
   {
    "id": "2513",
@@ -4240,7 +4369,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_3.jpg"
   },
   {
    "id": "2519",
@@ -4277,7 +4407,8 @@
      "from": "B5",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_9.jpg"
   },
   {
    "id": "2543",
@@ -4314,7 +4445,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_33.jpg"
   },
   {
    "id": "2537",
@@ -4343,7 +4475,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_27.jpg"
   },
   {
    "id": "2555",
@@ -4380,7 +4513,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_45.jpg"
   },
   {
    "id": "2515",
@@ -4409,7 +4543,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_5.jpg"
   },
   {
    "id": "2542",
@@ -4446,7 +4581,8 @@
      "from": "BM2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_32.jpg"
   },
   {
    "id": "2561",
@@ -4491,7 +4627,8 @@
      "from": "BM2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_51.jpg"
   },
   {
    "id": "2529",
@@ -4536,7 +4673,8 @@
      "from": "B4",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_19.jpg"
   },
   {
    "id": "2552",
@@ -4565,7 +4703,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_42.jpg"
   },
   {
    "id": "2521",
@@ -4594,7 +4733,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_11.jpg"
   },
   {
    "id": "2563",
@@ -4640,7 +4780,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_53.jpg"
   },
   {
    "id": "2516",
@@ -4660,7 +4801,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_6.jpg"
   },
   {
    "id": "2557",
@@ -4689,7 +4831,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_47.jpg"
   },
   {
    "id": "2511",
@@ -4726,7 +4869,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_1.jpg"
   },
   {
    "id": "2554",
@@ -4755,7 +4899,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_44.jpg"
   },
   {
    "id": "2533",
@@ -4800,7 +4945,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_23.jpg"
   },
   {
    "id": "2514",
@@ -4837,7 +4983,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_4.jpg"
   },
   {
    "id": "2539",
@@ -4882,7 +5029,8 @@
      "from": "B5",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_29.jpg"
   },
   {
    "id": "2526",
@@ -4927,7 +5075,8 @@
      "from": "B4",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_16.jpg"
   },
   {
    "id": "2520",
@@ -4972,7 +5121,8 @@
      "from": "BM2",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_10.jpg"
   },
   {
    "id": "2546",
@@ -5009,7 +5159,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_36.jpg"
   },
   {
    "id": "2531",
@@ -5046,7 +5197,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_21.jpg"
   },
   {
    "id": "2523",
@@ -5091,7 +5243,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_13.jpg"
   },
   {
    "id": "2528",
@@ -5136,7 +5289,8 @@
      "from": "B2",
      "to": "B4"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_18.jpg"
   },
   {
    "id": "2527",
@@ -5165,7 +5319,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_17.jpg"
   },
   {
    "id": "2524",
@@ -5210,7 +5365,8 @@
      "from": "B3",
      "to": "B4"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_14.jpg"
   },
   {
    "id": "2525",
@@ -5255,7 +5411,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_15.jpg"
   },
   {
    "id": "2558",
@@ -5292,7 +5449,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_48.jpg"
   },
   {
    "id": "2522",
@@ -5337,7 +5495,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_12.jpg"
   },
   {
    "id": "2556",
@@ -5366,7 +5525,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_46.jpg"
   },
   {
    "id": "2541",
@@ -5395,7 +5555,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_31.jpg"
   },
   {
    "id": "2517",
@@ -5424,7 +5585,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_7.jpg"
   },
   {
    "id": "2536",
@@ -5469,7 +5631,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_26.jpg"
   },
   {
    "id": "2544",
@@ -5506,7 +5669,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_34.jpg"
   },
   {
    "id": "2535",
@@ -5551,7 +5715,8 @@
      "from": "B3",
      "to": "B5"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_25.jpg"
   },
   {
    "id": "2548",
@@ -5588,7 +5753,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_38.jpg"
   },
   {
    "id": "2532",
@@ -5617,7 +5783,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_22.jpg"
   },
   {
    "id": "2566",
@@ -5662,7 +5829,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_56.jpg"
   },
   {
    "id": "2565",
@@ -5707,7 +5875,8 @@
      "from": "M1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_55.jpg"
   },
   {
    "id": "2564",
@@ -5744,7 +5913,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_54.jpg"
   },
   {
    "id": "2540",
@@ -5789,7 +5959,8 @@
      "from": "BM4",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_30.jpg"
   },
   {
    "id": "2518",
@@ -5826,7 +5997,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_5_8.jpg"
   },
   {
    "id": "2641",
@@ -5871,7 +6043,8 @@
      "from": "B3",
      "to": "B4"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_31.jpg"
   },
   {
    "id": "2627",
@@ -5908,7 +6081,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_17.jpg"
   },
   {
    "id": "2625",
@@ -5945,7 +6119,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_15.jpg"
   },
   {
    "id": "2616",
@@ -5982,7 +6157,8 @@
      "from": "B4",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_6.jpg"
   },
   {
    "id": "2630",
@@ -6027,7 +6203,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_20.jpg"
   },
   {
    "id": "2626",
@@ -6064,7 +6241,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_16.jpg"
   },
   {
    "id": "2614",
@@ -6109,7 +6287,8 @@
      "from": "B6",
      "to": "B5"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_4.jpg"
   },
   {
    "id": "2644",
@@ -6142,7 +6321,8 @@
      "from": "B1",
      "to": "BM1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_34.jpg"
   },
   {
    "id": "2637",
@@ -6187,7 +6367,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_27.jpg"
   },
   {
    "id": "2619",
@@ -6229,7 +6410,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_9.jpg"
   },
   {
    "id": "2621",
@@ -6283,7 +6465,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_11.jpg"
   },
   {
    "id": "2622",
@@ -6308,7 +6491,8 @@
      "from": "B1",
      "to": "BM1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_12.jpg"
   },
   {
    "id": "2633",
@@ -6345,7 +6529,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_23.jpg"
   },
   {
    "id": "2639",
@@ -6374,7 +6559,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_29.jpg"
   },
   {
    "id": "2648",
@@ -6411,7 +6597,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_38.jpg"
   },
   {
    "id": "2613",
@@ -6456,7 +6643,8 @@
      "from": "BM2",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_3.jpg"
   },
   {
    "id": "2629",
@@ -6485,7 +6673,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_19.jpg"
   },
   {
    "id": "2624",
@@ -6530,7 +6719,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_14.jpg"
   },
   {
    "id": "2643",
@@ -6567,7 +6757,8 @@
      "from": "M1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_33.jpg"
   },
   {
    "id": "2617",
@@ -6596,7 +6787,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_7.jpg"
   },
   {
    "id": "2645",
@@ -6650,7 +6842,8 @@
      "from": "B1",
      "to": "BM1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_35.jpg"
   },
   {
    "id": "2636",
@@ -6695,7 +6888,8 @@
      "from": "B2",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_26.jpg"
   },
   {
    "id": "2640",
@@ -6741,7 +6935,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_30.jpg"
   },
   {
    "id": "2634",
@@ -6786,7 +6981,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_24.jpg"
   },
   {
    "id": "2612",
@@ -6823,7 +7019,8 @@
      "from": "B4",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_2.jpg"
   },
   {
    "id": "2615",
@@ -6860,7 +7057,8 @@
      "from": "B5",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_5.jpg"
   },
   {
    "id": "2642",
@@ -6905,7 +7103,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_32.jpg"
   },
   {
    "id": "2620",
@@ -6943,7 +7142,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_10.jpg"
   },
   {
    "id": "2611",
@@ -6980,7 +7180,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_1.jpg"
   },
   {
    "id": "2631",
@@ -7017,7 +7218,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_21.jpg"
   },
   {
    "id": "2618",
@@ -7050,7 +7252,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_8.jpg"
   },
   {
    "id": "2638",
@@ -7083,7 +7286,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_28.jpg"
   },
   {
    "id": "2635",
@@ -7128,7 +7332,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_25.jpg"
   },
   {
    "id": "2646",
@@ -7173,7 +7378,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_36.jpg"
   },
   {
    "id": "2632",
@@ -7210,7 +7416,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_22.jpg"
   },
   {
    "id": "2623",
@@ -7255,7 +7462,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_13.jpg"
   },
   {
    "id": "2647",
@@ -7284,7 +7492,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_37.jpg"
   },
   {
    "id": "2628",
@@ -7329,7 +7538,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_6_18.jpg"
   },
   {
    "id": "2748",
@@ -7374,7 +7584,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_38.jpg"
   },
   {
    "id": "2732",
@@ -7411,7 +7622,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_22.jpg"
   },
   {
    "id": "2729",
@@ -7456,7 +7668,8 @@
      "from": "B2",
      "to": "2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_19.jpg"
   },
   {
    "id": "2736",
@@ -7501,7 +7714,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_26.jpg"
   },
   {
    "id": "2718",
@@ -7542,7 +7756,8 @@
      "from": "B4",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_8.jpg"
   },
   {
    "id": "2750",
@@ -7571,7 +7786,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_40.jpg"
   },
   {
    "id": "2747",
@@ -7616,7 +7832,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_37.jpg"
   },
   {
    "id": "2739",
@@ -7661,7 +7878,8 @@
      "from": "B1",
      "to": "BM1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_29.jpg"
   },
   {
    "id": "2737",
@@ -7706,7 +7924,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_27.jpg"
   },
   {
    "id": "2715",
@@ -7751,7 +7970,8 @@
      "from": "B1",
      "to": "BM1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_5.jpg"
   },
   {
    "id": "2734",
@@ -7805,7 +8025,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_24.jpg"
   },
   {
    "id": "2746",
@@ -7850,7 +8071,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_36.jpg"
   },
   {
    "id": "2712",
@@ -7879,7 +8101,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_2.jpg"
   },
   {
    "id": "2714",
@@ -7908,7 +8131,8 @@
      "from": "B1",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_4.jpg"
   },
   {
    "id": "2720",
@@ -7937,7 +8161,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_10.jpg"
   },
   {
    "id": "2723",
@@ -7974,7 +8199,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_13.jpg"
   },
   {
    "id": "2735",
@@ -8011,7 +8237,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_25.jpg"
   },
   {
    "id": "2744",
@@ -8044,7 +8271,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_34.jpg"
   },
   {
    "id": "2724",
@@ -8081,7 +8309,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_14.jpg"
   },
   {
    "id": "2741",
@@ -8122,7 +8351,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_31.jpg"
   },
   {
    "id": "2722",
@@ -8151,7 +8381,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_12.jpg"
   },
   {
    "id": "2713",
@@ -8192,7 +8423,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_3.jpg"
   },
   {
    "id": "2740",
@@ -8237,7 +8469,8 @@
      "from": "B5",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_30.jpg"
   },
   {
    "id": "2743",
@@ -8282,7 +8515,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_33.jpg"
   },
   {
    "id": "2745",
@@ -8311,7 +8545,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_35.jpg"
   },
   {
    "id": "2728",
@@ -8340,7 +8575,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_18.jpg"
   },
   {
    "id": "2752",
@@ -8385,7 +8621,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_42.jpg"
   },
   {
    "id": "2725",
@@ -8430,7 +8667,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_15.jpg"
   },
   {
    "id": "2738",
@@ -8484,7 +8722,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_28.jpg"
   },
   {
    "id": "2730",
@@ -8558,7 +8797,8 @@
      "from": "B2",
      "to": "B3"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_32.jpg"
   },
   {
    "id": "2711",
@@ -8578,7 +8818,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_1.jpg"
   },
   {
    "id": "2716",
@@ -8623,7 +8864,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_6.jpg"
   },
   {
    "id": "2726",
@@ -8652,7 +8894,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_16.jpg"
   },
   {
    "id": "2721",
@@ -8689,7 +8932,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_11.jpg"
   },
   {
    "id": "2751",
@@ -8718,7 +8962,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_41.jpg"
   },
   {
    "id": "2749",
@@ -8747,7 +8992,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_39.jpg"
   },
   {
    "id": "2731",
@@ -8784,7 +9030,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_21.jpg"
   },
   {
    "id": "2719",
@@ -8821,7 +9068,8 @@
      "from": "B3",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_9.jpg"
   },
   {
    "id": "2717",
@@ -8858,7 +9106,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_7.jpg"
   },
   {
    "id": "2733",
@@ -8895,7 +9144,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_7_23.jpg"
   },
   {
    "id": "2818",
@@ -8932,7 +9182,8 @@
      "from": "B3",
      "to": "B2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_8.jpg"
   },
   {
    "id": "2813",
@@ -8965,7 +9216,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_3.jpg"
   },
   {
    "id": "2828",
@@ -9002,7 +9254,8 @@
      "from": "3",
      "to": "2"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_12.png"
   },
   {
    "id": "2823",
@@ -9039,7 +9292,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_14.jpg"
   },
   {
    "id": "2824",
@@ -9068,7 +9322,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_15.jpg"
   },
   {
    "id": "2827",
@@ -9097,7 +9352,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_18.jpg"
   },
   {
    "id": "2814",
@@ -9142,7 +9398,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_4.jpg"
   },
   {
    "id": "2819",
@@ -9183,7 +9440,8 @@
      "from": "M1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_9.jpg"
   },
   {
    "id": "2821",
@@ -9216,7 +9474,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_11.jpg"
   },
   {
    "id": "2822",
@@ -9261,7 +9520,8 @@
      "from": "BM1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_13.jpg"
   },
   {
    "id": "2816",
@@ -9281,7 +9541,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_6.jpg"
   },
   {
    "id": "2817",
@@ -9310,7 +9571,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_7.jpg"
   },
   {
    "id": "2826",
@@ -9330,7 +9592,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_17.jpg"
   },
   {
    "id": "2825",
@@ -9350,7 +9613,8 @@
      "wheelchair": "Y"
     }
    ],
-   "escalator": []
+   "escalator": [],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_16.jpg"
   },
   {
    "id": "2811",
@@ -9379,7 +9643,8 @@
      "from": "B1",
      "to": "1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_1.jpg"
   },
   {
    "id": "2810",
@@ -9457,7 +9722,8 @@
      "from": "B2",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_5.jpg"
   },
   {
    "id": "2820",
@@ -9494,7 +9760,8 @@
      "from": "BM1",
      "to": "B1"
     }
-   ]
+   ],
+   "mapImg": "https://data.seoul.go.kr/contents/stn_img/image_8_10.jpg"
   }
  ]
 }
