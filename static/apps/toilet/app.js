@@ -1,10 +1,10 @@
 /* 급할 땐 · 지하철 화장실 — 스캐폴드(목업). 실데이터=data.go.kr 키 연결 예정 */
 const $=s=>document.querySelector(s);
 const LANG={
- ko:{map:'지도',line:'노선도',title:'급할 땐',sub:'지하철 화장실',toilet:'화장실',esc:'에스컬레이터',elv:'엘리베이터',inGate:'게이트 안',outGate:'게이트 밖',gateUnknown:'게이트 정보없음',floor:'층',nearCar:'가까운 칸',hours:'이용시간',type:'구성',wc:'휠체어 접근',lineNo:'호선',route:'길찾기',mine:'내 화장실',addMine:'내 화장실 추가',nudgeShop:'상가 화장실은 이용 시 음료 한 잔 어때요? ☕',pw:'비밀번호',hasPw:'비번 있음',noPw:'비번 없음',note:'비고',save:'저장',loc:'위치',near:'근처 공공화장실',search:'역 검색',stationMap:'역 구내 안내도'},
- en:{map:'Map',line:'Lines',title:'Gotta Go',sub:'Subway Toilets',toilet:'Toilet',esc:'Escalator',elv:'Elevator',inGate:'Inside gate',outGate:'Outside gate',gateUnknown:'Gate n/a',floor:'Floor',nearCar:'Nearest car',hours:'Hours',type:'Type',wc:'Wheelchair',lineNo:' Line',route:'Route',mine:'My spots',addMine:'Add my toilet',nudgeShop:'Buy a drink if you use a shop toilet ☕',pw:'Password',hasPw:'Has code',noPw:'No code',note:'Notes',save:'Save',loc:'Location',near:'Nearby public toilets',search:'Search station',stationMap:'Station map'},
- ja:{map:'地図',line:'路線',title:'急な時',sub:'地下鉄トイレ',toilet:'トイレ',esc:'エスカレーター',elv:'エレベーター',inGate:'改札内',outGate:'改札外',gateUnknown:'改札不明',floor:'階',nearCar:'近い車両',hours:'利用時間',type:'構成',wc:'車椅子',lineNo:'号線',route:'ルート',mine:'マイ',addMine:'マイトイレ追加',nudgeShop:'店舗トイレは一杯どうぞ ☕',pw:'暗証番号',hasPw:'番号あり',noPw:'番号なし',note:'メモ',save:'保存',loc:'場所',near:'近くの公衆トイレ',search:'駅を検索',stationMap:'構内図'},
- zh:{map:'地图',line:'线路',title:'急需时',sub:'地铁厕所',toilet:'厕所',esc:'扶梯',elv:'电梯',inGate:'闸内',outGate:'闸外',gateUnknown:'闸机未知',floor:'层',nearCar:'最近车厢',hours:'开放时间',type:'构成',wc:'轮椅',lineNo:'号线',route:'路线',mine:'我的',addMine:'添加厕所',nudgeShop:'用商铺厕所买杯饮料吧 ☕',pw:'密码',hasPw:'有密码',noPw:'无密码',note:'备注',save:'保存',loc:'位置',near:'附近公厕',search:'搜索车站',stationMap:'站内地图'}
+ ko:{map:'지도',line:'노선도',title:'급할 땐',sub:'지하철 화장실',toilet:'화장실',esc:'에스컬레이터',elv:'엘리베이터',inGate:'게이트 안',outGate:'게이트 밖',gateUnknown:'게이트 정보없음',floor:'층',nearCar:'가까운 칸',hours:'이용시간',type:'구성',wc:'휠체어 접근',lineNo:'호선',route:'길찾기',mine:'내 화장실',addMine:'내 화장실 추가',nudgeShop:'상가 화장실은 이용 시 음료 한 잔 어때요? ☕',pw:'비밀번호',hasPw:'비번 있음',noPw:'비번 없음',note:'비고',save:'저장',loc:'위치',near:'근처 공공화장실',search:'역 검색',stationMap:'역 구내 안내도',undo:'실행취소'},
+ en:{map:'Map',line:'Lines',title:'Gotta Go',sub:'Subway Toilets',toilet:'Toilet',esc:'Escalator',elv:'Elevator',inGate:'Inside gate',outGate:'Outside gate',gateUnknown:'Gate n/a',floor:'Floor',nearCar:'Nearest car',hours:'Hours',type:'Type',wc:'Wheelchair',lineNo:' Line',route:'Route',mine:'My spots',addMine:'Add my toilet',nudgeShop:'Buy a drink if you use a shop toilet ☕',pw:'Password',hasPw:'Has code',noPw:'No code',note:'Notes',save:'Save',loc:'Location',near:'Nearby public toilets',search:'Search station',stationMap:'Station map',undo:'Undo'},
+ ja:{map:'地図',line:'路線',title:'急な時',sub:'地下鉄トイレ',toilet:'トイレ',esc:'エスカレーター',elv:'エレベーター',inGate:'改札内',outGate:'改札外',gateUnknown:'改札不明',floor:'階',nearCar:'近い車両',hours:'利用時間',type:'構成',wc:'車椅子',lineNo:'号線',route:'ルート',mine:'マイ',addMine:'マイトイレ追加',nudgeShop:'店舗トイレは一杯どうぞ ☕',pw:'暗証番号',hasPw:'番号あり',noPw:'番号なし',note:'メモ',save:'保存',loc:'場所',near:'近くの公衆トイレ',search:'駅を検索',stationMap:'構内図',undo:'元に戻す'},
+ zh:{map:'地图',line:'线路',title:'急需时',sub:'地铁厕所',toilet:'厕所',esc:'扶梯',elv:'电梯',inGate:'闸内',outGate:'闸外',gateUnknown:'闸机未知',floor:'层',nearCar:'最近车厢',hours:'开放时间',type:'构成',wc:'轮椅',lineNo:'号线',route:'路线',mine:'我的',addMine:'添加厕所',nudgeShop:'用商铺厕所买杯饮料吧 ☕',pw:'密码',hasPw:'有密码',noPw:'无密码',note:'备注',save:'保存',loc:'位置',near:'附近公厕',search:'搜索车站',stationMap:'站内地图',undo:'撤销'}
 };
 let lang='ko', DATA={stations:[]};
 const t=k=>(LANG[lang]&&LANG[lang][k])||LANG.ko[k]||k;
@@ -17,6 +17,32 @@ const pinLayer=L.layerGroup().addTo(map);
 
 const LINE_COLORS={'1':'#0052A4','2':'#00A84D','3':'#EF7C1C','4':'#00A5DE','5':'#996CAC','6':'#CD7C2F','7':'#747F00','8':'#E6186C'};
 const lineColor=l=>LINE_COLORS[l]||'#888';
+
+// 화장실 카테고리 색상
+const CAT={
+ station:{c:'#2f7de1',emoji:'🚇',label:'지하철역'},
+ linked:{c:'#12b5cb',emoji:'🔵',label:'지하철 연결'},
+ public:{c:'#2f9e6b',emoji:'🟢',label:'야외 공공'},
+ mine:{c:'#8a4fd6',emoji:'🔑',label:'내 등록'}
+};
+const toiletCat=p=>/역|지하상가|지하도|지하철|환승|스테이션/.test((p.nm||'')+(p.addr||''))?'linked':'public';
+let publicToilets=null, _ptLoad=null; // 지연 로드(무거운 파일)
+function loadPublic(){
+ if(publicToilets)return Promise.resolve(publicToilets);
+ if(_ptLoad)return _ptLoad;
+ _ptLoad=fetch('public_toilets.json').then(r=>r.json()).then(d=>{publicToilets=(d.toilets||[]).map(p=>(p.cat=toiletCat(p),p));return publicToilets;}).catch(()=>{publicToilets=[];return publicToilets;});
+ return _ptLoad;
+}
+
+// 토스트(실행취소 등)
+let _toastT=null;
+function showToast(msg, btnLabel, onBtn, ms){
+ const el=$('#toast'), b=$('#toastBtn');
+ $('#toastMsg').textContent=msg;
+ if(btnLabel){b.textContent=btnLabel;b.onclick=()=>{onBtn&&onBtn();hideToast();};}else{b.textContent='';}
+ el.classList.add('on'); clearTimeout(_toastT); _toastT=setTimeout(hideToast, ms||3000);
+}
+function hideToast(){$('#toast').classList.remove('on');}
 const kmDist=(a,b,c,d)=>{const R=6371,r=Math.PI/180,dLa=(c-a)*r,dLo=(d-b)*r,x=Math.sin(dLa/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x));};
 const GAP=2.6; // km: 인접역이 이보다 멀면 지선 점프로 보고 선 끊음
 
@@ -52,13 +78,34 @@ function drawNetwork(layer,opts){
  });
 }
 
+function mineIcon(active){return L.divIcon({html:'<div class="pin" style="background:'+(active?'#e08a2f':CAT.mine.c)+';'+(active?'box-shadow:0 0 0 4px rgba(224,138,47,.35),0 2px 6px rgba(0,0,0,.3);':'')+'"><b>🔑</b></div>',className:'',iconSize:[30,30],iconAnchor:[15,28]});}
+function addMineMarker(m){
+ const mk=L.marker([m.lat,m.lng],{draggable:false,icon:mineIcon(false)}).addTo(pinLayer);
+ mk.on('click',()=>{if(!mk.__moving)showMine(m);});
+ mk.on('contextmenu',e=>{if(e.originalEvent)e.originalEvent.preventDefault();enterMove(mk,m);}); // 길게누르기(모바일)/우클릭
+ return mk;
+}
+function enterMove(mk,m){
+ if(mk.__moving)return;
+ mk.__moving=true; const oldPos={lat:m.lat,lng:m.lng};
+ mk.setIcon(mineIcon(true)); mk.dragging.enable();
+ showToast('✊ 핀을 옮긴 후 손을 떼세요','',null,3000);
+ mk.once('dragend',()=>{
+  const ll=mk.getLatLng();
+  const arr=mine(); const t=arr.find(x=>x.id===m.id); if(t){t.lat=ll.lat;t.lng=ll.lng;} saveMine(arr);
+  m.lat=ll.lat; m.lng=ll.lng;
+  mk.dragging.disable(); mk.setIcon(mineIcon(false));
+  setTimeout(()=>{mk.__moving=false;},250);
+  showToast('📍 위치를 옮겼어요', t('undo'), ()=>{
+   const a2=mine(); const t2=a2.find(x=>x.id===m.id); if(t2){t2.lat=oldPos.lat;t2.lng=oldPos.lng;} saveMine(a2);
+   m.lat=oldPos.lat; m.lng=oldPos.lng; mk.setLatLng(oldPos);
+  }, 6000);
+ });
+}
 function renderPins(){
  pinLayer.clearLayers();
  drawNetwork(pinLayer,{labels:false});
- mine().forEach(m=>{
-  L.marker([m.lat,m.lng],{icon:L.divIcon({html:'<div class="pin" style="background:#8a7fd6"><b>🔑</b></div>',className:'',iconSize:[30,30],iconAnchor:[15,28]})})
-   .on('click',()=>showMine(m)).addTo(pinLayer);
- });
+ mine().forEach(m=>addMineMarker(m));
 }
 
 // 노선도 탭 = 타일 없는 지도(흰 배경) + 색깔 노선 + 역이름
@@ -119,26 +166,73 @@ function showMine(m){
 }
 window.delMine=id=>{saveMine(mine().filter(x=>x.id!==id));renderPins();closeSheet();};
 
+let placeMarker=null;
 function addModal(){
+ go('map');
+ if(placeMarker){placeMarker.remove();placeMarker=null;}
  const c=map.getCenter();
+ placeMarker=L.marker(c,{draggable:true,icon:mineIcon(true)}).addTo(map);
  $('#modalBody').innerHTML=`
   <h2>＋ ${t('addMine')}</h2>
-  <p class="hint">지도 중앙 위치로 저장돼요 (실버전=탭 지정/현위치)</p>
+  <p class="hint">📍 주황 핀을 드래그해 정확한 위치로 옮긴 뒤 저장하세요</p>
   <label>${t('loc')} 메모</label><input id="mLoc" placeholder="예: OO빌딩 3층 카페 안쪽">
   <label>${t('note')}</label><input id="mNote" placeholder="예: 직원에게 문의, 층수">
   <label><input type="checkbox" id="mHasPw" style="width:auto;margin-right:6px">${t('hasPw')}</label>
   <input id="mPw" placeholder="${t('pw')} (예: 1234*)">
   <div class="nudge">${t('nudgeShop')}</div>
   <button class="btn" id="mSave">${t('save')}</button>
-  <button class="btn ghost" onclick="$('#modal').classList.remove('on')">닫기</button>`;
+  <button class="btn ghost" id="mCancel">닫기</button>`;
  $('#modal').classList.add('on');
+ const close=()=>{if(placeMarker){placeMarker.remove();placeMarker=null;}$('#modal').classList.remove('on');};
+ $('#mCancel').onclick=close;
  $('#mSave').onclick=()=>{
+  const ll=placeMarker.getLatLng();
   const arr=mine();
-  arr.push({id:'m'+Date.now(),name:$('#mLoc').value.slice(0,16)||'내 화장실',locText:$('#mLoc').value,note:$('#mNote').value,hasPw:$('#mHasPw').checked,pw:$('#mPw').value,lat:c.lat,lng:c.lng});
-  saveMine(arr);renderPins();$('#modal').classList.remove('on');
+  arr.push({id:'m'+Date.now(),name:$('#mLoc').value.slice(0,16)||'내 화장실',locText:$('#mLoc').value,note:$('#mNote').value,hasPw:$('#mHasPw').checked,pw:$('#mPw').value,lat:ll.lat,lng:ll.lng});
+  saveMine(arr);close();renderPins();
+  showToast('✅ 내 화장실을 등록했어요','',null,2500);
  };
 }
 $('#addBtn').onclick=addModal;
+
+/* 📍 내 주변 화장실 (현위치 기준 가까운 순) */
+let nearLayer=L.layerGroup().addTo(map), userMk=null;
+$('#nearBtn').onclick=()=>{
+ if(!navigator.geolocation){showToast('위치 기능을 쓸 수 없어요','',null,3000);return;}
+ $('#nearBtn').textContent='⏳';
+ Promise.all([
+  new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:10000,maximumAge:30000})),
+  loadPublic()
+ ]).then(([pos])=>{
+  $('#nearBtn').textContent='📍'; go('map');
+  const la=pos.coords.latitude, lo=pos.coords.longitude;
+  if(userMk)userMk.remove();
+  userMk=L.marker([la,lo],{icon:L.divIcon({html:'<div style="width:16px;height:16px;border-radius:50%;background:#e0392f;border:3px solid #fff;box-shadow:0 0 0 4px rgba(224,57,47,.3)"></div>',className:'',iconSize:[16,16],iconAnchor:[8,8]})}).addTo(map);
+  const cand=[];
+  DATA.stations.forEach(s=>{if(s.lat)cand.push({cat:'station',name:nm(s)+' '+s.line+t('lineNo'),lat:s.lat,lng:s.lng,d:kmDist(la,lo,s.lat,s.lng),st:s});});
+  publicToilets.forEach(p=>cand.push({cat:p.cat||'public',name:p.nm||'공중화장실',lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr,hr:p.hr}));
+  mine().forEach(m=>cand.push({cat:'mine',name:m.name||'내 화장실',lat:m.lat,lng:m.lng,d:kmDist(la,lo,m.lat,m.lng)}));
+  cand.sort((a,b)=>a.d-b.d);
+  const near=cand.slice(0,30);
+  nearLayer.clearLayers();
+  near.forEach(c=>{const col=CAT[c.cat].c;
+   L.circleMarker([c.lat,c.lng],{radius:7,color:'#fff',weight:2,fillColor:col,fillOpacity:.95})
+    .bindTooltip(c.name,{direction:'top'}).on('click',()=>openKakao(c.name,c.lat,c.lng)).addTo(nearLayer);});
+  map.setView([la,lo],16);
+  showLegend(true);
+  const rows=near.slice(0,15).map(c=>{const dist=c.d<1?Math.round(c.d*1000)+'m':c.d.toFixed(1)+'km';
+   return `<div class="card" style="cursor:pointer" onclick="openKakao('${(c.name||'').replace(/'/g,'')}',${c.lat},${c.lng})">
+     <div class="row"><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${CAT[c.cat].label}</span><b style="margin-left:auto;color:var(--accent)">${dist}</b></div>
+     <div style="font-weight:700;margin-top:4px">${c.name}</div>${c.addr?`<div class="hint">${c.addr}</div>`:''}
+     <div class="hint" style="color:var(--accent);margin-top:4px">🧭 탭하면 카카오맵 길찾기</div></div>`;}).join('');
+  openSheet(`<div class="row"><h2>📍 내 주변 화장실</h2></div><p class="hint">가까운 순 · ${near.length}곳</p>${rows}`);
+ }).catch(()=>{$('#nearBtn').textContent='📍';showToast('위치 권한을 허용해주세요','',null,3500);});
+};
+window.openKakao=(name,lat,lng)=>{window.open('https://map.kakao.com/link/to/'+encodeURIComponent(name)+','+lat+','+lng,'_blank');};
+
+function showLegend(on){const el=$('#legend');if(!on){el.classList.remove('on');return;}
+ el.innerHTML=Object.keys(CAT).map(k=>`<div class="lg"><i style="background:${CAT[k].c}"></i>${CAT[k].label}</div>`).join('');
+ el.classList.add('on');}
 
 /* 노선도(간단 리스트형) */
 window.__pick=id=>{const s=DATA.stations.find(x=>x.id===id);if(s){go('map');map.setView([s.lat,s.lng],15);showStation(s);}};
