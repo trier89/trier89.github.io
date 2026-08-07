@@ -37,6 +37,20 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // 화장실 평가/리뷰: 익명 인증 생성, 필드·크기 검증, 본인것만 삭제
+    match /toilet_reviews/{id} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['tid','rating','text','nick','uid','ts'])
+        && request.resource.data.tid is string && request.resource.data.tid.size() <= 64
+        && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5
+        && request.resource.data.text is string && request.resource.data.text.size() <= 200
+        && request.resource.data.nick is string && request.resource.data.nick.size() >= 1 && request.resource.data.nick.size() <= 16;
+      allow update: if false;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+
     // 그 외 모든 경로 완전 차단(백스톱)
     match /{document=**} {
       allow read, write: if false;

@@ -146,7 +146,9 @@ function showStation(st){
   ${toilets}
   ${(esc||elv)?`<div class="card">${elv?('🛗 '+elv):''}${(elv&&esc)?'<div style="height:6px"></div>':''}${esc?('↗ '+esc):''}</div>`:''}
   ${st.mapImg?`<div class="card"><b>🗺 ${t('stationMap')}</b><a href="${st.mapImg}" target="_blank" rel="noopener"><img src="${st.mapImg}" alt="${t('stationMap')}" style="width:100%;border-radius:8px;margin-top:6px" loading="lazy"></a></div>`:''}
+  <div id="tr-reviews" style="margin-top:14px"></div>
  `);
+ if(window.TReviews)TReviews.render($('#tr-reviews'), 'st_'+st.id, nm(st));
 }
 
 /* 내 화장실(프라이빗, localStorage) */
@@ -225,10 +227,27 @@ $('#nearBtn').onclick=()=>{
      <div class="row"><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${CAT[c.cat].label}</span><b style="margin-left:auto;color:var(--accent)">${dist}</b></div>
      <div style="font-weight:700;margin-top:4px">${c.name}</div>${c.addr?`<div class="hint">${c.addr}</div>`:''}
      <div class="hint" style="color:var(--accent);margin-top:4px">🧭 탭하면 카카오맵 길찾기</div></div>`;}).join('');
-  openSheet(`<div class="row"><h2>📍 내 주변 화장실</h2></div><p class="hint">가까운 순 · ${near.length}곳</p>${rows}`);
+  const tip=TIPS[Math.floor((la*1000+lo*1000))%TIPS.length];
+  const tipCard=`<div class="nudge" style="cursor:pointer" onclick="showTips()">💡 ${tip} <span style="color:var(--accent);font-weight:700">팁 더보기 ›</span></div>`;
+  openSheet(`<div class="row"><h2>📍 내 주변 화장실</h2></div><p class="hint">가까운 순 · ${near.length}곳</p>${tipCard}${rows}`);
  }).catch(()=>{$('#nearBtn').textContent='📍';showToast('위치 권한을 허용해주세요','',null,3500);});
 };
 window.openKakao=(name,lat,lng)=>{window.open('https://map.kakao.com/link/to/'+encodeURIComponent(name)+','+lat+','+lng,'_blank');};
+
+/* 💡 화장실 찾기 팁 */
+const TIPS=[
+ '지하철역 화장실은 대부분 개찰구 <b>밖(무료구역)</b>에 있어요. 게이트 안이면 다시 나오기 번거로우니 "게이트 밖"을 먼저 확인하세요.',
+ '급할 땐 대형 프랜차이즈 카페(스타벅스 등)·백화점·대형마트 화장실이 개방적이에요.',
+ '주유소와 대형 편의점(GS25·CU 등)도 화장실을 쓸 수 있는 곳이 많아요.',
+ '지하상가·지하도와 연결된 역은 지상보다 화장실이 더 가까울 수 있어요.',
+ '지하철역·공원 화장실은 대개 첫차~막차 시간에 열려 있어요.',
+ '아이 동반·장애인은 <b>다목적(가족)화장실</b>을 찾으면 편해요. 역마다 위치가 달라요.',
+ '기차역·터미널·고속도로 휴게소는 화장실이 크고 회전이 빨라요.',
+ '평일 낮이라면 주민센터·구청 같은 관공서 화장실도 개방돼요.',
+ '상가 화장실을 이용했다면 음료 한 잔 사주는 센스! ☕ (다음 사람을 위해)'
+];
+function showTips(){openSheet('<div class="row"><h2>💡 화장실 찾기 팁</h2></div>'+TIPS.map(x=>`<div class="card" style="font-size:14px;line-height:1.6">${x}</div>`).join(''));}
+window.showTips=showTips;
 
 function showLegend(on){const el=$('#legend');if(!on){el.classList.remove('on');return;}
  el.innerHTML=Object.keys(CAT).map(k=>`<div class="lg"><i style="background:${CAT[k].c}"></i>${CAT[k].label}</div>`).join('');
