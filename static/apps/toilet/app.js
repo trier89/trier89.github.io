@@ -15,14 +15,27 @@ const map=L.map('map',{zoomControl:true,attributionControl:false}).setView([37.5
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
 const pinLayer=L.layerGroup().addTo(map);
 
+const LINE_COLORS={'1':'#0052A4','2':'#00A84D','3':'#EF7C1C','4':'#00A5DE','5':'#996CAC','6':'#CD7C2F','7':'#747F00','8':'#E6186C'};
+const lineColor=l=>LINE_COLORS[l]||'#888';
+
 function renderPins(){
  pinLayer.clearLayers();
- DATA.stations.forEach(st=>{
-  const html=`<div class="pin"><b>🚻</b></div>`;
-  L.marker([st.lat,st.lng],{icon:L.divIcon({html,className:'',iconSize:[30,30],iconAnchor:[15,28]})})
-   .on('click',()=>showStation(st)).addTo(pinLayer);
+ // 1) 호선별 색깔 노선(역 순서대로 이어 그림)
+ const byLine={};
+ DATA.stations.forEach(s=>{if(s.lat)(byLine[s.line]=byLine[s.line]||[]).push(s);});
+ Object.keys(byLine).forEach(ln=>{
+  const pts=byLine[ln].slice().sort((a,b)=>(a.no||0)-(b.no||0)).map(s=>[s.lat,s.lng]);
+  if(pts.length>1)L.polyline(pts,{color:lineColor(ln),weight:4,opacity:.85,lineJoin:'round'}).addTo(pinLayer);
  });
- // 내 화장실
+ // 2) 역 = 색깔 테두리 원(탭하면 화장실)
+ DATA.stations.forEach(st=>{
+  if(!st.lat)return;
+  L.circleMarker([st.lat,st.lng],{radius:5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1})
+   .on('click',()=>showStation(st))
+   .bindTooltip(nm(st),{direction:'top',offset:[0,-6],className:'st-tip'})
+   .addTo(pinLayer);
+ });
+ // 3) 내 화장실
  mine().forEach(m=>{
   L.marker([m.lat,m.lng],{icon:L.divIcon({html:'<div class="pin" style="background:#8a7fd6"><b>🔑</b></div>',className:'',iconSize:[30,30],iconAnchor:[15,28]})})
    .on('click',()=>showMine(m)).addTo(pinLayer);
@@ -96,13 +109,16 @@ $('#addBtn').onclick=addModal;
 function renderLine(){
  const byLine={};
  DATA.stations.forEach(s=>{(byLine[s.line]=byLine[s.line]||[]).push(s);});
- $('#lineMap').innerHTML=Object.keys(byLine).sort().map(ln=>`
-  <div style="margin-bottom:18px">
-   <h3>${ln}호선</h3>
-   <div class="line-col">${byLine[ln].map(s=>`
-    <div class="line-st" onclick="__pick('${s.id}')"><span class="dot"></span><span class="lbl">${nm(s)}</span>
+ $('#lineMap').innerHTML=Object.keys(byLine).sort().map(ln=>{
+  const c=lineColor(ln);
+  const sts=byLine[ln].slice().sort((a,b)=>(a.no||0)-(b.no||0));
+  return `
+  <div style="margin-bottom:22px">
+   <h3><span class="line-badge" style="background:${c}">${ln}${t('lineNo')}</span></h3>
+   <div class="line-col" style="border-left:4px solid ${c};margin-left:9px">${sts.map(s=>`
+    <div class="line-st" onclick="__pick('${s.id}')"><span class="dot" style="border-color:${c}"></span><span class="lbl">${nm(s)}</span>
      <span class="mini">🚻 ${s.toilets.length}</span></div>`).join('')}</div>
-  </div>`).join('')||'<p class="hint">데이터 로딩 중…</p>';
+  </div>`;}).join('')||'<p class="hint">데이터 로딩 중…</p>';
 }
 window.__pick=id=>{const s=DATA.stations.find(x=>x.id===id);if(s){go('map');map.setView([s.lat,s.lng],15);showStation(s);}};
 
