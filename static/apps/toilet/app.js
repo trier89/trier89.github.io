@@ -26,6 +26,9 @@ const CAT={
  mine:{c:'#8a4fd6',emoji:'🔑',label:'내 등록'}
 };
 const toiletCat=p=>/역|지하상가|지하도|지하철|환승|스테이션/.test((p.nm||'')+(p.addr||''))?'linked':'public';
+// 프리미엄 카테고리 핀 마커(앱 아이콘 통일)
+const MARKER_ICONS={};
+['station','linked','public','mine'].forEach(function(k){MARKER_ICONS[k]=L.icon({iconUrl:'marker-'+k+'.png',iconSize:[36,36],iconAnchor:[18,34],tooltipAnchor:[0,-30]});});
 let publicToilets=null, _ptLoad=null; // 지연 로드(무거운 파일)
 function loadPublic(){
  if(publicToilets)return Promise.resolve(publicToilets);
@@ -217,8 +220,8 @@ $('#nearBtn').onclick=()=>{
   cand.sort((a,b)=>a.d-b.d);
   const near=cand.slice(0,30);
   nearLayer.clearLayers();
-  near.forEach(c=>{const col=CAT[c.cat].c;
-   L.circleMarker([c.lat,c.lng],{radius:7,color:'#fff',weight:2,fillColor:col,fillOpacity:.95})
+  near.forEach(c=>{
+   L.marker([c.lat,c.lng],{icon:MARKER_ICONS[c.cat]||MARKER_ICONS.public})
     .bindTooltip(c.name,{direction:'top'}).on('click',()=>openKakao(c.name,c.lat,c.lng)).addTo(nearLayer);});
   map.setView([la,lo],16);
   showLegend(true);
