@@ -432,7 +432,7 @@ document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>go(b.dataset.v
 /* 다국어 */
 function applyLang(){
  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
- $('#title').childNodes[0].nodeValue=t('title')+' 🚻';
+ var _tt=$('#titleText');if(_tt)_tt.textContent=t('title');
  $('#subtitle').textContent=t('sub');
  const se=$('#search');if(se)se.placeholder=t('search');
  renderPins();

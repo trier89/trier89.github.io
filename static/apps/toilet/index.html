@@ -14,7 +14,8 @@
 html,body{margin:0;height:100%;font-family:-apple-system,"Apple SD Gothic Neo",Pretendard,sans-serif;color:var(--ink);background:var(--bg)}
 #app{position:fixed;inset:0;display:flex;flex-direction:column}
 header{padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;z-index:600}
-header h1{font-size:16px;margin:0;font-weight:800}
+header h1{font-size:16px;margin:0;font-weight:800;display:flex;align-items:center;gap:6px}
+.applogo{width:26px;height:26px;border-radius:7px;flex:none}
 header h1 small{font-weight:600;color:var(--muted);font-size:12px;margin-left:4px}
 .seg{margin-left:auto;display:flex;background:var(--bg);border-radius:10px;padding:3px}
 .seg button{border:0;background:transparent;padding:6px 12px;border-radius:8px;font-weight:700;color:var(--muted);font-size:13px}
@@ -90,7 +91,7 @@ label{font-size:13px;font-weight:700;color:var(--muted)}
 
 <div id="app">
   <header>
-    <h1 id="title">급할 땐 🚻<small id="subtitle">지하철 화장실</small></h1>
+    <h1 id="title"><img class="applogo" src="icon-192.png" alt=""><span id="titleText">급할 땐</span><small id="subtitle">지하철 화장실</small></h1>
     <div class="seg">
       <button id="tabMap" class="on" data-v="map">🗺 <span data-i="map">지도</span></button>
       <button id="tabLine" data-v="line">🚇 <span data-i="line">노선도</span></button>
