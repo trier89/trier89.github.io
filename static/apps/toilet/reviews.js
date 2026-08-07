@@ -38,26 +38,27 @@
  }
 
  function render(container, tid, title){
-  container.innerHTML='<div style="color:#9ca3af;font-size:13px;padding:8px 0">⭐ 평가 불러오는 중…</div>';
+  container.innerHTML='<div style="color:#9ca3af;font-size:13px;padding:8px 0">⭐ '+(window.TT?window.TT('revLoading','평가 불러오는 중…'):'평가 불러오는 중…')+'</div>';
   init().then(function(){return fetchReviews(tid);}).then(function(list){
    var avg=list.length?(list.reduce(function(s,r){return s+r.rating;},0)/list.length):0;
    var sel=0; // 선택한 별점
-   var head='<div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px"><b style="font-size:15px">⭐ 화장실 평가</b>'
-    +(list.length?'<span style="color:#e8a020;font-weight:800">'+avg.toFixed(1)+'</span><span style="color:#9ca3af;font-size:12px">('+list.length+')</span>':'<span style="color:#9ca3af;font-size:12px">첫 평가를 남겨보세요</span>')+'</div>';
+   var TTr=function(k,f){return window.TT?window.TT(k,f):f;};
+   var head='<div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px"><b style="font-size:15px">⭐ '+TTr('revTitle','화장실 평가')+'</b>'
+    +(list.length?'<span style="color:#e8a020;font-weight:800">'+avg.toFixed(1)+'</span><span style="color:#9ca3af;font-size:12px">('+list.length+')</span>':'<span style="color:#9ca3af;font-size:12px">'+TTr('revFirst','첫 평가를 남겨보세요')+'</span>')+'</div>';
    var form='<div class="card" style="background:#faf9f6">'
-    +'<div style="font-size:13px;color:#7b828a;margin-bottom:4px">별점</div>'
+    +'<div style="font-size:13px;color:#7b828a;margin-bottom:4px">'+(window.TT?window.TT('revStar','별점'):'별점')+'</div>'
     +'<div id="tr-stars" style="font-size:26px;color:#e8a020;letter-spacing:2px">'+stars(0,true)+'</div>'
-    +'<input id="tr-nick" maxlength="16" placeholder="닉네임" style="margin-top:8px">'
-    +'<textarea id="tr-text" maxlength="200" rows="2" placeholder="화장실 어땠나요? (청결·위치 등, 최대 200자)"></textarea>'
+    +'<input id="tr-nick" maxlength="16" placeholder="'+(window.TT?window.TT('revNick','닉네임'):'닉네임')+'" style="margin-top:8px">'
+    +'<textarea id="tr-text" maxlength="200" rows="2" placeholder="'+(window.TT?window.TT('revPlaceholder','화장실 어땠나요?'):'화장실 어땠나요?')+'"></textarea>'
     +'<div style="display:flex;align-items:center;gap:8px"><span id="tr-msg" style="font-size:12px;color:#9ca3af;flex:1"></span>'
-    +'<button class="btn" id="tr-send" style="width:auto;margin:0;padding:9px 18px">등록</button></div></div>';
+    +'<button class="btn" id="tr-send" style="width:auto;margin:0;padding:9px 18px">'+(window.TT?window.TT('revSubmit','등록'):'등록')+'</button></div></div>';
    var items=list.map(function(r){
     var mine=r.uid&&r.uid===myUid;
     return '<div style="padding:9px 0;border-bottom:1px solid #f0f2f4">'
      +'<div style="display:flex;align-items:center;gap:6px"><span style="color:#e8a020">'+stars(r.rating)+'</span>'
      +'<b style="font-size:13px">'+esc(r.nick)+'</b><span style="color:#9ca3af;font-size:11px;margin-left:auto">'+fmt(r.ts)+'</span></div>'
      +(r.text?'<div style="font-size:14px;margin-top:3px">'+esc(r.text)+'</div>':'')
-     +(mine?'<button data-del="'+r.id+'" style="border:0;background:none;color:#e0392f;font-size:12px;padding:2px 0;margin-top:2px">삭제</button>':'')
+     +(mine?'<button data-del="'+r.id+'" style="border:0;background:none;color:#e0392f;font-size:12px;padding:2px 0;margin-top:2px">'+(window.TT?window.TT('revDelete','삭제'):'삭제')+'</button>':'')
      +'</div>';
    }).join('');
    container.innerHTML=head+form+'<div id="tr-list" style="margin-top:6px">'+items+'</div>';
@@ -73,14 +74,14 @@
    // 등록
    container.querySelector('#tr-send').onclick=function(){
     var msg=container.querySelector('#tr-msg');
-    if(!sel){msg.textContent='별점을 선택해주세요';return;}
-    if(Date.now()-lastSent<20000){msg.textContent='잠시 후 다시 시도해주세요';return;}
+    if(!sel){msg.textContent=(window.TT?window.TT('revSelectStar','별점을 선택해주세요'):'별점을 선택해주세요');return;}
+    if(Date.now()-lastSent<20000){msg.textContent=(window.TT?window.TT('revCooldown','잠시 후 다시 시도해주세요'):'잠시 후 다시 시도해주세요');return;}
     var nick=(container.querySelector('#tr-nick').value||'익명').slice(0,16);
     var text=(container.querySelector('#tr-text').value||'').slice(0,200);
     container.querySelector('#tr-send').disabled=true;
     db.collection('toilet_reviews').add({tid:tid,rating:sel,text:text,nick:nick,uid:myUid,ts:firebase.firestore.FieldValue.serverTimestamp()})
      .then(function(){lastSent=Date.now();render(container,tid,title);})
-     .catch(function(e){msg.textContent='등록 실패 (규칙 게시 필요)';container.querySelector('#tr-send').disabled=false;});
+     .catch(function(e){msg.textContent=(window.TT?window.TT('revFail','등록 실패'):'등록 실패');container.querySelector('#tr-send').disabled=false;});
    };
   });
  }
