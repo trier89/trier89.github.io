@@ -20,6 +20,7 @@ header h1 small{font-weight:600;color:var(--muted);font-size:12px;margin-left:4p
 .seg button{border:0;background:transparent;padding:6px 12px;border-radius:8px;font-weight:700;color:var(--muted);font-size:13px}
 .seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .lang{border:0;background:var(--bg);border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700;color:var(--ink)}
+#acctBtn{border:0;background:var(--bg);border-radius:8px;padding:5px 8px;font-size:16px;line-height:1;cursor:pointer}
 main{position:relative;flex:1;overflow:hidden}
 .view{position:absolute;inset:0;display:none}
 .view.on{display:block}
@@ -95,6 +96,7 @@ label{font-size:13px;font-weight:700;color:var(--muted)}
       <button id="tabLine" data-v="line">🚇 <span data-i="line">노선도</span></button>
     </div>
     <select class="lang" id="lang"><option value="ko">한</option><option value="en">EN</option><option value="ja">日</option><option value="zh">中</option></select>
+    <button id="acctBtn" title="계정">👤</button>
   </header>
   <main>
     <div id="searchWrap">
@@ -120,5 +122,6 @@ label{font-size:13px;font-weight:700;color:var(--muted)}
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="reviews.js"></script>
+<script src="account.js"></script>
 <script src="app.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}</script>

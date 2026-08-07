@@ -48,7 +48,7 @@
    var form='<div class="card" style="background:#faf9f6">'
     +'<div style="font-size:13px;color:#7b828a;margin-bottom:4px">'+(window.TT?window.TT('revStar','별점'):'별점')+'</div>'
     +'<div id="tr-stars" style="font-size:26px;color:#e8a020;letter-spacing:2px">'+stars(0,true)+'</div>'
-    +'<input id="tr-nick" maxlength="16" placeholder="'+(window.TT?window.TT('revNick','닉네임'):'닉네임')+'" style="margin-top:8px">'
+    +'<input id="tr-nick" maxlength="16" value="'+((window.Account&&window.Account.get&&window.Account.get())?esc(window.Account.get().userid):'')+'" placeholder="'+(window.TT?window.TT('revNick','닉네임'):'닉네임')+'" style="margin-top:8px">'
     +'<textarea id="tr-text" maxlength="200" rows="2" placeholder="'+(window.TT?window.TT('revPlaceholder','화장실 어땠나요?'):'화장실 어땠나요?')+'"></textarea>'
     +'<div style="display:flex;align-items:center;gap:8px"><span id="tr-msg" style="font-size:12px;color:#9ca3af;flex:1"></span>'
     +'<button class="btn" id="tr-send" style="width:auto;margin:0;padding:9px 18px">'+(window.TT?window.TT('revSubmit','등록'):'등록')+'</button></div></div>';
