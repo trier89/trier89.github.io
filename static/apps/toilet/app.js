@@ -23,18 +23,28 @@ const CAT={
  station:{c:'#2f7de1',emoji:'🚇',label:'지하철역'},
  linked:{c:'#12b5cb',emoji:'🔵',label:'지하철 연결'},
  public:{c:'#2f9e6b',emoji:'🟢',label:'야외 공공'},
+ starbucks:{c:'#00704A',emoji:'☕',label:'스타벅스'},
+ dept:{c:'#c2185b',emoji:'🏬',label:'백화점'},
+ mart:{c:'#e67e22',emoji:'🛒',label:'대형마트'},
  mine:{c:'#8a4fd6',emoji:'🔑',label:'내 등록'}
 };
 const toiletCat=p=>/역|지하상가|지하도|지하철|환승|스테이션/.test((p.nm||'')+(p.addr||''))?'linked':'public';
 // 프리미엄 카테고리 핀 마커(앱 아이콘 통일)
 const MARKER_ICONS={};
-['station','linked','public','mine'].forEach(function(k){MARKER_ICONS[k]=L.icon({iconUrl:'marker-'+k+'.png',iconSize:[36,36],iconAnchor:[18,34],tooltipAnchor:[0,-30]});});
+['station','linked','public','starbucks','dept','mart','mine'].forEach(function(k){MARKER_ICONS[k]=L.icon({iconUrl:'marker-'+k+'.png',iconSize:[36,36],iconAnchor:[18,34],tooltipAnchor:[0,-30]});});
 let publicToilets=null, _ptLoad=null; // 지연 로드(무거운 파일)
 function loadPublic(){
  if(publicToilets)return Promise.resolve(publicToilets);
  if(_ptLoad)return _ptLoad;
  _ptLoad=fetch('public_toilets.json').then(r=>r.json()).then(d=>{publicToilets=(d.toilets||[]).map(p=>(p.cat=toiletCat(p),p));return publicToilets;}).catch(()=>{publicToilets=[];return publicToilets;});
  return _ptLoad;
+}
+let places=null, _plLoad=null; // 스타벅스·백화점·대형마트(카카오)
+function loadPlaces(){
+ if(places)return Promise.resolve(places);
+ if(_plLoad)return _plLoad;
+ _plLoad=fetch('places.json').then(r=>r.json()).then(d=>{places=d.places||[];return places;}).catch(()=>{places=[];return places;});
+ return _plLoad;
 }
 
 // 토스트(실행취소 등)
@@ -208,7 +218,7 @@ $('#nearBtn').onclick=()=>{
  $('#nearBtn').textContent='⏳';
  Promise.all([
   new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:10000,maximumAge:30000})),
-  loadPublic()
+  loadPublic(), loadPlaces()
  ]).then(([pos])=>{
   $('#nearBtn').textContent='📍'; go('map');
   const la=pos.coords.latitude, lo=pos.coords.longitude;
@@ -218,6 +228,7 @@ $('#nearBtn').onclick=()=>{
   const cand=[];
   DATA.stations.forEach(s=>{if(s.lat)cand.push({cat:'station',name:nm(s)+' '+s.line+t('lineNo'),lat:s.lat,lng:s.lng,d:kmDist(la,lo,s.lat,s.lng),st:s});});
   publicToilets.forEach(p=>cand.push({cat:p.cat||'public',name:p.nm||'공중화장실',lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr,hr:p.hr}));
+  (places||[]).forEach(p=>cand.push({cat:p.cat,name:p.nm,lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr}));
   mine().forEach(m=>cand.push({cat:'mine',name:m.name||'내 화장실',lat:m.lat,lng:m.lng,d:kmDist(la,lo,m.lat,m.lng),mineObj:m}));
   cand.sort((a,b)=>a.d-b.d);
   const near=cand.slice(0,30); window._near=near;
