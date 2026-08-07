@@ -20,25 +20,28 @@ const lineColor=l=>LINE_COLORS[l]||'#888';
 const kmDist=(a,b,c,d)=>{const R=6371,r=Math.PI/180,dLa=(c-a)*r,dLo=(d-b)*r,x=Math.sin(dLa/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x));};
 const GAP=2.6; // km: 인접역이 이보다 멀면 지선 점프로 보고 선 끊음
 
-// 호선별 폴리라인 세그먼트 계산(지선/순환 대응: stnNo순 vs 최근접 중 조각 적은쪽)
-function lineSegments(){
+// 호선별 노선 엣지 = 최소신장트리(MST). 트리라서 갈림길(지선)은 뻗고 삼각형/지름길은 안 생김.
+// CAP 넘는 엣지는 제외(동떨어진 역은 억지 연결 안 함). 호선당 보통 1개 트리로 완전 연결.
+function lineEdges(){
  const byLine={};
  DATA.stations.forEach(s=>{if(s.lat)(byLine[s.line]=byLine[s.line]||[]).push(s);});
- const segByOrder=arr=>{const out=[];let seg=[];for(const s of arr){if(seg.length&&kmDist(seg[seg.length-1][0],seg[seg.length-1][1],s.lat,s.lng)>GAP){if(seg.length>1)out.push(seg);seg=[];}seg.push([s.lat,s.lng]);}if(seg.length>1)out.push(seg);return out;};
- const segByNN=arr=>{const p=arr.map(s=>[s.lat,s.lng]);const used=Array(p.length).fill(false);const out=[];let cur=0;for(let i=1;i<p.length;i++)if(p[i][1]+p[i][0]<p[cur][1]+p[cur][0])cur=i;let seg=[cur];used[cur]=true;let rem=p.length-1;while(rem>0){const last=seg[seg.length-1];let best=-1,bd=1e9;for(let j=0;j<p.length;j++){if(used[j])continue;const dd=kmDist(p[last][0],p[last][1],p[j][0],p[j][1]);if(dd<bd){bd=dd;best=j;}}if(bd>GAP){if(seg.length>1)out.push(seg.map(i=>p[i]));seg=[best];}else seg.push(best);used[best]=true;rem--;}if(seg.length>1)out.push(seg.map(i=>p[i]));return out;};
- const res=[];
+ const CAP=4.0;
+ const out=[];
  Object.keys(byLine).forEach(ln=>{
-  const arr=byLine[ln].slice().sort((a,b)=>(a.no||0)-(b.no||0));
-  const a=segByOrder(arr),b=segByNN(arr);
-  (b.length<a.length?b:a).forEach(seg=>res.push({line:ln,seg}));
+  const a=byLine[ln],n=a.length,E=[];
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const dd=kmDist(a[i].lat,a[i].lng,a[j].lat,a[j].lng);if(dd<=CAP)E.push([dd,i,j]);}
+  E.sort((x,y)=>x[0]-y[0]);
+  const par=a.map((_,i)=>i);
+  const find=x=>{while(par[x]!==x){par[x]=par[par[x]];x=par[x];}return x;};
+  for(const e of E){const ri=find(e[1]),rj=find(e[2]);if(ri!==rj){par[ri]=rj;out.push({line:ln,seg:[[a[e[1]].lat,a[e[1]].lng],[a[e[2]].lat,a[e[2]].lng]]});}}
  });
- return res;
+ return out;
 }
 
 // 노선+역 그리기(지도/노선도 공용). labels=true면 역이름 상시표시.
 function drawNetwork(layer,opts){
  opts=opts||{};
- lineSegments().forEach(o=>L.polyline(o.seg,{color:lineColor(o.line),weight:opts.weight||4,opacity:.85,lineJoin:'round'}).addTo(layer));
+ lineEdges().forEach(o=>L.polyline(o.seg,{color:lineColor(o.line),weight:opts.weight||4,opacity:.85,lineJoin:'round'}).addTo(layer));
  DATA.stations.forEach(st=>{
   if(!st.lat)return;
   const mk=L.circleMarker([st.lat,st.lng],{radius:opts.radius||5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1})
