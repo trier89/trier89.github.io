@@ -1,10 +1,10 @@
 /* 급할 땐 · 지하철 화장실 — 스캐폴드(목업). 실데이터=data.go.kr 키 연결 예정 */
 const $=s=>document.querySelector(s);
 const LANG={
- ko:{map:'지도',line:'노선도',title:'급할 땐',sub:'지하철 화장실',toilet:'화장실',esc:'에스컬레이터',inGate:'게이트 안',outGate:'게이트 밖',gateUnknown:'게이트 정보없음',floor:'층',nearCar:'가까운 칸',hours:'이용시간',type:'구성',wc:'휠체어 접근',lineNo:'호선',route:'길찾기',mine:'내 화장실',addMine:'내 화장실 추가',nudgeShop:'상가 화장실은 이용 시 음료 한 잔 어때요? ☕',pw:'비밀번호',hasPw:'비번 있음',noPw:'비번 없음',note:'비고',save:'저장',loc:'위치',near:'근처 공공화장실',search:'역 검색',stationMap:'역 구내 안내도'},
- en:{map:'Map',line:'Lines',title:'Gotta Go',sub:'Subway Toilets',toilet:'Toilet',esc:'Escalator',inGate:'Inside gate',outGate:'Outside gate',gateUnknown:'Gate n/a',floor:'Floor',nearCar:'Nearest car',hours:'Hours',type:'Type',wc:'Wheelchair',lineNo:' Line',route:'Route',mine:'My spots',addMine:'Add my toilet',nudgeShop:'Buy a drink if you use a shop toilet ☕',pw:'Password',hasPw:'Has code',noPw:'No code',note:'Notes',save:'Save',loc:'Location',near:'Nearby public toilets',search:'Search station',stationMap:'Station map'},
- ja:{map:'地図',line:'路線',title:'急な時',sub:'地下鉄トイレ',toilet:'トイレ',esc:'エスカレーター',inGate:'改札内',outGate:'改札外',gateUnknown:'改札不明',floor:'階',nearCar:'近い車両',hours:'利用時間',type:'構成',wc:'車椅子',lineNo:'号線',route:'ルート',mine:'マイ',addMine:'マイトイレ追加',nudgeShop:'店舗トイレは一杯どうぞ ☕',pw:'暗証番号',hasPw:'番号あり',noPw:'番号なし',note:'メモ',save:'保存',loc:'場所',near:'近くの公衆トイレ',search:'駅を検索',stationMap:'構内図'},
- zh:{map:'地图',line:'线路',title:'急需时',sub:'地铁厕所',toilet:'厕所',esc:'扶梯',inGate:'闸内',outGate:'闸外',gateUnknown:'闸机未知',floor:'层',nearCar:'最近车厢',hours:'开放时间',type:'构成',wc:'轮椅',lineNo:'号线',route:'路线',mine:'我的',addMine:'添加厕所',nudgeShop:'用商铺厕所买杯饮料吧 ☕',pw:'密码',hasPw:'有密码',noPw:'无密码',note:'备注',save:'保存',loc:'位置',near:'附近公厕',search:'搜索车站',stationMap:'站内地图'}
+ ko:{map:'지도',line:'노선도',title:'급할 땐',sub:'지하철 화장실',toilet:'화장실',esc:'에스컬레이터',elv:'엘리베이터',inGate:'게이트 안',outGate:'게이트 밖',gateUnknown:'게이트 정보없음',floor:'층',nearCar:'가까운 칸',hours:'이용시간',type:'구성',wc:'휠체어 접근',lineNo:'호선',route:'길찾기',mine:'내 화장실',addMine:'내 화장실 추가',nudgeShop:'상가 화장실은 이용 시 음료 한 잔 어때요? ☕',pw:'비밀번호',hasPw:'비번 있음',noPw:'비번 없음',note:'비고',save:'저장',loc:'위치',near:'근처 공공화장실',search:'역 검색',stationMap:'역 구내 안내도'},
+ en:{map:'Map',line:'Lines',title:'Gotta Go',sub:'Subway Toilets',toilet:'Toilet',esc:'Escalator',elv:'Elevator',inGate:'Inside gate',outGate:'Outside gate',gateUnknown:'Gate n/a',floor:'Floor',nearCar:'Nearest car',hours:'Hours',type:'Type',wc:'Wheelchair',lineNo:' Line',route:'Route',mine:'My spots',addMine:'Add my toilet',nudgeShop:'Buy a drink if you use a shop toilet ☕',pw:'Password',hasPw:'Has code',noPw:'No code',note:'Notes',save:'Save',loc:'Location',near:'Nearby public toilets',search:'Search station',stationMap:'Station map'},
+ ja:{map:'地図',line:'路線',title:'急な時',sub:'地下鉄トイレ',toilet:'トイレ',esc:'エスカレーター',elv:'エレベーター',inGate:'改札内',outGate:'改札外',gateUnknown:'改札不明',floor:'階',nearCar:'近い車両',hours:'利用時間',type:'構成',wc:'車椅子',lineNo:'号線',route:'ルート',mine:'マイ',addMine:'マイトイレ追加',nudgeShop:'店舗トイレは一杯どうぞ ☕',pw:'暗証番号',hasPw:'番号あり',noPw:'番号なし',note:'メモ',save:'保存',loc:'場所',near:'近くの公衆トイレ',search:'駅を検索',stationMap:'構内図'},
+ zh:{map:'地图',line:'线路',title:'急需时',sub:'地铁厕所',toilet:'厕所',esc:'扶梯',elv:'电梯',inGate:'闸内',outGate:'闸外',gateUnknown:'闸机未知',floor:'层',nearCar:'最近车厢',hours:'开放时间',type:'构成',wc:'轮椅',lineNo:'号线',route:'路线',mine:'我的',addMine:'添加厕所',nudgeShop:'用商铺厕所买杯饮料吧 ☕',pw:'密码',hasPw:'有密码',noPw:'无密码',note:'备注',save:'保存',loc:'位置',near:'附近公厕',search:'搜索车站',stationMap:'站内地图'}
 };
 let lang='ko', DATA={stations:[]};
 const t=k=>(LANG[lang]&&LANG[lang][k])||LANG.ko[k]||k;
@@ -92,13 +92,13 @@ function showStation(st){
    ${x.info?`<div class="kv"><b>${t('type')}</b><span>${x.info}</span></div>`:''}
   </div>`).join('');
  const esc=(st.escalator||[]).length?`<div class="kv"><b>${t('esc')}</b><span>${st.escalator.map(e=>e.from+'↔'+e.to).join(', ')}</span></div>`:'';
+ const elv=(st.elevator||[]).length?`<div class="kv"><b>${t('elv')}</b><span>${st.elevator.map(e=>`${e.from}↔${e.to}${e.pos?` · ${e.pos}`:''}`).join('<br>')}</span></div>`:'';
  openSheet(`
   <div class="row"><h2>${nm(st)}</h2><span class="tag" style="background:#eef3fb;color:var(--accent)">${st.line}${t('lineNo')}</span></div>
   <h3 style="margin-top:12px">🚻 ${t('toilet')} ${st.toilets.length}</h3>
   ${toilets}
-  ${esc?`<div class="card">${esc}</div>`:''}
+  ${(esc||elv)?`<div class="card">${elv?('🛗 '+elv):''}${(elv&&esc)?'<div style="height:6px"></div>':''}${esc?('↗ '+esc):''}</div>`:''}
   ${st.mapImg?`<div class="card"><b>🗺 ${t('stationMap')}</b><a href="${st.mapImg}" target="_blank" rel="noopener"><img src="${st.mapImg}" alt="${t('stationMap')}" style="width:100%;border-radius:8px;margin-top:6px" loading="lazy"></a></div>`:''}
-  <button class="btn ghost" onclick="alert('길찾기: 도보네트워크 API 연결 예정')">🧭 ${t('route')}</button>
  `);
 }
 
