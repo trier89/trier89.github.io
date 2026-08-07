@@ -1,0 +1,86 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>급할 땐 · 지하철 화장실</title>
+<meta name="description" content="지하철역 화장실 위치를 게이트 안/밖·층·출구까지 빠르게 찾는 앱. 서울 1~8호선 지원.">
+<meta name="theme-color" content="#2f7de1">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--line:#e6e8eb;--ink:#1c2126;--muted:#7b828a;--accent:#2f7de1;--warn:#e08a2f;--in:#2f9e5b;--out:#8a7fd6}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;font-family:-apple-system,"Apple SD Gothic Neo",Pretendard,sans-serif;color:var(--ink);background:var(--bg)}
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+header{padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;z-index:600}
+header h1{font-size:16px;margin:0;font-weight:800}
+header h1 small{font-weight:600;color:var(--muted);font-size:12px;margin-left:4px}
+.seg{margin-left:auto;display:flex;background:var(--bg);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:8px;font-weight:700;color:var(--muted);font-size:13px}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.lang{border:0;background:var(--bg);border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700;color:var(--ink)}
+main{position:relative;flex:1;overflow:hidden}
+.view{position:absolute;inset:0;display:none}
+.view.on{display:block}
+#map{position:absolute;inset:0}
+#lineMap{position:absolute;inset:0;overflow:auto;background:#fff;padding:16px}
+.pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:var(--accent);transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}
+.pin b{transform:rotate(45deg);color:#fff;font-size:13px}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.16);max-height:72%;overflow:auto;transform:translateY(102%);transition:transform .26s cubic-bezier(.2,.9,.3,1);z-index:700;padding-bottom:24px}
+.sheet.up{transform:none}
+.grabz{height:26px;display:flex;justify-content:center;align-items:center;touch-action:none}
+.grabz i{width:44px;height:5px;border-radius:3px;background:var(--line)}
+.pad{padding:4px 18px}
+.row{display:flex;align-items:center;gap:8px}
+h2{font-size:20px;margin:2px 0}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;margin:2px 4px 2px 0}
+.tag.in{background:#e7f5ec;color:var(--in)}
+.tag.out{background:#eeecfa;color:var(--out)}
+.card{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+.card h3{margin:0 0 6px;font-size:15px}
+.kv{display:flex;gap:6px;font-size:13px;color:var(--muted);margin:3px 0}
+.kv b{color:var(--ink);font-weight:700;min-width:52px}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px;font-size:15px;font-weight:800;background:var(--accent);color:#fff;margin-top:10px}
+.btn.ghost{background:var(--bg);color:var(--ink)}
+.fab{position:absolute;right:16px;bottom:22px;z-index:650;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:0;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.24)}
+.nudge{background:#fff7ec;border:1px solid #f0dcc0;color:#8a6a2f;border-radius:12px;padding:10px 12px;font-size:13px;margin:8px 0}
+input,textarea,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:var(--surface);margin:4px 0}
+label{font-size:13px;font-weight:700;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:flex-end;z-index:900}
+.modal.on{display:flex}
+.modal .box{background:var(--surface);width:100%;border-radius:20px 20px 0 0;padding:18px;max-height:90%;overflow:auto}
+.line-col{display:flex;flex-direction:column;gap:2px}
+.line-st{display:flex;align-items:center;gap:10px;padding:6px 4px;border-radius:8px}
+.line-st .dot{width:14px;height:14px;border-radius:50%;border:3px solid #2f7de1;background:#fff;flex:none}
+.line-st .lbl{font-weight:700}
+.line-st .mini{font-size:11px;color:var(--in);font-weight:700}
+.hint{font-size:12px;color:var(--muted)}
+</style>
+
+<div id="app">
+  <header>
+    <h1 id="title">급할 땐 🚻<small id="subtitle">지하철 화장실</small></h1>
+    <div class="seg">
+      <button id="tabMap" class="on" data-v="map">🗺 <span data-i="map">지도</span></button>
+      <button id="tabLine" data-v="line">🚇 <span data-i="line">노선도</span></button>
+    </div>
+    <select class="lang" id="lang"><option value="ko">한</option><option value="en">EN</option><option value="ja">日</option><option value="zh">中</option></select>
+  </header>
+  <main>
+    <section class="view on" id="v-map">
+      <div id="map"></div>
+      <button class="fab" id="addBtn" title="내 화장실 추가">＋</button>
+    </section>
+    <section class="view" id="v-line">
+      <div id="lineMap"></div>
+    </section>
+    <div class="sheet" id="sheet"><div class="grabz" id="grabz"><i></i></div><div class="pad" id="sheetBody"></div></div>
+  </main>
+</div>
+
+<div class="modal" id="modal"><div class="box" id="modalBody"></div></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}</script>

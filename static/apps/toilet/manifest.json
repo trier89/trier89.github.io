@@ -1,0 +1,16 @@
+{
+  "name": "급할 땐 · 지하철 화장실",
+  "short_name": "지하철화장실",
+  "description": "지하철역 화장실 위치를 게이트 안/밖·층·출구까지 빠르게 찾는 앱",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#2f7de1",
+  "lang": "ko",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

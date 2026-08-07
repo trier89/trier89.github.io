@@ -1,0 +1,9231 @@
+{
+ "stations": [
+  {
+   "id": "0155",
+   "name": "동대문",
+   "line": "1",
+   "lat": 37.570555555556,
+   "lng": 127.00833333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 4번 출입구 부근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0159",
+   "name": "동묘앞",
+   "line": "1",
+   "lat": 37.571944444444,
+   "lng": 127.01416666667,
+   "toilets": [
+    {
+     "gate": "",
+     "floor": "1",
+     "loc": "",
+     "nearCar": null,
+     "hours": null,
+     "info": "",
+     "wheelchair": ""
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 3번 출입구 부근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "하선승강장 7-3지점",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "1",
+     "loc": "상선승강장 4-3지점",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "1층 고객안전실 부근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0150",
+   "name": "서울역",
+   "line": "1",
+   "lat": 37.5558,
+   "lng": 126.972,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 2번 출입구 부근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0151",
+   "name": "시청",
+   "line": "1",
+   "lat": 37.564722222222,
+   "lng": 126.97694444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 5번 출입구 부근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0156",
+   "name": "신설동",
+   "line": "1",
+   "lat": 37.57548,
+   "lng": 127.02345,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실(지하1층) 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0157",
+   "name": "제기동",
+   "line": "1",
+   "lat": 37.57839,
+   "lng": 127.03464,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "2번 출입구 우측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0152",
+   "name": "종각",
+   "line": "1",
+   "lat": 37.570277777778,
+   "lng": 126.98305555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 (다)개집표기 부근(종로3가측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 (가)개집표기 부근 (연결통로 부근, 시청측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0153",
+   "name": "종로3가",
+   "line": "1",
+   "lat": 37.57,
+   "lng": 126.99166666667,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 (라)개집표기 내부(고객안전실앞)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 (가)개집표기 부근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0154",
+   "name": "종로5가",
+   "line": "1",
+   "lat": 37.570833333333,
+   "lng": 127.00194444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 지하상가 연결통로앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0158",
+   "name": "청량리",
+   "line": "1",
+   "lat": 37.58059,
+   "lng": 127.04823,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "4번 출입구 아래",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0222",
+   "name": "강남",
+   "line": "2",
+   "lat": 37.497927777778,
+   "lng": 127.02758333333,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "1층 고객안전실(1,12번 출입구),개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0214",
+   "name": "강변",
+   "line": "2",
+   "lat": 37.535,
+   "lng": 127.09472222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "대합실 1층 통로 중앙",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "2",
+     "to": "3"
+    }
+   ]
+  },
+  {
+   "id": "0212",
+   "name": "건대입구",
+   "line": "2",
+   "lat": 37.540693,
+   "lng": 127.070777,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "대합실 2층 통로 중앙",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0223",
+   "name": "교대",
+   "line": "2",
+   "lat": 37.493611111111,
+   "lng": 127.01361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1,2,3,4,번 출입구 쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0232",
+   "name": "구로디지털단지",
+   "line": "2",
+   "lat": 37.485277777778,
+   "lng": 126.90138888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "지상2층, 고객안전실 앞 (개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0213",
+   "name": "구의",
+   "line": "2",
+   "lat": 37.538055555556,
+   "lng": 127.08583333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "2",
+     "loc": "대합실 2층 통로 중앙",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0227",
+   "name": "낙성대",
+   "line": "2",
+   "lat": 37.476944444444,
+   "lng": 126.96388888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 고객안내부스앞(3,4,5,6번 출입구쪽)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0237",
+   "name": "당산",
+   "line": "2",
+   "lat": 37.534444444444,
+   "lng": 126.90222222222,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "지상2층, 대합실 중앙(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0233",
+   "name": "대림",
+   "line": "2",
+   "lat": 37.493333333333,
+   "lng": 126.895,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "지상2층, 대합실 중앙(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0247",
+   "name": "도림천",
+   "line": "2",
+   "lat": 37.514444444444,
+   "lng": 126.88277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "지상1층, 고객안전실 옆(개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0205",
+   "name": "동대문역사문화공원",
+   "line": "2",
+   "lat": 37.565,
+   "lng": 127.00777777778,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 1층 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0210",
+   "name": "뚝섬",
+   "line": "2",
+   "lat": 37.547222222222,
+   "lng": 127.0475,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "2",
+     "loc": "고객안전실 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0235",
+   "name": "문래",
+   "line": "2",
+   "lat": 37.518888888889,
+   "lng": 126.895,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실(개집표기 외부, 2,3번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0225",
+   "name": "방배",
+   "line": "2",
+   "lat": 37.481388888889,
+   "lng": 126.99777777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "서초방면 대합실 끝(1,4번 출입구방향),개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0229",
+   "name": "봉천",
+   "line": "2",
+   "lat": 37.48236,
+   "lng": 126.94194,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 아이센터 맞은편(1,6번 출입구)개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0226",
+   "name": "사당",
+   "line": "2",
+   "lat": 37.4765,
+   "lng": 126.98161111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 1,2번 출입구 쪽(방배측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 7,8번 출입구 쪽(낙성대측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0219",
+   "name": "삼성",
+   "line": "2",
+   "lat": 37.508872,
+   "lng": 127.063186,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 통로 중앙",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0207",
+   "name": "상왕십리",
+   "line": "2",
+   "lat": 37.564166666667,
+   "lng": 127.02944444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 5,6번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0228",
+   "name": "서울대입구",
+   "line": "2",
+   "lat": 37.481111111111,
+   "lng": 126.95277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 (7,8번 출입구쪽)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0224",
+   "name": "서초",
+   "line": "2",
+   "lat": 37.491944444444,
+   "lng": 127.00805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "교대방면 대합실(1,2,7,8번 출입구),개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0220",
+   "name": "선릉",
+   "line": "2",
+   "lat": 37.50445,
+   "lng": 127.04898611111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0211",
+   "name": "성수",
+   "line": "2",
+   "lat": 37.544444444444,
+   "lng": 127.05611111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "2",
+     "loc": "대합실 2층 2번 출입구측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0201",
+   "name": "시청",
+   "line": "2",
+   "lat": 37.564722222222,
+   "lng": 126.97694444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 환승통로",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 9,10번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0245",
+   "name": "신답",
+   "line": "2",
+   "lat": 37.570011111111,
+   "lng": 127.04651944444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "1",
+     "loc": "1층 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0206",
+   "name": "신당",
+   "line": "2",
+   "lat": 37.565555555556,
+   "lng": 127.01944444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 22,23번기둥",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0231",
+   "name": "신대방",
+   "line": "2",
+   "lat": 37.487222222222,
+   "lng": 126.91305555556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "2층 고객안전실(1,4번 출입구),개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "2",
+     "to": "3"
+    },
+    {
+     "from": "3",
+     "to": "2"
+    }
+   ]
+  },
+  {
+   "id": "0234",
+   "name": "신도림",
+   "line": "2",
+   "lat": 37.509166666667,
+   "lng": 126.89111111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 대합실 (개집표기 내부, 1번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실(개집표기 외부,1번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0230",
+   "name": "신림",
+   "line": "2",
+   "lat": 37.484166666667,
+   "lng": 126.92972222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 고객안전실 맞은편(3,4번 출입구),개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0246",
+   "name": "신설동",
+   "line": "2",
+   "lat": 37.57548,
+   "lng": 127.02345,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실(지하1층) 고객안전실 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0249",
+   "name": "신정네거리",
+   "line": "2",
+   "lat": 37.52,
+   "lng": 126.85277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 대합실(개집표기 외부, 2번, 3번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0240",
+   "name": "신촌",
+   "line": "2",
+   "lat": 37.5597,
+   "lng": 126.943,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실, 5번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0242",
+   "name": "아현",
+   "line": "2",
+   "lat": 37.557411111111,
+   "lng": 126.95615833333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 이대역방면 끝단",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0248",
+   "name": "양천구청",
+   "line": "2",
+   "lat": 37.512222222222,
+   "lng": 126.86555555556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "B1 대합실(개집표기 내부,신정자량사업소출입구 옆)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0221",
+   "name": "역삼",
+   "line": "2",
+   "lat": 37.500786111111,
+   "lng": 127.03688611111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층 통로 중앙",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0236",
+   "name": "영등포구청",
+   "line": "2",
+   "lat": 37.525777777778,
+   "lng": 126.89661111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 대합실(개집표기 내부, 환승통로입구)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0208",
+   "name": "왕십리",
+   "line": "2",
+   "lat": 37.56131,
+   "lng": 127.038632,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하1층 6-1번 출입구 쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0244",
+   "name": "용답",
+   "line": "2",
+   "lat": 37.561880555556,
+   "lng": 127.0509,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0250",
+   "name": "용두",
+   "line": "2",
+   "lat": 37.574,
+   "lng": 127.03806944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "(내선대합실)5번 출입구 입구",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "(외선대합실)1,2번 출입구 입구",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "(외선승강장)2-2 승강장 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "(내선승강장)3-3 승강장 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0203",
+   "name": "을지로3가",
+   "line": "2",
+   "lat": 37.566294444444,
+   "lng": 126.99278055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 (다)개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0204",
+   "name": "을지로4가",
+   "line": "2",
+   "lat": 37.566666666667,
+   "lng": 126.99805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 1,2번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0202",
+   "name": "을지로입구",
+   "line": "2",
+   "lat": 37.566111111111,
+   "lng": 126.9825,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 (다)개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0241",
+   "name": "이대",
+   "line": "2",
+   "lat": 37.556666666667,
+   "lng": 126.94583333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 5번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0216",
+   "name": "잠실",
+   "line": "2",
+   "lat": 37.513333333333,
+   "lng": 127.10027777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1,2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0215",
+   "name": "잠실나루",
+   "line": "2",
+   "lat": 37.520277777778,
+   "lng": 127.10388888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "대합실 1층 통로 중앙",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "3"
+    }
+   ]
+  },
+  {
+   "id": "0217",
+   "name": "잠실새내",
+   "line": "2",
+   "lat": 37.51138889,
+   "lng": 127.08611111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0218",
+   "name": "종합운동장",
+   "line": "2",
+   "lat": 37.511111111111,
+   "lng": 127.07361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1,2번 출입구 앞 (잠실새내측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 5번 출입구 앞 (삼성측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0243",
+   "name": "충정로",
+   "line": "2",
+   "lat": 37.56,
+   "lng": 126.96361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 아현방면 끝단",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0209",
+   "name": "한양대",
+   "line": "2",
+   "lat": 37.555277777778,
+   "lng": 127.04361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "2",
+     "loc": "고객안전실 맞은편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0238",
+   "name": "합정",
+   "line": "2",
+   "lat": 37.549166666667,
+   "lng": 126.91361111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 대합실, 1,2번 출입구",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0239",
+   "name": "홍대입구",
+   "line": "2",
+   "lat": 37.556666666667,
+   "lng": 126.92361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실, 2번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0340",
+   "name": "가락시장",
+   "line": "3",
+   "lat": 37.493055555556,
+   "lng": 127.11805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 B2층 고객안전실 앞(개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "대합실 B2층 고객상담실앞(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0317",
+   "name": "경복궁",
+   "line": "3",
+   "lat": 37.575769444444,
+   "lng": 126.97358888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층 대합실 (가)개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0341",
+   "name": "경찰병원",
+   "line": "3",
+   "lat": 37.49575,
+   "lng": 127.12431944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 아이센터 옆(개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 고객안전실 앞(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0330",
+   "name": "교대",
+   "line": "3",
+   "lat": 37.493611111111,
+   "lng": 127.01361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실1층 고객안전실 맞은편,개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0310",
+   "name": "구파발",
+   "line": "3",
+   "lat": 37.636711111111,
+   "lng": 126.91881944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 (가)개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0324",
+   "name": "금호",
+   "line": "3",
+   "lat": 37.547988888889,
+   "lng": 127.016,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 (가)개집표기 내 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0331",
+   "name": "남부터미널",
+   "line": "3",
+   "lat": 37.484988888889,
+   "lng": 127.01621111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "대합실 B2층 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0313",
+   "name": "녹번",
+   "line": "3",
+   "lat": 37.6009,
+   "lng": 126.93576111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0337",
+   "name": "대청",
+   "line": "3",
+   "lat": 37.493519444444,
+   "lng": 127.07953888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "대합실  B2층 상선 개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0335",
+   "name": "대치",
+   "line": "3",
+   "lat": 37.494511111111,
+   "lng": 127.06336944444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0334",
+   "name": "도곡",
+   "line": "3",
+   "lat": 37.490830555556,
+   "lng": 127.05538333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실  B2층 개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0316",
+   "name": "독립문",
+   "line": "3",
+   "lat": 37.574511111111,
+   "lng": 126.95791944444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층 대합실 (나)개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "0322",
+   "name": "동대입구",
+   "line": "3",
+   "lat": 37.559030555556,
+   "lng": 127.00556944444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "대합실 2층 (가)개집표기 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0333",
+   "name": "매봉",
+   "line": "3",
+   "lat": 37.486911111111,
+   "lng": 127.04671111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층개집표기옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0315",
+   "name": "무악재",
+   "line": "3",
+   "lat": 37.58225,
+   "lng": 126.95035,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층 대합실 (가)개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0312",
+   "name": "불광",
+   "line": "3",
+   "lat": 37.610830555556,
+   "lng": 126.92951111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 (나)개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0339",
+   "name": "수서",
+   "line": "3",
+   "lat": 37.486944444444,
+   "lng": 127.10194444444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 고객안전실좌측(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0327",
+   "name": "신사",
+   "line": "3",
+   "lat": 37.51621,
+   "lng": 127.01975,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하 1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0318",
+   "name": "안국",
+   "line": "3",
+   "lat": 37.576438888889,
+   "lng": 126.98543055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하3층 대합실 C계단 방면",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "0326",
+   "name": "압구정",
+   "line": "3",
+   "lat": 37.527419444444,
+   "lng": 127.02833055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0323",
+   "name": "약수",
+   "line": "3",
+   "lat": 37.554061111111,
+   "lng": 127.01016111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 개집표기 내 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0332",
+   "name": "양재",
+   "line": "3",
+   "lat": 37.484444444444,
+   "lng": 127.03388888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 상선 방향(9-4),개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0311",
+   "name": "연신내",
+   "line": "3",
+   "lat": 37.618819444444,
+   "lng": 126.92133055556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하 1층 대합실 라개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0342",
+   "name": "오금",
+   "line": "3",
+   "lat": 37.501944444444,
+   "lng": 127.12805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 1,2번 출입구 옆(개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 1,2번 출입구옆(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "B4"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "0325",
+   "name": "옥수",
+   "line": "3",
+   "lat": 37.540611111111,
+   "lng": 127.01888055556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "3",
+     "loc": "3층 환승통로측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "3",
+     "loc": "3층 금호역측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0320",
+   "name": "을지로3가",
+   "line": "3",
+   "lat": 37.566294444444,
+   "lng": 126.99278055556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "가 대합실 고객안전실 아래 지하 2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0338",
+   "name": "일원",
+   "line": "3",
+   "lat": 37.483780555556,
+   "lng": 127.08405,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 B2층 7번 출입구옆, 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0328",
+   "name": "잠원",
+   "line": "3",
+   "lat": 37.512880555556,
+   "lng": 127.01116111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 고객안전실 앞(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0319",
+   "name": "종로3가",
+   "line": "3",
+   "lat": 37.57,
+   "lng": 126.99166666667,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B3",
+     "loc": "엘리베이터 이용 지하3층 게이트 통과 후 오른쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0336",
+   "name": "학여울",
+   "line": "3",
+   "lat": 37.4965,
+   "lng": 127.06988,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B4",
+     "loc": "대합실 B4층 외부 E/V 옆 (개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0314",
+   "name": "홍제",
+   "line": "3",
+   "lat": 37.589,
+   "lng": 126.9438,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 대합실 (다)개집표기 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 상가(다이소) 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0417",
+   "name": "길음",
+   "line": "4",
+   "lat": 37.603338888889,
+   "lng": 127.02501944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 (가)개집표기 외부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0434",
+   "name": "남태령",
+   "line": "4",
+   "lat": 37.463788888889,
+   "lng": 126.98911944444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "(지하2층 고객안전실 옆)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0411",
+   "name": "노원",
+   "line": "4",
+   "lat": 37.656369444444,
+   "lng": 127.06345,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "2층 대합실 (나)개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    },
+    {
+     "from": "2",
+     "to": "3"
+    },
+    {
+     "from": "3",
+     "to": "2"
+    }
+   ]
+  },
+  {
+   "id": "0421",
+   "name": "동대문",
+   "line": "4",
+   "lat": 37.570555555556,
+   "lng": 127.00833333333,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0422",
+   "name": "동대문역사문화공원",
+   "line": "4",
+   "lat": 37.565,
+   "lng": 127.00777777778,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층 내부계단 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 10,11번 기둥앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0431",
+   "name": "동작",
+   "line": "4",
+   "lat": 37.502777777778,
+   "lng": 126.98027777778,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "대합실 2층 구내식당좌측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0424",
+   "name": "명동",
+   "line": "4",
+   "lat": 37.560938888889,
+   "lng": 126.98666111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "B1 2~8번 출입구쪽,개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "0415",
+   "name": "미아",
+   "line": "4",
+   "lat": 37.6266,
+   "lng": 127.026,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 교양휴게실 앞 (3,4번개집표기방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0416",
+   "name": "미아사거리",
+   "line": "4",
+   "lat": 37.613211111111,
+   "lng": 127.02998888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 고객안전실 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0409",
+   "name": "불암산",
+   "line": "4",
+   "lat": 37.66996,
+   "lng": 127.07877,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "2",
+     "loc": "대합실 2층 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "대합실 1층 (1,4번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    },
+    {
+     "from": "2",
+     "to": "3"
+    },
+    {
+     "from": "3",
+     "to": "2"
+    }
+   ]
+  },
+  {
+   "id": "0433",
+   "name": "사당",
+   "line": "4",
+   "lat": 37.4765,
+   "lng": 126.98161111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 남태령측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층 환승통로",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "(지하1층 총신대측)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "0428",
+   "name": "삼각지",
+   "line": "4",
+   "lat": 37.535511111111,
+   "lng": 126.97393055556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "게이트 내부 신용산측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0410",
+   "name": "상계",
+   "line": "4",
+   "lat": 37.66095,
+   "lng": 127.07343888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "2층 대합실 (나)개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    },
+    {
+     "from": "2",
+     "to": "3"
+    },
+    {
+     "from": "3",
+     "to": "2"
+    }
+   ]
+  },
+  {
+   "id": "0426",
+   "name": "서울역",
+   "line": "4",
+   "lat": 37.5558,
+   "lng": 126.972,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "14번 출입구  옆, 11번 출입구 물품보관함 건너편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "0418",
+   "name": "성신여대입구",
+   "line": "4",
+   "lat": 37.5926,
+   "lng": 127.01636944444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 고객 안내부스에서 10m 안쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0414",
+   "name": "수유",
+   "line": "4",
+   "lat": 37.638061111111,
+   "lng": 127.02573888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 지하1층 고객안전실 옆(2,8번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0427",
+   "name": "숙대입구",
+   "line": "4",
+   "lat": 37.544561111111,
+   "lng": 126.97213055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 (가)대합실과 (나)대합실 연결통로 가운데",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "0429",
+   "name": "신용산",
+   "line": "4",
+   "lat": 37.529130555556,
+   "lng": 126.9679,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 삼각지측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0413",
+   "name": "쌍문",
+   "line": "4",
+   "lat": 37.648588888889,
+   "lng": 127.03471111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 (나)환기실 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0430",
+   "name": "이촌",
+   "line": "4",
+   "lat": 37.522538888889,
+   "lng": 126.97316111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0412",
+   "name": "창동",
+   "line": "4",
+   "lat": 37.6525,
+   "lng": 127.04694444444,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "2층 대합실 (나)개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0432",
+   "name": "총신대입구",
+   "line": "4",
+   "lat": 37.486263,
+   "lng": 126.981989,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하1층 동작측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0423",
+   "name": "충무로",
+   "line": "4",
+   "lat": 37.561305555556,
+   "lng": 126.9945,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하2층 3,4,5,6,7번 출입구쪽,개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    }
+   ]
+  },
+  {
+   "id": "0419",
+   "name": "한성대입구",
+   "line": "4",
+   "lat": 37.588419444444,
+   "lng": 127.00618055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "1번 출입구방향, (가)개집표기 쪽(개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0420",
+   "name": "혜화",
+   "line": "4",
+   "lat": 37.582280555556,
+   "lng": 127.00186944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "(지하1층 3번 출입구 방면)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "0425",
+   "name": "회현",
+   "line": "4",
+   "lat": 37.558488888889,
+   "lng": 126.97813888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "개집표기 내부 지하2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2549",
+   "name": "강동",
+   "line": "5",
+   "lat": 37.535833333333,
+   "lng": 127.13222222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2562",
+   "name": "강일",
+   "line": "5",
+   "lat": 37.5574043,
+   "lng": 127.1759046,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 지하2층 3번 출입구측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 지하2층 4번 출입구측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2559",
+   "name": "개롱",
+   "line": "5",
+   "lat": 37.498055555556,
+   "lng": 127.135,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "1,4번호 출입구 사이",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2512",
+   "name": "개화산",
+   "line": "5",
+   "lat": 37.572222222222,
+   "lng": 126.80611111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 하선E/L 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2560",
+   "name": "거여",
+   "line": "5",
+   "lat": 37.493333333333,
+   "lng": 127.14361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 8번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2553",
+   "name": "고덕",
+   "line": "5",
+   "lat": 37.555,
+   "lng": 127.15416666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 1번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2530",
+   "name": "공덕",
+   "line": "5",
+   "lat": 37.543055555556,
+   "lng": 126.95111111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2547",
+   "name": "광나루",
+   "line": "5",
+   "lat": 37.545277777778,
+   "lng": 127.10361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2534",
+   "name": "광화문",
+   "line": "5",
+   "lat": 37.571583333333,
+   "lng": 126.97658333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "세종측 대합실 지하1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2545",
+   "name": "군자",
+   "line": "5",
+   "lat": 37.557222222222,
+   "lng": 127.07944444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 (가)개집표기 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2551",
+   "name": "굽은다리",
+   "line": "5",
+   "lat": 37.545555555556,
+   "lng": 127.14277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2550",
+   "name": "길동",
+   "line": "5",
+   "lat": 37.537777777778,
+   "lng": 127.14,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 3번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2513",
+   "name": "김포공항",
+   "line": "5",
+   "lat": 37.5625,
+   "lng": 126.80083333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하 1층, 1번 출입구 옆(지하철경찰센터 옆)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2 대합실 1번 출입구 아래(국내선 연결통로 방면)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2519",
+   "name": "까치산",
+   "line": "5",
+   "lat": 37.531666666667,
+   "lng": 126.84666666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실(지하1층) 1~4번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B5"
+    },
+    {
+     "from": "B5",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2543",
+   "name": "답십리",
+   "line": "5",
+   "lat": 37.566944444444,
+   "lng": 127.0525,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 5,6번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2537",
+   "name": "동대문역사문화공원",
+   "line": "5",
+   "lat": 37.565,
+   "lng": 127.00777777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2555",
+   "name": "둔촌동",
+   "line": "5",
+   "lat": 37.527777777778,
+   "lng": 127.13611111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층, 3,4번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2515",
+   "name": "마곡",
+   "line": "5",
+   "lat": 37.560166666667,
+   "lng": 126.82541666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 2번 출입구 하단",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2542",
+   "name": "마장",
+   "line": "5",
+   "lat": 37.566111111111,
+   "lng": 127.04305555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2561",
+   "name": "마천",
+   "line": "5",
+   "lat": 37.495,
+   "lng": 127.15277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 1번 출입구 방향에서우측 코너",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "BM2"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    },
+    {
+     "from": "BM2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2529",
+   "name": "마포",
+   "line": "5",
+   "lat": 37.539722222222,
+   "lng": 126.94611111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 토니모리좌측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2552",
+   "name": "명일",
+   "line": "5",
+   "lat": 37.551388888889,
+   "lng": 127.14388888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2521",
+   "name": "목동",
+   "line": "5",
+   "lat": 37.526055555556,
+   "lng": 126.86483333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 7번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2563",
+   "name": "미사",
+   "line": "5",
+   "lat": 37.563083333333,
+   "lng": 127.19288888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 5번 출입구옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 지하1층 방화방면 내부계단옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2516",
+   "name": "발산",
+   "line": "5",
+   "lat": 37.558611111111,
+   "lng": 126.83722222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1, 9번 출입구 사이",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2557",
+   "name": "방이",
+   "line": "5",
+   "lat": 37.508611111111,
+   "lng": 127.12583333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 3,4번 출입구방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2511",
+   "name": "방화",
+   "line": "5",
+   "lat": 37.5775,
+   "lng": 126.81277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 3,4번 출입구방향 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2554",
+   "name": "상일동",
+   "line": "5",
+   "lat": 37.556666666667,
+   "lng": 127.16583333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 7번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2533",
+   "name": "서대문",
+   "line": "5",
+   "lat": 37.56575,
+   "lng": 126.96663888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 1, 2번 출입구 내려와서 왼쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2514",
+   "name": "송정",
+   "line": "5",
+   "lat": 37.561111111111,
+   "lng": 126.81194444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층 ES 1호기 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2539",
+   "name": "신금호",
+   "line": "5",
+   "lat": 37.554444444444,
+   "lng": 127.02111111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2개집표기 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B5"
+    },
+    {
+     "from": "B5",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2526",
+   "name": "신길",
+   "line": "5",
+   "lat": 37.516944444444,
+   "lng": 126.9175,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B3",
+     "loc": "대합실(B3) 3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B3"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "1"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2520",
+   "name": "신정",
+   "line": "5",
+   "lat": 37.525,
+   "lng": 126.85627777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "2,3번 출입구 지하 (가)대합실 운임지역 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM2"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2546",
+   "name": "아차산",
+   "line": "5",
+   "lat": 37.551983333333,
+   "lng": 127.08962777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2531",
+   "name": "애오개",
+   "line": "5",
+   "lat": 37.553444444444,
+   "lng": 126.95666666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층개집표기 통과 후좌측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2523",
+   "name": "양평",
+   "line": "5",
+   "lat": 37.525555555556,
+   "lng": 126.88611111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "b1층 고객상담실 옆. 개집표기 내부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B3"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2528",
+   "name": "여의나루",
+   "line": "5",
+   "lat": 37.527055555556,
+   "lng": 126.93280555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 비운임지역 ES옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    }
+   ]
+  },
+  {
+   "id": "2527",
+   "name": "여의도",
+   "line": "5",
+   "lat": 37.521666666667,
+   "lng": 126.92416666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실1층  (가)개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2524",
+   "name": "영등포구청",
+   "line": "5",
+   "lat": 37.525777777778,
+   "lng": 126.89661111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 7번 출입구 방면",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B1",
+     "to": "B4"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    }
+   ]
+  },
+  {
+   "id": "2525",
+   "name": "영등포시장",
+   "line": "5",
+   "lat": 37.522666666667,
+   "lng": 126.90505555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층  2, 3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2558",
+   "name": "오금",
+   "line": "5",
+   "lat": 37.501944444444,
+   "lng": 127.12805555556,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 지하1층 방이역 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2522",
+   "name": "오목교",
+   "line": "5",
+   "lat": 37.524472222222,
+   "lng": 126.87513888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 3번 출입구 방향 임대상가 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2556",
+   "name": "올림픽공원",
+   "line": "5",
+   "lat": 37.516144444444,
+   "lng": 127.13087222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2541",
+   "name": "왕십리",
+   "line": "5",
+   "lat": 37.56131,
+   "lng": 127.038632,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "B2 대합실 상가2002호점 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2517",
+   "name": "우장산",
+   "line": "5",
+   "lat": 37.548888888889,
+   "lng": 126.83638888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실 2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2536",
+   "name": "을지로4가",
+   "line": "5",
+   "lat": 37.566666666667,
+   "lng": 126.99805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층, \nB2층 내려가는 계단 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2544",
+   "name": "장한평",
+   "line": "5",
+   "lat": 37.561666666667,
+   "lng": 127.06361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층 1번 출입구 나가기전 좌측방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2535",
+   "name": "종로3가",
+   "line": "5",
+   "lat": 37.57,
+   "lng": 126.99166666667,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 지하1층 고객안전실 맞은편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    },
+    {
+     "from": "B3",
+     "to": "B5"
+    }
+   ]
+  },
+  {
+   "id": "2548",
+   "name": "천호",
+   "line": "5",
+   "lat": 37.538516666667,
+   "lng": 127.12376666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 대합실(5,6번 출입구 방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2532",
+   "name": "충정로",
+   "line": "5",
+   "lat": 37.56,
+   "lng": 126.96361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 8번 출입구 방향 아이센터 맞은 편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2566",
+   "name": "하남검단산",
+   "line": "5",
+   "lat": 37.5398015,
+   "lng": 127.2235556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 1,2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2565",
+   "name": "하남시청",
+   "line": "5",
+   "lat": 37.541636,
+   "lng": 127.2069717,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 1~3번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "1"
+    },
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "M1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2564",
+   "name": "하남풍산",
+   "line": "5",
+   "lat": 37.5530248,
+   "lng": 127.2046624,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 1,2번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2540",
+   "name": "행당",
+   "line": "5",
+   "lat": 37.5575,
+   "lng": 127.02972222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B3",
+     "loc": "지하3층 E/S 옆(고객상담실 및만남의장소 앞)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "BM4"
+    },
+    {
+     "from": "BM4",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2518",
+   "name": "화곡",
+   "line": "5",
+   "lat": 37.541666666667,
+   "lng": 126.84027777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 7,8번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2641",
+   "name": "고려대",
+   "line": "6",
+   "lat": 37.590555555556,
+   "lng": 127.03638888889,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "지하 1층 대합실(개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B4"
+    }
+   ]
+  },
+  {
+   "id": "2627",
+   "name": "공덕",
+   "line": "6",
+   "lat": 37.543055555556,
+   "lng": 126.95111111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 7번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2625",
+   "name": "광흥창",
+   "line": "6",
+   "lat": 37.5475,
+   "lng": 126.93194444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층 (1,2,5,6번 출입구방향)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2616",
+   "name": "구산",
+   "line": "6",
+   "lat": 37.611388888889,
+   "lng": 126.91722222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 4번 출입구 맞은편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2630",
+   "name": "녹사평",
+   "line": "6",
+   "lat": 37.534722222222,
+   "lng": 126.98666666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 1,2번 출입구 진입 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2626",
+   "name": "대흥",
+   "line": "6",
+   "lat": 37.547777777778,
+   "lng": 126.94222222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 4번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2614",
+   "name": "독바위",
+   "line": "6",
+   "lat": 37.618611111111,
+   "lng": 126.93277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 E/S 7호기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B5"
+    },
+    {
+     "from": "B5",
+     "to": "B3"
+    },
+    {
+     "from": "B5",
+     "to": "B6"
+    },
+    {
+     "from": "B6",
+     "to": "B5"
+    }
+   ]
+  },
+  {
+   "id": "2644",
+   "name": "돌곶이",
+   "line": "6",
+   "lat": 37.610555555556,
+   "lng": 127.05638888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층 대합실(6,7번 출입구 사이)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    }
+   ]
+  },
+  {
+   "id": "2637",
+   "name": "동묘앞",
+   "line": "6",
+   "lat": 37.571944444444,
+   "lng": 127.01416666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 7번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2619",
+   "name": "디지털미디어시티",
+   "line": "6",
+   "lat": 37.576538888889,
+   "lng": 126.90131944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 4번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 지하1층 2,3번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2621",
+   "name": "마포구청",
+   "line": "6",
+   "lat": 37.563888888889,
+   "lng": 126.90305555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "가대합실 지하2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "나대합실 지하1층 편의점옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2622",
+   "name": "망원",
+   "line": "6",
+   "lat": 37.556111111111,
+   "lng": 126.91,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 대합실 1번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "BM1"
+    }
+   ]
+  },
+  {
+   "id": "2633",
+   "name": "버티고개",
+   "line": "6",
+   "lat": 37.547777777778,
+   "lng": 127.00638888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2639",
+   "name": "보문",
+   "line": "6",
+   "lat": 37.585555555556,
+   "lng": 127.01972222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 대합실 아이센터 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2648",
+   "name": "봉화산",
+   "line": "6",
+   "lat": 37.6175,
+   "lng": 127.09138888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층 대합실(고객상담실 옆)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2613",
+   "name": "불광",
+   "line": "6",
+   "lat": 37.610830555556,
+   "lng": 126.92951111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 (가)대합실(6,7번 출입구 아래)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B2",
+     "to": "BM2"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    },
+    {
+     "from": "BM2",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2629",
+   "name": "삼각지",
+   "line": "6",
+   "lat": 37.535511111111,
+   "lng": 126.97393055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 7,8번 출입구 측면",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2624",
+   "name": "상수",
+   "line": "6",
+   "lat": 37.547777777778,
+   "lng": 126.9225,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2 대합실 상가 미샤 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2643",
+   "name": "상월곡",
+   "line": "6",
+   "lat": 37.606388888889,
+   "lng": 127.04833333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하 2층 대합실(1, 4번 출입구방면)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "M1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2617",
+   "name": "새절",
+   "line": "6",
+   "lat": 37.591111111111,
+   "lng": 126.91361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 2번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2645",
+   "name": "석계",
+   "line": "6",
+   "lat": 37.614722222222,
+   "lng": 127.06527777778,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "지하 2층 대합실(환승통로)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층 대합실(7번 출입구 앞)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "2",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "2"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    }
+   ]
+  },
+  {
+   "id": "2636",
+   "name": "신당",
+   "line": "6",
+   "lat": 37.565555555556,
+   "lng": 127.01944444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 5~8번 출입구 나가는 방향 계단 하부",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2640",
+   "name": "안암",
+   "line": "6",
+   "lat": 37.586388888889,
+   "lng": 127.02916666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 3,4번 출입구 계단 인근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여,공용)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "대합실 B2층 봉화산방면 승강장 계단 인근",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2634",
+   "name": "약수",
+   "line": "6",
+   "lat": 37.554061111111,
+   "lng": 127.01016111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1 7,8번 출입구앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2612",
+   "name": "역촌",
+   "line": "6",
+   "lat": 37.606111111111,
+   "lng": 126.92277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 3번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B4"
+    },
+    {
+     "from": "B4",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2615",
+   "name": "연신내",
+   "line": "6",
+   "lat": 37.618819444444,
+   "lng": 126.92133055556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 6,7번 출입구방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B5"
+    },
+    {
+     "from": "B5",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2642",
+   "name": "월곡",
+   "line": "6",
+   "lat": 37.601944444444,
+   "lng": 127.04166666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2620",
+   "name": "월드컵경기장",
+   "line": "6",
+   "lat": 37.569722222222,
+   "lng": 126.89916666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실(B1 2번 출입구방향 개집표기옆)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실(B1 1번 출입구방향 개집표기 내부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2611",
+   "name": "응암",
+   "line": "6",
+   "lat": 37.598333333333,
+   "lng": 126.91555555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 GS25 편의점 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2631",
+   "name": "이태원",
+   "line": "6",
+   "lat": 37.534444444444,
+   "lng": 126.99388888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 대합실 E/S 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B4"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B4",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2618",
+   "name": "증산",
+   "line": "6",
+   "lat": 37.583888888889,
+   "lng": 126.90972222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 1번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2638",
+   "name": "창신",
+   "line": "6",
+   "lat": 37.579444444444,
+   "lng": 127.01527777778,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "대합실 B1층 E/V1호기 뒷편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2635",
+   "name": "청구",
+   "line": "6",
+   "lat": 37.560277777778,
+   "lng": 127.01388888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1 대합실 1번 출입구 나가는 방향 맞은편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2646",
+   "name": "태릉입구",
+   "line": "6",
+   "lat": 37.61769,
+   "lng": 127.07567,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 아이센터 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2632",
+   "name": "한강진",
+   "line": "6",
+   "lat": 37.539444444444,
+   "lng": 127.00166666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 임대상가(gs25)옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2623",
+   "name": "합정",
+   "line": "6",
+   "lat": 37.549166666667,
+   "lng": 126.91361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 8번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2647",
+   "name": "화랑대",
+   "line": "6",
+   "lat": 37.62,
+   "lng": 127.08472222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하 1층 대합실(개집표기 외부)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2628",
+   "name": "효창공원앞",
+   "line": "6",
+   "lat": 37.53925,
+   "lng": 126.95945,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 3,6번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2748",
+   "name": "가산디지털단지",
+   "line": "7",
+   "lat": 37.481666666667,
+   "lng": 126.8825,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 4번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2732",
+   "name": "강남구청",
+   "line": "7",
+   "lat": 37.517222222222,
+   "lng": 127.04138888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2층 대합실 (가)아이센터 맞은편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2729",
+   "name": "건대입구",
+   "line": "7",
+   "lat": 37.540693,
+   "lng": 127.070777,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "B2층 개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    },
+    {
+     "from": "2",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "2"
+    }
+   ]
+  },
+  {
+   "id": "2736",
+   "name": "고속터미널",
+   "line": "7",
+   "lat": 37.505938888889,
+   "lng": 127.00446944444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 3번 출입구 왼쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2718",
+   "name": "공릉",
+   "line": "7",
+   "lat": 37.625527777778,
+   "lng": 127.07297222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 아이센터 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2750",
+   "name": "광명사거리",
+   "line": "7",
+   "lat": 37.479166666667,
+   "lng": 126.85472222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층 연결통로 (가)아이센터,(나)아이센터 중간",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2747",
+   "name": "남구로",
+   "line": "7",
+   "lat": 37.486111111111,
+   "lng": 126.88722222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 2~5번 출입구(E/S 7,8호기 옆)",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B4"
+    },
+    {
+     "from": "B2",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "BM2"
+    },
+    {
+     "from": "B4",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2739",
+   "name": "남성",
+   "line": "7",
+   "lat": 37.484444444444,
+   "lng": 126.97111111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B2",
+     "loc": "대합실 상선 내부계단 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "1",
+     "to": "BM2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    }
+   ]
+  },
+  {
+   "id": "2737",
+   "name": "내방",
+   "line": "7",
+   "lat": 37.487777777778,
+   "lng": 126.99361111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 5~8번 출입구방면",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2715",
+   "name": "노원",
+   "line": "7",
+   "lat": 37.656369444444,
+   "lng": 127.06345,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 대합실, (가)아이센터 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "2",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    }
+   ]
+  },
+  {
+   "id": "2734",
+   "name": "논현",
+   "line": "7",
+   "lat": 37.511111111111,
+   "lng": 127.02138888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 7,8번 출입구 근처",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층 메트로의원 상가 뒤편",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2746",
+   "name": "대림",
+   "line": "7",
+   "lat": 37.493333333333,
+   "lng": 126.895,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2712",
+   "name": "도봉산",
+   "line": "7",
+   "lat": 37.689444444444,
+   "lng": 127.04583333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "지상1층 대합실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    },
+    {
+     "gate": "in",
+     "floor": "1",
+     "loc": "지상1층 환승통로",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2714",
+   "name": "마들",
+   "line": "7",
+   "lat": 37.664722222222,
+   "lng": 127.05777777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 B2 에스컬레이터 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2720",
+   "name": "먹골",
+   "line": "7",
+   "lat": 37.610555555556,
+   "lng": 127.07777777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2723",
+   "name": "면목",
+   "line": "7",
+   "lat": 37.588611111111,
+   "lng": 127.0875,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 아이센터 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2735",
+   "name": "반포",
+   "line": "7",
+   "lat": 37.508055555556,
+   "lng": 127.01166666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 지하2층 계단 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2744",
+   "name": "보라매",
+   "line": "7",
+   "lat": 37.5,
+   "lng": 126.92,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 3번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2724",
+   "name": "사가정",
+   "line": "7",
+   "lat": 37.580833333333,
+   "lng": 127.08833333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층  1번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2741",
+   "name": "상도",
+   "line": "7",
+   "lat": 37.502777777778,
+   "lng": 126.94777777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하 2층 대합실 계단좌측",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2722",
+   "name": "상봉",
+   "line": "7",
+   "lat": 37.595569444444,
+   "lng": 127.08576111111,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "B1",
+     "loc": "B1층 1,2,5,6번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2713",
+   "name": "수락산",
+   "line": "7",
+   "lat": 37.677777777778,
+   "lng": 127.05527777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 지하2층 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2740",
+   "name": "숭실대입구",
+   "line": "7",
+   "lat": 37.496111111111,
+   "lng": 126.95388888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B5"
+    },
+    {
+     "from": "B5",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2743",
+   "name": "신대방삼거리",
+   "line": "7",
+   "lat": 37.499722222222,
+   "lng": 126.92833333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 2층",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2745",
+   "name": "신풍",
+   "line": "7",
+   "lat": 37.5,
+   "lng": 126.91,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 5번 출입구방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2728",
+   "name": "어린이대공원",
+   "line": "7",
+   "lat": 37.547777777778,
+   "lng": 127.07444444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2층  아이센터 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2752",
+   "name": "온수",
+   "line": "7",
+   "lat": 37.492030555556,
+   "lng": 126.82303888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 4번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2725",
+   "name": "용마산",
+   "line": "7",
+   "lat": 37.573611111111,
+   "lng": 127.08666666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층  1번 출입구 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2738",
+   "name": "이수",
+   "line": "7",
+   "lat": 37.487769444444,
+   "lng": 126.98203888889,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 연결통로",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "N"
+    },
+    {
+     "gate": "in",
+     "floor": "B3",
+     "loc": "지하3층 (가)개집표기 내부 상선 내부계단 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2730",
+   "name": "자양",
+   "line": "7",
+   "lat": 37.531666666667,
+   "lng": 127.06666666667,
+   "toilets": [
+    {
+     "gate": "in",
+     "floor": "2",
+     "loc": "지상2층 대합실",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2742",
+   "name": "장승배기",
+   "line": "7",
+   "lat": 37.504722222222,
+   "lng": 126.93916666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "지하2층 대합실 5,6번 출입구방향 내부계단 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    }
+   ]
+  },
+  {
+   "id": "2711",
+   "name": "장암",
+   "line": "7",
+   "lat": 37.7,
+   "lng": 127.05305555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "1",
+     "loc": "1층개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2716",
+   "name": "중계",
+   "line": "7",
+   "lat": 37.644722222222,
+   "lng": 127.06416666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 1번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2726",
+   "name": "중곡",
+   "line": "7",
+   "lat": 37.565833333333,
+   "lng": 127.08416666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2층 개집표기 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2721",
+   "name": "중화",
+   "line": "7",
+   "lat": 37.6025,
+   "lng": 127.07916666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층  2번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2751",
+   "name": "천왕",
+   "line": "7",
+   "lat": 37.486666666667,
+   "lng": 126.83861111111,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 2번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2749",
+   "name": "철산",
+   "line": "7",
+   "lat": 37.476111111111,
+   "lng": 126.86805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 1층 3번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2731",
+   "name": "청담",
+   "line": "7",
+   "lat": 37.519166666667,
+   "lng": 127.05194444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B3",
+     "loc": "B3 대합실 (나)아이센터 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2719",
+   "name": "태릉입구",
+   "line": "7",
+   "lat": 37.61769,
+   "lng": 127.07567,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B3",
+     "loc": "대합실 지하3층 고객안전실 앞",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2717",
+   "name": "하계",
+   "line": "7",
+   "lat": 37.636388888889,
+   "lng": 127.06805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "지하1층 4번 출입구",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2733",
+   "name": "학동",
+   "line": "7",
+   "lat": 37.514166666667,
+   "lng": 127.03166666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B3",
+     "loc": "B2 1,2번 출입구 계단 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2818",
+   "name": "가락시장",
+   "line": "8",
+   "lat": 37.493055555556,
+   "lng": 127.11805555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 대합실과 가락몰 연결통로 사이",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    }
+   ]
+  },
+  {
+   "id": "2813",
+   "name": "강동구청",
+   "line": "8",
+   "lat": 37.530833333333,
+   "lng": 127.12055555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 B2층 개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2828",
+   "name": "남위례",
+   "line": "8",
+   "lat": 37.462822869444,
+   "lng": 127.13917145,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "2",
+     "loc": "대합실 지상2층 주출입구 근처",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "2"
+    },
+    {
+     "from": "2",
+     "to": "1"
+    },
+    {
+     "from": "2",
+     "to": "3"
+    },
+    {
+     "from": "3",
+     "to": "2"
+    }
+   ]
+  },
+  {
+   "id": "2823",
+   "name": "남한산성입구",
+   "line": "8",
+   "lat": 37.451666666667,
+   "lng": 127.15972222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "대합실 지하2층 에스컬레이터 근처",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2824",
+   "name": "단대오거리",
+   "line": "8",
+   "lat": 37.445,
+   "lng": 127.15666666667,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 2호기E/V 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2827",
+   "name": "모란",
+   "line": "8",
+   "lat": 37.431388888889,
+   "lng": 127.12972222222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B2",
+     "loc": "B2층 대합실 상행 E/S 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2814",
+   "name": "몽촌토성",
+   "line": "8",
+   "lat": 37.5175,
+   "lng": 127.11277777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 1,2,3번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2819",
+   "name": "문정",
+   "line": "8",
+   "lat": 37.485933333333,
+   "lng": 127.12235555556,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 2번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "1"
+    },
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "M1",
+     "to": "1"
+    },
+    {
+     "from": "M1",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2821",
+   "name": "복정",
+   "line": "8",
+   "lat": 37.470833333333,
+   "lng": 127.12694444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 아이센터 근처",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2822",
+   "name": "산성",
+   "line": "8",
+   "lat": 37.45694444,
+   "lng": 127.15,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 1,2번 출입구 계단 오른쪽",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    },
+    {
+     "from": "B2",
+     "to": "B3"
+    },
+    {
+     "from": "B3",
+     "to": "B2"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2816",
+   "name": "석촌",
+   "line": "8",
+   "lat": 37.505277777778,
+   "lng": 127.10694444444,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 개집표기 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2817",
+   "name": "송파",
+   "line": "8",
+   "lat": 37.499741666667,
+   "lng": 127.11219722222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 1번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2826",
+   "name": "수진",
+   "line": "8",
+   "lat": 37.4375,
+   "lng": 127.14083333333,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 지하1층 편의점 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2825",
+   "name": "신흥",
+   "line": "8",
+   "lat": 37.440833333333,
+   "lng": 127.1475,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 대합실 1,2번 출입구방면",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": []
+  },
+  {
+   "id": "2811",
+   "name": "암사",
+   "line": "8",
+   "lat": 37.55,
+   "lng": 127.1275,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 2번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    }
+   ]
+  },
+  {
+   "id": "2810",
+   "name": "암사역사공원",
+   "line": "8",
+   "lat": 37.5567927,
+   "lng": 127.135777,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 3번 출입구 방향",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "B1"
+    },
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "1"
+    },
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2815",
+   "name": "잠실",
+   "line": "8",
+   "lat": 37.513333333333,
+   "lng": 127.10027777778,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "B1층 11번 출입구 옆",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "B1",
+     "to": "B2"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "B2",
+     "to": "B1"
+    }
+   ]
+  },
+  {
+   "id": "2820",
+   "name": "장지",
+   "line": "8",
+   "lat": 37.478158333333,
+   "lng": 127.12629722222,
+   "toilets": [
+    {
+     "gate": "out",
+     "floor": "B1",
+     "loc": "대합실 B1층 3,4번 출입구 방면",
+     "nearCar": null,
+     "hours": null,
+     "info": "일반(남,여) / 교통약자(남,여)",
+     "wheelchair": "Y"
+    }
+   ],
+   "escalator": [
+    {
+     "from": "1",
+     "to": "BM1"
+    },
+    {
+     "from": "B1",
+     "to": "BM1"
+    },
+    {
+     "from": "BM1",
+     "to": "1"
+    },
+    {
+     "from": "BM1",
+     "to": "B1"
+    }
+   ]
+  }
+ ]
+}
