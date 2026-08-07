@@ -149,6 +149,7 @@ function showStation(st){
   ${toilets}
   ${(esc||elv)?`<div class="card">${elv?('🛗 '+elv):''}${(elv&&esc)?'<div style="height:6px"></div>':''}${esc?('↗ '+esc):''}</div>`:''}
   ${st.mapImg?`<div class="card"><b>🗺 ${t('stationMap')}</b><a href="${st.mapImg}" target="_blank" rel="noopener"><img src="${st.mapImg}" alt="${t('stationMap')}" style="width:100%;border-radius:8px;margin-top:6px" loading="lazy"></a></div>`:''}
+  <button class="btn" style="background:#e0392f" onclick="routeTo(${st.lat},${st.lng},'${nm(st).replace(/'/g,'')}')">🧭 여기로 도보 경로</button>
   <div id="tr-reviews" style="margin-top:14px"></div>
  `);
  if(window.TReviews)TReviews.render($('#tr-reviews'), 'st_'+st.id, nm(st));
@@ -211,31 +212,65 @@ $('#nearBtn').onclick=()=>{
  ]).then(([pos])=>{
   $('#nearBtn').textContent='📍'; go('map');
   const la=pos.coords.latitude, lo=pos.coords.longitude;
+  lastUserPos=[la,lo];
   if(userMk)userMk.remove();
   userMk=L.marker([la,lo],{icon:L.divIcon({html:'<div style="width:16px;height:16px;border-radius:50%;background:#e0392f;border:3px solid #fff;box-shadow:0 0 0 4px rgba(224,57,47,.3)"></div>',className:'',iconSize:[16,16],iconAnchor:[8,8]})}).addTo(map);
   const cand=[];
   DATA.stations.forEach(s=>{if(s.lat)cand.push({cat:'station',name:nm(s)+' '+s.line+t('lineNo'),lat:s.lat,lng:s.lng,d:kmDist(la,lo,s.lat,s.lng),st:s});});
   publicToilets.forEach(p=>cand.push({cat:p.cat||'public',name:p.nm||'공중화장실',lat:p.lat,lng:p.lng,d:kmDist(la,lo,p.lat,p.lng),addr:p.addr,hr:p.hr}));
-  mine().forEach(m=>cand.push({cat:'mine',name:m.name||'내 화장실',lat:m.lat,lng:m.lng,d:kmDist(la,lo,m.lat,m.lng)}));
+  mine().forEach(m=>cand.push({cat:'mine',name:m.name||'내 화장실',lat:m.lat,lng:m.lng,d:kmDist(la,lo,m.lat,m.lng),mineObj:m}));
   cand.sort((a,b)=>a.d-b.d);
-  const near=cand.slice(0,30);
+  const near=cand.slice(0,30); window._near=near;
   nearLayer.clearLayers();
-  near.forEach(c=>{
+  near.forEach((c,i)=>{
    L.marker([c.lat,c.lng],{icon:MARKER_ICONS[c.cat]||MARKER_ICONS.public})
-    .bindTooltip(c.name,{direction:'top'}).on('click',()=>openKakao(c.name,c.lat,c.lng)).addTo(nearLayer);});
+    .bindTooltip(c.name,{direction:'top'}).on('click',()=>showToiletInfo(c)).addTo(nearLayer);});
   map.setView([la,lo],16);
   showLegend(true);
-  const rows=near.slice(0,15).map(c=>{const dist=c.d<1?Math.round(c.d*1000)+'m':c.d.toFixed(1)+'km';
-   return `<div class="card" style="cursor:pointer" onclick="openKakao('${(c.name||'').replace(/'/g,'')}',${c.lat},${c.lng})">
+  const rows=near.slice(0,15).map((c,i)=>{const dist=c.d<1?Math.round(c.d*1000)+'m':c.d.toFixed(1)+'km';
+   return `<div class="card" style="cursor:pointer" onclick="showToiletInfo(window._near[${i}])">
      <div class="row"><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${CAT[c.cat].label}</span><b style="margin-left:auto;color:var(--accent)">${dist}</b></div>
      <div style="font-weight:700;margin-top:4px">${c.name}</div>${c.addr?`<div class="hint">${c.addr}</div>`:''}
-     <div class="hint" style="color:var(--accent);margin-top:4px">🧭 탭하면 카카오맵 길찾기</div></div>`;}).join('');
+     <div class="hint" style="color:var(--accent);margin-top:4px">탭하면 정보·별점·경로 ›</div></div>`;}).join('');
   const tip=TIPS[Math.floor((la*1000+lo*1000))%TIPS.length];
   const tipCard=`<div class="nudge" style="cursor:pointer" onclick="showTips()">💡 ${tip} <span style="color:var(--accent);font-weight:700">팁 더보기 ›</span></div>`;
   openSheet(`<div class="row"><h2>📍 내 주변 화장실</h2></div><p class="hint">가까운 순 · ${near.length}곳</p>${tipCard}${rows}`);
  }).catch(()=>{$('#nearBtn').textContent='📍';showToast('위치 권한을 허용해주세요','',null,3500);});
 };
-window.openKakao=(name,lat,lng)=>{window.open('https://map.kakao.com/link/to/'+encodeURIComponent(name)+','+lat+','+lng,'_blank');};
+/* 화장실 정보 시트(카테고리별) + 인앱 도보 경로(OSRM) */
+let lastUserPos=null;
+let routeLayer=L.layerGroup().addTo(map);
+function showToiletInfo(c){
+ if(c.cat==='station'&&c.st){showStation(c.st);return;}
+ if(c.cat==='mine'&&c.mineObj){showMine(c.mineObj);return;}
+ // 공중/백화점/스타벅스 등 상세
+ openSheet(`
+  <div class="row"><h2>${c.name}</h2><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${CAT[c.cat].label}</span></div>
+  ${(c.addr||c.hr)?`<div class="card">${c.addr?`<div class="kv"><b>주소</b><span>${c.addr}</span></div>`:''}${c.hr?`<div class="kv"><b>개방</b><span>${c.hr}</span></div>`:''}</div>`:''}
+  <button class="btn" id="route-btn" style="background:#e0392f">🧭 여기로 도보 경로</button>
+  <div id="tr-reviews" style="margin-top:14px"></div>
+ `);
+ $('#route-btn').onclick=()=>routeTo(c.lat,c.lng,c.name);
+ if(window.TReviews)TReviews.render($('#tr-reviews'), 'pt_'+c.lat.toFixed(5)+'_'+c.lng.toFixed(5), c.name);
+}
+window.showToiletInfo=showToiletInfo;
+function routeTo(lat,lng,name){
+ if(!lastUserPos){showToast('먼저 📍버튼으로 현위치를 잡아주세요','',null,3500);return;}
+ showToast('🚶 경로 계산 중…','',null,8000);
+ const ula=lastUserPos[0], ulo=lastUserPos[1];
+ fetch(`https://router.project-osrm.org/route/v1/foot/${ulo},${ula};${lng},${lat}?overview=full&geometries=geojson`)
+  .then(r=>r.json()).then(d=>{
+   if(d.code!=='Ok'||!d.routes.length){showToast('경로를 찾을 수 없어요','',null,3000);return;}
+   const rt=d.routes[0], coords=rt.geometry.coordinates.map(x=>[x[1],x[0]]);
+   routeLayer.clearLayers();
+   L.polyline(coords,{color:'#e0392f',weight:6,opacity:.85,lineJoin:'round'}).addTo(routeLayer);
+   L.circleMarker([ula,ulo],{radius:7,color:'#fff',weight:3,fillColor:'#e0392f',fillOpacity:1}).addTo(routeLayer);
+   go('map'); closeSheet(); map.fitBounds(coords,{padding:[70,70]});
+   const mins=Math.max(1,Math.round(rt.duration/60)), dist=rt.distance<1000?Math.round(rt.distance)+'m':(rt.distance/1000).toFixed(1)+'km';
+   showToast(`🚶 ${name} · 도보 ${dist} 약 ${mins}분`, '경로 지우기', ()=>routeLayer.clearLayers(), 9000);
+  }).catch(()=>showToast('경로 요청 실패','',null,3000));
+}
+window.routeTo=routeTo;
 
 /* 💡 화장실 찾기 팁 */
 const TIPS=[
