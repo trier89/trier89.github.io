@@ -413,7 +413,7 @@ window.showAccount=showAccount;
 const _acBtn=$('#acctBtn'); if(_acBtn)_acBtn.onclick=showAccount;
 
 function showLegend(on){const el=$('#legend');if(!on){el.classList.remove('on');return;}
- el.innerHTML=Object.keys(CAT).map(k=>`<div class="lg"><img class="lgico" src="mk-${k}.png">${catLabel(k)}</div>`).join('');
+ el.innerHTML=Object.keys(CAT).map(k=>`<div class="lg"><img class="lgico" src="lg-${k}.png">${catLabel(k)}</div>`).join('');
  el.classList.add('on');}
 
 /* 노선도(간단 리스트형) */
