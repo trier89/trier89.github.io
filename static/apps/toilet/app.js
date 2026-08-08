@@ -35,8 +35,7 @@ const toiletCat=p=>/역|지하상가|지하도|지하철|환승|스테이션/.te
 const _pinIcons={};
 function catPin(cat){
  if(_pinIcons[cat])return _pinIcons[cat];
- const c=CAT[cat]||CAT.public;
- _pinIcons[cat]=L.divIcon({html:'<div class="pin catpin" style="background:'+c.c+'"><b>'+(c.mk||'🚻')+'</b></div>',className:'',iconSize:[32,32],iconAnchor:[16,30]});
+ _pinIcons[cat]=L.icon({iconUrl:'mk-'+cat+'.png',iconSize:[34,44],iconAnchor:[17,42],tooltipAnchor:[0,-38]});
  return _pinIcons[cat];
 }
 let publicToilets=null, _ptLoad=null; // 지연 로드(무거운 파일)
@@ -414,7 +413,7 @@ window.showAccount=showAccount;
 const _acBtn=$('#acctBtn'); if(_acBtn)_acBtn.onclick=showAccount;
 
 function showLegend(on){const el=$('#legend');if(!on){el.classList.remove('on');return;}
- el.innerHTML=Object.keys(CAT).map(k=>`<div class="lg"><span class="lgpin" style="background:${CAT[k].c}"><b>${CAT[k].mk||'🚻'}</b></span>${catLabel(k)}</div>`).join('');
+ el.innerHTML=Object.keys(CAT).map(k=>`<div class="lg"><img class="lgico" src="mk-${k}.png">${catLabel(k)}</div>`).join('');
  el.classList.add('on');}
 
 /* 노선도(간단 리스트형) */
