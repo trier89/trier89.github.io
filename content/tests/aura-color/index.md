@@ -12,7 +12,7 @@ readingTime: false
 
 색을 고르는 게 아니라, **나를 감싼 색을 찾아주는** 테스트예요. 12개의 질문에 답하면 지금 당신의 에너지가 어떤 빛깔을 내뿜고 있는지 — 일곱 가지 아우라 컬러 중 내 색을 찾아드려요. (재미로 보는 심리테스트예요 🌈)
 
-<div id="au" style="max-width:600px;margin:0 auto;">
+<div id="au" style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;padding:22px 18px;color:#2b2b2b;box-shadow:0 2px 16px rgba(0,0,0,.15);">
   <div id="au-intro" style="text-align:center;">
     <button id="au-start" style="padding:16px 40px;border:0;border-radius:12px;background:#6d28d9;color:#fff;font-size:18px;font-weight:700;cursor:pointer;">내 아우라 색 찾기 (약 1분)</button>
   </div>

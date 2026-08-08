@@ -12,7 +12,7 @@ readingTime: false
 
 12개의 질문으로 알아보는 **내 안의 연애세포 유형**. 좋아하는 사람 앞에서 나는 순정파일까, 돌직구일까, 밀당의 고수일까? 6가지 연애세포 중 내 타입을 찾아보세요. (재미로 보는 자가진단이에요 💘)
 
-<div id="lc" style="max-width:600px;margin:0 auto;">
+<div id="lc" style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;padding:22px 18px;color:#2b2b2b;box-shadow:0 2px 16px rgba(0,0,0,.15);">
   <div id="lc-intro" style="text-align:center;">
     <button id="lc-start" style="padding:16px 40px;border:0;border-radius:12px;background:#e0518a;color:#fff;font-size:18px;font-weight:700;cursor:pointer;">테스트 시작 (약 1분)</button>
   </div>

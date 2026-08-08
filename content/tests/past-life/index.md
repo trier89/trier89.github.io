@@ -12,7 +12,7 @@ readingTime: false
 
 12개의 질문으로 풀어보는 **나의 전생**. 아주 먼 옛날, 나는 한 나라를 다스리던 왕이었을까 — 아니면 세상을 떠돌던 방랑자였을까? 지금 나의 성격 속에 남아있는 전생의 흔적을 따라가 보세요. (재미로 보는 심리테스트예요 🔮)
 
-<div id="pl" style="max-width:600px;margin:0 auto;">
+<div id="pl" style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;padding:22px 18px;color:#2b2b2b;box-shadow:0 2px 16px rgba(0,0,0,.15);">
   <div id="pl-intro" style="text-align:center;">
     <button id="pl-start" style="padding:16px 40px;border:0;border-radius:12px;background:#b8862f;color:#fff;font-size:18px;font-weight:700;cursor:pointer;">전생 확인하기 (약 1분)</button>
   </div>
