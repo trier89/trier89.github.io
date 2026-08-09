@@ -133,27 +133,45 @@ function renderPins(){
  mine().forEach(m=>addMineMarker(m));
 }
 
-// 노선도 탭 = 타일 없는 지도(흰 배경) + 색깔 노선 + 역이름
-let netMap=null, netLayer=null;
-function renderLine(){
- if(!netMap){
-  netMap=L.map('lineMap',{zoomControl:true,attributionControl:false,minZoom:10,maxZoom:16}).setView([37.55,127.02],11);
-  netLayer=L.layerGroup().addTo(netMap);
- }
- netLayer.clearLayers();
- drawNetwork(netLayer,{labels:true,radius:5,gate:true,weight:7});
- // 게이트 범례
- let lg=document.getElementById('gate-legend');
- if(!lg){lg=document.createElement('div');lg.id='gate-legend';document.getElementById('v-line').appendChild(lg);}
- lg.innerHTML='<b>'+t('gateLegendTitle')+'</b>'
-  +'<div class="gl"><i style="background:#111"></i>'+t('gateIn')+'</div>'
-  +'<div class="gl"><i style="background:#fff"></i>'+t('gateOut')+'</div>'
-  +'<div class="gl"><i style="background:linear-gradient(90deg,#111 50%,#fff 50%)"></i>'+t('gateBoth')+'</div>'
-  +'<div class="gl"><i style="background:#c2c6cc"></i>'+t('gateNone')+'</div>';
- setTimeout(()=>{netMap.invalidateSize();
-  const pts=DATA.stations.filter(s=>s.lat).map(s=>[s.lat,s.lng]);
-  if(pts.length)netMap.fitBounds(pts,{padding:[30,30]});
- },60);
+// 노선도 탭 = 오픈소스 MIT 수도권 노선도(SVG) + 역 탭→화장실 정보
+let _lineLoaded=false;
+async function renderLine(){
+ const host=document.getElementById('lineMap');
+ const gl=document.getElementById('gate-legend'); if(gl) gl.style.display='none';
+ if(_lineLoaded) return;
+ host.innerHTML='<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8b929a;font-size:14px">'+t('line')+' …</div>';
+ let svgText;
+ try{ svgText=await fetch('mapimage.svg').then(r=>r.text()); }
+ catch(e){ host.innerHTML='<div style="padding:20px;color:#c0392b">노선도 로드 실패</div>'; return; }
+ host.innerHTML=svgText+'<div class="mapcredit">노선도 ⓒ Sinseiki · MIT</div><div class="maptip">🔎 역 탭 → 화장실 정보</div>';
+ const el=host.querySelector('svg'); if(!el) return;
+ el.id='schemSvg'; el.removeAttribute('width'); el.removeAttribute('height');
+ el.style.cssText='width:100%;height:100%;display:block;touch-action:none;background:#fff';
+ const byname={}; DATA.stations.forEach(s=>{const b=byname[s.name]; if(!b||((s.toilets||[]).length>((b.toilets||[]).length)))byname[s.name]=s;});
+ el.querySelectorAll('text').forEach(tx=>{
+  const nm=(tx.textContent||'').replace(/\s+/g,'');
+  const st=byname[nm];
+  if(st){ tx.setAttribute('data-stn',st.id); tx.style.cursor='pointer'; tx.style.fontWeight='700'; tx.setAttribute('pointer-events','all'); }
+ });
+ _svgPanZoom(el);
+ _lineLoaded=true;
+}
+function _svgPanZoom(svg){
+ const a=(svg.getAttribute('viewBox')||'0 0 1000 1000').split(/\s+/).map(Number);
+ let vb={x:a[0],y:a[1],w:a[2],h:a[3]}; const W0=a[2];
+ const setVB=()=>svg.setAttribute('viewBox',vb.x.toFixed(1)+' '+vb.y.toFixed(1)+' '+vb.w.toFixed(1)+' '+vb.h.toFixed(1));
+ const fullH=a[3]; const r0=svg.getBoundingClientRect(); if(r0.width){ vb.h=vb.w*r0.height/r0.width; vb.y=(fullH-vb.h)/2; } setVB();
+ const pts=new Map(); let pd=0,lx=0,ly=0,moved=false;
+ const toVB=(cx,cy)=>{const r=svg.getBoundingClientRect();return{x:vb.x+(cx-r.left)/r.width*vb.w,y:vb.y+(cy-r.top)/r.height*vb.h};};
+ const zoomAt=(c,f)=>{const r=svg.getBoundingClientRect();const nw=Math.min(W0*1.3,Math.max(W0*0.12,vb.w*f));const k=nw/vb.w;vb.w=nw;vb.h=nw*r.height/r.width;vb.x=c.x-(c.x-vb.x)*k;vb.y=c.y-(c.y-vb.y)*k;setVB();};
+ svg.addEventListener('pointerdown',e=>{pts.set(e.pointerId,{x:e.clientX,y:e.clientY});lx=e.clientX;ly=e.clientY;moved=false;try{svg.setPointerCapture(e.pointerId)}catch(_){}});
+ svg.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});const r=svg.getBoundingClientRect();
+  if(pts.size>=2){const v=[...pts.values()];const nd=Math.hypot(v[0].x-v[1].x,v[0].y-v[1].y);const c=toVB((v[0].x+v[1].x)/2,(v[0].y+v[1].y)/2);if(pd)zoomAt(c,pd/nd);pd=nd;moved=true;return;}
+  vb.x-=(e.clientX-lx)/r.width*vb.w;vb.y-=(e.clientY-ly)/r.height*vb.h;lx=e.clientX;ly=e.clientY;moved=true;setVB();});
+ const end=e=>{pts.delete(e.pointerId);if(pts.size<2)pd=0;};
+ svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+ svg.addEventListener('wheel',e=>{e.preventDefault();zoomAt(toVB(e.clientX,e.clientY),e.deltaY>0?1.12:0.89);},{passive:false});
+ svg.addEventListener('click',e=>{if(moved)return;const tx=e.target.closest&&e.target.closest('[data-stn]');if(!tx)return;const st=DATA.stations.find(x=>String(x.id)===tx.getAttribute('data-stn'));if(st)showStation(st);});
 }
 
 /* 시트 */
@@ -441,7 +459,6 @@ function applyLang(){
  const se=$('#search');if(se)se.placeholder=t('search');
  renderPins();
  if($('#legend').classList.contains('on'))showLegend(true);
- if(netMap&&document.querySelector('#v-line').classList.contains('on'))renderLine();
 }
 $('#lang').onchange=e=>{lang=e.target.value;applyLang();};
 
