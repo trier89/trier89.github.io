@@ -154,6 +154,16 @@ async function renderLine(){
   if(st){ tx.setAttribute('data-stn',st.id); tx.style.cursor='pointer'; tx.style.fontWeight='700'; tx.setAttribute('pointer-events','all'); }
  });
  _svgPanZoom(el);
+ // 역 이름 옆 가장 가까운 원(점)도 탭 가능하게
+ requestAnimationFrame(()=>{
+  const circs=[...el.querySelectorAll('circle,ellipse')].map(c=>{const r=c.getBoundingClientRect();return {c,x:r.left+r.width/2,y:r.top+r.height/2,w:r.width};}).filter(o=>o.w>0&&o.w<26);
+  el.querySelectorAll('text[data-stn]').forEach(tx=>{
+   const r=tx.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,id=tx.getAttribute('data-stn');
+   let best=null,bd=1e9;
+   for(const o of circs){const dd=(o.x-cx)**2+(o.y-cy)**2; if(dd<bd){bd=dd;best=o;}}
+   if(best&&bd<44*44){best.c.setAttribute('data-stn',id);best.c.style.cursor='pointer';best.c.setAttribute('pointer-events','all');}
+  });
+ });
  _lineLoaded=true;
 }
 function _svgPanZoom(svg){
