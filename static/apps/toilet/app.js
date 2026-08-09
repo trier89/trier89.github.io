@@ -109,7 +109,7 @@ function drawNetwork(layer,opts){
  });
 }
 
-function mineIcon(active,hasPw){return L.divIcon({html:'<div class="pin" style="background:'+(active?'#e08a2f':CAT.mine.c)+';'+(active?'box-shadow:0 0 0 4px rgba(224,138,47,.35),0 2px 6px rgba(0,0,0,.3);':'')+'"><b>'+(hasPw?'🔒':'🔑')+'</b></div>',className:'',iconSize:[30,30],iconAnchor:[15,28]});}
+function mineIcon(active,hasPw){return L.divIcon({html:'<div style="width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#fff;border:2.5px solid '+(active?'#e08a2f':CAT.mine.c)+';box-shadow:'+(active?'0 0 0 4px rgba(224,138,47,.35),':'')+'0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center"><img src="icons/'+(hasPw?'lock':'key')+'.png" style="width:19px;height:19px;transform:rotate(45deg)"></div>',className:'',iconSize:[32,32],iconAnchor:[16,30]});}
 let _mineMarkers=[];
 function mineDispIcon(m){return map.getZoom()>=15?mineIcon(false,m.hasPw):L.icon({iconUrl:'mk-mine.png',iconSize:[30,40],iconAnchor:[15,38],tooltipAnchor:[0,-34]});}
 function addMineMarker(m){
