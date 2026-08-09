@@ -1,4 +1,4 @@
-const C='subway-toilet-v8';
+const C='subway-toilet-v9';
 const CORE=['./','index.html','app.js','reviews.js','data.json','manifest.json'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
