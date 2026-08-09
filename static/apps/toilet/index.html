@@ -13,16 +13,20 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;font-family:-apple-system,"Apple SD Gothic Neo",Pretendard,sans-serif;color:var(--ink);background:var(--bg)}
 #app{position:fixed;inset:0;display:flex;flex-direction:column}
-header{padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;z-index:600}
-header h1{font-size:16px;margin:0;font-weight:800;display:flex;align-items:center;gap:6px}
-.applogo{width:26px;height:26px;border-radius:7px;flex:none}
-header h1 small{font-weight:600;color:var(--muted);font-size:12px;margin-left:4px}
-.seg{margin-left:auto;display:flex;background:var(--bg);border-radius:10px;padding:3px}
-.seg button{border:0;background:transparent;padding:5px 11px;border-radius:8px;font-weight:700;color:var(--muted);font-size:13px;display:flex;align-items:center;gap:4px}
-.tabico{width:18px;height:18px;flex:none}
-.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.lang{border:0;background:var(--bg);border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700;color:var(--ink)}
-#acctBtn{border:0;background:var(--bg);border-radius:8px;padding:5px 8px;font-size:16px;line-height:1;cursor:pointer}
+header{padding:9px 12px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;z-index:600;min-height:58px}
+header h1{font-size:16px;margin:0;font-weight:800;display:flex;align-items:center;gap:7px;white-space:nowrap;flex:none}
+.applogo{width:30px;height:30px;border-radius:8px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.titlewrap{display:flex;flex-direction:column;line-height:1.12}
+.titlewrap b{font-size:16px;font-weight:800}
+header h1 small{font-weight:600;color:var(--muted);font-size:11px}
+.seg{margin-left:auto;display:flex;background:#eef1f4;border-radius:11px;padding:3px;flex:none}
+.seg button{border:0;background:transparent;padding:8px 13px;border-radius:9px;font-weight:800;color:var(--muted);font-size:13px;display:flex;align-items:center;gap:5px;transition:background .15s,color .15s}
+.tabico{width:17px;height:17px;flex:none}
+.seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(47,125,225,.4)}
+.seg button.on .tabico{filter:brightness(0) invert(1)}
+.lang{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 7px;font-size:13px;font-weight:800;color:var(--ink);flex:none;text-align:center}
+#acctBtn{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 9px;font-size:17px;line-height:1;cursor:pointer;flex:none}
+@media(max-width:400px){header h1 small{display:none}.seg button{padding:8px 10px}.seg button span{display:none}.tabico{width:19px;height:19px}}
 main{position:relative;flex:1;overflow:hidden}
 .view{position:absolute;inset:0;display:none}
 .view.on{display:block}
@@ -93,7 +97,7 @@ label{font-size:13px;font-weight:700;color:var(--muted)}
 
 <div id="app">
   <header>
-    <h1 id="title"><img class="applogo" src="icon-192.png" alt=""><span id="titleText">급할 땐</span><small id="subtitle">지하철 화장실</small></h1>
+    <h1 id="title"><img class="applogo" src="icon-192.png" alt=""><span class="titlewrap"><b id="titleText">급할 땐</b><small id="subtitle">지하철 화장실</small></span></h1>
     <div class="seg">
       <button id="tabMap" class="on" data-v="map"><img class="tabico" src="tab-map.png" alt=""><span data-i="map">지도</span></button>
       <button id="tabLine" data-v="line"><img class="tabico" src="tab-line.png" alt=""><span data-i="line">노선도</span></button>
