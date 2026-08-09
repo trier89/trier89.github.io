@@ -415,8 +415,8 @@ function showPrivacy(){
   +'<p><b>3. 파기 절차·방법</b><br>· 회원탈퇴 시 계정·리뷰 문서를 복구 불가능하게 즉시 삭제(Firestore)<br>· 기기 저장분은 앱 데이터/로컬저장소 삭제 시 소멸</p>'
   +'<p><b>4. 제3자 제공</b><br>· 별도 제3자 제공 없음(아래 처리위탁으로 처리)</p>'
   +'<p><b>5. 처리위탁(외부 서비스)·국외이전</b><br>· Google Firebase(Google LLC, 미국): 계정·리뷰 저장·인증<br>· Project OSRM(해외): 도보경로 계산 시 이용자 GPS 좌표 전송<br>· CARTO: 지도 타일(IP·조회영역)<br>· CDN(unpkg·gstatic): 라이브러리 로드(IP)</p>'
-  +'<p><b>6. 열람·정정·삭제</b><br>· 리뷰: 앱 내 본인 리뷰 직접 삭제<br>· 계정: 「계정 → 회원탈퇴」로 전체 삭제<br>· 기타 문의: <a href="mailto:make.our.story@gmail.com">make.our.story@gmail.com</a></p>'
-  +'<p><b>7. 개인정보 보호책임자</b><br>· 문의: <a href="mailto:make.our.story@gmail.com">make.our.story@gmail.com</a> <span style="color:#9ca3af">(성명·연락처 추후 기재)</span></p>'
+  +'<p><b>6. 열람·정정·삭제</b><br>· 리뷰: 앱 내 본인 리뷰 직접 삭제<br>· 계정: 「계정 → 회원탈퇴」로 전체 삭제<br>· 기타 문의: <a href="mailto:mysteries513@gmail.com">mysteries513@gmail.com</a></p>'
+  +'<p><b>7. 개인정보 보호책임자</b><br>· 문의: <a href="mailto:mysteries513@gmail.com">mysteries513@gmail.com</a> <span style="color:#9ca3af">(성명·연락처 추후 기재)</span></p>'
   +'<p><b>8. 쿠키 등 자동수집·거부</b><br>· 쿠키 직접 사용 안 함. localStorage·Firebase 인증토큰을 기기에 저장.<br>· 거부: 브라우저 사이트 데이터/로컬저장소 삭제·차단, 위치권한 거부(일부 기능 제한)</p>'
   +'<p style="color:#9ca3af;font-size:11px">본 방침은 서비스 운영에 따라 개정될 수 있습니다.</p>';
  m.querySelector('#privClose').onclick=function(){m.classList.remove('on');};
