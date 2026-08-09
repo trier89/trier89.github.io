@@ -40,5 +40,19 @@
    });
   }).then(function(){profile={userid:userid,nationality:nationality,gender:gender};localStorage.setItem('acct',JSON.stringify(profile));return profile;});
  }
- window.Account={init:init,get:function(){return profile;},uid:function(){return uid;},checkId:checkId,signup:signup};
+ function deleteAccount(){ // 회원탈퇴: usernames·users·본인 리뷰 완전삭제 + 로컬삭제
+  if(!db||!uid)return Promise.reject(new Error('no-auth'));
+  var lower=profile&&profile.userid?profile.userid.toLowerCase():null;
+  // 1) 본인 리뷰 조회·삭제
+  return db.collection('toilet_reviews').where('uid','==',uid).get().then(function(qs){
+   var batch=db.batch();
+   qs.forEach(function(doc){batch.delete(doc.ref);});
+   if(lower)batch.delete(db.collection('usernames').doc(lower));
+   batch.delete(db.collection('users').doc(uid));
+   return batch.commit();
+  }).then(function(){
+   profile=null; try{localStorage.removeItem('acct');}catch(e){}
+  });
+ }
+ window.Account={init:init,get:function(){return profile;},uid:function(){return uid;},checkId:checkId,signup:signup,deleteAccount:deleteAccount};
 })();

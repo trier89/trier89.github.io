@@ -59,7 +59,7 @@ service cloud.firestore {
         && request.resource.data.userid is string && request.resource.data.userid.size() >= 2 && request.resource.data.userid.size() <= 16
         && request.resource.data.nationality is string && request.resource.data.nationality.size() <= 40
         && request.resource.data.gender is string && request.resource.data.gender.size() <= 2;
-      allow delete: if false;
+      allow delete: if request.auth != null && uid == request.auth.uid;
     }
     // 아이디 유일성 예약: 없을 때만 생성(update·delete 금지 → 선점 불가)
     match /usernames/{name} {
@@ -67,7 +67,8 @@ service cloud.firestore {
       allow create: if request.auth != null
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.keys().hasOnly(['uid','ts']);
-      allow update, delete: if false;
+      allow update: if false;
+        allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
     }
 
     // 그 외 모든 경로 완전 차단(백스톱)

@@ -1,8 +1,8 @@
 /* 급할 땐 · 지하철 화장실 — 스캐폴드(목업). 실데이터=data.go.kr 키 연결 예정 */
 const $=s=>document.querySelector(s);
 const LANG={
- ko:{map:'지도',line:'노선도',title:'급할 땐',sub:'지하철 화장실',toilet:'화장실',esc:'에스컬레이터',elv:'엘리베이터',inGate:'게이트 안',outGate:'게이트 밖',gateUnknown:'게이트 정보없음',floor:'층',nearCar:'가까운 칸',hours:'이용시간',type:'구성',wc:'휠체어 접근',lineNo:'호선',route:'길찾기',mine:'내 화장실',addMine:'내 화장실 추가',nudgeShop:'상가 화장실은 이용 시 음료 한 잔 어때요? ☕',pw:'비밀번호',hasPw:'비번 있음',noPw:'비번 없음',note:'비고',save:'저장',loc:'위치',near:'근처 공공화장실',search:'역 검색',stationMap:'역 구내 안내도',undo:'실행취소',catStation:"지하철역",catLinked:"지하철 연결",catPublic:"야외 공공",catStarbucks:"스타벅스",catDept:"백화점",catMart:"대형마트",catMine:"내 등록",addr:"주소",openHr:"개방",routeHere:"여기로 도보 경로",tapInfo:"탭하면 정보·별점·경로",nearTitle:"내 주변 화장실",areaTitle:"이 지역 화장실",inView:"현재 화면 안",nearest:"가까운 순",countUnit:"곳",tipMore:"팁 더보기",tipsTitle:"화장실 찾기 팁",gateLegendTitle:"화장실 위치",gateIn:"게이트 안",gateOut:"게이트 밖",gateBoth:"둘 다",gateNone:"정보없음",routeClear:"경로 지우기",walkPre:"도보",aboutMin:"분",noRoute:"경로를 찾을 수 없어요",needLoc:"먼저 📍버튼으로 현위치를 잡아주세요",routeCalc:"경로 계산 중…",locDenied:"위치 권한을 허용해주세요",noGeo:"위치 기능을 쓸 수 없어요",revTitle:"화장실 평가",revStar:"별점",revNick:"닉네임",revPlaceholder:"화장실 어땠나요? (청결·위치 등, 최대 200자)",revSubmit:"등록",revFirst:"첫 평가를 남겨보세요",revLoading:"평가 불러오는 중…",revSelectStar:"별점을 선택해주세요",revCooldown:"잠시 후 다시 시도해주세요",revFail:"등록 실패",revDelete:"삭제",saved:"✅ 내 화장실을 등록했어요",addMineHint:"📍 주황 핀을 드래그해 정확한 위치로 옮긴 뒤 저장하세요",pinMove:"✊ 핀을 옮긴 후 손을 떼세요",pinMoved:"📍 위치를 옮겼어요",noResult:"검색 결과 없음",acctSignupTitle:"계정 만들기",acctIdLabel:"아이디",acctCheck:"중복확인",acctAvail:"✅ 사용 가능",acctTaken:"❌ 이미 사용중",acctFormat:"2~16자 (영문·숫자·한글)",acctNat:"국적",acctGender:"성별",acctSaveBtn:"가입",acctWelcome:"🎉 가입 완료!",acctMyProfile:"내 계정",acctSelect:"선택",acctIdFirst:"아이디 중복확인을 해주세요",acctNeedAll:"모든 항목을 입력해주세요",genderM:"남성",genderF:"여성",genderO:"기타",genderN:"비공개",acctSignupFail:"가입 실패 (아이디 중복)",acctBtn:"계정",deptNote:"💡 백화점 화장실은 보통 1층에 없어요. 2층 이상이나 지하층을 확인하세요."},
- en:{map:'Map',line:'Lines',title:'Gotta Go',sub:'Subway Toilets',toilet:'Toilet',esc:'Escalator',elv:'Elevator',inGate:'Inside gate',outGate:'Outside gate',gateUnknown:'Gate n/a',floor:'Floor',nearCar:'Nearest car',hours:'Hours',type:'Type',wc:'Wheelchair',lineNo:' Line',route:'Route',mine:'My spots',addMine:'Add my toilet',nudgeShop:'Buy a drink if you use a shop toilet ☕',pw:'Password',hasPw:'Has code',noPw:'No code',note:'Notes',save:'Save',loc:'Location',near:'Nearby public toilets',search:'Search station',stationMap:'Station map',undo:'Undo',catStation:"Subway station",catLinked:"Subway-linked",catPublic:"Public",catStarbucks:"Starbucks",catDept:"Dept. store",catMart:"Hypermarket",catMine:"My spot",addr:"Address",openHr:"Hours",routeHere:"Walk here",tapInfo:"Info · rating · route",nearTitle:"Toilets near me",areaTitle:"Toilets here",inView:"In view",nearest:"By distance",countUnit:"places",tipMore:"More tips",tipsTitle:"Toilet tips",gateLegendTitle:"Toilet location",gateIn:"Inside gate",gateOut:"Outside gate",gateBoth:"Both",gateNone:"No info",routeClear:"Clear route",walkPre:"Walk",aboutMin:"min",noRoute:"No route found",needLoc:"Tap 📍 to set your location first",routeCalc:"Finding route…",locDenied:"Please allow location access",noGeo:"Location not available",revTitle:"Toilet reviews",revStar:"Rating",revNick:"Nickname",revPlaceholder:"How was it? (up to 200)",revSubmit:"Post",revFirst:"Be the first to review",revLoading:"Loading…",revSelectStar:"Please pick a rating",revCooldown:"Please try again shortly",revFail:"Post failed",revDelete:"Delete",saved:"✅ Saved",addMineHint:"📍 Drag the orange pin, then save",pinMove:"✊ Drag the pin, then release",pinMoved:"📍 Location moved",noResult:"No results",acctSignupTitle:"Create account",acctIdLabel:"User ID",acctCheck:"Check",acctAvail:"✅ Available",acctTaken:"❌ Already taken",acctFormat:"2-16 chars (letters/numbers)",acctNat:"Nationality",acctGender:"Gender",acctSaveBtn:"Sign up",acctWelcome:"🎉 Welcome!",acctMyProfile:"My account",acctSelect:"Select",acctIdFirst:"Please check your ID",acctNeedAll:"Please fill all fields",genderM:"Male",genderF:"Female",genderO:"Other",genderN:"Private",acctSignupFail:"Sign up failed",acctBtn:"Account",deptNote:"💡 Department store toilets are usually not on the 1st floor — check 2F+ or basement."},
+ ko:{map:'지도',line:'노선도',title:'급할 땐',sub:'지하철 화장실',toilet:'화장실',esc:'에스컬레이터',elv:'엘리베이터',inGate:'게이트 안',outGate:'게이트 밖',gateUnknown:'게이트 정보없음',floor:'층',nearCar:'가까운 칸',hours:'이용시간',type:'구성',wc:'휠체어 접근',lineNo:'호선',route:'길찾기',mine:'내 화장실',addMine:'내 화장실 추가',nudgeShop:'상가 화장실은 이용 시 음료 한 잔 어때요? ☕',pw:'비밀번호',hasPw:'비번 있음',noPw:'비번 없음',note:'비고',save:'저장',loc:'위치',near:'근처 공공화장실',search:'역 검색',stationMap:'역 구내 안내도',undo:'실행취소',catStation:"지하철역",catLinked:"지하철 연결",catPublic:"야외 공공",catStarbucks:"스타벅스",catDept:"백화점",catMart:"대형마트",catMine:"내 등록",addr:"주소",openHr:"개방",routeHere:"여기로 도보 경로",tapInfo:"탭하면 정보·별점·경로",nearTitle:"내 주변 화장실",areaTitle:"이 지역 화장실",inView:"현재 화면 안",nearest:"가까운 순",countUnit:"곳",tipMore:"팁 더보기",tipsTitle:"화장실 찾기 팁",gateLegendTitle:"화장실 위치",gateIn:"게이트 안",gateOut:"게이트 밖",gateBoth:"둘 다",gateNone:"정보없음",routeClear:"경로 지우기",walkPre:"도보",aboutMin:"분",noRoute:"경로를 찾을 수 없어요",needLoc:"먼저 📍버튼으로 현위치를 잡아주세요",routeCalc:"경로 계산 중…",locDenied:"위치 권한을 허용해주세요",noGeo:"위치 기능을 쓸 수 없어요",revTitle:"화장실 평가",revStar:"별점",revNick:"닉네임",revPlaceholder:"화장실 어땠나요? (청결·위치 등, 최대 200자)",revSubmit:"등록",revFirst:"첫 평가를 남겨보세요",revLoading:"평가 불러오는 중…",revSelectStar:"별점을 선택해주세요",revCooldown:"잠시 후 다시 시도해주세요",revFail:"등록 실패",revDelete:"삭제",saved:"✅ 내 화장실을 등록했어요",addMineHint:"📍 주황 핀을 드래그해 정확한 위치로 옮긴 뒤 저장하세요",pinMove:"✊ 핀을 옮긴 후 손을 떼세요",pinMoved:"📍 위치를 옮겼어요",noResult:"검색 결과 없음",acctSignupTitle:"계정 만들기",acctIdLabel:"아이디",acctCheck:"중복확인",acctAvail:"✅ 사용 가능",acctTaken:"❌ 이미 사용중",acctFormat:"2~16자 (영문·숫자·한글)",acctNat:"국적",acctGender:"성별",acctSaveBtn:"가입",acctWelcome:"🎉 가입 완료!",acctMyProfile:"내 계정",acctSelect:"선택",acctIdFirst:"아이디 중복확인을 해주세요",acctNeedAll:"모든 항목을 입력해주세요",genderM:"남성",genderF:"여성",genderO:"기타",genderN:"비공개",acctSignupFail:"가입 실패 (아이디 중복)",acctBtn:"계정",deptNote:"💡 백화점 화장실은 보통 1층에 없어요. 2층 이상이나 지하층을 확인하세요.",acctDelete:"회원탈퇴",acctDeleteConfirm:"정말 탈퇴할까요?\n계정·작성한 리뷰가 모두 삭제되며 되돌릴 수 없어요.",acctDeleted:"✅ 탈퇴 완료. 데이터를 삭제했어요.",acctDeleteFail:"탈퇴 실패. 잠시 후 다시 시도해주세요.",consent:"개인정보 수집·이용 및 국외이전(Firebase·경로서버)에 동의합니다.",consentReq:"개인정보 수집 동의가 필요해요.",privacy:"개인정보처리방침",privacyView:"처리방침 보기",locNotice:"📍 내 주변·경로 기능은 기기 위치를 사용하며, 경로 계산 시 좌표가 외부 경로서버로 전송돼요."},
+ en:{map:'Map',line:'Lines',title:'Gotta Go',sub:'Subway Toilets',toilet:'Toilet',esc:'Escalator',elv:'Elevator',inGate:'Inside gate',outGate:'Outside gate',gateUnknown:'Gate n/a',floor:'Floor',nearCar:'Nearest car',hours:'Hours',type:'Type',wc:'Wheelchair',lineNo:' Line',route:'Route',mine:'My spots',addMine:'Add my toilet',nudgeShop:'Buy a drink if you use a shop toilet ☕',pw:'Password',hasPw:'Has code',noPw:'No code',note:'Notes',save:'Save',loc:'Location',near:'Nearby public toilets',search:'Search station',stationMap:'Station map',undo:'Undo',catStation:"Subway station",catLinked:"Subway-linked",catPublic:"Public",catStarbucks:"Starbucks",catDept:"Dept. store",catMart:"Hypermarket",catMine:"My spot",addr:"Address",openHr:"Hours",routeHere:"Walk here",tapInfo:"Info · rating · route",nearTitle:"Toilets near me",areaTitle:"Toilets here",inView:"In view",nearest:"By distance",countUnit:"places",tipMore:"More tips",tipsTitle:"Toilet tips",gateLegendTitle:"Toilet location",gateIn:"Inside gate",gateOut:"Outside gate",gateBoth:"Both",gateNone:"No info",routeClear:"Clear route",walkPre:"Walk",aboutMin:"min",noRoute:"No route found",needLoc:"Tap 📍 to set your location first",routeCalc:"Finding route…",locDenied:"Please allow location access",noGeo:"Location not available",revTitle:"Toilet reviews",revStar:"Rating",revNick:"Nickname",revPlaceholder:"How was it? (up to 200)",revSubmit:"Post",revFirst:"Be the first to review",revLoading:"Loading…",revSelectStar:"Please pick a rating",revCooldown:"Please try again shortly",revFail:"Post failed",revDelete:"Delete",saved:"✅ Saved",addMineHint:"📍 Drag the orange pin, then save",pinMove:"✊ Drag the pin, then release",pinMoved:"📍 Location moved",noResult:"No results",acctSignupTitle:"Create account",acctIdLabel:"User ID",acctCheck:"Check",acctAvail:"✅ Available",acctTaken:"❌ Already taken",acctFormat:"2-16 chars (letters/numbers)",acctNat:"Nationality",acctGender:"Gender",acctSaveBtn:"Sign up",acctWelcome:"🎉 Welcome!",acctMyProfile:"My account",acctSelect:"Select",acctIdFirst:"Please check your ID",acctNeedAll:"Please fill all fields",genderM:"Male",genderF:"Female",genderO:"Other",genderN:"Private",acctSignupFail:"Sign up failed",acctBtn:"Account",deptNote:"💡 Department store toilets are usually not on the 1st floor — check 2F+ or basement.",acctDelete:"Delete account",acctDeleteConfirm:"Delete your account?\nYour account and reviews will be permanently removed.",acctDeleted:"✅ Account and data deleted.",acctDeleteFail:"Delete failed. Please try again.",consent:"I agree to the collection/use of personal data and overseas transfer (Firebase, routing server).",consentReq:"Please agree to data collection.",privacy:"Privacy Policy",privacyView:"View policy",locNotice:"📍 Nearby/route features use your device location; coordinates are sent to an external routing server when calculating a route."},
  ja:{map:'地図',line:'路線',title:'急な時',sub:'地下鉄トイレ',toilet:'トイレ',esc:'エスカレーター',elv:'エレベーター',inGate:'改札内',outGate:'改札外',gateUnknown:'改札不明',floor:'階',nearCar:'近い車両',hours:'利用時間',type:'構成',wc:'車椅子',lineNo:'号線',route:'ルート',mine:'マイ',addMine:'マイトイレ追加',nudgeShop:'店舗トイレは一杯どうぞ ☕',pw:'暗証番号',hasPw:'番号あり',noPw:'番号なし',note:'メモ',save:'保存',loc:'場所',near:'近くの公衆トイレ',search:'駅を検索',stationMap:'構内図',undo:'元に戻す',catStation:"地下鉄駅",catLinked:"駅つながり",catPublic:"公衆",catStarbucks:"スターバックス",catDept:"百貨店",catMart:"大型スーパー",catMine:"マイ",addr:"住所",openHr:"開放",routeHere:"ここへ徒歩",tapInfo:"情報・評価・経路",nearTitle:"近くのトイレ",areaTitle:"この地域のトイレ",inView:"表示範囲内",nearest:"近い順",countUnit:"件",tipMore:"ヒント",tipsTitle:"トイレ探しのヒント",gateLegendTitle:"トイレの位置",gateIn:"改札内",gateOut:"改札外",gateBoth:"両方",gateNone:"情報なし",routeClear:"経路を消す",walkPre:"徒歩",aboutMin:"分",noRoute:"経路が見つかりません",needLoc:"先に📍で現在地を取得",routeCalc:"経路計算中…",locDenied:"位置情報を許可してください",noGeo:"位置情報が使えません",revTitle:"トイレ評価",revStar:"評価",revNick:"ニックネーム",revPlaceholder:"どうでしたか？(200字まで)",revSubmit:"投稿",revFirst:"最初の評価を",revLoading:"読み込み中…",revSelectStar:"評価を選んでください",revCooldown:"しばらくしてから",revFail:"投稿失敗",revDelete:"削除",saved:"✅ 登録しました",addMineHint:"📍 オレンジのピンを動かして保存",pinMove:"✊ ピンを動かして離す",pinMoved:"📍 位置を移動しました",noResult:"該当なし",acctSignupTitle:"アカウント作成",acctIdLabel:"ユーザーID",acctCheck:"重複確認",acctAvail:"✅ 使用可能",acctTaken:"❌ 使用中",acctFormat:"2〜16文字",acctNat:"国籍",acctGender:"性別",acctSaveBtn:"登録",acctWelcome:"🎉 登録完了!",acctMyProfile:"マイアカウント",acctSelect:"選択",acctIdFirst:"IDの重複確認を",acctNeedAll:"全項目を入力",genderM:"男性",genderF:"女性",genderO:"その他",genderN:"非公開",acctSignupFail:"登録失敗",acctBtn:"アカウント",deptNote:"💡 百貨店のトイレは通常1階になし。2階以上か地下を確認。"},
  zh:{map:'地图',line:'线路',title:'急需时',sub:'地铁厕所',toilet:'厕所',esc:'扶梯',elv:'电梯',inGate:'闸内',outGate:'闸外',gateUnknown:'闸机未知',floor:'层',nearCar:'最近车厢',hours:'开放时间',type:'构成',wc:'轮椅',lineNo:'号线',route:'路线',mine:'我的',addMine:'添加厕所',nudgeShop:'用商铺厕所买杯饮料吧 ☕',pw:'密码',hasPw:'有密码',noPw:'无密码',note:'备注',save:'保存',loc:'位置',near:'附近公厕',search:'搜索车站',stationMap:'站内地图',undo:'撤销',catStation:"地铁站",catLinked:"地铁连接",catPublic:"公共",catStarbucks:"星巴克",catDept:"百货店",catMart:"大型超市",catMine:"我的",addr:"地址",openHr:"开放",routeHere:"步行到这里",tapInfo:"信息·评分·路线",nearTitle:"附近的厕所",areaTitle:"该区域的厕所",inView:"当前视图",nearest:"按距离",countUnit:"处",tipMore:"更多提示",tipsTitle:"找厕所提示",gateLegendTitle:"厕所位置",gateIn:"闸机内",gateOut:"闸机外",gateBoth:"两者",gateNone:"无信息",routeClear:"清除路线",walkPre:"步行",aboutMin:"分钟",noRoute:"找不到路线",needLoc:"请先用📍获取当前位置",routeCalc:"正在计算路线…",locDenied:"请允许定位权限",noGeo:"无法使用定位",revTitle:"厕所评价",revStar:"评分",revNick:"昵称",revPlaceholder:"怎么样？(最多200字)",revSubmit:"发布",revFirst:"来做第一个评价",revLoading:"加载中…",revSelectStar:"请选择评分",revCooldown:"请稍后再试",revFail:"发布失败",revDelete:"删除",saved:"✅ 已保存",addMineHint:"📍 拖动橙色图钉后保存",pinMove:"✊ 拖动图钉后松开",pinMoved:"📍 已移动位置",noResult:"无结果",acctSignupTitle:"创建账号",acctIdLabel:"用户ID",acctCheck:"查重",acctAvail:"✅ 可用",acctTaken:"❌ 已被使用",acctFormat:"2-16个字符",acctNat:"国籍",acctGender:"性别",acctSaveBtn:"注册",acctWelcome:"🎉 注册成功!",acctMyProfile:"我的账号",acctSelect:"选择",acctIdFirst:"请先查重ID",acctNeedAll:"请填写所有项",genderM:"男",genderF:"女",genderO:"其他",genderN:"不公开",acctSignupFail:"注册失败",acctBtn:"账号",deptNote:"💡 百货店厕所通常不在1楼，请查看2楼以上或地下。"}
 };
@@ -195,7 +195,7 @@ function showStation(st){
  const glabel=g=>g==='in'?t('inGate'):g==='out'?t('outGate'):t('gateUnknown');
  const toilets=(st.toilets||[]).map(x=>`
   <div class="card">
-   <h3>${gicon(x.gate)} <span class="tag ${x.gate||''}">${glabel(x.gate)}</span>${x.wheelchair==='Y'?` <span class="tag" title="${t('wc')}">♿</span>`:''}</h3>
+   <h3>${gicon(x.gate)} <span class="tag ${x.gate||''}">${glabel(x.gate)}</span>${x.wheelchair==='Y'?` <span class="tag" title="${t('wc')}"><img class="ic" src="icons/wheelchair.png"></span>`:''}</h3>
    ${x.loc?`<div class="kv"><b>${t('loc')}</b><span>${x.loc}</span></div>`:''}
    <div class="kv"><b>${t('floor')}</b><span>${x.floor||'-'}</span></div>
    ${x.info?`<div class="kv"><b>${t('type')}</b><span>${x.info}</span></div>`:''}
@@ -204,11 +204,11 @@ function showStation(st){
  const elv=(st.elevator||[]).length?`<div class="kv"><b>${t('elv')}</b><span>${st.elevator.map(e=>`${e.from}↔${e.to}${e.pos?` · ${e.pos}`:''}`).join('<br>')}</span></div>`:'';
  openSheet(`
   <div class="row"><h2>${nm(st)}</h2><span class="tag" style="background:#eef3fb;color:var(--accent)">${st.line}${t('lineNo')}</span></div>
-  <h3 style="margin-top:12px">🚻 ${t('toilet')} ${st.toilets.length}</h3>
+  <h3 style="margin-top:12px"><img class="ic" src="icons/toilet.png"> ${t('toilet')} ${st.toilets.length}</h3>
   ${toilets}
-  ${(esc||elv)?`<div class="card">${elv?('🛗 '+elv):''}${(elv&&esc)?'<div style="height:6px"></div>':''}${esc?('↗ '+esc):''}</div>`:''}
-  ${st.mapImg?`<div class="card"><b>🗺 ${t('stationMap')}</b><a href="${st.mapImg}" target="_blank" rel="noopener"><img src="${st.mapImg}" alt="${t('stationMap')}" style="width:100%;border-radius:8px;margin-top:6px" loading="lazy"></a></div>`:''}
-  <button class="btn" style="background:#e0392f" onclick="routeTo(${st.lat},${st.lng},'${nm(st).replace(/'/g,'')}')">🧭 ${t('routeHere')}</button>
+  ${(esc||elv)?`<div class="card">${elv?('<img class="ic" src="icons/elevator.png"> '+elv):''}${(elv&&esc)?'<div style="height:6px"></div>':''}${esc?('<img class="ic" src="icons/escalator.png"> '+esc):''}</div>`:''}
+  ${st.mapImg?`<div class="card"><b><img class="ic" src="icons/map.png"> ${t('stationMap')}</b><a href="${st.mapImg}" target="_blank" rel="noopener"><img src="${st.mapImg}" alt="${t('stationMap')}" style="width:100%;border-radius:8px;margin-top:6px" loading="lazy"></a></div>`:''}
+  <button class="btn" style="background:#e0392f" onclick="routeTo(${st.lat},${st.lng},'${nm(st).replace(/'/g,'')}')"><img class="ic" src="icons/route.png"> ${t('routeHere')}</button>
   <div id="tr-reviews" style="margin-top:14px"></div>
  `);
  if(window.TReviews)TReviews.render($('#tr-reviews'), 'st_'+st.id, nm(st));
@@ -289,6 +289,7 @@ function renderNearby(la,lo,fromMap){
 }
 $('#nearBtn').onclick=()=>{
  if(!navigator.geolocation){showToast(t('noGeo'),'',null,3000);return;}
+ try{if(!localStorage.getItem('locNoticed')){showToast(t('locNotice'),'',null,4500);localStorage.setItem('locNoticed','1');}}catch(e){}
  $('#nearBtn').textContent='⏳';
  Promise.all([
   new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:10000,maximumAge:30000})),
@@ -323,7 +324,7 @@ function showToiletInfo(c){
   <div class="row"><h2>${c.name}</h2><span class="tag" style="background:${CAT[c.cat].c};color:#fff">${CAT[c.cat].emoji} ${catLabel(c.cat)}</span></div>
   ${(c.addr||c.hr)?`<div class="card">${c.addr?`<div class="kv"><b>${t('addr')}</b><span>${c.addr}</span></div>`:''}${c.hr?`<div class="kv"><b>${t('openHr')}</b><span>${c.hr}</span></div>`:''}</div>`:''}
   ${c.cat==='dept'?`<div class="nudge">${t('deptNote')}</div>`:''}
-  <button class="btn" id="route-btn" style="background:#e0392f">🧭 ${t('routeHere')}</button>
+  <button class="btn" id="route-btn" style="background:#e0392f"><img class="ic" src="icons/route.png"> ${t('routeHere')}</button>
   <div id="tr-reviews" style="margin-top:14px"></div>
  `);
  $('#route-btn').onclick=()=>routeTo(c.lat,c.lng,c.name);
@@ -403,6 +404,24 @@ window.showTips=showTips;
 /* 👤 고유 계정 (아이디 중복체크·국적·성별) */
 const COUNTRIES=[['🇰🇷','대한민국'],['🇺🇸','United States'],['🇯🇵','日本'],['🇨🇳','中国'],['🇹🇼','台灣'],['🇭🇰','香港'],['🇬🇧','United Kingdom'],['🇫🇷','France'],['🇩🇪','Deutschland'],['🇪🇸','España'],['🇮🇹','Italia'],['🇷🇺','Россия'],['🇻🇳','Việt Nam'],['🇹🇭','ไทย'],['🇵🇭','Philippines'],['🇮🇩','Indonesia'],['🇲🇾','Malaysia'],['🇸🇬','Singapore'],['🇮🇳','India'],['🇦🇺','Australia'],['🇨🇦','Canada'],['🇧🇷','Brasil'],['🌍','기타 / Other']];
 const genderLabel=g=>({M:t('genderM'),F:t('genderF'),O:t('genderO'),N:t('genderN')}[g]||g||'-');
+function showPrivacy(){
+ var m=document.getElementById('privacyModal');
+ if(!m){m=document.createElement('div');m.id='privacyModal';m.className='modal';m.innerHTML='<div class="box" style="max-width:640px"><div id="privacyBody" style="font-size:13px;line-height:1.65;color:#2b2f36"></div><button class="btn" id="privClose" style="margin-top:14px">'+t('save')+'</button></div>';document.body.appendChild(m);}
+ m.querySelector('#privacyBody').innerHTML=
+  '<h2 style="margin:0 0 4px">📄 개인정보처리방침</h2>'
+  +'<p style="color:#7b828a;font-size:12px;margin:0 0 10px">「급할 땐 · 지하철 화장실」</p>'
+  +'<p><b>1. 수집 항목·목적</b><br>· 계정(선택): 아이디·국적·성별·익명식별자 — 닉네임 표시, 리뷰 작성자 식별, 아이디 중복방지<br>· 리뷰: 별점·내용·닉네임·작성시각 — 화장실 평가 공유<br>· 위치: 기기 GPS(요청 시 1회) — 내 주변·도보경로. 서버 저장 없이 일시 사용<br>· 자동수집: IP·로컬저장소값 — 서비스 제공</p>'
+  +'<p><b>2. 보유·이용 기간</b><br>· 계정·리뷰: 회원탈퇴 시 즉시 파기<br>· 위치: 저장하지 않음(처리 후 즉시 폐기)<br>· 내 화장실·설정: 이용자 기기에만 저장</p>'
+  +'<p><b>3. 파기 절차·방법</b><br>· 회원탈퇴 시 계정·리뷰 문서를 복구 불가능하게 즉시 삭제(Firestore)<br>· 기기 저장분은 앱 데이터/로컬저장소 삭제 시 소멸</p>'
+  +'<p><b>4. 제3자 제공</b><br>· 별도 제3자 제공 없음(아래 처리위탁으로 처리)</p>'
+  +'<p><b>5. 처리위탁(외부 서비스)·국외이전</b><br>· Google Firebase(Google LLC, 미국): 계정·리뷰 저장·인증<br>· Project OSRM(해외): 도보경로 계산 시 이용자 GPS 좌표 전송<br>· CARTO: 지도 타일(IP·조회영역)<br>· CDN(unpkg·gstatic): 라이브러리 로드(IP)</p>'
+  +'<p><b>6. 열람·정정·삭제</b><br>· 리뷰: 앱 내 본인 리뷰 직접 삭제<br>· 계정: 「계정 → 회원탈퇴」로 전체 삭제<br>· 기타 문의: <a href="mailto:make.our.story@gmail.com">make.our.story@gmail.com</a></p>'
+  +'<p><b>7. 개인정보 보호책임자</b><br>· 문의: <a href="mailto:make.our.story@gmail.com">make.our.story@gmail.com</a> <span style="color:#9ca3af">(성명·연락처 추후 기재)</span></p>'
+  +'<p><b>8. 쿠키 등 자동수집·거부</b><br>· 쿠키 직접 사용 안 함. localStorage·Firebase 인증토큰을 기기에 저장.<br>· 거부: 브라우저 사이트 데이터/로컬저장소 삭제·차단, 위치권한 거부(일부 기능 제한)</p>'
+  +'<p style="color:#9ca3af;font-size:11px">본 방침은 서비스 운영에 따라 개정될 수 있습니다.</p>';
+ m.querySelector('#privClose').onclick=function(){m.classList.remove('on');};
+ m.classList.add('on');
+}
 function showAccount(){
  if(!window.Account){showToast('...',''); return;}
  Account.init().then(function(){
@@ -412,8 +431,15 @@ function showAccount(){
     +'<div class="card"><div class="kv"><b>'+t('acctIdLabel')+'</b><span>'+p.userid+'</span></div>'
     +'<div class="kv"><b>'+t('acctNat')+'</b><span>'+(p.nationality||'-')+'</span></div>'
     +'<div class="kv"><b>'+t('acctGender')+'</b><span>'+genderLabel(p.gender)+'</span></div></div>'
+    +'<button class="btn ghost" id="acPolicy">📄 '+t('privacy')+'</button>'
+    +'<button class="btn" id="acDel" style="background:#e0392f;margin-top:8px">'+t('acctDelete')+'</button>'
     +'<button class="btn ghost" id="acClose">'+t('save')+'</button>';
-   $('#modal').classList.add('on'); $('#acClose').onclick=()=>$('#modal').classList.remove('on'); return;
+   $('#modal').classList.add('on'); $('#acClose').onclick=()=>$('#modal').classList.remove('on');
+   $('#acPolicy').onclick=showPrivacy;
+   $('#acDel').onclick=function(){ if(!confirm(t('acctDeleteConfirm')))return; var b=this; b.disabled=true;
+     Account.deleteAccount().then(function(){$('#modal').classList.remove('on');showToast(t('acctDeleted'),'',null,3500);})
+       .catch(function(){b.disabled=false;showToast(t('acctDeleteFail'),'',null,3000);}); };
+   return;
   }
   let idOk=false;
   const natOpts=COUNTRIES.map(c=>'<option value="'+c[0]+' '+c[1]+'">'+c[0]+' '+c[1]+'</option>').join('');
@@ -424,16 +450,19 @@ function showAccount(){
    +'<div id="acMsg" style="font-size:12px;margin:3px 0;min-height:16px;color:#9ca3af"></div>'
    +'<label>'+t('acctNat')+'</label><select id="acNat"><option value="">'+t('acctSelect')+'</option>'+natOpts+'</select>'
    +'<label>'+t('acctGender')+'</label><select id="acGen"><option value="">'+t('acctSelect')+'</option>'+genOpts+'</select>'
+   +'<label style="display:flex;align-items:flex-start;gap:8px;font-weight:400;margin-top:12px;font-size:12.5px;color:#555;line-height:1.4"><input type="checkbox" id="acConsent" style="width:auto;margin:2px 0 0"><span>'+t('consent')+' <a href="#" id="acPolicyLink" style="color:var(--accent);font-weight:700">('+t('privacyView')+')</a></span></label>'
    +'<button class="btn" id="acSave" style="margin-top:12px">'+t('acctSaveBtn')+'</button>'
    +'<button class="btn ghost" id="acCancel">✕</button>';
   $('#modal').classList.add('on');
   $('#acCancel').onclick=()=>$('#modal').classList.remove('on');
+  $('#acPolicyLink').onclick=function(e){e.preventDefault();showPrivacy();};
   $('#acId').oninput=()=>{idOk=false;$('#acMsg').textContent='';};
   $('#acChk').onclick=()=>{const v=$('#acId').value.trim();$('#acMsg').style.color='#9ca3af';$('#acMsg').textContent='…';
    Account.checkId(v).then(r=>{idOk=r.ok;$('#acMsg').style.color=r.ok?'#2f9e6b':'#e0392f';$('#acMsg').textContent=r.ok?t('acctAvail'):(r.reason==='format'?t('acctFormat'):t('acctTaken'));});};
   $('#acSave').onclick=()=>{const v=$('#acId').value.trim(),nat=$('#acNat').value,gen=$('#acGen').value;
    if(!idOk){$('#acMsg').style.color='#e0392f';$('#acMsg').textContent=t('acctIdFirst');return;}
    if(!nat||!gen){$('#acMsg').style.color='#e0392f';$('#acMsg').textContent=t('acctNeedAll');return;}
+   if(!$('#acConsent').checked){$('#acMsg').style.color='#e0392f';$('#acMsg').textContent=t('consentReq');return;}
    $('#acSave').disabled=true;
    Account.signup(v,nat,gen).then(()=>{$('#modal').classList.remove('on');showToast(t('acctWelcome'),'',null,3000);}).catch(()=>{$('#acSave').disabled=false;$('#acMsg').style.color='#e0392f';$('#acMsg').textContent=t('acctSignupFail');});
   };
