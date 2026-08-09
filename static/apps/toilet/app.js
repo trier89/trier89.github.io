@@ -86,14 +86,14 @@ function lineEdges(){
 // 노선+역 그리기(지도/노선도 공용). labels=true면 역이름 상시표시.
 function drawNetwork(layer,opts){
  opts=opts||{};
- lineEdges().forEach(o=>L.polyline(o.seg,{color:lineColor(o.line),weight:opts.weight||4,opacity:.85,lineJoin:'round'}).addTo(layer));
+ lineEdges().forEach(o=>L.polyline(o.seg,{color:lineColor(o.line),weight:opts.weight||4,opacity:.9,lineJoin:'round',lineCap:'round'}).addTo(layer));
  DATA.stations.forEach(st=>{
   if(!st.lat)return;
   let mk;
   if(opts.gate){ // 게이트 안/밖 화장실 색구분(둘다=반반)
    const hi=(st.toilets||[]).some(x=>x.gate==='in'), ho=(st.toilets||[]).some(x=>x.gate==='out');
-   const bg=(hi&&ho)?'linear-gradient(90deg,#2f9e6b 50%,#e08a2f 50%)':hi?'#2f9e6b':ho?'#e08a2f':'#b0b6bd';
-   mk=L.marker([st.lat,st.lng],{icon:L.divIcon({html:'<div style="width:14px;height:14px;border-radius:50%;background:'+bg+';border:2px solid #fff;box-shadow:0 0 0 1.5px '+lineColor(st.line)+'"></div>',className:'',iconSize:[14,14],iconAnchor:[7,7]})}).on('click',()=>showStation(st));
+   const bg=(hi&&ho)?'linear-gradient(90deg,#111 50%,#fff 50%)':hi?'#111':ho?'#fff':'#c2c6cc';
+   mk=L.marker([st.lat,st.lng],{icon:L.divIcon({html:'<div style="width:15px;height:15px;border-radius:50%;background:'+bg+';border:2px solid #111;box-shadow:0 0 0 2px #fff,0 0 0 4px '+lineColor(st.line)+'"></div>',className:'',iconSize:[15,15],iconAnchor:[8,8]})}).on('click',()=>showStation(st));
   } else {
    mk=L.circleMarker([st.lat,st.lng],{radius:opts.radius||5,color:lineColor(st.line),weight:2.5,fillColor:'#fff',fillOpacity:1}).on('click',()=>showStation(st));
   }
@@ -141,15 +141,15 @@ function renderLine(){
   netLayer=L.layerGroup().addTo(netMap);
  }
  netLayer.clearLayers();
- drawNetwork(netLayer,{labels:true,radius:5,gate:true});
+ drawNetwork(netLayer,{labels:true,radius:5,gate:true,weight:7});
  // 게이트 범례
  let lg=document.getElementById('gate-legend');
  if(!lg){lg=document.createElement('div');lg.id='gate-legend';document.getElementById('v-line').appendChild(lg);}
  lg.innerHTML='<b>'+t('gateLegendTitle')+'</b>'
-  +'<div class="gl"><i style="background:#2f9e6b"></i>'+t('gateIn')+'</div>'
-  +'<div class="gl"><i style="background:#e08a2f"></i>'+t('gateOut')+'</div>'
-  +'<div class="gl"><i style="background:linear-gradient(90deg,#2f9e6b 50%,#e08a2f 50%)"></i>'+t('gateBoth')+'</div>'
-  +'<div class="gl"><i style="background:#b0b6bd"></i>'+t('gateNone')+'</div>';
+  +'<div class="gl"><i style="background:#111"></i>'+t('gateIn')+'</div>'
+  +'<div class="gl"><i style="background:#fff"></i>'+t('gateOut')+'</div>'
+  +'<div class="gl"><i style="background:linear-gradient(90deg,#111 50%,#fff 50%)"></i>'+t('gateBoth')+'</div>'
+  +'<div class="gl"><i style="background:#c2c6cc"></i>'+t('gateNone')+'</div>';
  setTimeout(()=>{netMap.invalidateSize();
   const pts=DATA.stations.filter(s=>s.lat).map(s=>[s.lat,s.lng]);
   if(pts.length)netMap.fitBounds(pts,{padding:[30,30]});
@@ -425,6 +425,9 @@ window.__pick=id=>{const s=DATA.stations.find(x=>x.id===id);if(s){go('map');map.
 function go(v){
  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
  document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ const lg=$('#legend');
+ if(v==='line'){go._legWas=lg.classList.contains('on');lg.classList.remove('on');}
+ else if(v==='map'&&go._legWas){lg.classList.add('on');go._legWas=false;}
  if(v==='map')setTimeout(()=>map.invalidateSize(),50);
  if(v==='line')renderLine();
 }
