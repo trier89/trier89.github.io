@@ -133,39 +133,16 @@ function renderPins(){
  mine().forEach(m=>addMineMarker(m));
 }
 
-// 노선도 탭 = 도식형(옥틸리니어) SVG 노선도
-function _esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function buildSchematic(){
- const nodes={};
- DATA.stations.forEach(s=>{if(!s.lat)return;const n=nodes[s.name]||(nodes[s.name]={name:s.name,lines:new Set(),lat:0,lng:0,c:0,ents:[]});n.lines.add(s.line);n.lat+=s.lat;n.lng+=s.lng;n.c++;n.ents.push(s);});
- Object.values(nodes).forEach(n=>{n.lat/=n.c;n.lng/=n.c;});
- const byline={};DATA.stations.forEach(s=>{if(s.lat)(byline[s.line]=byline[s.line]||[]).push(s);});
- const edges=[];Object.keys(byline).forEach(ln=>{const a=byline[ln].slice().sort((x,y)=>(x.no||0)-(y.no||0));for(let i=0;i<a.length-1;i++){if(a[i].name===a[i+1].name)continue;if(kmDist(a[i].lat,a[i].lng,a[i+1].lat,a[i+1].lng)>2.6)continue;edges.push([a[i].name,a[i+1].name,ln]);}});
- const arr=Object.values(nodes);const las=arr.map(n=>n.lat),los=arr.map(n=>n.lng);
- const la0=Math.min(...las),la1=Math.max(...las),lo0=Math.min(...los),lo1=Math.max(...los);
- const S=1500,G=26,asp=(lo1-lo0)/(la1-la0),occ={};
- arr.sort((p,q)=>(q.lines.size-p.lines.size)||(p.name<q.name?-1:1));
- arr.forEach(n=>{let x=(n.lng-lo0)/(lo1-lo0)*S*asp,y=(la1-n.lat)/(la1-la0)*S,gx=Math.round(x/G),gy=Math.round(y/G);
-  if(occ[gx+','+gy]){let done=false;for(let r=1;r<30&&!done;r++){for(let dx=-r;dx<=r&&!done;dx++)for(let dy=-r;dy<=r&&!done;dy++){if(Math.max(Math.abs(dx),Math.abs(dy))!==r)continue;if(!occ[(gx+dx)+','+(gy+dy)]){gx+=dx;gy+=dy;done=true;}}}}
-  occ[gx+','+gy]=1;n.px=gx*G;n.py=gy*G;});
- return {nodes,edges};
-}
-function _octiSeg(a,b){const dx=b.sx-a.sx,dy=b.sy-a.sy,sx=dx>=0?1:-1,sy=dy>=0?1:-1,adx=Math.abs(dx),ady=Math.abs(dy),m=Math.min(adx,ady);let bx,by;if(adx>=ady){bx=a.sx+sx*(adx-m);by=a.sy;}else{bx=a.sx;by=a.sy+sy*(ady-m);}return 'L'+bx+' '+by+' L'+b.sx+' '+b.sy;}
-function _nodeGate(n){const hi=n.ents.some(s=>(s.toilets||[]).some(x=>x.gate==='in')),ho=n.ents.some(s=>(s.toilets||[]).some(x=>x.gate==='out'));return hi&&ho?'url(#gboth)':hi?'#111':ho?'#fff':'#c2c6cc';}
-let _schemNodes=null;
+// 노선도 탭 = 타일 없는 지도(흰 배경) + 색깔 노선 + 역이름
+let netMap=null, netLayer=null;
 function renderLine(){
- const {nodes,edges}=buildSchematic();_schemNodes=nodes;
- const vals=Object.values(nodes);
- const minx=Math.min(...vals.map(n=>n.px)),miny=Math.min(...vals.map(n=>n.py)),maxx=Math.max(...vals.map(n=>n.px)),maxy=Math.max(...vals.map(n=>n.py));
- const PAD=44,W=(maxx-minx)+PAD*2,H=(maxy-miny)+PAD*2;
- vals.forEach(n=>{n.sx=+(n.px-minx+PAD).toFixed(1);n.sy=+(n.py-miny+PAD).toFixed(1);});
- let paths='';edges.forEach(e=>{const a=nodes[e[0]],b=nodes[e[1]];if(a&&b)paths+='<path d="M'+a.sx+' '+a.sy+' '+_octiSeg(a,b)+'" stroke="'+lineColor(e[2])+'" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';});
- let circles='',labels='';
- vals.forEach(n=>{const inter=n.lines.size>1,r=inter?7:4.5,stroke=inter?'#111':lineColor([...n.lines][0]),sw=inter?3:2;
-  circles+='<circle class="stn" data-nm="'+_esc(n.name)+'" cx="'+n.sx+'" cy="'+n.sy+'" r="'+r+'" fill="'+_nodeGate(n)+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>';
-  if(inter)labels+='<text x="'+(n.sx+10)+'" y="'+(n.sy+4)+'" font-size="12.5" font-weight="800" fill="#1c2126" paint-order="stroke" stroke="#fff" stroke-width="3">'+_esc(nm(n.ents[0]))+'</text>';});
- document.getElementById('lineMap').innerHTML='<svg id="schemSvg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;touch-action:none;background:#fff;display:block"><defs><linearGradient id="gboth" x1="0" y1="0" x2="1" y2="0"><stop offset="50%" stop-color="#111"/><stop offset="50%" stop-color="#fff"/></linearGradient></defs><g>'+paths+circles+labels+'</g></svg>';
- _schemPanZoom(W,H);
+ if(!netMap){
+  netMap=L.map('lineMap',{zoomControl:true,attributionControl:false,minZoom:10,maxZoom:16}).setView([37.55,127.02],11);
+  netLayer=L.layerGroup().addTo(netMap);
+ }
+ netLayer.clearLayers();
+ drawNetwork(netLayer,{labels:true,radius:5,gate:true,weight:7});
+ // 게이트 범례
  let lg=document.getElementById('gate-legend');
  if(!lg){lg=document.createElement('div');lg.id='gate-legend';document.getElementById('v-line').appendChild(lg);}
  lg.innerHTML='<b>'+t('gateLegendTitle')+'</b>'
@@ -173,24 +150,10 @@ function renderLine(){
   +'<div class="gl"><i style="background:#fff"></i>'+t('gateOut')+'</div>'
   +'<div class="gl"><i style="background:linear-gradient(90deg,#111 50%,#fff 50%)"></i>'+t('gateBoth')+'</div>'
   +'<div class="gl"><i style="background:#c2c6cc"></i>'+t('gateNone')+'</div>';
-}
-function _schemPanZoom(W,H){
- const svg=document.getElementById('schemSvg');if(!svg)return;
- let vb={x:0,y:0,w:W,h:H},pd=0,lx=0,ly=0,moved=false;const pts=new Map();
- const setVB=()=>svg.setAttribute('viewBox',vb.x.toFixed(1)+' '+vb.y.toFixed(1)+' '+vb.w.toFixed(1)+' '+vb.h.toFixed(1));
- const rect=svg.getBoundingClientRect();const ar=rect.width/rect.height||1;
- // initial fit (contain)
- if(W/H>ar){vb.w=W;vb.h=W/ar;vb.y=(H-vb.h)/2;}else{vb.h=H;vb.w=H*ar;vb.x=(W-vb.w)/2;}setVB();
- const toVB=(cx,cy)=>{const r=svg.getBoundingClientRect();return {x:vb.x+(cx-r.left)/r.width*vb.w,y:vb.y+(cy-r.top)/r.height*vb.h};};
- const zoomAt=(c,f)=>{const r=svg.getBoundingClientRect();const nw=Math.min(W*1.6,Math.max(W*0.10,vb.w*f));const k=nw/vb.w;vb.w=nw;vb.h=nw*r.height/r.width;vb.x=c.x-(c.x-vb.x)*k;vb.y=c.y-(c.y-vb.y)*k;setVB();};
- svg.addEventListener('pointerdown',e=>{pts.set(e.pointerId,{x:e.clientX,y:e.clientY});lx=e.clientX;ly=e.clientY;moved=false;try{svg.setPointerCapture(e.pointerId)}catch(_){}});
- svg.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});const r=svg.getBoundingClientRect();
-  if(pts.size>=2){const a=[...pts.values()];const nd=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);const c=toVB((a[0].x+a[1].x)/2,(a[0].y+a[1].y)/2);if(pd)zoomAt(c,pd/nd);pd=nd;moved=true;return;}
-  vb.x-=(e.clientX-lx)/r.width*vb.w;vb.y-=(e.clientY-ly)/r.height*vb.h;lx=e.clientX;ly=e.clientY;moved=true;setVB();});
- const end=e=>{pts.delete(e.pointerId);if(pts.size<2)pd=0;};
- svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
- svg.addEventListener('wheel',e=>{e.preventDefault();zoomAt(toVB(e.clientX,e.clientY),e.deltaY>0?1.12:0.89);},{passive:false});
- svg.addEventListener('click',e=>{if(moved)return;const c=e.target.closest&&e.target.closest('.stn');if(!c)return;const n=_schemNodes[c.getAttribute('data-nm')];if(!n)return;const best=n.ents.slice().sort((a,b)=>((b.toilets||[]).length)-((a.toilets||[]).length))[0];showStation(best);});
+ setTimeout(()=>{netMap.invalidateSize();
+  const pts=DATA.stations.filter(s=>s.lat).map(s=>[s.lat,s.lng]);
+  if(pts.length)netMap.fitBounds(pts,{padding:[30,30]});
+ },60);
 }
 
 /* 시트 */
@@ -478,7 +441,7 @@ function applyLang(){
  const se=$('#search');if(se)se.placeholder=t('search');
  renderPins();
  if($('#legend').classList.contains('on'))showLegend(true);
- if(document.querySelector('#v-line').classList.contains('on'))renderLine();
+ if(netMap&&document.querySelector('#v-line').classList.contains('on'))renderLine();
 }
 $('#lang').onchange=e=>{lang=e.target.value;applyLang();};
 
