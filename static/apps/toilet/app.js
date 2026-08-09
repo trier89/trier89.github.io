@@ -110,8 +110,10 @@ function drawNetwork(layer,opts){
 }
 
 function mineIcon(active,hasPw){return L.divIcon({html:'<div class="pin" style="background:'+(active?'#e08a2f':CAT.mine.c)+';'+(active?'box-shadow:0 0 0 4px rgba(224,138,47,.35),0 2px 6px rgba(0,0,0,.3);':'')+'"><b>'+(hasPw?'🔒':'🔑')+'</b></div>',className:'',iconSize:[30,30],iconAnchor:[15,28]});}
+let _mineMarkers=[];
+function mineDispIcon(m){return map.getZoom()>=15?mineIcon(false,m.hasPw):L.icon({iconUrl:'mk-mine.png',iconSize:[30,40],iconAnchor:[15,38],tooltipAnchor:[0,-34]});}
 function addMineMarker(m){
- const mk=L.marker([m.lat,m.lng],{draggable:false,icon:mineIcon(false,m.hasPw)}).addTo(pinLayer);
+ const mk=L.marker([m.lat,m.lng],{draggable:false,icon:mineDispIcon(m)}).addTo(pinLayer); _mineMarkers.push({mk:mk,m:m});
  mk.on('click',()=>{if(!mk.__moving)showMine(m);});
  mk.on('contextmenu',e=>{if(e.originalEvent)e.originalEvent.preventDefault();enterMove(mk,m);}); // 길게누르기(모바일)/우클릭
  return mk;
@@ -134,7 +136,7 @@ function enterMove(mk,m){
  });
 }
 function renderPins(){
- pinLayer.clearLayers();
+ pinLayer.clearLayers(); _mineMarkers=[];
  drawNetwork(pinLayer,{labels:false});
  mine().forEach(m=>addMineMarker(m));
 }
@@ -293,7 +295,7 @@ function renderNearby(la,lo,fromMap){
  list.sort((a,b)=>a.d-b.d);
  const near=list.slice(0,fromMap?80:30); window._near=near;
  nearLayer.clearLayers();
- near.forEach(c=>{L.marker([c.lat,c.lng],{icon:catPin(c.cat,isClosed(c.cat))}).bindTooltip(c.name,{direction:'top'}).on('click',()=>showToiletInfo(c)).addTo(nearLayer);});
+ near.forEach(c=>{if(c.cat==='mine')return;L.marker([c.lat,c.lng],{icon:catPin(c.cat,isClosed(c.cat))}).bindTooltip(c.name,{direction:'top'}).on('click',()=>showToiletInfo(c)).addTo(nearLayer);});
  showLegend(true);
  const rows=near.slice(0,20).map((c,i)=>{const dist=c.d<1?Math.round(c.d*1000)+'m':c.d.toFixed(1)+'km';
   return `<div class="card" style="cursor:pointer" onclick="showToiletInfo(window._near[${i}])">
@@ -325,6 +327,7 @@ $('#areaBtn').onclick=()=>{
  Promise.all([loadPublic(),loadPlaces()]).then(()=>{const c=map.getCenter();renderNearby(c.lat,c.lng,true);});
 };
 let _moveT=null;
+map.on('zoomend',()=>{_mineMarkers.forEach(o=>{if(!o.mk.__moving)o.mk.setIcon(mineDispIcon(o.m));});});
 map.on('moveend',()=>{
  if(!document.querySelector('#v-map').classList.contains('on'))return;
  if(map.getZoom()<14)return;
