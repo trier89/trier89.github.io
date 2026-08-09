@@ -14,19 +14,19 @@
 html,body{margin:0;height:100%;font-family:-apple-system,"Apple SD Gothic Neo",Pretendard,sans-serif;color:var(--ink);background:var(--bg)}
 #app{position:fixed;inset:0;display:flex;flex-direction:column}
 header{padding:9px 12px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;z-index:600;min-height:58px}
-header h1{font-size:16px;margin:0;font-weight:800;display:flex;align-items:center;gap:7px;white-space:nowrap;flex:none}
+header h1{font-size:16px;margin:0;font-weight:800;display:flex;align-items:center;gap:7px;flex:1 1 auto;min-width:0}
 .applogo{width:30px;height:30px;border-radius:8px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.14)}
-.titlewrap{display:flex;flex-direction:column;line-height:1.12}
-.titlewrap b{font-size:16px;font-weight:800}
-header h1 small{font-weight:600;color:var(--muted);font-size:11px}
-.seg{margin-left:auto;display:flex;background:#eef1f4;border-radius:11px;padding:3px;flex:none}
-.seg button{border:0;background:transparent;padding:8px 13px;border-radius:9px;font-weight:800;color:var(--muted);font-size:13px;display:flex;align-items:center;gap:5px;transition:background .15s,color .15s}
+.titlewrap{display:flex;flex-direction:column;line-height:1.12;min-width:0;overflow:hidden}
+.titlewrap b{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header h1 small{font-weight:600;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg{display:flex;background:#eef1f4;border-radius:11px;padding:3px;flex:none}
+.seg button{border:0;background:transparent;padding:8px 12px;border-radius:9px;font-weight:800;color:var(--muted);font-size:13px;display:flex;align-items:center;gap:5px;transition:background .15s,color .15s}
 .tabico{width:17px;height:17px;flex:none}
 .seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(47,125,225,.4)}
 .seg button.on .tabico{filter:brightness(0) invert(1)}
-.lang{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 7px;font-size:13px;font-weight:800;color:var(--ink);flex:none;text-align:center}
+.lang{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 4px;font-size:13px;font-weight:800;color:var(--ink);flex:none;text-align:center;width:38px;-webkit-appearance:none;appearance:none;background-image:none}
 #acctBtn{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 9px;font-size:17px;line-height:1;cursor:pointer;flex:none}
-@media(max-width:400px){header h1 small{display:none}.seg button{padding:8px 10px}.seg button span{display:none}.tabico{width:19px;height:19px}}
+@media(max-width:430px){header h1 small{display:none}.seg button{padding:8px 9px}.seg button span{display:none}.tabico{width:19px;height:19px}.lang{width:34px;padding:8px 2px}}
 main{position:relative;flex:1;overflow:hidden}
 .view{position:absolute;inset:0;display:none}
 .view.on{display:block}
