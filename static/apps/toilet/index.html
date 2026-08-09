@@ -96,6 +96,7 @@ label{font-size:13px;font-weight:700;color:var(--muted)}
 .st-tip{font-size:12px;font-weight:700;background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .hint{font-size:12px;color:var(--muted)}
 .ic{width:20px;height:20px;vertical-align:-5px;display:inline-block;object-fit:contain}
+.leaflet-marker-icon.mkclosed{filter:grayscale(1) opacity(.5)}
 </style>
 
 <div id="app">
@@ -115,7 +116,7 @@ label{font-size:13px;font-weight:700;color:var(--muted)}
     </div>
     <section class="view on" id="v-map">
       <div id="map"></div>
-      <button id="areaBtn">🗺 이 지역 화장실 보기</button>
+      <button id="areaBtn">🔄 이 지역 화장실 보기</button>
       <button class="fab" id="nearBtn" title="내 주변 화장실" style="bottom:88px;background:#2f9e6b">📍</button>
       <button class="fab" id="addBtn" title="내 화장실 추가">＋</button>
     </section>
