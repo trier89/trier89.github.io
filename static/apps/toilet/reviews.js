@@ -30,7 +30,7 @@
    var out=[];(rows||[]).forEach(function(x){if(!x.document)return;var f=x.document.fields||{};out.push({
     rating:parseInt((f.rating&&f.rating.integerValue)||0,10),
     text:(f.text&&f.text.stringValue)||'',nick:(f.nick&&f.nick.stringValue)||'익명',
-    uid:(f.uid&&f.uid.stringValue)||'',ts:(f.ts&&f.ts.timestampValue)||'',
+    uid:(f.uid&&f.uid.stringValue)||'',ts:(f.ts&&f.ts.timestampValue)||'',paper:!!(f.paper&&f.paper.booleanValue),
     id:x.document.name.split('/').pop()});});
    out.sort(function(a,b){return (b.ts||'').localeCompare(a.ts||'');});
    return out;
@@ -44,12 +44,13 @@
    var sel=0; // 선택한 별점
    var TTr=function(k,f){return window.TT?window.TT(k,f):f;};
    var head='<div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px"><b style="font-size:15px">⭐ '+TTr('revTitle','화장실 평가')+'</b>'
-    +(list.length?'<span style="color:#e8a020;font-weight:800">'+avg.toFixed(1)+'</span><span style="color:#9ca3af;font-size:12px">('+list.length+')</span>':'<span style="color:#9ca3af;font-size:12px">'+TTr('revFirst','첫 평가를 남겨보세요')+'</span>')+'</div>';
+    +(list.length?'<span style="color:#e8a020;font-weight:800">'+avg.toFixed(1)+'</span><span style="color:#9ca3af;font-size:12px">('+list.length+')</span>':'<span style="color:#9ca3af;font-size:12px">'+TTr('revFirst','첫 평가를 남겨보세요')+'</span>')+(list.filter(function(r){return r.paper;}).length?' <span style="background:#eef7f0;color:#2f9e5b;font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px">'+TTr('paperYes','\ud83e\uddfb \ud734\uc9c0 \uc788\uc74c')+' '+list.filter(function(r){return r.paper;}).length+'</span>':'')+'</div>';
    var form='<div class="card" style="background:#faf9f6">'
     +'<div style="font-size:13px;color:#7b828a;margin-bottom:4px">'+(window.TT?window.TT('revStar','별점'):'별점')+'</div>'
     +'<div id="tr-stars" style="font-size:26px;color:#e8a020;letter-spacing:2px">'+stars(0,true)+'</div>'
     +'<input id="tr-nick" maxlength="16" value="'+((window.Account&&window.Account.get&&window.Account.get())?esc(window.Account.get().userid):'')+'" placeholder="'+(window.TT?window.TT('revNick','닉네임'):'닉네임')+'" style="margin-top:8px">'
     +'<textarea id="tr-text" maxlength="200" rows="2" placeholder="'+(window.TT?window.TT('revPlaceholder','화장실 어땠나요?'):'화장실 어땠나요?')+'"></textarea>'
+    +'<label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#555;margin:6px 0 2px"><input type="checkbox" id="tr-paper" style="width:auto"> '+TTr('paperReport','\ud83e\uddfb \ud734\uc9c0 \uc788\uc5c8\uc5b4\uc694')+'</label>'
     +'<div style="display:flex;align-items:center;gap:8px"><span id="tr-msg" style="font-size:12px;color:#9ca3af;flex:1"></span>'
     +'<button class="btn" id="tr-send" style="width:auto;margin:0;padding:9px 18px">'+(window.TT?window.TT('revSubmit','등록'):'등록')+'</button></div></div>';
    var items=list.map(function(r){
@@ -79,7 +80,7 @@
     var nick=(container.querySelector('#tr-nick').value||'익명').slice(0,16);
     var text=(container.querySelector('#tr-text').value||'').slice(0,200);
     container.querySelector('#tr-send').disabled=true;
-    db.collection('toilet_reviews').add({tid:tid,rating:sel,text:text,nick:nick,uid:myUid,ts:firebase.firestore.FieldValue.serverTimestamp()})
+    db.collection('toilet_reviews').add({tid:tid,rating:sel,text:text,nick:nick,uid:myUid,paper:!!(container.querySelector('#tr-paper')&&container.querySelector('#tr-paper').checked),ts:firebase.firestore.FieldValue.serverTimestamp()})
      .then(function(){lastSent=Date.now();render(container,tid,title);})
      .catch(function(e){msg.textContent=(window.TT?window.TT('revFail','등록 실패'):'등록 실패');container.querySelector('#tr-send').disabled=false;});
    };

@@ -42,11 +42,12 @@ service cloud.firestore {
       allow read: if true;
       allow create: if request.auth != null
         && request.resource.data.uid == request.auth.uid
-        && request.resource.data.keys().hasOnly(['tid','rating','text','nick','uid','ts'])
+        && request.resource.data.keys().hasOnly(['tid','rating','text','nick','uid','ts','paper'])
         && request.resource.data.tid is string && request.resource.data.tid.size() <= 64
         && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5
         && request.resource.data.text is string && request.resource.data.text.size() <= 200
-        && request.resource.data.nick is string && request.resource.data.nick.size() >= 1 && request.resource.data.nick.size() <= 16;
+        && request.resource.data.nick is string && request.resource.data.nick.size() >= 1 && request.resource.data.nick.size() <= 16
+        && (!('paper' in request.resource.data) || request.resource.data.paper is bool);
       allow update: if false;
       allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
     }
