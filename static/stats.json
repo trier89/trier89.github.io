@@ -4,7 +4,7 @@
  "total": 118,
  "total_visits": 332,
  "yesterday": {
-  "users": 5,
+  "users": 6,
   "new": 1,
   "pv": 21,
   "sessions": 7
@@ -13,7 +13,7 @@
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
    "views": 42,
-   "eng": 1810,
+   "eng": 1813,
    "avg_sec": 43
   },
   {
@@ -57,7 +57,7 @@
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
    "views": 42,
-   "eng": 1810,
+   "eng": 1813,
    "avg_sec": 43
   },
   {
@@ -73,5 +73,5 @@
    "avg_sec": 8
   }
  ],
- "updated": "2026-08-13 04:11"
+ "updated": "2026-08-13 05:11"
 }
