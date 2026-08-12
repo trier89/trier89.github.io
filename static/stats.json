@@ -1,77 +1,77 @@
 {
- "today": 0,
- "today_pv": 0,
- "total": 110,
- "total_visits": 307,
+ "today": 4,
+ "today_pv": 13,
+ "total": 118,
+ "total_visits": 329,
  "yesterday": {
-  "users": 5,
-  "new": 3,
-  "pv": 9,
-  "sessions": 7
+  "users": 2,
+  "new": 0,
+  "pv": 2,
+  "sessions": 2
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 88,
-   "eng": 781,
-   "avg_sec": 9
-  },
-  {
-   "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 44,
-   "eng": 2601,
-   "avg_sec": 59
-  },
-  {
-   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 41,
-   "eng": 405,
-   "avg_sec": 10
-  },
-  {
-   "title": "무료 IQ 테스트 — 15분 만에 알아보는 내 지능지수",
-   "views": 20,
-   "eng": 2973,
-   "avg_sec": 149
+   "views": 35,
+   "eng": 1753,
+   "avg_sec": 50
   },
   {
    "title": "심리테스트",
-   "views": 13,
-   "eng": 31,
+   "views": 7,
+   "eng": 17,
    "avg_sec": 2
+  },
+  {
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 5,
+   "eng": 8,
+   "avg_sec": 2
+  },
+  {
+   "title": "404 Page not found",
+   "views": 3,
+   "eng": 24,
+   "avg_sec": 8
+  },
+  {
+   "title": "연애세포 유형 테스트 — 내 안의 연애세포는 무슨 타입?",
+   "views": 3,
+   "eng": 514,
+   "avg_sec": 171
   }
  ],
  "top_dwell": [
   {
-   "title": "무료 IQ 테스트 — 15분 만에 알아보는 내 지능지수",
-   "views": 20,
-   "eng": 2973,
-   "avg_sec": 149
+   "title": "연애세포 유형 테스트 — 내 안의 연애세포는 무슨 타입?",
+   "views": 3,
+   "eng": 514,
+   "avg_sec": 171
   },
   {
-   "title": "신수 키우기 (다마고치) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 44,
-   "eng": 2601,
-   "avg_sec": 59
+   "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
+   "views": 3,
+   "eng": 250,
+   "avg_sec": 83
   },
   {
-   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
-   "views": 5,
-   "eng": 238,
-   "avg_sec": 48
+   "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
+   "views": 35,
+   "eng": 1753,
+   "avg_sec": 50
   },
   {
-   "title": "리듬 게임 (저작권 프리 클래식 명곡) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 8,
-   "eng": 315,
-   "avg_sec": 39
+   "title": "404 Page not found",
+   "views": 3,
+   "eng": 24,
+   "avg_sec": 8
   },
   {
-   "title": "카드 뒤집기(메모리 게임) — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 6,
-   "eng": 230,
-   "avg_sec": 38
+   "title": "심리테스트",
+   "views": 7,
+   "eng": 17,
+   "avg_sec": 2
   }
  ],
- "updated": "2026-08-07 15:09"
+ "updated": "2026-08-12 19:16"
 }
