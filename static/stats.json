@@ -2,12 +2,12 @@
  "today": 0,
  "today_pv": 0,
  "total": 118,
- "total_visits": 341,
+ "total_visits": 342,
  "yesterday": {
   "users": 5,
   "new": 0,
-  "pv": 22,
-  "sessions": 7
+  "pv": 25,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -31,8 +31,8 @@
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 5,
-   "eng": 68,
-   "avg_sec": 14
+   "eng": 85,
+   "avg_sec": 17
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
@@ -63,8 +63,8 @@
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 5,
-   "eng": 68,
-   "avg_sec": 14
+   "eng": 85,
+   "avg_sec": 17
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
@@ -73,5 +73,5 @@
    "avg_sec": 12
   }
  ],
- "updated": "2026-08-14 00:13"
+ "updated": "2026-08-14 01:13"
 }
