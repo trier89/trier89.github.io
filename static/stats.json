@@ -1,26 +1,26 @@
 {
- "today": 5,
- "today_pv": 22,
+ "today": 0,
+ "today_pv": 0,
  "total": 118,
  "total_visits": 341,
  "yesterday": {
-  "users": 6,
-  "new": 2,
-  "pv": 27,
-  "sessions": 8
+  "users": 5,
+  "new": 0,
+  "pv": 22,
+  "sessions": 7
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 46,
-   "eng": 1836,
-   "avg_sec": 40
+   "views": 42,
+   "eng": 1861,
+   "avg_sec": 44
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 7,
-   "eng": 67,
-   "avg_sec": 10
+   "views": 8,
+   "eng": 75,
+   "avg_sec": 9
   },
   {
    "title": "심리테스트",
@@ -29,49 +29,49 @@
    "avg_sec": 2
   },
   {
-   "title": "404 Page not found",
-   "views": 3,
-   "eng": 24,
-   "avg_sec": 8
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 5,
+   "eng": 68,
+   "avg_sec": 14
   },
   {
-   "title": "연애세포 유형 테스트 — 내 안의 연애세포는 무슨 타입?",
-   "views": 3,
-   "eng": 514,
-   "avg_sec": 171
+   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
+   "views": 5,
+   "eng": 60,
+   "avg_sec": 12
   }
  ],
  "top_dwell": [
   {
    "title": "연애세포 유형 테스트 — 내 안의 연애세포는 무슨 타입?",
-   "views": 3,
-   "eng": 514,
-   "avg_sec": 171
+   "views": 4,
+   "eng": 623,
+   "avg_sec": 156
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
-   "views": 3,
-   "eng": 250,
-   "avg_sec": 83
+   "views": 4,
+   "eng": 357,
+   "avg_sec": 89
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 46,
-   "eng": 1836,
-   "avg_sec": 40
+   "views": 42,
+   "eng": 1861,
+   "avg_sec": 44
   },
   {
-   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 7,
-   "eng": 67,
-   "avg_sec": 10
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 5,
+   "eng": 68,
+   "avg_sec": 14
   },
   {
-   "title": "404 Page not found",
-   "views": 3,
-   "eng": 24,
-   "avg_sec": 8
+   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
+   "views": 5,
+   "eng": 60,
+   "avg_sec": 12
   }
  ],
- "updated": "2026-08-13 23:13"
+ "updated": "2026-08-14 00:13"
 }
