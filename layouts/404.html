@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>페이지를 찾을 수 없어요 — {{ .Site.Title }}</title>
+<script>
+// 데일리로 이관된 옛 자동콘텐츠(뉴스·트렌드·역사·다락방컴퍼니) 경로는 데일리 사이트로 자동 이동
+(function(){
+  var p = location.pathname;
+  var moved = /^\/(post|categories\/(%EB%89%B4%EC%8A%A4|뉴스|%ED%8A%B8%EB%A0%8C%EB%93%9C|트렌드|오늘의-역사|%EC%98%A4%EB%8A%98%EC%9D%98-%EC%97%AD%EC%82%AC)|darak-company)(\/|$)/;
+  if (moved.test(p)) {
+    location.replace('https://planfully-daily.pages.dev' + p + location.search);
+  }
+})();
+</script>
+<style>
+:root{--bg:#262624;--panel:#1f1f1d;--line:#3e3e3a;--txt:#e8e6e3;--dim:#9c9a94;--coral:#d97757;--green:#7fb069;--blue:#7ea6e0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menlo,Consolas,'Apple SD Gothic Neo',monospace;font-size:15px;line-height:1.8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:34px 16px;}
+.box{max-width:520px;text-align:center;border:1px solid var(--coral);border-radius:12px;padding:34px 28px;background:rgba(217,119,87,.06);}
+h1{color:var(--coral);font-size:20px;margin-bottom:10px;}
+p{color:var(--dim);margin-bottom:8px;}
+.nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px;}
+.nav a{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:7px 16px;font-size:13.5px;background:var(--panel);}
+.nav a:hover{border-color:var(--coral);color:var(--coral);}
+.prompt{color:var(--green);}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1><span class="prompt">❯</span> 404 — 페이지를 찾을 수 없어요</h1>
+  <p>주소가 바뀌었거나 사라진 페이지예요.</p>
+  <p>뉴스·트렌드·역사·다락방컴퍼니는 <a href="https://planfully-daily.pages.dev/" style="color:var(--blue);">데일리 사이트</a>로 옮겼어요.</p>
+  <div class="nav">
+    <a href="/">🏠 홈</a>
+    <a href="/tools/">🧰 도구방</a>
+    <a href="/games/">🎮 게임방</a>
+    <a href="/tests/">🧠 심리테스트</a>
+    <a href="https://planfully-daily.pages.dev/">📰 데일리</a>
+  </div>
+</div>
+</body>
+</html>
