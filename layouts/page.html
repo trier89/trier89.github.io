@@ -45,6 +45,7 @@
   mk('페이스북','📘',function(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),'_blank','width=580,height=400');});
   mk('링크복사','🔗',function(){navigator.clipboard.writeText(url).then(function(){alert('링크가 복사됐어요!');});});})();
   </script>
+  {{ partial "pf/adfit.html" . }}
   {{ if not (eq .Params.comments false) }}
     <div id="planfully-comments"></div>
     <script src="/comments.js?v={{ now.Unix }}" defer></script>
