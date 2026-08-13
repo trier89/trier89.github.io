@@ -49,12 +49,14 @@ def main():
     added = 0
     # 최신 회차 발견: cur_max 부근을 조회하면 batch에 실제 최신까지 포함됨.
     # 새 회차가 여러 개 밀렸을 수도 있으니 몇 단계 위로 훑는다.
+    # ⚠️ API는 srchLtEpsd가 최신회차보다 크면 빈 리스트를 준다(구 버그: probe+5로 조회해 신규 못 봄, 2026-08-13 수정).
+    # 유효한 최근 회차로 조회하면 최신 10회차 배치를 돌려주므로 그대로 훑는다.
     probe = cur_max
     for _ in range(6):
         try:
-            j = fetch(probe + 5)
+            j = fetch(probe)
         except Exception as e:
-            print("fetch error @%d: %s" % (probe + 5, e))
+            print("fetch error @%d: %s" % (probe, e))
             break
         lst = (j.get("data") or {}).get("list") or []
         news = [x for x in lst if x.get("ltEpsd") and x["ltEpsd"] > cur_max and x["ltEpsd"] not in by_round]
