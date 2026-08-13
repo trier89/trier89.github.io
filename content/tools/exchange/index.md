@@ -68,12 +68,14 @@ $('ex-cur').onchange=refresh;
 $('ex-amt').oninput=calc;
 $('ex-swap').onclick=function(){dir=(dir==='fx2krw')?'krw2fx':'fx2krw';refresh();};
 refresh();
-fetch('https://api.frankfurter.app/latest?from=USD&to=KRW,JPY,EUR,CNY,GBP').then(function(r){return r.json();}).then(function(d){
-  var kr=d.rates.KRW;
-  if(!kr){throw new Error('no krw');}
-  RATE={USD:kr,JPY:kr/d.rates.JPY,EUR:kr/d.rates.EUR,CNY:kr/d.rates.CNY,GBP:kr/d.rates.GBP};
-  RDATE=d.date;LIVE=true;baseNote();calc();
-}).catch(function(){LIVE=false;baseNote();calc();});
+var SRC=[
+ {u:'https://api.fxratesapi.com/latest?base=USD&currencies=KRW,JPY,EUR,CNY,GBP',p:function(d){if(!(d.rates&&d.rates.KRW))return null;var ds=d.timestamp?new Date(d.timestamp*1000).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):(d.date||'').slice(0,10);return {r:d.rates,d:ds};}},
+ {u:'https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW,JPY,EUR,CNY,GBP',p:function(d){return (d.rates&&d.rates.KRW)?{r:d.rates,d:d.date}:null;}},
+ {u:'https://open.er-api.com/v6/latest/USD',p:function(d){return (d.rates&&d.rates.KRW)?{r:d.rates,d:(d.time_last_update_utc||'').slice(0,16)}:null;}}
+];
+function apply(o){var kr=o.r.KRW;RATE={USD:kr,JPY:kr/o.r.JPY,EUR:kr/o.r.EUR,CNY:kr/o.r.CNY,GBP:kr/o.r.GBP};RDATE=o.d;LIVE=true;baseNote();calc();}
+function tryFetch(i){if(i>=SRC.length){LIVE=false;baseNote();calc();return;}fetch(SRC[i].u).then(function(r){return r.json();}).then(function(d){var o=SRC[i].p(d);if(o){apply(o);}else{tryFetch(i+1);}}).catch(function(){tryFetch(i+1);});}
+tryFetch(0);
 })();
 </script>
 
