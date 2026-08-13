@@ -2,31 +2,31 @@
  "today": 2,
  "today_pv": 8,
  "total": 118,
- "total_visits": 334,
+ "total_visits": 336,
  "yesterday": {
   "users": 6,
-  "new": 1,
-  "pv": 21,
-  "sessions": 7
+  "new": 2,
+  "pv": 27,
+  "sessions": 8
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 42,
-   "eng": 1813,
-   "avg_sec": 43
+   "views": 46,
+   "eng": 1836,
+   "avg_sec": 40
+  },
+  {
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 7,
+   "eng": 67,
+   "avg_sec": 10
   },
   {
    "title": "심리테스트",
    "views": 7,
    "eng": 17,
    "avg_sec": 2
-  },
-  {
-   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 5,
-   "eng": 54,
-   "avg_sec": 11
   },
   {
    "title": "404 Page not found",
@@ -56,15 +56,15 @@
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 42,
-   "eng": 1813,
-   "avg_sec": 43
+   "views": 46,
+   "eng": 1836,
+   "avg_sec": 40
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 5,
-   "eng": 54,
-   "avg_sec": 11
+   "views": 7,
+   "eng": 67,
+   "avg_sec": 10
   },
   {
    "title": "404 Page not found",
@@ -73,5 +73,5 @@
    "avg_sec": 8
   }
  ],
- "updated": "2026-08-13 10:11"
+ "updated": "2026-08-13 11:11"
 }
