@@ -14,6 +14,7 @@
     {{ range .Pages }}<a class="pf-card" href="{{ .RelPermalink }}" style="margin:0;"><div class="t">{{ .Title }}</div><div class="m">{{ .Description }}</div></a>{{ end }}
   </div>
   <style>@media(max-width:600px){.pf-tg{grid-template-columns:1fr!important;}}</style>
+{{ partial "pf/adfit.html" . }}
 </main>
 {{ partial "pf/foot.html" . }}
 </div>
