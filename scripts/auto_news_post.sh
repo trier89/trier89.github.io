@@ -3,11 +3,13 @@
 # Runs on Mac mini via crontab. Analysis: tries Claude CLI, falls back to OpenAI gpt-4o-mini
 # (NOTE: Claude CLI is currently logged out on this Mac, so OpenAI is used every run — re-login `claude` to restore Claude quality).
 
-BLOG_ROOT="/Users/minim/projects/planfully-lazy"
+BLOG_ROOT="/Users/minim/projects/planfully-lazy"     # 스크립트·.env 위치(유지)
 SCRIPTS_DIR="$BLOG_ROOT/scripts"
+DAILY_ROOT="/Users/minim/projects/planfully-daily"   # 콘텐츠 발행·배포 대상(2026-08-13 애드센스 분리)
+export PF_CONTENT_ROOT="$DAILY_ROOT"                  # today_in_history.py/daily_trends.py 출력 리다이렉트
 DATE=$(date +%Y-%m-%d)
 DATE_DISPLAY=$(date '+%Y년 %m월 %d일')
-POST_DIR="$BLOG_ROOT/content/post/news-$DATE"
+POST_DIR="$DAILY_ROOT/content/post/news-$DATE"
 PYTHON="/usr/bin/python3"
 WEEKDAY=$($PYTHON -c "import datetime; wd=['월','화','수','목','금','토','일']; print(wd[datetime.date.today().weekday()])")
 
@@ -27,9 +29,7 @@ if [ -f "$POST_DIR/index.md" ]; then
     echo "Already posted today, skipping." >> "$LOG_FILE"
     # 뉴스는 있어도 '오늘의 역사'가 없으면 그것만 생성·발행 (조기 종료 경로에서도 데일리 보장)
     $PYTHON "$SCRIPTS_DIR/today_in_history.py" >> "$LOG_FILE" 2>&1 || true
-    cd "$BLOG_ROOT"
-    git add content/post/today-* content/post/trends-* >> "$LOG_FILE" 2>&1 || true
-    git diff --cached --quiet || { git commit -m "Add today-in-history: $DATE" >> "$LOG_FILE" 2>&1; git push origin main >> "$LOG_FILE" 2>&1; }
+    "$DAILY_ROOT/deploy.sh" >> "$LOG_FILE" 2>&1
     exit 0
 fi
 
@@ -44,7 +44,7 @@ fi
 
 # Collect previous post titles for dedup
 PREV_TITLES=""
-for f in "$BLOG_ROOT"/content/post/news-*/index.md; do
+for f in "$DAILY_ROOT"/content/post/news-*/index.md; do
     [ -f "$f" ] && PREV_TITLES="$PREV_TITLES$(grep -oP '\*\*\d+\. \[\K[^\]]+' "$f" 2>/dev/null | head -20)\n"
 done
 
@@ -117,13 +117,9 @@ fi
 # Step 2.5: 오늘의 역사 포스트 (2026-07-21 사용자 요청 — 실패해도 뉴스 발행은 계속)
 $PYTHON "$SCRIPTS_DIR/today_in_history.py" >> "$LOG_FILE" 2>&1 || echo "today_in_history failed (skip)" >> "$LOG_FILE"
 
-# Step 3: Git commit and push
-echo "Pushing to GitHub..." >> "$LOG_FILE"
-cd "$BLOG_ROOT"
-git add "content/post/news-$DATE/" >> "$LOG_FILE" 2>&1
-git add content/post/today-* content/post/trends-* >> "$LOG_FILE" 2>&1 || true
-git commit -m "Add daily news: $DATE" >> "$LOG_FILE" 2>&1
-git push origin main >> "$LOG_FILE" 2>&1
+# Step 3: 데일리 사이트 빌드 + Cloudflare Pages 배포 (git push 대체)
+echo "Deploying to planfully-daily.pages.dev..." >> "$LOG_FILE"
+"$DAILY_ROOT/deploy.sh" >> "$LOG_FILE" 2>&1
 
 echo "Done! Post published: news-$DATE" >> "$LOG_FILE"
 rm -f "/tmp/news_raw_$DATE.json" "/tmp/news_prompt_$DATE.txt"

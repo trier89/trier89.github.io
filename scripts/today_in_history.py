@@ -4,10 +4,11 @@
 /tools/my-birthday/ 와 같은 데이터 소스 — 포스트 하단에 도구 링크로 상호 유입.
 출력: content/post/today-YYYYMMDD/index.md (이미 있으면 skip, 재실행 안전)
 """
-import re, json, time, datetime, urllib.request, urllib.parse, urllib.error
+import re, json, time, datetime, urllib.request, urllib.parse, urllib.error, os
 from pathlib import Path
 
-BLOG = Path(__file__).resolve().parent.parent
+# 출력 루트: PF_CONTENT_ROOT 있으면 그쪽(=데일리 사이트), 없으면 기존 planfully-lazy
+BLOG = Path(os.environ.get("PF_CONTENT_ROOT") or Path(__file__).resolve().parent.parent)
 API = "https://ko.wikipedia.org/w/api.php"
 # 위키미디어는 명확한 연락처 UA를 요구 — 429/차단 완화
 UA = {"User-Agent": "planfully-lazy-blog/1.1 (https://planfully.ai.kr; make.our.story@gmail.com)"}

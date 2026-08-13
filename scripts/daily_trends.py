@@ -5,11 +5,12 @@
 사람 이름 단독 키워드(연예인·사건 인물 가능성)는 기사 제목만 붙이고 코멘트 없음.
 출력: content/post/trends-YYYYMMDD/index.md (있으면 skip)
 """
-import re, datetime, urllib.request
+import re, datetime, urllib.request, os
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-BLOG = Path(__file__).resolve().parent.parent
+# 출력 루트: PF_CONTENT_ROOT 있으면 그쪽(=데일리 사이트), 없으면 기존 planfully-lazy
+BLOG = Path(os.environ.get("PF_CONTENT_ROOT") or Path(__file__).resolve().parent.parent)
 RSS = "https://trends.google.com/trending/rss?geo=KR"
 NS = {"ht": "https://trends.google.com/trending/rss"}
 UA = {"User-Agent": "Mozilla/5.0 (planfully-lazy blog)"}
