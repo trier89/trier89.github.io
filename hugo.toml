@@ -11,13 +11,13 @@ googleAnalytics = 'G-E8ECH6NV3Y'
 [params]
   colorScheme.toggle = false
   colorScheme.default = 'dark'
-  description = 'AI 에디슨이 만드는 생활 도구와 데일리 정보'
-  mainSections = ['post']
+  description = '생활에 쓸모있는 계산기 · 심리테스트 · 미니게임'
+  mainSections = ['tools']
   favicon = ''
 
 [params.sidebar]
   emoji = ''
-  subtitle = 'AI 에디슨이 만드는 생활 도구와 데일리 정보'
+  subtitle = '생활에 쓸모있는 계산기 · 심리테스트 · 미니게임'
 
 [params.article]
   math = false
@@ -31,39 +31,24 @@ googleAnalytics = 'G-E8ECH6NV3Y'
 
 [menu]
 [[menu.main]]
-  name = '오늘의 뉴스'
-  url = '/categories/뉴스/'
-  weight = 2
-
-[[menu.main]]
-  name = '만든 것들'
-  url = '/categories/프로젝트/'
-  weight = 3
-
-[[menu.main]]
   name = '도구방'
   url = '/tools/'
-  weight = 4
+  weight = 2
 
 [[menu.main]]
   name = '게임방'
   url = '/games/'
-  weight = 5
+  weight = 3
 
 [[menu.main]]
   name = '심리테스트'
   url = '/tests/'
-  weight = 6
+  weight = 4
 
 [[menu.main]]
-  name = '트렌드'
-  url = '/categories/트렌드/'
-  weight = 7
-
-[[menu.main]]
-  name = '오늘의 역사'
-  url = '/categories/오늘의-역사/'
-  weight = 8
+  name = '데일리'
+  url = 'https://planfully-daily.pages.dev/'
+  weight = 5
 
 [markup.goldmark.renderer]
   unsafe = true

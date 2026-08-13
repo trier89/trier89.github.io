@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ .Site.Title }} — AI 에디슨의 놀이터</title>
+<title>{{ .Site.Title }} — 생활 계산기 · 심리테스트 · 미니게임</title>
 <meta name="description" content="{{ .Site.Params.description }}">
 {{ partial "head/custom.html" . }}
 {{ with .Site.Config.Services.GoogleAnalytics.ID }}
@@ -87,10 +87,7 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
     <a href="/games/">🎮 게임방</a>
     <a href="/tests/">🧠 심리테스트</a>
     <a href="/page/requests/">💌 요청방</a>
-    <a href="/categories/트렌드/">🔍 트렌드</a>
-    <a href="/categories/오늘의-역사/">🏛 역사</a>
-    <a href="/categories/뉴스/">📰 뉴스</a>
-    <a href="/darak-company/">🏢 다락방컴퍼니</a>
+    <a href="https://planfully-daily.pages.dev/">📰 데일리</a>
   </div>
 
   <div class="sec">
@@ -126,35 +123,18 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   </div>
 
   <div class="sec">
-    <div class="shead"><a href="/categories/뉴스/">📰 양면뉴스 · 트렌드 →</a> <span class="dim">한 사건, 양쪽 시각 + 지금 뜨는 이야기</span></div>
-    <div class="grid">
-      {{ range first 2 (where (where .Site.RegularPages "Section" "post") "Params.categories" "intersect" (slice "뉴스")).ByDate.Reverse }}
-      <a class="card" href="{{ .RelPermalink }}"><div class="emoji">📰</div><div class="cname">{{ .Title }}</div><div class="cdesc">{{ .Params.description | truncate 46 }}</div></a>
-      {{ end }}
-      {{ range first 2 (where (where .Site.RegularPages "Section" "post") "Params.categories" "intersect" (slice "트렌드")).ByDate.Reverse }}
-      <a class="card" href="{{ .RelPermalink }}"><div class="emoji">🔍</div><div class="cname">{{ .Title }}</div><div class="cdesc">{{ .Params.description | truncate 46 }}</div></a>
-      {{ end }}
-    </div>
-  </div>
-
-  <div class="sec log">
-    <div class="shead">📰 오늘의 글 <span class="dim">매일 자동 발행</span></div>
-    {{ $posts := where .Site.RegularPages "Section" "post" }}
-    {{ range first 3 $posts.ByDate.Reverse }}
-    <div class="ln"><span class="date">{{ .Date.Format "01.02" }}</span><span class="cat">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
-    {{ end }}
-    <div class="more"><span class="prompt">❯</span><a href="/post/">전체 글 보기 →</a></div>
+    <div class="shead"><a href="https://planfully-daily.pages.dev/">📰 데일리 →</a> <span class="dim">매일의 뉴스·트렌드·역사는 여기서</span></div>
   </div>
 
   <div class="foot">
-    <div>🤖 이 사이트의 도구·게임·글은 AI 에디슨이 만들고, 사람이 지켜봅니다</div>
+    <div>🧰 생활에 쓸모있는 계산기 · 심리테스트 · 미니게임을 만듭니다</div>
     <div>&copy; 2026 planfully.ai.kr · <a href="/page/about/">소개</a> · <a href="/page/contact/">문의</a> · <a href="/page/privacy/">개인정보처리방침</a> · <a href="/page/terms/">이용약관</a></div>
   </div>
 </div>
 <script>
 (function(){
   var msgs=[
-    'AI 에디슨이 만드는 도구와 게임, 매일의 이야기가 있는 놀이터예요.',
+    '생활에 쓸모있는 계산기와 심리테스트, 잠깐 쉬어가는 미니게임.',
     '오늘도 계획대로, 느긋하게.',
   ];
   var el=document.getElementById('typed');

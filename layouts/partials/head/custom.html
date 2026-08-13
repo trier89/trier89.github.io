@@ -1,6 +1,4 @@
-{{/* 2026-08-01 애드센스 Quality Content: 자동생성 데일리 글(뉴스·역사·트렌드·작업로그)은 색인 제외 — 사이트엔 유지하되 검색·심사 대상서 빼서 저품질 판정 회피. 링크는 따라감. 전역 head라 어느 템플릿이 렌더해도 적용됨 */}}
-{{ $auto := slice "뉴스" "오늘의 역사" "트렌드" "검색 트렌드" }}
-{{ if or (intersect (.Params.categories | default slice) $auto) (eq .Section "darak-company-log") }}<meta name="robots" content="noindex,follow" />{{ end }}
+{{/* planfully.ai.kr — 생활 계산기·심리테스트·미니게임 사이트. 자동 데일리 콘텐츠(뉴스·트렌드·역사·컴퍼니)는 2026-08-13 planfully-daily.pages.dev로 완전 분리(애드센스 저품질 판정 회피). */}}
 <meta name="google-site-verification" content="rbNlXSTInYti9v9vL2iS9xyikzDjO6lp6G-HjbS7MN8" />
 <meta name="naver-site-verification" content="2a39da95f15f0776d30f4d51cf8a44045f4b47db" />
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
