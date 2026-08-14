@@ -2,12 +2,12 @@
  "today": 0,
  "today_pv": 0,
  "total": 120,
- "total_visits": 349,
+ "total_visits": 350,
  "yesterday": {
   "users": 4,
   "new": 2,
-  "pv": 23,
-  "sessions": 7
+  "pv": 26,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -18,9 +18,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 16,
+   "views": 19,
    "eng": 128,
-   "avg_sec": 8
+   "avg_sec": 7
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -67,11 +67,11 @@
    "avg_sec": 9
   },
   {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 16,
-   "eng": 128,
-   "avg_sec": 8
+   "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
+   "views": 33,
+   "eng": 242,
+   "avg_sec": 7
   }
  ],
- "updated": "2026-08-15 00:15"
+ "updated": "2026-08-15 01:15"
 }
