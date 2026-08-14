@@ -1,24 +1,20 @@
-{{/* 카카오 애드핏 반응형 — 모바일(≤767) 320x100 / PC(≥768) 300x250. 기기별 ins 1개만 주입 후 ba.min.js 로드. 2026-08-14 */}}
-<div class="pf-ad" id="pf-adfit" style="margin:30px auto 10px;text-align:center;min-height:100px;"></div>
-<script type="text/javascript">
-(function(){
-  var m = window.matchMedia && window.matchMedia('(max-width:767px)').matches;
-  var unit = m ? 'DAN-Iix8EuqtooyXPHVn' : 'DAN-U3Tez6Y0llmoHKff';
-  var w = m ? '320' : '300';
-  var h = m ? '100' : '250';
-  var box = document.getElementById('pf-adfit');
-  if(!box) return;
-  var ins = document.createElement('ins');
-  ins.className = 'kakao_ad_area';
-  ins.style.display = 'none';
-  ins.setAttribute('data-ad-unit', unit);
-  ins.setAttribute('data-ad-width', w);
-  ins.setAttribute('data-ad-height', h);
-  box.appendChild(ins);
-  var s = document.createElement('script');
-  s.type = 'text/javascript';
-  s.src = '//t1.kakaocdn.net/kas/static/ba.min.js';
-  s.async = true;
-  box.appendChild(s);
-})();
-</script>
+{{/* 카카오 애드핏 반응형 — 두 ins 정적 배치 + 미디어쿼리로 기기별 노출. 모바일(≤767) 320x100 / PC·태블릿(≥768) 300x250. 2026-08-14 */}}
+<div class="pf-ad" style="margin:30px auto 10px;text-align:center;">
+  <div class="pf-ad-pc">
+    <ins class="kakao_ad_area" style="display:none;"
+         data-ad-unit="DAN-U3Tez6Y0llmoHKff"
+         data-ad-width="300"
+         data-ad-height="250"></ins>
+  </div>
+  <div class="pf-ad-mo">
+    <ins class="kakao_ad_area" style="display:none;"
+         data-ad-unit="DAN-Iix8EuqtooyXPHVn"
+         data-ad-width="320"
+         data-ad-height="100"></ins>
+  </div>
+  <script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+</div>
+<style>
+.pf-ad-mo{display:none;}
+@media(max-width:767px){.pf-ad-pc{display:none;}.pf-ad-mo{display:block;}}
+</style>
