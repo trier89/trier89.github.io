@@ -2,12 +2,12 @@
  "today": 0,
  "today_pv": 0,
  "total": 120,
- "total_visits": 350,
+ "total_visits": 353,
  "yesterday": {
-  "users": 4,
+  "users": 5,
   "new": 2,
-  "pv": 26,
-  "sessions": 8
+  "pv": 40,
+  "sessions": 11
  },
  "top_views": [
   {
@@ -18,9 +18,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 19,
-   "eng": 128,
-   "avg_sec": 7
+   "views": 29,
+   "eng": 738,
+   "avg_sec": 25
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -49,6 +49,12 @@
    "avg_sec": 53
   },
   {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 29,
+   "eng": 738,
+   "avg_sec": 25
+  },
+  {
    "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
    "views": 3,
    "eng": 51,
@@ -65,13 +71,7 @@
    "views": 9,
    "eng": 84,
    "avg_sec": 9
-  },
-  {
-   "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 33,
-   "eng": 242,
-   "avg_sec": 7
   }
  ],
- "updated": "2026-08-15 01:15"
+ "updated": "2026-08-15 02:15"
 }
