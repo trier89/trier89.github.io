@@ -1,20 +1,8 @@
-{{/* 카카오 애드핏 반응형 — 두 ins 정적 배치 + 미디어쿼리로 기기별 노출. 모바일(≤767) 320x100 / PC·태블릿(≥768) 300x250. 2026-08-14 */}}
+{{/* 카카오 애드핏 광고 (300x250) — 자체완결형(ins + 스크립트). 페이지당 1회 포함 전제. 2026-08-13 */}}
 <div class="pf-ad" style="margin:30px auto 10px;text-align:center;">
-  <div class="pf-ad-pc">
-    <ins class="kakao_ad_area" style="display:none;"
-         data-ad-unit="DAN-U3Tez6Y0llmoHKff"
-         data-ad-width="300"
-         data-ad-height="250"></ins>
-  </div>
-  <div class="pf-ad-mo">
-    <ins class="kakao_ad_area" style="display:none;"
-         data-ad-unit="DAN-Iix8EuqtooyXPHVn"
-         data-ad-width="320"
-         data-ad-height="100"></ins>
-  </div>
+  <ins class="kakao_ad_area" style="display:none;"
+       data-ad-unit="DAN-U3Tez6Y0llmoHKff"
+       data-ad-width="300"
+       data-ad-height="250"></ins>
   <script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
 </div>
-<style>
-.pf-ad-mo{display:none;}
-@media(max-width:767px){.pf-ad-pc{display:none;}.pf-ad-mo{display:block;}}
-</style>
