@@ -1,77 +1,77 @@
 {
- "today": 4,
- "today_pv": 23,
+ "today": 0,
+ "today_pv": 0,
  "total": 120,
  "total_visits": 349,
  "yesterday": {
-  "users": 5,
-  "new": 0,
-  "pv": 26,
-  "sessions": 8
+  "users": 4,
+  "new": 2,
+  "pv": 23,
+  "sessions": 7
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 42,
-   "eng": 1861,
-   "avg_sec": 44
-  },
-  {
-   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 8,
-   "eng": 75,
-   "avg_sec": 9
-  },
-  {
-   "title": "심리테스트",
-   "views": 7,
-   "eng": 17,
-   "avg_sec": 2
+   "views": 33,
+   "eng": 242,
+   "avg_sec": 7
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 6,
-   "eng": 85,
-   "avg_sec": 14
+   "views": 16,
+   "eng": 128,
+   "avg_sec": 8
+  },
+  {
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 9,
+   "eng": 84,
+   "avg_sec": 9
+  },
+  {
+   "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
+   "views": 7,
+   "eng": 372,
+   "avg_sec": 53
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
-   "views": 5,
-   "eng": 60,
-   "avg_sec": 12
+   "views": 6,
+   "eng": 62,
+   "avg_sec": 10
   }
  ],
  "top_dwell": [
   {
-   "title": "연애세포 유형 테스트 — 내 안의 연애세포는 무슨 타입?",
-   "views": 4,
-   "eng": 623,
-   "avg_sec": 156
-  },
-  {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
-   "views": 4,
-   "eng": 357,
-   "avg_sec": 89
+   "views": 7,
+   "eng": 372,
+   "avg_sec": 53
   },
   {
-   "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 42,
-   "eng": 1861,
-   "avg_sec": 44
-  },
-  {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 6,
-   "eng": 85,
-   "avg_sec": 14
+   "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
+   "views": 3,
+   "eng": 51,
+   "avg_sec": 17
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
-   "views": 5,
-   "eng": 60,
-   "avg_sec": 12
+   "views": 6,
+   "eng": 62,
+   "avg_sec": 10
+  },
+  {
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 9,
+   "eng": 84,
+   "avg_sec": 9
+  },
+  {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 16,
+   "eng": 128,
+   "avg_sec": 8
   }
  ],
- "updated": "2026-08-14 23:15"
+ "updated": "2026-08-15 00:15"
 }
