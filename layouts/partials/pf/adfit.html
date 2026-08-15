@@ -1,21 +1,15 @@
-{{/* 카카오 애드핏 — 반응형(PC/태블릿 300x250 + 모바일 320x100). 기기별 미디어쿼리 분기. 페이지당 1회 포함 전제. 2026-08-15 */}}
-<style>
-  .pf-ad .pf-ad-mo{display:none;}
-  @media (max-width:600px){
-    .pf-ad .pf-ad-pc{display:none !important;}
-  }
-  @media (min-width:601px){
-    .pf-ad .pf-ad-mo{display:none !important;}
-  }
-</style>
+{{/* 카카오 애드핏 — 반응형. PC/태블릿 유닛(300x250) + 모바일 유닛(320x100)을 둘 다 배치하고
+     기기 타겟팅은 AdFit 자체에 위임(각 유닛이 등록된 기기에서만 광고 채워짐 = no-fill이면 숨김 유지).
+     ⚠️CSS로 ins를 display:none 숨기지 말 것 — ba.min.js가 로드 시점에 '숨겨진 ins'를 건너뛰어
+        해당 유닛이 아예 광고 요청을 안 함(2026-08-15 모바일 미표시 원인). 페이지당 1회 포함 전제. */}}
 <div class="pf-ad" style="margin:30px auto 10px;text-align:center;">
-  {{/* PC·태블릿 */}}
-  <ins class="kakao_ad_area pf-ad-pc" style="display:none;"
+  {{/* PC·태블릿 (PC 웹 유닛) */}}
+  <ins class="kakao_ad_area" style="display:none;"
        data-ad-unit="DAN-U3Tez6Y0llmoHKff"
        data-ad-width="300"
        data-ad-height="250"></ins>
-  {{/* 모바일 */}}
-  <ins class="kakao_ad_area pf-ad-mo" style="display:none;"
+  {{/* 모바일 (모바일 웹 유닛) */}}
+  <ins class="kakao_ad_area" style="display:none;"
        data-ad-unit="DAN-Iix8EuqtooyXPHVn"
        data-ad-width="320"
        data-ad-height="100"></ins>
