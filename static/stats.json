@@ -1,38 +1,38 @@
 {
- "today": 2,
- "today_pv": 15,
+ "today": 0,
+ "today_pv": 0,
  "total": 120,
  "total_visits": 359,
  "yesterday": {
-  "users": 5,
-  "new": 2,
-  "pv": 59,
-  "sessions": 11
+  "users": 2,
+  "new": 0,
+  "pv": 17,
+  "sessions": 6
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 40,
-   "eng": 1358,
-   "avg_sec": 34
+   "views": 52,
+   "eng": 1433,
+   "avg_sec": 28
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 33,
-   "eng": 242,
-   "avg_sec": 7
+   "views": 30,
+   "eng": 233,
+   "avg_sec": 8
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 9,
-   "eng": 84,
-   "avg_sec": 9
+   "views": 10,
+   "eng": 107,
+   "avg_sec": 11
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
    "views": 9,
-   "eng": 373,
-   "avg_sec": 41
+   "eng": 131,
+   "avg_sec": 15
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
@@ -49,29 +49,29 @@
    "avg_sec": 119
   },
   {
-   "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
-   "views": 9,
-   "eng": 373,
-   "avg_sec": 41
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 52,
+   "eng": 1433,
+   "avg_sec": 28
   },
   {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 40,
-   "eng": 1358,
-   "avg_sec": 34
+   "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
+   "views": 9,
+   "eng": 131,
+   "avg_sec": 15
   },
   {
    "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
-   "views": 4,
-   "eng": 52,
-   "avg_sec": 13
+   "views": 6,
+   "eng": 74,
+   "avg_sec": 12
   },
   {
-   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
-   "views": 6,
-   "eng": 62,
-   "avg_sec": 10
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 10,
+   "eng": 107,
+   "avg_sec": 11
   }
  ],
- "updated": "2026-08-15 23:18"
+ "updated": "2026-08-16 00:18"
 }
