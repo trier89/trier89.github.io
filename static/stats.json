@@ -1,24 +1,24 @@
 {
- "today": 3,
- "today_pv": 5,
+ "today": 0,
+ "today_pv": 0,
  "total": 121,
- "total_visits": 363,
+ "total_visits": 364,
  "yesterday": {
-  "users": 2,
-  "new": 0,
-  "pv": 19,
-  "sessions": 6
+  "users": 3,
+  "new": 1,
+  "pv": 7,
+  "sessions": 4
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 53,
-   "eng": 1435,
-   "avg_sec": 27
+   "views": 60,
+   "eng": 1440,
+   "avg_sec": 24
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 30,
+   "views": 29,
    "eng": 233,
    "avg_sec": 8
   },
@@ -50,9 +50,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 53,
-   "eng": 1435,
-   "avg_sec": 27
+   "views": 60,
+   "eng": 1440,
+   "avg_sec": 24
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
@@ -73,5 +73,5 @@
    "avg_sec": 11
   }
  ],
- "updated": "2026-08-16 23:20"
+ "updated": "2026-08-17 00:20"
 }
