@@ -1,12 +1,12 @@
 {
- "today": 0,
+ "today": 1,
  "today_pv": 0,
  "total": 123,
- "total_visits": 377,
+ "total_visits": 379,
  "yesterday": {
   "users": 3,
   "new": 1,
-  "pv": 21,
+  "pv": 23,
   "sessions": 13
  },
  "top_views": [
@@ -17,16 +17,16 @@
    "avg_sec": 24
   },
   {
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 21,
+   "eng": 116,
+   "avg_sec": 6
+  },
+  {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
    "views": 19,
    "eng": 160,
    "avg_sec": 8
-  },
-  {
-   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 19,
-   "eng": 116,
-   "avg_sec": 6
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
@@ -73,5 +73,5 @@
    "avg_sec": 12
   }
  ],
- "updated": "2026-08-18 01:23"
+ "updated": "2026-08-18 02:23"
 }
