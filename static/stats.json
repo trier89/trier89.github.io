@@ -1,26 +1,26 @@
 {
  "today": 2,
- "today_pv": 9,
+ "today_pv": 11,
  "total": 123,
- "total_visits": 386,
+ "total_visits": 388,
  "yesterday": {
-  "users": 3,
-  "new": 1,
-  "pv": 23,
-  "sessions": 13
+  "users": 4,
+  "new": 2,
+  "pv": 37,
+  "sessions": 14
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 62,
+   "views": 65,
    "eng": 1461,
-   "avg_sec": 24
+   "avg_sec": 22
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 21,
-   "eng": 116,
-   "avg_sec": 6
+   "views": 32,
+   "eng": 480,
+   "avg_sec": 15
   },
   {
    "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
@@ -50,9 +50,15 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 62,
+   "views": 65,
    "eng": 1461,
-   "avg_sec": 24
+   "avg_sec": 22
+  },
+  {
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 32,
+   "eng": 480,
+   "avg_sec": 15
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
@@ -65,13 +71,7 @@
    "views": 8,
    "eng": 105,
    "avg_sec": 13
-  },
-  {
-   "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
-   "views": 6,
-   "eng": 74,
-   "avg_sec": 12
   }
  ],
- "updated": "2026-08-18 09:23"
+ "updated": "2026-08-18 10:24"
 }
