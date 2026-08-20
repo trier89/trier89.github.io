@@ -36,6 +36,10 @@ def to_row(x):
         "date": fmt_date(str(x["ltRflYmd"])),
         "nums": [x["tm1WnNo"], x["tm2WnNo"], x["tm3WnNo"], x["tm4WnNo"], x["tm5WnNo"], x["tm6WnNo"]],
         "bonus": x["bnsWnNo"],
+        # 당첨자수(1~5등) + 1등 1인 상금 (앱 '역대당첨' 표시용, 2026-08-20 추가)
+        "w": [x.get("rnk1WnNope", 0), x.get("rnk2WnNope", 0), x.get("rnk3WnNope", 0),
+              x.get("rnk4WnNope", 0), x.get("rnk5WnNope", 0)],
+        "p1": x.get("rnk1WnAmt", 0),
     }
 
 
