@@ -1,0 +1,12 @@
+{{- $emoji := dict "tests" "🧠" "tools" "🧰" "games" "🎮" -}}
+{{- $pages := where site.RegularPages "Section" "in" (slice "tests" "tools" "games") -}}
+{{- $pages = sort $pages "Date" "desc" -}}
+[
+{{- range $i, $p := first 15 $pages -}}
+{{- if $i }},{{ end }}
+{{- $t := index (split (index (split $p.Title " — ") 0) " (") 0 -}}
+{{- $e := index $emoji $p.Section -}}
+{{- $text := $p.Params.ticker | default (printf "%s %s 추가" $e $t) -}}
+  {"date": {{ $p.Date.Format "2006-01-02" | jsonify }}, "text": {{ $text | jsonify }}, "url": {{ $p.RelPermalink | jsonify }}}
+{{- end }}
+]

@@ -54,4 +54,10 @@ googleAnalytics = 'G-E8ECH6NV3Y'
   unsafe = true
 
 [outputs]
-  home = ['HTML', 'JSON']
+  home = ['HTML', 'JSON', 'updates']
+
+[outputFormats.updates]
+  mediaType = 'application/json'
+  baseName = 'updates'
+  isPlainText = true
+  rel = 'alternate'
