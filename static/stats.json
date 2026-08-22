@@ -1,77 +1,71 @@
 {
- "today": 2,
- "today_pv": 29,
- "total": 123,
- "total_visits": 425,
+ "today": 1,
+ "today_pv": 1,
+ "total": 126,
+ "total_visits": 473,
  "yesterday": {
-  "users": 4,
+  "users": 2,
   "new": 0,
-  "pv": 58,
-  "sessions": 28
+  "pv": 14,
+  "sessions": 11
  },
  "top_views": [
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 85,
-   "eng": 621,
-   "avg_sec": 7
+   "views": 162,
+   "eng": 637,
+   "avg_sec": 4
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 68,
-   "eng": 1473,
-   "avg_sec": 22
-  },
-  {
-   "title": "계획대로 느긋하게 — AI 에디슨의 놀이터",
-   "views": 17,
-   "eng": 148,
-   "avg_sec": 9
+   "views": 39,
+   "eng": 172,
+   "avg_sec": 4
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 10,
-   "eng": 105,
-   "avg_sec": 10
+   "views": 4,
+   "eng": 24,
+   "avg_sec": 6
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
-   "views": 10,
-   "eng": 131,
-   "avg_sec": 13
+   "views": 4,
+   "eng": 20,
+   "avg_sec": 5
+  },
+  {
+   "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
+   "views": 2,
+   "eng": 22,
+   "avg_sec": 11
   }
  ],
  "top_dwell": [
   {
-   "title": "혈액형 성격 테스트 — 나는 진짜 무슨 형?",
-   "views": 5,
-   "eng": 596,
-   "avg_sec": 119
-  },
-  {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 68,
-   "eng": 1473,
-   "avg_sec": 22
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 4,
+   "eng": 24,
+   "avg_sec": 6
   },
   {
    "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
-   "views": 10,
-   "eng": 131,
-   "avg_sec": 13
+   "views": 4,
+   "eng": 20,
+   "avg_sec": 5
   },
   {
-   "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
-   "views": 6,
-   "eng": 74,
-   "avg_sec": 12
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 162,
+   "eng": 637,
+   "avg_sec": 4
   },
   {
-   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 10,
-   "eng": 105,
-   "avg_sec": 10
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 39,
+   "eng": 172,
+   "avg_sec": 4
   }
  ],
- "updated": "2026-08-19 18:27"
+ "updated": "2026-08-22 19:01"
 }
