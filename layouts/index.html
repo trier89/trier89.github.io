@@ -69,14 +69,21 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
   <style>
   .pf-ticker{display:flex;align-items:center;gap:9px;margin-top:12px;border:1px solid var(--line);border-radius:20px;padding:8px 15px;background:var(--panel);font-size:13px;text-decoration:none;overflow:hidden;}
   .pf-ticker .tk-badge{flex:0 0 auto;color:var(--coral);font-weight:700;}
-  .pf-ticker .tk-txt{color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .45s ease;min-width:0;}
+  .pf-ticker .tk-txt{color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .4s ease,transform .4s ease;min-width:0;}
   .pf-ticker:hover{border-color:var(--coral);}
   </style>
   <script>
   (function(){var el=document.getElementById('tk-txt'),box=document.getElementById('pf-ticker');if(!el)return;
     fetch('/updates.json?v='+Date.now()).then(function(r){return r.json();}).then(function(list){
       if(!list||!list.length){if(box)box.style.display='none';return;}
-      var u=list[0];el.textContent=(u.date?u.date.slice(5).replace('-','.')+' · ':'')+u.text;el.style.opacity=1;
+      var items=list.slice(0,3).map(function(u){return (u.date?u.date.slice(5).replace('-','.')+' · ':'')+u.text;});
+      var i=0;
+      function show(){el.textContent=items[i];el.style.opacity=1;el.style.transform='translateY(0)';}
+      show();
+      if(items.length>1){setInterval(function(){
+        el.style.opacity=0;el.style.transform='translateY(-9px)';
+        setTimeout(function(){i=(i+1)%items.length;show();},420);
+      },3400);}
     }).catch(function(){if(box)box.style.display='none';});})();
   </script>
   <div class="visitors" id="visitors" style="display:none;"></div>
