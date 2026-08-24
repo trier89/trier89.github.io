@@ -1,26 +1,26 @@
 {
- "today": 2,
- "today_pv": 3,
+ "today": 0,
+ "today_pv": 0,
  "total": 128,
  "total_visits": 482,
  "yesterday": {
-  "users": 3,
-  "new": 2,
-  "pv": 4,
+  "users": 2,
+  "new": 0,
+  "pv": 3,
   "sessions": 3
  },
  "top_views": [
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 162,
-   "eng": 637,
-   "avg_sec": 4
+   "views": 130,
+   "eng": 157,
+   "avg_sec": 1
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 30,
-   "eng": 3719,
-   "avg_sec": 124
+   "views": 27,
+   "eng": 3714,
+   "avg_sec": 138
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
@@ -35,10 +35,10 @@
    "avg_sec": 0
   },
   {
-   "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
-   "views": 1,
-   "eng": 12,
-   "avg_sec": 12
+   "title": "혈액형 성격 테스트 — 나는 진짜 무슨 형?",
+   "views": 2,
+   "eng": 2,
+   "avg_sec": 1
   }
  ],
  "top_dwell": [
@@ -50,15 +50,15 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 30,
-   "eng": 3719,
-   "avg_sec": 124
+   "views": 27,
+   "eng": 3714,
+   "avg_sec": 138
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 162,
-   "eng": 637,
-   "avg_sec": 4
+   "views": 130,
+   "eng": 157,
+   "avg_sec": 1
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -67,5 +67,5 @@
    "avg_sec": 0
   }
  ],
- "updated": "2026-08-24 23:34"
+ "updated": "2026-08-25 00:34"
 }
