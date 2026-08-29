@@ -4,23 +4,17 @@
  "total": 128,
  "total_visits": 485,
  "yesterday": {
-  "users": 1,
+  "users": 0,
   "new": 0,
-  "pv": 5,
-  "sessions": 1
+  "pv": 0,
+  "sessions": 0
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 17,
-   "eng": 3692,
-   "avg_sec": 217
-  },
-  {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 1830,
-   "avg_sec": 458
+   "views": 9,
+   "eng": 65,
+   "avg_sec": 7
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -39,20 +33,20 @@
    "views": 1,
    "eng": 0,
    "avg_sec": 0
+  },
+  {
+   "title": "도구방",
+   "views": 1,
+   "eng": 4,
+   "avg_sec": 4
   }
  ],
  "top_dwell": [
   {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 1830,
-   "avg_sec": 458
-  },
-  {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 17,
-   "eng": 3692,
-   "avg_sec": 217
+   "views": 9,
+   "eng": 65,
+   "avg_sec": 7
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -61,5 +55,5 @@
    "avg_sec": 3
   }
  ],
- "updated": "2026-08-29 23:53"
+ "updated": "2026-08-30 00:53"
 }
