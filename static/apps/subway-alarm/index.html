@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>내릴 때 알려줘 — 지하철 하차 알림</title>
+<meta name="description" content="탑승 시 버튼만 누르면 하차역 1분 전에 음성으로 알려주는 지하철 하차 알림 앱">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f9d63">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="하차알림">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0d1b2a;color:#eef2f6;min-height:100vh;min-height:100dvh;padding:env(safe-area-inset-top) 16px calc(env(safe-area-inset-bottom) + 16px);}
+.wrap{max-width:460px;margin:0 auto;padding-top:18px;}
+h1{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px;}
+.sub{text-align:center;color:#8fa3b8;font-size:12.5px;margin-bottom:18px;}
+.card{background:#16263a;border-radius:16px;padding:16px;margin-bottom:14px;}
+label{display:block;font-size:13px;color:#9fb3c8;margin:0 0 6px;font-weight:700;}
+select,input[type=range]{width:100%;}
+select{padding:13px;border-radius:11px;border:1.5px solid #2b3f57;background:#0d1b2a;color:#eef2f6;font-size:16px;-webkit-appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" fill="%238fa3b8"><path d="M0 0l6 8 6-8z"/></svg>');background-repeat:no-repeat;background-position:right 14px center;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.seg{display:flex;justify-content:space-between;font-size:12px;color:#8fa3b8;margin-top:4px;}
+.big-btn{width:100%;padding:17px;border:0;border-radius:14px;background:linear-gradient(135deg,#12b06e,#0e9d8f);color:#fff;font-size:18px;font-weight:800;cursor:pointer;margin-top:4px;}
+.big-btn:active{opacity:.85;}
+.big-btn.stop{background:linear-gradient(135deg,#e06666,#d64a4a);}
+#run{display:none;}
+.dest{text-align:center;padding:8px 0 4px;}
+.dest .k{font-size:13px;color:#8fa3b8;}
+.dest .v{font-size:30px;font-weight:900;color:#4ee39b;line-height:1.15;margin-top:2px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0;}
+.stat{background:#0d1b2a;border-radius:12px;padding:12px 6px;text-align:center;}
+.stat .n{font-size:22px;font-weight:800;color:#eef2f6;line-height:1.1;}
+.stat .l{font-size:11px;color:#8fa3b8;margin-top:3px;}
+.bar{height:10px;background:#0d1b2a;border-radius:6px;overflow:hidden;margin:6px 0 4px;}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#12b06e,#4ee39b);width:0;transition:width .5s;}
+.now{text-align:center;font-size:14px;color:#cfe0ef;margin:8px 0 2px;}
+.now b{color:#4ee39b;}
+.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.ctrls button{padding:14px;border:1.5px solid #2b3f57;border-radius:12px;background:#0d1b2a;color:#eef2f6;font-size:15px;font-weight:700;cursor:pointer;}
+.ctrls button:active{background:#16263a;}
+.log{margin-top:14px;font-size:12.5px;color:#8fa3b8;max-height:120px;overflow-y:auto;}
+.log div{padding:4px 0;border-bottom:1px solid #1e3049;}
+.note{font-size:11.5px;color:#7d92a8;line-height:1.6;margin-top:10px;}
+.warn{background:#3a2a12;border:1px solid #6b4e1e;color:#f0d59b;font-size:12px;border-radius:10px;padding:10px 12px;margin-bottom:14px;line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔔 내릴 때 알려줘</h1>
+  <div class="sub">탈 때 버튼만 누르면, 하차역 1분 전에 음성으로 알려드려요</div>
+  <div id="setup">
+    <div class="warn">📱 <b>테스트 안내</b><br>실시간 열차정보 없이 <b>역 수 × 역당 소요시간</b>으로 계산하는 첫 버전이에요. 화면을 켜둔 채로 타보고, 실제 도착과 얼마나 맞는지 알려주시면 정밀도를 맞출게요. (급행·지선은 오차가 있을 수 있어요)</div>
+    <div class="card">
+      <label>🚇 노선</label>
+      <select id="line"></select>
+      <div class="row2" style="margin-top:14px;">
+        <div><label>승차역</label><select id="from"></select></div>
+        <div><label>하차역</label><select id="to"></select></div>
+      </div>
+      <div style="margin-top:16px;">
+        <label>⏱️ 역당 소요시간 (타이밍 보정): <span id="segv">2.1</span>분</label>
+        <input type="range" id="seg" min="1.4" max="3.0" step="0.1" value="2.1">
+        <div class="seg"><span>빠름 1.4</span><span>느림 3.0</span></div>
+      </div>
+    </div>
+    <button class="big-btn" id="start">🚉 탑승 · 알림 시작</button>
+    <div class="note">시작을 누르면 음성/화면유지 권한이 켜져요. 홈 화면에 추가하면 앱처럼 쓸 수 있어요(공유 → 홈 화면에 추가).</div>
+  </div>
+  <div id="run">
+    <div class="card">
+      <div class="dest"><div class="k">이번에 내릴 역</div><div class="v" id="destN">—</div></div>
+      <div class="grid3">
+        <div class="stat"><div class="n" id="remSt">–</div><div class="l">남은 역</div></div>
+        <div class="stat"><div class="n" id="remT">–</div><div class="l">남은 시간</div></div>
+        <div class="stat"><div class="n" id="eta">–</div><div class="l">도착 예정</div></div>
+      </div>
+      <div class="bar"><i id="barI"></i></div>
+      <div class="now">지금쯤 <b id="curN">—</b> 부근</div>
+      <div class="ctrls">
+        <button id="btnNow">🔊 지금 어디?</button>
+        <button id="btnPause">⏸️ 일시정지</button>
+      </div>
+      <button class="big-btn stop" id="btnStop" style="margin-top:10px;">■ 정지 / 다시 설정</button>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+</div>
+<script>
+var LINES={},order=[];
+var st={running:false,from:0,to:0,dir:1,total:0,seg:2.1,t0:0,paused:false,pausedAt:0,pausedAcc:0,firedWarn:false,firedArr:false,lastSpokenIdx:-1,stations:[]};
+var $=function(id){return document.getElementById(id);};
+function speak(text){try{if(!("speechSynthesis" in window))return;var u=new SpeechSynthesisUtterance(text);u.lang="ko-KR";u.rate=1.0;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
+function vibe(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
+var wakeLock=null;
+function keepAwake(){try{if("wakeLock" in navigator)navigator.wakeLock.request("screen").then(function(w){wakeLock=w;});}catch(e){}}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&st.running)keepAwake();});
+function fillStations(){var ln=$("line").value;var arr=LINES[ln]||[];st.stations=arr;var f=$("from"),t=$("to");f.innerHTML="";t.innerHTML="";arr.forEach(function(s,i){var o1=document.createElement("option");o1.value=i;o1.textContent=s.n;f.appendChild(o1);var o2=o1.cloneNode(true);t.appendChild(o2);});f.value=0;t.value=Math.min(arr.length-1,5);}
+function log(m){var d=document.createElement("div");var now=new Date();d.textContent="["+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0")+"] "+m;$("log").prepend(d);}
+function fmtClock(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");}
+function fmtMMSS(sec){sec=Math.max(0,Math.round(sec));var m=Math.floor(sec/60),s=sec%60;return m+":"+String(s).padStart(2,"0");}
+function elapsedMin(){var acc=st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0);return (Date.now()-st.t0-acc)/60000;}
+function tick(){if(!st.running)return;var em=elapsedMin();var stElapsed=Math.floor(em/st.seg);if(stElapsed>st.total)stElapsed=st.total;var curIdx=st.from+st.dir*stElapsed;var remSt=st.total-stElapsed;var remMin=st.total*st.seg-em;var etaMs=st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+st.total*st.seg*60000;$("remSt").textContent=remSt+"개";$("remT").textContent=fmtMMSS(remMin*60);$("eta").textContent=fmtClock(etaMs);$("barI").style.width=Math.min(100,stElapsed/st.total*100)+"%";var cur=st.stations[curIdx];$("curN").textContent=cur?cur.n:"—";if(!st.paused&&curIdx!==st.lastSpokenIdx&&stElapsed>0&&remSt>1){st.lastSpokenIdx=curIdx;}if(!st.paused&&!st.firedWarn&&remMin<=1&&remSt>=0){st.firedWarn=true;var dn=st.stations[st.to].n;speak("곧 "+dn+"역입니다. 내릴 준비하세요.");vibe([300,150,300]);log("🔔 곧 "+dn+"역 (1분 전)");}if(!st.paused&&!st.firedArr&&remMin<=0){st.firedArr=true;var dn2=st.stations[st.to].n;speak(dn2+"역 도착입니다. 내리세요.");vibe([500,200,500]);log("✅ "+dn2+"역 도착");}}
+$("start").onclick=function(){var f=+$("from").value,t=+$("to").value;if(f===t){alert("승차역과 하차역이 같아요.");return;}st.from=f;st.to=t;st.dir=t>f?1:-1;st.total=Math.abs(t-f);st.seg=+$("seg").value;st.t0=Date.now();st.paused=false;st.pausedAcc=0;st.firedWarn=false;st.firedArr=false;st.lastSpokenIdx=-1;st.running=true;speechSynthesis&&speechSynthesis.cancel();keepAwake();var dn=st.stations[t].n;$("destN").textContent=dn;$("setup").style.display="none";$("run").style.display="block";$("log").innerHTML="";var mins=Math.round(st.total*st.seg);speak(dn+"역까지 "+st.total+"개 역, 약 "+mins+"분 걸립니다. 도착 1분 전에 알려드릴게요.");log("🚉 출발 · "+dn+"역까지 "+st.total+"개 역 (약 "+mins+"분)");tick();};
+$("btnNow").onclick=function(){var em=elapsedMin();var stElapsed=Math.min(st.total,Math.floor(em/st.seg));var cur=st.stations[st.from+st.dir*stElapsed];if(cur)speak("지금은 "+cur.n+"역 부근입니다.");};
+$("btnPause").onclick=function(){if(!st.paused){st.paused=true;st.pausedAt=Date.now();$("btnPause").textContent="▶️ 재개";log("⏸️ 일시정지");}else{st.paused=false;st.pausedAcc+=Date.now()-st.pausedAt;$("btnPause").textContent="⏸️ 일시정지";log("▶️ 재개");}};
+$("btnStop").onclick=function(){st.running=false;if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}speechSynthesis&&speechSynthesis.cancel();$("run").style.display="none";$("setup").style.display="block";};
+$("seg").oninput=function(){$("segv").textContent=(+this.value).toFixed(1);};
+$("line").onchange=fillStations;
+setInterval(tick,1000);
+if("speechSynthesis" in window){speechSynthesis.onvoiceschanged=function(){};speechSynthesis.getVoices();}
+fetch("lines.json").then(function(r){return r.json();}).then(function(j){LINES=j;order=Object.keys(j).sort();var ls=$("line");order.forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=k.replace(/^0/,"").replace("호선","호선");ls.appendChild(o);});ls.value=order.indexOf("02호선")>=0?"02호선":order[0];fillStations();}).catch(function(){$("setup").innerHTML='<div class="warn">노선 데이터를 불러오지 못했어요. 새로고침 해주세요.</div>';});
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}
+</script>
+</body>
+</html>
