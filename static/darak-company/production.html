@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>피디의 제작 노트 — 다락방 컴퍼니</title>
+<meta name="description" content="다락방 컴퍼니 피디가 남기는 영상 제작 뒷이야기. 에피소드마다 무엇이 어려웠고 어떻게 풀었는지, 롱폼과 숏폼을 어떻게 만들었는지 기록합니다.">
+<style>
+:root{--txt:#f2e9dc;--dim:#b9a891;--gold:#e0b878;--coral:#d97757;--card:#241a10;--line:#52412c;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color:var(--txt);font-family:'Apple SD Gothic Neo','Pretendard',system-ui,sans-serif;min-height:100vh;padding:16px 12px 60px;line-height:1.7;}
+.wrap{max-width:760px;margin:0 auto;}
+nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
+nav a{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);}
+nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(--gold);}
+.head{text-align:center;margin-bottom:24px;}
+.head h1{font-size:25px;color:var(--gold);font-weight:800;letter-spacing:-.01em;}
+.head .em{font-size:34px;}
+.head p{color:var(--dim);font-size:13.5px;margin-top:6px;}
+.legend{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+.legend span{font-size:11px;color:var(--dim);}
+.ep{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);}
+.ep .tag{display:inline-block;background:var(--coral);color:#2a1c10;font-size:11px;font-weight:800;padding:2px 10px;border-radius:9px;letter-spacing:-.01em;}
+.ep h2{font-size:18px;margin:9px 0 3px;color:var(--txt);}
+.ep .sub{color:var(--dim);font-size:12.5px;margin-bottom:14px;}
+.ep .yt{display:inline-flex;align-items:center;gap:7px;background:#cc2b2b;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;margin-bottom:16px;}
+.ep .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.ep .chip{background:rgba(224,184,120,.12);border:1px solid var(--line);color:var(--gold);font-size:11.5px;padding:3px 10px;border-radius:8px;}
+.tracks{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.trk{font-size:11.5px;padding:3px 10px;border-radius:8px;border:1px solid var(--line);background:rgba(224,184,120,.10);color:var(--gold);}
+.trk.prod{background:rgba(217,119,87,.18);color:var(--coral);border-color:var(--coral);}
+.trk.plan{background:rgba(185,168,145,.08);color:var(--dim);}
+.channel{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#17100a;font-weight:800;text-decoration:none;font-size:13px;padding:8px 16px;border-radius:11px;margin-top:14px;box-shadow:0 6px 18px rgba(224,184,120,.18);}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.lnk{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:9px;border:1px solid var(--gold);color:var(--gold);background:rgba(224,184,120,.14);transition:background .15s;}
+.lnk:hover{background:rgba(224,184,120,.26);}
+.lnk.soon{border-style:dashed;border-color:var(--line);color:var(--dim);background:rgba(255,255,255,.03);cursor:default;font-weight:600;}
+.lnk.soon:hover{background:rgba(255,255,255,.05);}
+.lnk .soonlbl{font-size:10.5px;font-weight:500;opacity:.85;}
+.blk{margin-bottom:12px;}
+.blk h3{font-size:13px;color:var(--coral);margin-bottom:5px;letter-spacing:.02em;}
+.blk p,.blk li{font-size:13.5px;color:var(--txt);}
+.blk ul{padding-left:18px;}
+.blk li{margin-bottom:3px;}
+.foot{text-align:center;color:var(--dim);font-size:12px;margin-top:26px;line-height:1.9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a href="/">✻ 홈</a>
+  <a href="/darak-company/">🏢 다락방컴퍼니</a>
+  <a href="/darak-company/production.html" class="on">🎬 제작 노트</a>
+  <a href="/darak-company/characters.html">🏛 인물 도감</a>
+</nav>
+<div class="head">
+  <div class="em">🎬</div>
+  <h1>피디의 제작 노트</h1>
+  <p>영상 하나가 나오기까지 — 무엇이 어려웠고, 어떻게 풀었는지. 다락방 피디가 남기는 뒷이야기.</p>
+  <p style="font-size:12.5px;">모든 에피소드는 <b>롱폼(시네마틱)</b>과 <b>숏폼(크레파스)</b> 두 갈래로 같이 만듭니다.</p>
+  <div class="legend">
+    <span>🎬 롱폼 · 📱 숏폼(크레파스) · <span style="color:var(--coral)">제작중</span> · <span style="color:var(--dim)">예정</span></span>
+  </div>
+  <div><a class="channel" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 다락방 채널 바로가기</a></div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.22 · 발행</span>
+  <h2>세이렌과 스킬라</h2>
+  <p class="sub">오디세이아 6부 · 살아 돌아가는 길은, 두 괴물의 아가리 사이로 나 있었다</p>
+  <div class="links"><a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a></div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>마녀 키르케의 경고대로, 오디세우스 앞엔 두 괴물이 지키는 좁은 바닷길이 놓입니다. 노래로 뱃사람을 홀려 바다에 뛰어들게 만드는 세이렌, 그리고 여섯 개의 머리로 사람을 낚아채는 스킬라. 그는 부하들의 귀를 밀랍으로 막고, 노래를 듣고도 살아남기 위해 스스로를 돛대에 묶습니다. 그리고 모두를 삼키는 소용돌이 카립디스 대신, 여섯을 스킬라에게 내주는 잔혹한 선택을 하죠. "노래를 이기고 괴물을 지났지만, 바다는 아직 더 많은 것을 앗아갈 참이었다"로 다음 편(태양신의 소)을 예고합니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>스킬라는 정확히 여섯 머리</b> — 머리 수가 틀리지 않게 컷마다 세어가며 검수했어요. 물어 올리는 장면도 유혈 없이, 입에 살짝 문 실루엣으로만.</li>
+      <li><b>결박된 앎</b> — 오디세우스만 노래를 듣되 파멸하지 않으려 자신을 묶는 장면이 이번 화의 핵심. 홀린 그가 몸부림치는데 귀 막은 부하들은 못 듣고 밧줄만 조이는 대비를 살렸어요.</li>
+      <li>개연성을 촘촘히 — 왜 밀랍으로 귀를 막았는지, 왜 자신은 묶고 들었는지, 왜 소용돌이 대신 절벽을 택했는지 원인과 결과를 앞뒤로 이어 붙였습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.21 · 발행</span>
+  <h2>죽은 자들의 나라</h2>
+  <p class="sub">오디세이아 5부 · 산 자가 두드린 죽음의 문</p>
+  <div class="links"><a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a></div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>고향으로 돌아가려면 먼저 죽은 자들의 땅에서 예언자 테이레시아스를 만나야 한다는 키르케의 말에, 오디세우스는 산 사람의 몸으로 저승의 문을 두드립니다. 제물의 피에 이끌려 몰려든 망령들 사이에서 예언자에게 귀향의 길을 묻고, 먼저 세상을 떠난 어머니를 마주하지만 세 번이나 안으려 한 팔은 그저 허공을 통과할 뿐이었죠. 최고 영웅 아킬레우스마저 "죽은 자들의 왕이 되느니 산 자의 종이 낫다"고 말합니다. 삶이 얼마나 귀한지를 죽은 자들에게 배우는 이야기예요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>유령은 반투명 파란빛</b>으로, 무섭지 않고 애틋하게 — 산 자 오디세우스만 온전한 색을 입혀 대비를 줬어요.</li>
+      <li><b>빗나간 포옹</b>이 클라이맥스 — 어머니를 안으려는 팔이 통과해버리는 한 컷에 감정을 몰아넣고, 그 앞뒤 호흡을 길게 잡았습니다.</li>
+      <li>설명란에 "왜 피를 바쳤나 · 왜 칼로 혼령을 막았나" 같은 배경지식을 덧붙여, 짧은 영상 뒤 더 깊이 볼 거리를 남겼어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.20 · 발행</span>
+  <h2>마녀 키르케</h2>
+  <p class="sub">오디세이아 4부 · 사람을 돼지로 바꾸는 마녀</p>
+  <div class="links"><a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a></div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>낯선 섬에 닿은 오디세우스의 부하들이, 아름다운 마녀 키르케의 집에서 대접받은 술을 마시고 그만 돼지로 변해버립니다. 홀로 구하러 나선 오디세우스는 신 헤르메스가 건넨 약초 "몰리" 덕에 마법에 걸리지 않고, 키르케를 제압해 부하들을 되돌리죠. 경계해야 할 상대와 한 지붕 아래 지내야 하는 아이러니, 그리고 다음 여정(저승)으로 가는 길을 여는 이야기예요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>변신의 순간</b>을 무섭지 않게 — 돼지로 바뀌는 부하들을 귀엽고 코믹하게 그려, 아이들도 편히 볼 톤을 유지했어요.</li>
+      <li>약초 "몰리" 하나가 판을 뒤집는 <b>반전 소품</b>. 그 작은 풀이 왜 중요한지 화면에서 또렷이 보이게 했습니다.</li>
+      <li>매혹과 위험을 함께 지닌 키르케의 이중성을, 색과 표정으로만 은근히 드러냈어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.19 · 발행</span>
+  <h2>라이스트리고네스의 항구</h2>
+  <p class="sub">오디세이아 3부 · 가장 아늑해 보이던 항구가, 가장 깊은 함정이었다</p>
+  <div class="links"><a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a></div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>바람의 신에게 버림받은 오디세우스의 함대가, 절벽에 둘러싸인 아늑한 항구에 닿습니다. 그러나 그곳은 사람을 잡아먹는 거인족 라이스트리고네스의 땅. 절벽 위에서 쏟아지는 거대한 바위에 배들이 부서지고, 항구 밖에 홀로 배를 매어둔 오디세우스의 단 한 척만 살아남죠. 여섯 척으로 들어가 한 척으로 나오는, 가장 안전해 보이는 곳이 가장 위험했다는 이야기예요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>여섯 척 → 한 척</b>의 상실을 스케일로 — 아늑한 항구의 안도감과, 쏟아지는 바위의 파괴를 같은 구도에 겹쳐 반전을 줬어요.</li>
+      <li>거인이 사람을 해치는 장면은 <b>유혈 없이</b> 실루엣과 크기 대비로만 공포를 전했습니다.</li>
+      <li>"가장 아늑한 곳이 가장 깊은 함정"이라는 한 문장을 여닫이로 회수하는 수미상관 구성.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.18 · 발행</span>
+  <h2>아이올로스의 바람 자루</h2>
+  <p class="sub">오디세이아 2부 · 손닿을 곳의 고향을 앗아간 건, 사람의 욕심 하나</p>
+  <div class="links"><a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a></div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>바람을 다스리는 신 아이올로스가, 세상의 모든 바람을 소가죽 자루에 묶고 고향으로 부는 서풍 하나만 남겨 오디세우스에게 건넵니다. 아흐레 밤낮 키를 놓지 않은 그가 열흘 만에 처음 잠든 사이, 부하들이 자루를 보물인 줄 알고 매듭을 풀어버려요. 갇혔던 바람이 한꺼번에 터져 나오고, 눈앞의 고향 이타카가 다시 수평선 너머로 사라집니다. "고향을 앗아간 건 신도 괴물도 아닌, 사람의 욕심 하나"라는 이야기예요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>폭풍이 이번 화의 킥</b> — 억지로 길게 끌지 않고, 갑판 위 혼란과 배를 휩쓰는 돌풍 딱 두 컷으로 임팩트만 줬어요.</li>
+      <li><b>수미상관</b> — "집은 늘 가까웠다"로 열고 "손닿을 곳의 고향을 욕심이 앗아갔다"로 회수. 희망과 상실을 같은 구도로 겹쳤습니다.</li>
+      <li>절망은 직접 그리지 않아요 — 난간을 움켜쥔 손과 먼바다를 응시하는 옆얼굴로만(유혈·자해 묘사 없음).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.17 · 발행</span>
+  <h2>외눈의 거인 폴리페모스</h2>
+  <p class="sub">오디세이아 1부 · 이름을 감추어 살고, 이름을 뽐내어 잃다</p>
+  <div class="links">
+    <a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>트로이를 무너뜨린 승자 오디세우스가, 이마 한가운데 눈이 하나뿐인 거인 폴리페모스의 동굴에 갇힙니다. 거인이 이름을 묻자 "내 이름은 아무것도 아니"라고 속인 뒤, 취해 잠든 거인의 눈을 멀게 하고 양의 배에 매달려 탈출하죠. 거인이 "나를 해친 건 아무것도 아니"라 외치니 이웃 거인들은 별일 아닌 줄 알고 돌아갑니다. 그러나 자만한 그가 진짜 이름을 외쳐버려, 거인의 아버지 포세이돈의 저주로 십 년을 바다에 갇힙니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>언어유희가 축</b> — "아무것도 아니"라는 가명 하나가 그를 살리고, 뽐낸 진짜 이름 하나가 그를 저주합니다. 같은 이름으로 여닫는 수미상관이에요.</li>
+      <li>부하가 잡아먹히는 장면, 달군 말뚝으로 눈을 찌르는 장면 모두 <b>유혈 없이</b> — 거인의 손아귀와 공포의 얼굴, 찌르기 직전에서 컷하는 실루엣으로만.</li>
+      <li>거인 대 인간의 <b>크기 대비</b>를 로우앵글·투샷으로 반복해, 압도적인 스케일을 강조했어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.16 · 발행</span>
+  <h2>트로이 목마</h2>
+  <p class="sub">트로이 대서사 완결편(3부) · 힘이 아니라 꾀 하나로 무너진 성</p>
+  <div class="links">
+    <a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>십 년을 싸워도 끄떡없던 성벽을, 꾀 많은 왕 오디세우스가 텅 빈 나무 말 한 마리로 무너뜨립니다. 그리스군이 떠난 척 사라지고 해변엔 거대한 목마만 덩그러니. 예언자 공주 카산드라가 "저 안에 죽음이 있다, 이 성이 불탄다"고 절규하지만 아무도 믿지 않죠 — 미래를 보되 아무도 믿어 주지 않는 저주가 걸려 있었으니까요. 트로이는 제 손으로 성문을 열어 파멸을 들이고, 하룻밤 만에 무너집니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>함락은 유혈·직접 폭력 없이 <b>시적 부재</b>로 — 빈 거리, 지평선까지 번지는 불빛, 하늘로 오르는 검은 연기, 통곡하는 얼굴로만 처리했어요.</li>
+      <li>사제 라오콘이 목마에 창을 던지는 컷은 <b>날아가는 창을 카메라가 따라가</b> 몸통에 꽂히는 순간까지 쫓는 발사체 추적 샷으로 잡았습니다.</li>
+      <li>크리스토퍼 놀란의 「오디세이」 톤을 참고해, 웅장한 와이드(목마·성벽)와 인물 극단 클로즈업(카산드라·오디세우스의 눈)을 대비시켰어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.15 · 발행</span>
+  <h2>아킬레우스</h2>
+  <p class="sub">트로이 대서사 2부 · 불사의 몸이 발뒤꿈치 하나로 무너지다</p>
+  <div class="links">
+    <a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>바다의 여신 테티스가 갓난 아들을 저승의 강 스틱스에 담가, 그 무엇도 상처 입힐 수 없는 몸으로 만듭니다. 다만 붙잡았던 발뒤꿈치 한 곳만은 강물에 닿지 않았죠. 그리스 최강의 전사가 된 아킬레우스는 총사령관과의 다툼, 절친 파트로클로스의 죽음, 헥토르를 향한 복수를 지나 — 끝내 파리스가 쏜 화살 하나에 그 발뒤꿈치를 맞고 쓰러집니다. 가장 강한 몸이 가장 약한 한 곳으로 무너지는 이야기예요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>수미상관</b> — 콜드오픈에서 '발뒤꿈치에 박힌 화살'을 먼저 보여주고 "어떻게 된 일일까요?"로 당긴 뒤, 마지막에 그 장면을 정확히 회수했어요.</li>
+      <li>줌 남발을 끊고 <b>컷마다 다른 카메라 기법</b>(랙 포커스·측면 트래킹·오빗·크레인·로우앵글)을 로테이션해, 긴 편인데도 정적인 컷이 반복되지 않게 했습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.14 · 발행</span>
+  <h2>파리스의 심판</h2>
+  <p class="sub">트로이 대서사 1부 · 황금 사과 한 알이 십 년 전쟁이 되다</p>
+  <div class="links">
+    <a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>혼례에 초대받지 못한 불화의 여신 에리스가, "가장 아름다운 이에게"라 새긴 황금 사과를 연회장 한복판으로 굴려 넣습니다. 헤라·아테나·아프로디테가 서로 자기 것이라 다투고, 곤란해진 제우스는 심판을 목동 파리스에게 떠넘기죠. 세 여신은 저마다 왕권·불패의 지혜·가장 아름다운 여인을 약속하고, 파리스는 아프로디테를 택합니다. 그러나 그가 받은 여인 헬레네에겐 이미 남편이 있었고 — 사과 한 알이 천 척의 배와 십 년 전쟁의 불씨가 됩니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>세 여신은 <b>캐릭터시트를 확정한 뒤 전 컷 얼굴을 잠가</b> 일관성을 지켰어요. 각자의 상징(공작·투구창·장미)으로 삼자 대치 구도를 잡았습니다.</li>
+      <li><b>콜드오픈</b>으로 굴러오는 황금 사과를 먼저 보여주고, 마지막에 불타는 트로이로 회수하며 다음 편(대서사)으로 이어지는 떡밥을 깔았어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.13 · 발행</span>
+  <h2>벨레로폰과 페가수스</h2>
+  <p class="sub">오만의 몰락 · 가장 높이 난 영웅이, 가장 낮은 곳으로</p>
+  <div class="links">
+    <a class="lnk" href="https://www.youtube.com/channel/UCNSZiTvrQnNOpoxbFSkhfWA" target="_blank" rel="noopener">▶ 채널에서 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>왕비의 유혹을 단호히 거절한 죄로 누명을 쓴 영웅 벨레로폰. 왕은 그의 손에 "이 편지를 든 자를 죽여 주시오"라 적힌 봉인된 편지를 들려 멀리 장인에게 보냅니다. 차마 손님을 죽이지 못한 장인은 불 뿜는 괴물 키마이라를 처치하라는 불가능한 임무를 내리죠. 아테나가 준 황금 고삐로 천마 페가수스를 길들인 벨레로폰은 괴물을 물리치지만 — 명성에 취해 신들의 산 올림포스로 오르려다, 제우스가 보낸 작은 벌레에 놀란 천마에서 추락합니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li><b>콜드오픈 회수</b> — 맨 앞에서 하늘 끝에서 곤두박질치는 영웅을 보여주고 "어쩌다?"로 당긴 뒤, 오만의 추락 장면에서 그대로 회수했어요.</li>
+      <li>천마 페가수스는 EP.06(메두사의 피에서 태어난 그 천마)의 레퍼를 그대로 물려 재사용해, 세계관을 시각적으로 이었습니다. 클립은 Kling 3.0 Pro로 렌더했어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.12 · 예약 · 오늘 18:30 공개</span>
+  <h2>미다스의 손</h2>
+  <p class="sub">황금이 된 모든 것의 저주 · 롱폼 36컷 기획 · 키프레임 완료, 클립 렌더 중</p>
+  <div class="links">
+    <a class="lnk" data-ep="12" data-track="long" href="https://youtu.be/8PxRnbqmVfQ" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="12" data-track="short" href="https://youtu.be/xf9ONpWkQuI" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk prod">🎬 롱폼 제작중</span>
+    <span class="trk plan">📱 숏폼 예정</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>손에 닿는 모든 걸 황금으로 바꾸는 소원을 얻은 미다스. 빵도, 포도주도, 끝내 달려온 딸까지 황금이 되어버리자, 가장 부유한 왕이 가장 소중한 걸 잃을 뻔합니다. "손에 넣는 것보다, 지켜야 할 것을 아는 게 진짜 부유함"이라는 이야기예요.</p>
+  </div>
+  <div class="blk">
+    <h3>지금 이게 고민이에요</h3>
+    <ul>
+      <li><b>점진적 황금화</b> — 컷이 진행될수록 소품과 인물이 조금씩 황금으로 변해가는데, 이 "황금화 정도"를 클립마다 일관되게 유지하는 게 제일 까다로워요.</li>
+      <li><b>콜드오픈 회수</b> — 맨 앞에서 '황금이 된 딸'을 먼저 보여주고 "어쩌다?"로 당긴 다음, S21에서 그 장면을 정확히 회수하도록 설계했어요.</li>
+      <li>딸이 굳는 비극은 직접 그리지 않고 <b>따뜻함→차가운 금속</b>의 대비로만 처리합니다.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>제작 방식</h3>
+    <p>36컷 전부 EP.11에서 확립한 <b>"첫 프레임"으로 키프레임을 고정</b>하는 방식으로 렌더 중이에요. 인물이 다시 등장할 땐 앞 키프레임을 참조로 물려서 얼굴을 잠급니다.</p>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.11 · 발행</span>
+  <h2>아프로디테의 불륜</h2>
+  <p class="sub">신들 앞에서 발가벗겨진 미의 여신 · 롱폼 4분 3초 · 43컷</p>
+  <div class="links">
+    <a class="lnk" data-ep="11" data-track="long" href="https://youtu.be/xKhMY_8NA2w" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="11" data-track="short" href="https://youtu.be/3rBw_bK4FiY" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="meta">
+    <span class="chip">🖼 첫프레임 방식 확립</span>
+    <span class="chip">🔁 18컷 재렌더</span>
+    <span class="chip">🎨 예술누드 수위 관리</span>
+  </div>
+  <div class="blk">
+    <h3>이번엔 이게 어려웠어요</h3>
+    <ul>
+      <li><b>태양마차 버그</b> — 헬리오스(태양마차) 등장 이후 컷들이 죄다 마차 장면으로 변해버렸어요. 앞 컷의 참조 이미지가 다음 생성에 새어 들어가는 문제였죠.</li>
+      <li><b>캐릭터 일관성</b> — 재렌더하니 늙고 긴머리 헤파이스토스가 젊은 일반 대장장이로 바뀌는 등, 우리 키프레임이 안 지켜졌어요.</li>
+      <li><b>수위</b> — 그물에 걸린 두 연인 장면은 반투명 천으로 가린 예술누드로, 검열을 넘으면서도 이야기가 성립하게 잡아야 했어요.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>이렇게 풀었어요</h3>
+    <ul>
+      <li>참조(reference)가 아니라 <b>"첫 프레임(First Video Frame)"으로 키프레임을 직접 고정</b> → 캐릭터가 100% 잠기고 참조 누수도 사라졌어요. 이 방식을 이번에 확립했습니다.</li>
+      <li>대본을 43컷 전부 <b>클립 길이에 맞춰 다시 써서</b> 정적을 없앴어요(빈 시간 25초 → 0).</li>
+      <li>숏폼(크레파스)은 같은 이야기를, "남한테 저주 내리던 여신이 이번엔 자기가 그물에 걸렸다"는 능청 톤으로 60초에 담았어요.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>배운 점</h3>
+    <p>AI 영상은 "참조로 비슷하게"보다 "첫 프레임으로 못박기"가 캐릭터 일관성엔 훨씬 강력하다는 것. 그리고 나레이션은 그림이 나온 뒤 길이에 맞춰 쓰는 게 정답이라는 것.</p>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.10 · 발행</span>
+  <h2>아들을 사랑한 왕비</h2>
+  <p class="sub">테세우스의 여인들 / 파에드라 · 저주받은 핏줄의 비극</p>
+  <div class="links">
+    <a class="lnk" data-ep="10" data-track="long" href="https://youtu.be/J99Qj7cgWe0" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="10" data-track="short" href="https://youtu.be/XdGJ6U5PJOY" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>남편의 아들을 사랑하게 된 왕비 파에드라. 거절당한 마음이 거짓 유서를 남기고, 그 유서를 오해한 아버지가 제 손으로 아들을 죽음으로 몰아넣는 이야기예요. 어머니 파시파에(황소를 사랑해 괴물을 낳은)로 이어지는 "핏줄에 흐르는 금지된 사랑"이 축입니다.</p>
+  </div>
+  <div class="blk">
+    <h3>제작 노트</h3>
+    <ul>
+      <li>번인 자막을 처음 도입한 편. "왜 아들이 죄를 지었는데 어머니가 저주받았나"의 개연성을 — 사랑을 비웃은 자에겐 사랑의 저주가 안 통하니, 애먼 새어머니를 무기로 삼았다 — 로 풀어낸 게 포인트였어요.</li>
+      <li>EP.09가 "구도가 단조롭다"는 반성이 있어서, 이번엔 <b>원경·클로즈업·인서트·액션을 일부러 섞어</b> 컷을 다양화했어요.</li>
+      <li>파에드라의 최후와 히폴리토스의 죽음은 직접 그리지 않고 <b>시적 부재</b>(늘어진 손·바닥에 떨어진 유서·부서진 전차·흩어진 고삐)로만 처리했습니다. 숏폼은 유아 시청자를 배려해 거짓 유서 내용도 간접적으로 돌려 말했어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.09 · 발행</span>
+  <h2>다이달로스와 이카로스</h2>
+  <p class="sub">태양에 녹은 밀랍 날개 · 콜드오픈 + 4막</p>
+  <div class="links">
+    <a class="lnk" data-ep="09" data-track="long" href="https://youtu.be/zagTreaagus" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="09" data-track="short" href="https://youtu.be/uYsj4yoQTfI" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>미궁의 비밀을 안 죄로 탑에 갇힌 장인 다이달로스가, 깃털과 밀랍으로 날개를 만들어 아들과 함께 탈출합니다. 하지만 환희에 취해 태양으로 오른 이카로스는, 밀랍이 녹아 추락하죠.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>추락은 직접 그리지 않아요. <b>빈 하늘 → 수면 위 깃털 → 파문</b>으로만 암시하는 시적 부재. 이카로스도 소년이 아니라 청년으로 시각화해 안전 프레이밍을 지켰어요.</li>
+      <li>경고 장면(S16)은 <b>아버지 손이 아들 어깨에 닿고 서로 시선을 맞추도록</b> eyeline을 명시했어요 — 빗나간 시선은 바로 반려합니다.</li>
+      <li>숏폼 날개는 '몸에서 난 날개' 금지, <b>손으로 잡는 제작 날개</b>(나무 살대+깃털)로 롱폼 설정을 이어받았어요.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>배운 점</h3>
+    <p>편이 길어지니 "인물이 화면 중앙에 정지"한 컷이 반복돼 지루해졌어요. 이 반성이 바로 다음 편(EP.10) 컷 다양화로 이어졌습니다.</p>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.08 · 발행</span>
+  <h2>테세우스와 미노타우로스</h2>
+  <p class="sub">미궁 · 아리아드네의 실타래 · 잊어버린 흰 돛</p>
+  <div class="links">
+    <a class="lnk" data-ep="08" data-track="long" href="https://youtu.be/ak10Nj7ahWU" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="08" data-track="short" href="https://youtu.be/OHs_PcYmPCM" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>괴물을 죽이러 스스로 미궁에 걸어 들어간 왕자 테세우스. 사랑에 빠진 아리아드네가 건넨 실 한 올로 어둠을 빠져나오지만, 흰 돛으로 바꾸는 걸 잊은 탓에 아버지를 잃습니다(그 바다가 '에게해').</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>미노타우로스 대결은 유혈 없이 <b>어둠 속 두 실루엣과 횃불 역광</b>으로. 아이게우스의 죽음도 빈 절벽·바람에 날리는 검은 돛·빈 왕좌로만 처리했어요.</li>
+      <li>바로 앞 영웅 헤라클레스와 겹치지 않도록, 테세우스는 <b>더 젊고 날렵하게, 수염 없이</b> 강하게 차별화했어요.</li>
+      <li>미궁 설계자 다이달로스를 짧게 심어, 다음 편(EP.09) 복선을 깔았습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.07 · 발행</span>
+  <h2>헤라클레스와 네메아 사자</h2>
+  <p class="sub">영웅의 시대 개막 · 열두 과업의 시작</p>
+  <div class="links">
+    <a class="lnk" data-ep="07" data-track="long" href="https://youtu.be/BMc5cWPuhCM" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="07" data-track="short" href="https://youtu.be/R5kC0fvtxmA" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>신의 아들로 태어났으나 여신 헤라의 미움을 받은 사내 헤라클레스. 광기로 지은 죄를 열두 과업으로 씻기 시작하고, 그 첫 상대는 어떤 무기도 뚫지 못하는 네메아의 사자입니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이번엔 이게 어려웠어요</h3>
+    <ul>
+      <li><b>가족 비극·광기</b>는 인물 가해를 절대 직접 그리지 않았어요 → 붉은 안개가 집을 삼키고, 깨진 물항아리·꺼진 화로·빈 방(시적 부재)으로만. 사자 격투도 유혈 없이 동굴 어둠 속 맨손 실루엣이에요.</li>
+      <li><b>헤라 키프레임이 노년 얼굴로 왜곡</b>되는 사고가 있어서, EP.01의 얼굴 레퍼를 다시 물려 복구했어요. (캐릭터시트에 정면 얼굴이 없으면 이렇게 틀어집니다.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.06 · 발행</span>
+  <h2>페르세우스와 메두사</h2>
+  <p class="sub">영웅의 시대의 개막 · 장편 실험 33컷</p>
+  <div class="links">
+    <a class="lnk" data-ep="06" data-track="long" href="https://youtu.be/fy3DD37nHwc" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="06" data-track="short" href="https://youtu.be/1_ynn_7Ue70" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>자존심 한 마디로 메두사의 목을 약속해버린 소년이, 신들의 도움을 받아 방패에 비친 상만 보며 괴물을 베고 영웅이 되어 돌아옵니다. 자존심으로 시작해 지혜로 이기고, 운명 앞에 겸손해지는 성장담이에요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>참수는 <b>그림자와 반사상만</b>, 무혈로. 메두사의 시선은 석화 설정을 활용해 항상 반사/뒷모습으로 두고 화면 정면을 금지했어요.</li>
+      <li>33컷 장편 실험이라, 키프레임 검수를 낱장 폭탄 대신 <b>막별 몽타주(그리드)</b>로 바꿔 한 막씩 확인했습니다. 이 검수 방식을 이 편에서 정착시켰어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.05 · 발행</span>
+  <h2>대홍수</h2>
+  <p class="sub">데우칼리온과 피라 · 씻어낸 세상과 다시 세운 인류</p>
+  <div class="links">
+    <a class="lnk" data-ep="05" data-track="long" href="https://youtu.be/04KAJPOszcM" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="05" data-track="short" href="https://youtu.be/N7vItcjw7ao" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>타락한 세상을 물로 씻어내기로 한 제우스. 판도라의 딸 피라와 프로메테우스의 아들 데우칼리온만 방주로 살아남아, 신탁대로 "어머니의 뼈(=대지의 돌)"를 등 뒤로 던져 새 인류를 세웁니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>수몰 장면엔 사람을 직접 그리지 않았어요 — 지붕과 나무만 잠기고, 시체 없이 빈 풍경으로. 돌이 사람이 되는 건 <b>부풀어 오르는 형상</b>으로 표현했습니다.</li>
+      <li>혈통을 시각적으로 이어, 피라는 어머니 판도라의 밤갈색 머리를 계승하게 캐스팅했어요.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.04 · 발행</span>
+  <h2>판도라의 상자</h2>
+  <p class="sub">인류에게 보낸 아름다운 함정 · 바닥에 남은 희망</p>
+  <div class="links">
+    <a class="lnk" data-ep="04" data-track="long" href="https://youtu.be/Gs_HCrBVwiE" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="04" data-track="short" href="https://youtu.be/DRvbxaTff08" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>불을 빼앗긴 제우스가 인간에게 "선물"의 모습으로 보낸 복수. 신이 심은 호기심을 이기지 못한 판도라가 항아리를 열자 세상의 모든 재앙이 쏟아지고, 바닥에 딱 하나 — 희망(엘피스)만 남습니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>재앙이 검은 연기로 쏟아지는 폭발과, 항아리 바닥의 <b>작은 날개 달린 빛(희망)</b>을 대비시키는 게 핵심 그림이었어요.</li>
+      <li>침묵 2씬(상자 앞 망설임 / 닫은 뒤 정적)으로 호흡을 줬고, EP.03이 남긴 "상자 하나가요" 클리프행어를 정면으로 회수했습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.03 · 발행</span>
+  <h2>불을 훔친 신</h2>
+  <p class="sub">프로메테우스 · 인간을 위한 배신</p>
+  <div class="links">
+    <a class="lnk" data-ep="03" data-track="long" href="https://youtu.be/jcpzKGWTPKk" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="03" data-track="short" href="https://youtu.be/H5OJdkzBjiQ" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>인간을 자식처럼 아낀 티탄 프로메테우스가, 회향 줄기 속에 하늘의 불씨를 숨겨 훔쳐 내려옵니다. 그 불에서 문명이 피어나지만, 그는 대가로 바위에 묶여 매일 독수리에게 간을 쪼이는 형벌을 받죠. 그래도 후회하지 않습니다.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>불을 훔치는 잠입을 헬리오스의 태양 마차·대장간 불에서 따오고, 문명은 <b>대장간·도자기·모닥불 둘레 아이들</b> 몽타주로 압축했어요.</li>
+      <li>독수리 형벌 직후는 침묵 씬으로 처리해, "같은 편 신의 배신이지만 인간을 위한 것"이라는 반전의 여운을 살렸습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.02 · 발행</span>
+  <h2>왕좌를 노린 괴물</h2>
+  <p class="sub">티폰 · 가장 두려운 밤을 지나야 진짜 왕이 된다</p>
+  <div class="links">
+    <a class="lnk" data-ep="02" data-track="long" href="https://youtu.be/X-qVwgonbgk" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="02" data-track="short" href="https://youtu.be/I1rB478k4u0" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>가이아가 신을 잡아먹으라고 낳은 최후의 괴물 티폰. 힘줄이 잘려 동굴에 유폐된 제우스가 헤르메스의 도둑질로 부활해, 에트나 산을 들어 티폰을 영원히 봉인합니다. 지금도 뿜는 화산 연기가 그 숨결이라고요.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 만들었어요</h3>
+    <ul>
+      <li>EP.01 엔딩을 정면 회수하고, <b>수미상관</b>(S01↔S20 로우앵글 왕좌)과 <b>스케일 대비</b>(하늘에 닿는 괴물 ↔ 들어올린 산)로 구조를 짰어요.</li>
+      <li>침묵 2씬과 막경계 딥투블랙, 번개 라이트모티프(점화→하늘 폭풍)로 리듬을 만들었습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ep">
+  <span class="tag">EP.01 · 발행</span>
+  <h2>자식을 삼킨 아버지</h2>
+  <p class="sub">번개창의 기원 · 시리즈의 시작</p>
+  <div class="links">
+    <a class="lnk" data-ep="01" data-track="long" href="https://youtu.be/CY78GUNaJ5s" target="_blank" rel="noopener">▶ 롱폼 보기</a>
+    <a class="lnk" data-ep="01" data-track="short" href="https://youtu.be/1GTUpholZ8g" target="_blank" rel="noopener">▶ 숏폼(크레파스) 보기</a>
+  </div>
+  <div class="tracks">
+    <span class="trk">🎬 롱폼 발행</span>
+    <span class="trk">📱 숏폼 발행</span>
+  </div>
+  <div class="blk">
+    <h3>어떤 이야기냐면요</h3>
+    <p>"자식의 손에 무너진다"는 예언에, 태어나는 족족 자식을 삼킨 크로노스. 홀로 살아남은 여섯째 제우스가, 아버지가 버린 외눈 거인들이 벼려준 번개창으로 그 예언을 완성합니다. 번개창은 버려진 자들의 선물이었죠.</p>
+  </div>
+  <div class="blk">
+    <h3>이렇게 시작했어요</h3>
+    <ul>
+      <li>삼킴 장면은 유혈 없이 <b>실루엣과 사라지는 강보</b>로만. 다락방의 톤 — 능청과 진지를 오가는 하이브리드 화법 — 을 이 첫 편에서 잡았어요.</li>
+      <li>같은 이야기를 크레파스 숏폼으로도 만들어, 롱폼↔숏폼 <b>투트랙</b>의 출발점이 된 에피소드입니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="foot">
+  <div>🎬 다락방 컴퍼니의 모든 영상은 AI가 만들고, 사람이 지켜봅니다.</div>
+  <div>새 에피소드가 나올 때마다 제작 노트가 추가됩니다.</div>
+</div>
+</div>
+</body>
+</html>

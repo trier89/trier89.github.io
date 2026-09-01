@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신화 인물 도감 — 다락방 컴퍼니</title>
+<meta name="description" content="다락방 그리스·로마 신화 영상에 등장하는 신과 영웅들의 계보도. 티탄에서 올림포스, 그 후손과 인간·영웅까지 가계도로 한눈에.">
+<style>
+:root{--txt:#f2e9dc;--dim:#b9a891;--gold:#e0b878;--coral:#d97757;--card:#241a10;--line:#52412c;--conn:#9c7c47;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color:var(--txt);font-family:'Apple SD Gothic Neo','Pretendard',system-ui,sans-serif;min-height:100vh;padding:16px 12px 60px;line-height:1.65;}
+.wrap{max-width:980px;margin:0 auto;}
+nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
+nav a{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:4px 11px;font-size:12.5px;background:rgba(255,255,255,.05);}
+nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(--gold);}
+.head{text-align:center;margin-bottom:20px;}
+.head .em{font-size:34px;}
+.head h1{font-size:25px;color:var(--gold);font-weight:800;}
+.head p{color:var(--dim);font-size:13.5px;margin-top:6px;}
+.head .tip{color:var(--gold);font-size:11.5px;margin-top:8px;opacity:.85;}
+.grp{color:var(--coral);font-weight:800;font-size:14px;margin:30px 0 6px;letter-spacing:.02em;text-align:center;}
+.grp .sub{display:block;color:var(--dim);font-weight:500;font-size:11.5px;margin-top:2px;}
+
+/* tree scroll container */
+.treebox{overflow-x:auto;overflow-y:hidden;padding:8px 2px 12px;-webkit-overflow-scrolling:touch;}
+.tree{min-width:640px;margin:0 auto;width:max-content;display:flex;flex-direction:column;align-items:center;}
+
+/* generation band label */
+.genband{display:flex;align-items:center;gap:10px;width:100%;margin:2px 0 14px;}
+.genband::before,.genband::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line) 40%,var(--line) 60%,transparent);}
+.genband b{color:var(--gold);font-weight:800;font-size:12.5px;background:rgba(224,184,120,.10);border:1px solid var(--line);padding:4px 14px;border-radius:20px;white-space:nowrap;text-align:center;}
+.genband b small{display:block;color:var(--dim);font-weight:500;font-size:10px;margin-top:1px;}
+
+/* generation row of cards */
+.row{display:flex;justify-content:center;align-items:flex-start;gap:16px;flex-wrap:nowrap;}
+
+/* connector between generations */
+.link{display:flex;flex-direction:column;align-items:center;margin:2px 0 14px;}
+.link .ln{width:3px;height:18px;background:var(--conn);border-radius:2px;}
+.link .dm{color:var(--conn);font-size:12px;line-height:.7;margin-top:-1px;}
+
+/* couple (marriage) */
+.couple{display:flex;align-items:flex-start;justify-content:center;gap:0;}
+.couple .x{color:var(--gold);font-size:20px;font-weight:800;padding:0 8px;align-self:center;position:relative;top:-14px;}
+
+/* card */
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 9px 10px;width:118px;text-align:center;display:flex;flex-direction:column;align-items:center;transition:transform .12s ease,border-color .12s ease;}
+.c img{width:96px;height:96px;object-fit:cover;object-position:center top;border-radius:10px;border:1px solid var(--line);background:#120c06;display:block;cursor:zoom-in;}
+.c:not(.ph):hover{border-color:var(--gold);transform:translateY(-2px);}
+.c .nm{font-weight:800;font-size:13.5px;color:var(--gold);margin-top:6px;line-height:1.25;}
+.c .role{color:var(--txt);font-size:10.5px;margin-top:1px;}
+.c .par{color:var(--dim);font-size:9.5px;margin-top:3px;line-height:1.35;}
+.c .eps{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin-top:5px;}
+.c .ep{background:rgba(224,184,120,.13);border:1px solid var(--line);color:var(--gold);font-size:9px;padding:1px 5px;border-radius:6px;}
+.c.big{width:132px;}
+.c.big img{width:110px;height:110px;}
+
+/* placeholder (not-yet-made) card */
+.c.ph{border-style:dashed;border-color:var(--line);opacity:.62;background:rgba(36,26,16,.45);}
+.c.ph .phi{width:96px;height:96px;border-radius:10px;border:1px dashed var(--line);background:repeating-linear-gradient(45deg,#1a1209,#1a1209 6px,#150e07 6px,#150e07 12px);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:38px;font-weight:800;}
+.c.ph.big .phi{width:110px;height:110px;}
+.c.ph .nm{color:var(--dim);}
+.c.ph .role{color:var(--dim);font-style:italic;font-size:10px;}
+
+/* plain grid for mortals/others */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px;margin-top:8px;}
+.grid .c{width:auto;}
+.grid .c img{width:100%;height:120px;}
+
+.foot{text-align:center;color:var(--dim);font-size:12px;margin-top:32px;line-height:1.9;}
+.legend{text-align:center;color:var(--dim);font-size:11px;margin-top:8px;}
+.legend .dot{display:inline-block;width:10px;height:10px;border-radius:3px;border:1px dashed var(--line);vertical-align:middle;margin:0 3px 2px 8px;}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(8,5,2,.93);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:100;padding:24px;cursor:zoom-out;}
+.lb.on{display:flex;}
+.lb img{max-width:min(90vw,560px);max-height:74vh;border-radius:14px;border:1px solid var(--line);box-shadow:0 24px 70px rgba(0,0,0,.65);object-fit:contain;background:#120c06;}
+.lb .cap{margin-top:16px;text-align:center;max-width:90vw;}
+.lb .cap .n{color:var(--gold);font-weight:800;font-size:19px;}
+.lb .cap .r{color:var(--dim);font-size:13px;margin-top:4px;}
+.lb .hint{position:absolute;top:14px;right:18px;color:var(--dim);font-size:12px;border:1px solid var(--line);border-radius:14px;padding:3px 10px;background:rgba(255,255,255,.04);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a href="/">✻ 홈</a>
+  <a href="/darak-company/">🏢 다락방컴퍼니</a>
+  <a href="/darak-company/production.html">🎬 제작 노트</a>
+  <a href="/darak-company/characters.html" class="on">🏛 인물 도감</a>
+</nav>
+<div class="head">
+  <div class="em">🏛</div>
+  <h1>신화 인물 도감 · 계보도</h1>
+  <p>다락방 신화 영상 속 신·영웅·인간을 가계도로. 티탄에서 올림포스, 그 후손과 인간·영웅까지.</p>
+  <p class="tip">🔍 인물 사진을 누르면 크게 볼 수 있어요.</p>
+</div>
+
+<!-- ============ 신들의 계보 (divine tree) ============ -->
+<div class="grp">🌩 신들의 계보<span class="sub">태초의 신 → 티탄 → 1세대 올림포스 → 그 후손</span></div>
+<div class="treebox">
+<div class="tree">
+
+  <!-- Gen 0: 태초 (grandparents) -->
+  <div class="genband"><b>태초의 신 · 조부모 세대<small>하늘과 대지, 만물의 근원</small></b></div>
+  <div class="row">
+    <div class="couple">
+      <div class="c ph big">
+        <div class="phi">?</div>
+        <div class="nm">우라노스</div><div class="role">제작 예정</div>
+        <div class="par">하늘의 신 · 크로노스의 아버지</div>
+      </div>
+      <div class="x">×</div>
+      <div class="c ph big">
+        <div class="phi">?</div>
+        <div class="nm">가이아</div><div class="role">제작 예정</div>
+        <div class="par">대지의 여신 · 크로노스의 어머니</div>
+      </div>
+    </div>
+  </div>
+  <div class="link"><div class="ln"></div><div class="dm">◆</div></div>
+
+  <!-- Gen 1: Titan couple -->
+  <div class="genband"><b>티탄 세대<small>우라노스 × 가이아의 자녀 (남매이자 부부)</small></b></div>
+  <div class="row">
+    <div class="couple">
+      <div class="c big">
+        <img src="/darak-company/chars/cronos.png" alt="크로노스">
+        <div class="nm">크로노스</div><div class="role">티탄의 왕 · 시간</div>
+        <div class="par">우라노스 · 가이아의 아들</div>
+        <div class="eps"><span class="ep">EP.01</span></div>
+      </div>
+      <div class="x">×</div>
+      <div class="c big">
+        <img src="/darak-company/chars/rhea.png" alt="레아">
+        <div class="nm">레아</div><div class="role">대지의 티탄 여신</div>
+        <div class="par">크로노스의 누이이자 아내</div>
+        <div class="eps"><span class="ep">EP.01</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="link"><div class="ln"></div><div class="dm">◆</div></div>
+
+  <!-- Gen 2: six first-gen Olympians -->
+  <div class="genband"><b>1세대 올림포스<small>크로노스 × 레아의 여섯 자녀</small></b></div>
+  <div class="row">
+    <div class="c">
+      <img src="/darak-company/chars/hestia.png" alt="헤스티아">
+      <div class="nm">헤스티아</div><div class="role">화로의 여신</div>
+      <div class="par">첫째 · 크로노스 · 레아</div>
+      <div class="eps"><span class="ep">EP.01</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/demeter.png" alt="데메테르">
+      <div class="nm">데메테르</div><div class="role">대지·곡물의 여신</div>
+      <div class="par">크로노스 · 레아</div>
+      <div class="eps"><span class="ep">EP.01</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/hera.png" alt="헤라">
+      <div class="nm">헤라</div><div class="role">결혼의 여신 · 신들의 여왕</div>
+      <div class="par">크로노스 · 레아 · 제우스의 아내</div>
+      <div class="eps"><span class="ep">EP.01</span><span class="ep">EP.07</span><span class="ep">EP.14</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/hades.png" alt="하데스">
+      <div class="nm">하데스</div><div class="role">저승의 신</div>
+      <div class="par">크로노스 · 레아</div>
+      <div class="eps"><span class="ep">EP.01</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/poseidon.png" alt="포세이돈">
+      <div class="nm">포세이돈</div><div class="role">바다의 신</div>
+      <div class="par">크로노스 · 레아</div>
+      <div class="eps"><span class="ep">EP.01</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/zeus.png" alt="제우스">
+      <div class="nm">제우스</div><div class="role">신들의 왕 · 번개</div>
+      <div class="par">막내 · 크로노스 · 레아</div>
+      <div class="eps"><span class="ep">EP.01</span><span class="ep">EP.07</span></div>
+    </div>
+  </div>
+  <div class="link"><div class="ln"></div><div class="dm">◆</div></div>
+
+  <!-- Gen 3: next generation (Olympian children & demigod heroes) -->
+  <div class="genband"><b>다음 세대<small>올림포스 2세대와 반신(半神) 영웅</small></b></div>
+  <div class="row">
+    <div class="c">
+      <img src="/darak-company/chars/athena.png" alt="아테나">
+      <div class="nm">아테나</div><div class="role">지혜·전쟁의 여신</div>
+      <div class="par">제우스의 딸 (머리에서 태어남)</div>
+      <div class="eps"><span class="ep">EP.04</span><span class="ep">EP.14</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/apollo.png" alt="아폴론">
+      <div class="nm">아폴론</div><div class="role">태양·예언·궁술의 신</div>
+      <div class="par">제우스 · 레토의 아들 · 아르테미스의 쌍둥이</div>
+      <div class="eps"><span class="ep">EP.10</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/artemis.png" alt="아르테미스">
+      <div class="nm">아르테미스</div><div class="role">사냥·달의 여신</div>
+      <div class="par">제우스 · 레토의 딸 · 아폴론의 쌍둥이</div>
+      <div class="eps"><span class="ep">EP.10</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/ares.png" alt="아레스">
+      <div class="nm">아레스</div><div class="role">전쟁의 신</div>
+      <div class="par">제우스 · 헤라의 아들 · 아프로디테의 연인</div>
+      <div class="eps"><span class="ep">EP.11</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/hephaestus.png" alt="헤파이스토스">
+      <div class="nm">헤파이스토스</div><div class="role">대장장이 신</div>
+      <div class="par">헤라의 아들 · 아프로디테의 남편</div>
+      <div class="eps"><span class="ep">EP.04</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/hermes.png" alt="헤르메스">
+      <div class="nm">헤르메스</div><div class="role">전령의 신</div>
+      <div class="par">제우스 · 마이아의 아들</div>
+      <div class="eps"><span class="ep">EP.02</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/dionysus.png" alt="디오니소스">
+      <div class="nm">디오니소스</div><div class="role">포도주·환희의 신</div>
+      <div class="par">제우스 · 세멜레의 아들</div>
+      <div class="eps"><span class="ep">EP.12</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/perseus.png" alt="페르세우스">
+      <div class="nm">페르세우스</div><div class="role">메두사를 벤 영웅</div>
+      <div class="par">제우스 · 다나에의 아들 (반신 영웅)</div>
+      <div class="eps"><span class="ep">EP.06</span></div>
+    </div>
+    <div class="c">
+      <img src="/darak-company/chars/heracles.png" alt="헤라클레스">
+      <div class="nm">헤라클레스</div><div class="role">최강의 영웅</div>
+      <div class="par">제우스 · 알크메네의 아들 (반신 영웅)</div>
+      <div class="eps"><span class="ep">EP.07</span></div>
+    </div>
+  </div>
+
+</div><!-- /tree -->
+</div><!-- /treebox -->
+
+<!-- ============ 아프로디테 계보 ============ -->
+<div class="grp">🌊 아프로디테 계보<span class="sub">세대 밖 태생 — 바다 거품에서 태어난 미의 여신</span></div>
+<div class="treebox">
+<div class="tree" style="min-width:420px;">
+  <div class="genband"><b>세대 밖 태생<small>후손 계보와 별도로 태어난 신</small></b></div>
+  <div class="row">
+    <div class="c big">
+      <img src="/darak-company/chars/aphrodite.png" alt="아프로디테">
+      <div class="nm">아프로디테</div><div class="role">미·사랑의 여신</div>
+      <div class="par">바다 거품에서 태어남 · 헤파이스토스의 아내</div>
+      <div class="eps"><span class="ep">EP.04</span><span class="ep">EP.11</span><span class="ep">EP.14</span></div>
+    </div>
+  </div>
+  <div class="link"><div class="ln"></div><div class="dm">◆</div></div>
+  <div class="genband"><b>그 자식<small>아프로디테와 아레스의 사이</small></b></div>
+  <div class="row">
+    <div class="c ph">
+      <div class="phi">?</div>
+      <div class="nm">에로스</div><div class="role">제작 예정</div>
+      <div class="par">아프로디테 · 아레스의 아들 · 사랑의 화살</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 티탄 형제 계보 ============ -->
+<div class="grp">🔥 티탄 형제 계보<span class="sub">이아페토스의 아들들 · 그리고 판도라</span></div>
+<div class="treebox">
+<div class="tree" style="min-width:520px;">
+  <div class="genband"><b>티탄 이아페토스<small>프로메테우스 형제의 아버지</small></b></div>
+  <div class="row">
+    <div class="c ph big">
+      <div class="phi">?</div>
+      <div class="nm">이아페토스</div><div class="role">제작 예정</div>
+      <div class="par">티탄 · 프로메테우스 형제의 아버지</div>
+    </div>
+  </div>
+  <div class="link"><div class="ln"></div><div class="dm">◆</div></div>
+  <div class="genband"><b>이아페토스의 자손<small>티탄 형제와 그 배우자</small></b></div>
+  <div class="row">
+    <div class="c">
+      <img src="/darak-company/chars/prometheus.png" alt="프로메테우스">
+      <div class="nm">프로메테우스</div><div class="role">불을 전한 티탄</div>
+      <div class="par">'먼저 생각하는 자'</div>
+      <div class="eps"><span class="ep">EP.03</span></div>
+    </div>
+    <div class="c ph">
+      <div class="phi">?</div>
+      <div class="nm">아틀라스</div><div class="role">제작 예정</div>
+      <div class="par">하늘을 짊어진 티탄 · 형제</div>
+    </div>
+    <div class="couple">
+      <div class="c">
+        <img src="/darak-company/chars/epimetheus.png" alt="에피메테우스">
+        <div class="nm">에피메테우스</div><div class="role">티탄 · 프로메테우스의 동생</div>
+        <div class="par">'나중에 생각하는 자'</div>
+        <div class="eps"><span class="ep">EP.04</span></div>
+      </div>
+      <div class="x">×</div>
+      <div class="c">
+        <img src="/darak-company/chars/pandora.png" alt="판도라">
+        <div class="nm">판도라</div><div class="role">최초의 인간 여성</div>
+        <div class="par">에피메테우스의 아내 · 상자를 연 이</div>
+        <div class="eps"><span class="ep">EP.04</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 인간 · 영웅 · 기타 ============ -->
+<div class="grp">🏺 인간 · 영웅 · 기타<span class="sub">신들의 계보 밖 인간과 괴물들 (관계 표기)</span></div>
+<div class="grid">
+  <div class="c">
+    <img src="/darak-company/chars/danae.png" alt="다나에">
+    <div class="nm">다나에</div><div class="role">페르세우스의 어머니</div>
+    <div class="par">아르고스의 공주</div>
+    <div class="eps"><span class="ep">EP.06</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/andromeda.png" alt="안드로메다">
+    <div class="nm">안드로메다</div><div class="role">페르세우스의 아내</div>
+    <div class="par">에티오피아의 공주</div>
+    <div class="eps"><span class="ep">EP.06</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/medusa.png" alt="메두사">
+    <div class="nm">메두사</div><div class="role">고르곤 · 돌로 만드는 눈</div>
+    <div class="par">페르세우스에게 목이 베임</div>
+    <div class="eps"><span class="ep">EP.06</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/polydectes.png" alt="폴뤼덱테스">
+    <div class="nm">폴뤼덱테스</div><div class="role">세리포스의 왕</div>
+    <div class="par">페르세우스에게 과업을 강요</div>
+    <div class="eps"><span class="ep">EP.06</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/eurystheus.png" alt="에우리스테우스">
+    <div class="nm">에우리스테우스</div><div class="role">미케네의 왕</div>
+    <div class="par">헤라클레스에게 12과업을 명함</div>
+    <div class="eps"><span class="ep">EP.07</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/nemean-lion.png" alt="네메아 사자">
+    <div class="nm">네메아 사자</div><div class="role">가죽이 뚫리지 않는 괴물</div>
+    <div class="par">헤라클레스 1과업의 상대</div>
+    <div class="eps"><span class="ep">EP.07</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/deucalion.png" alt="데우칼리온">
+    <div class="nm">데우칼리온</div><div class="role">대홍수의 생존자</div>
+    <div class="par">프로메테우스의 아들 · 피라의 남편</div>
+    <div class="eps"><span class="ep">EP.05</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/pyrrha.png" alt="피라">
+    <div class="nm">피라</div><div class="role">대홍수의 생존자</div>
+    <div class="par">판도라의 딸 · 데우칼리온의 아내</div>
+    <div class="eps"><span class="ep">EP.05</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/daedalus.png" alt="다이달로스">
+    <div class="nm">다이달로스</div><div class="role">전설의 명장(名匠)</div>
+    <div class="par">이카로스의 아버지 · 날개를 만듦</div>
+    <div class="eps"><span class="ep">EP.09</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/icarus.png" alt="이카로스">
+    <div class="nm">이카로스</div><div class="role">태양에 너무 가까이 간 소년</div>
+    <div class="par">다이달로스의 아들</div>
+    <div class="eps"><span class="ep">EP.09</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/midas.png" alt="미다스">
+    <div class="nm">미다스</div><div class="role">황금의 손을 가진 왕</div>
+    <div class="par">프리기아의 왕</div>
+    <div class="eps"><span class="ep">EP.12</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/daughter.png" alt="미다스의 딸">
+    <div class="nm">미다스의 딸</div><div class="role">황금이 된 소녀</div>
+    <div class="par">미다스의 딸</div>
+    <div class="eps"><span class="ep">EP.12</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/silenus.png" alt="실레노스">
+    <div class="nm">실레노스</div><div class="role">늙은 사튀로스</div>
+    <div class="par">디오니소스의 스승·양부</div>
+    <div class="eps"><span class="ep">EP.12</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/leopard.png" alt="표범">
+    <div class="nm">표범</div><div class="role">디오니소스의 신수(神獸)</div>
+    <div class="par">술의 신을 따르는 맹수</div>
+    <div class="eps"><span class="ep">EP.12</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/cyclops.png" alt="키클롭스">
+    <div class="nm">키클롭스</div><div class="role">외눈의 거인 대장장이</div>
+    <div class="par">제우스에게 번개를 벼려 줌</div>
+    <div class="eps"><span class="ep">EP.01</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/bellerophon.png" alt="벨레로폰">
+    <div class="nm">벨레로폰</div><div class="role">천마를 길들인 영웅</div>
+    <div class="par">코린토스의 영웅 · 오만으로 추락</div>
+    <div class="eps"><span class="ep">EP.13</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/pegasus.png" alt="페가수스">
+    <div class="nm">페가수스</div><div class="role">하늘을 나는 천마</div>
+    <div class="par">메두사의 피에서 태어난 백마</div>
+    <div class="eps"><span class="ep">EP.13</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/chimera.png" alt="키마이라">
+    <div class="nm">키마이라</div><div class="role">불을 뿜는 괴물</div>
+    <div class="par">사자 머리 · 염소 몸 · 뱀 꼬리</div>
+    <div class="eps"><span class="ep">EP.13</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/paris.png" alt="파리스">
+    <div class="nm">파리스</div><div class="role">트로이의 왕자</div>
+    <div class="par">황금 사과의 심판자 · 아킬레우스를 쏨</div>
+    <div class="eps"><span class="ep">EP.14</span><span class="ep">EP.15</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/achilles.png" alt="아킬레우스">
+    <div class="nm">아킬레우스</div><div class="role">그리스 최강의 전사</div>
+    <div class="par">테티스의 아들 · 발뒤꿈치가 약점 (반신 영웅)</div>
+    <div class="eps"><span class="ep">EP.15</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/cassandra.png" alt="카산드라">
+    <div class="nm">카산드라</div><div class="role">믿음받지 못한 예언자</div>
+    <div class="par">트로이의 공주 · 아무도 믿지 않는 저주</div>
+    <div class="eps"><span class="ep">EP.16</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/trojan-horse.png" alt="트로이 목마">
+    <div class="nm">트로이 목마</div><div class="role">성을 무너뜨린 나무 말</div>
+    <div class="par">오디세우스의 계략 · 속에 병사가 숨음</div>
+    <div class="eps"><span class="ep">EP.16</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/odysseus.png" alt="오디세우스">
+    <div class="nm">오디세우스</div><div class="role">꾀 많은 이타카의 왕</div>
+    <div class="par">트로이 목마의 계략가 · 십 년의 방랑</div>
+    <div class="eps"><span class="ep">EP.16</span><span class="ep">EP.17</span><span class="ep">EP.18</span><span class="ep">EP.19</span><span class="ep">EP.20</span><span class="ep">EP.21</span><span class="ep">EP.22</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/polyphemus.png" alt="폴리페모스">
+    <div class="nm">폴리페모스</div><div class="role">외눈의 거인</div>
+    <div class="par">포세이돈의 아들 · 오디세우스에게 눈이 멀다</div>
+    <div class="eps"><span class="ep">EP.17</span></div>
+  </div>
+  <div class="c">
+    <img src="/darak-company/chars/aeolus.png" alt="아이올로스">
+    <div class="nm">아이올로스</div><div class="role">바람을 다스리는 신</div>
+    <div class="par">바람 자루를 건넨 신</div>
+    <div class="eps"><span class="ep">EP.18</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">라이스트리고네스</div><div class="role">식인 거인족</div>
+    <div class="par">절벽에서 바위를 던져 함대를 부순 거인들</div>
+    <div class="eps"><span class="ep">EP.19</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">키르케</div><div class="role">사람을 돼지로 바꾸는 마녀</div>
+    <div class="par">부하들을 돼지로 · 저승 가는 길을 일러준 여신</div>
+    <div class="eps"><span class="ep">EP.20</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">테이레시아스</div><div class="role">눈먼 예언자</div>
+    <div class="par">저승에서 오디세우스에게 귀향의 길을 알려주다</div>
+    <div class="eps"><span class="ep">EP.21</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">안티클레이아</div><div class="role">오디세우스의 어머니</div>
+    <div class="par">저승에서 만난 · 세 번 안으려 해도 통과한 혼령</div>
+    <div class="eps"><span class="ep">EP.21</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">엘페노르</div><div class="role">오디세우스의 부하</div>
+    <div class="par">장례를 못 치른 채 저승 문턱을 떠돈 혼령</div>
+    <div class="eps"><span class="ep">EP.21</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">세이렌</div><div class="role">노래로 홀리는 세 자매</div>
+    <div class="par">반인반조 · 노래를 들은 뱃사람을 죽음으로</div>
+    <div class="eps"><span class="ep">EP.22</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">스킬라</div><div class="role">여섯 머리 바다 괴물</div>
+    <div class="par">절벽에서 뱃사람 여섯을 낚아채다</div>
+    <div class="eps"><span class="ep">EP.22</span></div>
+  </div>
+  <div class="c ph">
+    <div class="phi">?</div>
+    <div class="nm">카립디스</div><div class="role">모든 걸 삼키는 소용돌이</div>
+    <div class="par">스킬라 맞은편 · 배도 사람도 남기지 않는 죽음</div>
+    <div class="eps"><span class="ep">EP.22</span></div>
+  </div>
+</div>
+
+<div class="legend">
+  실선 카드 = 이미 만든 인물 &nbsp;·&nbsp; <span class="dot"></span>점선 "?" 카드 = 계보상 있지만 아직 안 만든 인물(제작 예정)
+</div>
+
+<div class="foot">
+  <div>🏛 새 에피소드가 나올 때마다 인물이 계보에 추가됩니다.</div>
+  <div>다락방에서 들려주는 그리스·로마 신화</div>
+</div>
+</div>
+
+<!-- lightbox overlay -->
+<div class="lb" id="lb">
+  <div class="hint">아무데나 누르면 닫힘 · ESC</div>
+  <img id="lbimg" src="" alt="">
+  <div class="cap"><div class="n" id="lbname"></div><div class="r" id="lbrole"></div></div>
+</div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'),
+      lbi=document.getElementById('lbimg'),
+      lbn=document.getElementById('lbname'),
+      lbr=document.getElementById('lbrole');
+  function close(){lb.classList.remove('on');}
+  document.addEventListener('click',function(e){
+    var img=e.target.closest('.c:not(.ph) img');
+    if(img){
+      var card=img.closest('.c');
+      var nm=card.querySelector('.nm'), role=card.querySelector('.role');
+      lbi.src=img.src; lbi.alt=img.alt;
+      lbn.textContent=nm?nm.textContent:'';
+      lbr.textContent=role?role.textContent:'';
+      lb.classList.add('on');
+      return;
+    }
+    if(lb.classList.contains('on')) close();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'||e.key==='Esc') close();
+  });
+})();
+</script>
+</body>
+</html>

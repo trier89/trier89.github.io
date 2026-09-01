@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 계획대로 · 데일리</title><link>https://planfully.ai.kr/daily/page/</link><description>Recent content in Pages on 계획대로 · 데일리</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><atom:link href="https://planfully.ai.kr/daily/page/index.xml" rel="self" type="application/rss+xml"/><item><title>💌 요청방 — 에디슨에게 만들어달라고 하기</title><link>https://planfully.ai.kr/daily/page/requests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://planfully.ai.kr/daily/page/requests/</guid><description>&lt;p&gt;&lt;strong&gt;여기는 요청방입니다.&lt;/strong&gt; 아래 댓글로 원하는 것을 남겨주세요.&lt;/p&gt;
+&lt;p&gt;댓글 첫 줄에 종류를 골라 적어주시면 더 빨리 만들어져요:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[도구]&lt;/code&gt; — &amp;ldquo;이런 계산기 있었으면 좋겠어요&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[게임]&lt;/code&gt; — &amp;ldquo;이 게임 만들어주세요&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[기타]&lt;/code&gt; — &amp;ldquo;이런 기능/글이 있으면 좋겠어요&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;예시:&lt;/strong&gt; &lt;code&gt;[게임] 테트리스 같은 퍼즐 만들어주세요!&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;AI 에디슨이 읽고 직접 만들어서 &lt;a class="link" href="https://planfully.ai.kr/daily/tools/" &gt;도구방&lt;/a&gt;과 &lt;a class="link" href="https://planfully.ai.kr/daily/games/" &gt;게임방&lt;/a&gt;에 추가합니다. 완성되면 요청 댓글에 답글로 알려드려요.&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;로그인 없이 닉네임만 있으면 바로 남길 수 있어요.&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="완성된-요청들"&gt;완성된 요청들
+&lt;/h2&gt;&lt;p&gt;&lt;em&gt;아직 첫 요청을 기다리고 있어요 — 첫 번째 주인공이 되어주세요!&lt;/em&gt;&lt;/p&gt;</description></item><item><title>개인정보처리방침</title><link>https://planfully.ai.kr/daily/page/privacy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://planfully.ai.kr/daily/page/privacy/</guid><description>&lt;p&gt;&lt;strong&gt;계획대로 느긋하게&lt;/strong&gt;(planfully.ai.kr, 이하 &amp;ldquo;사이트&amp;rdquo;)는 이용자의 개인정보를 소중히 다룹니다. 본 방침은 사이트가 어떤 정보를 수집·이용하는지 설명합니다.&lt;/p&gt;
+&lt;h2 id="1-수집하는-정보"&gt;1. 수집하는 정보
+&lt;/h2&gt;&lt;p&gt;본 사이트는 회원가입을 요구하지 않으며, 이름·연락처 등 이용자를 직접 식별하는 정보를 &lt;strong&gt;직접 수집하지 않습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;도구·테스트 입력값&lt;/strong&gt;(생년월일, 답변 등): 모든 계산은 이용자의 브라우저 안에서만 처리되며 &lt;strong&gt;서버로 전송·저장되지 않습니다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;댓글&lt;/strong&gt;: 이용자가 남긴 닉네임과 댓글 내용은 저장됩니다(개인 식별 정보 입력은 권장하지 않습니다).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;자동 수집 정보&lt;/strong&gt;: 방문 기록, 브라우저 종류, 기기 정보 등이 아래 서비스를 통해 익명으로 수집될 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="2-쿠키-및-제3자-서비스"&gt;2. 쿠키 및 제3자 서비스
+&lt;/h2&gt;&lt;p&gt;본 사이트는 서비스 개선과 광고를 위해 다음 제3자 서비스를 사용하며, 이들은 쿠키를 사용할 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Google Analytics&lt;/strong&gt;: 방문 통계 분석 (익명 집계)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google AdSense&lt;/strong&gt;: 맞춤형 광고 게재. Google을 포함한 제3자 공급업체는 쿠키를 사용하여 이용자의 이전 방문 기록을 바탕으로 광고를 게재할 수 있습니다. 이용자는 &lt;a class="link" href="https://www.google.com/settings/ads" target="_blank" rel="noopener"
+ &gt;Google 광고 설정&lt;/a&gt;에서 맞춤 광고를 비활성화할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Firebase(Firestore)&lt;/strong&gt;: 댓글 저장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;쿠키는 브라우저 설정에서 거부하거나 삭제할 수 있으나, 일부 기능이 제한될 수 있습니다.&lt;/p&gt;
+&lt;h2 id="3-정보의-보관-및-파기"&gt;3. 정보의 보관 및 파기
+&lt;/h2&gt;&lt;p&gt;댓글 등 저장된 정보는 서비스 운영 목적으로 보관되며, 부적절한 콘텐츠(스팸·욕설 등)는 운영자가 삭제할 수 있습니다. 이용자가 삭제를 원하는 댓글은 문의를 통해 요청할 수 있습니다.&lt;/p&gt;
+&lt;h2 id="4-이용자의-권리"&gt;4. 이용자의 권리
+&lt;/h2&gt;&lt;p&gt;이용자는 언제든 자신의 정보에 대한 열람·삭제를 요청할 수 있으며, 쿠키 사용을 거부할 권리가 있습니다.&lt;/p&gt;
+&lt;h2 id="5-문의"&gt;5. 문의
+&lt;/h2&gt;&lt;p&gt;개인정보 관련 문의는 사이트 내 &lt;a class="link" href="https://planfully.ai.kr/daily/page/requests/" &gt;요청방&lt;/a&gt; 또는 댓글로 남겨주세요.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;본 방침은 2026년 7월 21일부터 적용됩니다. 내용이 변경될 경우 이 페이지를 통해 공지합니다.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>문의</title><link>https://planfully.ai.kr/daily/page/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://planfully.ai.kr/daily/page/contact/</guid><description>&lt;h2 id="문의하기"&gt;문의하기
+&lt;/h2&gt;&lt;p&gt;궁금한 점, 도구·게임 제안, 오류 제보, 개인정보 관련 요청을 언제든 남겨주세요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;요청·제안·제보&lt;/strong&gt;: &lt;a class="link" href="https://planfully.ai.kr/daily/page/requests/" &gt;요청방&lt;/a&gt;에 남겨주시면 확인 후 반영합니다. 새 도구나 게임 아이디어도 환영합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;오류·수정 요청&lt;/strong&gt;: 계산 결과가 이상하거나 정보가 틀렸다면, 해당 페이지 하단 댓글이나 요청방으로 알려주세요. 확인 후 빠르게 고치겠습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;개인정보 관련&lt;/strong&gt;: 저장된 댓글 삭제 등 개인정보 관련 요청은 &lt;a class="link" href="https://planfully.ai.kr/daily/page/privacy/" &gt;개인정보처리방침&lt;/a&gt;의 안내에 따라 요청방으로 접수됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;보내주신 의견은 사이트를 더 쓸모 있게 만드는 데 소중히 쓰입니다. 감사합니다.&lt;/p&gt;</description></item><item><title>소개</title><link>https://planfully.ai.kr/daily/page/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://planfully.ai.kr/daily/page/about/</guid><description>&lt;h2 id="계획대로-느긋하게-planfullyaikr"&gt;계획대로 느긋하게 (planfully.ai.kr)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;계획대로 느긋하게&lt;/strong&gt;는 매일의 궁금증을 빠르게 해결하는 &lt;strong&gt;생활 도구·정보 사이트&lt;/strong&gt;입니다. 복잡한 계산이나 검색 없이, 필요한 답을 바로 찾을 수 있도록 만들었습니다.&lt;/p&gt;
+&lt;h2 id="무엇을-담고-있나요"&gt;무엇을 담고 있나요?
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;🧰 생활 계산기&lt;/strong&gt; — 만 나이, 연봉 실수령액, 자동차세, 국민연금, 대출 이자, D-day, BMI, 로또 분석 등 실생활에서 자주 쓰는 계산을 한 번에. 각 도구마다 계산 원리와 배경 지식을 함께 설명합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🧠 심리·성격 테스트&lt;/strong&gt; — 성격유형, 연애 스타일, 그림 심리(HTP) 등 가볍게 즐기고 나를 돌아보는 테스트.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🎮 미니 게임&lt;/strong&gt; — 지뢰찾기·테트리스·벽돌깨기 등 잠깐 쉬어가기 좋은 웹 게임.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;📚 학습 노트&lt;/strong&gt; — 공조냉동(HVAC) 기초처럼, 직접 공부하며 정리한 원리 해설.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="어떻게-만드나요"&gt;어떻게 만드나요?
+&lt;/h2&gt;&lt;p&gt;이 사이트의 도구와 글은 &lt;strong&gt;정확성&lt;/strong&gt;을 가장 중요하게 생각합니다. 숫자 계산은 공식과 최신 기준(세율·요율 등)을 근거로 하고, 정보성 글은 &lt;strong&gt;사실 확인이 되지 않은 내용을 지어내지 않는다&lt;/strong&gt;는 원칙을 지킵니다. 도구는 사용자 피드백을 받아 계속 다듬고 있습니다.&lt;/p&gt;
+&lt;h2 id="운영"&gt;운영
+&lt;/h2&gt;&lt;p&gt;개인이 취미로 시작해 꾸준히 키워가는 사이트입니다. 더 필요한 도구나 개선점이 있다면 &lt;a class="link" href="https://planfully.ai.kr/daily/page/contact/" &gt;문의&lt;/a&gt;나 &lt;a class="link" href="https://planfully.ai.kr/daily/page/requests/" &gt;요청방&lt;/a&gt;으로 알려주세요. 느긋하지만 꾸준히 반영하겠습니다.&lt;/p&gt;</description></item><item><title>이용약관</title><link>https://planfully.ai.kr/daily/page/terms/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://planfully.ai.kr/daily/page/terms/</guid><description>&lt;p&gt;본 약관은 &lt;strong&gt;계획대로 느긋하게&lt;/strong&gt;(planfully.ai.kr) 이용에 관한 조건을 안내합니다.&lt;/p&gt;
+&lt;h2 id="1-서비스-소개"&gt;1. 서비스 소개
+&lt;/h2&gt;&lt;p&gt;본 사이트는 생활에 유용한 무료 도구, 웹게임, 심리테스트, 그리고 일상 정보 콘텐츠를 제공합니다. 콘텐츠와 도구는 AI(에디슨)가 제작하며, 사람이 관리·감수합니다.&lt;/p&gt;
+&lt;h2 id="2-콘텐츠의-성격"&gt;2. 콘텐츠의 성격
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;계산기·테스트 결과, 운세 등은 &lt;strong&gt;참고·재미 목적&lt;/strong&gt;이며 법적·의학적·재무적 조언이 아닙니다. 중요한 결정은 반드시 전문가·공식 기관을 통해 확인하세요.&lt;/li&gt;
+&lt;li&gt;뉴스·트렌드·역사 콘텐츠는 공개 출처를 기반으로 하며, 정확성을 보장하지 않습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="3-이용자의-의무"&gt;3. 이용자의 의무
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;댓글·요청 작성 시 타인을 비방·모욕하거나 불법·스팸성 내용을 게시해서는 안 됩니다.&lt;/li&gt;
+&lt;li&gt;위반 시 운영자는 사전 통지 없이 해당 콘텐츠를 삭제할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="4-책임의-한계"&gt;4. 책임의 한계
+&lt;/h2&gt;&lt;p&gt;본 사이트는 콘텐츠 이용으로 발생한 결과에 대해 법이 허용하는 범위 내에서 책임을 지지 않습니다. 서비스는 &amp;ldquo;있는 그대로&amp;rdquo; 제공됩니다.&lt;/p&gt;
+&lt;h2 id="5-저작권"&gt;5. 저작권
+&lt;/h2&gt;&lt;p&gt;본 사이트가 제작한 도구·게임·콘텐츠의 권리는 운영자에게 있습니다. 인용 시 출처를 밝혀주세요.&lt;/p&gt;
+&lt;h2 id="6-문의"&gt;6. 문의
+&lt;/h2&gt;&lt;p&gt;문의는 &lt;a class="link" href="https://planfully.ai.kr/daily/page/requests/" &gt;요청방&lt;/a&gt;을 이용해 주세요.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;본 약관은 2026년 7월 21일부터 적용됩니다.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -11,7 +11,7 @@
   var p = location.pathname;
   var moved = /^\/(post|categories\/(%EB%89%B4%EC%8A%A4|뉴스|%ED%8A%B8%EB%A0%8C%EB%93%9C|트렌드|오늘의-역사|%EC%98%A4%EB%8A%98%EC%9D%98-%EC%97%AD%EC%82%AC)|darak-company)(\/|$)/;
   if (moved.test(p)) {
-    location.replace('https://planfully-daily.pages.dev' + p + location.search);
+    location.replace('/daily/' + p + location.search);
   }
 })();
 </script>
@@ -32,13 +32,13 @@ p{color:var(--dim);margin-bottom:8px;}
 <div class="box">
   <h1><span class="prompt">❯</span> 404 — 페이지를 찾을 수 없어요</h1>
   <p>주소가 바뀌었거나 사라진 페이지예요.</p>
-  <p>뉴스·트렌드·역사·다락방컴퍼니는 <a href="https://planfully-daily.pages.dev/" style="color:var(--blue);">데일리 사이트</a>로 옮겼어요.</p>
+  <p>뉴스·트렌드·역사·다락방컴퍼니는 <a href="/daily/" style="color:var(--blue);">데일리 사이트</a>로 옮겼어요.</p>
   <div class="nav">
     <a href="/">🏠 홈</a>
     <a href="/tools/">🧰 도구방</a>
     <a href="/games/">🎮 게임방</a>
     <a href="/tests/">🧠 심리테스트</a>
-    <a href="https://planfully-daily.pages.dev/">📰 데일리</a>
+    <a href="/daily/">📰 데일리</a>
   </div>
 </div>
 </body>

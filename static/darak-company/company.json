@@ -1,0 +1,117 @@
+{
+  "date": "2026-08-31",
+  "company": "다락방 컴퍼니",
+  "weather": "흐림 ☁️",
+  "employees": {
+    "boss": {
+      "floor": "top",
+      "name": "사장",
+      "role": "대표",
+      "emoji": "🧑‍💼",
+      "hire": "2026-03-28",
+      "status": "전 직원 총괄·관망",
+      "mood": "calm",
+      "bubble": "다들 조용히 잘 버텼구나"
+    },
+    "hr": {
+      "floor": "hr",
+      "name": "세리",
+      "role": "인사·경영지원",
+      "emoji": "📝",
+      "hire": "2026-07-22",
+      "status": "하루 기록·정리",
+      "mood": "sly",
+      "bubble": "조용한 날도 다 적어둔다"
+    },
+    "sec": {
+      "floor": "hr",
+      "name": "비서",
+      "role": "모니터링",
+      "emoji": "👀",
+      "hire": "2026-06-29",
+      "status": "24회 정상 감시",
+      "mood": "calm",
+      "bubble": "전 구간 이상 없이 넘겼습니다"
+    },
+    "jay": {
+      "floor": "invest",
+      "name": "제이",
+      "role": "미국주식",
+      "emoji": "📈",
+      "hire": "2026-07-01",
+      "status": "14전략 무매매 관망",
+      "mood": "neutral",
+      "bubble": "손 안 댄 날도 전략이지"
+    },
+    "kook": {
+      "floor": "invest",
+      "name": "국주",
+      "role": "국내주식",
+      "emoji": "📊",
+      "hire": "2026-07-13",
+      "status": "23전략 시뮬 스캔",
+      "mood": "calm",
+      "bubble": "시뮬은 시뮬, 서두르지 않는다"
+    },
+    "coin": {
+      "floor": "invest",
+      "name": "코인",
+      "role": "코인선물",
+      "emoji": "🪙",
+      "hire": "2026-07-07",
+      "status": "포지션 없는 대기",
+      "mood": "neutral",
+      "bubble": "펀딩비 볼 자리가 없었다"
+    },
+    "content": {
+      "floor": "content",
+      "name": "트렌디",
+      "role": "블로그",
+      "emoji": "✍️",
+      "hire": "2026-03-28",
+      "status": "휴식·소재 대기",
+      "mood": "neutral",
+      "bubble": "트렌드 충전 중, 곧 터진다"
+    },
+    "pd": {
+      "floor": "content",
+      "name": "피디",
+      "role": "영상제작",
+      "emoji": "🎬",
+      "hire": "2026-07-06",
+      "status": "편집 휴식일",
+      "mood": "neutral",
+      "bubble": "다음 컷은 머리로만 굴린다"
+    },
+    "coach": {
+      "floor": "gym",
+      "name": "코치",
+      "role": "헬스·식단",
+      "emoji": "💪",
+      "hire": "2026-06-29",
+      "status": "훈련 없는 하루",
+      "mood": "neutral",
+      "bubble": "쉬는 날도 물은 마셔라"
+    },
+    "lobby": {
+      "floor": "lobby",
+      "name": "리아",
+      "role": "안내데스크",
+      "emoji": "💁",
+      "hire": "2026-07-22",
+      "status": "방문 기록 없음",
+      "mood": "calm",
+      "bubble": "사장님, 오늘은 조용했습니다"
+    }
+  },
+  "timeline": [
+    {
+      "t": "08:25",
+      "who": "kook",
+      "msg": "전략 시뮬 스캔·기록 (3회, 08:25~10:40)",
+      "line": "시뮬 스캔부터, 천천히 간다"
+    }
+  ],
+  "daily_script": "어제는 사무실이 유난히 조용했다. 국주가 아침부터 오전까지 세 차례 전략 시뮬 스캔을 돌리며 21종목을 정리했고, 제이는 14개 전략을 켜두고도 한 건도 손대지 않은 채 하락장을 관망했다. 비서는 24회 점검을 평균 283ms로 무중단 완주했고, 나머지 직원들은 각자 자리에서 다음 날을 준비했다.\n사장 — 조용한 날을 지켜본 하루\n세리 — 사건 없는 날도 기록 완료\n비서 — 24회 전부 이상 무\n제이 — 무매매로 지켜낸 보합\n국주 — 시뮬만 꾸준히 세 번\n코인 — 들어갈 자리 없어 대기\n트렌디 — 소재 모으며 숨 고르기\n피디 — 컷 없이 구상만 한 날\n코치 — 훈련 없이 회복한 하루\n리아 — 접수 없는 조용한 로비",
+  "_source": "claude"
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://planfully.ai.kr/sitemap.xml
