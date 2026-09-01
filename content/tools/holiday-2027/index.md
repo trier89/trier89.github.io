@@ -19,7 +19,8 @@ readingTime: false
   <div style="font-size:13.5px;color:#6b7280;margin-bottom:12px;">공휴일 앞뒤 평일에 연차를 쓰면 며칠을 연속으로 쉴 수 있는지 계산했어요. 효율(연차 1일당 쉬는 날)이 높은 순서로 보여드려요.</div>
   <div id="h27-budget" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;"></div>
   <div id="h27-reco" style="display:flex;flex-direction:column;gap:10px;"></div>
-  <h2 style="font-size:19px;margin:30px 0 12px;">📅 2027년 달력</h2>
+  <h2 style="font-size:19px;margin:30px 0 6px;">📅 2027년 달력</h2>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#555;margin-bottom:12px;"><span><span style="display:inline-block;width:11px;height:11px;background:#fdecec;border:1px solid #f3b4b4;border-radius:3px;vertical-align:-1px;"></span> 공휴일</span><span><span style="display:inline-block;width:11px;height:11px;background:#cdefe0;border:1px solid #58c69a;border-radius:3px;vertical-align:-1px;"></span> 연차 추천일</span><span style="color:#dc2626;">■</span> 일요일 <span style="color:#2563eb;">■</span> 토요일</div>
   <div id="h27-cal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;"></div>
 </div>
 <style>
@@ -45,6 +46,9 @@ readingTime: false
 .h27-cell.sat .dn{color:#2563eb;}
 .h27-cell.hol{background:#fdecec;}
 .h27-cell.hol .dn{color:#dc2626;}
+.h27-cell.leave{background:#cdefe0;box-shadow:inset 0 0 0 1px #58c69a;}
+.h27-cell.leave .dn{color:#0f9d63;}
+.h27-cell.leave .hn{color:#0f9d63;}
 .h27-cell.empty{background:transparent;}
 </style>
 <script>
@@ -72,15 +76,16 @@ var picked=[],used={};
 cands.forEach(function(c){for(var t=0;t<c.lv.length;t++)if(used[c.lv[t]])return;picked.push(c);c.lv.forEach(function(l){used[l]=1;});});
 picked.sort(function(p,q){return p.s-q.s;});
 function stars(r){return r>=4?"🔥🔥🔥":r>=2.5?"🔥🔥":"🔥";}
-function renderReco(maxCost){var box=document.getElementById("h27-reco");var list=picked.filter(function(c){return c.cost<=maxCost;});if(!list.length){box.innerHTML='<div style="color:#888;font-size:14px;">해당 연차 일수로 만들 수 있는 추천이 없어요.</div>';return;}box.innerHTML=list.map(function(c){var r=c.tot/c.cost;var lv=c.lv.map(function(k){return fmt(days[k].dt);}).join(", ");return '<div class="h27-card"><div class="top"><span class="rng">'+fmt(days[c.s].dt)+' ~ '+fmt(days[c.e].dt)+' · '+c.tot+'일 연속</span><span class="eff">'+stars(r)+' 효율 '+r.toFixed(1)+' (연차 '+c.cost+'일)</span></div><div class="lv">연차 쓸 날: <b>'+lv+'</b></div></div>';}).join("");}
-var budgets=[[1,"연차 1일"],[2,"2일 이하"],[3,"3일 이하"],[4,"전체"]];
-var bbox=document.getElementById("h27-budget");
-bbox.innerHTML=budgets.map(function(b,idx){return '<button class="h27-b'+(idx===3?" on":"")+'" data-c="'+b[0]+'">'+b[1]+'</button>';}).join("");
-bbox.addEventListener("click",function(ev){var t=ev.target;if(t.tagName!=="BUTTON")return;[].forEach.call(bbox.children,function(x){x.classList.remove("on");});t.classList.add("on");renderReco(+t.getAttribute("data-c"));});
-renderReco(4);
 var cal=document.getElementById("h27-cal");var html="";
-for(var mo=0;mo<12;mo++){var first=new Date(2027,mo,1);var start=first.getDay();var dim=new Date(2027,mo+1,0).getDate();html+='<div class="h27-mon"><h3>'+(mo+1)+'월</h3><div class="h27-grid">';for(var w=0;w<7;w++)html+='<div class="hd" style="color:'+(w===0?"#dc2626":w===6?"#2563eb":"#999")+'">'+WD[w]+'</div>';for(var e2=0;e2<start;e2++)html+='<div class="h27-cell empty"></div>';for(var dd=1;dd<=dim;dd++){var cd=new Date(2027,mo,dd);var g2=cd.getDay();var is2=iso(cd);var h2=HOL[is2];var cls="h27-cell"+(g2===0?" sun":g2===6?" sat":"")+(h2?" hol":"");html+='<div class="'+cls+'"><div class="dn">'+dd+'</div>'+(h2?'<div class="hn">'+h2+'</div>':'')+'</div>';}html+='</div></div>';}
+for(var mo=0;mo<12;mo++){var first=new Date(2027,mo,1);var start=first.getDay();var dim=new Date(2027,mo+1,0).getDate();html+='<div class="h27-mon"><h3>'+(mo+1)+'월</h3><div class="h27-grid">';for(var w=0;w<7;w++)html+='<div class="hd" style="color:'+(w===0?"#dc2626":w===6?"#2563eb":"#999")+'">'+WD[w]+'</div>';for(var e2=0;e2<start;e2++)html+='<div class="h27-cell empty"></div>';for(var dd=1;dd<=dim;dd++){var cd=new Date(2027,mo,dd);var g2=cd.getDay();var is2=iso(cd);var h2=HOL[is2];var cls="h27-cell"+(g2===0?" sun":g2===6?" sat":"")+(h2?" hol":"");html+='<div class="'+cls+'" data-iso="'+is2+'"><div class="dn">'+dd+'</div>'+(h2?'<div class="hn">'+h2+'</div>':'')+'</div>';}html+='</div></div>';}
 cal.innerHTML=html;
+function highlight(list){[].forEach.call(cal.querySelectorAll(".h27-cell.leave"),function(el){el.classList.remove("leave");var hn=el.querySelector(".hn.tag");if(hn)hn.remove();});list.forEach(function(c){c.lv.forEach(function(k){var el=cal.querySelector('[data-iso="'+days[k].iso+'"]');if(el){el.classList.add("leave");if(!el.querySelector(".hn")){var t=document.createElement("div");t.className="hn tag";t.textContent="연차";el.appendChild(t);}}});});}
+function renderReco(v){var box=document.getElementById("h27-reco");var list=(v==="all")?picked:picked.filter(function(c){return c.cost===v;});if(!list.length){box.innerHTML='<div style="color:#888;font-size:14px;">연차 '+v+'일로 만드는 추천이 없어요.</div>';highlight([]);return;}box.innerHTML=list.map(function(c){var r=c.tot/c.cost;var lv=c.lv.map(function(k){return fmt(days[k].dt);}).join(", ");return '<div class="h27-card"><div class="top"><span class="rng">'+fmt(days[c.s].dt)+' ~ '+fmt(days[c.e].dt)+' · '+c.tot+'일 연속</span><span class="eff">'+stars(r)+' 효율 '+r.toFixed(1)+' (연차 '+c.cost+'일)</span></div><div class="lv">연차 쓸 날: <b>'+lv+'</b></div></div>';}).join("");highlight(list);}
+var budgets=[["all","전체"],[1,"1일"],[2,"2일"],[3,"3일"],[4,"4일"]];
+var bbox=document.getElementById("h27-budget");
+bbox.innerHTML=budgets.map(function(b,idx){return '<button class="h27-b'+(idx===0?" on":"")+'" data-c="'+b[0]+'">'+b[1]+'</button>';}).join("");
+bbox.addEventListener("click",function(ev){var t=ev.target;if(t.tagName!=="BUTTON")return;[].forEach.call(bbox.children,function(x){x.classList.remove("on");});t.classList.add("on");var v=t.getAttribute("data-c");renderReco(v==="all"?"all":+v);});
+renderReco("all");
 })();
 </script>
 
