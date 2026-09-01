@@ -1,15 +1,21 @@
 {
- "today": 1,
- "today_pv": 7,
- "total": 128,
- "total_visits": 488,
+ "today": 0,
+ "today_pv": 0,
+ "total": 129,
+ "total_visits": 490,
  "yesterday": {
-  "users": 0,
-  "new": 0,
-  "pv": 0,
-  "sessions": 0
+  "users": 2,
+  "new": 1,
+  "pv": 12,
+  "sessions": 5
  },
  "top_views": [
+  {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 10,
+   "eng": 152,
+   "avg_sec": 15
+  },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
    "views": 3,
@@ -17,25 +23,19 @@
    "avg_sec": 3
   },
   {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "title": "도구방",
    "views": 2,
-   "eng": 36,
-   "avg_sec": 18
+   "eng": 17,
+   "avg_sec": 8
   },
   {
-   "title": "검색",
-   "views": 1,
+   "title": "연봉계산기 — 실수령액·4대보험 (연봉 역산 지원)",
+   "views": 2,
    "eng": 0,
    "avg_sec": 0
   },
   {
-   "title": "도구방",
-   "views": 1,
-   "eng": 4,
-   "avg_sec": 4
-  },
-  {
-   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "title": "검색",
    "views": 1,
    "eng": 0,
    "avg_sec": 0
@@ -43,11 +43,17 @@
  ],
  "top_dwell": [
   {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 10,
+   "eng": 152,
+   "avg_sec": 15
+  },
+  {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
    "views": 3,
    "eng": 10,
    "avg_sec": 3
   }
  ],
- "updated": "2026-09-01 23:02"
+ "updated": "2026-09-02 00:02"
 }
