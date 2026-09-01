@@ -1,6 +1,6 @@
 ---
 title: "재산세 계산기 — 주택 공시가격으로 재산세·도시지역분·지방교육세"
-description: "주택 공시가격과 1주택자 여부를 입력하면 과세표준, 재산세 본세(누진세율), 도시지역분, 지방교육세, 총 납부액을 계산합니다. 2026년 기준 무료 재산세 계산기."
+description: "주택 공시가격과 1주택자 여부를 입력하면 과세표준, 재산세 본세(누진세율), 도시지역분, 지방교육세, 총 납부액을 계산합니다. 9월 재산세 2기분 납부기간(9/16~9/30) 확인. 2026년 기준 무료 재산세 계산기."
 date: 2026-07-22
 slug: "property-tax"
 categories: ["도구"]
@@ -10,6 +10,8 @@ readingTime: false
 ---
 
 주택 **공시가격**과 **1세대 1주택자** 여부를 넣으면 과세표준·재산세 본세·도시지역분·지방교육세와 **총 납부액**을 계산합니다. (2026년 주택 기준)
+
+> 📅 **9월은 재산세 2기분 납부의 달!** 주택 재산세 **2기분 납부기간은 9월 16일~9월 30일**이에요(1기분은 7/16~7/31). 기한을 넘기면 3%의 납부지연가산세가 붙으니 잊지 말고 챙기세요.
 
 <div class="pf-tool" style="max-width:520px;margin:0 auto;">
   <label style="display:block;"><span style="display:block;font-weight:700;margin-bottom:6px;">주택 공시가격 (만원)</span><input type="tel" id="pt-price" inputmode="numeric" placeholder="예: 30000 (3억원)" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
