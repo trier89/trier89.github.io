@@ -13,6 +13,7 @@
     <div style="color:var(--dim);font-size:13px;margin-bottom:20px;">
       <span style="color:var(--yellow);">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>{{ if not .Date.IsZero }} · {{ .Date.Format "2006년 1월 2일" }}{{ end }}
     </div>
+    {{ partial "pf/adfit-top.html" . }}
     {{ .Content }}
   </article>
   {{/* 2026-07-28 양면뉴스 시인성: 🔍시각A / 🔎시각B 를 색상구분 카드로 변환 */}}
@@ -45,7 +46,7 @@
   mk('페이스북','📘',function(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),'_blank','width=580,height=400');});
   mk('링크복사','🔗',function(){navigator.clipboard.writeText(url).then(function(){alert('링크가 복사됐어요!');});});})();
   </script>
-  {{ partial "pf/adfit.html" . }}
+  {{ partial "pf/adfit-pc.html" . }}
   {{ if not (eq .Params.comments false) }}
     <div id="planfully-comments"></div>
     <script src="/comments.js?v={{ now.Unix }}" defer></script>

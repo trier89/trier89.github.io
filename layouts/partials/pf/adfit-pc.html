@@ -1,0 +1,10 @@
+{{/* 카카오 애드핏 — 본문 하단 사각형(PC 전용) + ba.min.js 로드(페이지당 1회, 상단 배너 몫까지 스캔).
+     글 페이지(single/page)는 adfit-top(모바일 상단) + adfit-pc(PC 하단) 조합.
+     목록/홈 등은 기존 pf/adfit.html(듀얼) 그대로. ins를 CSS로 추가 숨김처리 금지(주석 adfit.html 참조). */}}
+<div class="pf-ad" style="margin:30px auto 10px;text-align:center;">
+  <ins class="kakao_ad_area" style="display:none;"
+       data-ad-unit="DAN-U3Tez6Y0llmoHKff"
+       data-ad-width="300"
+       data-ad-height="250"></ins>
+  <script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+</div>
