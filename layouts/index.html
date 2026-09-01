@@ -97,6 +97,7 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
     <a href="/daily/">📰 데일리</a>
   </div>
 
+  {{ partial "pf/adfit-top.html" . }}
   <div class="sec">
     <div class="shead"><a href="/tools/">🧰 도구방 →</a> <span class="dim">새로 나온 도구</span></div>
     <div class="grid">
@@ -133,7 +134,7 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding','Jet
     <div class="shead"><a href="/daily/">📰 데일리 →</a> <span class="dim">매일의 뉴스·트렌드·역사는 여기서</span></div>
   </div>
 
-  {{ partial "pf/adfit.html" . }}
+  {{ partial "pf/adfit-pc.html" . }}
 
   <div class="foot">
     <div>🧰 생활에 쓸모있는 계산기 · 심리테스트 · 미니게임을 만듭니다</div>

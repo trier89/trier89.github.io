@@ -1,6 +1,7 @@
-{{/* 카카오 애드핏 — 본문 하단 사각형(PC 전용) + ba.min.js 로드(페이지당 1회, 상단 배너 몫까지 스캔).
-     글 페이지(single/page)는 adfit-top(모바일 상단) + adfit-pc(PC 하단) 조합.
-     목록/홈 등은 기존 pf/adfit.html(듀얼) 그대로. ins를 CSS로 추가 숨김처리 금지(주석 adfit.html 참조). */}}
+{{/* 카카오 애드핏 — 본문 하단 사각형(300x250) + ba.min.js 로드(페이지당 1회, 상단 배너 몫까지 스캔).
+     2026-09-01 전 페이지 = adfit-top(320x100 배너, 상단) + adfit-pc(사각형, 하단) 조합으로 통일
+     (기기 타겟팅이 배타적이지 않아 모바일서 두 유닛 다 채워짐 → 듀얼 하단 배치는 하단에 광고 2개 겹침).
+     구 pf/adfit.html(듀얼)은 템플릿에서 미사용. ins를 CSS로 추가 숨김처리 금지. */}}
 <div class="pf-ad" style="margin:30px auto 10px;text-align:center;">
   <ins class="kakao_ad_area" style="display:none;"
        data-ad-unit="DAN-U3Tez6Y0llmoHKff"

@@ -9,6 +9,7 @@
 {{ partial "pf/nav.html" . }}
 <main class="pf-main">
   <h1>{{ .Title }}</h1>
+  {{ partial "pf/adfit-top.html" . }}
   {{ with .Params.description }}<p style="color:var(--dim);">{{ . }}</p>{{ end }}
   <p style="color:var(--dim);font-size:13px;">{{ len .Pages }}개의 글</p>
   {{ $pag := .Paginate .Pages }}
@@ -26,7 +27,7 @@
     {{ if $p.HasNext }}<a class="pf-card" style="display:inline-block;margin:0;" href="{{ $p.Next.URL }}">다음 →</a>{{ end }}
   </div>
   {{ end }}
-{{ partial "pf/adfit.html" . }}
+{{ partial "pf/adfit-pc.html" . }}
 </main>
 {{ partial "pf/foot.html" . }}
 </div>

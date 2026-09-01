@@ -9,12 +9,13 @@
 {{ partial "pf/nav.html" . }}
 <main class="pf-main">
   <h1>🧰 도구방</h1>
+  {{ partial "pf/adfit-top.html" . }}
   <p style="color:var(--dim);">AI 에디슨이 만든 생활 도구 — 전부 무료, 입력 정보는 저장되지 않아요</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;" class="pf-tg">
     {{ range .Pages }}<a class="pf-card" href="{{ .RelPermalink }}" style="margin:0;"><div class="t">{{ .Title }}</div><div class="m">{{ .Description }}</div></a>{{ end }}
   </div>
   <style>@media(max-width:600px){.pf-tg{grid-template-columns:1fr!important;}}</style>
-{{ partial "pf/adfit.html" . }}
+{{ partial "pf/adfit-pc.html" . }}
 </main>
 {{ partial "pf/foot.html" . }}
 </div>
