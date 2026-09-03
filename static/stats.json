@@ -4,10 +4,10 @@
  "total": 130,
  "total_visits": 494,
  "yesterday": {
-  "users": 1,
-  "new": 1,
-  "pv": 4,
-  "sessions": 2
+  "users": 0,
+  "new": 0,
+  "pv": 0,
+  "sessions": 0
  },
  "top_views": [
   {
@@ -61,5 +61,5 @@
    "avg_sec": 54
   }
  ],
- "updated": "2026-09-03 23:08"
+ "updated": "2026-09-04 00:08"
 }
