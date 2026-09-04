@@ -88,6 +88,22 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .subbtn{width:100%;padding:12px;border:1.5px solid #2b3f57;border-radius:12px;background:#0d1b2a;color:#cfe0ef;font-size:14px;font-weight:700;cursor:pointer;margin-top:9px;}
 .subbtn:active{opacity:.8;}
 .ok{background:#12321f;border:1px solid #1e6b3f;color:#9be0b6;}
+/* 여정 라인(S자 노선도) */
+.jmap-card{padding:14px 8px 10px;}
+.jm-top{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:0 8px 9px;}
+.jm-ttl{font-size:12px;color:#8fa3b8;font-weight:700;margin-right:2px;}
+.jm-chip{font-size:10.5px;font-weight:800;color:#fff;border-radius:6px;padding:2px 7px;}
+.jm-pct{margin-left:auto;font-size:11.5px;color:#8fa3b8;font-weight:700;}
+.jm-b{fill:none;stroke-width:5;stroke-linecap:round;opacity:.2;}
+.jm-p{fill:none;stroke-width:5;stroke-linecap:round;}
+.jm-l{font-size:9px;fill:#7d92a8;}
+.jm-l.ed{fill:#cfe0ef;font-weight:700;}
+.jm-l.tf{fill:#e0c07e;font-weight:700;}
+.jm-l.on{fill:#4ee39b;font-weight:800;}
+.jm-t{font-size:8px;fill:#6f8399;}
+.jm-mk{fill:#fff;stroke:#0d1b2a;stroke-width:1.6;}
+.jm-pulse{fill:#4ee39b;animation:jmp 1.7s ease-out infinite;}
+@keyframes jmp{0%{r:5;opacity:.5}100%{r:14;opacity:0}}
 </style>
 </head>
 <body>
@@ -117,6 +133,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
     <div class="card">
       <div class="route-sum"><div><div class="t" id="rsTime">–</div><div class="d" id="rsDesc"></div></div><button id="reFind" style="background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:6px 12px;font-size:12px;cursor:pointer;">← 다시</button></div>
       <div id="legs"></div>
+      <div id="jmapPre"></div>
       <button class="subbtn" id="saveFav">⭐ 이 경로 즐겨찾기 저장</button>
     </div>
     <button class="big-btn" id="board">🚉 탑승 · 알림 시작</button>
@@ -138,6 +155,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       <button class="big-btn stop" id="btnStop" style="margin-top:9px;">■ 정지 / 다시 설정</button>
       <div class="log" id="log"></div>
     </div>
+    <div class="card jmap-card"><div id="jmap"></div></div>
   </div>
 </div>
 
@@ -281,6 +299,7 @@ function renderRoute(path,fromName,toName){
   });
   $("legs").innerHTML=html;
   st.legs=subLegs;
+  renderJMap("jmapPre",false);
 }
 
 // 탑승 이벤트 타임라인 구성 (승차시각 기준 누적)
@@ -317,6 +336,7 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   $("remT").textContent=fmtMMSS(evRem*60);
   $("eta").textContent=fmtClock(st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+nextEv.at*60000);
   $("barI").style.width=Math.min(100,em/st.total*100)+"%";
+  jmTick(em);
   $("curN").textContent=curStation(em);
   if(st.paused)return;
   // 알림: 각 이벤트 1분 전 + 도착
@@ -414,6 +434,7 @@ function startRunPlan(plan){
   var last=st.legs[st.legs.length-1],arrMs=plan[plan.length-1].arr;
   speak(last.endName+"까지 "+fmtClock(arrMs)+" 도착 예정입니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
   log("🚉 "+fmtClock(st.t0)+" 출발 · "+last.endName+" "+fmtClock(arrMs)+" 도착 예정"+(plan[0].train?" ("+plan[0].train+"열차)":""));
+  renderJMap("jmap",true);
   tick();
 }
 function startRun(boardMs){
@@ -423,9 +444,130 @@ function startRun(boardMs){
   var last=st.legs[st.legs.length-1];
   speak(last.endName+"까지 약 "+st.total+"분 걸립니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
   log("🚉 출발 · "+last.endName+"까지 약 "+st.total+"분");
+  renderJMap("jmap",true);
   tick();
 }
 function log(m){var d=document.createElement("div");var n=new Date();d.textContent="["+String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0")+"] "+m;$("log").prepend(d);}
+
+// ── 여정 라인(S자 노선도) — 전체 여정 중 어디까지 왔는지 + 역 표시 ──
+var JM=null;
+function jmEsc(t){return String(t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function jmCut(t,n){t=String(t||"");return t.length>n?t.slice(0,n-1)+"…":t;}
+// 전 구간 역 목록을 하나로 잇는다. 같은 역 환승은 합치고, 다른 역(도보) 환승은 점선으로 남긴다.
+function jmNodes(){
+  var legs=st.legs||[],out=[],cum=0;
+  legs.forEach(function(sp,li){
+    if(!sp.lane||!sp.lane[0])return;
+    var col=lineColor(sp.lane[0].name);
+    var s0=(sp.__start!=null)?sp.__start:cum, s1=(sp.__cum!=null)?sp.__cum:cum+sp.sectionTime;
+    cum=s1;
+    var stns=(sp.__stns&&sp.__stns.length)?sp.__stns:((sp.passStopList&&sp.passStopList.stations)||[]);
+    var names;
+    if(stns.length>=2){names=stns.map(function(x){return x.stationName;});}
+    else{names=[sp.startName];for(var k=1;k<Math.max(1,sp.stationCount);k++)names.push("");names.push(sp.endName);}
+    var segN=Math.max(1,names.length-1);
+    for(var j=0;j<names.length;j++){
+      var nd={name:names[j],t:s0+(s1-s0)*(j/segN),leg:li,col:col};
+      if(j===0&&out.length){
+        var pv=out[out.length-1];
+        if(pv.name&&pv.name===nd.name){pv.tf=true;pv.col2=col;continue;}  // 같은 역 환승 → 한 점으로
+        nd.walk=true;nd.tf=true;pv.tf=true;                                // 도보 환승 → 점선 구간
+      }
+      if(li===0&&j===0)nd.start=true;
+      if(li===legs.length-1&&j===names.length-1)nd.end=true;
+      out.push(nd);
+    }
+  });
+  return out;
+}
+function renderJMap(elId,live){
+  var el=$(elId);if(!el)return;
+  var nodes=jmNodes();
+  if(nodes.length<2){el.innerHTML="";if(live)JM=null;return;}
+  var W=el.clientWidth||Math.min(430,(document.body.clientWidth||390)-30);
+  var n=nodes.length;
+  var cols=Math.max(3,Math.min(7,Math.floor((W-40)/56)));
+  if(n<cols)cols=n;
+  var rows=Math.ceil(n/cols);
+  var pad=22,colW=(cols>1)?(W-pad*2-16)/(cols-1):0;
+  var rowH=58,top=(rows>1)?24:26,H=top+(rows-1)*rowH+30;
+  var P=nodes.map(function(nd,i){
+    var r=Math.floor(i/cols),k=i%cols,c=(r%2===0)?k:(cols-1-k);
+    return {x:Math.round((pad+c*colW)*10)/10,y:top+r*rowH,r:r};
+  });
+  var segs="",dots="",labs="";
+  for(var i=0;i<n-1;i++){
+    var a=P[i],b=P[i+1],nb=nodes[i+1],d;
+    if(a.r===b.r){d="M"+a.x+" "+a.y+"L"+b.x+" "+b.y;}
+    else{var bx=a.x+((a.r%2===0)?20:-20);   // 줄 끝에서 S자로 돌아 내려간다
+      d="M"+a.x+" "+a.y+"C"+bx+" "+(a.y+11)+" "+bx+" "+(b.y-11)+" "+b.x+" "+b.y;}
+    var col=nb.walk?"#8fa3b8":nb.col;
+    var dash=nb.walk?' stroke-dasharray="1 7"':'';
+    segs+='<path class="jm-b" d="'+d+'" stroke="'+col+'"'+dash+'></path>';
+    segs+='<path class="jm-p" d="'+d+'" stroke="'+col+'"'+dash+'></path>';
+  }
+  nodes.forEach(function(nd,i){
+    var p=P[i],r=nd.tf?6:((nd.start||nd.end)?5.5:3.6);
+    dots+='<circle class="jm-d" cx="'+p.x+'" cy="'+p.y+'" r="'+r+'" fill="#16263a" stroke="'+nd.col+'" stroke-width="'+(nd.tf?3:2)+'"></circle>';
+    if(nd.col2)dots+='<circle cx="'+p.x+'" cy="'+p.y+'" r="2.3" fill="'+nd.col2+'"></circle>';
+    if(nd.name){
+      labs+='<text class="jm-l'+(nd.tf?" tf":"")+((nd.start||nd.end)?" ed":"")+'" x="'+p.x+'" y="'+(p.y+16)+'" text-anchor="middle">'+jmEsc(jmCut(nd.name,5))+'</text>';
+      if(live&&st.t0&&(nd.tf||nd.start||nd.end))
+        labs+='<text class="jm-t" x="'+p.x+'" y="'+(p.y-11)+'" text-anchor="middle">'+fmtClock(st.t0+nd.t*60000)+'</text>';
+    }
+  });
+  var mk=live?'<circle class="jm-pulse" cx="-99" cy="-99" r="5"></circle><circle class="jm-mk" cx="-99" cy="-99" r="4.6"></circle>':'';
+  var chips=(st.legs||[]).map(function(sp){
+    if(!sp.lane||!sp.lane[0])return "";
+    return '<span class="jm-chip" style="background:'+lineColor(sp.lane[0].name)+'">'+jmEsc(lineShort(sp.lane[0].name))+'</span>';}).join("");
+  el.innerHTML='<div class="jm-top"><span class="jm-ttl">전체 여정</span>'+chips+'<span class="jm-pct"></span></div>'
+    +'<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" xmlns="http://www.w3.org/2000/svg">'+segs+dots+labs+mk+'</svg>';
+  var sv=el.querySelector("svg");
+  var jm={el:el,nodes:nodes,
+    prog:[].slice.call(sv.querySelectorAll(".jm-p")).map(function(q){return {el:q,len:q.getTotalLength()||1,walk:!!q.getAttribute("stroke-dasharray")};}),
+    dots:[].slice.call(sv.querySelectorAll(".jm-d")),
+    labs:[].slice.call(sv.querySelectorAll("text.jm-l")),
+    mk:sv.querySelector(".jm-mk"),pulse:sv.querySelector(".jm-pulse"),pct:el.querySelector(".jm-pct")};
+  if(live)JM=jm;
+  jmDraw(jm,(live&&st.running)?elapsedMin():0,live);
+}
+function jmDraw(jm,em,live){
+  if(!jm)return;var nodes=jm.nodes,i,f,t0,t1;
+  for(i=0;i<jm.prog.length;i++){
+    t0=nodes[i].t;t1=nodes[i+1].t;
+    f=(t1>t0)?(em-t0)/(t1-t0):(em>=t1?1:0);
+    f=Math.max(0,Math.min(1,f));
+    var q=jm.prog[i];
+    if(q.walk){q.el.style.strokeOpacity=(f>0?1:0);}
+    else{q.el.style.strokeDasharray=q.len;q.el.style.strokeDashoffset=q.len*(1-f);}
+  }
+  var cur=0,li=0;
+  for(i=0;i<nodes.length;i++){
+    var passed=live&&em>=nodes[i].t-0.01;
+    if(passed)cur=i;
+    if(jm.dots[i])jm.dots[i].setAttribute("fill",passed?nodes[i].col:"#16263a");
+    if(nodes[i].name){if(jm.labs[li]){try{jm.labs[li].classList.toggle("on",live&&i===cur&&em>0);}catch(e){}}li++;}
+  }
+  if(!live)return;
+  if(jm.mk&&jm.prog.length){
+    var si=Math.min(jm.prog.length-1,cur),q2=jm.prog[si];
+    t0=nodes[si].t;t1=nodes[si+1].t;
+    f=(t1>t0)?Math.max(0,Math.min(1,(em-t0)/(t1-t0))):1;
+    try{var pt=q2.el.getPointAtLength(q2.len*f);
+      jm.mk.setAttribute("cx",pt.x);jm.mk.setAttribute("cy",pt.y);
+      if(jm.pulse){jm.pulse.setAttribute("cx",pt.x);jm.pulse.setAttribute("cy",pt.y);}}catch(e){}
+  }
+  if(jm.pct)jm.pct.textContent=st.total?Math.max(0,Math.min(100,Math.round(em/st.total*100)))+"% 왔어요":"";
+}
+function jmTick(em){
+  if(!JM)return;
+  // 현재 칠해진 라벨만 갱신하면 되지만, 라벨 하이라이트가 따라가야 해 전체를 다시 그린다(가벼움)
+  jmDraw(JM,em,true);
+}
+window.addEventListener("resize",function(){
+  if(st.running)renderJMap("jmap",true);
+  else if($("result")&&!$("result").classList.contains("hidden"))renderJMap("jmapPre",false);
+});
 
 // ── 즐겨찾기 (출근·퇴근·등교 등 직접 이름 지정) ──
 function favLoad(){try{return JSON.parse(localStorage.getItem("subway_favs")||"[]");}catch(e){return [];}}
