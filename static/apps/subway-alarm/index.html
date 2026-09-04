@@ -693,15 +693,17 @@ function showBoardModal(k){
     st.tt=d;var now=Date.now();
     if(d.offline)$("mQs").textContent=(first.way||"")+" 방면 · 📴 저장된 시간표";
     // 첫차~막차를 한 칸씩. 열자마자 지금 시각 칸에 맞춰두고, 넘기면 앞뒤 시간이 나온다.
+    // "곧 출발"로 적히는 열차(반올림해서 0분)는 아직 지난 게 아니다 → 같은 기준으로 센다
+    var mins=function(x){return Math.round((dayMs(x)-now)/60000);};
     var soon=-1;
-    for(var k=0;k<d.trains.length;k++){if(dayMs(d.trains[k].dep)>=now){soon=k;break;}}
+    for(var k=0;k<d.trains.length;k++){if(mins(d.trains[k].dep)>=0){soon=k;break;}}
     if(soon<0)soon=d.trains.length-1;
     $("pkHint").textContent="지금 "+fmtClock(now)+" · 위아래로 넘겨서 탄 열차를 고르세요";
     var html=d.trains.map(function(t,i){
-      var dep=dayMs(t.dep),diff=Math.round((dep-now)/60000);
+      var dep=dayMs(t.dep),diff=Math.round((dep-now)/60000),gone=(diff<0);
       var when=diff>0?("약 "+diff+"분 뒤 출발"):(diff===0?"곧 출발":(-diff)+"분 전 출발");
-      var tag=(dep<now)?'<b class="bg was">지남</b>':((i===soon)?'<b class="bg next">다음</b>':'');
-      return '<button class="tr'+(dep<now?" past":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
+      var tag=gone?'<b class="bg was">지남</b>':((i===soon)?'<b class="bg next">다음</b>':'');
+      return '<button class="tr'+(gone?" past":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
         +'<span class="ds">'+tag+(t.dest?t.dest+"행 · ":"")+when+'</span></button>';
     }).join("");
     var box=$("trains");box.innerHTML=html;
