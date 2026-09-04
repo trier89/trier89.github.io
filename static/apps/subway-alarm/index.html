@@ -73,6 +73,12 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .modal .other{background:#0d1b2a;color:#cfe0ef;border:1.5px solid #2b3f57;}
 .offs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 .offs button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#eef2f6;border-radius:18px;padding:9px 14px;font-size:14px;cursor:pointer;}
+.trains{max-height:44vh;overflow-y:auto;margin:4px 0 14px;}
+.trains .tr{display:flex;align-items:center;gap:10px;width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;border-radius:12px;padding:11px 13px;margin-bottom:8px;color:#eef2f6;font-size:15px;cursor:pointer;text-align:left;}
+.trains .tr .tm{font-size:19px;font-weight:800;color:#4ee39b;min-width:62px;}
+.trains .tr .ds{flex:1;font-size:12.5px;color:#8fa3b8;line-height:1.4;}
+.trains .tr.soon{border-color:#12b06e;}
+.trains .tr .mm{font-size:12px;color:#cfe0ef;}
 .hidden{display:none!important;}
 .spin{text-align:center;color:#8fa3b8;padding:20px;font-size:14px;}
 .favbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px;}
@@ -133,11 +139,11 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
     <div class="mln" id="mLn">호선</div>
     <div class="q" id="mQ">이 열차에 타셨나요?</div>
     <div class="qs" id="mQs"></div>
+    <div class="trains" id="trains"><div class="spin">열차 시간표를 불러오는 중…</div></div>
     <div class="mbtns">
-      <button class="yes" id="mYes">✅ 네, 탔어요</button>
-      <button class="other" id="mOther">다른 열차 탔어요</button>
+      <button class="other" id="mNow">시간표 없이 지금 탔어요</button>
+      <button class="other" id="mCancel">닫기</button>
     </div>
-    <div class="offs hidden" id="offs"></div>
   </div>
 </div>
 
@@ -222,11 +228,12 @@ function renderRoute(path,fromName,toName){
   var info=path.info;
   $("rsTime").textContent=info.totalTime+"분";
   $("rsDesc").textContent="환승 "+(info.subwayTransitCount||0)+"회 · "+(info.totalStationCount||info.subwayStationCount||0)+"개 역";
-  var html="",subLegs=[];
+  var html="",subLegs=[],pendWalk=0;
   path.subPath.forEach(function(sp){
-    if(sp.trafficType===3){ if(sp.sectionTime>0) html+='<div class="leg"><div class="walk">🚶 '+sp.sectionTime+'분</div><div class="info"><span class="sm">도보 이동</span></div></div>'; }
+    if(sp.trafficType===3){ if(sp.sectionTime>0){pendWalk+=sp.sectionTime; html+='<div class="leg"><div class="walk">🚶 '+sp.sectionTime+'분</div><div class="info"><span class="sm">도보 이동</span></div></div>';} }
     else if(sp.trafficType===1){
       var col=lineColor(sp.lane[0].name),shrt=lineShort(sp.lane[0].name);
+      sp.__walk=pendWalk;pendWalk=0;   // 이 구간 승차 전 도보(환승) 시간
       subLegs.push(sp);
       html+='<div class="leg"><div class="ln" style="background:'+col+'">'+shrt+'</div><div class="info"><b>'+sp.startName+'</b> → <b>'+sp.endName+'</b><br><span class="sm">'+sp.stationCount+'개 역 · '+sp.sectionTime+'분</span> <span class="way">'+(sp.way||'')+' 방면</span></div></div>';
     }
@@ -284,14 +291,89 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   });
 }
 
-// ── 탑승 확인 모달 ──
+// ── 열차 시간표 ──
+var TIMEAPI="https://planfully-daily.pages.dev/api/subway-time";
+function hhmm(t){return (t||"").slice(0,5);}
+function todayMs(hms){ // "08:02:30" → 오늘(또는 인접일) 해당 시각 ms
+  var p=(hms||"").split(":"),h=parseInt(p[0],10)||0,mi=parseInt(p[1],10)||0,s=parseInt(p[2],10)||0;
+  var n=new Date(),base=new Date(n.getFullYear(),n.getMonth(),n.getDate(),0,0,0).getTime();
+  var ms=base+((h*60+mi)*60+s)*1000;           // 25:10 같은 표기도 그대로 더해짐
+  if(ms<Date.now()-12*3600e3)ms+=86400000;
+  if(ms>Date.now()+12*3600e3)ms-=86400000;
+  return ms;
+}
+function legLine(sp){var c=sp.lane&&sp.lane[0]&&sp.lane[0].subwayCode;return c||lineShort(sp.lane[0].name).replace("호선","");}
+function legNext(sp){var s=(sp.passStopList&&sp.passStopList.stations)||[];return s[1]?s[1].stationName:"";}
+function fetchTrains(sp,after){
+  var q="?from="+encodeURIComponent(sp.startName)+"&next="+encodeURIComponent(legNext(sp))
+       +"&to="+encodeURIComponent(sp.endName)+"&line="+encodeURIComponent(legLine(sp))
+       +"&mins="+sp.sectionTime+(after?"&after="+encodeURIComponent(after):"");
+  return fetch(TIMEAPI+q).then(function(r){return r.json();}).catch(function(){return {ok:false};});
+}
+function hmsOf(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+":00";}
+
+// ── 탑승 열차 선택 모달 (시간표 기준) ──
 function showBoardModal(){
-  var first=st.legs[0];var col=lineColor(first.lane[0].name),shrt=lineShort(first.lane[0].name);
-  $("mLn").style.background=col;$("mLn").textContent=shrt;
-  $("mQ").textContent=(first.way||"")+" 방면 열차에 타셨나요?";
-  $("mQs").textContent=first.startName+"역 승차 · 지금 시각 "+fmtClock(Date.now());
-  $("offs").classList.add("hidden");$("offs").innerHTML="";
+  var first=st.legs[0];
+  $("mLn").style.background=lineColor(first.lane[0].name);$("mLn").textContent=lineShort(first.lane[0].name);
+  $("mQ").textContent=first.startName+"역에서 몇 시 열차를 타셨나요?";
+  $("mQs").textContent=(first.way||"")+" 방면 · 지금 "+fmtClock(Date.now());
+  $("trains").innerHTML='<div class="spin">열차 시간표를 불러오는 중…</div>';
   $("modalBg").style.display="flex";
+  fetchTrains(first).then(function(d){
+    if(!d||!d.ok||!d.trains||!d.trains.length){
+      st.tt=null;
+      $("trains").innerHTML='<div class="spin">이 구간은 시간표를 불러오지 못했어요.<br>아래 「시간표 없이 지금 탔어요」로 시작해주세요.</div>';
+      return;
+    }
+    st.tt=d;var now=Date.now();
+    $("trains").innerHTML=d.trains.map(function(t,i){
+      var dep=todayMs(t.dep),arr=t.arr?todayMs(t.arr):dep+first.sectionTime*60000;
+      var diff=Math.round((dep-now)/60000);
+      var when=diff>0?("약 "+diff+"분 뒤 출발"):(diff===0?"곧 출발":(-diff)+"분 전 출발");
+      return '<button class="tr'+(i===0?" soon":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
+        +'<span class="ds">'+(t.dest?t.dest+"행 · ":"")+when+'<br>'+first.endName+" "+fmtClock(arr)+" 도착"+(t.arr?"":" (예상)")+'</span></button>';
+    }).join("");
+  });
+}
+// 선택한 열차 기준으로 전 구간 시각 확정(환승 구간은 도보시간 뒤 첫 열차)
+function startFromTrain(t){
+  $("modalBg").style.display="none";
+  var legs=st.legs,first=legs[0];
+  var dep0=todayMs(t.dep),arr0=t.arr?todayMs(t.arr):dep0+first.sectionTime*60000;
+  var plan=[{dep:dep0,arr:arr0,exact:!!t.arr,train:t.no}];
+  (function chain(i){
+    if(i>=legs.length){startRunPlan(plan);return;}
+    var sp=legs[i],prev=plan[i-1],afterMs=prev.arr+(sp.__walk||2)*60000;
+    fetchTrains(sp,hmsOf(afterMs)).then(function(r){
+      if(r&&r.ok&&r.trains&&r.trains.length){
+        var tr=r.trains[0],dp=todayMs(tr.dep),ar=tr.arr?todayMs(tr.arr):dp+sp.sectionTime*60000;
+        if(dp<afterMs-60000){dp=afterMs;ar=dp+sp.sectionTime*60000;}
+        plan.push({dep:dp,arr:ar,exact:!!tr.arr,train:tr.no});
+      }else{
+        plan.push({dep:afterMs,arr:afterMs+sp.sectionTime*60000,exact:false,train:null});
+      }
+      chain(i+1);
+    });
+  })(1);
+}
+function startRunPlan(plan){
+  st.t0=plan[0].dep;st.fired={};st.events=[];st.paused=false;st.pausedAcc=0;st.plan=plan;
+  st.legs.forEach(function(sp,i){
+    var p=plan[i]||plan[plan.length-1];
+    sp.__start=(p.dep-st.t0)/60000;sp.__cum=(p.arr-st.t0)/60000;
+    sp.__stns=(sp.passStopList&&sp.passStopList.stations)||[];
+    sp.__per=(sp.__cum-sp.__start)/Math.max(1,sp.stationCount);
+    st.events.push({at:sp.__cum,type:(i===st.legs.length-1)?"final":"transfer",station:sp.endName,legIdx:i,
+                    nextLine:(i===st.legs.length-1)?null:lineShort(st.legs[i+1].lane[0].name)});
+  });
+  st.total=st.events[st.events.length-1].at;
+  st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);
+  $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";
+  var last=st.legs[st.legs.length-1],arrMs=plan[plan.length-1].arr;
+  speak(last.endName+"까지 "+fmtClock(arrMs)+" 도착 예정입니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
+  log("🚉 "+fmtClock(st.t0)+" 출발 · "+last.endName+" "+fmtClock(arrMs)+" 도착 예정"+(plan[0].train?" ("+plan[0].train+"열차)":""));
+  tick();
 }
 function startRun(boardMs){
   $("modalBg").style.display="none";
@@ -347,12 +429,13 @@ $("testSnd").onclick=function(){
   w.innerHTML="🔊 방금 <b>삑삑 소리와 안내 음성</b>이 들렸다면 정상입니다. 안 들렸다면 아이폰 옆면 무음 스위치를 풀고 볼륨을 올린 뒤 다시 눌러주세요.";
 };
 $("board").onclick=function(){audioUnlock();askNotify();showBoardModal();};
-$("mYes").onclick=function(){startRun(Date.now());};
-$("mOther").onclick=function(){
-  $("offs").classList.remove("hidden");
-  $("offs").innerHTML=[["-2","2분 전"],["2","2분 뒤"],["4","4분 뒤"],["6","6분 뒤"],["8","8분 뒤"]].map(function(o){return '<button data-m="'+o[0]+'">'+o[1]+'</button>';}).join("")+'<div style="width:100%;font-size:12px;color:#8fa3b8;margin-top:4px;">탄 열차의 출발 시각을 골라주세요 (지금 기준)</div>';
+$("trains").onclick=function(e){
+  var b=e.target.closest?e.target.closest(".tr"):null;
+  if(!b||!st.tt)return;
+  startFromTrain(st.tt.trains[parseInt(b.getAttribute("data-i"),10)]);
 };
-$("offs").onclick=function(e){if(e.target.tagName==="BUTTON"){var m=parseInt(e.target.getAttribute("data-m"),10);startRun(Date.now()+m*60000);}};
+$("mNow").onclick=function(){startRun(Date.now());};      // 시간표 못 받았을 때 예전 방식(예상 소요시간)
+$("mCancel").onclick=function(){$("modalBg").style.display="none";};
 $("btnNow").onclick=function(){var s=curStation(elapsedMin());if(s)speak("지금은 "+s+"역 부근입니다.");};
 $("btnPause").onclick=function(){if(!st.paused){st.paused=true;st.pausedAt=Date.now();$("btnPause").textContent="▶️ 재개";log("⏸️ 일시정지");}else{st.paused=false;st.pausedAcc+=Date.now()-st.pausedAt;$("btnPause").textContent="⏸️ 일시정지";log("▶️ 재개");}};
 $("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
