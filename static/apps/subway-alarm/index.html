@@ -181,6 +181,19 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   </div>
 </div>
 
+<div class="modal-bg" id="tfBg">
+  <div class="modal">
+    <button class="mx" id="tfX" aria-label="닫기">✕</button>
+    <div class="mln" id="tfLn">호선</div>
+    <div class="q" id="tfQ">이 열차에 타셨나요?</div>
+    <div class="qs" id="tfQs"></div>
+    <div class="mbtns">
+      <button class="yes" id="tfYes">네, 탔어요</button>
+      <button class="other" id="tfNo">아니요, 다른 열차예요</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-bg" id="offBg">
   <div class="modal">
     <button class="mx" id="offX" aria-label="닫기">✕</button>
@@ -469,6 +482,13 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
              (nextEv.type==="final"?"내릴 역 ":"갈아탈 역 ")+nextEv.station+" "+fmtLeft(evRem*60)+" 전");
   }
   if(st.paused)return;
+  // 갈아탈 열차 출발 시각이 되면 확인
+  if($("tfBg").style.display!=="flex"&&$("modalBg").style.display!=="flex"&&$("offBg").style.display!=="flex"){
+    for(var li=1;li<st.legs.length;li++){
+      if(st.fired["q"+li])continue;
+      if(em>=st.legs[li].__start-0.02){st.fired["q"+li]=true;askBoarded(li);break;}
+    }
+  }
   // 알림: 각 이벤트 1분 전 + 도착
   st.events.forEach(function(e,i){
     if(!st.fired["w"+i]&&(e.at-em)<=1&&(e.at-em)>0){st.fired["w"+i]=true;
@@ -557,8 +577,9 @@ function dayMs(hms){   // 목록 표시용: 오늘 0시 + 표기시각(25:10도 
 function hmsOf(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+":00";}
 
 // ── 탑승 열차 선택 모달 (시간표 기준) ──
-function showBoardModal(){
-  var first=st.legs[0];
+function showBoardModal(k){
+  k=k||0;st.pickLeg=k;
+  var first=st.legs[k];
   $("mLn").style.background=lineColor(first.lane[0].name);$("mLn").textContent=lineShort(first.lane[0].name);
   $("mQ").innerHTML='<b class="hl">'+jmEsc(first.startName)+'</b>역에서<br>몇 시 열차를 타셨나요?';
   $("mQs").textContent=(first.way||"")+" 방면";
@@ -617,6 +638,7 @@ function startFromTrain(t){
   })(1);
 }
 function startRunPlan(plan){
+  st.pickLeg=0;
   st.t0=plan[0].dep;st.fired={};st.events=[];st.paused=false;st.pausedAcc=0;st.plan=plan;
   st.legs.forEach(function(sp,i){
     var p=plan[i]||plan[plan.length-1];
@@ -854,15 +876,29 @@ function pkStep(n){
 }
 $("pkUp").onclick=function(){pkStep(-1);};
 $("pkDn").onclick=function(){pkStep(1);};
+function useTrain(t){
+  if(!t)return;
+  if(!st.running||!st.plan||!st.pickLeg){startFromTrain(t);return;}   // 첫 탑승
+  var k=st.pickLeg,sp=st.legs[k];
+  var dep=todayMs(t.dep),arr=t.arr?todayMs(t.arr):dep+sp.sectionTime*60000;
+  var plan=st.plan.slice();
+  plan[k]={dep:dep,arr:arr,exact:!!t.arr,train:t.no};
+  $("modalBg").style.display="none";
+  st.replanning=true;
+  var nx=st.legs[k+1];
+  chainPlan(k+1,arr+((nx&&nx.__walk)||2)*60000,plan).then(function(np){
+    st.replanning=false;rebuildFromPlan(np);
+    log("🚉 "+fmtClock(dep)+" 열차로 다시 잡았습니다"+(t.no?" ("+t.no+"열차)":""));
+  });
+}
 $("mPick").onclick=function(){
   if(!st.tt||!st.tt.trains||!st.tt.trains.length)return;
-  var t=st.tt.trains[Math.min(st.tt.trains.length-1,pkIndex())];
-  if(t)startFromTrain(t);
+  useTrain(st.tt.trains[Math.min(st.tt.trains.length-1,pkIndex())]);
 };
 $("trains").onclick=function(e){   // 보이는 칸을 그냥 눌러도 선택
   var b=e.target.closest?e.target.closest(".tr"):null;
   if(!b||!st.tt)return;
-  startFromTrain(st.tt.trains[parseInt(b.getAttribute("data-i"),10)]);
+  useTrain(st.tt.trains[parseInt(b.getAttribute("data-i"),10)]);
 };
 $("mNow").onclick=function(){startRun(Date.now());};      // 시간표 못 받았을 때 예전 방식(예상 소요시간)
 $("mCancel").onclick=function(){$("modalBg").style.display="none";};
@@ -920,6 +956,7 @@ function rebuildFromPlan(plan){
   var em=elapsedMin();
   st.fired={};
   st.events.forEach(function(e,i){if(e.at<=em){st.fired["w"+i]=true;st.fired["a"+i]=true;}});
+  st.legs.forEach(function(sp,i){if(i>0&&sp.__start<=em)st.fired["q"+i]=true;});
   renderJMap("jmap",true);tick();
 }
 var offRow=62;
@@ -980,6 +1017,22 @@ function resumeRide(){
   });
 }
 $("btnPause").onclick=function(){ if(!st.paused)askOffStation(); else resumeRide(); };
+// 갈아탈 열차 출발 시각이 되면 "그 열차 타셨나요?" 물어본다.
+// 환승 도보가 늦어 놓치는 경우가 많아, 놓쳤다면 실제 탄 열차로 다시 잡는다.
+function askBoarded(i){
+  var sp=st.legs[i],pl=st.plan&&st.plan[i];
+  if(!sp||!pl||!sp.lane||!sp.lane[0])return;
+  st.pickLeg=i;
+  $("tfLn").style.background=lineColor(sp.lane[0].name);
+  $("tfLn").textContent=lineShort(sp.lane[0].name);
+  $("tfQ").innerHTML='<b class="hl">'+fmtClock(pl.dep)+'</b> 열차<br>타셨나요?';
+  $("tfQs").textContent=sp.startName+" · "+(sp.way||"")+" 방면"+(pl.train?" · "+pl.train+"열차":"");
+  $("tfBg").style.display="flex";
+  vibe([300,120,300]);notify("갈아탄 열차 확인",fmtClock(pl.dep)+" 열차에 타셨나요?");
+}
+$("tfYes").onclick=function(){$("tfBg").style.display="none";log("✅ "+fmtClock(st.plan[st.pickLeg].dep)+" 열차 탑승 확인");};
+$("tfX").onclick=function(){$("tfBg").style.display="none";};
+$("tfNo").onclick=function(){$("tfBg").style.display="none";showBoardModal(st.pickLeg);};
 $("offX").onclick=function(){$("offBg").style.display="none";};
 $("offUp").onclick=function(){offStep(-1);};
 $("offDn").onclick=function(){offStep(1);};
