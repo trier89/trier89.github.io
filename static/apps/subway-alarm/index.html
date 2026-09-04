@@ -389,6 +389,7 @@ function renderRoute(path,fromName,toName){
   $("legs").innerHTML=html;
   st.legs=subLegs;
   renderJMap("jmapPre",false);
+  favBtn();
 }
 
 // 탑승 이벤트 타임라인 구성 (승차시각 기준 누적)
@@ -795,8 +796,23 @@ $("favbar").onclick=function(e){
   if(!f)return;
   $("from").value=f.from;$("to").value=f.to;audioUnlock();findRoute();
 };
+function favFind(){          // 지금 보고 있는 경로가 이미 즐겨찾기인지
+  if(!st.route)return -1;
+  var l=favLoad();
+  for(var i=0;i<l.length;i++)if(l[i].from===st.route.from&&l[i].to===st.route.to)return i;
+  return -1;
+}
+function favBtn(){
+  var i=favFind();
+  $("saveFav").textContent=(i>=0)?("★ 즐겨찾기 «"+favLoad()[i].name+"» 에서 빼기"):"⭐ 이 경로 즐겨찾기 저장";
+}
 $("saveFav").onclick=function(){
   if(!st.route)return;
+  var idx=favFind();
+  if(idx>=0){                // 이미 저장된 경로 → 빼기
+    var l=favLoad();l.splice(idx,1);favStore(l);favRender();favBtn();
+    return;
+  }
   var h=new Date().getHours();
   var def=(h<11?"출근":(h<15?"외출":"퇴근"));
   var name=prompt("즐겨찾기 이름을 정해주세요 (예: 출근, 퇴근, 등교, 하교)",def);
@@ -806,7 +822,7 @@ $("saveFav").onclick=function(){
   l.unshift({name:name.trim().slice(0,10),from:st.route.from,to:st.route.to});
   favStore(l.slice(0,8));favRender();
   $("saveFav").textContent="⭐ 저장했어요 · "+name;
-  setTimeout(function(){$("saveFav").textContent="⭐ 이 경로 즐겨찾기 저장";},1800);
+  setTimeout(favBtn,1800);
 };
 
 // ── 이벤트 바인딩 ──
