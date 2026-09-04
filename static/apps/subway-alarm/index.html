@@ -35,7 +35,10 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .big-btn:active{opacity:.85;}
 .big-btn.stop{background:#e06666;color:#fff;}
 .big-btn[disabled]{opacity:.5;}
-.route-sum{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.route-sum{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:12px;}
+.route-sum>div:first-child{flex:1;}
+.favtag{background:#0d1b2a;border:1.5px solid #2b3f57;border-radius:20px;padding:6px 11px;font-size:12px;font-weight:800;color:#eef2f6;cursor:pointer;white-space:nowrap;}
+.favtag:active{background:#26384f;}
 .route-sum .t{font-size:24px;font-weight:800;color:#eef2f6;}
 .route-sum .d{font-size:12.5px;color:#8fa3b8;}
 .leg{display:flex;gap:11px;align-items:flex-start;padding:9px 0;}
@@ -141,7 +144,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 
   <div id="result" class="hidden">
     <div class="card">
-      <div class="route-sum"><div><div class="t" id="rsTime">–</div><div class="d" id="rsDesc"></div></div><button id="reFind" style="background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:6px 12px;font-size:12px;cursor:pointer;">← 다시</button></div>
+      <div class="route-sum"><div><div class="t" id="rsTime">–</div><div class="d" id="rsDesc"></div></div><button class="favtag hidden" id="favTag"></button><button id="reFind" style="background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:6px 12px;font-size:12px;cursor:pointer;">← 다시</button></div>
       <div id="legs"></div>
       <div id="jmapPre"></div>
       <div id="offNote" class="warn hidden" style="margin:10px 0 0;"></div>
@@ -802,17 +805,22 @@ function favFind(){          // 지금 보고 있는 경로가 이미 즐겨찾�
   for(var i=0;i<l.length;i++)if(l[i].from===st.route.from&&l[i].to===st.route.to)return i;
   return -1;
 }
-function favBtn(){
-  var i=favFind();
-  $("saveFav").textContent=(i>=0)?"★ 즐겨찾기 해제":"⭐ 이 경로 즐겨찾기 저장";
+function favBtn(){        // 즐겨찾기면 위쪽에 이름표, 아니면 아래에 저장 버튼
+  var i=favFind(),tag=$("favTag"),btn=$("saveFav");
+  if(i>=0){
+    tag.textContent="★ "+favLoad()[i].name;
+    tag.classList.remove("hidden");btn.classList.add("hidden");
+  }else{
+    tag.classList.add("hidden");
+    btn.classList.remove("hidden");btn.textContent="⭐ 이 경로 즐겨찾기 저장";
+  }
 }
+$("favTag").onclick=function(){    // 별을 누르면 즐겨찾기에서 뺀다
+  var i=favFind();if(i<0)return;
+  var l=favLoad();l.splice(i,1);favStore(l);favRender();favBtn();
+};
 $("saveFav").onclick=function(){
   if(!st.route)return;
-  var idx=favFind();
-  if(idx>=0){                // 이미 저장된 경로 → 빼기
-    var l=favLoad();l.splice(idx,1);favStore(l);favRender();favBtn();
-    return;
-  }
   var h=new Date().getHours();
   var def=(h<11?"출근":(h<15?"외출":"퇴근"));
   var name=prompt("즐겨찾기 이름을 정해주세요 (예: 출근, 퇴근, 등교, 하교)",def);
