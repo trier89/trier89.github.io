@@ -118,6 +118,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .trains .tr.past .tm,.trains .tr.past .ds{color:#5b7186;}   /* 지난 열차는 글씨도 낮춘다(딱지가 고를 수 있음을 알려준다) */
 .trains .tr .bg.was{background:#42586e;color:#eef2f6;}
 .trains .tr .bg.next{background:#eef2f6;color:#0b1725;}
+.trains .tr .bg.exp{background:transparent;border:1.5px solid #eef2f6;color:#eef2f6;padding:1px 6px;}
 .pkbtn{width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;color:#9fb3c8;border-radius:10px;padding:7px;font-size:13px;font-weight:700;cursor:pointer;}
 .pkbtn:active{background:#16263a;}
 .pkhint{font-size:11.5px;color:#7d92a8;margin:9px 0 13px;line-height:1.5;}
@@ -692,6 +693,7 @@ function showBoardModal(k){
       var dep=dayMs(t.dep),diff=Math.round((dep-now)/60000),gone=(diff<0);
       var when=diff>0?("약 "+diff+"분 뒤 출발"):(diff===0?"곧 출발":(-diff)+"분 전 출발");
       var tag=gone?'<b class="bg was">지남</b>':((i===soon)?'<b class="bg next">다음</b>':'');
+      if(t.express)tag+='<b class="bg exp">급행</b>';
       return '<button class="tr'+(gone?" past":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
         +'<span class="ds">'+tag+(t.dest?t.dest+"행 · ":"")+when+'</span></button>';
     }).join("");
