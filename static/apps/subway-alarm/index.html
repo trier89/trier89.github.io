@@ -588,6 +588,13 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
 
 // ── 열차 시간표 ──
 var TIMEAPI="https://planfully-daily.pages.dev/api/subway-time";
+// 서울시 시간표는 1~9호선만 준다 → 나머지 노선은 국토교통부 TAGO 시간표로
+var TAGOAPI="https://planfully-daily.pages.dev/api/subway-time-tago";
+var SEOUL_LINE=/^0[1-9]호선$/;
+function ttQueryTago(sp){
+  return "?name="+encodeURIComponent(sp.startName)+"&line="+encodeURIComponent(sp.lane[0].name)
+       +"&way="+encodeURIComponent(sp.way||"");
+}
 function hhmm(t){return (t||"").slice(0,5);}
 function todayMs(hms){ // "08:02:30" → 오늘(또는 인접일) 해당 시각 ms
   var p=(hms||"").split(":"),h=parseInt(p[0],10)||0,mi=parseInt(p[1],10)||0,s=parseInt(p[2],10)||0;
@@ -626,7 +633,10 @@ function fetchDay(sp){
   var wk=wkNow(),k=ttKey(sp,wk),c=ckGet(k);
   if(c&&c.trains&&c.trains.length&&Date.now()-(c.ts||0)<3*864e5)
     return Promise.resolve({ok:true,stored:true,ts:c.ts,inout:c.inout,week:wk,trains:c.trains});
-  return fetchT(TIMEAPI+ttQuery(sp)+"&full=1&week="+wk,15000).then(function(r){return r.json();}).then(function(d){
+  var seoul=SEOUL_LINE.test((sp.lane&&sp.lane[0]&&sp.lane[0].name)||"");
+  var url=seoul ? (TIMEAPI+ttQuery(sp)+"&full=1&week="+wk)
+                : (TAGOAPI+ttQueryTago(sp)+"&full=1&week=0"+wk);
+  return fetchT(url,15000).then(function(r){return r.json();}).then(function(d){
     if(!d||!d.ok||!d.trains||!d.trains.length)throw new Error("bad");
     ckSet(k,{trains:d.trains,inout:d.inout,week:wk,ts:Date.now()});
     return d;
