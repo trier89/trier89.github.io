@@ -43,13 +43,12 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .leg .info b{color:#eef2f6;}
 .leg .info .sm{font-size:12px;color:#8fa3b8;}
 .leg .info .way{color:#7ea6e0;font-size:12px;}
-#run .dest{text-align:center;padding:6px 0 2px;}
-#run .dest .k{font-size:13px;color:#8fa3b8;}
-#run .dest .v{font-size:27px;font-weight:900;line-height:1.15;margin-top:2px;}
+#run .dest{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:3px 3px 1px;}
+#run .dest .k{font-size:11.5px;color:#8fa3b8;font-weight:700;}
+#run .dest .v{font-size:26px;font-weight:900;line-height:1.15;margin-top:1px;}
 #run .dest .v.near{color:#e0c07e;}
-.dgo{font-size:12.5px;color:#8fa3b8;margin-top:5px;}
-.dgo b{color:#4ee39b;font-weight:800;}
-.dgo span{color:#7d92a8;}
+#run .dest .r{text-align:right;}
+#run .dest .v2{font-size:19px;font-weight:800;line-height:1.25;margin-top:2px;color:#4ee39b;}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0;}
 .stat{background:#0d1b2a;border-radius:12px;padding:11px 5px;text-align:center;}
 .stat .n{font-size:20px;font-weight:800;}
@@ -167,8 +166,10 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 
   <div id="run" class="hidden">
     <div class="card">
-      <div class="dest"><div class="k">이번 역</div><div class="v" id="destN">—</div>
-        <div class="dgo">목적지 <b id="dstN">—</b><span id="dgoT"></span></div></div>
+      <div class="dest">
+        <div><div class="k">이번 역</div><div class="v" id="destN">—</div></div>
+        <div class="r"><div class="k">목적지</div><div class="v2" id="dstN">—</div></div>
+      </div>
       <div class="grid3">
         <div class="stat"><div class="n" id="remSt">–</div><div class="l">남은 역</div></div>
         <div class="stat"><div class="n" id="remT">–</div><div class="l">남은 시간</div></div>
@@ -440,7 +441,6 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   var lastLeg=st.legs[st.legs.length-1];
   $("dstN").textContent=lastLeg?lastLeg.endName:"—";
   if(lastLeg&&lastLeg.lane&&lastLeg.lane[0])$("dstN").style.color=lineInk(lastLeg.lane[0].name);
-  $("dgoT").textContent=(nextEv.type==="final")?"":(" · "+fmtClock(st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+st.total*60000)+" 도착");
   var curLeg=st.legs[nextEv.legIdx];
   var remStations=curLeg?Math.max(0,Math.ceil((curLeg.__cum-em)/curLeg.__per)):0;
   $("remSt").textContent=remStations+"개";
