@@ -804,7 +804,7 @@ function favFind(){          // 지금 보고 있는 경로가 이미 즐겨찾�
 }
 function favBtn(){
   var i=favFind();
-  $("saveFav").textContent=(i>=0)?("★ 즐겨찾기 «"+favLoad()[i].name+"» 에서 빼기"):"⭐ 이 경로 즐겨찾기 저장";
+  $("saveFav").textContent=(i>=0)?"★ 즐겨찾기 해제":"⭐ 이 경로 즐겨찾기 저장";
 }
 $("saveFav").onclick=function(){
   if(!st.route)return;
