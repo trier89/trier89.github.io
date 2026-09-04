@@ -31,9 +31,9 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .ac div:active{background:#26384f;}
 .swap{text-align:center;margin:-4px 0 8px;}
 .swap button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:5px 14px;font-size:13px;cursor:pointer;}
-.big-btn{width:100%;padding:16px;border:0;border-radius:14px;background:linear-gradient(135deg,#12b06e,#0e9d8f);color:#fff;font-size:17px;font-weight:800;cursor:pointer;}
+.big-btn{width:100%;padding:16px;border:0;border-radius:14px;background:var(--acc-bg);color:var(--acc-fg);font-size:17px;font-weight:800;cursor:pointer;}
 .big-btn:active{opacity:.85;}
-.big-btn.stop{background:linear-gradient(135deg,#e06666,#d64a4a);}
+.big-btn.stop{background:#e06666;color:#fff;}
 .big-btn[disabled]{opacity:.5;}
 .route-sum{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 .route-sum .t{font-size:24px;font-weight:800;color:#eef2f6;}
@@ -134,13 +134,6 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       <div class="stn-in"><label>출발역</label><input type="text" id="from" placeholder="예: 잠실" autocomplete="off"><div class="ac" id="fromAc"></div></div>
       <div class="swap"><button id="swap">↕ 출발·도착 바꾸기</button></div>
       <div class="stn-in"><label>도착역</label><input type="text" id="to" placeholder="예: 서울역" autocomplete="off"><div class="ac" id="toAc"></div></div>
-    </div>
-    <div class="card" style="padding:12px 15px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <div><div style="font-size:14px;font-weight:700;">🎧 이어폰 있을 때만 소리</div>
-        <div style="font-size:11.5px;color:#7d92a8;margin-top:3px;" id="earHint">이어폰이 없으면 진동과 화면 알림만 옵니다</div></div>
-        <button id="earTgl" style="flex-shrink:0;border:0;border-radius:20px;padding:9px 15px;font-size:13px;font-weight:800;cursor:pointer;background:#12b06e;color:#fff;">켬</button>
-      </div>
     </div>
     <button class="big-btn" id="find">🔎 경로 찾기</button>
     <div class="note">경로와 열차 시간표는 한 번 조회하면 폰에 저장돼, 다음부터는 신호가 없는 승강장에서도 그대로 쓸 수 있어요. 홈 화면에 추가하면 앱처럼 쓸 수 있어요(공유 → 홈 화면에 추가).</div>
@@ -327,37 +320,9 @@ function notify(title,body){try{
   }else{new Notification(title,{body:body,icon:"icon-192.png"});}
 }catch(e){}}
 function askNotify(){try{if("Notification"in window&&Notification.permission==="default")Notification.requestPermission();}catch(e){}}
-// ── 이어폰 ──
-// 모바일 브라우저엔 출력 장치를 강제 지정하는 API가 없다(setSinkId는 데스크톱 전용).
-// 이어폰이 꽂혀 있으면 OS가 알아서 그쪽으로 보내므로, 우리가 하는 일은
-// "이어폰이 없을 때 스피커로 터지는 것"을 막는 것 — 그때는 소리 없이 진동·알림만.
-var earOnly=(localStorage.getItem("subway_earonly")!=="0");
-var earState="unknown";   // connected | none | unknown
-function earScan(){
-  try{
-    if(!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices)return;
-    navigator.mediaDevices.enumerateDevices().then(function(ds){
-      var outs=ds.filter(function(d){return d.kind==="audiooutput";});
-      var hit=outs.some(function(d){return /head|ear|bluetooth|airpod|buds|hands.?free|bt /i.test(d.label||"");});
-      // 라벨이 비어 있으면(권한 없음) 판정 불가 — 스위치를 사용자 판단에 맡긴다
-      var labeled=outs.some(function(d){return (d.label||"").length>0;});
-      earState=!labeled?"unknown":(hit?"connected":"none");
-      renderEar();
-    }).catch(function(){});
-  }catch(e){}
-}
-function soundAllowed(){ return !earOnly || earState!=="none"; }  // 확실히 '없음'일 때만 음소거
-function renderEar(){
-  var b=$("earTgl"),h=$("earHint");
-  if(!b)return;
-  b.textContent=earOnly?"켬":"끔";
-  b.style.background=earOnly?"#12b06e":"#2b3f57";
-  h.textContent=earOnly
-    ? (earState==="connected"?"이어폰 연결됨 — 이어폰으로 소리가 나갑니다"
-      :earState==="none"?"이어폰이 없어 지금은 진동·화면 알림만 옵니다"
-      :"이어폰이 꽂혀 있으면 그쪽으로 나갑니다(브라우저가 스피커/이어폰을 구분 못 하면 소리도 함께 납니다)")
-    : "이어폰이 없어도 스피커로 소리를 냅니다";
-}
+// 이어폰이 꽂혀 있으면 OS가 알아서 그쪽으로 보낸다(모바일엔 출력 장치 지정 API가 없다).
+// 스피커로 나가는 게 싫으면 폰 볼륨을 줄이면 되므로 앱이 따로 막지 않는다.
+function soundAllowed(){ return true; }
 function alertNow(title,text,n){
   if(soundAllowed()){beep(n||2);speak(text);}
   vibe([400,180,400,180,400]);notify(title,text);
@@ -1064,9 +1029,6 @@ $("offList").onclick=function(e){   // 보이는 칸을 눌러도 선택
 };
 $("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
-$("earTgl").onclick=function(){earOnly=!earOnly;try{localStorage.setItem("subway_earonly",earOnly?"1":"0");}catch(e){}renderEar();};
-try{if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener)navigator.mediaDevices.addEventListener("devicechange",earScan);}catch(e){}
-renderEar();earScan();
 
 setInterval(tick,1000);
 favRender();
