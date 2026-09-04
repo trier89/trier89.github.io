@@ -48,6 +48,12 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .leg .info b{color:#eef2f6;}
 .leg .info .sm{font-size:12px;color:#8fa3b8;}
 .leg .info .way{color:#7ea6e0;font-size:12px;}
+/* 1분 전 경고 — 색은 노선이 아니라 "지금 움직여야 한다"는 신호 */
+.nearbar{display:none;background:#e0c07e;color:#0b1725;border-radius:15px;padding:13px 15px 14px;margin-bottom:11px;text-align:center;animation:nb 1.1s ease-in-out infinite;}
+.nearbar.on{display:block;}
+.nearbar .k{font-size:13px;font-weight:800;opacity:.72;}
+.nearbar .v{font-size:26px;font-weight:900;line-height:1.15;margin-top:1px;}
+@keyframes nb{0%,100%{opacity:1}50%{opacity:.68}}
 #run .dest{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:3px 3px 1px;}
 #run .dest .k{font-size:11.5px;color:#8fa3b8;font-weight:700;}
 #run .dest .v{font-size:26px;font-weight:900;line-height:1.15;margin-top:1px;}
@@ -102,10 +108,14 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .pkhint{font-size:11.5px;color:#7d92a8;margin:9px 0 13px;line-height:1.5;}
 .hidden{display:none!important;}
 .spin{text-align:center;color:#8fa3b8;padding:20px;font-size:14px;}
-.favbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px;}
-.favbar .fav{display:flex;align-items:center;gap:6px;background:#16263a;border:1.5px solid #2b3f57;border-radius:18px;padding:7px 11px;font-size:13px;color:#eef2f6;cursor:pointer;}
-.favbar .fav .x{color:#7d92a8;font-size:15px;line-height:1;padding:0 1px;}
-.favbar .fav .rt{color:#8fa3b8;font-size:11.5px;}
+.favbar{display:flex;flex-direction:column;gap:9px;margin-bottom:13px;}
+.favbar .fav{position:relative;display:block;background:#16263a;border:1.5px solid #2b3f57;border-radius:16px;padding:14px 40px 13px 16px;cursor:pointer;text-align:left;}
+.favbar .fav:active{background:#1c2f45;}
+.favbar .fav .nm{display:block;font-size:17px;font-weight:800;color:#eef2f6;}
+.favbar .fav .rt{display:block;margin-top:3px;font-size:13px;color:#8fa3b8;}
+.favbar .fav .go{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#5d7186;font-size:17px;}
+.favbar .fav .x{position:absolute;right:13px;top:7px;color:#4a5c70;font-size:14px;line-height:1;padding:3px 4px;}
+.favbar .hint{font-size:11.5px;color:#7d92a8;}
 .subbtn{width:100%;padding:12px;border:1.5px solid #2b3f57;border-radius:12px;background:#0d1b2a;color:#cfe0ef;font-size:14px;font-weight:700;cursor:pointer;margin-top:9px;}
 .subbtn:active{opacity:.8;}
 .ok{background:#12321f;border:1px solid #1e6b3f;color:#9be0b6;}
@@ -156,6 +166,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   </div>
 
   <div id="run" class="hidden">
+    <div class="nearbar" id="nearBar"><div class="k" id="nbK">곧 내리세요</div><div class="v" id="nbV">—</div></div>
     <div class="card">
       <div class="dest">
         <div><div class="k" id="destK">이번 역</div><div class="v" id="destN">—</div></div>
@@ -326,9 +337,11 @@ function askNotify(){try{if("Notification"in window&&Notification.permission==="
 // 이어폰이 꽂혀 있으면 OS가 알아서 그쪽으로 보낸다(모바일엔 출력 장치 지정 API가 없다).
 // 스피커로 나가는 게 싫으면 폰 볼륨을 줄이면 되므로 앱이 따로 막지 않는다.
 function soundAllowed(){ return true; }
-function alertNow(title,text,n){
+// 화면을 안 보고 있어도 진동만으로 구분되게: 하차=길게 세 번, 환승=짧게 여러 번
+var VIB_OFF=[700,250,700,250,700], VIB_TF=[180,110,180,110,180,110,180];
+function alertNow(title,text,n,pat){
   if(soundAllowed()){beep(n||2);speak(text);}
-  vibe([400,180,400,180,400]);notify(title,text);
+  vibe(pat||VIB_OFF);notify(title,text);
 }
 var wakeLock=null;function keepAwake(){try{if("wakeLock"in navigator)navigator.wakeLock.request("screen").then(function(w){wakeLock=w;});}catch(e){}}
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&st.running)keepAwake();});
@@ -361,7 +374,7 @@ function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
     ckSet(rtKey(f,t),{path:path,ts:Date.now()});
     ttPrefetch(st.legs);
   }).catch(function(err){
-    var c=ckGet(rtKey(f,t));            // 신호가 없으면 저장해둔 경로로
+    var c=ckGet(rtKey(f,t));   // 신호 없으면 저장본으로            // 신호가 없으면 저장해둔 경로로
     if(c&&c.path){
       renderRoute(c.path,f,t);
       var days=Math.floor((Date.now()-(c.ts||0))/864e5);
@@ -370,6 +383,7 @@ function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
       ttPrefetch(st.legs);
       return;
     }
+    st.autoBoard=false;
     $("legs").innerHTML='<div class="spin">경로를 찾지 못했어요.<br>인터넷이 없다면, 신호가 있을 때 이 경로를 한 번 열어두면 다음부터는 오프라인에서도 됩니다.</div>';
   });
 }
@@ -396,6 +410,7 @@ function renderRoute(path,fromName,toName){
   st.legs=subLegs;
   renderJMap("jmapPre",false);
   favBtn();
+  if(st.autoBoard){st.autoBoard=false;setTimeout(function(){showBoardModal(0);},60);}
 }
 
 // 탑승 이벤트 타임라인 구성 (승차시각 기준 누적)
@@ -439,6 +454,13 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
   var nextEv=st.events.find(function(e){return e.at>em-0.02;})||st.events[st.events.length-1];
   var evRem=nextEv.at-em;
   var curSt=curStation(em);
+  // 1분 안쪽이면 화면 위에 큰 경고를 띄운다(힐끗 봐도 보이게)
+  var near=(!st.paused&&evRem<=1&&evRem>-0.4);
+  $("nearBar").className="nearbar"+(near?" on":"");
+  if(near){
+    $("nbK").textContent=(nextEv.type==="final")?"곧 내리세요":"곧 갈아타세요";
+    $("nbV").textContent=nextEv.station+(nextEv.type==="final"?"":" · "+nextEv.nextLine);
+  }
   var onBreak=st.paused&&st.off;
   $("destK").textContent=onBreak?"내린 역":"이번 역";
   $("destN").textContent=onBreak?st.off.name:curSt;
@@ -473,12 +495,12 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
   // 알림: 각 이벤트 1분 전 + 도착
   st.events.forEach(function(e,i){
     if(!st.fired["w"+i]&&(e.at-em)<=1&&(e.at-em)>0){st.fired["w"+i]=true;
-      if(e.type==="transfer"){alertNow("곧 "+e.station+" 환승","곧 "+e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.");log("🔁 곧 "+e.station+" 환승("+e.nextLine+")");}
-      else{alertNow("곧 "+e.station+" 하차","곧 "+e.station+"역입니다. 내릴 준비하세요.");log("🔔 곧 "+e.station+" 하차");}
+      if(e.type==="transfer"){alertNow("곧 "+e.station+" 환승","곧 "+e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.",2,VIB_TF);log("🔁 곧 "+e.station+" 환승("+e.nextLine+")");}
+      else{alertNow("곧 "+e.station+" 하차","곧 "+e.station+"역입니다. 내릴 준비하세요.",2,VIB_OFF);log("🔔 곧 "+e.station+" 하차");}
     }
     if(!st.fired["a"+i]&&(e.at-em)<=0){st.fired["a"+i]=true;
-      if(e.type==="final"){alertNow(e.station+" 도착",e.station+"역 도착입니다. 내리세요.",3);log("✅ "+e.station+" 도착");vibe([500,200,500]);}
-      else{alertNow(e.station+" 환승",e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.",3);log("🔁 "+e.station+" 환승");}
+      if(e.type==="final"){alertNow(e.station+" 도착",e.station+"역 도착입니다. 내리세요.",3,VIB_OFF);log("✅ "+e.station+" 도착");}
+      else{alertNow(e.station+" 환승",e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.",3,VIB_TF);log("🔁 "+e.station+" 환승");}
     }
   });
 }
@@ -787,20 +809,35 @@ window.addEventListener("resize",function(){
 // ── 즐겨찾기 (출근·퇴근·등교 등 직접 이름 지정) ──
 function favLoad(){try{return JSON.parse(localStorage.getItem("subway_favs")||"[]");}catch(e){return [];}}
 function favStore(l){try{localStorage.setItem("subway_favs",JSON.stringify(l));}catch(e){}}
+// 지금 시각에 자주 쓰던 즐겨찾기를 위로 올린다(쓸 때마다 시간대를 기억해둔다)
+function favScore(f){
+  var h=new Date().getHours(),u=f.u||{},sc=0;
+  for(var d=-1;d<=1;d++)sc+=(u[(h+d+24)%24]||0)*(d===0?3:1);
+  return sc;
+}
 function favRender(){
   var l=favLoad(),bar=$("favbar");
-  bar.innerHTML=l.map(function(f,i){
-    return '<div class="fav" data-i="'+i+'"><span class="nm">'+f.name+'</span><span class="rt">'+f.from+'→'+f.to+'</span><span class="x" data-del="'+i+'">✕</span></div>';
-  }).join("")+'<div style="font-size:11.5px;color:#7d92a8;align-self:center;">'+(l.length?"":"자주 가는 경로를 저장해두면 한 번에 불러와요")+'</div>';
+  var idx=l.map(function(f,i){return i;});
+  idx.sort(function(a,b){return favScore(l[b])-favScore(l[a]);});
+  bar.innerHTML=idx.map(function(i){
+    var f=l[i];
+    return '<button class="fav" data-i="'+i+'"><span class="nm">★ '+jmEsc(f.name)+'</span>'
+      +'<span class="rt">'+jmEsc(f.from)+' → '+jmEsc(f.to)+'</span>'
+      +'<span class="go">›</span><span class="x" data-del="'+i+'">✕</span></button>';
+  }).join("")+(l.length?"":'<div class="hint">자주 가는 경로를 저장해두면 여기서 한 번에 불러와요</div>');
 }
 $("favbar").onclick=function(e){
   var del=e.target.getAttribute("data-del");
   if(del!==null&&del!==undefined){var l=favLoad();l.splice(parseInt(del,10),1);favStore(l);favRender();return;}
   var box=e.target.closest?e.target.closest(".fav"):null;
   if(!box)return;
-  var f=favLoad()[parseInt(box.getAttribute("data-i"),10)];
+  var i=parseInt(box.getAttribute("data-i"),10),l=favLoad(),f=l[i];
   if(!f)return;
-  $("from").value=f.from;$("to").value=f.to;audioUnlock();findRoute();
+  f.u=f.u||{};var h=new Date().getHours();f.u[h]=(f.u[h]||0)+1;favStore(l);   // 시간대 학습
+  $("from").value=f.from;$("to").value=f.to;
+  audioUnlock();askNotify();
+  st.autoBoard=true;                 // 경로가 나오면 곧바로 열차 고르기까지
+  findRoute();
 };
 function favFind(){          // 지금 보고 있는 경로가 이미 즐겨찾기인지
   if(!st.route)return -1;
@@ -845,6 +882,7 @@ $("testSnd").onclick=function(){
   setTimeout(function(){beep(2);speak("소리 테스트입니다. 내릴 역 1분 전에 이렇게 알려드릴게요.");},120);
   var w=$("sndWarn");w.className="warn ok";
   w.innerHTML="🔊 방금 <b>삑삑 소리와 안내 음성</b>이 들렸다면 정상입니다. 안 들렸다면 아이폰 옆면 무음 스위치를 풀고 볼륨을 올린 뒤 다시 눌러주세요.";
+  try{localStorage.setItem("subway_sndok","1");}catch(e){}   // 다음부터는 안내 숨김
 };
 $("board").onclick=function(){audioUnlock();askNotify();showBoardModal();};
 function pkIndex(){return Math.max(0,Math.round($("trains").scrollTop/(pkRow||62)));}
@@ -1054,11 +1092,12 @@ $("offList").onclick=function(e){   // 보이는 칸을 눌러도 선택
   $("offBg").style.display="none";
   pauseRide(stns[i]?{leg:st.offLeg,idx:i,name:stns[i].stationName}:null);
 };
-$("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
+$("btnStop").onclick=function(){st.running=false;$("nearBar").className="nearbar";keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
 
 setInterval(tick,1000);
 favRender();
+try{if(localStorage.getItem("subway_sndok")==="1"){$("sndWarn").classList.add("hidden");$("testSnd").textContent="🔊 알림 소리 다시 확인";}}catch(e){}
 // 즐겨찾기 경로는 신호 있을 때 시간표를 미리 받아둔다 → 지하 승강장에서도 바로 됨
 setTimeout(function(){
   try{
