@@ -72,7 +72,8 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .modal .mx{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;border-radius:50%;background:#0d1b2a;color:#8fa3b8;font-size:15px;line-height:1;cursor:pointer;}
 .modal .mx:active{background:#26384f;}
 .modal .mln{display:inline-block;border-radius:8px;padding:5px 12px;font-size:14px;font-weight:800;color:#fff;margin-bottom:10px;}
-.modal .q{font-size:17px;font-weight:700;line-height:1.5;margin-bottom:4px;}
+.modal .q{font-size:17px;font-weight:700;line-height:1.55;margin-bottom:4px;}
+.modal .q .hl{color:#4ee39b;font-size:23px;font-weight:900;letter-spacing:-.3px;}
 .modal .qs{font-size:13px;color:#8fa3b8;margin-bottom:18px;}
 .modal .mbtns{display:flex;flex-direction:column;gap:9px;}
 .modal .mbtns button{padding:14px;border-radius:12px;border:0;font-size:15px;font-weight:700;cursor:pointer;}
@@ -172,7 +173,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       <div class="grid3">
         <div class="stat"><div class="n" id="remSt">–</div><div class="l">남은 역</div></div>
         <div class="stat"><div class="n" id="remT">–</div><div class="l">남은 시간</div></div>
-        <div class="stat"><div class="n" id="eta">–</div><div class="l">도착 시각</div></div>
+        <div class="stat"><div class="n" id="eta">–</div><div class="l">도착 예정 시각</div></div>
       </div>
       <div class="barlbl"><span id="barK">갈아탈 역까지</span><span id="barP">0%</span></div>
       <div class="bar"><i id="barI"></i></div>
@@ -541,7 +542,7 @@ function hmsOf(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0"
 function showBoardModal(){
   var first=st.legs[0];
   $("mLn").style.background=lineColor(first.lane[0].name);$("mLn").textContent=lineShort(first.lane[0].name);
-  $("mQ").textContent=first.startName+"역에서 몇 시 열차를 타셨나요?";
+  $("mQ").innerHTML='<b class="hl">'+jmEsc(first.startName)+'</b>역에서<br>몇 시 열차를 타셨나요?';
   $("mQs").textContent=(first.way||"")+" 방면";
   $("trains").innerHTML='<div class="spin">열차 시간표를 불러오는 중…</div>';
   $("pkWrap").classList.remove("hidden");
