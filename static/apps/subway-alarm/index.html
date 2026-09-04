@@ -36,7 +36,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .big-btn.stop{background:linear-gradient(135deg,#e06666,#d64a4a);}
 .big-btn[disabled]{opacity:.5;}
 .route-sum{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-.route-sum .t{font-size:24px;font-weight:800;color:#4ee39b;}
+.route-sum .t{font-size:24px;font-weight:800;color:#eef2f6;}
 .route-sum .d{font-size:12.5px;color:#8fa3b8;}
 .leg{display:flex;gap:11px;align-items:flex-start;padding:9px 0;}
 .leg .ln{flex-shrink:0;width:52px;text-align:center;border-radius:8px;padding:5px 2px;font-size:12px;font-weight:800;color:#fff;line-height:1.25;}
@@ -49,15 +49,13 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 #run .dest .k{font-size:11.5px;color:#8fa3b8;font-weight:700;}
 #run .dest .v{font-size:26px;font-weight:900;line-height:1.15;margin-top:1px;}
 #run .dest .r{text-align:right;}
-#run .dest .v2{font-size:19px;font-weight:800;line-height:1.25;margin-top:2px;color:#4ee39b;}
+#run .dest .v2{font-size:19px;font-weight:800;line-height:1.25;margin-top:2px;color:#eef2f6;}
 .tgt{font-size:11.5px;color:#8fa3b8;font-weight:700;margin:13px 3px 5px;}
 .tgt b{font-weight:900;}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:0 0 13px;}
 .stat{background:#0d1b2a;border-radius:12px;padding:11px 5px;text-align:center;}
 .stat .n{font-size:20px;font-weight:800;}
 .stat .l{font-size:10.5px;color:#8fa3b8;margin-top:2px;}
-.now{text-align:center;font-size:13.5px;color:#cfe0ef;margin:6px 0;}
-.now b{color:#4ee39b;}
 .ctrls{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px;}
 .ctrls button{padding:13px;border:1.5px solid #2b3f57;border-radius:12px;background:#0d1b2a;color:#eef2f6;font-size:14px;font-weight:700;cursor:pointer;}
 .log{margin-top:12px;font-size:12px;color:#8fa3b8;max-height:100px;overflow-y:auto;}
@@ -239,7 +237,7 @@ function lineColor(name){var m=name.replace("수도권","").trim();var num=m.mat
 // 어두운 노선색(1호선 남색 등)을 어두운 배경 위에서도 읽히게 밝힌다
 function lineInk(name){
   var m=/^#([0-9a-f]{6})$/i.exec(lineColor(name)||"");
-  if(!m)return "#4ee39b";
+  if(!m)return "#eef2f6";
   var n=parseInt(m[1],16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;
   var lum=(0.299*r+0.587*g+0.114*b)/255;
   if(lum<0.58){var t=(0.58-lum)/0.58*0.66;
@@ -482,7 +480,8 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
   $("destN").style.color=onBreak?"#e0c07e":((evRem<=1)?"#e0c07e":lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:""));
   $("tgtK").textContent=(nextEv.type==="final")?"내릴 역":"갈아탈 역";
   $("tgtN").textContent=nextEv.station;
-  $("tgtN").style.color=(nextEv.type==="final")?"#4ee39b":"#e0c07e";
+  // 역 이름이니 그 역까지 타고 가는 노선 색으로(초록은 2호선 뜻이 되어버린다)
+  $("tgtN").style.color=lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:"");
   var remStations=curLeg?Math.max(0,Math.ceil((curLeg.__cum-em)/curLeg.__per)):0;
   $("remSt").textContent=remStations+"개";
   $("remT").textContent=fmtLeft(evRem*60);
