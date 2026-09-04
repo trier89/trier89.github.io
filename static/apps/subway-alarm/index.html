@@ -378,7 +378,6 @@ function renderRoute(path,fromName,toName){
   st.route={path:path,from:fromName,to:toName};
   var info=path.info;
   $("rsTime").textContent=info.totalTime+"분";
-  $("rsDesc").textContent="환승 "+(info.subwayTransitCount||0)+"회 · "+(info.totalStationCount||info.subwayStationCount||0)+"개 역";
   var html="",subLegs=[],pendWalk=0;
   path.subPath.forEach(function(sp){
     if(sp.trafficType===3){ if(sp.sectionTime>0){pendWalk+=sp.sectionTime; html+='<div class="leg"><div class="walk">🚶 '+sp.sectionTime+'분</div><div class="info"><span class="sm">도보 이동</span></div></div>';} }
@@ -390,6 +389,10 @@ function renderRoute(path,fromName,toName){
     }
   });
   $("legs").innerHTML=html;
+  // subwayTransitCount는 '탄 횟수'라 한 번만 타도 1이 나온다 → 구간 수로 직접 센다
+  var nT=Math.max(0,subLegs.length-1);
+  var nS=subLegs.reduce(function(a,sp){return a+(sp.stationCount||0);},0);
+  $("rsDesc").textContent=(nT?("환승 "+nT+"회"):"환승 없음")+" · "+(nS||info.totalStationCount||0)+"개 역";
   st.legs=subLegs;
   renderJMap("jmapPre",false);
   favBtn();
