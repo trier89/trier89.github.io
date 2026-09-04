@@ -395,6 +395,11 @@ function mergePath(a,b){        // 앞 경로 + 뒤 경로를 한 여정으로
 }
 function routeUrl(a,b){var x=STN[a],y=STN[b];return PROXY+"?sx="+x.x+"&sy="+x.y+"&ex="+y.x+"&ey="+y.y;}
 function firstPath(d){
+  if(d&&d.error){                       // ODsay가 사유를 담아 보내는 경우(한도 초과 등)
+    var e=[].concat(d.error)[0]||{};
+    var err=new Error(e.message||"api error");err.api=String(e.code||"");err.msg=e.message||"";
+    throw err;
+  }
   if(!d||!d.result||!d.result.path||!d.result.path.length)throw new Error("no path");
   return d.result.path;
 }
@@ -409,6 +414,11 @@ function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
   $("setup").classList.add("hidden");$("result").classList.remove("hidden");
   $("legs").innerHTML='<div class="spin">경로를 찾는 중…</div>';$("rsTime").textContent="–";$("rsDesc").textContent="";
   $("offNote").classList.add("hidden");
+  var fresh=ckGet(rtKey(f,t,v));
+  if(fresh&&fresh.paths&&fresh.paths.length&&Date.now()-(fresh.ts||0)<3*864e5){
+    renderPaths(fresh.paths,f,t,0);     // 저장본 그대로 — 조회 안 함
+    return;
+  }
   var job = v
     ? Promise.all([fetchT(routeUrl(f,v)).then(function(r){return r.json();}),
                    fetchT(routeUrl(v,t)).then(function(r){return r.json();})])
@@ -423,12 +433,18 @@ function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
     if(saved&&saved.length){
       renderPaths(saved,f,t,0);
       var days=Math.floor((Date.now()-(c.ts||0))/864e5);
-      $("offNote").textContent="📴 인터넷이 없어 저장해둔 경로로 안내합니다"+(days>0?" ("+days+"일 전 저장)":"")+". 열차 시간표도 저장본을 씁니다.";
+      var head=(err&&err.api==="429")?"⚠️ 오늘 경로 조회 한도를 다 써서"
+             :(navigator.onLine===false||(err&&err.name==="AbortError"))?"📴 인터넷이 없어"
+             :"⚠️ 경로 조회가 안 돼";
+      $("offNote").textContent=head+" 저장해둔 경로로 안내합니다"+(days>0?" ("+days+"일 전 저장)":"")+". 열차 시간표도 저장본을 씁니다.";
       $("offNote").classList.remove("hidden");
       return;
     }
     st.autoBoard=false;
-    $("legs").innerHTML='<div class="spin">경로를 찾지 못했어요.<br>인터넷이 없다면, 신호가 있을 때 이 경로를 한 번 열어두면 다음부터는 오프라인에서도 됩니다.</div>';
+    var why=(err&&err.api==="429")
+      ? "오늘 경로 조회 한도를 다 썼어요. 내일 다시 되고, 한 번 찾아둔 경로는 지금도 그대로 쓸 수 있어요."
+      : "경로를 찾지 못했어요.<br>인터넷이 없다면, 신호가 있을 때 이 경로를 한 번 열어두면 다음부터는 오프라인에서도 됩니다.";
+    $("legs").innerHTML='<div class="spin">'+why+'</div>';
   });
 }
 
