@@ -29,7 +29,8 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .ac{position:absolute;left:0;right:0;top:100%;z-index:20;background:#1c2f45;border:1px solid #2b3f57;border-radius:10px;margin-top:3px;max-height:200px;overflow-y:auto;display:none;}
 .ac div{padding:11px 13px;font-size:15px;border-bottom:1px solid #26384f;cursor:pointer;}
 .ac div:active{background:#26384f;}
-.swap{text-align:center;margin:-4px 0 8px;}
+.swap{display:flex;gap:7px;justify-content:center;margin:-4px 0 8px;}
+.viaoff{float:right;color:#7d92a8;font-weight:400;cursor:pointer;}
 .swap button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:5px 14px;font-size:13px;cursor:pointer;}
 .big-btn{width:100%;padding:16px;border:0;border-radius:14px;background:var(--acc-bg);color:var(--acc-fg);font-size:17px;font-weight:800;cursor:pointer;}
 .big-btn:active{opacity:.85;}
@@ -38,7 +39,9 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .pathpick{display:flex;gap:7px;margin-bottom:12px;}
 .pathpick .pth{flex:1;background:#0d1b2a;border:1.5px solid #2b3f57;border-radius:12px;padding:9px 5px 8px;cursor:pointer;color:#8fa3b8;text-align:center;}
 .pathpick .pth.on{border-color:#eef2f6;background:#1c2f45;}
-.pathpick .pth b{display:block;font-size:16px;font-weight:900;color:#eef2f6;}
+.pathpick .pth u{display:block;font-size:10.5px;font-weight:800;color:#7d92a8;text-decoration:none;margin-bottom:3px;}
+.pathpick .pth.on u{color:#cfe0ef;}
+.pathpick .pth b{display:block;font-size:17px;font-weight:900;color:#eef2f6;}
 .pathpick .pth span{display:block;font-size:11px;margin-top:1px;}
 .pathpick .pth em{display:flex;gap:3px;justify-content:center;margin-top:6px;font-style:normal;}
 .pathpick .pth em i{display:block;width:15px;height:4px;border-radius:2px;}
@@ -152,7 +155,8 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
     <div class="favbar" id="favbar"></div>
     <div class="card">
       <div class="stn-in"><label>출발역</label><input type="text" id="from" placeholder="예: 잠실" autocomplete="off"><div class="ac" id="fromAc"></div></div>
-      <div class="swap"><button id="swap">↕ 출발·도착 바꾸기</button></div>
+      <div class="stn-in hidden" id="viaWrap"><label>경유역 <span class="viaoff" id="viaOff">✕ 빼기</span></label><input type="text" id="via" placeholder="예: 교대" autocomplete="off"><div class="ac" id="viaAc"></div></div>
+      <div class="swap"><button id="viaTgl">＋ 경유지 추가</button> <button id="swap">↕ 출발·도착 바꾸기</button></div>
       <div class="stn-in"><label>도착역</label><input type="text" id="to" placeholder="예: 서울역" autocomplete="off"><div class="ac" id="toAc"></div></div>
     </div>
     <button class="big-btn" id="find">🔎 경로 찾기</button>
@@ -380,21 +384,36 @@ var st={running:false,legs:[],events:[],t0:0,paused:false,pausedAt:0,pausedAcc:0
 
 function fetchStations(){return fetch("stations.json").then(function(r){return r.json();}).then(function(j){STN=j;NAMES=Object.keys(j);});}
 
+function mergePath(a,b){        // 앞 경로 + 뒤 경로를 한 여정으로
+  return {info:{totalTime:(a.info.totalTime||0)+(b.info.totalTime||0)},
+          subPath:(a.subPath||[]).concat(b.subPath||[])};
+}
+function routeUrl(a,b){var x=STN[a],y=STN[b];return PROXY+"?sx="+x.x+"&sy="+x.y+"&ex="+y.x+"&ey="+y.y;}
+function firstPath(d){
+  if(!d||!d.result||!d.result.path||!d.result.path.length)throw new Error("no path");
+  return d.result.path;
+}
 function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
+  var v=$("viaWrap").classList.contains("hidden")?"":$("via").value.trim();
   if(!STN[f]){alert("출발역 '"+f+"'을(를) 찾을 수 없어요. 목록에서 골라주세요.");return;}
   if(!STN[t]){alert("도착역 '"+t+"'을(를) 찾을 수 없어요. 목록에서 골라주세요.");return;}
+  if(v&&!STN[v]){alert("경유역 '"+v+"'을(를) 찾을 수 없어요. 목록에서 골라주세요.");return;}
   if(f===t){alert("출발역과 도착역이 같아요.");return;}
+  if(v&&(v===f||v===t)){alert("경유역이 출발역·도착역과 같아요.");return;}
+  st.via=v;
   $("setup").classList.add("hidden");$("result").classList.remove("hidden");
   $("legs").innerHTML='<div class="spin">경로를 찾는 중…</div>';$("rsTime").textContent="–";$("rsDesc").textContent="";
-  var s=STN[f],e=STN[t];
-  var url=PROXY+"?sx="+s.x+"&sy="+s.y+"&ex="+e.x+"&ey="+e.y;
   $("offNote").classList.add("hidden");
-  fetchT(url).then(function(r){return r.json();}).then(function(d){
-    if(!d.result||!d.result.path||!d.result.path.length){throw new Error("no path");}
-    renderPaths(d.result.path.slice(0,4),f,t,0);
-    ckSet(rtKey(f,t),{paths:st.paths,ts:Date.now()});
+  var job = v
+    ? Promise.all([fetchT(routeUrl(f,v)).then(function(r){return r.json();}),
+                   fetchT(routeUrl(v,t)).then(function(r){return r.json();})])
+        .then(function(rs){return [mergePath(firstPath(rs[0])[0],firstPath(rs[1])[0])];})
+    : fetchT(routeUrl(f,t)).then(function(r){return r.json();}).then(function(d){return firstPath(d).slice(0,4);});
+  job.then(function(list){
+    renderPaths(list,f,t,0);
+    ckSet(rtKey(f,t,v),{paths:st.paths,ts:Date.now()});
   }).catch(function(err){
-    var c=ckGet(rtKey(f,t));                    // 신호가 없으면 저장해둔 경로로
+    var c=ckGet(rtKey(f,t,v));                  // 신호가 없으면 저장해둔 경로로
     var saved=c&&(c.paths||(c.path?[c.path]:null));
     if(saved&&saved.length){
       renderPaths(saved,f,t,0);
@@ -412,10 +431,22 @@ function pathSig(pp){    // 같은 노선 조합이면 같은 경로로 본다
   return ((pp.subPath||[]).filter(function(sp){return sp.trafficType===1;})
     .map(function(sp){return (sp.lane&&sp.lane[0]?sp.lane[0].name:"")+":"+sp.startName;}).join(">"));
 }
+function legN(pp){return (pp.subPath||[]).filter(function(sp){return sp.trafficType===1;}).length;}
+// 후보는 둘이면 충분하다 — 제일 빠른 것, 제일 덜 갈아타는 것
+function pickTwo(list){
+  var seen={},c=[];
+  (list||[]).forEach(function(pp){var k=pathSig(pp);if(!seen[k]){seen[k]=1;c.push(pp);}});
+  if(c.length<2)return c;
+  var fast=c[0],few=c[0];
+  c.forEach(function(pp){
+    if((pp.info.totalTime||999)<(fast.info.totalTime||999))fast=pp;
+    var n=legN(pp),fn=legN(few);
+    if(n<fn||(n===fn&&(pp.info.totalTime||999)<(few.info.totalTime||999)))few=pp;
+  });
+  return (fast===few)?[fast]:[fast,few];
+}
 function renderPaths(list,f,t,idx){
-  var seen={},uniq=[];
-  (list||[]).forEach(function(pp){var k=pathSig(pp);if(!seen[k]){seen[k]=1;uniq.push(pp);}});
-  uniq=uniq.slice(0,3);
+  var uniq=pickTwo(list);
   st.paths=uniq;st.pathIdx=Math.max(0,Math.min(idx||0,uniq.length-1));
   var box=$("pathPick");
   if(uniq.length<2){box.innerHTML="";box.classList.add("hidden");}
@@ -425,7 +456,8 @@ function renderPaths(list,f,t,idx){
       var legs=(pp.subPath||[]).filter(function(sp){return sp.trafficType===1;});
       var nT=Math.max(0,legs.length-1);
       var chips=legs.map(function(sp){return '<i style="background:'+lineColor(sp.lane[0].name)+'"></i>';}).join("");
-      return '<button class="pth'+(i===st.pathIdx?" on":"")+'" data-i="'+i+'"><b>'+(pp.info.totalTime||0)+'분</b>'
+      return '<button class="pth'+(i===st.pathIdx?" on":"")+'" data-i="'+i+'"><u>'+(i===0?"최소 시간":"최소 환승")+'</u>'
+        +'<b>'+(pp.info.totalTime||0)+'분</b>'
         +'<span>'+(nT?("환승 "+nT+"회"):"환승 없음")+'</span><em>'+chips+'</em></button>';
     }).join("");
   }
@@ -448,9 +480,14 @@ function renderRoute(path,fromName,toName){
   });
   $("legs").innerHTML=html;
   // subwayTransitCount는 '탄 횟수'라 한 번만 타도 1이 나온다 → 구간 수로 직접 센다
-  var nT=Math.max(0,subLegs.length-1);
+  var nT=0;
+  for(var q=1;q<subLegs.length;q++){
+    var la=subLegs[q-1].lane[0].name,lb=subLegs[q].lane[0].name;
+    if(la!==lb)nT++;
+  }
   var nS=subLegs.reduce(function(a,sp){return a+(sp.stationCount||0);},0);
-  $("rsDesc").textContent=(nT?("환승 "+nT+"회"):"환승 없음")+" · "+(nS||info.totalStationCount||0)+"개 역";
+  $("rsDesc").textContent=(st.via?("경유 "+st.via+" · "):"")+(nT?("환승 "+nT+"회"):"환승 없음")
+    +" · "+(nS||info.totalStationCount||0)+"개 역";
   st.legs=subLegs;
   renderJMap("jmapPre",false);
   favBtn();
@@ -502,8 +539,9 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
   var near=(!st.paused&&evRem<=1&&evRem>-0.4);
   $("nearBar").className="nearbar"+(near?" on":"");
   if(near){
-    $("nbK").textContent=(nextEv.type==="final")?"곧 내리세요":"곧 갈아타세요";
-    $("nbV").textContent=nextEv.station+(nextEv.type==="final"?"":" · "+nextEv.nextLine);
+    var vNow=(st.via&&nextEv.station===st.via&&nextEv.type!=="final");
+    $("nbK").textContent=(nextEv.type==="final"||vNow)?"곧 내리세요":"곧 갈아타세요";
+    $("nbV").textContent=nextEv.station+((nextEv.type==="final"||vNow)?"":" · "+nextEv.nextLine);
   }
   var onBreak=st.paused&&st.off;
   $("destK").textContent=onBreak?"내린 역":"이번 역";
@@ -514,7 +552,8 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
   var curLeg=st.legs[nextEv.legIdx];
   // 이번 역 이름도 지금 타고 있는 노선 색으로. 다만 곧 내려야 할 땐 경고색이 우선.
   $("destN").style.color=onBreak?"#e0c07e":((evRem<=1)?"#e0c07e":lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:""));
-  $("tgtK").textContent=(nextEv.type==="final")?"내릴 역":"갈아탈 역";
+  var isVia=(st.via&&nextEv.station===st.via&&nextEv.type!=="final");
+  $("tgtK").textContent=(nextEv.type==="final")?"내릴 역":(isVia?"경유지":"갈아탈 역");
   $("tgtN").textContent=nextEv.station;
   // 역 이름이니 그 역까지 타고 가는 노선 색으로(초록은 2호선 뜻이 되어버린다)
   $("tgtN").style.color=lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:"");
@@ -541,7 +580,8 @@ function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var rem
   // 알림: 각 이벤트 1분 전 + 도착
   st.events.forEach(function(e,i){
     if(!st.fired["w"+i]&&(e.at-em)<=1&&(e.at-em)>0){st.fired["w"+i]=true;
-      if(e.type==="transfer"){alertNow("곧 "+e.station+" 환승","곧 "+e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.",2,VIB_TF);log("🔁 곧 "+e.station+" 환승("+e.nextLine+")");}
+      if(e.type==="transfer"&&st.via&&e.station===st.via){alertNow("곧 "+e.station+" 하차","곧 "+e.station+"역입니다. 여기서 내리세요.",2,VIB_OFF);log("📍 곧 "+e.station+" 경유지 하차");}
+      else if(e.type==="transfer"){alertNow("곧 "+e.station+" 환승","곧 "+e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.",2,VIB_TF);log("🔁 곧 "+e.station+" 환승("+e.nextLine+")");}
       else{alertNow("곧 "+e.station+" 하차","곧 "+e.station+"역입니다. 내릴 준비하세요.",2,VIB_OFF);log("🔔 곧 "+e.station+" 하차");}
     }
     if(!st.fired["a"+i]&&(e.at-em)<=0){st.fired["a"+i]=true;
@@ -574,7 +614,7 @@ function ckSet(k,v){
     try{Object.keys(localStorage).forEach(function(x){if(x.indexOf("sa_tt:")===0)localStorage.removeItem(x);});
         localStorage.setItem(k,JSON.stringify(v));}catch(e2){}}
 }
-function rtKey(f,t){return "sa_rt:"+f+">"+t;}
+function rtKey(f,t,v){return "sa_rt:"+f+(v?(">"+v):"")+">"+t;}
 function ttKey(sp,wk){return "sa_tt:"+legLine(sp)+"|"+sp.startName+"|"+legNext(sp)+"|"+sp.endName+"|"+wk;}
 function ttQuery(sp){
   return "?from="+encodeURIComponent(sp.startName)+"&next="+encodeURIComponent(legNext(sp))
@@ -868,7 +908,7 @@ function favRender(){
   bar.innerHTML=idx.map(function(i){
     var f=l[i];
     return '<button class="fav" data-i="'+i+'"><span class="nm">★ '+jmEsc(f.name)+'</span>'
-      +'<span class="rt">'+jmEsc(f.from)+' → '+jmEsc(f.to)+'</span>'
+      +'<span class="rt">'+jmEsc(f.from)+(f.via?(' → '+jmEsc(f.via)):'')+' → '+jmEsc(f.to)+'</span>'
       +'<span class="go">›</span><span class="x" data-del="'+i+'">✕</span></button>';
   }).join("")+(l.length?"":'<div class="hint">자주 가는 경로를 저장해두면 여기서 한 번에 불러와요</div>');
 }
@@ -881,6 +921,8 @@ $("favbar").onclick=function(e){
   if(!f)return;
   f.u=f.u||{};var h=new Date().getHours();f.u[h]=(f.u[h]||0)+1;favStore(l);   // 시간대 학습
   $("from").value=f.from;$("to").value=f.to;
+  if(f.via){$("viaWrap").classList.remove("hidden");$("via").value=f.via;$("viaTgl").textContent="경유지";}
+  else{$("viaWrap").classList.add("hidden");$("via").value="";$("viaTgl").textContent="＋ 경유지 추가";}
   audioUnlock();askNotify();
   st.autoBoard=true;                 // 경로가 나오면 곧바로 열차 고르기까지
   findRoute();
@@ -888,7 +930,7 @@ $("favbar").onclick=function(e){
 function favFind(){          // 지금 보고 있는 경로가 이미 즐겨찾기인지
   if(!st.route)return -1;
   var l=favLoad();
-  for(var i=0;i<l.length;i++)if(l[i].from===st.route.from&&l[i].to===st.route.to)return i;
+  for(var i=0;i<l.length;i++)if(l[i].from===st.route.from&&l[i].to===st.route.to&&(l[i].via||"")===(st.via||""))return i;
   return -1;
 }
 function favBtn(){        // 즐겨찾기면 위쪽에 이름표, 아니면 아래에 저장 버튼
@@ -913,7 +955,7 @@ $("saveFav").onclick=function(){
   if(!name)return;
   var l=favLoad();
   l=l.filter(function(f){return f.name!==name;});
-  l.unshift({name:name.trim().slice(0,10),from:st.route.from,to:st.route.to});
+  l.unshift({name:name.trim().slice(0,10),from:st.route.from,to:st.route.to,via:st.via||''});
   favStore(l.slice(0,8));favRender();
   $("saveFav").textContent="⭐ 저장했어요 · "+name;
   setTimeout(favBtn,1800);
@@ -927,6 +969,15 @@ $("pathPick").onclick=function(e){
   renderPaths(st.paths,st.route.from,st.route.to,parseInt(b.getAttribute("data-i"),10));
 };
 $("reFind").onclick=function(){$("result").classList.add("hidden");$("setup").classList.remove("hidden");};
+$("viaTgl").onclick=function(){
+  var hid=$("viaWrap").classList.toggle("hidden");   // true면 방금 감춘 것
+  $("viaTgl").textContent=hid?"＋ 경유지 추가":"경유지";
+  if(hid)$("via").value=""; else $("via").focus();
+};
+$("viaOff").onclick=function(e){
+  e.stopPropagation();
+  $("viaWrap").classList.add("hidden");$("via").value="";$("viaTgl").textContent="＋ 경유지 추가";
+};
 $("swap").onclick=function(){var a=$("from").value;$("from").value=$("to").value;$("to").value=a;};
 $("testSnd").onclick=function(){
   audioUnlock();askNotify();
@@ -1161,7 +1212,7 @@ setTimeout(function(){
   }catch(e){}
 },3000);
 if("speechSynthesis"in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){};}
-setupAC("from","fromAc");setupAC("to","toAc");
+setupAC("from","fromAc");setupAC("to","toAc");setupAC("via","viaAc");
 fetchStations();
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>
