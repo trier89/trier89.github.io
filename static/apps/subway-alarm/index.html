@@ -249,8 +249,8 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   </div>
 </div>
 
+<script src="router.js"></script>
 <script>
-var PROXY="https://planfully-daily.pages.dev/api/subway-route";
 var STN={},NAMES=[];
 var LINECOLOR={"1":"#0d3692","2":"#00a84d","3":"#ef7c1c","4":"#00a5de","5":"#996cac","6":"#cd7c2f","7":"#747f00","8":"#e6186c","9":"#bb8336","공항":"#0090d2","신분당":"#d4003b","수인분당":"#f5a200","분당":"#f5a200","경의중앙":"#77c4a3","경의":"#77c4a3","경춘":"#0c8e72","서해":"#8fc31f","신림":"#697215","우이신설":"#b7c452","인천1":"#7ca8d5","인천2":"#ed8b00","의정부":"#fda600","용인":"#509f22","김포":"#a17800","GTX":"#9a4d9e"};
 var $=function(id){return document.getElementById(id);};
@@ -393,15 +393,9 @@ function mergePath(a,b){        // 앞 경로 + 뒤 경로를 한 여정으로
   return {info:{totalTime:(a.info.totalTime||0)+(b.info.totalTime||0)},
           subPath:(a.subPath||[]).concat(b.subPath||[])};
 }
-function routeUrl(a,b){var x=STN[a],y=STN[b];return PROXY+"?sx="+x.x+"&sy="+x.y+"&ex="+y.x+"&ey="+y.y;}
-function firstPath(d){
-  if(d&&d.error){                       // ODsay가 사유를 담아 보내는 경우(한도 초과 등)
-    var e=[].concat(d.error)[0]||{};
-    var err=new Error(e.message||"api error");err.api=String(e.code||"");err.msg=e.message||"";
-    throw err;
-  }
-  if(!d||!d.result||!d.result.path||!d.result.path.length)throw new Error("no path");
-  return d.result.path;
+function needPath(list){
+  if(!list||!list.length)throw new Error("no path");
+  return list;
 }
 function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
   var v=$("viaWrap").classList.contains("hidden")?"":$("via").value.trim();
@@ -414,37 +408,16 @@ function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
   $("setup").classList.add("hidden");$("result").classList.remove("hidden");
   $("legs").innerHTML='<div class="spin">경로를 찾는 중…</div>';$("rsTime").textContent="–";$("rsDesc").textContent="";
   $("offNote").classList.add("hidden");
-  var fresh=ckGet(rtKey(f,t,v));
-  if(fresh&&fresh.paths&&fresh.paths.length&&Date.now()-(fresh.ts||0)<3*864e5){
-    renderPaths(fresh.paths,f,t,0);     // 저장본 그대로 — 조회 안 함
-    return;
-  }
+  // 길찾기는 앱 안에서 직접 계산한다(인터넷·조회 한도와 무관)
   var job = v
-    ? Promise.all([fetchT(routeUrl(f,v)).then(function(r){return r.json();}),
-                   fetchT(routeUrl(v,t)).then(function(r){return r.json();})])
-        .then(function(rs){return [mergePath(firstPath(rs[0])[0],firstPath(rs[1])[0])];})
-    : fetchT(routeUrl(f,t)).then(function(r){return r.json();}).then(function(d){return firstPath(d).slice(0,4);});
+    ? Promise.all([LocalRoute.routes(f,v),LocalRoute.routes(v,t)])
+        .then(function(rs){return [mergePath(needPath(rs[0])[0],needPath(rs[1])[0])];})
+    : LocalRoute.routes(f,t).then(function(list){return needPath(list);});
   job.then(function(list){
     renderPaths(list,f,t,0);
-    ckSet(rtKey(f,t,v),{paths:st.paths,ts:Date.now()});
   }).catch(function(err){
-    var c=ckGet(rtKey(f,t,v));                  // 신호가 없으면 저장해둔 경로로
-    var saved=c&&(c.paths||(c.path?[c.path]:null));
-    if(saved&&saved.length){
-      renderPaths(saved,f,t,0);
-      var days=Math.floor((Date.now()-(c.ts||0))/864e5);
-      var head=(err&&err.api==="429")?"⚠️ 오늘 경로 조회 한도를 다 써서"
-             :(navigator.onLine===false||(err&&err.name==="AbortError"))?"📴 인터넷이 없어"
-             :"⚠️ 경로 조회가 안 돼";
-      $("offNote").textContent=head+" 저장해둔 경로로 안내합니다"+(days>0?" ("+days+"일 전 저장)":"")+". 열차 시간표도 저장본을 씁니다.";
-      $("offNote").classList.remove("hidden");
-      return;
-    }
     st.autoBoard=false;
-    var why=(err&&err.api==="429")
-      ? "오늘 경로 조회 한도를 다 썼어요. 내일 다시 되고, 한 번 찾아둔 경로는 지금도 그대로 쓸 수 있어요."
-      : "경로를 찾지 못했어요.<br>인터넷이 없다면, 신호가 있을 때 이 경로를 한 번 열어두면 다음부터는 오프라인에서도 됩니다.";
-    $("legs").innerHTML='<div class="spin">'+why+'</div>';
+    $("legs").innerHTML='<div class="spin">경로를 찾지 못했어요. 역 이름을 확인해주세요.</div>';
   });
 }
 
@@ -635,7 +608,6 @@ function ckSet(k,v){
     try{Object.keys(localStorage).forEach(function(x){if(x.indexOf("sa_tt:")===0)localStorage.removeItem(x);});
         localStorage.setItem(k,JSON.stringify(v));}catch(e2){}}
 }
-function rtKey(f,t,v){return "sa_rt:"+f+(v?(">"+v):"")+">"+t;}
 function ttKey(sp,wk){return "sa_tt:"+legLine(sp)+"|"+sp.startName+"|"+legNext(sp)+"|"+sp.endName+"|"+wk;}
 function ttQuery(sp){
   return "?from="+encodeURIComponent(sp.startName)+"&next="+encodeURIComponent(legNext(sp))
@@ -1228,10 +1200,9 @@ try{if(localStorage.getItem("subway_sndok")==="1"){$("sndWarn").classList.add("h
 setTimeout(function(){
   try{
     favLoad().forEach(function(f){
-      var c=ckGet(rtKey(f.from,f.to));
-      var pp=c&&((c.paths&&c.paths[0])||c.path);
-      if(!pp||!pp.subPath)return;
-      ttPrefetch(pp.subPath.filter(function(sp){return sp.trafficType===1;}));
+      LocalRoute.routes(f.from,f.to).then(function(ps){          // 경로는 즉시 계산되므로 저장할 필요가 없다
+        if(ps&&ps.length)ttPrefetch(ps[0].subPath.filter(function(sp){return sp.trafficType===1;}));
+      }).catch(function(){});
     });
   }catch(e){}
 },3000);
