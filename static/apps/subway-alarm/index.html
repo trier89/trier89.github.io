@@ -15,6 +15,8 @@
 <meta name="apple-mobile-web-app-title" content="하차알림">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
+/* 색은 노선 구분에만 쓰고, 화면 UI는 어느 호선도 안 쓰는 무채색으로 둔다 */
+:root{--acc:#eef2f6;--acc-bg:#eef2f6;--acc-fg:#0b1725;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0d1b2a;color:#eef2f6;min-height:100vh;min-height:100dvh;padding:env(safe-area-inset-top) 15px calc(env(safe-area-inset-bottom) + 16px);}
 .wrap{max-width:460px;margin:0 auto;padding-top:16px;}
@@ -68,11 +70,11 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .modal .mx:active{background:#26384f;}
 .modal .mln{display:inline-block;border-radius:8px;padding:5px 12px;font-size:14px;font-weight:800;color:#fff;margin-bottom:10px;}
 .modal .q{font-size:17px;font-weight:700;line-height:1.55;margin-bottom:4px;}
-.modal .q .hl{color:#4ee39b;font-size:23px;font-weight:900;letter-spacing:-.3px;}
+.modal .q .hl{color:var(--acc);font-size:23px;font-weight:900;letter-spacing:-.3px;}
 .modal .qs{font-size:13px;color:#8fa3b8;margin-bottom:18px;}
 .modal .mbtns{display:flex;flex-direction:column;gap:9px;}
 .modal .mbtns button{padding:14px;border-radius:12px;border:0;font-size:15px;font-weight:700;cursor:pointer;}
-.modal .yes{background:linear-gradient(135deg,#12b06e,#0e9d8f);color:#fff;}
+.modal .yes{background:var(--acc-bg);color:var(--acc-fg);}
 .modal .other{background:#0d1b2a;color:#cfe0ef;border:1.5px solid #2b3f57;}
 .offs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 .offs button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#eef2f6;border-radius:18px;padding:9px 14px;font-size:14px;cursor:pointer;}
@@ -83,15 +85,15 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .pkbox:before{top:0;background:linear-gradient(180deg,#0b1725 12%,rgba(11,23,37,.72) 55%,rgba(11,23,37,0));}
 .pkbox:after{bottom:0;background:linear-gradient(0deg,#0b1725 12%,rgba(11,23,37,.72) 55%,rgba(11,23,37,0));}
 .pksel{position:absolute;left:9px;right:9px;top:62px;height:62px;z-index:2;pointer-events:none;
-  border-top:1.5px solid rgba(18,176,110,.85);border-bottom:1.5px solid rgba(18,176,110,.85);
-  background:linear-gradient(90deg,rgba(18,176,110,.10),rgba(18,176,110,.03));}
+  border-top:1.5px solid var(--acc-bg);border-bottom:1.5px solid var(--acc-bg);
+  background:linear-gradient(90deg,rgba(255,255,255,.055),rgba(255,255,255,.015));}
 .trains{position:relative;z-index:1;height:186px;padding:62px 0;overflow-y:auto;scroll-snap-type:y mandatory;
   transform-style:preserve-3d;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;}
 .trains::-webkit-scrollbar{display:none;}
 .trains .tr{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:11px;width:100%;height:62px;
   background:transparent;border:0;padding:0 12px;margin:0;color:#eef2f6;cursor:pointer;text-align:left;
   scroll-snap-align:center;scroll-snap-stop:always;transform-origin:50% 50%;will-change:transform,opacity;}
-.trains .tr .tm{font-size:27px;font-weight:900;color:#4ee39b;line-height:1.1;letter-spacing:.5px;}
+.trains .tr .tm{font-size:27px;font-weight:900;color:var(--acc);line-height:1.1;letter-spacing:.5px;}
 .trains .tr .ds{font-size:12.5px;color:#8fa3b8;line-height:1.35;}
 .trains .tr.past .tm{color:#e0c07e;}
 .pkbtn{width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;color:#9fb3c8;border-radius:10px;padding:7px;font-size:13px;font-weight:700;cursor:pointer;}
@@ -117,11 +119,11 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .jm-l{font-size:9px;fill:#7d92a8;}
 .jm-l.ed{fill:#cfe0ef;font-weight:700;}
 .jm-l.tf{fill:#e0c07e;font-weight:700;}
-.jm-l.on{fill:#4ee39b;font-weight:800;}
+.jm-l.on{fill:#ffffff;font-weight:800;}
 .jm-t{font-size:8px;fill:#6f8399;}
 .jm-x{font-size:8.5px;fill:#8fa3b8;font-weight:700;}
 .jm-mk{fill:#fff;stroke:#0d1b2a;stroke-width:1.6;}
-.jm-pulse{fill:#4ee39b;animation:jmp 1.7s ease-out infinite;}
+.jm-pulse{fill:#ffffff;animation:jmp 1.7s ease-out infinite;}
 @keyframes jmp{0%{r:5;opacity:.5}100%{r:14;opacity:0}}
 </style>
 </head>
@@ -243,6 +245,16 @@ function lineInk(name){
   if(lum<0.58){var t=(0.58-lum)/0.58*0.66;
     r=Math.round(r+(255-r)*t);g=Math.round(g+(255-g)*t);b=Math.round(b+(255-b)*t);}
   return "rgb("+r+","+g+","+b+")";
+}
+function setAccent(name){
+  try{
+    var r=document.documentElement.style;
+    r.setProperty("--acc",lineInk(name));
+    r.setProperty("--acc-bg",lineColor(name));
+  }catch(e){}
+}
+function modalOpen(){
+  return $("modalBg").style.display==="flex"||$("offBg").style.display==="flex"||$("tfBg").style.display==="flex";
 }
 function lineShort(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return num[1]+"호선";return m.replace("선","선").slice(0,5);}
 function speak(t){try{if(!("speechSynthesis"in window))return;speechSynthesis.resume();var u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=1.0;u.volume=1;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
