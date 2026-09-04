@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>내릴 때 알려줘 — 지하철 하차·환승 알림</title>
+<!-- Google Analytics 4 (planfully.ai.kr 통합) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-E8ECH6NV3Y");</script>
 <meta name="description" content="출발·도착역만 넣으면 환승 경로를 찾아, 내릴 역과 갈아탈 역 1분 전에 음성으로 알려주는 지하철 알림 앱">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f9d63">
@@ -72,6 +75,13 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .offs button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#eef2f6;border-radius:18px;padding:9px 14px;font-size:14px;cursor:pointer;}
 .hidden{display:none!important;}
 .spin{text-align:center;color:#8fa3b8;padding:20px;font-size:14px;}
+.favbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px;}
+.favbar .fav{display:flex;align-items:center;gap:6px;background:#16263a;border:1.5px solid #2b3f57;border-radius:18px;padding:7px 11px;font-size:13px;color:#eef2f6;cursor:pointer;}
+.favbar .fav .x{color:#7d92a8;font-size:15px;line-height:1;padding:0 1px;}
+.favbar .fav .rt{color:#8fa3b8;font-size:11.5px;}
+.subbtn{width:100%;padding:12px;border:1.5px solid #2b3f57;border-radius:12px;background:#0d1b2a;color:#cfe0ef;font-size:14px;font-weight:700;cursor:pointer;margin-top:9px;}
+.subbtn:active{opacity:.8;}
+.ok{background:#12321f;border:1px solid #1e6b3f;color:#9be0b6;}
 </style>
 </head>
 <body>
@@ -80,6 +90,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   <div class="sub">출발·도착역만 넣으면, 내릴 역·갈아탈 역을 1분 전에 음성으로 알려드려요</div>
 
   <div id="setup">
+    <div class="favbar" id="favbar"></div>
     <div class="card">
       <div class="stn-in"><label>출발역</label><input type="text" id="from" placeholder="예: 잠실" autocomplete="off"><div class="ac" id="fromAc"></div></div>
       <div class="swap"><button id="swap">↕ 출발·도착 바꾸기</button></div>
@@ -91,11 +102,13 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 
   <div id="result" class="hidden">
     <div class="card">
-      <div class="route-sum"><div><div class="t" id="rsTime">–</div><div class="d" id="rsDesc"></div></div><button class="swap" style="margin:0;"><button id="reFind" style="background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:6px 12px;font-size:12px;cursor:pointer;">← 다시</button></button></div>
+      <div class="route-sum"><div><div class="t" id="rsTime">–</div><div class="d" id="rsDesc"></div></div><button id="reFind" style="background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:6px 12px;font-size:12px;cursor:pointer;">← 다시</button></div>
       <div id="legs"></div>
+      <button class="subbtn" id="saveFav">⭐ 이 경로 즐겨찾기 저장</button>
     </div>
     <button class="big-btn" id="board">🚉 탑승 · 알림 시작</button>
-    <div class="warn" style="margin-top:12px;">📱 iOS는 화면을 켜둔 채로 테스트해주세요. 화면이 꺼지면 음성이 안 나올 수 있어요(화면유지는 켜뒀지만 제한적).</div>
+    <button class="subbtn" id="testSnd">🔊 알림 소리 테스트</button>
+    <div class="warn" id="sndWarn" style="margin-top:12px;">🔊 <b>먼저 소리 테스트를 눌러 들리는지 확인하세요.</b> 아이폰은 옆면 무음 스위치가 켜져 있으면 소리가 안 납니다. 소리가 안 들리면 무음을 풀고 볼륨을 올린 뒤 다시 눌러보세요.</div>
   </div>
 
   <div id="run" class="hidden">
@@ -135,8 +148,46 @@ var LINECOLOR={"1":"#0d3692","2":"#00a84d","3":"#ef7c1c","4":"#00a5de","5":"#996
 var $=function(id){return document.getElementById(id);};
 function lineColor(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return LINECOLOR[num[1]];for(var k in LINECOLOR){if(m.indexOf(k)>=0)return LINECOLOR[k];}return "#5a6b7d";}
 function lineShort(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return num[1]+"호선";return m.replace("선","선").slice(0,5);}
-function speak(t){try{if(!("speechSynthesis"in window))return;var u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=1.0;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
+function speak(t){try{if(!("speechSynthesis"in window))return;speechSynthesis.resume();var u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=1.0;u.volume=1;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
 function vibe(m){try{if(navigator.vibrate)navigator.vibrate(m);}catch(e){}}
+
+// ── 소리 (음성만으로는 안 울리는 문제 대응: 오디오세션 + 비프 + 알림 3중) ──
+var AC=null,keepNode=null,ttsPrimed=false;
+function audioUnlock(){try{
+  if(navigator.audioSession){try{navigator.audioSession.type="playback";}catch(e){}}  // iOS 무음스위치 무시
+  if(!AC){var Ctx=window.AudioContext||window.webkitAudioContext;if(Ctx)AC=new Ctx();}
+  if(AC&&AC.state==="suspended")AC.resume();
+  if(!ttsPrimed&&"speechSynthesis"in window){ // 빈 문자열 프라이밍은 iOS에서 무효 → 실제 텍스트로
+    var u=new SpeechSynthesisUtterance("준비");u.volume=0.01;u.lang="ko-KR";speechSynthesis.speak(u);ttsPrimed=true;}
+}catch(e){}}
+function keepAudioAlive(on){try{
+  if(!AC)return;
+  if(on){ if(keepNode)return;
+    var o=AC.createOscillator(),g=AC.createGain();
+    g.gain.value=0.0008;o.frequency.value=60;o.connect(g);g.connect(AC.destination);o.start();
+    keepNode={o:o,g:g};
+  }else if(keepNode){try{keepNode.o.stop();}catch(e){}keepNode=null;}
+}catch(e){}}
+function beep(n){try{
+  if(!AC)return; if(AC.state==="suspended")AC.resume();
+  var t0=AC.currentTime;
+  for(var i=0;i<(n||2);i++){
+    var o=AC.createOscillator(),g=AC.createGain(),s=t0+i*0.36;
+    o.type="sine";o.frequency.setValueAtTime(880,s);o.frequency.setValueAtTime(1320,s+0.12);
+    g.gain.setValueAtTime(0.0001,s);
+    g.gain.exponentialRampToValueAtTime(0.5,s+0.03);
+    g.gain.exponentialRampToValueAtTime(0.0001,s+0.3);
+    o.connect(g);g.connect(AC.destination);o.start(s);o.stop(s+0.33);
+  }
+}catch(e){}}
+function notify(title,body){try{
+  if(!("Notification"in window)||Notification.permission!=="granted")return;
+  if(navigator.serviceWorker&&navigator.serviceWorker.ready){
+    navigator.serviceWorker.ready.then(function(r){r.showNotification(title,{body:body,icon:"icon-192.png",vibrate:[300,150,300],tag:"subway-alarm",renotify:true});});
+  }else{new Notification(title,{body:body,icon:"icon-192.png"});}
+}catch(e){}}
+function askNotify(){try{if("Notification"in window&&Notification.permission==="default")Notification.requestPermission();}catch(e){}}
+function alertNow(title,text,n){beep(n||2);speak(text);vibe([300,150,300]);notify(title,text);}
 var wakeLock=null;function keepAwake(){try{if("wakeLock"in navigator)navigator.wakeLock.request("screen").then(function(w){wakeLock=w;});}catch(e){}}
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&st.running)keepAwake();});
 
@@ -223,13 +274,12 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   // 알림: 각 이벤트 1분 전 + 도착
   st.events.forEach(function(e,i){
     if(!st.fired["w"+i]&&(e.at-em)<=1&&(e.at-em)>0){st.fired["w"+i]=true;
-      if(e.type==="transfer"){speak("곧 "+e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.");log("🔁 곧 "+e.station+" 환승("+e.nextLine+")");}
-      else{speak("곧 "+e.station+"역입니다. 내릴 준비하세요.");log("🔔 곧 "+e.station+" 하차");}
-      vibe([300,150,300]);
+      if(e.type==="transfer"){alertNow("곧 "+e.station+" 환승","곧 "+e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.");log("🔁 곧 "+e.station+" 환승("+e.nextLine+")");}
+      else{alertNow("곧 "+e.station+" 하차","곧 "+e.station+"역입니다. 내릴 준비하세요.");log("🔔 곧 "+e.station+" 하차");}
     }
     if(!st.fired["a"+i]&&(e.at-em)<=0){st.fired["a"+i]=true;
-      if(e.type==="final"){speak(e.station+"역 도착입니다. 내리세요.");log("✅ "+e.station+" 도착");vibe([500,200,500]);}
-      else{speak(e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.");log("🔁 "+e.station+" 환승");vibe([400,150,400]);}
+      if(e.type==="final"){alertNow(e.station+" 도착",e.station+"역 도착입니다. 내리세요.",3);log("✅ "+e.station+" 도착");vibe([500,200,500]);}
+      else{alertNow(e.station+" 환승",e.station+"역입니다. "+e.nextLine+"으로 갈아타세요.",3);log("🔁 "+e.station+" 환승");}
     }
   });
 }
@@ -245,7 +295,7 @@ function showBoardModal(){
 }
 function startRun(boardMs){
   $("modalBg").style.display="none";
-  buildTimeline(boardMs);st.running=true;keepAwake();
+  buildTimeline(boardMs);st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);
   $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";
   var last=st.legs[st.legs.length-1];
   speak(last.endName+"까지 약 "+st.total+"분 걸립니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
@@ -254,11 +304,49 @@ function startRun(boardMs){
 }
 function log(m){var d=document.createElement("div");var n=new Date();d.textContent="["+String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0")+"] "+m;$("log").prepend(d);}
 
+// ── 즐겨찾기 (출근·퇴근·등교 등 직접 이름 지정) ──
+function favLoad(){try{return JSON.parse(localStorage.getItem("subway_favs")||"[]");}catch(e){return [];}}
+function favStore(l){try{localStorage.setItem("subway_favs",JSON.stringify(l));}catch(e){}}
+function favRender(){
+  var l=favLoad(),bar=$("favbar");
+  bar.innerHTML=l.map(function(f,i){
+    return '<div class="fav" data-i="'+i+'"><span class="nm">'+f.name+'</span><span class="rt">'+f.from+'→'+f.to+'</span><span class="x" data-del="'+i+'">✕</span></div>';
+  }).join("")+'<div style="font-size:11.5px;color:#7d92a8;align-self:center;">'+(l.length?"":"자주 가는 경로를 저장해두면 한 번에 불러와요")+'</div>';
+}
+$("favbar").onclick=function(e){
+  var del=e.target.getAttribute("data-del");
+  if(del!==null&&del!==undefined){var l=favLoad();l.splice(parseInt(del,10),1);favStore(l);favRender();return;}
+  var box=e.target.closest?e.target.closest(".fav"):null;
+  if(!box)return;
+  var f=favLoad()[parseInt(box.getAttribute("data-i"),10)];
+  if(!f)return;
+  $("from").value=f.from;$("to").value=f.to;audioUnlock();findRoute();
+};
+$("saveFav").onclick=function(){
+  if(!st.route)return;
+  var h=new Date().getHours();
+  var def=(h<11?"출근":(h<15?"외출":"퇴근"));
+  var name=prompt("즐겨찾기 이름을 정해주세요 (예: 출근, 퇴근, 등교, 하교)",def);
+  if(!name)return;
+  var l=favLoad();
+  l=l.filter(function(f){return f.name!==name;});
+  l.unshift({name:name.trim().slice(0,10),from:st.route.from,to:st.route.to});
+  favStore(l.slice(0,8));favRender();
+  $("saveFav").textContent="⭐ 저장했어요 · "+name;
+  setTimeout(function(){$("saveFav").textContent="⭐ 이 경로 즐겨찾기 저장";},1800);
+};
+
 // ── 이벤트 바인딩 ──
-$("find").onclick=findRoute;
+$("find").onclick=function(){audioUnlock();findRoute();};
 $("reFind").onclick=function(){$("result").classList.add("hidden");$("setup").classList.remove("hidden");};
 $("swap").onclick=function(){var a=$("from").value;$("from").value=$("to").value;$("to").value=a;};
-$("board").onclick=function(){speak("");showBoardModal();};
+$("testSnd").onclick=function(){
+  audioUnlock();askNotify();
+  setTimeout(function(){beep(2);speak("소리 테스트입니다. 내릴 역 1분 전에 이렇게 알려드릴게요.");},120);
+  var w=$("sndWarn");w.className="warn ok";
+  w.innerHTML="🔊 방금 <b>삑삑 소리와 안내 음성</b>이 들렸다면 정상입니다. 안 들렸다면 아이폰 옆면 무음 스위치를 풀고 볼륨을 올린 뒤 다시 눌러주세요.";
+};
+$("board").onclick=function(){audioUnlock();askNotify();showBoardModal();};
 $("mYes").onclick=function(){startRun(Date.now());};
 $("mOther").onclick=function(){
   $("offs").classList.remove("hidden");
@@ -267,9 +355,10 @@ $("mOther").onclick=function(){
 $("offs").onclick=function(e){if(e.target.tagName==="BUTTON"){var m=parseInt(e.target.getAttribute("data-m"),10);startRun(Date.now()+m*60000);}};
 $("btnNow").onclick=function(){var s=curStation(elapsedMin());if(s)speak("지금은 "+s+"역 부근입니다.");};
 $("btnPause").onclick=function(){if(!st.paused){st.paused=true;st.pausedAt=Date.now();$("btnPause").textContent="▶️ 재개";log("⏸️ 일시정지");}else{st.paused=false;st.pausedAcc+=Date.now()-st.pausedAt;$("btnPause").textContent="⏸️ 일시정지";log("▶️ 재개");}};
-$("btnStop").onclick=function(){st.running=false;if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
+$("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
 setInterval(tick,1000);
+favRender();
 if("speechSynthesis"in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){};}
 setupAC("from","fromAc");setupAC("to","toAc");
 fetchStations();
