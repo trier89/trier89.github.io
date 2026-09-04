@@ -73,7 +73,11 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .modal .other{background:#0d1b2a;color:#cfe0ef;border:1.5px solid #2b3f57;}
 .offs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 .offs button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#eef2f6;border-radius:18px;padding:9px 14px;font-size:14px;cursor:pointer;}
-.trains{max-height:44vh;overflow-y:auto;margin:4px 0 14px;}
+.trains{position:relative;max-height:52vh;overflow-y:auto;margin:4px 0 14px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.trains .tr.past{opacity:.45;}
+.trains .tr.past .tm{color:#8fa3b8;}
+.nowline{display:flex;align-items:center;gap:8px;margin:6px 2px 10px;color:#4ee39b;font-size:11.5px;font-weight:800;}
+.nowline:before,.nowline:after{content:"";flex:1;height:1px;background:#12b06e;opacity:.5;}
 .trains .tr{display:flex;align-items:center;gap:10px;width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;border-radius:12px;padding:11px 13px;margin-bottom:8px;color:#eef2f6;font-size:15px;cursor:pointer;text-align:left;}
 .trains .tr .tm{font-size:19px;font-weight:800;color:#4ee39b;min-width:62px;}
 .trains .tr .ds{flex:1;font-size:12.5px;color:#8fa3b8;line-height:1.4;}
@@ -404,13 +408,19 @@ function fetchT(url,ms){ // 오프라인이면 빨리 포기해야 저장본으�
   var c=new AbortController(),tm=setTimeout(function(){c.abort();},ms||7000);
   return fetch(url,{signal:c.signal}).then(function(r){clearTimeout(tm);return r;},function(e){clearTimeout(tm);throw e;});
 }
-function ttFromCache(sp,after){
-  var c=ckGet(ttKey(sp,wkNow()));
-  if(!c||!c.trains||!c.trains.length)return {ok:false};
-  var as=hms2s(after||hmsOf(Date.now()));
-  var list=c.trains.filter(function(t){return hms2s(t.dep)>=as-60;}).slice(0,8);
-  if(!list.length)return {ok:false};
-  return {ok:true,offline:true,ts:c.ts,inout:c.inout,week:c.week,trains:list};
+// 오늘 하루치 시간표 전체(첫차~막차). 저장본이 3일 안쪽이면 그걸 쓰고, 아니면 받아서 저장.
+function fetchDay(sp){
+  var wk=wkNow(),k=ttKey(sp,wk),c=ckGet(k);
+  if(c&&c.trains&&c.trains.length&&Date.now()-(c.ts||0)<3*864e5)
+    return Promise.resolve({ok:true,stored:true,ts:c.ts,inout:c.inout,week:wk,trains:c.trains});
+  return fetchT(TIMEAPI+ttQuery(sp)+"&full=1&week="+wk,15000).then(function(r){return r.json();}).then(function(d){
+    if(!d||!d.ok||!d.trains||!d.trains.length)throw new Error("bad");
+    ckSet(k,{trains:d.trains,inout:d.inout,week:wk,ts:Date.now()});
+    return d;
+  }).catch(function(){
+    if(c&&c.trains&&c.trains.length)return {ok:true,offline:true,ts:c.ts,inout:c.inout,week:wk,trains:c.trains};
+    return {ok:false};
+  });
 }
 // 그날치 전체 시간표를 미리 받아둔다(3일 지난 것만 갱신)
 function ttPrefetch(legs){
@@ -418,21 +428,21 @@ function ttPrefetch(legs){
   var wk=wkNow();
   (legs||[]).forEach(function(sp){
     if(!sp||!sp.lane)return;
-    var k=ttKey(sp,wk),c=ckGet(k);
-    if(c&&c.ts&&Date.now()-c.ts<3*864e5)return;
-    fetchT(TIMEAPI+ttQuery(sp)+"&full=1&week="+wk,12000).then(function(r){return r.json();}).then(function(d){
-      if(d&&d.ok&&d.trains&&d.trains.length)ckSet(k,{trains:d.trains,inout:d.inout,week:wk,ts:Date.now()});
-    }).catch(function(){});
+    fetchDay(sp);
   });
 }
-function fetchTrains(sp,after){
-  return fetchT(TIMEAPI+ttQuery(sp)+(after?"&after="+encodeURIComponent(after):""))
-    .then(function(r){return r.json();})
-    .then(function(d){
-      if(d&&d.ok&&d.trains&&d.trains.length)return d;
-      var c=ttFromCache(sp,after);return c.ok?c:d;
-    })
-    .catch(function(){return ttFromCache(sp,after);});
+function fetchTrains(sp,after){   // 환승 구간 자동선택용 — 기준시각 이후 몇 편만
+  return fetchDay(sp).then(function(d){
+    if(!d.ok)return d;
+    var as=hms2s(after||hmsOf(Date.now()));
+    var list=d.trains.filter(function(t){return hms2s(t.dep)>=as-60;}).slice(0,8);
+    return list.length?{ok:true,offline:d.offline,ts:d.ts,inout:d.inout,week:d.week,trains:list}:{ok:false};
+  });
+}
+function dayMs(hms){   // 목록 표시용: 오늘 0시 + 표기시각(25:10도 그대로 더해져 순서가 안 뒤집힌다)
+  var q=(hms||"").split(":"),h=parseInt(q[0],10)||0,mi=parseInt(q[1],10)||0,se=parseInt(q[2],10)||0;
+  var n=new Date();
+  return new Date(n.getFullYear(),n.getMonth(),n.getDate()).getTime()+((h*60+mi)*60+se)*1000;
 }
 function hmsOf(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+":00";}
 
@@ -441,10 +451,10 @@ function showBoardModal(){
   var first=st.legs[0];
   $("mLn").style.background=lineColor(first.lane[0].name);$("mLn").textContent=lineShort(first.lane[0].name);
   $("mQ").textContent=first.startName+"역에서 몇 시 열차를 타셨나요?";
-  $("mQs").textContent=(first.way||"")+" 방면 · 지금 "+fmtClock(Date.now());
+  $("mQs").textContent=(first.way||"")+" 방면 · 위아래로 넘기면 다른 시간도 보여요";
   $("trains").innerHTML='<div class="spin">열차 시간표를 불러오는 중…</div>';
   $("modalBg").style.display="flex";
-  fetchTrains(first).then(function(d){
+  fetchDay(first).then(function(d){
     if(!d||!d.ok||!d.trains||!d.trains.length){
       st.tt=null;
       $("trains").innerHTML='<div class="spin">이 구간은 시간표를 불러오지 못했어요.<br>아래 「시간표 없이 지금 탔어요」로 시작해주세요.</div>';
@@ -452,13 +462,23 @@ function showBoardModal(){
     }
     st.tt=d;var now=Date.now();
     if(d.offline)$("mQs").textContent=(first.way||"")+" 방면 · 📴 저장된 시간표";
-    $("trains").innerHTML=d.trains.map(function(t,i){
-      var dep=todayMs(t.dep),arr=t.arr?todayMs(t.arr):dep+first.sectionTime*60000;
+    // 첫차~막차를 다 그린다(지난 열차는 흐리게). 휠/스크롤로 앞뒤 시간을 볼 수 있게.
+    var soon=-1;
+    for(var k=0;k<d.trains.length;k++){if(dayMs(d.trains[k].dep)>=now){soon=k;break;}}
+    var html="";
+    d.trains.forEach(function(t,i){
+      var dep=dayMs(t.dep),arr=t.arr?dayMs(t.arr):dep+first.sectionTime*60000;
+      if(arr<dep)arr+=86400000;
       var diff=Math.round((dep-now)/60000);
+      if(i===soon)html+='<div class="nowline"><span>지금 '+fmtClock(now)+'</span></div>';
       var when=diff>0?("약 "+diff+"분 뒤 출발"):(diff===0?"곧 출발":(-diff)+"분 전 출발");
-      return '<button class="tr'+(i===0?" soon":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
+      html+='<button class="tr'+(i<soon||soon<0?" past":"")+(i===soon?" soon":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
         +'<span class="ds">'+(t.dest?t.dest+"행 · ":"")+when+'<br>'+first.endName+" "+fmtClock(arr)+" 도착"+(t.arr?"":" (예상)")+'</span></button>';
-    }).join("");
+    });
+    if(soon<0)html+='<div class="nowline"><span>오늘 열차는 끝났어요</span></div>';
+    var box=$("trains");box.innerHTML=html;
+    var ln=box.querySelector(".nowline");
+    if(ln)box.scrollTop=Math.max(0,ln.offsetTop-box.clientHeight*0.34);   // 지금 시각이 위쪽에 오게
   });
 }
 // 선택한 열차 기준으로 전 구간 시각 확정(환승 구간은 도보시간 뒤 첫 열차)
