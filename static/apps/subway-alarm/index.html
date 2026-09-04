@@ -68,7 +68,9 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .note{font-size:11.5px;color:#7d92a8;line-height:1.6;margin-top:9px;}
 .warn{background:#3a2a12;border:1px solid #6b4e1e;color:#f0d59b;font-size:12px;border-radius:10px;padding:9px 11px;margin-bottom:12px;line-height:1.5;}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
-.modal{background:#16263a;border-radius:18px;padding:22px;max-width:380px;width:100%;text-align:center;}
+.modal{position:relative;background:#16263a;border-radius:18px;padding:22px;max-width:380px;width:100%;text-align:center;}
+.modal .mx{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;border-radius:50%;background:#0d1b2a;color:#8fa3b8;font-size:15px;line-height:1;cursor:pointer;}
+.modal .mx:active{background:#26384f;}
 .modal .mln{display:inline-block;border-radius:8px;padding:5px 12px;font-size:14px;font-weight:800;color:#fff;margin-bottom:10px;}
 .modal .q{font-size:17px;font-weight:700;line-height:1.5;margin-bottom:4px;}
 .modal .qs{font-size:13px;color:#8fa3b8;margin-bottom:18px;}
@@ -81,20 +83,20 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 /* 열차 고르기 = 돌리는 원통(드럼). 가운데 한 편만 또렷하고 위아래는 곡면으로 누워 사라진다 */
 .pkbox{position:relative;border-radius:16px;background:#0b1725;overflow:hidden;margin:7px 0;
   perspective:520px;perspective-origin:50% 50%;box-shadow:inset 0 0 34px rgba(0,0,0,.75);}
-.pkbox:before,.pkbox:after{content:"";position:absolute;left:0;right:0;height:74px;z-index:3;pointer-events:none;}
+.pkbox:before,.pkbox:after{content:"";position:absolute;left:0;right:0;height:66px;z-index:3;pointer-events:none;}
 .pkbox:before{top:0;background:linear-gradient(180deg,#0b1725 12%,rgba(11,23,37,.72) 55%,rgba(11,23,37,0));}
 .pkbox:after{bottom:0;background:linear-gradient(0deg,#0b1725 12%,rgba(11,23,37,.72) 55%,rgba(11,23,37,0));}
-.pksel{position:absolute;left:9px;right:9px;top:70px;height:70px;z-index:2;pointer-events:none;
+.pksel{position:absolute;left:9px;right:9px;top:62px;height:62px;z-index:2;pointer-events:none;
   border-top:1.5px solid rgba(18,176,110,.85);border-bottom:1.5px solid rgba(18,176,110,.85);
   background:linear-gradient(90deg,rgba(18,176,110,.10),rgba(18,176,110,.03));}
-.trains{position:relative;z-index:1;height:210px;padding:70px 0;overflow-y:auto;scroll-snap-type:y mandatory;
+.trains{position:relative;z-index:1;height:186px;padding:62px 0;overflow-y:auto;scroll-snap-type:y mandatory;
   transform-style:preserve-3d;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;}
 .trains::-webkit-scrollbar{display:none;}
-.trains .tr{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:100%;height:70px;
-  background:transparent;border:0;padding:0 10px;margin:0;color:#eef2f6;cursor:pointer;text-align:center;
+.trains .tr{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:11px;width:100%;height:62px;
+  background:transparent;border:0;padding:0 12px;margin:0;color:#eef2f6;cursor:pointer;text-align:left;
   scroll-snap-align:center;scroll-snap-stop:always;transform-origin:50% 50%;will-change:transform,opacity;}
 .trains .tr .tm{font-size:27px;font-weight:900;color:#4ee39b;line-height:1.1;letter-spacing:.5px;}
-.trains .tr .ds{font-size:11.5px;color:#8fa3b8;line-height:1.35;}
+.trains .tr .ds{font-size:12.5px;color:#8fa3b8;line-height:1.35;}
 .trains .tr.past .tm{color:#e0c07e;}
 .pkbtn{width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;color:#9fb3c8;border-radius:10px;padding:7px;font-size:13px;font-weight:700;cursor:pointer;}
 .pkbtn:active{background:#16263a;}
@@ -184,17 +186,19 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 
 <div class="modal-bg" id="modalBg">
   <div class="modal">
+    <button class="mx" id="mCancel" aria-label="닫기">✕</button>
     <div class="mln" id="mLn">호선</div>
     <div class="q" id="mQ">이 열차에 타셨나요?</div>
     <div class="qs" id="mQs"></div>
-    <button class="pkbtn" id="pkUp">▲ 이전 열차</button>
-    <div class="pkbox"><div class="pksel"></div><div class="trains" id="trains"><div class="spin">열차 시간표를 불러오는 중…</div></div></div>
-    <button class="pkbtn" id="pkDn">▼ 다음 열차</button>
-    <div class="pkhint" id="pkHint">위아래로 넘겨서 탄 열차를 고르세요</div>
+    <div id="pkWrap">
+      <button class="pkbtn" id="pkUp">▲ 이전 열차</button>
+      <div class="pkbox"><div class="pksel"></div><div class="trains" id="trains"><div class="spin">열차 시간표를 불러오는 중…</div></div></div>
+      <button class="pkbtn" id="pkDn">▼ 다음 열차</button>
+      <div class="pkhint" id="pkHint">위아래로 넘겨서 탄 열차를 고르세요</div>
+    </div>
     <div class="mbtns">
       <button class="yes" id="mPick">이 열차 탔어요</button>
-      <button class="other" id="mNow">방금 탔어요 · 시간표 없이 대략으로<br><span style="font-size:11.5px;color:#7d92a8;font-weight:400;">지금 시각부터 소요시간을 더해 계산합니다</span></button>
-      <button class="other" id="mCancel">닫기</button>
+      <button class="other hidden" id="mNow">시간표 없이 지금 탔어요<br><span style="font-size:11.5px;color:#7d92a8;font-weight:400;">지금 시각부터 소요시간을 더해 대략 계산합니다</span></button>
     </div>
   </div>
 </div>
@@ -204,7 +208,7 @@ var PROXY="https://planfully-daily.pages.dev/api/subway-route";
 var STN={},NAMES=[];
 var LINECOLOR={"1":"#0d3692","2":"#00a84d","3":"#ef7c1c","4":"#00a5de","5":"#996cac","6":"#cd7c2f","7":"#747f00","8":"#e6186c","9":"#bb8336","공항":"#0090d2","신분당":"#d4003b","수인분당":"#f5a200","분당":"#f5a200","경의중앙":"#77c4a3","경의":"#77c4a3","경춘":"#0c8e72","서해":"#8fc31f","신림":"#697215","우이신설":"#b7c452","인천1":"#7ca8d5","인천2":"#ed8b00","의정부":"#fda600","용인":"#509f22","김포":"#a17800","GTX":"#9a4d9e"};
 var $=function(id){return document.getElementById(id);};
-var pkRow=70;   // 드럼 한 칸 높이(렌더 후 실제값으로 갱신)
+var pkRow=62;   // 드럼 한 칸 높이(렌더 후 실제값으로 갱신)
 function lineColor(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return LINECOLOR[num[1]];for(var k in LINECOLOR){if(m.indexOf(k)>=0)return LINECOLOR[k];}return "#5a6b7d";}
 function lineShort(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return num[1]+"호선";return m.replace("선","선").slice(0,5);}
 function speak(t){try{if(!("speechSynthesis"in window))return;speechSynthesis.resume();var u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=1.0;u.volume=1;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
@@ -539,11 +543,17 @@ function showBoardModal(){
   $("mQ").textContent=first.startName+"역에서 몇 시 열차를 타셨나요?";
   $("mQs").textContent=(first.way||"")+" 방면";
   $("trains").innerHTML='<div class="spin">열차 시간표를 불러오는 중…</div>';
+  $("pkWrap").classList.remove("hidden");
+  $("mPick").classList.remove("hidden");
+  $("mNow").classList.add("hidden");
   $("modalBg").style.display="flex";
   fetchDay(first).then(function(d){
     if(!d||!d.ok||!d.trains||!d.trains.length){
       st.tt=null;
-      $("trains").innerHTML='<div class="spin">이 구간은 시간표를 불러오지 못했어요.<br>아래 「시간표 없이 지금 탔어요」로 시작해주세요.</div>';
+      $("pkWrap").classList.add("hidden");
+      $("mPick").classList.add("hidden");
+      $("mNow").classList.remove("hidden");
+      $("mQs").textContent="이 구간은 열차 시간표를 불러오지 못했어요";
       return;
     }
     st.tt=d;var now=Date.now();
@@ -554,15 +564,13 @@ function showBoardModal(){
     if(soon<0)soon=d.trains.length-1;
     $("pkHint").textContent="지금 "+fmtClock(now)+" · 위아래로 넘겨서 탄 열차를 고르세요";
     var html=d.trains.map(function(t,i){
-      var dep=dayMs(t.dep),arr=t.arr?dayMs(t.arr):dep+first.sectionTime*60000;
-      if(arr<dep)arr+=86400000;
-      var diff=Math.round((dep-now)/60000);
+      var dep=dayMs(t.dep),diff=Math.round((dep-now)/60000);
       var when=diff>0?("약 "+diff+"분 뒤 출발"):(diff===0?"곧 출발":(-diff)+"분 전 출발");
       return '<button class="tr'+(dep<now?" past":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
-        +'<span class="ds">'+(t.dest?t.dest+"행 · ":"")+when+'<br>'+first.endName+" "+fmtClock(arr)+" 도착"+(t.arr?"":" (예상)")+'</span></button>';
+        +'<span class="ds">'+(t.dest?t.dest+"행 · ":"")+when+'</span></button>';
     }).join("");
     var box=$("trains");box.innerHTML=html;
-    pkRow=(box.querySelector(".tr")||{}).offsetHeight||70;
+    pkRow=(box.querySelector(".tr")||{}).offsetHeight||62;
     box.scrollTop=soon*pkRow;
     pkPaint();
   });
@@ -677,7 +685,7 @@ function renderJMap(elId,live){
     else{var bx=a.x+((a.r%2===0)?20:-20);   // 줄 끝에서 S자로 돌아 내려간다
       d="M"+a.x+" "+a.y+"C"+bx+" "+(a.y+11)+" "+bx+" "+(b.y-11)+" "+b.x+" "+b.y;}
     var col=(nb.walk||nb.xfer)?"#8fa3b8":nb.col;
-    var dash=nb.walk?' stroke-dasharray="1 7"':'';
+    var dash=(nb.walk||nb.xfer)?' stroke-dasharray="1 7"':'';   // 환승 구간은 회색 점선
     segs+='<path class="jm-b" d="'+d+'" stroke="'+col+'"'+dash+'></path>';
     segs+='<path class="jm-p" d="'+d+'" stroke="'+col+'"'+dash+'></path>';
   }
@@ -793,12 +801,12 @@ $("testSnd").onclick=function(){
   w.innerHTML="🔊 방금 <b>삑삑 소리와 안내 음성</b>이 들렸다면 정상입니다. 안 들렸다면 아이폰 옆면 무음 스위치를 풀고 볼륨을 올린 뒤 다시 눌러주세요.";
 };
 $("board").onclick=function(){audioUnlock();askNotify();showBoardModal();};
-function pkIndex(){return Math.max(0,Math.round($("trains").scrollTop/(pkRow||70)));}
+function pkIndex(){return Math.max(0,Math.round($("trains").scrollTop/(pkRow||62)));}
 // 가운데에서 멀어질수록 눕히고 흐리게 → 원통 표면에 적힌 것처럼 보인다
 var pkRaf=0;
 function pkPaint(){
   var box=$("trains");if(!box||!box.children.length)return;
-  var c=box.scrollTop/(pkRow||70),kids=box.children;
+  var c=box.scrollTop/(pkRow||62),kids=box.children;
   var lo=Math.max(0,Math.round(c)-3),hi=Math.min(kids.length-1,Math.round(c)+3);
   for(var i=lo;i<=hi;i++){
     var el=kids[i];if(!el||!el.style)continue;
