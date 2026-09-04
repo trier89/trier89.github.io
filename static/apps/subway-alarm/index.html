@@ -20,6 +20,9 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0d1b2a;color:#eef2f6;min-height:100vh;min-height:100dvh;padding:env(safe-area-inset-top) 15px calc(env(safe-area-inset-bottom) + 16px);}
 .wrap{max-width:460px;margin:0 auto;padding-top:16px;}
+/* 주행 중에는 제목·설명을 접는다(자리만 차지함) */
+body.riding h1,body.riding .sub{display:none;}
+body.riding .wrap{padding-top:6px;}
 h1{font-size:20px;font-weight:800;text-align:center;}
 .sub{text-align:center;color:#8fa3b8;font-size:12.5px;margin:3px 0 16px;}
 .card{background:#16263a;border-radius:16px;padding:15px;margin-bottom:13px;}
@@ -661,7 +664,7 @@ function startRunPlan(plan){
   });
   st.total=st.events[st.events.length-1].at;
   st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);lockStart();
-  $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";
+  $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";document.body.classList.add("riding");
   var last=st.legs[st.legs.length-1],arrMs=plan[plan.length-1].arr;
   speak(last.endName+"까지 "+fmtClock(arrMs)+" 도착 예정입니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
   log("🚉 "+fmtClock(st.t0)+" 출발 · "+last.endName+" "+fmtClock(arrMs)+" 도착 예정"+(plan[0].train?" ("+plan[0].train+"열차)":""));
@@ -671,7 +674,7 @@ function startRunPlan(plan){
 function startRun(boardMs){
   $("modalBg").style.display="none";
   buildTimeline(boardMs);st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);lockStart();
-  $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";
+  $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";document.body.classList.add("riding");
   var last=st.legs[st.legs.length-1];
   speak(last.endName+"까지 약 "+st.total+"분 걸립니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
   log("🚉 출발 · "+last.endName+"까지 약 "+st.total+"분");
@@ -1064,7 +1067,7 @@ $("offList").onclick=function(e){   // 보이는 칸을 눌러도 선택
   $("offBg").style.display="none";
   pauseRide(stns[i]?{leg:st.offLeg,idx:i,name:stns[i].stationName}:null);
 };
-$("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
+$("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");document.body.classList.remove("riding");};
 
 $("earTgl").onclick=function(){earOnly=!earOnly;try{localStorage.setItem("subway_earonly",earOnly?"1":"0");}catch(e){}renderEar();};
 try{if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener)navigator.mediaDevices.addEventListener("devicechange",earScan);}catch(e){}
