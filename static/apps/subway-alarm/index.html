@@ -126,7 +126,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       </div>
     </div>
     <button class="big-btn" id="find">🔎 경로 찾기</button>
-    <div class="note">경로는 출발할 때 한 번만 조회하고, 이후엔 인터넷 없이도 알림이 작동해요. 홈 화면에 추가하면 앱처럼 쓸 수 있어요(공유 → 홈 화면에 추가).</div>
+    <div class="note">경로와 열차 시간표는 한 번 조회하면 폰에 저장돼, 다음부터는 신호가 없는 승강장에서도 그대로 쓸 수 있어요. 홈 화면에 추가하면 앱처럼 쓸 수 있어요(공유 → 홈 화면에 추가).</div>
   </div>
 
   <div id="result" class="hidden">
@@ -134,6 +134,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       <div class="route-sum"><div><div class="t" id="rsTime">–</div><div class="d" id="rsDesc"></div></div><button id="reFind" style="background:#0d1b2a;border:1.5px solid #2b3f57;color:#8fa3b8;border-radius:20px;padding:6px 12px;font-size:12px;cursor:pointer;">← 다시</button></div>
       <div id="legs"></div>
       <div id="jmapPre"></div>
+      <div id="offNote" class="warn hidden" style="margin:10px 0 0;"></div>
       <button class="subbtn" id="saveFav">⭐ 이 경로 즐겨찾기 저장</button>
     </div>
     <button class="big-btn" id="board">🚉 탑승 · 알림 시작</button>
@@ -276,10 +277,25 @@ function findRoute(){var f=$("from").value.trim(),t=$("to").value.trim();
   $("legs").innerHTML='<div class="spin">경로를 찾는 중…</div>';$("rsTime").textContent="–";$("rsDesc").textContent="";
   var s=STN[f],e=STN[t];
   var url=PROXY+"?sx="+s.x+"&sy="+s.y+"&ex="+e.x+"&ey="+e.y;
-  fetch(url).then(function(r){return r.json();}).then(function(d){
+  $("offNote").classList.add("hidden");
+  fetchT(url).then(function(r){return r.json();}).then(function(d){
     if(!d.result||!d.result.path||!d.result.path.length){throw new Error("no path");}
-    renderRoute(d.result.path[0],f,t);
-  }).catch(function(err){$("legs").innerHTML='<div class="spin">경로를 찾지 못했어요. 역 이름을 확인하거나 잠시 후 다시 시도해주세요.</div>';});
+    var path=d.result.path[0];
+    renderRoute(path,f,t);
+    ckSet(rtKey(f,t),{path:path,ts:Date.now()});
+    ttPrefetch(st.legs);
+  }).catch(function(err){
+    var c=ckGet(rtKey(f,t));            // 신호가 없으면 저장해둔 경로로
+    if(c&&c.path){
+      renderRoute(c.path,f,t);
+      var days=Math.floor((Date.now()-(c.ts||0))/864e5);
+      $("offNote").textContent="📴 인터넷이 없어 저장해둔 경로로 안내합니다"+(days>0?" ("+days+"일 전 저장)":"")+". 열차 시간표도 저장본을 씁니다.";
+      $("offNote").classList.remove("hidden");
+      ttPrefetch(st.legs);
+      return;
+    }
+    $("legs").innerHTML='<div class="spin">경로를 찾지 못했어요.<br>인터넷이 없다면, 신호가 있을 때 이 경로를 한 번 열어두면 다음부터는 오프라인에서도 됩니다.</div>';
+  });
 }
 
 function renderRoute(path,fromName,toName){
@@ -365,11 +381,58 @@ function todayMs(hms){ // "08:02:30" → 오늘(또는 인접일) 해당 시각 
 }
 function legLine(sp){var c=sp.lane&&sp.lane[0]&&sp.lane[0].subwayCode;return c||lineShort(sp.lane[0].name).replace("호선","");}
 function legNext(sp){var s=(sp.passStopList&&sp.passStopList.stations)||[];return s[1]?s[1].stationName:"";}
-function fetchTrains(sp,after){
-  var q="?from="+encodeURIComponent(sp.startName)+"&next="+encodeURIComponent(legNext(sp))
+// ── 오프라인 캐시: 경로 + 그날치 열차 시간표를 폰에 저장해둔다 ──
+// 지하 승강장처럼 신호가 없는 데서도 즐겨찾기 경로는 그대로 쓸 수 있게 하기 위함.
+function wkNow(){var d=new Date().getDay();return d===0?"3":(d===6?"2":"1");}
+function ckGet(k){try{return JSON.parse(localStorage.getItem(k)||"null");}catch(e){return null;}}
+function ckSet(k,v){
+  try{localStorage.setItem(k,JSON.stringify(v));}
+  catch(e){ // 용량 넘치면 오래된 시간표부터 비우고 한 번 더
+    try{Object.keys(localStorage).forEach(function(x){if(x.indexOf("sa_tt:")===0)localStorage.removeItem(x);});
+        localStorage.setItem(k,JSON.stringify(v));}catch(e2){}}
+}
+function rtKey(f,t){return "sa_rt:"+f+">"+t;}
+function ttKey(sp,wk){return "sa_tt:"+legLine(sp)+"|"+sp.startName+"|"+legNext(sp)+"|"+sp.endName+"|"+wk;}
+function ttQuery(sp){
+  return "?from="+encodeURIComponent(sp.startName)+"&next="+encodeURIComponent(legNext(sp))
        +"&to="+encodeURIComponent(sp.endName)+"&line="+encodeURIComponent(legLine(sp))
-       +"&mins="+sp.sectionTime+(after?"&after="+encodeURIComponent(after):"");
-  return fetch(TIMEAPI+q).then(function(r){return r.json();}).catch(function(){return {ok:false};});
+       +"&mins="+sp.sectionTime;
+}
+function hms2s(t){var q=(t||"").split(":");return q.length>=2?(+q[0])*3600+(+q[1])*60+(+(q[2]||0)):-1;}
+function fetchT(url,ms){ // 오프라인이면 빨리 포기해야 저장본으로 넘어간다
+  if(!window.AbortController)return fetch(url);
+  var c=new AbortController(),tm=setTimeout(function(){c.abort();},ms||7000);
+  return fetch(url,{signal:c.signal}).then(function(r){clearTimeout(tm);return r;},function(e){clearTimeout(tm);throw e;});
+}
+function ttFromCache(sp,after){
+  var c=ckGet(ttKey(sp,wkNow()));
+  if(!c||!c.trains||!c.trains.length)return {ok:false};
+  var as=hms2s(after||hmsOf(Date.now()));
+  var list=c.trains.filter(function(t){return hms2s(t.dep)>=as-60;}).slice(0,8);
+  if(!list.length)return {ok:false};
+  return {ok:true,offline:true,ts:c.ts,inout:c.inout,week:c.week,trains:list};
+}
+// 그날치 전체 시간표를 미리 받아둔다(3일 지난 것만 갱신)
+function ttPrefetch(legs){
+  if(navigator.onLine===false)return;
+  var wk=wkNow();
+  (legs||[]).forEach(function(sp){
+    if(!sp||!sp.lane)return;
+    var k=ttKey(sp,wk),c=ckGet(k);
+    if(c&&c.ts&&Date.now()-c.ts<3*864e5)return;
+    fetchT(TIMEAPI+ttQuery(sp)+"&full=1&week="+wk,12000).then(function(r){return r.json();}).then(function(d){
+      if(d&&d.ok&&d.trains&&d.trains.length)ckSet(k,{trains:d.trains,inout:d.inout,week:wk,ts:Date.now()});
+    }).catch(function(){});
+  });
+}
+function fetchTrains(sp,after){
+  return fetchT(TIMEAPI+ttQuery(sp)+(after?"&after="+encodeURIComponent(after):""))
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d&&d.ok&&d.trains&&d.trains.length)return d;
+      var c=ttFromCache(sp,after);return c.ok?c:d;
+    })
+    .catch(function(){return ttFromCache(sp,after);});
 }
 function hmsOf(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+":00";}
 
@@ -388,6 +451,7 @@ function showBoardModal(){
       return;
     }
     st.tt=d;var now=Date.now();
+    if(d.offline)$("mQs").textContent=(first.way||"")+" 방면 · 📴 저장된 시간표";
     $("trains").innerHTML=d.trains.map(function(t,i){
       var dep=todayMs(t.dep),arr=t.arr?todayMs(t.arr):dep+first.sectionTime*60000;
       var diff=Math.round((dep-now)/60000);
@@ -629,6 +693,16 @@ renderEar();earScan();
 
 setInterval(tick,1000);
 favRender();
+// 즐겨찾기 경로는 신호 있을 때 시간표를 미리 받아둔다 → 지하 승강장에서도 바로 됨
+setTimeout(function(){
+  try{
+    favLoad().forEach(function(f){
+      var c=ckGet(rtKey(f.from,f.to));
+      if(!c||!c.path||!c.path.subPath)return;
+      ttPrefetch(c.path.subPath.filter(function(sp){return sp.trafficType===1;}));
+    });
+  }catch(e){}
+},3000);
 if("speechSynthesis"in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){};}
 setupAC("from","fromAc");setupAC("to","toAc");
 fetchStations();
