@@ -181,6 +181,20 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   </div>
 </div>
 
+<div class="modal-bg" id="offBg">
+  <div class="modal">
+    <button class="mx" id="offX" aria-label="닫기">✕</button>
+    <div class="mln" id="offLn">호선</div>
+    <div class="q">어느 역에서<br>내리셨나요?</div>
+    <div class="qs" id="offQs"></div>
+    <button class="pkbtn" id="offUp">▲ 이전 역</button>
+    <div class="pkbox"><div class="pksel"></div><div class="trains" id="offList"></div></div>
+    <button class="pkbtn" id="offDn">▼ 다음 역</button>
+    <div class="pkhint">위아래로 넘겨서 내린 역을 고르세요</div>
+    <div class="mbtns"><button class="yes" id="offOk">여기서 내렸어요</button></div>
+  </div>
+</div>
+
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <button class="mx" id="mCancel" aria-label="닫기">✕</button>
@@ -812,10 +826,10 @@ $("testSnd").onclick=function(){
 $("board").onclick=function(){audioUnlock();askNotify();showBoardModal();};
 function pkIndex(){return Math.max(0,Math.round($("trains").scrollTop/(pkRow||62)));}
 // 가운데에서 멀어질수록 눕히고 흐리게 → 원통 표면에 적힌 것처럼 보인다
-var pkRaf=0;
-function pkPaint(){
-  var box=$("trains");if(!box||!box.children.length)return;
-  var c=box.scrollTop/(pkRow||62),kids=box.children;
+function drumPaint(box){
+  if(!box||!box.children.length)return;
+  var row=(box.children[0].offsetHeight)||62;
+  var c=box.scrollTop/row,kids=box.children;
   var lo=Math.max(0,Math.round(c)-3),hi=Math.min(kids.length-1,Math.round(c)+3);
   for(var i=lo;i<=hi;i++){
     var el=kids[i];if(!el||!el.style)continue;
@@ -824,10 +838,15 @@ function pkPaint(){
     el.style.opacity=Math.max(0,1-ad*.45).toFixed(2);
   }
 }
-$("trains").addEventListener("scroll",function(){
-  if(pkRaf)return;
-  pkRaf=requestAnimationFrame(function(){pkRaf=0;pkPaint();});
-});
+function pkPaint(){drumPaint($("trains"));}
+function drumBind(box){
+  var raf=0;
+  box.addEventListener("scroll",function(){
+    if(raf)return;
+    raf=requestAnimationFrame(function(){raf=0;drumPaint(box);});
+  });
+}
+drumBind($("trains"));drumBind($("offList"));
 function pkStep(n){
   var box=$("trains"),len=((st.tt&&st.tt.trains)||[]).length;
   var i=Math.min(len-1,Math.max(0,pkIndex()+n));
@@ -903,8 +922,28 @@ function rebuildFromPlan(plan){
   st.events.forEach(function(e,i){if(e.at<=em){st.fired["w"+i]=true;st.fired["a"+i]=true;}});
   renderJMap("jmap",true);tick();
 }
-function pauseRide(){
+var offRow=62;
+function offIndex(){return Math.max(0,Math.round($("offList").scrollTop/(offRow||62)));}
+function askOffStation(){          // 어디서 내렸는지 먼저 확인한다(추정이 틀릴 수 있으므로)
   var em=elapsedMin(),op=offPoint(em);
+  if(!op){pauseRide(null);return;}
+  var sp=st.legs[op.leg],stns=sp.__stns||[];
+  if(stns.length<2){pauseRide(op);return;}
+  $("offLn").style.background=lineColor(sp.lane[0].name);
+  $("offLn").textContent=lineShort(sp.lane[0].name);
+  $("offQs").textContent=sp.startName+" → "+sp.endName;
+  st.offLeg=op.leg;
+  $("offList").innerHTML=stns.map(function(x,i){
+    var at=st.t0+(sp.__start+sp.__per*i)*60000;
+    return '<button class="tr" data-i="'+i+'"><span class="tm" style="font-size:21px;">'+jmEsc(x.stationName)+'</span>'
+      +'<span class="ds">'+fmtClock(at)+(i<=op.idx?" 지남":" 예정")+'</span></button>';
+  }).join("");
+  $("offBg").style.display="flex";
+  offRow=($("offList").querySelector(".tr")||{}).offsetHeight||62;
+  $("offList").scrollTop=op.idx*offRow;
+  drumPaint($("offList"));
+}
+function pauseRide(op){
   st.paused=true;st.pausedAt=Date.now();st.off=op;
   $("btnPause").textContent="▶️ 다시 탔어요";
   log(op?("⏸️ "+op.name+"역에서 내림 — 다시 타면 그 시각 열차로 다시 잡습니다"):"⏸️ 일시정지");
@@ -940,7 +979,27 @@ function resumeRide(){
     speak("다시 탑승했습니다. "+(st.legs[k].endName)+"까지 다시 계산했습니다.");
   });
 }
-$("btnPause").onclick=function(){ if(!st.paused)pauseRide(); else resumeRide(); };
+$("btnPause").onclick=function(){ if(!st.paused)askOffStation(); else resumeRide(); };
+$("offX").onclick=function(){$("offBg").style.display="none";};
+$("offUp").onclick=function(){offStep(-1);};
+$("offDn").onclick=function(){offStep(1);};
+function offStep(n){
+  var box=$("offList"),len=box.children.length;
+  var i=Math.min(len-1,Math.max(0,offIndex()+n));
+  if(box.scrollTo)box.scrollTo({top:i*offRow,behavior:"smooth"});else{box.scrollTop=i*offRow;drumPaint(box);}
+}
+$("offOk").onclick=function(){
+  var sp=st.legs[st.offLeg],stns=(sp&&sp.__stns)||[],i=Math.min(stns.length-1,offIndex());
+  $("offBg").style.display="none";
+  pauseRide(stns[i]?{leg:st.offLeg,idx:i,name:stns[i].stationName}:null);
+};
+$("offList").onclick=function(e){   // 보이는 칸을 눌러도 선택
+  var b=e.target.closest?e.target.closest(".tr"):null;
+  if(!b)return;
+  var sp=st.legs[st.offLeg],stns=(sp&&sp.__stns)||[],i=parseInt(b.getAttribute("data-i"),10);
+  $("offBg").style.display="none";
+  pauseRide(stns[i]?{leg:st.offLeg,idx:i,name:stns[i].stationName}:null);
+};
 $("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
 $("earTgl").onclick=function(){earOnly=!earOnly;try{localStorage.setItem("subway_earonly",earOnly?"1":"0");}catch(e){}renderEar();};
