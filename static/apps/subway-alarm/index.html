@@ -172,7 +172,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       <div class="grid3">
         <div class="stat"><div class="n" id="remSt">–</div><div class="l">남은 역</div></div>
         <div class="stat"><div class="n" id="remT">–</div><div class="l">남은 시간</div></div>
-        <div class="stat"><div class="n" id="eta">–</div><div class="l">도착 예정</div></div>
+        <div class="stat"><div class="n" id="eta">–</div><div class="l">도착 시각</div></div>
       </div>
       <div class="barlbl"><span id="barK">갈아탈 역까지</span><span id="barP">0%</span></div>
       <div class="bar"><i id="barI"></i></div>
@@ -401,7 +401,8 @@ function buildTimeline(boardMs){
 }
 
 function elapsedMin(){var acc=st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0);return (Date.now()-st.t0-acc)/60000;}
-function fmtMMSS(sec){sec=Math.max(0,Math.round(sec));var m=Math.floor(sec/60),s=sec%60;return m+":"+String(s).padStart(2,"0");}
+// 시계 시각과 헷갈리지 않게 "16분" / "57초"로 적는다
+function fmtLeft(sec){sec=Math.max(0,Math.round(sec));return sec<60?(sec+"초"):(Math.floor(sec/60)+"분");}
 function fmtClock(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");}
 // 지금 향해 가고 있는 역(=이번 역). 한 역에 닿는 순간 바로 다음 역으로 넘어간다.
 function curStation(em){
@@ -432,7 +433,7 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   var curLeg=st.legs[nextEv.legIdx];
   var remStations=curLeg?Math.max(0,Math.ceil((curLeg.__cum-em)/curLeg.__per)):0;
   $("remSt").textContent=remStations+"개";
-  $("remT").textContent=fmtMMSS(evRem*60);
+  $("remT").textContent=fmtLeft(evRem*60);
   $("eta").textContent=fmtClock(st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+nextEv.at*60000);
   // 위쪽 바 = 이번 구간(다음 이벤트까지)만 100% — 아래 전체 여정 라인과 겹치지 않게
   var segS=curLeg?curLeg.__start:0,segE=nextEv.at;
@@ -446,7 +447,7 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   if(Date.now()-lockLast>10000){                       // 잠금화면 문구는 10초마다만
     lockLast=Date.now();
     lockInfo("이번 역 "+curSt+" · "+(lastLeg?lastLeg.endName:"")+"까지 "+Math.max(0,Math.ceil(remMin))+"분",
-             (nextEv.type==="final"?"내릴 역 ":"갈아탈 역 ")+nextEv.station+" "+fmtMMSS(evRem*60)+" 전");
+             (nextEv.type==="final"?"내릴 역 ":"갈아탈 역 ")+nextEv.station+" "+fmtLeft(evRem*60)+" 전");
   }
   if(st.paused)return;
   // 알림: 각 이벤트 1분 전 + 도착
