@@ -43,7 +43,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .leg .info b{color:#eef2f6;}
 .leg .info .sm{font-size:12px;color:#8fa3b8;}
 .leg .info .way{color:#7ea6e0;font-size:12px;}
-#run .dest{text-align:center;padding:6px 0 2px;cursor:pointer;}
+#run .dest{text-align:center;padding:6px 0 2px;}
 #run .dest .k{font-size:13px;color:#8fa3b8;}
 #run .dest .v{font-size:27px;font-weight:900;line-height:1.15;margin-top:2px;}
 #run .dest .v.near{color:#e0c07e;}
@@ -167,7 +167,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 
   <div id="run" class="hidden">
     <div class="card">
-      <div class="dest" id="destBox"><div class="k">이번 역</div><div class="v" id="destN">—</div>
+      <div class="dest"><div class="k">이번 역</div><div class="v" id="destN">—</div>
         <div class="dgo">목적지 <b id="dstN">—</b><span id="dgoT"></span></div></div>
       <div class="grid3">
         <div class="stat"><div class="n" id="remSt">–</div><div class="l">남은 역</div></div>
@@ -850,12 +850,6 @@ $("trains").onclick=function(e){   // 보이는 칸을 그냥 눌러도 선택
 };
 $("mNow").onclick=function(){startRun(Date.now());};      // 시간표 못 받았을 때 예전 방식(예상 소요시간)
 $("mCancel").onclick=function(){$("modalBg").style.display="none";};
-$("destBox").onclick=function(){    // 화면 안 보고 있을 때: 역 이름을 눌러 소리로 확인
-  if(!st.running)return;
-  var em=elapsedMin(),cur=curStation(em),ev=st.events.find(function(e){return e.at>em-0.02;});
-  if(!cur)return;
-  speak("이번 역은 "+cur+"역입니다."+(ev?" "+ev.station+"까지 약 "+Math.max(1,Math.round(ev.at-em))+"분 남았습니다.":""));
-};
 $("btnPause").onclick=function(){if(!st.paused){st.paused=true;st.pausedAt=Date.now();$("btnPause").textContent="▶️ 재개";log("⏸️ 일시정지");}else{st.paused=false;st.pausedAcc+=Date.now()-st.pausedAt;$("btnPause").textContent="⏸️ 일시정지";log("▶️ 재개");}};
 $("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
