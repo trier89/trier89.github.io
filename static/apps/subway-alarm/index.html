@@ -112,8 +112,11 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   scroll-snap-align:center;scroll-snap-stop:always;transform-origin:50% 50%;will-change:transform,opacity;}
 .trains .tr .tm{font-size:27px;font-weight:900;color:var(--acc);line-height:1.1;letter-spacing:.5px;}
 .trains .tr .ds{font-size:12.5px;color:#8fa3b8;line-height:1.35;}
-/* 떠난 열차도 똑같이 고를 수 있어야 한다(방금 탄 열차가 대개 그것) →
-   색을 죽이지 않고, 옆의 "4분 전 출발" 문구로만 구분한다 */
+/* 떠난 열차도 똑같이 고를 수 있어야 한다(방금 탄 열차가 대개 그것).
+   그래서 글씨를 죽이는 대신 뚜렷한 딱지로 구분한다 */
+.trains .tr .bg{display:inline-block;border-radius:6px;padding:2px 7px;font-size:10.5px;font-weight:800;margin-right:6px;}
+.trains .tr .bg.was{background:#42586e;color:#eef2f6;}
+.trains .tr .bg.next{background:#eef2f6;color:#0b1725;}
 .pkbtn{width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;color:#9fb3c8;border-radius:10px;padding:7px;font-size:13px;font-weight:700;cursor:pointer;}
 .pkbtn:active{background:#16263a;}
 .pkhint{font-size:11.5px;color:#7d92a8;margin:9px 0 13px;line-height:1.5;}
@@ -697,8 +700,9 @@ function showBoardModal(k){
     var html=d.trains.map(function(t,i){
       var dep=dayMs(t.dep),diff=Math.round((dep-now)/60000);
       var when=diff>0?("약 "+diff+"분 뒤 출발"):(diff===0?"곧 출발":(-diff)+"분 전 출발");
+      var tag=(dep<now)?'<b class="bg was">지남</b>':((i===soon)?'<b class="bg next">다음</b>':'');
       return '<button class="tr'+(dep<now?" past":"")+'" data-i="'+i+'"><span class="tm">'+hhmm(t.dep)+'</span>'
-        +'<span class="ds">'+(t.dest?t.dest+"행 · ":"")+when+'</span></button>';
+        +'<span class="ds">'+tag+(t.dest?t.dest+"행 · ":"")+when+'</span></button>';
     }).join("");
     var box=$("trains");box.innerHTML=html;
     pkRow=(box.querySelector(".tr")||{}).offsetHeight||62;
