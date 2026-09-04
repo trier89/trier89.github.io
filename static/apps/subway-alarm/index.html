@@ -164,7 +164,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
   <div id="run" class="hidden">
     <div class="card">
       <div class="dest">
-        <div><div class="k">이번 역</div><div class="v" id="destN">—</div></div>
+        <div><div class="k" id="destK">이번 역</div><div class="v" id="destN">—</div></div>
         <div class="r"><div class="k">목적지</div><div class="v2" id="dstN">—</div></div>
       </div>
       <div class="tgt"><span id="tgtK">갈아탈 역</span> <b id="tgtN">—</b>까지</div>
@@ -427,18 +427,20 @@ function curStation(em){
   var last=st.legs[st.legs.length-1];return last?last.endName:"—";
 }
 
-function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em;
+function tick(){if(!st.running||st.replanning)return;var em=elapsedMin();var remMin=st.total-em;
   // 다음 이벤트
   var nextEv=st.events.find(function(e){return e.at>em-0.02;})||st.events[st.events.length-1];
   var evRem=nextEv.at-em;
   var curSt=curStation(em);
-  $("destN").textContent=curSt;
+  var onBreak=st.paused&&st.off;
+  $("destK").textContent=onBreak?"내린 역":"이번 역";
+  $("destN").textContent=onBreak?st.off.name:curSt;
   var lastLeg=st.legs[st.legs.length-1];
   $("dstN").textContent=lastLeg?lastLeg.endName:"—";
   if(lastLeg&&lastLeg.lane&&lastLeg.lane[0])$("dstN").style.color=lineInk(lastLeg.lane[0].name);
   var curLeg=st.legs[nextEv.legIdx];
   // 이번 역 이름도 지금 타고 있는 노선 색으로. 다만 곧 내려야 할 땐 경고색이 우선.
-  $("destN").style.color=(evRem<=1)?"#e0c07e":lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:"");
+  $("destN").style.color=onBreak?"#e0c07e":((evRem<=1)?"#e0c07e":lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:""));
   $("tgtK").textContent=(nextEv.type==="final")?"내릴 역":"갈아탈 역";
   $("tgtN").textContent=nextEv.station;
   $("tgtN").style.color=(nextEv.type==="final")?"#4ee39b":"#e0c07e";
@@ -656,7 +658,7 @@ function jmNodes(){
         var pv=out[out.length-1],gap=nd.t-pv.t;                           // 갈아타는 데 걸리는 시간
         if(pv.name&&pv.name===nd.name){
           if(gap<=0.15){pv.tf=true;pv.col2=col;continue;}                 // 대기시간 정보가 없으면 한 점으로
-          nd.xfer=true;nd.mins=gap;                                       // 같은 역 환승 → 회색 구간
+          nd.xfer=true;nd.mins=gap;nd.stop=(col===pv.col);                // 같은 노선이면 환승이 아니라 잠깐 내린 것
         }else{nd.walk=true;nd.mins=gap;}                                  // 다른 역(도보) → 회색 점선
         pv.tf=true;pv.col2=col;
       }
@@ -698,7 +700,7 @@ function renderJMap(elId,live){
     dots+='<circle class="jm-d" cx="'+p.x+'" cy="'+p.y+'" r="'+r+'" fill="#16263a" stroke="'+nd.col+'" stroke-width="'+(nd.tf?3:2)+'"></circle>';
     if(nd.col2)dots+='<circle cx="'+p.x+'" cy="'+p.y+'" r="2.3" fill="'+nd.col2+'"></circle>';
     if(nd.xfer){   // 같은 역 환승: 이름 대신 갈아타는 데 걸리는 시간
-      labs+='<text class="jm-x" x="'+p.x+'" y="'+(p.y+16)+'" text-anchor="middle">환승 '+Math.max(1,Math.round(nd.mins))+'분</text>';
+      labs+='<text class="jm-x" x="'+p.x+'" y="'+(p.y+16)+'" text-anchor="middle">'+(nd.stop?"정차 ":"환승 ")+Math.max(1,Math.round(nd.mins))+'분</text>';
       return;
     }
     if(nd.name){
@@ -710,9 +712,12 @@ function renderJMap(elId,live){
     }
   });
   var mk=live?'<circle class="jm-pulse" cx="-99" cy="-99" r="5"></circle><circle class="jm-mk" cx="-99" cy="-99" r="4.6"></circle>':'';
-  var chips=(st.legs||[]).map(function(sp){
+  var prevLn="",chips=(st.legs||[]).map(function(sp){
     if(!sp.lane||!sp.lane[0])return "";
-    return '<span class="jm-chip" style="background:'+lineColor(sp.lane[0].name)+'">'+jmEsc(lineShort(sp.lane[0].name))+'</span>';}).join("");
+    var ln=sp.lane[0].name;
+    if(ln===prevLn)return "";                 // 잠깐 내렸다 다시 탄 같은 노선은 한 번만
+    prevLn=ln;
+    return '<span class="jm-chip" style="background:'+lineColor(ln)+'">'+jmEsc(lineShort(ln))+'</span>';}).join("");
   el.innerHTML='<div class="jm-top"><span class="jm-ttl">전체 여정</span>'+chips+'<span class="jm-pct"></span></div>'
     +'<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" xmlns="http://www.w3.org/2000/svg">'+segs+dots+labs+mk+'</svg>';
   var sv=el.querySelector("svg");
@@ -842,7 +847,100 @@ $("trains").onclick=function(e){   // 보이는 칸을 그냥 눌러도 선택
 };
 $("mNow").onclick=function(){startRun(Date.now());};      // 시간표 못 받았을 때 예전 방식(예상 소요시간)
 $("mCancel").onclick=function(){$("modalBg").style.display="none";};
-$("btnPause").onclick=function(){if(!st.paused){st.paused=true;st.pausedAt=Date.now();$("btnPause").textContent="▶️ 재개";log("⏸️ 일시정지");}else{st.paused=false;st.pausedAcc+=Date.now()-st.pausedAt;$("btnPause").textContent="⏸️ 일시정지";log("▶️ 재개");}};
+// 방금 지나온 역 = 화장실 등으로 내린 역
+function offPoint(em){
+  for(var i=0;i<st.legs.length;i++){
+    var sp=st.legs[i];
+    if(em<=sp.__cum+0.001){
+      var stns=(sp.__stns&&sp.__stns.length)?sp.__stns:[];
+      if(!stns.length)return null;
+      var into=Math.max(0,em-sp.__start);
+      var si=Math.min(stns.length-1,Math.floor(into/sp.__per));
+      return {leg:i,idx:si,name:stns[si].stationName};
+    }
+  }
+  return null;
+}
+function cutLeg(sp,stns,mins){    // 구간을 잘라 새 구간 하나를 만든다
+  return {trafficType:1,lane:sp.lane,way:sp.way,startName:stns[0].stationName,
+    endName:stns[stns.length-1].stationName,stationCount:Math.max(1,stns.length-1),
+    sectionTime:mins,passStopList:{stations:stns},__walk:0};
+}
+// 재개 시점 이후 첫 열차로 남은 구간들의 시각을 다시 잡는다
+function chainPlan(k,afterMs,plan){
+  return new Promise(function(res){
+    (function step(i,after){
+      if(i>=st.legs.length){res(plan);return;}
+      var sp=st.legs[i];
+      fetchTrains(sp,hmsOf(after)).then(function(r){
+        var dep,arr,no=null,exact=false;
+        if(r&&r.ok&&r.trains&&r.trains.length){
+          var tr=r.trains[0];dep=todayMs(tr.dep);arr=tr.arr?todayMs(tr.arr):dep+sp.sectionTime*60000;
+          if(dep<after-60000){dep=after;arr=dep+sp.sectionTime*60000;}
+          no=tr.no;exact=!!tr.arr;
+        }else{dep=after;arr=after+sp.sectionTime*60000;}
+        plan[i]={dep:dep,arr:arr,exact:exact,train:no};
+        var nx=st.legs[i+1];
+        step(i+1,arr+((nx&&nx.__walk)||2)*60000);
+      });
+    })(k,afterMs);
+  });
+}
+// 계획표(절대시각)로 구간·이벤트를 다시 계산. t0는 그대로 두어 지나온 길이 안 흔들린다.
+function rebuildFromPlan(plan){
+  st.plan=plan;st.events=[];
+  st.legs.forEach(function(sp,i){
+    var pl=plan[i]||plan[plan.length-1];
+    sp.__start=(pl.dep-st.t0)/60000;sp.__cum=(pl.arr-st.t0)/60000;
+    sp.__stns=(sp.passStopList&&sp.passStopList.stations)||[];
+    sp.__per=(sp.__cum-sp.__start)/Math.max(1,sp.stationCount);
+    st.events.push({at:sp.__cum,type:(i===st.legs.length-1)?"final":"transfer",station:sp.endName,legIdx:i,
+                    nextLine:(i===st.legs.length-1)?null:lineShort(st.legs[i+1].lane[0].name)});
+  });
+  st.total=st.events[st.events.length-1].at;
+  var em=elapsedMin();
+  st.fired={};
+  st.events.forEach(function(e,i){if(e.at<=em){st.fired["w"+i]=true;st.fired["a"+i]=true;}});
+  renderJMap("jmap",true);tick();
+}
+function pauseRide(){
+  var em=elapsedMin(),op=offPoint(em);
+  st.paused=true;st.pausedAt=Date.now();st.off=op;
+  $("btnPause").textContent="▶️ 다시 탔어요";
+  log(op?("⏸️ "+op.name+"역에서 내림 — 다시 타면 그 시각 열차로 다시 잡습니다"):"⏸️ 일시정지");
+  tick();
+}
+function resumeRide(){
+  var op=st.off,now=Date.now();
+  $("btnPause").textContent="⏸️ 일시정지";
+  st.paused=false;
+  if(!op||!st.plan){st.pausedAcc+=now-st.pausedAt;log("▶️ 재개");tick();return;}
+  var li=op.leg,sp=st.legs[li],stns=sp.__stns||[],k;
+  var plan=st.plan.slice();
+  if(op.idx>0&&op.idx<stns.length-1){          // 구간 중간에서 내렸으면 둘로 쪼갠다
+    var per=sp.sectionTime/Math.max(1,sp.stationCount);      // 표시용 소요시간 배분
+    var a=cutLeg(sp,stns.slice(0,op.idx+1),per*op.idx);
+    var b=cutLeg(sp,stns.slice(op.idx),per*(stns.length-1-op.idx));
+    st.legs.splice(li,1,a,b);
+    var offAbs=st.t0+(sp.__start+sp.__per*op.idx)*60000;     // 실제로 그 역에 닿았던 시각
+    plan.splice(li,1,{dep:st.plan[li].dep,arr:offAbs,exact:false,train:st.plan[li].train},null);
+    k=li+1;
+  }else{
+    k=(op.idx>=stns.length-1)?li+1:li;         // 끝 역에서 내렸으면 다음 구간부터
+  }
+  if(k>=st.legs.length){st.pausedAcc+=now-st.pausedAt;log("▶️ 재개");tick();return;}
+  st.pausedAcc=0;                              // 절대시각으로 다시 잡으므로 누적 정지시간은 필요 없다
+  st.replanning=true;                          // 다시 잡는 동안엔 화면을 흔들지 않는다
+  log("▶️ "+op.name+"에서 다시 탑승 — 열차 찾는 중…");
+  chainPlan(k,now,plan).then(function(np){
+    st.replanning=false;
+    rebuildFromPlan(np);
+    var p0=np[k];
+    log("🚉 "+fmtClock(p0.dep)+" 열차"+(p0.train?" ("+p0.train+")":"")+" 기준으로 다시 계산했습니다");
+    speak("다시 탑승했습니다. "+(st.legs[k].endName)+"까지 다시 계산했습니다.");
+  });
+}
+$("btnPause").onclick=function(){ if(!st.paused)pauseRide(); else resumeRide(); };
 $("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
 $("earTgl").onclick=function(){earOnly=!earOnly;try{localStorage.setItem("subway_earonly",earOnly?"1":"0");}catch(e){}renderEar();};
