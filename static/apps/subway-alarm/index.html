@@ -43,11 +43,14 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .leg .info b{color:#eef2f6;}
 .leg .info .sm{font-size:12px;color:#8fa3b8;}
 .leg .info .way{color:#7ea6e0;font-size:12px;}
-#run .dest{text-align:center;padding:6px 0 2px;}
+#run .dest{text-align:center;padding:6px 0 2px;cursor:pointer;}
+#run .dest .spk{font-size:10.5px;color:#5d7186;margin-left:3px;}
 #run .dest .k{font-size:13px;color:#8fa3b8;}
 #run .dest .v{font-size:27px;font-weight:900;line-height:1.15;margin-top:2px;}
-#run .dest .v.transfer{color:#e0c07e;}
-#run .dest .v.final{color:#4ee39b;}
+#run .dest .v.near{color:#e0c07e;}
+.dgo{font-size:12.5px;color:#8fa3b8;margin-top:5px;}
+.dgo b{color:#4ee39b;font-weight:800;}
+.dgo span{color:#7d92a8;}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0;}
 .stat{background:#0d1b2a;border-radius:12px;padding:11px 5px;text-align:center;}
 .stat .n{font-size:20px;font-weight:800;}
@@ -58,7 +61,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .bar>i{display:block;height:100%;background:linear-gradient(90deg,#12b06e,#4ee39b);width:0;transition:width .5s;}
 .now{text-align:center;font-size:13.5px;color:#cfe0ef;margin:6px 0;}
 .now b{color:#4ee39b;}
-.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px;}
+.ctrls{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px;}
 .ctrls button{padding:13px;border:1.5px solid #2b3f57;border-radius:12px;background:#0d1b2a;color:#eef2f6;font-size:14px;font-weight:700;cursor:pointer;}
 .log{margin-top:12px;font-size:12px;color:#8fa3b8;max-height:100px;overflow-y:auto;}
 .log div{padding:3px 0;border-bottom:1px solid #1e3049;}
@@ -75,13 +78,23 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 .modal .other{background:#0d1b2a;color:#cfe0ef;border:1.5px solid #2b3f57;}
 .offs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 .offs button{background:#0d1b2a;border:1.5px solid #2b3f57;color:#eef2f6;border-radius:18px;padding:9px 14px;font-size:14px;cursor:pointer;}
-/* 열차 고르기 = 한 번에 한 칸만 보이는 스냅 휠 */
-.pkbox{border:2px solid #12b06e;border-radius:14px;background:#0d1b2a;overflow:hidden;margin:7px 0;}
-.trains{height:98px;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;}
+/* 열차 고르기 = 돌리는 원통(드럼). 가운데 한 편만 또렷하고 위아래는 곡면으로 누워 사라진다 */
+.pkbox{position:relative;border-radius:16px;background:#0b1725;overflow:hidden;margin:7px 0;
+  perspective:520px;perspective-origin:50% 50%;box-shadow:inset 0 0 34px rgba(0,0,0,.75);}
+.pkbox:before,.pkbox:after{content:"";position:absolute;left:0;right:0;height:74px;z-index:3;pointer-events:none;}
+.pkbox:before{top:0;background:linear-gradient(180deg,#0b1725 12%,rgba(11,23,37,.72) 55%,rgba(11,23,37,0));}
+.pkbox:after{bottom:0;background:linear-gradient(0deg,#0b1725 12%,rgba(11,23,37,.72) 55%,rgba(11,23,37,0));}
+.pksel{position:absolute;left:9px;right:9px;top:70px;height:70px;z-index:2;pointer-events:none;
+  border-top:1.5px solid rgba(18,176,110,.85);border-bottom:1.5px solid rgba(18,176,110,.85);
+  background:linear-gradient(90deg,rgba(18,176,110,.10),rgba(18,176,110,.03));}
+.trains{position:relative;z-index:1;height:210px;padding:70px 0;overflow-y:auto;scroll-snap-type:y mandatory;
+  transform-style:preserve-3d;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;}
 .trains::-webkit-scrollbar{display:none;}
-.trains .tr{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:100%;height:98px;background:transparent;border:0;padding:0 12px;margin:0;color:#eef2f6;cursor:pointer;text-align:center;scroll-snap-align:start;scroll-snap-stop:always;}
-.trains .tr .tm{font-size:31px;font-weight:900;color:#4ee39b;line-height:1.05;}
-.trains .tr .ds{font-size:12.5px;color:#8fa3b8;line-height:1.45;}
+.trains .tr{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:100%;height:70px;
+  background:transparent;border:0;padding:0 10px;margin:0;color:#eef2f6;cursor:pointer;text-align:center;
+  scroll-snap-align:center;scroll-snap-stop:always;transform-origin:50% 50%;will-change:transform,opacity;}
+.trains .tr .tm{font-size:27px;font-weight:900;color:#4ee39b;line-height:1.1;letter-spacing:.5px;}
+.trains .tr .ds{font-size:11.5px;color:#8fa3b8;line-height:1.35;}
 .trains .tr.past .tm{color:#e0c07e;}
 .pkbtn{width:100%;background:#0d1b2a;border:1.5px solid #2b3f57;color:#9fb3c8;border-radius:10px;padding:7px;font-size:13px;font-weight:700;cursor:pointer;}
 .pkbtn:active{background:#16263a;}
@@ -152,7 +165,8 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 
   <div id="run" class="hidden">
     <div class="card">
-      <div class="dest"><div class="k" id="destK">다음</div><div class="v" id="destN">—</div></div>
+      <div class="dest" id="destBox"><div class="k">이번 역 <span class="spk">🔊 눌러서 듣기</span></div><div class="v" id="destN">—</div>
+        <div class="dgo">목적지 <b id="dstN">—</b><span id="dgoT"></span></div></div>
       <div class="grid3">
         <div class="stat"><div class="n" id="remSt">–</div><div class="l">남은 역</div></div>
         <div class="stat"><div class="n" id="remT">–</div><div class="l">남은 시간</div></div>
@@ -160,8 +174,7 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
       </div>
       <div class="barlbl"><span id="barK">갈아탈 역까지</span><span id="barP">0%</span></div>
       <div class="bar"><i id="barI"></i></div>
-      <div class="now">지금쯤 <b id="curN">—</b> 부근</div>
-      <div class="ctrls"><button id="btnNow">🔊 지금 어디?</button><button id="btnPause">⏸️ 일시정지</button></div>
+      <div class="ctrls"><button id="btnPause">⏸️ 일시정지</button></div>
       <button class="big-btn stop" id="btnStop" style="margin-top:9px;">■ 정지 / 다시 설정</button>
       <div class="log" id="log"></div>
     </div>
@@ -175,12 +188,12 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
     <div class="q" id="mQ">이 열차에 타셨나요?</div>
     <div class="qs" id="mQs"></div>
     <button class="pkbtn" id="pkUp">▲ 이전 열차</button>
-    <div class="pkbox"><div class="trains" id="trains"><div class="spin">열차 시간표를 불러오는 중…</div></div></div>
+    <div class="pkbox"><div class="pksel"></div><div class="trains" id="trains"><div class="spin">열차 시간표를 불러오는 중…</div></div></div>
     <button class="pkbtn" id="pkDn">▼ 다음 열차</button>
     <div class="pkhint" id="pkHint">위아래로 넘겨서 탄 열차를 고르세요</div>
     <div class="mbtns">
       <button class="yes" id="mPick">이 열차 탔어요</button>
-      <button class="other" id="mNow">시간표 없이 지금 탔어요</button>
+      <button class="other" id="mNow">방금 탔어요 · 시간표 없이 대략으로<br><span style="font-size:11.5px;color:#7d92a8;font-weight:400;">지금 시각부터 소요시간을 더해 계산합니다</span></button>
       <button class="other" id="mCancel">닫기</button>
     </div>
   </div>
@@ -191,7 +204,7 @@ var PROXY="https://planfully-daily.pages.dev/api/subway-route";
 var STN={},NAMES=[];
 var LINECOLOR={"1":"#0d3692","2":"#00a84d","3":"#ef7c1c","4":"#00a5de","5":"#996cac","6":"#cd7c2f","7":"#747f00","8":"#e6186c","9":"#bb8336","공항":"#0090d2","신분당":"#d4003b","수인분당":"#f5a200","분당":"#f5a200","경의중앙":"#77c4a3","경의":"#77c4a3","경춘":"#0c8e72","서해":"#8fc31f","신림":"#697215","우이신설":"#b7c452","인천1":"#7ca8d5","인천2":"#ed8b00","의정부":"#fda600","용인":"#509f22","김포":"#a17800","GTX":"#9a4d9e"};
 var $=function(id){return document.getElementById(id);};
-var pkRow=98;   // 휠 한 칸 높이(렌더 후 실제값으로 갱신)
+var pkRow=70;   // 드럼 한 칸 높이(렌더 후 실제값으로 갱신)
 function lineColor(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return LINECOLOR[num[1]];for(var k in LINECOLOR){if(m.indexOf(k)>=0)return LINECOLOR[k];}return "#5a6b7d";}
 function lineShort(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return num[1]+"호선";return m.replace("선","선").slice(0,5);}
 function speak(t){try{if(!("speechSynthesis"in window))return;speechSynthesis.resume();var u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=1.0;u.volume=1;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
@@ -205,6 +218,41 @@ function audioUnlock(){try{
   if(AC&&AC.state==="suspended")AC.resume();
   if(!ttsPrimed&&"speechSynthesis"in window){ // 빈 문자열 프라이밍은 iOS에서 무효 → 실제 텍스트로
     var u=new SpeechSynthesisUtterance("준비");u.volume=0.01;u.lang="ko-KR";speechSynthesis.speak(u);ttsPrimed=true;}
+}catch(e){}}
+// ── 잠금화면 표시: 무음을 재생해 미디어 세션을 띄우고, 거기에 이번 역·남은 시간을 적는다 ──
+var lockA=null,lockUrl=null,lockLast=0;
+function silentUrl(sec){
+  var sr=8000,n=sr*sec,b=new Uint8Array(44+n),i;
+  function W(o,t){for(var k=0;k<t.length;k++)b[o+k]=t.charCodeAt(k);}
+  function U32(o,v){b[o]=v&255;b[o+1]=(v>>8)&255;b[o+2]=(v>>16)&255;b[o+3]=(v>>24)&255;}
+  function U16(o,v){b[o]=v&255;b[o+1]=(v>>8)&255;}
+  W(0,"RIFF");U32(4,36+n);W(8,"WAVEfmt ");U32(16,16);U16(20,1);U16(22,1);U32(24,sr);U32(28,sr);U16(32,1);U16(34,8);W(36,"data");U32(40,n);
+  for(i=0;i<n;i++)b[44+i]=128;                        // 8bit 무음
+  return URL.createObjectURL(new Blob([b],{type:"audio/wav"}));
+}
+function lockStart(){try{
+  if(!lockA){
+    lockUrl=silentUrl(12);                            // 너무 짧으면 잠금화면에 안 뜬다
+    lockA=new Audio(lockUrl);lockA.loop=true;lockA.volume=0.0001;
+    lockA.setAttribute("playsinline","");lockA.preload="auto";
+  }
+  var pr=lockA.play();if(pr&&pr.catch)pr.catch(function(){});
+  if("mediaSession" in navigator){
+    navigator.mediaSession.playbackState="playing";
+    try{
+      navigator.mediaSession.setActionHandler("play",function(){try{lockA.play();}catch(e){}});
+      navigator.mediaSession.setActionHandler("pause",function(){try{lockA.play();}catch(e){}});
+    }catch(e){}
+  }
+}catch(e){}}
+function lockStop(){try{
+  if(lockA){lockA.pause();}
+  if("mediaSession" in navigator){navigator.mediaSession.playbackState="none";navigator.mediaSession.metadata=null;}
+}catch(e){}}
+function lockInfo(title,sub){try{
+  if(!("mediaSession" in navigator)||!window.MediaMetadata)return;
+  navigator.mediaSession.metadata=new MediaMetadata({title:title,artist:sub,album:"내릴 때 알려줘",
+    artwork:[{src:"icon-192.png",sizes:"192x192",type:"image/png"},{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
 }catch(e){}}
 function keepAudioAlive(on){try{
   if(!AC)return;
@@ -351,15 +399,32 @@ function buildTimeline(boardMs){
 function elapsedMin(){var acc=st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0);return (Date.now()-st.t0-acc)/60000;}
 function fmtMMSS(sec){sec=Math.max(0,Math.round(sec));var m=Math.floor(sec/60),s=sec%60;return m+":"+String(s).padStart(2,"0");}
 function fmtClock(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");}
-function curStation(em){for(var i=0;i<st.legs.length;i++){var sp=st.legs[i];if(em<=sp.__cum){var into=em-sp.__start;var idx=Math.min(sp.__stns.length-1,Math.max(0,Math.round(into/sp.__per)));return sp.__stns[idx]?sp.__stns[idx].stationName:sp.startName;}}var last=st.legs[st.legs.length-1];return last?last.endName:"—";}
+// 지금 향해 가고 있는 역(=이번 역). 한 역에 닿는 순간 바로 다음 역으로 넘어간다.
+function curStation(em){
+  for(var i=0;i<st.legs.length;i++){
+    var sp=st.legs[i];
+    if(em<=sp.__cum){
+      var into=em-sp.__start;
+      if(into<0)return sp.startName;                       // 아직 환승 대기중 → 갈아탈 역에 서 있다
+      var stns=sp.__stns&&sp.__stns.length?sp.__stns:null;
+      if(!stns)return sp.endName;
+      var idx=Math.min(stns.length-1,Math.floor(into/sp.__per)+1);
+      return stns[idx]?stns[idx].stationName:sp.endName;
+    }
+  }
+  var last=st.legs[st.legs.length-1];return last?last.endName:"—";
+}
 
 function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em;
   // 다음 이벤트
   var nextEv=st.events.find(function(e){return e.at>em-0.02;})||st.events[st.events.length-1];
   var evRem=nextEv.at-em;
-  $("destK").textContent=nextEv.type==="final"?"이번에 내릴 역":"갈아탈 역";
-  $("destN").textContent=nextEv.station;
-  $("destN").className="v "+(nextEv.type==="final"?"final":"transfer");
+  var curSt=curStation(em);
+  $("destN").textContent=curSt;
+  $("destN").className="v"+(evRem<=1?" near":"");     // 곧 내려야 하면 강조
+  var lastLeg=st.legs[st.legs.length-1];
+  $("dstN").textContent=lastLeg?lastLeg.endName:"—";
+  $("dgoT").textContent=(nextEv.type==="final")?"":(" · "+fmtClock(st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+st.total*60000)+" 도착");
   var curLeg=st.legs[nextEv.legIdx];
   var remStations=curLeg?Math.max(0,Math.ceil((curLeg.__cum-em)/curLeg.__per)):0;
   $("remSt").textContent=remStations+"개";
@@ -374,7 +439,11 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   $("barK").textContent=(nextEv.type==="final"?"내릴 역까지":"갈아탈 역까지")+" · "+nextEv.station;
   $("barP").textContent=Math.round(segF*100)+"%";
   jmTick(em);
-  $("curN").textContent=curStation(em);
+  if(Date.now()-lockLast>10000){                       // 잠금화면 문구는 10초마다만
+    lockLast=Date.now();
+    lockInfo("이번 역 "+curSt+" · "+(lastLeg?lastLeg.endName:"")+"까지 "+Math.max(0,Math.ceil(remMin))+"분",
+             (nextEv.type==="final"?"내릴 역 ":"갈아탈 역 ")+nextEv.station+" "+fmtMMSS(evRem*60)+" 전");
+  }
   if(st.paused)return;
   // 알림: 각 이벤트 1분 전 + 도착
   st.events.forEach(function(e,i){
@@ -493,8 +562,9 @@ function showBoardModal(){
         +'<span class="ds">'+(t.dest?t.dest+"행 · ":"")+when+'<br>'+first.endName+" "+fmtClock(arr)+" 도착"+(t.arr?"":" (예상)")+'</span></button>';
     }).join("");
     var box=$("trains");box.innerHTML=html;
-    pkRow=(box.querySelector(".tr")||{}).offsetHeight||98;
+    pkRow=(box.querySelector(".tr")||{}).offsetHeight||70;
     box.scrollTop=soon*pkRow;
+    pkPaint();
   });
 }
 // 선택한 열차 기준으로 전 구간 시각 확정(환승 구간은 도보시간 뒤 첫 열차)
@@ -529,7 +599,7 @@ function startRunPlan(plan){
                     nextLine:(i===st.legs.length-1)?null:lineShort(st.legs[i+1].lane[0].name)});
   });
   st.total=st.events[st.events.length-1].at;
-  st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);
+  st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);lockStart();
   $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";
   var last=st.legs[st.legs.length-1],arrMs=plan[plan.length-1].arr;
   speak(last.endName+"까지 "+fmtClock(arrMs)+" 도착 예정입니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
@@ -539,7 +609,7 @@ function startRunPlan(plan){
 }
 function startRun(boardMs){
   $("modalBg").style.display="none";
-  buildTimeline(boardMs);st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);
+  buildTimeline(boardMs);st.running=true;keepAwake();audioUnlock();keepAudioAlive(true);lockStart();
   $("result").classList.add("hidden");$("run").classList.remove("hidden");$("log").innerHTML="";
   var last=st.legs[st.legs.length-1];
   speak(last.endName+"까지 약 "+st.total+"분 걸립니다. 내릴 역과 갈아탈 역 1분 전에 알려드릴게요.");
@@ -723,11 +793,28 @@ $("testSnd").onclick=function(){
   w.innerHTML="🔊 방금 <b>삑삑 소리와 안내 음성</b>이 들렸다면 정상입니다. 안 들렸다면 아이폰 옆면 무음 스위치를 풀고 볼륨을 올린 뒤 다시 눌러주세요.";
 };
 $("board").onclick=function(){audioUnlock();askNotify();showBoardModal();};
-function pkIndex(){return Math.max(0,Math.round($("trains").scrollTop/(pkRow||98)));}
+function pkIndex(){return Math.max(0,Math.round($("trains").scrollTop/(pkRow||70)));}
+// 가운데에서 멀어질수록 눕히고 흐리게 → 원통 표면에 적힌 것처럼 보인다
+var pkRaf=0;
+function pkPaint(){
+  var box=$("trains");if(!box||!box.children.length)return;
+  var c=box.scrollTop/(pkRow||70),kids=box.children;
+  var lo=Math.max(0,Math.round(c)-3),hi=Math.min(kids.length-1,Math.round(c)+3);
+  for(var i=lo;i<=hi;i++){
+    var el=kids[i];if(!el||!el.style)continue;
+    var d=i-c,ad=Math.abs(d);
+    el.style.transform="rotateX("+(-d*27).toFixed(1)+"deg) scale("+(1-Math.min(.32,ad*.12)).toFixed(3)+")";
+    el.style.opacity=Math.max(0,1-ad*.45).toFixed(2);
+  }
+}
+$("trains").addEventListener("scroll",function(){
+  if(pkRaf)return;
+  pkRaf=requestAnimationFrame(function(){pkRaf=0;pkPaint();});
+});
 function pkStep(n){
   var box=$("trains"),len=((st.tt&&st.tt.trains)||[]).length;
   var i=Math.min(len-1,Math.max(0,pkIndex()+n));
-  if(box.scrollTo)box.scrollTo({top:i*pkRow,behavior:"smooth"});else box.scrollTop=i*pkRow;
+  if(box.scrollTo)box.scrollTo({top:i*pkRow,behavior:"smooth"});else{box.scrollTop=i*pkRow;pkPaint();}
 }
 $("pkUp").onclick=function(){pkStep(-1);};
 $("pkDn").onclick=function(){pkStep(1);};
@@ -743,9 +830,14 @@ $("trains").onclick=function(e){   // 보이는 칸을 그냥 눌러도 선택
 };
 $("mNow").onclick=function(){startRun(Date.now());};      // 시간표 못 받았을 때 예전 방식(예상 소요시간)
 $("mCancel").onclick=function(){$("modalBg").style.display="none";};
-$("btnNow").onclick=function(){var s=curStation(elapsedMin());if(s)speak("지금은 "+s+"역 부근입니다.");};
+$("destBox").onclick=function(){    // 화면 안 보고 있을 때: 역 이름을 눌러 소리로 확인
+  if(!st.running)return;
+  var em=elapsedMin(),cur=curStation(em),ev=st.events.find(function(e){return e.at>em-0.02;});
+  if(!cur)return;
+  speak("이번 역은 "+cur+"역입니다."+(ev?" "+ev.station+"까지 약 "+Math.max(1,Math.round(ev.at-em))+"분 남았습니다.":""));
+};
 $("btnPause").onclick=function(){if(!st.paused){st.paused=true;st.pausedAt=Date.now();$("btnPause").textContent="▶️ 재개";log("⏸️ 일시정지");}else{st.paused=false;st.pausedAcc+=Date.now()-st.pausedAt;$("btnPause").textContent="⏸️ 일시정지";log("▶️ 재개");}};
-$("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
+$("btnStop").onclick=function(){st.running=false;keepAudioAlive(false);lockStop();if(wakeLock){try{wakeLock.release();}catch(e){}wakeLock=null;}if("speechSynthesis"in window)speechSynthesis.cancel();$("run").classList.add("hidden");$("setup").classList.remove("hidden");};
 
 $("earTgl").onclick=function(){earOnly=!earOnly;try{localStorage.setItem("subway_earonly",earOnly?"1":"0");}catch(e){}renderEar();};
 try{if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener)navigator.mediaDevices.addEventListener("devicechange",earScan);}catch(e){}
