@@ -211,6 +211,16 @@ var LINECOLOR={"1":"#0d3692","2":"#00a84d","3":"#ef7c1c","4":"#00a5de","5":"#996
 var $=function(id){return document.getElementById(id);};
 var pkRow=62;   // 드럼 한 칸 높이(렌더 후 실제값으로 갱신)
 function lineColor(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return LINECOLOR[num[1]];for(var k in LINECOLOR){if(m.indexOf(k)>=0)return LINECOLOR[k];}return "#5a6b7d";}
+// 어두운 노선색(1호선 남색 등)을 어두운 배경 위에서도 읽히게 밝힌다
+function lineInk(name){
+  var m=/^#([0-9a-f]{6})$/i.exec(lineColor(name)||"");
+  if(!m)return "#4ee39b";
+  var n=parseInt(m[1],16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  var lum=(0.299*r+0.587*g+0.114*b)/255;
+  if(lum<0.58){var t=(0.58-lum)/0.58*0.66;
+    r=Math.round(r+(255-r)*t);g=Math.round(g+(255-g)*t);b=Math.round(b+(255-b)*t);}
+  return "rgb("+r+","+g+","+b+")";
+}
 function lineShort(name){var m=name.replace("수도권","").trim();var num=m.match(/([1-9])호선/);if(num)return num[1]+"호선";return m.replace("선","선").slice(0,5);}
 function speak(t){try{if(!("speechSynthesis"in window))return;speechSynthesis.resume();var u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=1.0;u.volume=1;var vs=speechSynthesis.getVoices();var kv=vs.find(function(v){return v.lang&&v.lang.indexOf("ko")===0;});if(kv)u.voice=kv;speechSynthesis.speak(u);}catch(e){}}
 function vibe(m){try{if(navigator.vibrate)navigator.vibrate(m);}catch(e){}}
@@ -430,6 +440,7 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   $("destN").className="v"+(evRem<=1?" near":"");     // 곧 내려야 하면 강조
   var lastLeg=st.legs[st.legs.length-1];
   $("dstN").textContent=lastLeg?lastLeg.endName:"—";
+  if(lastLeg&&lastLeg.lane&&lastLeg.lane[0])$("dstN").style.color=lineInk(lastLeg.lane[0].name);
   $("dgoT").textContent=(nextEv.type==="final")?"":(" · "+fmtClock(st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+st.total*60000)+" 도착");
   var curLeg=st.legs[nextEv.legIdx];
   var remStations=curLeg?Math.max(0,Math.ceil((curLeg.__cum-em)/curLeg.__per)):0;
