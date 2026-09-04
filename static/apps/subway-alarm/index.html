@@ -46,17 +46,12 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
 #run .dest{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:3px 3px 1px;}
 #run .dest .k{font-size:11.5px;color:#8fa3b8;font-weight:700;}
 #run .dest .v{font-size:26px;font-weight:900;line-height:1.15;margin-top:1px;}
-#run .dest .v.near{color:#e0c07e;}
 #run .dest .r{text-align:right;}
 #run .dest .v2{font-size:19px;font-weight:800;line-height:1.25;margin-top:2px;color:#4ee39b;}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0;}
 .stat{background:#0d1b2a;border-radius:12px;padding:11px 5px;text-align:center;}
 .stat .n{font-size:20px;font-weight:800;}
 .stat .l{font-size:10.5px;color:#8fa3b8;margin-top:2px;}
-.barlbl{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#8fa3b8;font-weight:700;margin:11px 2px 4px;}
-.barlbl span:last-child{color:#cfe0ef;}
-.bar{height:9px;background:#0d1b2a;border-radius:6px;overflow:hidden;margin:0 0 2px;}
-.bar>i{display:block;height:100%;background:linear-gradient(90deg,#12b06e,#4ee39b);width:0;transition:width .5s;}
 .now{text-align:center;font-size:13.5px;color:#cfe0ef;margin:6px 0;}
 .now b{color:#4ee39b;}
 .ctrls{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px;}
@@ -175,8 +170,6 @@ input[type=text]{width:100%;padding:13px;border-radius:11px;border:1.5px solid #
         <div class="stat"><div class="n" id="remT">–</div><div class="l">남은 시간</div></div>
         <div class="stat"><div class="n" id="eta">–</div><div class="l">도착 예정 시각</div></div>
       </div>
-      <div class="barlbl"><span id="barK">갈아탈 역까지</span><span id="barP">0%</span></div>
-      <div class="bar"><i id="barI"></i></div>
       <div class="ctrls"><button id="btnPause">⏸️ 일시정지</button></div>
       <button class="big-btn stop" id="btnStop" style="margin-top:9px;">■ 정지 / 다시 설정</button>
       <div class="log" id="log"></div>
@@ -437,23 +430,16 @@ function tick(){if(!st.running)return;var em=elapsedMin();var remMin=st.total-em
   var evRem=nextEv.at-em;
   var curSt=curStation(em);
   $("destN").textContent=curSt;
-  $("destN").className="v"+(evRem<=1?" near":"");     // 곧 내려야 하면 강조
   var lastLeg=st.legs[st.legs.length-1];
   $("dstN").textContent=lastLeg?lastLeg.endName:"—";
   if(lastLeg&&lastLeg.lane&&lastLeg.lane[0])$("dstN").style.color=lineInk(lastLeg.lane[0].name);
   var curLeg=st.legs[nextEv.legIdx];
+  // 이번 역 이름도 지금 타고 있는 노선 색으로. 다만 곧 내려야 할 땐 경고색이 우선.
+  $("destN").style.color=(evRem<=1)?"#e0c07e":lineInk(curLeg&&curLeg.lane&&curLeg.lane[0]?curLeg.lane[0].name:"");
   var remStations=curLeg?Math.max(0,Math.ceil((curLeg.__cum-em)/curLeg.__per)):0;
   $("remSt").textContent=remStations+"개";
   $("remT").textContent=fmtLeft(evRem*60);
   $("eta").textContent=fmtClock(st.t0+st.pausedAcc+(st.paused?(Date.now()-st.pausedAt):0)+nextEv.at*60000);
-  // 위쪽 바 = 이번 구간(다음 이벤트까지)만 100% — 아래 전체 여정 라인과 겹치지 않게
-  var segS=curLeg?curLeg.__start:0,segE=nextEv.at;
-  var segF=(segE>segS)?(em-segS)/(segE-segS):(em>=segE?1:0);
-  segF=Math.max(0,Math.min(1,segF));
-  $("barI").style.width=(segF*100)+"%";
-  if(curLeg&&curLeg.lane&&curLeg.lane[0])$("barI").style.background=lineColor(curLeg.lane[0].name);
-  $("barK").textContent=(nextEv.type==="final"?"내릴 역까지":"갈아탈 역까지")+" · "+nextEv.station;
-  $("barP").textContent=Math.round(segF*100)+"%";
   jmTick(em);
   if(Date.now()-lockLast>10000){                       // 잠금화면 문구는 10초마다만
     lockLast=Date.now();
