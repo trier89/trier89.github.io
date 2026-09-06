@@ -1,13 +1,13 @@
 {
- "today": 1,
- "today_pv": 3,
+ "today": 0,
+ "today_pv": 0,
  "total": 138,
  "total_visits": 506,
  "yesterday": {
-  "users": 2,
+  "users": 1,
   "new": 1,
-  "pv": 4,
-  "sessions": 3
+  "pv": 3,
+  "sessions": 1
  },
  "top_views": [
   {
@@ -29,24 +29,24 @@
    "avg_sec": 32
   },
   {
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 6,
+   "eng": 1212,
+   "avg_sec": 202
+  },
+  {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
    "views": 3,
    "eng": 162,
    "avg_sec": 54
-  },
-  {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 3,
-   "eng": 616,
-   "avg_sec": 205
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 3,
-   "eng": 616,
-   "avg_sec": 205
+   "views": 6,
+   "eng": 1212,
+   "avg_sec": 202
   },
   {
    "title": "내릴 때 알려줘 — 지하철 하차·환승 알림",
@@ -73,5 +73,5 @@
    "avg_sec": 32
   }
  ],
- "updated": "2026-09-06 23:28"
+ "updated": "2026-09-07 00:28"
 }
