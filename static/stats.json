@@ -1,13 +1,13 @@
 {
- "today": 7,
- "today_pv": 11,
+ "today": 0,
+ "today_pv": 0,
  "total": 144,
  "total_visits": 518,
  "yesterday": {
-  "users": 3,
-  "new": 0,
-  "pv": 8,
-  "sessions": 5
+  "users": 7,
+  "new": 5,
+  "pv": 11,
+  "sessions": 7
  },
  "top_views": [
   {
@@ -17,36 +17,36 @@
    "avg_sec": 160
   },
   {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 13,
-   "eng": 970,
-   "avg_sec": 75
-  },
-  {
    "title": "고양이 Catcha!",
-   "views": 7,
-   "eng": 193,
-   "avg_sec": 28
+   "views": 12,
+   "eng": 293,
+   "avg_sec": 24
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
    "views": 6,
-   "eng": 164,
-   "avg_sec": 27
+   "eng": 3,
+   "avg_sec": 0
+  },
+  {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 6,
+   "eng": 212,
+   "avg_sec": 35
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 6,
-   "eng": 1212,
-   "avg_sec": 202
+   "eng": 1353,
+   "avg_sec": 226
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 6,
-   "eng": 1212,
-   "avg_sec": 202
+   "eng": 1353,
+   "avg_sec": 226
   },
   {
    "title": "내릴 때 알려줘 — 지하철 하차·환승 알림",
@@ -56,22 +56,22 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 13,
-   "eng": 970,
-   "avg_sec": 75
+   "views": 6,
+   "eng": 212,
+   "avg_sec": 35
   },
   {
    "title": "고양이 Catcha!",
-   "views": 7,
-   "eng": 193,
-   "avg_sec": 28
+   "views": 12,
+   "eng": 293,
+   "avg_sec": 24
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
    "views": 6,
-   "eng": 164,
-   "avg_sec": 27
+   "eng": 3,
+   "avg_sec": 0
   }
  ],
- "updated": "2026-09-08 23:34"
+ "updated": "2026-09-09 00:34"
 }
