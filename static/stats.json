@@ -1,12 +1,12 @@
 {
- "today": 0,
+ "today": 1,
  "today_pv": 0,
- "total": 138,
- "total_visits": 511,
+ "total": 139,
+ "total_visits": 512,
  "yesterday": {
-  "users": 2,
+  "users": 3,
   "new": 0,
-  "pv": 7,
+  "pv": 8,
   "sessions": 5
  },
  "top_views": [
@@ -19,8 +19,8 @@
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 13,
-   "eng": 965,
-   "avg_sec": 74
+   "eng": 970,
+   "avg_sec": 75
   },
   {
    "title": "고양이 Catcha!",
@@ -29,16 +29,16 @@
    "avg_sec": 28
   },
   {
+   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
+   "views": 6,
+   "eng": 164,
+   "avg_sec": 27
+  },
+  {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 6,
    "eng": 1212,
    "avg_sec": 202
-  },
-  {
-   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
-   "views": 5,
-   "eng": 162,
-   "avg_sec": 32
   }
  ],
  "top_dwell": [
@@ -57,21 +57,21 @@
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 13,
-   "eng": 965,
-   "avg_sec": 74
-  },
-  {
-   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
-   "views": 5,
-   "eng": 162,
-   "avg_sec": 32
+   "eng": 970,
+   "avg_sec": 75
   },
   {
    "title": "고양이 Catcha!",
    "views": 7,
    "eng": 193,
    "avg_sec": 28
+  },
+  {
+   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
+   "views": 6,
+   "eng": 164,
+   "avg_sec": 27
   }
  ],
- "updated": "2026-09-08 10:32"
+ "updated": "2026-09-08 11:32"
 }
