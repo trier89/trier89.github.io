@@ -11,7 +11,7 @@ toc: false
 readingTime: false
 ---
 
-지능을 하나의 숫자로 줄이는 대신, **언어이해 · 지각추론 · 작업기억 · 처리속도** 네 가지 축으로 나누어 **내 머리가 어떤 방식으로 잘 돌아가는지** 프로필을 그려보는 테스트입니다. 객관식만 푸는 게 아니라 **숫자를 거꾸로 외우고**, **60초 동안 기호를 짝짓는** 실전 과제가 들어 있어요. 재미로 보는 **자체 제작 테스트**로, 웩슬러(WAIS·WISC) 등 정식 지능검사가 아니며 IQ 점수를 내지 않습니다. 답변은 저장·전송되지 않습니다.
+지능을 하나의 숫자로 줄이는 대신, **언어이해 · 지각추론 · 작업기억 · 처리속도** 네 가지 축으로 나누어 **내 머리가 어떤 방식으로 잘 돌아가는지** 프로필을 그려보는 테스트입니다. 객관식만 푸는 게 아니라 **숫자를 한 자리씩 보고 거꾸로 외우고**, **60초 동안 기호 여덟 개를 짝짓는** 실전 과제가 들어 있어요. 재미로 보는 **자체 제작 테스트**로, 웩슬러(WAIS·WISC) 등 정식 지능검사가 아니며 IQ 점수를 내지 않습니다. 답변은 저장·전송되지 않습니다.
 
 <div id="cg" style="max-width:640px;margin:0 auto;">
   <div id="cg-intro" style="text-align:center;">
@@ -20,8 +20,8 @@ readingTime: false
       <b>4개 파트로 진행돼요</b><br>
       1️⃣ 언어이해 — 말과 개념을 다루는 힘 (8문항)<br>
       2️⃣ 지각추론 — 규칙과 패턴을 찾는 힘 (8문항)<br>
-      3️⃣ 작업기억 — 머릿속에 붙잡아 두는 힘 (숫자 거꾸로 말하기)<br>
-      4️⃣ 처리속도 — 단순 작업을 빠르고 정확히 (60초 기호 짝짓기)<br>
+      3️⃣ 작업기억 — 머릿속에 붙잡아 두는 힘 (숫자를 <b>한 자리씩</b> 보여준 뒤 거꾸로 말하기)<br>
+      4️⃣ 처리속도 — 단순 작업을 빠르고 정확히 (60초 기호 8종 짝짓기)<br>
       <span style="color:#047857;">※ 3·4번은 실제로 해보는 과제예요. 조용한 곳에서 하시면 좋아요.</span>
     </div>
     <button id="cg-start" style="padding:16px 40px;border:0;border-radius:12px;background:#059669;color:#fff;font-size:18px;font-weight:700;cursor:pointer;">테스트 시작하기 (약 7분)</button>
@@ -37,25 +37,25 @@ readingTime: false
 (function(){
 var $=function(id){return document.getElementById(id);};
 var VCI=[
-["'지우개'와 '삭제 버튼'의 공통점은?",["있던 것을 없앤다","손으로 쥔다","글씨를 쓴다","값이 싸다"],0],
-["'약속'과 '계약'에 공통으로 들어 있는 것은?",["지키기로 한 합의","돈이 오간다","문서로 남는다","법이 강제한다"],0],
-["\"그 사람 손이 크다\"는 말의 뜻은?",["씀씀이가 넉넉하다","실제로 손이 크다","일을 잘한다","욕심이 많다"],0],
-["나침반 : 방향 = 온도계 : ?",["온도","날씨","계절","바람"],0],
-["'희소하다'와 뜻이 가장 가까운 말은?",["드물다","값지다","작다","낡다"],0],
-["다음 중 성격이 다른 하나는?",["책상","기쁨","슬픔","분노"],0],
-["'설상가상'이 뜻하는 상황은?",["나쁜 일에 나쁜 일이 겹침","눈이 많이 내림","좋은 일이 이어짐","위기를 넘김"],0],
-["'가설'이 '이론'과 다른 점은?",["아직 검증되지 않았다","더 복잡하다","숫자로 되어 있다","오래되었다"],0]];
+["'사면초가'와 '진퇴양난'이 공통으로 담고 있는 것은?",["빠져나갈 길이 없다","적이 많다","싸움에서 진다","시간이 없다"],0],
+["'물이 맑으면 고기가 없다'가 경계하는 태도는?",["지나친 결벽","게으름","욕심","거짓말"],0],
+["의사 : 처방 = 판사 : ?",["판결","법정","변호","범죄"],0],
+["다음 중 나머지 셋을 포함하는 개념은?",["도구","망치","톱","자"],0],
+["'손을 씻다'가 '그만두다'의 뜻이 되는 것처럼, '발을 빼다'와 성격이 같은 표현은?",["발이 넓다","손이 크다","눈이 높다","귀가 얇다"],0],
+["'역설'이 뜻하는 것에 가장 가까운 것은?",["모순처럼 보이나 진실을 담은 말","사실과 다른 거짓말","반대로 뒤집어 놓은 말","강하게 주장하는 말"],0],
+["'그는 결코 실패하지 않았다고는 말할 수 없다'가 뜻하는 바는?",["실패한 적이 있다","한 번도 실패하지 않았다","실패 여부를 모른다","실패를 인정하지 않는다"],0],
+["'모든 A는 B다'가 참일 때 반드시 참인 것은?",["B가 아니면 A도 아니다","모든 B는 A다","A가 아니면 B도 아니다","어떤 B는 A가 아니다"],0]];
 var PRI=[
-["2, 4, 8, 16, ?",["32","24","20","18"],0],
-["1, 1, 2, 3, 5, 8, ?",["13","11","10","16"],0],
-["81, 64, 49, 36, ?",["25","24","30","16"],0],
-["A, C, F, J, ?",["O","N","M","P"],0],
-["3, 6, 5, 10, 9, 18, ?",["17","20","16","19"],0],
-["● ○ ● ● ○ ● ● ● ○ 다음에 올 것은?",["●","○","●●","○○"],0],
-["2, 3, 5, 7, 11, ?",["13","12","14","15"],0],
-["정사각형을 시계 방향으로 90도씩 4번 돌리면?",["처음과 같다","좌우가 뒤집힌다","위아래가 뒤집힌다","마름모가 된다"],0]];
-var WM_LENS=[3,3,4,4,5,5,6,6,7,7];
-var SYMS=["◆","▲","●","■","★","✚"];
+["2, 3, 5, 9, 17, ?",["33","25","31","34"],0],
+["1, 4, 9, 61, 52, ?",["63","36","72","45"],0],
+["3, 4, 8, 17, 33, ?",["58","54","62","49"],0],
+["A, D, I, P, ?",["Y","W","V","Z"],0],
+["7, 10, 8, 11, 9, 12, ?",["10","13","11","14"],0],
+["2, 6, 12, 20, 30, ?",["42","40","44","36"],0],
+["1, 2, 6, 24, 120, ?",["720","600","480","840"],0],
+["정육면체를 한 꼭짓점만 지나도록 자르면 잘린 단면은?",["삼각형","사각형","오각형","육각형"],0]];
+var WM_LENS=[3,4,4,5,5,6,6,7,8,9];
+var SYMS=["◆","▲","●","■","★","✚","▼","◗"];
 var st={vi:0,vc:0,pi:0,pc:0,wi:0,wc:0,ps:0,pt:0,seq:[],psTimer:null,psLeft:60,psCur:0};
 var TOTAL=8+8+10+1;
 function prog(n){$("cg-bar").style.width=Math.round(n/TOTAL*100)+"%";}
@@ -64,13 +64,13 @@ function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").repl
 function mcq(list,idx,phase,onPick){
   $("cg-phase").textContent=phase;
   var q=list[idx];
-  var h='<div style="font-size:13px;color:#9ca3af;margin-bottom:6px;">'+(idx+1)+' / '+list.length+'</div>';
-  h+='<div style="font-size:19px;font-weight:700;line-height:1.6;min-height:56px;">'+esc(q[0])+'</div>';
+  var h='<div style="font-size:13px;color:#4b5563;margin-bottom:6px;font-weight:600;">'+(idx+1)+' / '+list.length+'</div>';
+  h+='<div style="font-size:19px;font-weight:700;line-height:1.6;min-height:62px;color:#111827;">'+esc(q[0])+'</div>';
   h+='<div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">';
   var order=[0,1,2,3];
   for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
   order.forEach(function(oi){
-    h+='<button class="cg-opt" data-i="'+oi+'" style="padding:14px 16px;border:2px solid #d1d5db;border-radius:10px;background:#fff;font-size:16px;text-align:left;cursor:pointer;line-height:1.5;">'+esc(q[1][oi])+'</button>';
+    h+='<button class="cg-opt" data-i="'+oi+'" style="padding:14px 16px;border:2px solid #9ca3af;border-radius:10px;background:#fff;color:#111827;font-size:16px;text-align:left;cursor:pointer;line-height:1.5;">'+esc(q[1][oi])+'</button>';
   });
   h+='</div>';
   $("cg-body").innerHTML=h;
@@ -90,7 +90,7 @@ function stepP(){
 }
 function introWM(){
   $("cg-phase").textContent="3️⃣ 작업기억";
-  $("cg-body").innerHTML='<div style="padding:18px;border-radius:12px;background:#ecfdf5;font-size:15px;line-height:1.8;color:#065f46;">숫자가 잠깐 나타났다 사라집니다.<br>사라진 뒤 <b>거꾸로</b> 입력하세요.<br><span style="color:#047857;">예) 화면에 <b>4 7 2</b> → 입력 <b>274</b></span><br>총 10회, 자릿수가 점점 늘어납니다.</div><button id="cg-wmgo" style="margin-top:18px;width:100%;padding:15px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:17px;cursor:pointer;">시작</button>';
+  $("cg-body").innerHTML='<div style="padding:18px;border-radius:12px;background:#ecfdf5;font-size:15px;line-height:1.8;color:#064e3b;">숫자가 <b>한 자리씩 차례로</b> 나타났다 사라집니다.<br>다 끝나면 <b>거꾸로</b> 입력하세요.<br><span style="color:#047857;">예) 화면에 <b>4</b> → <b>7</b> → <b>2</b> 가 차례로 나오면 입력은 <b>274</b></span><br>총 10회, 3자리에서 9자리까지 늘어납니다.</div><button id="cg-wmgo" style="margin-top:18px;width:100%;padding:15px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:17px;cursor:pointer;">시작</button>';
   $("cg-wmgo").onclick=function(){st.wi=0;stepWM();};
 }
 function stepWM(){
@@ -99,13 +99,20 @@ function stepWM(){
   st.seq=[];
   for(var i=0;i<n;i++){st.seq.push(Math.floor(Math.random()*10));}
   $("cg-phase").textContent="3️⃣ 작업기억 — "+(st.wi+1)+" / "+WM_LENS.length;
-  $("cg-body").innerHTML='<div style="text-align:center;padding:34px 0;"><div style="font-size:13px;color:#9ca3af;margin-bottom:14px;">외우세요 ('+n+'자리)</div><div id="cg-digits" style="font-size:46px;font-weight:800;letter-spacing:14px;color:#111827;min-height:60px;">'+st.seq.join(" ")+'</div></div>';
+  $("cg-body").innerHTML='<div style="text-align:center;padding:34px 0;"><div style="font-size:13px;color:#4b5563;margin-bottom:14px;font-weight:600;">외우세요 ('+n+'자리)</div><div id="cg-digits" style="font-size:64px;font-weight:800;color:#111827;min-height:84px;line-height:84px;"></div></div>';
   prog(done());
-  setTimeout(askWM,700+n*750);
+  var i=0;
+  var show=function(){
+    if(i>=st.seq.length){$("cg-digits").textContent="";setTimeout(askWM,450);return;}
+    $("cg-digits").textContent=String(st.seq[i]);
+    i++;
+    setTimeout(function(){$("cg-digits").textContent="";setTimeout(show,220);},700);
+  };
+  setTimeout(show,600);
 }
 function askWM(){
   var n=st.seq.length;
-  $("cg-body").innerHTML='<div style="text-align:center;padding:20px 0;"><div style="font-size:15px;font-weight:700;margin-bottom:14px;">거꾸로 입력하세요</div><input id="cg-wmin" inputmode="numeric" autocomplete="off" maxlength="'+n+'" style="width:220px;padding:14px;font-size:26px;text-align:center;letter-spacing:8px;border:2px solid #059669;border-radius:10px;outline:none;"><div><button id="cg-wmok" style="margin-top:16px;padding:13px 40px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:16px;cursor:pointer;">확인</button></div></div>';
+  $("cg-body").innerHTML='<div style="text-align:center;padding:20px 0;"><div style="font-size:15px;font-weight:700;margin-bottom:14px;color:#111827;">거꾸로 입력하세요 ('+n+'자리)</div><input id="cg-wmin" inputmode="numeric" autocomplete="off" maxlength="'+n+'" style="width:250px;padding:14px;font-size:26px;text-align:center;letter-spacing:8px;border:2px solid #059669;border-radius:10px;outline:none;color:#111827;background:#fff;"><div><button id="cg-wmok" style="margin-top:16px;padding:13px 40px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:16px;cursor:pointer;">확인</button></div></div>';
   var inp=$("cg-wmin");inp.focus();
   var submit=function(){
     var want=st.seq.slice().reverse().join("");
@@ -115,23 +122,23 @@ function askWM(){
   $("cg-wmok").onclick=submit;
   inp.onkeydown=function(e){if(e.key==="Enter")submit();};
 }
+function keyHtml(small){
+  var w=small?44:50,fs=small?17:21,ns=small?12:14;
+  var h='<div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:12px 0;">';
+  SYMS.forEach(function(s,i){h+='<div style="width:'+w+'px;text-align:center;border:2px solid #059669;border-radius:8px;padding:5px 0;background:#fff;"><div style="font-size:'+fs+'px;line-height:1.1;color:#111827;">'+s+'</div><div style="font-size:'+ns+'px;font-weight:800;color:#047857;">'+(i+1)+'</div></div>';});
+  return h+'</div>';
+}
 function introPS(){
   $("cg-phase").textContent="4️⃣ 처리속도";
-  var key='<div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0;">';
-  SYMS.forEach(function(s,i){key+='<div style="width:52px;text-align:center;border:2px solid #059669;border-radius:8px;padding:6px 0;background:#fff;"><div style="font-size:22px;line-height:1.1;">'+s+'</div><div style="font-size:15px;font-weight:800;color:#059669;">'+(i+1)+'</div></div>';});
-  key+='</div>';
-  $("cg-body").innerHTML='<div style="padding:18px;border-radius:12px;background:#ecfdf5;font-size:15px;line-height:1.8;color:#065f46;">아래 <b>대응표</b>를 보고, 화면에 뜨는 기호에 맞는 숫자를 누르세요.<br><b>60초</b> 동안 맞힌 개수를 셉니다. 표는 계속 보여요.</div>'+key+'<button id="cg-psgo" style="margin-top:12px;width:100%;padding:15px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:17px;cursor:pointer;">시작 (60초)</button>';
+  $("cg-body").innerHTML='<div style="padding:18px;border-radius:12px;background:#ecfdf5;font-size:15px;line-height:1.8;color:#064e3b;">아래 <b>대응표</b>를 보고, 화면에 뜨는 기호에 맞는 숫자를 누르세요.<br><b>60초</b> 동안 맞힌 개수를 셉니다. 표는 계속 보입니다.<br><span style="color:#047857;">틀리면 개수가 늘지 않으니 정확도도 중요합니다.</span></div>'+keyHtml(false)+'<button id="cg-psgo" style="margin-top:12px;width:100%;padding:15px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:17px;cursor:pointer;">시작 (60초)</button>';
   $("cg-psgo").onclick=startPS;
 }
 function startPS(){
   st.ps=0;st.pt=0;st.psLeft=60;
-  var key='<div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;">';
-  SYMS.forEach(function(s,i){key+='<div style="width:46px;text-align:center;border:1px solid #a7f3d0;border-radius:6px;padding:4px 0;background:#f0fdf4;"><div style="font-size:18px;line-height:1.1;">'+s+'</div><div style="font-size:13px;font-weight:800;color:#059669;">'+(i+1)+'</div></div>';});
-  key+='</div>';
-  var pad='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;">';
-  for(var i=1;i<=6;i++){pad+='<button class="cg-pk" data-n="'+i+'" style="padding:18px 0;border:2px solid #d1d5db;border-radius:10px;background:#fff;font-size:22px;font-weight:800;cursor:pointer;">'+i+'</button>';}
+  var pad='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:16px;">';
+  for(var i=1;i<=8;i++){pad+='<button class="cg-pk" data-n="'+i+'" style="padding:16px 0;border:2px solid #9ca3af;border-radius:10px;background:#fff;color:#111827;font-size:20px;font-weight:800;cursor:pointer;">'+i+'</button>';}
   pad+='</div>';
-  $("cg-body").innerHTML=key+'<div style="text-align:center;"><div id="cg-time" style="font-size:14px;font-weight:800;color:#059669;">60초</div><div id="cg-sym" style="font-size:64px;line-height:1.3;min-height:88px;"></div><div id="cg-cnt" style="font-size:13px;color:#9ca3af;">맞힘 0</div></div>'+pad;
+  $("cg-body").innerHTML=keyHtml(true)+'<div style="text-align:center;"><div id="cg-time" style="font-size:15px;font-weight:800;color:#047857;">60초</div><div id="cg-sym" style="font-size:64px;line-height:1.3;min-height:88px;color:#111827;"></div><div id="cg-cnt" style="font-size:13px;color:#4b5563;font-weight:600;">맞힘 0</div></div>'+pad;
   var btns=$("cg-body").getElementsByClassName("cg-pk");
   for(var k=0;k<btns.length;k++){
     btns[k].onclick=function(){
@@ -155,10 +162,10 @@ function nextSym(){
   $("cg-sym").textContent=SYMS[st.psCur];
 }
 var IDX={
- V:{n:"언어이해",e:"💬",d:"말과 개념을 다루는 힘. 어휘·비유·관계를 빠르게 잡아냅니다.",hi:"설명을 잘하고, 추상적인 개념을 말로 정리하는 데 강해요. 글·기획·상담처럼 언어가 도구인 일에서 힘을 발휘합니다.",lo:"머릿속엔 있는데 말로 옮기는 데 시간이 걸릴 수 있어요. 읽고 요약해 보는 습관이 잘 듣습니다."},
- P:{n:"지각추론",e:"🧩",d:"규칙과 패턴을 찾아내는 힘. 처음 보는 문제의 구조를 파악합니다.",hi:"경험이 없는 문제에서도 규칙을 먼저 찾아냅니다. 설계·분석·문제해결에 강해요.",lo:"낯선 규칙을 처음부터 세우는 건 부담스러울 수 있어요. 예시를 여러 개 놓고 비교하면 훨씬 잘 풀립니다."},
+ V:{n:"언어이해",e:"💬",d:"말과 개념을 다루는 힘. 어휘·비유·논리 관계를 빠르게 잡아냅니다.",hi:"설명을 잘하고 추상적인 개념을 말로 정리하는 데 강해요. 글·기획·상담처럼 언어가 도구인 일에서 힘을 발휘합니다.",lo:"머릿속엔 있는데 말로 옮기는 데 시간이 걸릴 수 있어요. 읽고 한 문장으로 요약해 보는 습관이 잘 듣습니다."},
+ P:{n:"지각추론",e:"🧩",d:"규칙과 패턴을 찾아내는 힘. 처음 보는 문제의 구조를 파악합니다.",hi:"경험이 없는 문제에서도 규칙을 먼저 찾아냅니다. 설계·분석·문제해결에 강해요.",lo:"낯선 규칙을 처음부터 세우는 건 부담스러울 수 있어요. 예시를 여러 개 늘어놓고 비교하면 훨씬 잘 풀립니다."},
  W:{n:"작업기억",e:"🧠",d:"여러 정보를 머릿속에 붙잡아 두고 조작하는 힘.",hi:"암산·복잡한 지시 수행·여러 갈래를 동시에 따라가는 데 강해요. 회의에서 흐름을 놓치지 않습니다.",lo:"한꺼번에 여러 개를 들고 있으면 흘러내릴 수 있어요. 메모와 체크리스트가 실제로 성과를 크게 올려줍니다."},
- S:{n:"처리속도",e:"⚡",d:"단순한 판단을 빠르고 정확하게 반복하는 힘.",hi:"반복 작업을 빠르게 쳐냅니다. 마감·실무 처리량에서 강점이 나와요.",lo:"속도보다 정확도로 승부하는 편이에요. 급하게 몰아치는 환경보다 충분히 생각할 시간이 있을 때 훨씬 잘합니다."}};
+ S:{n:"처리속도",e:"⚡",d:"단순한 판단을 빠르고 정확하게 반복하는 힘.",hi:"반복 작업을 빠르게 쳐냅니다. 마감·실무 처리량에서 강점이 나와요.",lo:"속도보다 정확도로 승부하는 편이에요. 몰아치는 환경보다 충분히 생각할 시간이 있을 때 훨씬 잘합니다."}};
 var ORDER=["V","P","W","S"];
 var CODE={V:"V",P:"P",W:"W",S:"S"};
 function render(top,shared,sc){
@@ -166,29 +173,29 @@ function render(top,shared,sc){
   var h='<div style="text-align:center;padding:26px 18px;border-radius:16px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">';
   h+='<div style="font-size:13px;color:#047857;font-weight:700;">'+(shared?"친구의":"내")+' 인지 프로필 강점</div>';
   h+='<div style="font-size:50px;margin:8px 0;">'+t.e+'</div>';
-  h+='<div style="font-size:26px;font-weight:800;color:#065f46;">'+t.n+'</div>';
-  h+='<div style="margin-top:8px;font-size:15px;color:#065f46;line-height:1.7;">'+t.d+'</div></div>';
+  h+='<div style="font-size:26px;font-weight:800;color:#064e3b;">'+t.n+'</div>';
+  h+='<div style="margin-top:8px;font-size:15px;color:#064e3b;line-height:1.7;">'+t.d+'</div></div>';
   if(!shared){
     h+='<div style="margin-top:20px;">';
     ORDER.forEach(function(k){
       var p=sc[k];
-      h+='<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;"><span>'+IDX[k].e+' '+IDX[k].n+'</span><span style="color:#059669;font-weight:800;">'+p+'</span></div><div style="height:10px;background:#d1fae5;border-radius:5px;overflow:hidden;"><div style="height:10px;width:'+p+'%;background:#059669;border-radius:5px;"></div></div></div>';
+      h+='<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;color:#111827;font-weight:600;"><span>'+IDX[k].e+' '+IDX[k].n+'</span><span style="color:#047857;font-weight:800;">'+p+'</span></div><div style="height:10px;background:#d1fae5;border-radius:5px;overflow:hidden;"><div style="height:10px;width:'+p+'%;background:#059669;border-radius:5px;"></div></div></div>';
     });
     h+='</div>';
     var lowk=ORDER.slice().sort(function(a,b){return sc[a]-sc[b];})[0];
-    h+='<div style="margin-top:8px;padding:16px;border-radius:12px;background:#f0fdf4;font-size:15px;line-height:1.8;color:#065f46;"><b>'+t.e+' 강점 — '+t.n+'</b><br>'+t.hi+'<br><br><b>'+IDX[lowk].e+' 보완하면 좋은 축 — '+IDX[lowk].n+'</b><br>'+IDX[lowk].lo+'</div>';
+    h+='<div style="margin-top:8px;padding:16px;border-radius:12px;background:#f0fdf4;font-size:15px;line-height:1.8;color:#064e3b;"><b>'+t.e+' 강점 — '+t.n+'</b><br>'+t.hi+'<br><br><b>'+IDX[lowk].e+' 보완하면 좋은 축 — '+IDX[lowk].n+'</b><br>'+IDX[lowk].lo+'</div>';
     var spread=Math.max(sc.V,sc.P,sc.W,sc.S)-Math.min(sc.V,sc.P,sc.W,sc.S);
     var shape=spread<=20?"네 축이 고르게 발달한 <b>균형형</b>이에요. 어느 상황에서도 크게 흔들리지 않는 대신, 한 분야에서 압도적인 무기를 만들려면 의식적으로 한 축을 파고들 필요가 있어요.":(spread>=45?"축 사이 편차가 큰 <b>뾰족형</b>이에요. 잘하는 방식으로 일할 때 성과가 확 올라갑니다. 약한 축은 보완하려 애쓰기보다 도구와 습관으로 대신하는 편이 효율적이에요.":"강점과 약점이 자연스럽게 나뉜 <b>일반형</b>이에요. 강한 축을 주 무기로 쓰고 약한 축은 메모·체크리스트 같은 장치로 받쳐주면 잘 굴러갑니다.");
-    h+='<div style="margin-top:12px;padding:16px;border-radius:12px;background:#eff6ff;font-size:15px;line-height:1.8;">📐 '+shape+'</div>';
-    h+='<div style="margin-top:14px;padding:14px;border-radius:10px;background:#fef3c7;color:#92400e;font-size:13.5px;line-height:1.65;">⚠️ 이 결과는 <b>재미로 보는 자체 제작 테스트</b>의 결과예요. 웩슬러(WAIS·WISC) 등 정식 지능검사가 아니고 IQ 점수도 아닙니다. 문항 수가 적고 기기·환경(화면 크기, 터치 반응)에 따라 특히 처리속도 점수가 크게 달라져요. 진단이나 능력 판별로 쓰지 마세요.</div>';
+    h+='<div style="margin-top:12px;padding:16px;border-radius:12px;background:#eff6ff;font-size:15px;line-height:1.8;color:#1e3a8a;">📐 '+shape+'</div>';
+    h+='<div style="margin-top:14px;padding:14px;border-radius:10px;background:#fef3c7;color:#78350f;font-size:13.5px;line-height:1.65;">⚠️ 이 결과는 <b>재미로 보는 자체 제작 테스트</b>의 결과예요. 웩슬러(WAIS·WISC) 등 정식 지능검사가 아니고 IQ 점수도 아닙니다. 문항 수가 적고 기기·환경(화면 크기, 터치 반응)에 따라 특히 처리속도 점수가 크게 달라져요. 진단이나 능력 판별로 쓰지 마세요.</div>';
   }
   h+='<div style="display:flex;gap:10px;margin-top:22px;">'
     +(shared
       ?'<button id="cg-mine" style="flex:1;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:16px;cursor:pointer;">나도 테스트하기 →</button>'
       :'<button onclick="location.href=location.pathname" style="flex:1;padding:13px;border:2px solid #059669;border-radius:10px;background:#fff;color:#047857;font-weight:700;font-size:15px;cursor:pointer;">다시 하기</button><button id="cg-share" style="flex:1;padding:13px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">결과 공유하기</button>')
     +'</div>';
-  h+='<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14px;">다른 테스트도 → <a href="/tests/">심리테스트</a> · <a href="/tests/iq-test/">IQ 테스트</a> · <a href="/tests/temperament-character/">기질·성격 유형</a></div>';
-  h+='<div style="margin-top:12px;font-size:12px;color:#9ca3af;line-height:1.6;">※ 재미와 자기이해를 위한 자가진단이며 전문·임상 검사가 아닙니다. 답변은 저장·전송되지 않고 브라우저에서만 계산돼요.</div>';
+  h+='<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14px;color:#1e3a8a;">다른 테스트도 → <a href="/tests/">심리테스트</a> · <a href="/tests/iq-test/">IQ 테스트</a> · <a href="/tests/temperament-character/">기질·성격 유형</a></div>';
+  h+='<div style="margin-top:12px;font-size:12px;color:#6b7280;line-height:1.6;">※ 재미와 자기이해를 위한 자가진단이며 전문·임상 검사가 아닙니다. 답변은 저장·전송되지 않고 브라우저에서만 계산돼요.</div>';
   $("cg-result").innerHTML=h;
   $("cg-stage").style.display="none";
   $("cg-result").style.display="block";
@@ -205,7 +212,7 @@ function result(){
     V:Math.round(st.vc/VCI.length*100),
     P:Math.round(st.pc/PRI.length*100),
     W:Math.round(st.wc/WM_LENS.length*100),
-    S:Math.min(100,Math.round(st.ps/45*100))
+    S:Math.min(100,Math.round(st.ps/55*100))
   };
   var top=ORDER[0];
   ORDER.forEach(function(k){if(sc[k]>sc[top])top=k;});
@@ -223,7 +230,7 @@ $("cg-start").onclick=function(){$("cg-intro").style.display="none";$("cg-stage"
 
 **🧩 지각추론** — 배운 적 없는 문제에서 규칙과 패턴을 찾아내는 힘입니다. 수열, 도형, 구조 파악이 여기 들어갑니다.
 
-**🧠 작업기억** — 정보를 머릿속에 붙잡아 둔 채로 조작하는 힘입니다. 이 테스트에서는 숫자를 **거꾸로** 말하게 하는 방식으로 재봅니다. 그냥 따라 외우는 것보다 훨씬 어려운데, 외우는 동시에 순서를 뒤집는 조작을 해야 하기 때문이에요.
+**🧠 작업기억** — 정보를 머릿속에 붙잡아 둔 채로 조작하는 힘입니다. 이 테스트에서는 숫자를 **한 자리씩 차례로 보여준 뒤 사라지게 하고, 거꾸로** 말하게 합니다. 한꺼번에 띄워놓으면 그냥 오른쪽부터 읽으면 되기 때문에 기억을 재지 못해요. 하나씩 지나가야 머릿속에 담아두었다가 뒤집는 진짜 작업기억 과제가 됩니다.
 
 **⚡ 처리속도** — 단순한 판단을 빠르고 정확하게 반복하는 힘입니다. 기호와 숫자를 짝짓는 60초 과제로 재봅니다. 머리가 좋고 나쁨보다는 **손과 눈과 판단이 붙는 속도**에 가깝습니다.
 
