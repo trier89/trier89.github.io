@@ -6,7 +6,7 @@
  "yesterday": {
   "users": 7,
   "new": 6,
-  "pv": 12,
+  "pv": 13,
   "sessions": 7
  },
  "top_views": [
@@ -73,5 +73,5 @@
    "avg_sec": 0
   }
  ],
- "updated": "2026-09-09 12:35"
+ "updated": "2026-09-09 13:36"
 }
