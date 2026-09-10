@@ -1,13 +1,13 @@
 {
- "today": 1,
- "today_pv": 1,
+ "today": 0,
+ "today_pv": 0,
  "total": 149,
  "total_visits": 524,
  "yesterday": {
-  "users": 4,
-  "new": 4,
-  "pv": 5,
-  "sessions": 5
+  "users": 1,
+  "new": 1,
+  "pv": 1,
+  "sessions": 1
  },
  "top_views": [
   {
@@ -18,9 +18,9 @@
   },
   {
    "title": "고양이 Catcha!",
-   "views": 16,
-   "eng": 379,
-   "avg_sec": 24
+   "views": 17,
+   "eng": 457,
+   "avg_sec": 27
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -62,9 +62,9 @@
   },
   {
    "title": "고양이 Catcha!",
-   "views": 16,
-   "eng": 379,
-   "avg_sec": 24
+   "views": 17,
+   "eng": 457,
+   "avg_sec": 27
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
@@ -73,5 +73,5 @@
    "avg_sec": 1
   }
  ],
- "updated": "2026-09-10 23:40"
+ "updated": "2026-09-11 00:40"
 }
