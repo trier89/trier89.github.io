@@ -95,6 +95,78 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   .c{width:104px;} .c img{width:86px;height:86px;}
   .c.big{width:116px;} .c.big img{width:98px;height:98px;}
 }
+/*GRAPH-CSS*/
+[hidden]{display:none!important;}
+.vtabs{display:flex;justify-content:center;gap:8px;margin:0 0 14px;flex-wrap:wrap;}
+.vtabs button{font:inherit;font-size:13.5px;font-weight:700;color:var(--txt);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:20px;padding:6px 16px;cursor:pointer;}
+.vtabs button.on{background:var(--gold);color:#17100a;border-color:var(--gold);}
+.gbar{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 0 10px;}
+#gq{font:inherit;font-size:14px;color:var(--txt);background:#1c140b;border:1px solid var(--line);border-radius:18px;padding:7px 14px;width:min(300px,100%);outline:none;}
+#gq:focus{border-color:var(--gold);}
+.gleg{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;}
+.gleg button{font:inherit;font-size:11.5px;color:var(--txt);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:2px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+.gleg button i{display:inline-block;width:18px;height:0;}
+.gleg button.off{opacity:.38;}
+.gleg button.off span{text-decoration:line-through;}
+.gbox{position:relative;height:min(78vh,780px);min-height:460px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:radial-gradient(90% 70% at 50% 42%,#2b2014 0%,#140e07 100%);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab;}
+.gbox.grabbing{cursor:grabbing;}
+.gbox.full{position:fixed;inset:0;height:auto;min-height:0;border-radius:0;border:0;z-index:90;}
+#gworld{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0;}
+#gsvg{position:absolute;left:0;top:0;width:1px;height:1px;overflow:visible;}
+.ge{stroke-linecap:round;opacity:.34;transition:opacity .3s;}
+.gbox.hv .ge{opacity:.1;} .gbox.fx .ge{opacity:.035;}
+.gbox.hv .ge.hl,.gbox.fx .ge.hl{opacity:.95;}
+.gn{position:absolute;left:0;top:0;cursor:pointer;transition:opacity .3s;}
+.gn .gi{position:absolute;left:0;top:0;transform:translate(-50%,calc(var(--s) / -2));display:flex;flex-direction:column;align-items:center;}
+.gn .av{width:var(--s);height:var(--s);border-radius:50%;border:2px solid var(--gc);background:#1a1209;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.55);transition:box-shadow .3s,transform .2s;}
+.gn .av img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;pointer-events:none;-webkit-user-drag:none;}
+.gn.ph .av{border-style:dashed;display:flex;align-items:center;justify-content:center;color:var(--dim);font-weight:800;font-size:calc(var(--s) * .42);}
+.gn .gnm{margin-top:3px;font-size:12px;font-weight:700;color:var(--txt);white-space:nowrap;text-shadow:0 1px 2px #000,0 0 6px #000,0 0 10px #000;}
+.gn.ph .gnm{color:var(--dim);}
+.gn .grl{display:none;margin-top:1px;font-size:10.5px;font-weight:600;width:max-content;max-width:112px;text-align:center;line-height:1.25;text-shadow:0 1px 2px #000,0 0 6px #000;}
+.gbox.fx .gn.hl .grl{display:block;}
+.gbox.hv .gn{opacity:.35;} .gbox.fx .gn{opacity:.1;}
+.gbox.hv .gn.hl,.gbox.hv .gn.sel,.gbox.fx .gn.hl,.gbox.fx .gn.sel{opacity:1;}
+.gn.hl{z-index:2;} .gn.sel{z-index:3;}
+.gn.sel .av{box-shadow:0 0 0 4px rgba(224,184,120,.3),0 0 30px rgba(224,184,120,.6);}
+.gn.sel .gnm{color:var(--gold);font-size:13.5px;}
+.gn:hover .av{transform:scale(1.08);}
+.ghint{position:absolute;left:12px;top:10px;right:58px;color:var(--dim);font-size:11px;pointer-events:none;transition:opacity .3s;text-shadow:0 1px 2px #000;}
+.gbox.fx .ghint{opacity:0;}
+.gctl{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px;z-index:5;}
+.gctl button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:rgba(23,17,10,.88);color:var(--txt);font-size:17px;line-height:1;cursor:pointer;}
+.gctl button:hover{border-color:var(--gold);}
+.gpanel{position:absolute;left:10px;top:10px;bottom:10px;width:320px;overflow:auto;overscroll-behavior:contain;background:rgba(21,15,9,.95);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;z-index:6;box-shadow:0 12px 40px rgba(0,0,0,.6);cursor:auto;touch-action:pan-y;-webkit-user-select:text;user-select:text;}
+.gx{position:absolute;right:8px;top:8px;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--dim);font-size:14px;cursor:pointer;}
+.gpt{display:flex;gap:12px;align-items:center;padding-right:30px;}
+.gpt img,.gpt .q{width:68px;height:68px;border-radius:12px;object-fit:cover;object-position:center top;border:1px solid var(--line);flex:none;background:#120c06;}
+.gpt img{cursor:zoom-in;}
+.gpt .q{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:28px;font-weight:800;border-style:dashed;}
+.gpt .nm{color:var(--gold);font-weight:800;font-size:17px;line-height:1.25;}
+.gpt .role{font-size:12px;color:var(--txt);margin-top:2px;}
+.gpar{color:var(--dim);font-size:12px;line-height:1.55;margin-top:8px;}
+.geps{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.geps span{background:rgba(224,184,120,.13);border:1px solid var(--line);color:var(--gold);font-size:10px;padding:1px 6px;border-radius:6px;}
+.grt{display:flex;align-items:center;gap:7px;color:var(--gold);font-size:12px;font-weight:800;margin:12px 0 6px;}
+.grt i{display:inline-block;width:18px;height:0;}
+.grt small{color:var(--dim);font-weight:600;font-size:11px;}
+.gchips{display:flex;flex-direction:column;gap:4px;}
+.gchips button{font:inherit;display:flex;align-items:center;gap:8px;width:100%;background:rgba(255,255,255,.035);border:1px solid transparent;border-radius:10px;padding:3px 8px 3px 3px;color:var(--txt);cursor:pointer;text-align:left;}
+.gchips button:hover{border-color:var(--line);background:rgba(255,255,255,.07);}
+.gchips img,.gchips .q{width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:center top;flex:none;background:#120c06;}
+.gchips .q{border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--dim);}
+.gchips .t{display:flex;flex-direction:column;min-width:0;}
+.gchips b{font-size:12.5px;font-weight:700;}
+.gchips em{font-style:normal;color:var(--dim);font-size:11px;line-height:1.35;}
+.ggrp{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;color:var(--dim);font-size:11px;margin-top:8px;}
+.ggrp span{display:inline-flex;align-items:center;gap:5px;}
+.ggrp i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+@media (max-width:640px){
+  .gbox{height:72vh;min-height:420px;}
+  .gpanel{left:8px;right:8px;top:auto;bottom:8px;width:auto;max-height:46%;}
+  .ghint{font-size:10.5px;}
+}
+/*/GRAPH-CSS*/
 </style>
 </head>
 <body>
@@ -113,6 +185,9 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
 </div>
 
 <!-- ============ 신들의 계보 (divine tree) ============ -->
+<!--VIEWS-->
+<div class="vtabs"><button type="button" data-v="tree" class="on">🌳 족보로 보기</button><button type="button" data-v="graph">🕸 관계도로 보기</button></div>
+<div id="tview">
 <div class="grp">🌩 신들의 계보<span class="sub">태초의 신 → 티탄 → 1세대 올림포스</span></div>
 <div class="treebox"><div class="tree">
 <div class="genband"><b>태초의 신 · 조부모 세대<small>하늘과 대지, 만물의 근원</small></b></div>
@@ -183,6 +258,8 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
 <div class="row w2"><div class="c"><img src="/darak-company/chars/athena.png" alt="아테나" loading="lazy"><div class="nm">아테나</div><div class="role">지혜·전쟁의 여신</div><div class="par">제우스의 머리에서 태어남 · 오디세우스의 수호신</div><div class="eps"><span class="ep">EP.04</span><span class="ep">EP.14</span><span class="ep">EP.24</span><span class="ep">EP.25</span><span class="ep">EP.26</span></div></div><div class="c"><img src="/darak-company/chars/poseidon.png" alt="포세이돈" loading="lazy"><div class="nm">포세이돈</div><div class="role">바다의 신</div><div class="par">크로노스·레아의 아들</div><div class="eps"><span class="ep">EP.01</span><span class="ep">EP.17</span><span class="ep">EP.25</span></div></div><div class="c"><img src="/darak-company/chars/zeus.png" alt="제우스" loading="lazy"><div class="nm">제우스</div><div class="role">신들의 왕 · 번개</div><div class="par">크로노스·레아의 막내 · 올림포스의 주인</div><div class="eps"><span class="ep">EP.01</span><span class="ep">EP.07</span><span class="ep">EP.23</span></div></div></div>
 <div class="famnote">오디세이아를 움직인 세 신 — 돕는 아테나, 막는 포세이돈, 판을 정리하는 제우스.</div>
 </div></div>
+</div>
+<div id="gview" hidden><div class="gbar"><input id="gq" type="search" list="gql" placeholder="🔍 인물 이름으로 찾기" autocomplete="off" enterkeyhint="search"><datalist id="gql"></datalist><div class="gleg" id="gleg"></div></div><div class="gbox" id="gbox"><div id="gworld"><svg id="gsvg" aria-hidden="true"><g id="gedges"></g></svg><div id="gnodes"></div></div><div class="ghint">인물을 누르면 이어진 인물들이 모여요 · 빈 곳을 끌어 이동 · 휠·두 손가락으로 확대</div><div class="gctl"><button type="button" id="gzin" title="확대" aria-label="확대">＋</button><button type="button" id="gzout" title="축소" aria-label="축소">－</button><button type="button" id="gfit" title="전체 보기" aria-label="전체 보기">⤢</button><button type="button" id="gfull" title="크게 보기" aria-label="크게 보기">⛶</button></div><div class="gpanel" id="gpanel" hidden></div></div><div class="ggrp">테두리 색 · <span><i style="background:#e0b878"></i>신들</span><span><i style="background:#e07a57"></i>영웅 이야기</span><span><i style="background:#b58ad6"></i>트로이 전쟁</span><span><i style="background:#5fb2c9"></i>오디세이아</span></div></div>
 
 <div class="legend">
   실선 카드 = 이미 만든 인물 &nbsp;·&nbsp; <span class="dot"></span>점선 "?" 카드 = 계보상 있지만 아직 안 만든 인물(제작 예정)
@@ -226,5 +303,355 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
   });
 })();
 </script>
+<!--GRAPH-JS-->
+<script type="application/json" id="gdata">{"nodes":[{"id":"uranus","nm":"우라노스","role":"제작 예정","par":"가이아의 남편 · 크로노스의 아버지","eps":[],"g":"god"},{"id":"gaia","nm":"가이아","role":"제작 예정","par":"우라노스의 아내 · 크로노스의 어머니","eps":[],"g":"god"},{"id":"cronos","nm":"크로노스","role":"티탄의 왕","par":"우라노스·가이아의 막내 · 자식을 삼킨 아버지","eps":[1],"g":"god","img":"cronos.png","th":"_g/cronos.jpg"},{"id":"rhea","nm":"레아","role":"티탄 여신","par":"크로노스의 아내 · 제우스를 숨긴 어머니","eps":[1],"g":"god","img":"rhea.png","th":"_g/rhea.jpg"},{"id":"iapetus","nm":"이아페토스","role":"제작 예정","par":"프로메테우스·에피메테우스의 아버지","eps":[],"g":"god"},{"id":"cyclops","nm":"키클롭스","role":"외눈의 대장장이","par":"제우스에게 번개를 벼려 준 거인","eps":[1],"g":"god","img":"cyclops.png","th":"_g/cyclops.jpg"},{"id":"hestia","nm":"헤스티아","role":"화덕의 여신","par":"크로노스·레아의 첫째","eps":[1],"g":"god","img":"hestia.png","th":"_g/hestia.jpg"},{"id":"demeter","nm":"데메테르","role":"대지·곡물의 여신","par":"크로노스·레아의 딸","eps":[1],"g":"god","img":"demeter.png","th":"_g/demeter.jpg"},{"id":"hera","nm":"헤라","role":"결혼의 여신 · 신들의 여왕","par":"크로노스·레아의 딸 · 제우스의 아내","eps":[1,7,14],"g":"god","img":"hera.png","th":"_g/hera.jpg"},{"id":"hades","nm":"하데스","role":"저승의 신","par":"크로노스·레아의 아들","eps":[1],"g":"god","img":"hades.png","th":"_g/hades.jpg"},{"id":"poseidon","nm":"포세이돈","role":"바다의 신","par":"크로노스·레아의 아들","eps":[1,17,25],"g":"god","img":"poseidon.png","th":"_g/poseidon.jpg"},{"id":"zeus","nm":"제우스","role":"신들의 왕 · 번개","par":"크로노스·레아의 막내 · 올림포스의 주인","eps":[1,7,23],"g":"god","img":"zeus.png","th":"_g/zeus.jpg"},{"id":"athena","nm":"아테나","role":"지혜·전쟁의 여신","par":"제우스의 머리에서 태어남 · 오디세우스의 수호신","eps":[4,14,24,25,26],"g":"god","img":"athena.png","th":"_g/athena.jpg"},{"id":"apollo","nm":"아폴론","role":"태양·예언·궁술의 신","par":"제우스와 레토의 아들 · 아르테미스의 쌍둥이","eps":[10],"g":"god","img":"apollo.png","th":"_g/apollo.jpg"},{"id":"artemis","nm":"아르테미스","role":"사냥·달의 여신","par":"제우스와 레토의 딸 · 아폴론의 쌍둥이","eps":[10],"g":"god","img":"artemis.png","th":"_g/artemis.jpg"},{"id":"ares","nm":"아레스","role":"전쟁의 신","par":"제우스와 헤라의 아들 · 아프로디테의 연인","eps":[11],"g":"god","img":"ares.png","th":"_g/ares.jpg"},{"id":"hermes","nm":"헤르메스","role":"전령의 신","par":"제우스와 마이아의 아들 · 몰리를 건넨 신","eps":[2,20],"g":"god","img":"hermes.png","th":"_g/hermes.jpg"},{"id":"dionysus","nm":"디오니소스","role":"포도주·환희의 신","par":"제우스와 세멜레의 아들","eps":[12],"g":"god","img":"dionysus.png","th":"_g/dionysus.jpg"},{"id":"perseus","nm":"페르세우스","role":"메두사를 벤 영웅","par":"제우스와 다나에의 아들 (반신)","eps":[6],"g":"hero","img":"perseus.png","th":"_g/perseus.jpg"},{"id":"heracles","nm":"헤라클레스","role":"최강의 영웅","par":"제우스와 알크메네의 아들 (반신)","eps":[7],"g":"hero","img":"heracles.png","th":"_g/heracles.jpg"},{"id":"helen","nm":"헬레네","role":"제작 예정","par":"제우스의 딸 · 트로이 전쟁의 불씨","eps":[14,16],"g":"troy"},{"id":"hephaestus","nm":"헤파이스토스","role":"대장장이 신","par":"헤라의 아들 · 아프로디테의 남편","eps":[4,11],"g":"god","img":"hephaestus.png","th":"_g/hephaestus.jpg"},{"id":"polyphemus","nm":"폴리페모스","role":"외눈의 거인","par":"포세이돈의 아들 · 오디세우스에게 눈이 멀다","eps":[17],"g":"odyssey","img":"polyphemus.png","th":"_g/polyphemus.jpg"},{"id":"pegasus","nm":"페가수스","role":"하늘을 나는 천마","par":"메두사의 피에서 태어난 백마","eps":[13],"g":"hero","img":"pegasus.png","th":"_g/pegasus.jpg"},{"id":"aphrodite","nm":"아프로디테","role":"미의 여신","par":"바다 거품에서 태어남 · 헤파이스토스의 아내","eps":[11,14],"g":"god","img":"aphrodite.png","th":"_g/aphrodite.jpg"},{"id":"prometheus","nm":"프로메테우스","role":"불을 훔친 티탄","par":"이아페토스의 아들 · 데우칼리온의 아버지","eps":[3,5],"g":"god","img":"prometheus.png","th":"_g/prometheus.jpg"},{"id":"epimetheus","nm":"에피메테우스","role":"뒤늦게 깨닫는 티탄","par":"프로메테우스의 동생 · 판도라의 남편","eps":[4,5],"g":"god","img":"epimetheus.png","th":"_g/epimetheus.jpg"},{"id":"pandora","nm":"판도라","role":"최초의 인간 여자","par":"에피메테우스의 아내 · 피라의 어머니","eps":[4,5],"g":"god","img":"pandora.png","th":"_g/pandora.jpg"},{"id":"deucalion","nm":"데우칼리온","role":"대홍수의 생존자","par":"프로메테우스의 아들 · 피라의 남편","eps":[5],"g":"god","img":"deucalion.png","th":"_g/deucalion.jpg"},{"id":"pyrrha","nm":"피라","role":"대홍수의 생존자","par":"판도라의 딸 · 데우칼리온의 아내","eps":[5],"g":"god","img":"pyrrha.png","th":"_g/pyrrha.jpg"},{"id":"danae","nm":"다나에","role":"페르세우스의 어머니","par":"아르고스의 공주","eps":[6],"g":"hero","img":"danae.png","th":"_g/danae.jpg"},{"id":"andromeda","nm":"안드로메다","role":"페르세우스의 아내","par":"에티오피아의 공주","eps":[6],"g":"hero","img":"andromeda.png","th":"_g/andromeda.jpg"},{"id":"medusa","nm":"메두사","role":"고르곤 · 돌로 만드는 눈","par":"페르세우스에게 목이 베임","eps":[6],"g":"hero","img":"medusa.png","th":"_g/medusa.jpg"},{"id":"polydectes","nm":"폴뤼덱테스","role":"세리포스의 왕","par":"페르세우스에게 메두사의 목을 강요","eps":[6],"g":"hero","img":"polydectes.png","th":"_g/polydectes.jpg"},{"id":"eurystheus","nm":"에우리스테우스","role":"미케네의 왕","par":"헤라클레스에게 12과업을 명함","eps":[7],"g":"hero","img":"eurystheus.png","th":"_g/eurystheus.jpg"},{"id":"nemean","nm":"네메아 사자","role":"가죽이 뚫리지 않는 괴물","par":"헤라클레스 첫 과업의 상대","eps":[7],"g":"hero","img":"nemean-lion.png","th":"_g/nemean-lion.jpg"},{"id":"daedalus","nm":"다이달로스","role":"전설의 명장(名匠)","par":"이카로스의 아버지 · 날개를 만듦","eps":[9],"g":"hero","img":"daedalus.png","th":"_g/daedalus.jpg"},{"id":"icarus","nm":"이카로스","role":"태양에 너무 가까이 간 소년","par":"다이달로스의 아들","eps":[9],"g":"hero","img":"icarus.png","th":"_g/icarus.jpg"},{"id":"midas","nm":"미다스","role":"황금의 손을 가진 왕","par":"프리기아의 왕 · 디오니소스에게 소원을 받다","eps":[12],"g":"hero","img":"midas.png","th":"_g/midas.jpg"},{"id":"daughter","nm":"미다스의 딸","role":"황금이 된 소녀","par":"미다스의 딸","eps":[12],"g":"hero","img":"daughter.png","th":"_g/daughter.jpg"},{"id":"silenus","nm":"실레노스","role":"늙은 사튀로스","par":"디오니소스의 스승 · 미다스가 대접한 손님","eps":[12],"g":"hero","img":"silenus.png","th":"_g/silenus.jpg"},{"id":"leopard","nm":"표범","role":"디오니소스의 신수(神獸)","par":"술의 신을 따르는 맹수","eps":[12],"g":"hero","img":"leopard.png","th":"_g/leopard.jpg"},{"id":"bellerophon","nm":"벨레로폰","role":"천마를 길들인 영웅","par":"코린토스의 영웅 · 오만으로 추락","eps":[13],"g":"hero","img":"bellerophon.png","th":"_g/bellerophon.jpg"},{"id":"chimera","nm":"키마이라","role":"불을 뿜는 괴물","par":"사자 머리 · 염소 몸 · 뱀 꼬리","eps":[13],"g":"hero","img":"chimera.png","th":"_g/chimera.jpg"},{"id":"paris","nm":"파리스","role":"트로이의 왕자","par":"황금 사과의 심판자 · 아킬레우스를 쏘다","eps":[14,15],"g":"troy","img":"paris.png","th":"_g/paris.jpg"},{"id":"achilles","nm":"아킬레우스","role":"그리스 최강의 전사","par":"테티스의 아들 · 발뒤꿈치가 약점 (반신)","eps":[15,21],"g":"troy","img":"achilles.png","th":"_g/achilles.jpg"},{"id":"cassandra","nm":"카산드라","role":"믿음받지 못한 예언자","par":"트로이의 공주 · 아무도 믿지 않는 저주","eps":[16],"g":"troy","img":"cassandra.png","th":"_g/cassandra.jpg"},{"id":"horse","nm":"트로이 목마","role":"성을 무너뜨린 나무 말","par":"오디세우스의 계략 · 속에 병사가 숨다","eps":[16],"g":"troy","img":"trojan-horse.png","th":"_g/trojan-horse.jpg"},{"id":"agamemnon","nm":"아가멤논","role":"그리스 연합군 총사령관","par":"귀향하자마자 살해당한 왕 · 저승에서 만나다","eps":[21],"g":"troy","img":"agamemnon.png","th":"_g/agamemnon.jpg"},{"id":"odysseus","nm":"오디세우스","role":"꾀 많은 이타카의 왕","par":"목마의 계략가 · 스무 해의 방랑","eps":[16,17,18,19,20,21,22,23,24,25,26],"g":"odyssey","img":"odysseus.png","th":"_g/odysseus.jpg"},{"id":"beggar","nm":"거지가 된 오디세우스","role":"아테나가 바꾼 모습","par":"제 집에 남처럼 들어가다","eps":[26],"g":"odyssey","img":"odysseus-beggar.png","th":"_g/odysseus-beggar.jpg"},{"id":"penelope","nm":"페넬로페","role":"기다린 아내","par":"오디세우스의 아내 · 수의를 밤마다 풀다","eps":[26],"g":"odyssey","img":"penelope.png","th":"_g/penelope.jpg"},{"id":"telemachus","nm":"텔레마코스","role":"아버지를 찾아 나선 아들","par":"오디세우스와 페넬로페의 아들","eps":[26],"g":"odyssey","img":"telemachus.png","th":"_g/telemachus.jpg"},{"id":"argos","nm":"아르고스","role":"스무 해를 기다린 개","par":"냄새로 주인을 알아본 늙은 사냥개","eps":[26],"g":"odyssey","img":"argos.png","th":"_g/argos.jpg"},{"id":"eumaeus","nm":"에우마이오스","role":"충직한 돼지치기","par":"거지를 알아보지 못하고도 거두어 준 종","eps":[26],"g":"odyssey","img":"eumaeus.png","th":"_g/eumaeus.jpg"},{"id":"eurycleia","nm":"에우리클레이아","role":"늙은 유모","par":"발을 씻기다 무릎 흉터로 알아보다","eps":[26],"g":"odyssey","img":"eurycleia.png","th":"_g/eurycleia.jpg"},{"id":"antinous","nm":"안티노오스","role":"구혼자들의 우두머리","par":"거지에게 발판을 던진 사내","eps":[26],"g":"odyssey","img":"antinous.png","th":"_g/antinous.jpg"},{"id":"anticleia","nm":"안티클레이아","role":"오디세우스의 어머니","par":"저승에서 만난 · 세 번 안으려 해도 통과한 혼령","eps":[21],"g":"odyssey","img":"anticleia.png","th":"_g/anticleia.jpg"},{"id":"aeolus","nm":"아이올로스","role":"바람을 다스리는 신","par":"바람 자루를 건넨 신","eps":[18],"g":"odyssey","img":"aeolus.png","th":"_g/aeolus.jpg"},{"id":"antiphates","nm":"안티파테스","role":"라이스트리고네스의 왕","par":"절벽에서 바위를 던진 식인 거인","eps":[19],"g":"odyssey","img":"antiphates.png","th":"_g/antiphates.jpg"},{"id":"circe","nm":"키르케","role":"사람을 돼지로 바꾸는 마녀","par":"부하들을 돼지로 · 저승 가는 길을 일러 준 여신","eps":[20],"g":"odyssey","img":"circe.png","th":"_g/circe.jpg"},{"id":"tiresias","nm":"테이레시아스","role":"눈먼 예언자","par":"저승에서 귀향의 길을 알려 준 혼령","eps":[21],"g":"odyssey","img":"tiresias.png","th":"_g/tiresias.jpg"},{"id":"elpenor","nm":"엘페노르","role":"오디세우스의 부하","par":"장례를 못 치른 채 저승 문턱을 떠돈 혼령","eps":[21],"g":"odyssey","img":"elpenor.png","th":"_g/elpenor.jpg"},{"id":"sirens","nm":"세이렌","role":"노래로 홀리는 자매","par":"노래를 들은 뱃사람을 죽음으로","eps":[22],"g":"odyssey","img":"sirens.png","th":"_g/sirens.jpg"},{"id":"scylla","nm":"스킬라","role":"여섯 머리 바다 괴물","par":"절벽에서 뱃사람 여섯을 낚아채다","eps":[22],"g":"odyssey","img":"scylla.png","th":"_g/scylla.jpg"},{"id":"charybdis","nm":"카립디스","role":"모든 걸 삼키는 소용돌이","par":"스킬라 맞은편 · 배도 사람도 남기지 않는 죽음","eps":[22],"g":"odyssey","img":"charybdis.png","th":"_g/charybdis.jpg"},{"id":"helios","nm":"헬리오스","role":"제작 예정","par":"건드리면 안 되는 소의 주인","eps":[23],"g":"odyssey"},{"id":"calypso","nm":"칼립소","role":"섬의 여신","par":"칠 년을 붙잡아 둔 · 불사를 제안한 여신","eps":[24],"g":"odyssey","img":"calypso.png","th":"_g/calypso.jpg"},{"id":"nausicaa","nm":"나우시카","role":"파이아케스의 공주","par":"알몸의 표류자를 돌봐 준 공주","eps":[25],"g":"odyssey","img":"nausicaa.png","th":"_g/nausicaa.jpg"},{"id":"alcinous","nm":"알키노오스","role":"파이아케스의 왕","par":"이름도 묻지 않고 배를 내준 왕","eps":[25],"g":"odyssey","img":"alcinous.png","th":"_g/alcinous.jpg"},{"id":"arete","nm":"아레테","role":"파이아케스의 왕비","par":"나우시카의 어머니","eps":[25],"g":"odyssey","img":"arete.png","th":"_g/arete.jpg"},{"id":"demodocus","nm":"데모도코스","role":"눈먼 악사","par":"트로이 목마를 노래해 오디세우스를 울리다","eps":[25],"g":"odyssey","img":"demodocus.png","th":"_g/demodocus.jpg"}],"edges":[{"s":"uranus","t":"gaia","y":"spouse","l":""},{"s":"uranus","t":"cronos","y":"parent","l":""},{"s":"gaia","t":"cronos","y":"parent","l":""},{"s":"cronos","t":"rhea","y":"spouse","l":""},{"s":"cronos","t":"hestia","y":"parent","l":""},{"s":"cronos","t":"demeter","y":"parent","l":""},{"s":"cronos","t":"hera","y":"parent","l":""},{"s":"cronos","t":"hades","y":"parent","l":""},{"s":"cronos","t":"poseidon","y":"parent","l":""},{"s":"cronos","t":"zeus","y":"parent","l":""},{"s":"rhea","t":"hestia","y":"parent","l":""},{"s":"rhea","t":"demeter","y":"parent","l":""},{"s":"rhea","t":"hera","y":"parent","l":""},{"s":"rhea","t":"hades","y":"parent","l":""},{"s":"rhea","t":"poseidon","y":"parent","l":""},{"s":"rhea","t":"zeus","y":"parent","l":""},{"s":"cronos","t":"zeus","y":"enemy","l":"삼키려던 아들에게 왕좌를 잃음"},{"s":"cyclops","t":"zeus","y":"ally","l":"번개창을 벼려 줌"},{"s":"cronos","t":"cyclops","y":"enemy","l":"가둬 버린 거인"},{"s":"iapetus","t":"prometheus","y":"parent","l":""},{"s":"iapetus","t":"epimetheus","y":"parent","l":""},{"s":"prometheus","t":"epimetheus","y":"sibling","l":"형제"},{"s":"zeus","t":"hera","y":"spouse","l":""},{"s":"zeus","t":"athena","y":"parent","l":""},{"s":"zeus","t":"apollo","y":"parent","l":""},{"s":"zeus","t":"artemis","y":"parent","l":""},{"s":"zeus","t":"ares","y":"parent","l":""},{"s":"zeus","t":"hermes","y":"parent","l":""},{"s":"zeus","t":"dionysus","y":"parent","l":""},{"s":"zeus","t":"perseus","y":"parent","l":""},{"s":"zeus","t":"heracles","y":"parent","l":""},{"s":"zeus","t":"helen","y":"parent","l":""},{"s":"hera","t":"ares","y":"parent","l":""},{"s":"hera","t":"hephaestus","y":"parent","l":""},{"s":"apollo","t":"artemis","y":"sibling","l":"쌍둥이"},{"s":"ares","t":"hephaestus","y":"sibling","l":"형제"},{"s":"hermes","t":"zeus","y":"ally","l":"잘린 힘줄을 되찾아 옴"},{"s":"prometheus","t":"zeus","y":"enemy","l":"불을 훔쳐 형벌을 받음"},{"s":"aphrodite","t":"hephaestus","y":"spouse","l":""},{"s":"aphrodite","t":"ares","y":"lover","l":"들통난 불륜"},{"s":"hephaestus","t":"ares","y":"enemy","l":"황금 그물로 망신 줌"},{"s":"poseidon","t":"polyphemus","y":"parent","l":""},{"s":"poseidon","t":"pegasus","y":"parent","l":""},{"s":"medusa","t":"pegasus","y":"parent","l":"피에서 태어남"},{"s":"zeus","t":"pandora","y":"meet","l":"복수의 선물로 보냄"},{"s":"hephaestus","t":"pandora","y":"meet","l":"흙으로 빚음"},{"s":"epimetheus","t":"pandora","y":"spouse","l":""},{"s":"prometheus","t":"deucalion","y":"parent","l":""},{"s":"epimetheus","t":"pyrrha","y":"parent","l":""},{"s":"pandora","t":"pyrrha","y":"parent","l":""},{"s":"deucalion","t":"pyrrha","y":"spouse","l":""},{"s":"zeus","t":"deucalion","y":"meet","l":"대홍수에서 살아남음"},{"s":"zeus","t":"danae","y":"lover","l":"청동 방에 찾아옴"},{"s":"danae","t":"perseus","y":"parent","l":""},{"s":"polydectes","t":"perseus","y":"enemy","l":"메두사의 목을 요구"},{"s":"polydectes","t":"danae","y":"enemy","l":"억지 청혼"},{"s":"perseus","t":"medusa","y":"enemy","l":"목을 벰"},{"s":"perseus","t":"andromeda","y":"spouse","l":"바다 괴물에게서 구함"},{"s":"athena","t":"perseus","y":"ally","l":"방패를 빌려줌"},{"s":"hera","t":"heracles","y":"enemy","l":"미워해 광기를 내림"},{"s":"eurystheus","t":"heracles","y":"enemy","l":"열두 과업을 명함"},{"s":"heracles","t":"nemean","y":"enemy","l":"첫 과업의 상대"},{"s":"daedalus","t":"icarus","y":"parent","l":""},{"s":"midas","t":"daughter","y":"parent","l":""},{"s":"dionysus","t":"midas","y":"meet","l":"황금 손 소원을 들어줌"},{"s":"silenus","t":"dionysus","y":"ally","l":"스승"},{"s":"midas","t":"silenus","y":"ally","l":"극진히 대접함"},{"s":"leopard","t":"dionysus","y":"ally","l":"따르는 신수"},{"s":"bellerophon","t":"pegasus","y":"ally","l":"길들여 올라탐"},{"s":"bellerophon","t":"chimera","y":"enemy","l":"하늘에서 처치"},{"s":"athena","t":"bellerophon","y":"ally","l":"황금 고삐를 줌"},{"s":"paris","t":"aphrodite","y":"ally","l":"황금 사과를 건넴"},{"s":"paris","t":"hera","y":"meet","l":"심판에서 고르지 않음"},{"s":"paris","t":"athena","y":"meet","l":"심판에서 고르지 않음"},{"s":"zeus","t":"paris","y":"meet","l":"심판을 떠넘김"},{"s":"paris","t":"helen","y":"lover","l":"데려가 전쟁을 부름"},{"s":"aphrodite","t":"helen","y":"meet","l":"파리스에게 약속한 여인"},{"s":"paris","t":"cassandra","y":"sibling","l":"남매"},{"s":"paris","t":"achilles","y":"enemy","l":"발뒤꿈치를 쏨"},{"s":"achilles","t":"agamemnon","y":"enemy","l":"총사령관과 다툼"},{"s":"odysseus","t":"horse","y":"meet","l":"목마의 계략을 짬"},{"s":"cassandra","t":"horse","y":"enemy","l":"\"저 안에 죽음이 있다\""},{"s":"odysseus","t":"penelope","y":"spouse","l":""},{"s":"odysseus","t":"telemachus","y":"parent","l":""},{"s":"penelope","t":"telemachus","y":"parent","l":""},{"s":"anticleia","t":"odysseus","y":"parent","l":"저승에서 재회"},{"s":"odysseus","t":"beggar","y":"same","l":"아테나가 바꾼 모습"},{"s":"athena","t":"odysseus","y":"ally","l":"수호신"},{"s":"athena","t":"beggar","y":"ally","l":"거지로 변신시킴"},{"s":"argos","t":"odysseus","y":"ally","l":"냄새로 알아봄"},{"s":"eurycleia","t":"odysseus","y":"ally","l":"무릎 흉터로 알아봄"},{"s":"eumaeus","t":"odysseus","y":"ally","l":"거지를 거두어 줌"},{"s":"antinous","t":"odysseus","y":"enemy","l":"구혼자들의 우두머리"},{"s":"antinous","t":"beggar","y":"enemy","l":"발판을 던짐"},{"s":"antinous","t":"penelope","y":"enemy","l":"억지 구혼"},{"s":"polyphemus","t":"odysseus","y":"enemy","l":"눈을 멀게 함"},{"s":"poseidon","t":"odysseus","y":"enemy","l":"귀향을 가로막음"},{"s":"aeolus","t":"odysseus","y":"ally","l":"바람 자루를 건넴"},{"s":"antiphates","t":"odysseus","y":"enemy","l":"바위로 함대를 부숨"},{"s":"circe","t":"odysseus","y":"meet","l":"부하를 돼지로 → 길을 일러 줌"},{"s":"hermes","t":"odysseus","y":"ally","l":"약초 몰리를 건넴"},{"s":"circe","t":"tiresias","y":"meet","l":"찾아가라고 일러 줌"},{"s":"tiresias","t":"odysseus","y":"ally","l":"귀향의 길을 예언"},{"s":"elpenor","t":"odysseus","y":"ally","l":"떠도는 부하의 혼령"},{"s":"odysseus","t":"achilles","y":"meet","l":"저승에서 만남"},{"s":"odysseus","t":"agamemnon","y":"meet","l":"저승에서 만남"},{"s":"sirens","t":"odysseus","y":"enemy","l":"노래로 홀림"},{"s":"scylla","t":"odysseus","y":"enemy","l":"부하 여섯을 낚아챔"},{"s":"charybdis","t":"odysseus","y":"enemy","l":"배를 삼키는 소용돌이"},{"s":"scylla","t":"charybdis","y":"meet","l":"해협의 맞은편"},{"s":"helios","t":"odysseus","y":"enemy","l":"소를 잡아먹힘"},{"s":"helios","t":"zeus","y":"meet","l":"벌을 호소함"},{"s":"zeus","t":"odysseus","y":"enemy","l":"벼락으로 배를 쪼갬"},{"s":"calypso","t":"odysseus","y":"lover","l":"칠 년을 붙잡아 둠"},{"s":"athena","t":"nausicaa","y":"ally","l":"꿈에 나타남"},{"s":"nausicaa","t":"odysseus","y":"ally","l":"표류자를 돌봐 줌"},{"s":"alcinous","t":"arete","y":"spouse","l":""},{"s":"alcinous","t":"nausicaa","y":"parent","l":""},{"s":"arete","t":"nausicaa","y":"parent","l":""},{"s":"alcinous","t":"odysseus","y":"ally","l":"배를 내줌"},{"s":"demodocus","t":"odysseus","y":"meet","l":"목마 노래로 울림"},{"s":"demodocus","t":"horse","y":"meet","l":"목마를 노래함"}],"gc":{"god":"#e0b878","hero":"#e07a57","troy":"#b58ad6","odyssey":"#5fb2c9"}}</script>
+<script>
+(function(){
+'use strict';
+var D=JSON.parse(document.getElementById('gdata').textContent);
+var IMG='/darak-company/chars/';
+// 관계 종류: [이름, 색, 점선, 굵기]
+var TY={parent:['부모·자식','#e0b878','',1.8],spouse:['부부','#e07a57','',2.8],sibling:['형제·남매','#d8c7a0','2 5',1.8],
+  lover:['연인','#ec8fb6','7 5',2],ally:['도움','#6cc38f','',1.8],enemy:['적대','#e25b55','',2],
+  meet:['인연','#a8977f','4 5',1.5],same:['같은 인물','#e0b878','1 5',2.4]};
+var TORDER=['parent','spouse','sibling','lover','ally','enemy','meet','same'];
+var GC=D.gc;
+function $(id){return document.getElementById(id);}
+var box=$('gbox'),world=$('gworld'),gE=$('gedges'),gN=$('gnodes'),panel=$('gpanel'),gq=$('gq'),leg=$('gleg');
+var tview=$('tview'),gview=$('gview'),tabs=document.querySelectorAll('.vtabs button');
+var SVGNS='http://www.w3.org/2000/svg';
+var mobileMQ=window.matchMedia('(max-width:640px)');
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var rnd=rng(20260912);
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+function lineStyle(i,t){i.style.borderTop='2px '+(TY[t][2]?'dashed ':'solid ')+TY[t][1];}
+
+// ── 데이터: 같은 두 사람 사이 관계는 선 하나로 합침
+var byId={},N=D.nodes,E=[],pairs={},on={};
+N.forEach(function(n){byId[n.id]=n;n.adj=[];});
+D.edges.forEach(function(r){
+  var k=r.s<r.t?r.s+'|'+r.t:r.t+'|'+r.s,e=pairs[k];
+  if(!e){e=pairs[k]={s:byId[r.s],t:byId[r.t],rels:[]};E.push(e);e.s.adj.push(e);e.t.adj.push(e);}
+  e.rels.push(r);
+});
+var present={};D.edges.forEach(function(r){present[r.y]=1;});
+TORDER=TORDER.filter(function(t){return present[t];});
+TORDER.forEach(function(t){on[t]=true;});
+
+// ── 크기(연결 많을수록 큼) + 갈래별 시작 위치
+var GA={god:-Math.PI/2,hero:Math.PI*0.92,troy:Math.PI*0.32,odyssey:Math.PI*0.02};
+N.forEach(function(n){
+  n.r=Math.round(21+Math.min(n.adj.length,26)*0.85);
+  var a=(GA[n.g]||0)+(rnd()-.5)*1.3,d=160+rnd()*260;
+  n.x=Math.cos(a)*d;n.y=Math.sin(a)*d;n.vx=0;n.vy=0;n.ph=rnd()*6.283;n.fx=null;n.fy=null;n.rx=n.x;n.ry=n.y;
+});
+
+// ── DOM
+E.forEach(function(e){var l=document.createElementNS(SVGNS,'line');l.setAttribute('class','ge');gE.appendChild(l);e.el=l;});
+N.forEach(function(n){
+  var d=el('div','gn'+(n.img?'':' ph'));d.dataset.id=n.id;
+  d.style.setProperty('--s',n.r*2+'px');d.style.setProperty('--gc',GC[n.g]||GC.god);
+  var gi=el('div','gi'),av=el('div','av');
+  if(n.img){var im=el('img');im.src=IMG+(n.th||n.img);im.alt='';im.draggable=false;av.appendChild(im);}else av.textContent='?';
+  gi.appendChild(av);gi.appendChild(el('div','gnm',n.nm));n.rl=el('div','grl');gi.appendChild(n.rl);
+  d.appendChild(gi);gN.appendChild(d);n.el=d;
+});
+TORDER.forEach(function(t){
+  var b=el('button');b.type='button';b.dataset.t=t;var i=el('i');lineStyle(i,t);
+  b.appendChild(i);b.appendChild(el('span',null,TY[t][0]));leg.appendChild(b);
+});
+var dl=$('gql');
+N.slice().sort(function(a,b){return a.nm.localeCompare(b.nm,'ko');}).forEach(function(n){var o=document.createElement('option');o.value=n.nm;dl.appendChild(o);});
+
+function refreshEdges(){
+  var dv={};N.forEach(function(n){dv[n.id]=0;});
+  E.forEach(function(e){
+    var rs=e.rels.filter(function(r){return on[r.y];});
+    e.on=rs.length>0;e.y=e.on?rs[0].y:e.rels[0].y;
+    if(e.on){dv[e.s.id]++;dv[e.t.id]++;}
+  });
+  E.forEach(function(e){
+    e.el.style.display=e.on?'':'none';
+    if(!e.on)return;
+    e.k=1/Math.min(dv[e.s.id],dv[e.t.id]);e.b=dv[e.s.id]/(dv[e.s.id]+dv[e.t.id]);
+    var t=TY[e.y];e.el.setAttribute('stroke',t[1]);e.el.setAttribute('stroke-width',t[3]);
+    if(t[2])e.el.setAttribute('stroke-dasharray',t[2]);else e.el.removeAttribute('stroke-dasharray');
+  });
+}
+
+// ── 힘 시뮬레이션(d3-force 방식을 작게)
+var alpha=1,aTarget=0,AMIN=.003,ADECAY=1-Math.pow(.001,1/300);
+var focus=null,ringPos={},locked={},ringR=0,hover=null,drag=null;
+var W=0,H=0,gx=.016,gy=.016;
+function step(){
+  var i,j,a,b,dx,dy,d2,d,w,n=N.length,e,L;
+  for(i=0;i<E.length;i++){e=E[i];if(!e.on)continue;a=e.s;b=e.t;if(locked[a.id]||locked[b.id])continue;
+    dx=b.x+b.vx-a.x-a.vx;dy=b.y+b.vy-a.y-a.vy;d=Math.sqrt(dx*dx+dy*dy)||1;
+    L=(e.y==='spouse'||e.y==='same')?95:(e.y==='parent'?120:150);
+    w=(d-L)/d*alpha*e.k;dx*=w;dy*=w;
+    b.vx-=dx*e.b;b.vy-=dy*e.b;a.vx+=dx*(1-e.b);a.vy+=dy*(1-e.b);}
+  for(i=0;i<n;i++){a=N[i];for(j=i+1;j<n;j++){b=N[j];
+    dx=b.x-a.x;dy=b.y-a.y;d2=dx*dx+dy*dy;
+    if(d2<1){dx=rnd()-.5;dy=rnd()-.5;d2=dx*dx+dy*dy+1e-3;}
+    var la=locked[a.id],lb=locked[b.id];
+    if(!la&&!lb&&d2<360000){w=-560*alpha/d2;a.vx+=dx*w;a.vy+=dy*w;b.vx-=dx*w;b.vy-=dy*w;}
+    var m=a.r+b.r+28;
+    if(d2<m*m){d=Math.sqrt(d2);w=(m-d)/d*.35;
+      var pa=la&&!lb?0:(lb&&!la?1:.5),pb=1-pa;if(la&&lb){pa=pb=.2;}
+      a.vx-=dx*w*pa;a.vy-=dy*w*pa;b.vx+=dx*w*pb;b.vy+=dy*w*pb;}
+  }}
+  for(i=0;i<n;i++){a=N[i];if(locked[a.id])continue;a.vx-=a.x*gx*alpha;a.vy-=a.y*gy*alpha;}
+  if(focus){var F=focus,RR=ringR+130,p;
+    for(i=0;i<n;i++){a=N[i];if(a===F)continue;p=ringPos[a.id];
+      if(p){a.vx+=(F.x+p.x-a.x)*.12;a.vy+=(F.y+p.y-a.y)*.12;}
+      else{dx=a.x-F.x;dy=a.y-F.y;d=Math.sqrt(dx*dx+dy*dy)||1;if(d<RR){w=(RR-d)/d*.08;a.vx+=dx*w;a.vy+=dy*w;}}
+    }}
+  for(i=0;i<n;i++){a=N[i];
+    if(a.fx!=null){a.x=a.fx;a.y=a.fy;a.vx=a.vy=0;continue;}
+    a.vx*=.6;a.vy*=.6;a.x+=a.vx;a.y+=a.vy;}
+  alpha+=(aTarget-alpha)*ADECAY;
+}
+
+// ── 카메라
+var cam={x:0,y:0,k:1},tgt=null,offX=0,offY=0,offTX=0,offTY=0;
+function updOff(){
+  offTX=0;offTY=0;var aw=W,ah=H;
+  if(!panel.hidden){
+    if(mobileMQ.matches){var ph=panel.offsetHeight+16;offTY=-ph/2;ah=H-ph;}
+    else{var pw=panel.offsetWidth+20;offTX=pw/2;aw=W-pw;}
+  }
+  return [aw,ah];
+}
+function resize(){W=box.clientWidth;H=box.clientHeight;var asp=W/Math.max(H,1);gx=.016*Math.max(1,1/asp);gy=.016*Math.max(1,asp);updOff();}
+function fitK(w,h){var a=updOff();return Math.max(.2,Math.min(1.15,(a[0]-30)/w,(a[1]-30)/h));}
+function flyTo(x,y,k){tgt={x:x,y:y,k:Math.max(.2,Math.min(3,k))};}
+function fitAll(instant){
+  var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  N.forEach(function(n){x0=Math.min(x0,n.x-n.r-40);x1=Math.max(x1,n.x+n.r+40);y0=Math.min(y0,n.y-n.r);y1=Math.max(y1,n.y+n.r+22);});
+  var k=fitK(x1-x0,y1-y0),cx=(x0+x1)/2,cy=(y0+y1)/2;
+  if(instant){cam={x:cx,y:cy,k:k};tgt=null;offX=offTX;offY=offTY;applyCam();}else flyTo(cx,cy,k);
+}
+function applyCam(){world.style.transform='translate('+(W/2+offX-cam.x*cam.k).toFixed(1)+'px,'+(H/2+offY-cam.y*cam.k).toFixed(1)+'px) scale('+cam.k.toFixed(4)+')';}
+function toWorld(sx,sy){var r=box.getBoundingClientRect();return{x:(sx-r.left-W/2-offX)/cam.k+cam.x,y:(sy-r.top-H/2-offY)/cam.k+cam.y};}
+function zoomAt(sx,sy,k){
+  k=Math.max(.2,Math.min(3,k));var w=toWorld(sx,sy),r=box.getBoundingClientRect();
+  cam.k=k;cam.x=w.x-(sx-r.left-W/2-offX)/k;cam.y=w.y-(sy-r.top-H/2-offY)/k;
+}
+
+// ── 그리기(둥실둥실 떠다니는 오프셋은 화면에만 — 레이아웃은 안 흔듦)
+function draw(t){
+  var s=reduced?0:3.2,i,n,e;
+  for(i=0;i<N.length;i++){n=N[i];
+    n.rx=n.x+Math.sin(t*.00071+n.ph)*s;n.ry=n.y+Math.cos(t*.00053+n.ph*1.7)*s;
+    n.el.style.transform='translate('+n.rx.toFixed(1)+'px,'+n.ry.toFixed(1)+'px)';}
+  for(i=0;i<E.length;i++){e=E[i];if(!e.on)continue;
+    e.el.setAttribute('x1',e.s.rx.toFixed(1));e.el.setAttribute('y1',e.s.ry.toFixed(1));
+    e.el.setAttribute('x2',e.t.rx.toFixed(1));e.el.setAttribute('y2',e.t.ry.toFixed(1));}
+}
+var running=false,started=false;
+function frame(t){
+  if(!running)return;
+  if(alpha>AMIN||aTarget>0)step();
+  if(tgt){cam.x+=(tgt.x-cam.x)*.14;cam.y+=(tgt.y-cam.y)*.14;cam.k+=(tgt.k-cam.k)*.14;
+    if(Math.abs(tgt.x-cam.x)<.3&&Math.abs(tgt.y-cam.y)<.3&&Math.abs(tgt.k-cam.k)<.002){cam.x=tgt.x;cam.y=tgt.y;cam.k=tgt.k;tgt=null;}}
+  offX+=(offTX-offX)*.14;offY+=(offTY-offY)*.14;
+  applyCam();draw(t);requestAnimationFrame(frame);
+}
+function start(){
+  if(running)return;running=true;resize();
+  if(!started){started=true;refreshEdges();for(var i=0;i<300;i++)step();fitAll(true);draw(0);}
+  requestAnimationFrame(frame);
+}
+
+// ── 강조 · 포커스
+function applyClasses(){
+  var c=focus||hover,hl={};
+  box.classList.toggle('fx',!!focus);box.classList.toggle('hv',!focus&&!!hover);
+  if(c)c.adj.forEach(function(e){if(e.on){hl[e.s.id]=1;hl[e.t.id]=1;}});
+  N.forEach(function(n){n.el.classList.toggle('hl',!!(c&&hl[n.id]&&n!==c));n.el.classList.toggle('sel',n===c);});
+  E.forEach(function(e){e.el.classList.toggle('hl',!!(c&&e.on&&(e.s===c||e.t===c)));});
+}
+function neighbors(n){var out=[];n.adj.forEach(function(e){if(e.on)out.push({n:e.s===n?e.t:e.s,e:e});});return out;}
+function relText(r,me){
+  var base=r.y==='parent'?(r.s===me.id?'자식':'부모'):(r.y==='spouse'?'부부':'');
+  if(base)return r.l?base+' · '+r.l:base;
+  return r.l||TY[r.y][0];
+}
+function edgeText(e,me){return e.rels.filter(function(r){return on[r.y];}).map(function(r){return relText(r,me);}).join(' / ');}
+function releaseFocus(){
+  if(!focus)return;focus.fx=focus.fy=null;
+  N.forEach(function(n){n.rl.textContent='';});
+  focus=null;locked={};ringPos={};alpha=Math.max(alpha,.3);aTarget=0;
+}
+function setFocus(n,o){
+  o=o||{};releaseFocus();
+  focus=n;n.fx=n.x;n.fy=n.y;locked[n.id]=1;
+  var nb=neighbors(n);
+  nb.sort(function(a,b){return TORDER.indexOf(a.e.y)-TORDER.indexOf(b.e.y)||a.n.nm.localeCompare(b.n.nm,'ko');});
+  var c=nb.length,zig=c>12,R=Math.max(150,c*(zig?50:84)/(2*Math.PI));
+  ringR=R+(zig?96:0);
+  nb.forEach(function(b,i){
+    var a=-Math.PI/2+i*2*Math.PI/Math.max(c,1),rr=R+(zig&&i%2?96:0);
+    ringPos[b.n.id]={x:Math.cos(a)*rr,y:Math.sin(a)*rr};locked[b.n.id]=1;
+    b.n.rl.textContent=edgeText(b.e,n);b.n.rl.style.color=TY[b.e.y][1];
+  });
+  alpha=Math.max(alpha,.25);aTarget=.05;
+  applyClasses();showPanel(n,nb);
+  var ext=ringR+95,k=fitK(ext*2,ext*2);
+  if(o.instant){for(var i=0;i<160;i++)step();cam={x:n.x,y:n.y,k:k};tgt=null;offX=offTX;offY=offTY;}
+  else flyTo(n.x,n.y,k);
+  if(!o.noHash)setHash('graph='+n.id);
+}
+function unfocus(){releaseFocus();applyClasses();hidePanel();setHash('graph');}
+
+// ── 인물 카드 패널
+function showPanel(n,nb){
+  panel.textContent='';
+  var x=el('button','gx','✕');x.type='button';x.setAttribute('aria-label','닫기');panel.appendChild(x);
+  var top=el('div','gpt');
+  if(n.img){var im=el('img');im.src=IMG+n.img;im.alt=n.nm;top.appendChild(im);}else top.appendChild(el('div','q','?'));
+  var tx=el('div');tx.appendChild(el('div','nm',n.nm));tx.appendChild(el('div','role',n.role));top.appendChild(tx);panel.appendChild(top);
+  if(n.par)panel.appendChild(el('div','gpar',n.par));
+  if(n.eps&&n.eps.length){var ep=el('div','geps');n.eps.forEach(function(v){ep.appendChild(el('span',null,'EP.'+(v<10?'0':'')+v));});panel.appendChild(ep);}
+  var gr={};nb.forEach(function(b){(gr[b.e.y]=gr[b.e.y]||[]).push(b);});
+  TORDER.forEach(function(t){
+    if(!gr[t])return;
+    var h=el('div','grt'),i=el('i');lineStyle(i,t);h.appendChild(i);
+    h.appendChild(document.createTextNode(TY[t][0]+' '));h.appendChild(el('small',null,gr[t].length+'명'));panel.appendChild(h);
+    var list=el('div','gchips');
+    gr[t].forEach(function(b){
+      var bt=el('button');bt.type='button';bt.dataset.id=b.n.id;
+      if(b.n.img){var im=el('img');im.src=IMG+(b.n.th||b.n.img);im.alt='';bt.appendChild(im);}else bt.appendChild(el('span','q','?'));
+      var s=el('span','t');s.appendChild(el('b',null,b.n.nm));s.appendChild(el('em',null,edgeText(b.e,n)));bt.appendChild(s);
+      list.appendChild(bt);
+    });
+    panel.appendChild(list);
+  });
+  if(!nb.length)panel.appendChild(el('div','gpar','켜 둔 관계 종류로 이어진 인물이 없어요.'));
+  panel.hidden=false;panel.scrollTop=0;updOff();
+}
+function hidePanel(){panel.hidden=true;updOff();}
+panel.addEventListener('click',function(e){
+  var b=e.target.closest('button');
+  if(b&&b.classList.contains('gx')){unfocus();return;}
+  if(b&&b.dataset.id){setFocus(byId[b.dataset.id]);return;}
+  var im=e.target.closest('.gpt img'),lb=$('lb');
+  if(im&&focus&&lb){$('lbimg').src=im.src;$('lbname').textContent=focus.nm;$('lbrole').textContent=focus.role;lb.classList.add('on');e.stopPropagation();}
+});
+
+// ── 조작: 드래그(이동/인물 끌기) · 핀치 · 휠
+var ptr={};
+box.addEventListener('pointerdown',function(e){
+  if(e.target.closest('.gpanel,.gctl'))return;
+  if(e.button>0)return;
+  ptr[e.pointerId]={x:e.clientX,y:e.clientY};
+  try{box.setPointerCapture(e.pointerId);}catch(_){}
+  var ks=Object.keys(ptr);
+  if(ks.length===2){
+    if(drag&&drag.type==='node'&&drag.n!==focus){drag.n.fx=drag.n.fy=null;}
+    var a=ptr[ks[0]],b=ptr[ks[1]];
+    drag={type:'pinch',d0:Math.hypot(a.x-b.x,a.y-b.y)||1,k0:cam.k};tgt=null;return;
+  }
+  if(ks.length>2)return;
+  var ne=e.target.closest('.gn');
+  drag={type:ne?'node':'pan',n:ne?byId[ne.dataset.id]:null,sx:e.clientX,sy:e.clientY,cx:cam.x,cy:cam.y,moved:false};
+});
+box.addEventListener('pointermove',function(e){
+  if(!ptr[e.pointerId]||!drag)return;
+  ptr[e.pointerId]={x:e.clientX,y:e.clientY};
+  if(drag.type==='pinch'){
+    var ks=Object.keys(ptr);if(ks.length<2)return;var a=ptr[ks[0]],b=ptr[ks[1]];
+    zoomAt((a.x+b.x)/2,(a.y+b.y)/2,drag.k0*Math.hypot(a.x-b.x,a.y-b.y)/drag.d0);return;
+  }
+  var dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;
+  if(!drag.moved&&dx*dx+dy*dy<36)return;
+  drag.moved=true;tgt=null;
+  if(drag.type==='pan'){cam.x=drag.cx-dx/cam.k;cam.y=drag.cy-dy/cam.k;box.classList.add('grabbing');}
+  else{var w=toWorld(e.clientX,e.clientY);drag.n.fx=w.x;drag.n.fy=w.y;alpha=Math.max(alpha,.25);aTarget=focus?.05:.25;}
+});
+function endPtr(e){
+  if(!ptr[e.pointerId])return;delete ptr[e.pointerId];
+  var left=Object.keys(ptr).length;
+  if(!drag)return;
+  if(drag.type==='pinch'){if(!left)drag=null;return;}
+  if(left)return;
+  if(!drag.moved){
+    if(e.type==='pointerup'){
+      if(drag.type==='node'){if(focus===drag.n)unfocus();else setFocus(drag.n);}
+      else if(focus)unfocus();
+    }
+  }else if(drag.type==='node'){
+    if(drag.n!==focus){drag.n.fx=drag.n.fy=null;}
+    aTarget=focus?.05:0;
+  }
+  box.classList.remove('grabbing');drag=null;
+}
+box.addEventListener('pointerup',endPtr);box.addEventListener('pointercancel',endPtr);
+box.addEventListener('wheel',function(e){
+  if(e.target.closest('.gpanel'))return;
+  e.preventDefault();tgt=null;
+  zoomAt(e.clientX,e.clientY,cam.k*Math.exp(-e.deltaY*(e.ctrlKey?.01:.0015)));
+},{passive:false});
+gN.addEventListener('pointerover',function(e){
+  if(e.pointerType!=='mouse'||drag)return;var ne=e.target.closest('.gn');if(!ne)return;
+  hover=byId[ne.dataset.id];if(!focus)applyClasses();
+});
+gN.addEventListener('pointerout',function(e){
+  if(e.pointerType!=='mouse')return;var ne=e.target.closest('.gn');if(!ne)return;
+  if(e.relatedTarget&&ne.contains(e.relatedTarget))return;
+  hover=null;if(!focus)applyClasses();
+});
+
+// ── 버튼 · 검색 · 관계 종류 필터
+function cur(){return tgt||cam;}
+$('gzin').addEventListener('click',function(){var c=cur();flyTo(c.x,c.y,c.k*1.35);});
+$('gzout').addEventListener('click',function(){var c=cur();flyTo(c.x,c.y,c.k/1.35);});
+$('gfit').addEventListener('click',function(){if(focus)unfocus();fitAll();});
+$('gfull').addEventListener('click',function(){toggleFull();});
+function toggleFull(f){
+  var v=f==null?!box.classList.contains('full'):f;
+  box.classList.toggle('full',v);document.documentElement.style.overflow=v?'hidden':'';
+  var b=$('gfull');b.textContent=v?'✕':'⛶';b.title=v?'작게 보기':'크게 보기';resize();
+}
+leg.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;var t=b.dataset.t;
+  on[t]=!on[t];b.classList.toggle('off',!on[t]);refreshEdges();alpha=Math.max(alpha,.3);
+  if(focus)setFocus(focus,{noHash:true});else applyClasses();
+});
+function findNode(q){
+  q=q.trim();if(!q)return null;var i;
+  for(i=0;i<N.length;i++)if(N[i].nm===q)return N[i];
+  for(i=0;i<N.length;i++)if(N[i].nm.indexOf(q)>=0)return N[i];
+  return null;
+}
+function searchGo(){var n=findNode(gq.value);if(n&&n!==focus){setFocus(n);gq.blur();}}
+gq.addEventListener('change',searchGo);
+gq.addEventListener('keydown',function(e){if(e.key==='Enter')searchGo();});
+gq.addEventListener('input',function(e){
+  if(e.inputType&&e.inputType!=='insertReplacementText')return;
+  var q=gq.value.trim();for(var i=0;i<N.length;i++)if(N[i].nm===q){if(N[i]!==focus)setFocus(N[i]);gq.blur();return;}
+});
+document.addEventListener('keydown',function(e){
+  if(gview.hidden||(e.key!=='Escape'&&e.key!=='Esc'))return;
+  var lb=$('lb');if(lb&&lb.classList.contains('on'))return;
+  if(focus)unfocus();else if(box.classList.contains('full'))toggleFull(false);
+},true);
+window.addEventListener('resize',function(){if(running)resize();});
+
+// ── 탭 · 주소(#graph, #graph=odysseus 로 바로 열기)
+function setHash(h){try{history.replaceState(null,'',h?'#'+h:location.pathname+location.search);}catch(_){}}
+function view(v,noHash){
+  for(var i=0;i<tabs.length;i++)tabs[i].classList.toggle('on',tabs[i].dataset.v===v);
+  tview.hidden=v!=='tree';gview.hidden=v!=='graph';
+  if(v==='graph'){start();if(!noHash)setHash(focus?'graph='+focus.id:'graph');}
+  else{running=false;if(box.classList.contains('full'))toggleFull(false);if(!noHash)setHash('');}
+}
+for(var ti=0;ti<tabs.length;ti++)tabs[ti].addEventListener('click',function(){view(this.dataset.v);});
+var m=/^#graph(?:=([A-Za-z0-9_-]+))?$/.exec(location.hash);
+if(m){view('graph',true);if(m[1]&&byId[m[1]])setFocus(byId[m[1]],{instant:true,noHash:true});}
+})();
+</script>
+<!--/GRAPH-JS-->
 </body>
 </html>
