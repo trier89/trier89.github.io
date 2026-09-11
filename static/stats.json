@@ -6,15 +6,15 @@
  "yesterday": {
   "users": 2,
   "new": 0,
-  "pv": 10,
+  "pv": 11,
   "sessions": 3
  },
  "top_views": [
   {
    "title": "고양이 Catcha!",
-   "views": 11,
+   "views": 12,
    "eng": 265,
-   "avg_sec": 24
+   "avg_sec": 22
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -49,16 +49,16 @@
    "avg_sec": 184
   },
   {
-   "title": "고양이 Catcha!",
-   "views": 11,
-   "eng": 265,
-   "avg_sec": 24
-  },
-  {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 10,
    "eng": 227,
    "avg_sec": 23
+  },
+  {
+   "title": "고양이 Catcha!",
+   "views": 12,
+   "eng": 265,
+   "avg_sec": 22
   },
   {
    "title": "내릴 때 알려줘 — 지하철 하차·환승 알림",
@@ -73,5 +73,5 @@
    "avg_sec": 1
   }
  ],
- "updated": "2026-09-12 01:35"
+ "updated": "2026-09-12 02:35"
 }
