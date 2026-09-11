@@ -92,13 +92,17 @@ body{background:radial-gradient(120% 80% at 50% 0%,#3a2c1c 0%,#17110a 65%);color
 </div>
 <script>
 (function(){
+  // 아카이브 글 경로는 호스트마다 다르다(2026-09-11 404 수정):
+  //   planfully-daily.pages.dev → /darak-company-log/…   (사이트 루트가 데일리)
+  //   planfully.ai.kr           → /daily/darak-company-log/…  (데일리가 /daily 아래)
+  var LOGBASE = (location.hostname.indexOf('planfully.ai.kr') >= 0) ? '/daily/darak-company-log/' : '/darak-company-log/';
   fetch('/darak-company/log-index.json?v='+Date.now()).then(function(r){return r.json();}).then(function(a){
     var el=document.getElementById('arclist');
     if(!a||!a.length){el.innerHTML='<div style="color:var(--dim);text-align:center;">아직 기록이 없어요.</div>';return;}
     el.innerHTML=a.slice(0,30).map(function(x){
-      return '<a href="/darak-company-log/'+x.date+'/" style="display:block;color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);font-size:13.5px;">🗓 <b style="color:var(--gold);">'+x.date+'</b> — '+(x.title||'하루 기록')+'</a>';
+      return '<a href="'+LOGBASE+x.date+'/" style="display:block;color:var(--txt);text-decoration:none;border:1px solid var(--wall2);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);font-size:13.5px;">🗓 <b style="color:var(--gold);">'+x.date+'</b> — '+(x.title||'하루 기록')+'</a>';
     }).join('');
-  }).catch(function(){document.getElementById('arclist').innerHTML='<a href="/darak-company-log/" style="color:var(--gold);text-align:center;display:block;">전체 기록 보기 →</a>';});
+  }).catch(function(){document.getElementById('arclist').innerHTML='<a href="'+LOGBASE+'" style="color:var(--gold);text-align:center;display:block;">전체 기록 보기 →</a>';});
 })();
 </script>
 <script>
