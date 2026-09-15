@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="robots" content="noindex">
+<title>별자리 카메라 (테스트)</title>
+<style>
+:root{--fg:#eaf1ff;--dim:#9fb3d9;--acc:#ffd98a;--panel:rgba(8,14,32,.74)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#cam{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;background:#050a18}
+#sky{position:fixed;inset:0;touch-action:none}
+#top{position:fixed;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 8px) 16px 18px;background:linear-gradient(rgba(5,10,24,.88),rgba(5,10,24,0));font-size:13px;line-height:1.5;pointer-events:none}
+#top b{color:var(--acc);font-weight:600}
+#modes{position:fixed;top:calc(env(safe-area-inset-top,0px) + 76px);left:50%;transform:translateX(-50%);display:flex;background:var(--panel);border:1px solid rgba(160,190,255,.2);border-radius:999px;padding:3px}
+#modes button{border:0;background:transparent;color:var(--dim);padding:7px 14px;border-radius:999px;font-size:13px;white-space:nowrap}
+#modes button.on{background:#2b4a8a;color:#fff}
+#bar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:center;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 12px);background:linear-gradient(rgba(5,10,24,0),rgba(5,10,24,.88))}
+#bar button{flex:1;max-width:96px;border:1px solid rgba(160,190,255,.25);background:var(--panel);color:var(--fg);border-radius:12px;padding:9px 4px;font-size:12px}
+#bar button.on{border-color:var(--acc);color:var(--acc)}
+#calib{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 72px);background:var(--panel);border:1px solid rgba(255,217,138,.45);border-radius:12px;padding:8px 12px;font-size:12px;line-height:1.5;text-align:center;width:max-content;max-width:calc(100% - 32px)}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:72%;overflow:auto;background:rgba(8,14,32,.96);border-top:1px solid rgba(160,190,255,.25);border-radius:16px 16px 0 0;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 18px);font-size:14px;line-height:1.65;-webkit-user-select:text;user-select:text}
+.sheet h2{margin:0 36px 4px 0;font-size:18px}
+.sheet .x{position:absolute;right:8px;top:6px;border:0;background:transparent;color:var(--dim);font-size:24px;padding:4px 10px}
+.sheet img{display:block;width:100%;max-width:300px;margin:10px auto 4px;border-radius:12px}
+.sheet .src{color:var(--dim);font-size:12px;margin-top:8px}
+.sheet .sub{color:var(--dim);font-size:12px}
+.sheet ol{padding-left:20px;margin:8px 0}
+.sheet li{margin:6px 0}
+.btn{border:1px solid rgba(160,190,255,.3);background:transparent;color:var(--fg);border-radius:10px;padding:8px 12px;font-size:13px}
+#start{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at 50% 40%,#16244a,#050a18)}
+#start .card{max-width:340px;text-align:center}
+#start h1{font-size:24px;margin:0 0 10px}
+#start p{color:var(--dim);line-height:1.6;margin:8px 0}
+#go{margin-top:14px;border:0;border-radius:14px;padding:14px 28px;font-size:16px;background:var(--acc);color:#1a1300;font-weight:700}
+#toast{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%);background:var(--panel);padding:10px 14px;border-radius:10px;font-size:13px;max-width:calc(100% - 40px);text-align:center;pointer-events:none}
+.small{font-size:12px}
+</style>
+</head>
+<body>
+<video id="cam" playsinline muted autoplay></video>
+<canvas id="sky"></canvas>
+<div id="top"></div>
+<div id="modes"><button id="mStar">⭐ 별이름</button><button id="mCon">✨ 별자리</button></div>
+<div id="calib" hidden></div>
+<div id="bar"><button id="bCam">📷 카메라</button><button id="bCal">🎯 보정</button><button id="bTip">💡 팁</button><button id="bReset">↺ 초기화</button></div>
+<div id="info" class="sheet" hidden></div>
+<div id="tips" class="sheet" hidden>
+  <button class="x" data-close>×</button>
+  <h2>💡 보정 팁 — 달로 맞추기</h2>
+  <ol>
+    <li>달이 보이는 곳에서 폰을 <b>세로로</b> 들고 달 쪽을 비춰 카메라에 달이 들어오게 해요. 화면 밖이면 🌙 화살표를 따라가요.</li>
+    <li><b>🎯 보정</b>을 켜고, 한 손가락으로 화면을 밀어 🌙 표시를 실제 달 위에 겹쳐요. 방향과 높이가 함께 맞춰져요.</li>
+    <li><b>크기(스케일)</b> — 폰을 돌려 달을 화면 가장자리 쪽으로 보내 봐요. 🌙 표시가 실제 달을 따라오면 맞은 거예요. 표시가 달보다 <b>안쪽</b>(화면 가운데 쪽)에 있으면 두 손가락으로 <b>벌리고</b>, <b>바깥쪽</b>에 있으면 <b>오므려요</b>. 크기는 이 기기에 저장돼서 한 번만 하면 돼요.</li>
+    <li>다 맞췄으면 <b>🎯 보정</b>을 꺼서 실수로 밀리지 않게 해요.</li>
+  </ol>
+  <p class="small">달이 안 뜬 날에도 나침반 기준으로 보여요. 방향 보정은 6시간 동안 유지돼요. 금속·자동차·전자제품 가까이에선 방향이 틀어질 수 있어요.</p>
+  <p><button id="resetFov" class="btn">화각(크기) 기본값으로</button></p>
+  <p class="src">별 데이터 d3-celestial(BSD) · 천문 계산 Astronomy Engine(MIT)<span id="figCredit"></span></p>
+</div>
+<div id="start"><div class="card">
+  <h1>🌌 별자리 카메라</h1>
+  <p>폰을 하늘로 들면 그 방향의 별과 별자리가 겹쳐 보여요.</p>
+  <p class="small">카메라·위치·방향 센서를 써요. 영상과 위치는 폰 밖으로 보내지 않아요.</p>
+  <button id="go">시작하기</button>
+  <p class="small">테스트 버전 · 세로로 들고 사용</p>
+</div></div>
+<div id="toast" hidden></div>
+<script src="astronomy.browser.min.js"></script>
+<script src="sky-data.js"></script>
+<script src="sky-fig.js"></script>
+<script src="sky-story.js"></script>
+<script src="sky-photo.js"></script>
+<script>
+(function () {
+  const A = window.Astronomy, SKY = window.SKY;
+  const $ = id => document.getElementById(id);
+  const Q = new URLSearchParams(location.search);
+  const D2R = Math.PI / 180, R2D = 180 / Math.PI;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  const FOV_DEFAULT = 62;
+  const st = {
+    lat: 37.5665, lon: 126.978, loc: '서울(기본값)', decl: -8.7,
+    sensor: false, north: '', vfov: store.get('skycam_vfov_v1', FOV_DEFAULT),
+    hOff: 0, pOff: 0, calib: false, cam: false, stream: null,
+    lookAz: +(Q.get('az') || 225), lookAlt: +(Q.get('alt') || 15),
+    mode: store.get('skycam_mode_v1', 'con')
+  };
+  if (Q.get('lat')) { st.lat = +Q.get('lat'); st.lon = +Q.get('lon'); st.loc = `${st.lat.toFixed(2)}, ${st.lon.toFixed(2)}`; }
+  const saved = store.get('skycam_offset_v1', null);
+  if (saved && Date.now() - saved.t < 6 * 3600e3) { st.hOff = saved.h; st.pOff = saved.p; }
+  const saveOff = () => store.set('skycam_offset_v1', { h: st.hOff, p: st.pOff, t: Date.now() });
+  // 한국 부근 자기편각(서쪽 약 8~9°). 정확한 값은 달 보정이 잡는다.
+  const declFor = (lat, lon) => (lat > 32 && lat < 44 && lon > 123 && lon < 132) ? -8.7 : 0;
+
+  // ── 행렬 ──
+  const mul = (P, R) => { const C = [[0,0,0],[0,0,0],[0,0,0]]; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) { let s = 0; for (let k = 0; k < 3; k++) s += P[i][k] * R[k][j]; C[i][j] = s; } return C; };
+  const Rz = a => { const c = Math.cos(a), s = Math.sin(a); return [[c,-s,0],[s,c,0],[0,0,1]]; };
+  const Rx = a => { const c = Math.cos(a), s = Math.sin(a); return [[1,0,0],[0,c,-s],[0,s,c]]; };
+  const Ry = a => { const c = Math.cos(a), s = Math.sin(a); return [[c,0,s],[0,1,0],[-s,0,c]]; };
+  function ortho(M) {
+    const n = v => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return v.map(x => x / l); };
+    let c0 = n([M[0][0], M[1][0], M[2][0]]), c1 = [M[0][1], M[1][1], M[2][1]];
+    const d = c0[0]*c1[0] + c0[1]*c1[1] + c0[2]*c1[2];
+    c1 = n([c1[0] - d*c0[0], c1[1] - d*c0[1], c1[2] - d*c0[2]]);
+    const c2 = [c0[1]*c1[2] - c0[2]*c1[1], c0[2]*c1[0] - c0[0]*c1[2], c0[0]*c1[1] - c0[1]*c1[0]];
+    return [[c0[0], c1[0], c2[0]], [c0[1], c1[1], c2[1]], [c0[2], c1[2], c2[2]]];
+  }
+  const blend = (P, R, k) => ortho(P.map((row, i) => row.map((v, j) => v * (1 - k) + R[i][j] * k)));
+  const enu = (az, alt) => [Math.cos(alt*D2R) * Math.sin(az*D2R), Math.cos(alt*D2R) * Math.cos(az*D2R), Math.sin(alt*D2R)];
+
+  // ── 화면 ──
+  const cv = $('sky'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, DPR = 1;
+  function resize() { DPR = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * DPR; cv.height = H * DPR; cv.style.width = W + 'px'; cv.style.height = H + 'px'; }
+  addEventListener('resize', resize); resize();
+  const focal = () => (H / 2) / Math.tan(st.vfov / 2 * D2R);
+
+  // ── 방향 센서 ──
+  let sensR = null, smR = null, gotAbs = false, iosOff = null;
+  const wrap = d => ((d % 360) + 540) % 360 - 180;
+  function onOri(e, abs) {
+    if (e.beta == null) return;
+    let alpha = e.alpha;
+    if (typeof e.webkitCompassHeading === 'number' && !isNaN(e.webkitCompassHeading) && alpha != null) {
+      const d = wrap((360 - e.webkitCompassHeading) - alpha);
+      iosOff = iosOff == null ? d : iosOff + wrap(d - iosOff) * 0.05;
+      alpha = alpha + iosOff; st.north = 'magnetic';
+    } else if (abs) { gotAbs = true; st.north = 'magnetic'; }
+    else { if (gotAbs) return; st.north = 'relative'; }
+    if (alpha == null) return;
+    sensR = mul(mul(Rz((alpha - st.decl) * D2R), Rx(e.beta * D2R)), Ry((e.gamma || 0) * D2R));
+    if (!st.sensor) { st.sensor = true; updInfo(); }
+  }
+  function listenOri() {
+    if ('ondeviceorientationabsolute' in window) addEventListener('deviceorientationabsolute', e => onOri(e, true));
+    addEventListener('deviceorientation', e => onOri(e, !!e.absolute));
+  }
+  function viewR(smooth = true) {
+    let base;
+    if (st.sensor && sensR) {
+      smR = smooth ? (smR ? blend(smR, sensR, 0.22) : sensR) : (smR || sensR);
+      base = mul(Rz(st.hOff * D2R), smR);
+    } else {
+      base = mul(Rz((-st.lookAz + st.hOff) * D2R), Rx((90 + st.lookAlt) * D2R));
+    }
+    return mul(base, Rx(st.pOff * D2R));
+  }
+  function proj(R, v, f) {
+    const x = R[0][0]*v[0] + R[1][0]*v[1] + R[2][0]*v[2];
+    const y = R[0][1]*v[0] + R[1][1]*v[1] + R[2][1]*v[2];
+    const z = R[0][2]*v[0] + R[1][2]*v[1] + R[2][2]*v[2];
+    if (z > -0.02) return { x, y, z, vis: false };
+    return { x, y, z, vis: true, sx: W / 2 + f * x / -z, sy: H / 2 - f * y / -z };
+  }
+  const onScr = (p, m) => p.vis && p.sx > -m && p.sx < W + m && p.sy > -m && p.sy < H + m;
+
+  // ── 하늘 계산 ──
+  const now = () => Q.get('t') ? new Date(Q.get('t')) : new Date();
+  const DIRS = ['북', '북동', '동', '남동', '남', '남서', '서', '북서'];
+  const dirName = az => DIRS[Math.round(az / 45) % 8];
+  const PLANETS = [['Mercury', '수성'], ['Venus', '금성'], ['Mars', '화성'], ['Jupiter', '목성'], ['Saturn', '토성']];
+  const phaseName = p => p < 12 || p > 348 ? '삭(안 보임)' : p < 80 ? '초승달' : p < 100 ? '상현달' : p < 170 ? '차오르는 달' : p < 190 ? '보름달' : p < 260 ? '기우는 달' : p < 280 ? '하현달' : '그믐달';
+  const hhmm = d => d ? d.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }) : '-';
+  const HORIZON = Array.from({ length: 121 }, (_, i) => enu(i * 3, 0));
+  let sky = null, riseSetAt = 0, riseSet = {};
+  function computeSky() {
+    const t = now(), obs = new A.Observer(st.lat, st.lon, 0), rot = A.Rotation_EQJ_HOR(t, obs), at = A.MakeTime(t);
+    const conv = (ra, dec) => { const r = ra * D2R, d = dec * D2R; const h = A.RotateVector(rot, new A.Vector(Math.cos(d) * Math.cos(r), Math.cos(d) * Math.sin(r), Math.sin(d), at)); return [-h.y, h.x, h.z]; };
+    const body = name => { const eq = A.Equator(name, t, obs, true, true); const hz = A.Horizon(t, obs, eq.ra, eq.dec, 'normal'); return { az: hz.azimuth, alt: hz.altitude, dist: eq.dist, v: enu(hz.azimuth, hz.altitude) }; };
+    const moon = body('Moon');
+    moon.frac = A.Illumination('Moon', t).phase_fraction;
+    moon.phase = A.MoonPhase(t);
+    moon.rad = Math.atan(1737.4 / (moon.dist * 149597870.7));
+    if (Date.now() - riseSetAt > 60000 || Q.get('t')) {
+      riseSetAt = Date.now();
+      riseSet = { rise: A.SearchRiseSet('Moon', obs, +1, t, 1.5), set: A.SearchRiseSet('Moon', obs, -1, t, 1.5) };
+    }
+    const FIG = window.SKY_FIG || {};
+    sky = {
+      t, moon,
+      stars: SKY.stars.map(s => [conv(s[0], s[1]), s[2]]),
+      lines: SKY.lines.map(([id, segs]) => [id, segs.map(seg => seg.map(p => conv(p[0], p[1])))]),
+      names: SKY.names.map(([id, ko, ra, dec]) => [id, ko, conv(ra, dec)]),
+      bright: SKY.bright.map(([ko, ra, dec, hip]) => [ko, conv(ra, dec), hip]),
+      planets: PLANETS.map(([en, ko]) => Object.assign(body(en), { en, ko })),
+      figs: Object.entries(FIG).map(([id, f]) => [id, f, f.anchors.map(a => conv(a[2], a[3]))])
+    };
+    updInfo();
+  }
+
+  // ── 그리기 ──
+  const imgs = {};
+  const getImg = src => { if (!imgs[src]) { const im = new Image(); im.src = src; imgs[src] = im; } return imgs[src]; };
+  let hits = [];
+  function label(text, x, y, color, size, center) {
+    ctx.font = `${size}px -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif`;
+    ctx.textAlign = center ? 'center' : 'left';
+    ctx.shadowColor = 'rgba(0,0,0,.85)'; ctx.shadowBlur = 4;
+    ctx.fillStyle = color; ctx.fillText(text, x, y);
+    ctx.shadowBlur = 0;
+  }
+  function affine(u, s) {
+    const [u1, v1] = u[0], [u2, v2] = u[1], [u3, v3] = u[2];
+    const den = u1 * (v2 - v3) + u2 * (v3 - v1) + u3 * (v1 - v2);
+    if (Math.abs(den) < 1e-6) return null;
+    const solve = k => [
+      (s[0][k] * (v2 - v3) + s[1][k] * (v3 - v1) + s[2][k] * (v1 - v2)) / den,
+      (s[0][k] * (u3 - u2) + s[1][k] * (u1 - u3) + s[2][k] * (u2 - u1)) / den,
+      (s[0][k] * (u2 * v3 - u3 * v2) + s[1][k] * (u3 * v1 - u1 * v3) + s[2][k] * (u1 * v2 - u2 * v1)) / den
+    ];
+    const [a, c, e] = solve(0), [b, d, f] = solve(1);
+    return [a, b, c, d, e, f];
+  }
+  function frame() {
+    requestAnimationFrame(frame);
+    if (!sky) return;
+    const R = viewR(), f = focal();
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    if (!st.cam) { ctx.fillStyle = '#050a18'; ctx.fillRect(0, 0, W, H); }
+    hits = [];
+    const con = st.mode === 'con';
+
+    if (con) {
+      for (const [id, fg, anc] of sky.figs) {
+        const ps = anc.map(v => proj(R, v, f));
+        if (!ps.every(p => p.vis) || ps.every(p => !onScr(p, W))) continue;
+        const m = affine(fg.anchors.map(a => [a[0], a[1]]), ps.map(p => [p.sx, p.sy]));
+        const im = getImg(fg.img);
+        if (!m || !im.complete || !im.naturalWidth) continue;
+        const scale = Math.hypot(m[0], m[1]);
+        if (!(scale > 0.02 && scale < 40)) continue;
+        ctx.save();
+        ctx.globalAlpha = st.cam ? 0.3 : 0.22;          // 그림이 별·달을 가리지 않게 옅게
+        ctx.setTransform(DPR * m[0], DPR * m[1], DPR * m[2], DPR * m[3], DPR * m[4], DPR * m[5]);
+        ctx.drawImage(im, 0, 0, fg.w, fg.h);
+        ctx.restore();
+      }
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctx.strokeStyle = 'rgba(130,175,255,.6)'; ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      for (const [, segs] of sky.lines) for (const seg of segs) {
+        let pv = null;
+        for (const v of seg) {
+          const p = proj(R, v, f);
+          if (p.vis && pv && pv.vis && (onScr(p, 0) || onScr(pv, 0)) && Math.abs(p.sx - pv.sx) < W * 1.5 && Math.abs(p.sy - pv.sy) < H * 1.5) { ctx.moveTo(pv.sx, pv.sy); ctx.lineTo(p.sx, p.sy); }
+          pv = p;
+        }
+      }
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = '#fff';
+    for (const [v, mag] of sky.stars) {
+      const p = proj(R, v, f);
+      if (!onScr(p, 4)) continue;
+      ctx.globalAlpha = Math.max(0.25, Math.min(1, 1.25 - 0.17 * mag)) * (v[2] < 0 ? 0.35 : 1);
+      ctx.beginPath(); ctx.arc(p.sx, p.sy, Math.max(0.7, 2.9 - 0.45 * mag), 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // 지평선 · 방위
+    ctx.strokeStyle = 'rgba(255,170,110,.6)'; ctx.lineWidth = 1.2; ctx.beginPath();
+    let pv = null;
+    for (const v of HORIZON) { const p = proj(R, v, f); if (p.vis && pv && pv.vis && Math.abs(p.sx - pv.sx) < W) { ctx.moveTo(pv.sx, pv.sy); ctx.lineTo(p.sx, p.sy); } pv = p; }
+    ctx.stroke();
+    DIRS.forEach((n, i) => { const p = proj(R, enu(i * 45, 0), f); if (onScr(p, 20)) label(n, p.sx, p.sy + 16, '#ffb27a', i % 2 ? 11 : 14, true); });
+
+    if (con) {
+      for (const [id, ko, v] of sky.names) {
+        const p = proj(R, v, f);
+        if (!onScr(p, 0)) continue;
+        label(ko, p.sx, p.sy, 'rgba(175,205,255,.95)', 12, true);
+        hits.push({ x: p.sx, y: p.sy - 4, kind: 'con', key: id, title: ko });
+      }
+    } else {
+      for (const [ko, v, hip] of sky.bright) {
+        const p = proj(R, v, f);
+        if (!onScr(p, 0)) continue;
+        label(ko, p.sx + 7, p.sy + 4, '#fff3c4', 12, false);
+        hits.push({ x: p.sx, y: p.sy, kind: 'star', key: hip, title: ko });
+      }
+    }
+
+    for (const pl of sky.planets) {
+      const p = proj(R, pl.v, f);
+      if (!onScr(p, 0)) continue;
+      ctx.globalAlpha = pl.alt < 0 ? 0.4 : 1;
+      ctx.fillStyle = '#ffcf7a'; ctx.beginPath(); ctx.arc(p.sx, p.sy, 3.4, 0, 6.2832); ctx.fill();
+      ctx.globalAlpha = 1;
+      label(pl.ko, p.sx + 7, p.sy + 4, '#ffcf7a', 12, false);
+      hits.push({ x: p.sx, y: p.sy, kind: 'planet', key: pl.en, title: pl.ko, sub: `${dirName(pl.az)} ${Math.round(pl.az)}° · 고도 ${Math.round(pl.alt)}°` });
+    }
+
+    // 달
+    const m = sky.moon, mp = proj(R, m.v, f);
+    if (onScr(mp, 0)) {
+      const r = Math.max(3, m.rad * f), ring = Math.max(r + 9, 17);
+      ctx.fillStyle = '#ffe9a8'; ctx.beginPath(); ctx.arc(mp.sx, mp.sy, r, 0, 6.2832); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,217,138,.95)'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(mp.sx, mp.sy, ring, 0, 6.2832); ctx.stroke();
+      label(`🌙 달 ${Math.round(m.frac * 100)}%`, mp.sx, mp.sy + ring + 16, '#ffd98a', 13, true);
+      hits.push({ x: mp.sx, y: mp.sy, kind: 'planet', key: 'Moon', title: '달', sub: `${phaseName(m.phase)} ${Math.round(m.frac * 100)}% · ${dirName(m.az)} ${Math.round(m.az)}° · 고도 ${Math.round(m.alt)}°` });
+    } else {
+      let dx, dy;
+      if (mp.vis) { dx = mp.sx - W / 2; dy = mp.sy - H / 2; } else { dx = mp.x; dy = -mp.y; }
+      if (Math.hypot(dx, dy) < 1e-6) { dx = 0; dy = 1; }
+      const L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
+      const mx = W / 2 - 36, my = H / 2 - 120;
+      const s = Math.min(mx / Math.max(Math.abs(ux), 1e-6), my / Math.max(Math.abs(uy), 1e-6));
+      const ax = W / 2 + ux * s, ay = H / 2 + uy * s;
+      ctx.save(); ctx.translate(ax, ay); ctx.rotate(Math.atan2(uy, ux));
+      ctx.fillStyle = 'rgba(255,217,138,.95)'; ctx.beginPath(); ctx.moveTo(14, 0); ctx.lineTo(-8, -9); ctx.lineTo(-8, 9); ctx.closePath(); ctx.fill();
+      ctx.restore();
+      label('🌙 달', ax - ux * 30, ay - uy * 30 + 4, '#ffd98a', 13, true);
+    }
+
+    if (st.calib) {
+      ctx.strokeStyle = 'rgba(255,217,138,.9)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(W / 2 - 14, H / 2); ctx.lineTo(W / 2 + 14, H / 2); ctx.moveTo(W / 2, H / 2 - 14); ctx.lineTo(W / 2, H / 2 + 14); ctx.stroke();
+    }
+  }
+
+  // ── 정보 · UI ──
+  function updInfo() {
+    if (!sky) return;
+    const m = sky.moon;
+    const warn = !st.sensor ? ' · <b>센서 없음 — 화면을 밀어 둘러보기</b>' : st.north === 'relative' ? ' · <b>나침반 없음 — 달로 보정해 주세요</b>' : '';
+    $('top').innerHTML = `📍 ${esc(st.loc)}${warn}<br>🌙 <b>${phaseName(m.phase)} ${Math.round(m.frac * 100)}%</b> · ${m.alt > 0 ? `${dirName(m.az)} ${Math.round(m.az)}° · 고도 ${Math.round(m.alt)}°` : '지금은 지평선 아래'}<br>다음 월출 ${hhmm(riseSet.rise && riseSet.rise.date)} · 다음 월몰 ${hhmm(riseSet.set && riseSet.set.date)}`;
+  }
+  const sg = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(1);
+  function updCalib() {
+    $('calib').hidden = !st.calib;
+    if (st.calib) $('calib').innerHTML = `방향 ${sg(st.hOff)}° · 높이 ${sg(st.pOff)}° · 화각 ${st.vfov.toFixed(0)}°<br>한 손가락: 🌙 표시를 실제 달로 밀기 · 두 손가락: 크기`;
+  }
+  function updBtns() {
+    $('bCam').classList.toggle('on', st.cam);
+    $('bCal').classList.toggle('on', st.calib);
+    $('mStar').classList.toggle('on', st.mode === 'star');
+    $('mCon').classList.toggle('on', st.mode === 'con');
+  }
+  let toastT = 0;
+  function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600); }
+
+  function openInfo(h) {
+    const S = window.SKY_STORY || {}, P = window.SKY_PHOTO || {};
+    let s = null, photo = null;
+    if (h.kind === 'con') s = (S.con || {})[h.key];
+    else if (h.kind === 'star') { s = (S.star || {})['HIP' + h.key]; photo = P['HIP' + h.key]; }
+    else { s = (S.planet || {})[h.key]; photo = P[h.key]; }
+    let html = `<button class="x" data-close>×</button><h2>${esc(s && s.title || h.title)}</h2>`;
+    if (h.sub) html += `<div class="sub">${esc(h.sub)}</div>`;
+    if (photo) html += `<img src="${esc(photo.img)}" alt=""><div class="src">${esc(photo.caption || '')}${photo.credit ? ' · 사진 ' + esc(photo.credit) : ''}${photo.license ? ' (' + esc(photo.license) + ')' : ''}</div>`;
+    if (s) {
+      if (s.shape) html += `<p><b>모양 찾기</b> ${esc(s.shape)}</p>`;
+      html += `<p>${esc(s.story)}</p>`;
+      if (s.src) html += `<div class="src">출처 ${esc(s.src)}</div>`;
+    } else html += `<p class="small">이야기는 준비 중이에요.</p>`;
+    $('info').innerHTML = html;
+    $('tips').hidden = true;
+    $('info').hidden = false;
+  }
+  function tap(x, y) {
+    let best = null, bd = 44;
+    for (const h of hits) { const d = Math.hypot(h.x - x, h.y - y); if (d < bd) { bd = d; best = h; } }
+    if (best) openInfo(best);
+  }
+  document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (c) c.closest('.sheet').hidden = true; });
+
+  // ── 터치: 밀기(보정/둘러보기) · 두 손가락(크기) · 탭(정보) ──
+  const pts = new Map(); let pinch = null, down = null;
+  cv.addEventListener('pointerdown', e => {
+    cv.setPointerCapture(e.pointerId);
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 1) down = { x: e.clientX, y: e.clientY, t: Date.now(), moved: false };
+    if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), fov: st.vfov }; if (down) down.moved = true; }
+  });
+  cv.addEventListener('pointermove', e => {
+    const prev = pts.get(e.pointerId); if (!prev) return;
+    const cur = { x: e.clientX, y: e.clientY }; pts.set(e.pointerId, cur);
+    if (down && Math.hypot(cur.x - down.x, cur.y - down.y) > 8) down.moved = true;
+    const adjustable = !st.sensor || st.calib;
+    if (pts.size === 2 && pinch) {
+      if (!adjustable) return;
+      const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d > 10) { st.vfov = Math.max(15, Math.min(120, pinch.fov * pinch.d / d)); store.set('skycam_vfov_v1', st.vfov); updCalib(); }
+      return;
+    }
+    if (pts.size !== 1) return;
+    const f = focal(), dx = (cur.x - prev.x) / f * R2D, dy = (cur.y - prev.y) / f * R2D;
+    if (st.sensor) { if (!st.calib) return; st.hOff += dx; st.pOff += dy; saveOff(); }
+    else { st.lookAz = ((st.lookAz - dx) % 360 + 360) % 360; st.lookAlt = Math.max(-89, Math.min(89, st.lookAlt + dy)); }
+    updCalib();
+  });
+  cv.addEventListener('pointerup', e => {
+    const had = pts.delete(e.pointerId);
+    if (pts.size < 2) pinch = null;
+    if (had && pts.size === 0) { if (down && !down.moved && Date.now() - down.t < 500) tap(e.clientX, e.clientY); down = null; }
+  });
+  cv.addEventListener('pointercancel', e => { pts.delete(e.pointerId); pinch = null; down = null; });
+
+  // ── 카메라 · 위치 ──
+  async function startCam() {
+    try {
+      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false });
+      const v = $('cam'); v.srcObject = s; await v.play().catch(() => {});
+      st.stream = s; st.cam = true;
+    } catch (e) { st.cam = false; toast('카메라를 못 켰어요 — 별 지도만 보여요'); }
+    updBtns();
+  }
+  function stopCam() { if (st.stream) st.stream.getTracks().forEach(t => t.stop()); st.stream = null; st.cam = false; $('cam').srcObject = null; updBtns(); }
+  function locate() {
+    if (!navigator.geolocation) { toast('위치를 못 읽어서 서울 기준으로 보여요'); return; }
+    navigator.geolocation.getCurrentPosition(p => {
+      st.lat = p.coords.latitude; st.lon = p.coords.longitude; st.decl = declFor(st.lat, st.lon);
+      st.loc = `내 위치 ${st.lat.toFixed(2)}, ${st.lon.toFixed(2)}`; riseSetAt = 0; computeSky();
+    }, () => { st.loc = '서울(위치 못 읽음)'; updInfo(); toast('위치를 못 읽어서 서울 기준으로 보여요'); },
+    { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
+  }
+
+  $('go').onclick = async () => {
+    try { if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') await DeviceOrientationEvent.requestPermission(); } catch (e) {}
+    $('start').hidden = true;
+    listenOri(); startCam(); locate();
+    setTimeout(() => { if (!st.sensor) toast('방향 센서가 없어요 — 화면을 밀어서 둘러보세요'); }, 2500);
+  };
+  $('bCam').onclick = () => st.cam ? stopCam() : startCam();
+  $('bCal').onclick = () => { st.calib = !st.calib; updCalib(); updBtns(); if (st.calib && !store.get('skycam_tipseen_v1', false)) { store.set('skycam_tipseen_v1', true); $('tips').hidden = false; } };
+  $('bTip').onclick = () => { $('info').hidden = true; $('tips').hidden = false; };
+  $('bReset').onclick = () => { st.hOff = 0; st.pOff = 0; saveOff(); updCalib(); toast('방향·높이 보정을 지웠어요 (크기는 그대로)'); };
+  $('resetFov').onclick = () => { st.vfov = FOV_DEFAULT; store.set('skycam_vfov_v1', st.vfov); updCalib(); toast('화각을 기본값으로 돌렸어요'); };
+  $('mStar').onclick = () => { st.mode = 'star'; store.set('skycam_mode_v1', st.mode); updBtns(); };
+  $('mCon').onclick = () => { st.mode = 'con'; store.set('skycam_mode_v1', st.mode); updBtns(); };
+  if (window.SKY_FIG_CREDIT) $('figCredit').textContent = ' · 별자리 그림 ' + window.SKY_FIG_CREDIT;
+  if (Q.has('nostart')) $('start').hidden = true;
+
+  computeSky();
+  setInterval(computeSky, 2000);
+  updBtns();
+  requestAnimationFrame(frame);
+
+  // 검증용
+  window.__skycam = {
+    st,
+    moon: () => ({ az: sky.moon.az, alt: sky.moon.alt, s: proj(viewR(false), sky.moon.v, focal()) }),
+    at: (az, alt) => proj(viewR(false), enu(az, alt), focal()),
+    tap, hits: () => hits
+  };
+})();
+</script>
+</body>
+</html>
