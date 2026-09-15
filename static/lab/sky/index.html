@@ -17,6 +17,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
 #modes{position:fixed;top:calc(env(safe-area-inset-top,0px) + 76px);left:50%;transform:translateX(-50%);display:flex;background:var(--panel);border:1px solid rgba(160,190,255,.2);border-radius:999px;padding:3px}
 #modes button{border:0;background:transparent;color:var(--dim);padding:7px 14px;border-radius:999px;font-size:13px;white-space:nowrap}
 #modes button.on{background:#2b4a8a;color:#fff}
+#selChip{position:fixed;top:calc(env(safe-area-inset-top,0px) + 120px);left:50%;transform:translateX(-50%);border:1px solid rgba(255,217,138,.6);background:var(--panel);color:var(--acc);border-radius:999px;padding:6px 14px;font-size:13px;white-space:nowrap}
 #bar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:center;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 12px);background:linear-gradient(rgba(5,10,24,0),rgba(5,10,24,.88))}
 #bar button{flex:1;max-width:96px;border:1px solid rgba(160,190,255,.25);background:var(--panel);color:var(--fg);border-radius:12px;padding:9px 4px;font-size:12px}
 #bar button.on{border-color:var(--acc);color:var(--acc)}
@@ -44,6 +45,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
 <canvas id="sky"></canvas>
 <div id="top"></div>
 <div id="modes"><button id="mStar">⭐ 별이름</button><button id="mCon">✨ 별자리</button></div>
+<button id="selChip" hidden></button>
 <div id="calib" hidden></div>
 <div id="bar"><button id="bCam">📷 카메라</button><button id="bCal">🎯 보정</button><button id="bTip">💡 팁</button><button id="bReset">↺ 초기화</button></div>
 <div id="info" class="sheet" hidden></div>
@@ -56,6 +58,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     <li><b>크기(스케일)</b> — 폰을 돌려 달을 화면 가장자리 쪽으로 보내 봐요. 🌙 표시가 실제 달을 따라오면 맞은 거예요. 표시가 달보다 <b>안쪽</b>(화면 가운데 쪽)에 있으면 두 손가락으로 <b>벌리고</b>, <b>바깥쪽</b>에 있으면 <b>오므려요</b>. 크기는 이 기기에 저장돼서 한 번만 하면 돼요.</li>
     <li>다 맞췄으면 <b>🎯 보정</b>을 꺼서 실수로 밀리지 않게 해요.</li>
   </ol>
+  <p class="small">✨별자리 모드에서 별자리 이름이나 선을 탭하면 그 별자리만 그림과 함께 강조돼요. 빈 하늘을 탭하거나 위의 ✕를 누르면 해제돼요.</p>
   <p class="small">달이 안 뜬 날에도 나침반 기준으로 보여요. 방향 보정은 6시간 동안 유지돼요. 금속·자동차·전자제품 가까이에선 방향이 틀어질 수 있어요.</p>
   <p><button id="resetFov" class="btn">화각(크기) 기본값으로</button></p>
   <p class="src">별 데이터 d3-celestial(BSD) · 천문 계산 Astronomy Engine(MIT)<span id="figCredit"></span></p>
@@ -90,7 +93,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     sensor: false, north: '', vfov: store.get('skycam_vfov_v1', FOV_DEFAULT),
     hOff: 0, pOff: 0, calib: false, cam: false, stream: null,
     lookAz: +(Q.get('az') || 225), lookAlt: +(Q.get('alt') || 15),
-    mode: store.get('skycam_mode_v1', 'con')
+    mode: store.get('skycam_mode_v1', 'con'), sel: null
   };
   if (Q.get('lat')) { st.lat = +Q.get('lat'); st.lon = +Q.get('lon'); st.loc = `${st.lat.toFixed(2)}, ${st.lon.toFixed(2)}`; }
   const saved = store.get('skycam_offset_v1', null);
@@ -198,7 +201,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   // ── 그리기 ──
   const imgs = {};
   const getImg = src => { if (!imgs[src]) { const im = new Image(); im.src = src; imgs[src] = im; } return imgs[src]; };
-  let hits = [];
+  let hits = [], lineHits = [], figsDrawn = [];
   function label(text, x, y, color, size, center) {
     ctx.font = `${size}px -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif`;
     ctx.textAlign = center ? 'center' : 'left';
@@ -225,11 +228,13 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     ctx.clearRect(0, 0, W, H);
     if (!st.cam) { ctx.fillStyle = '#050a18'; ctx.fillRect(0, 0, W, H); }
-    hits = [];
+    hits = []; lineHits = []; figsDrawn = [];
     const con = st.mode === 'con';
 
     if (con) {
+      const selFig = st.sel ? (FIG_ALIAS[st.sel] || st.sel) : null;
       for (const [id, fg, anc] of sky.figs) {
+        if (id !== selFig) continue;                  // 그림은 고른 별자리만(다 그리면 헷갈림 — 사장님 9/15)
         const ps = anc.map(v => proj(R, v, f));
         if (!ps.every(p => p.vis) || ps.every(p => !onScr(p, W))) continue;
         const m = affine(fg.anchors.map(a => [a[0], a[1]]), ps.map(p => [p.sx, p.sy]));
@@ -238,23 +243,35 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
         const scale = Math.hypot(m[0], m[1]);
         if (!(scale > 0.02 && scale < 40)) continue;
         ctx.save();
-        ctx.globalAlpha = st.cam ? 0.3 : 0.22;          // 그림이 별·달을 가리지 않게 옅게
+        figsDrawn.push(id);
+        ctx.globalAlpha = st.cam ? 0.6 : 0.5;
         ctx.setTransform(DPR * m[0], DPR * m[1], DPR * m[2], DPR * m[3], DPR * m[4], DPR * m[5]);
         ctx.drawImage(im, 0, 0, fg.w, fg.h);
         ctx.restore();
       }
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      ctx.strokeStyle = 'rgba(130,175,255,.6)'; ctx.lineWidth = 1.1;
-      ctx.beginPath();
-      for (const [, segs] of sky.lines) for (const seg of segs) {
-        let pv = null;
-        for (const v of seg) {
-          const p = proj(R, v, f);
-          if (p.vis && pv && pv.vis && (onScr(p, 0) || onScr(pv, 0)) && Math.abs(p.sx - pv.sx) < W * 1.5 && Math.abs(p.sy - pv.sy) < H * 1.5) { ctx.moveTo(pv.sx, pv.sy); ctx.lineTo(p.sx, p.sy); }
-          pv = p;
+      const strokeLines = only => {                    // only: undefined=전부, true=고른 것만, false=나머지만
+        ctx.beginPath();
+        for (const [id, segs] of sky.lines) {
+          if (only !== undefined && (id === st.sel) !== only) continue;
+          for (const seg of segs) {
+            let pv = null;
+            for (const v of seg) {
+              const p = proj(R, v, f);
+              if (p.vis && pv && pv.vis && (onScr(p, 0) || onScr(pv, 0)) && Math.abs(p.sx - pv.sx) < W * 1.5 && Math.abs(p.sy - pv.sy) < H * 1.5) {
+                ctx.moveTo(pv.sx, pv.sy); ctx.lineTo(p.sx, p.sy);
+                lineHits.push([id, pv.sx, pv.sy, p.sx, p.sy]);
+              }
+              pv = p;
+            }
+          }
         }
-      }
-      ctx.stroke();
+        ctx.stroke();
+      };
+      if (st.sel) {
+        ctx.strokeStyle = 'rgba(130,175,255,.22)'; ctx.lineWidth = 1; strokeLines(false);
+        ctx.strokeStyle = 'rgba(255,217,138,.95)'; ctx.lineWidth = 2.2; strokeLines(true);
+      } else { ctx.strokeStyle = 'rgba(130,175,255,.6)'; ctx.lineWidth = 1.1; strokeLines(); }
     }
 
     ctx.fillStyle = '#fff';
@@ -277,7 +294,8 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
       for (const [id, ko, v] of sky.names) {
         const p = proj(R, v, f);
         if (!onScr(p, 0)) continue;
-        label(ko, p.sx, p.sy, 'rgba(175,205,255,.95)', 12, true);
+        if (st.sel === id) label(ko, p.sx, p.sy, '#ffd98a', 15, true);
+        else label(ko, p.sx, p.sy, st.sel ? 'rgba(175,205,255,.4)' : 'rgba(175,205,255,.95)', 12, true);
         hits.push({ x: p.sx, y: p.sy - 4, kind: 'con', key: id, title: ko });
       }
     } else {
@@ -371,10 +389,30 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     $('tips').hidden = true;
     $('info').hidden = false;
   }
+  // 그림이 따로 없는 별자리는 그림을 품은 별자리로(고물·돛=아르고호(용골), 뱀=뱀주인)
+  const FIG_ALIAS = { Pup: 'Car', Vel: 'Car', Ser: 'Oph' };
+  const segDist = (x, y, x1, y1, x2, y2) => {
+    const dx = x2 - x1, dy = y2 - y1, L = dx * dx + dy * dy;
+    const t = L ? Math.max(0, Math.min(1, ((x - x1) * dx + (y - y1) * dy) / L)) : 0;
+    return Math.hypot(x - x1 - t * dx, y - y1 - t * dy);
+  };
+  function select(id, title) {
+    st.sel = id || null;
+    $('selChip').hidden = !id;
+    if (id) $('selChip').textContent = `✨ ${title}  ✕`;
+  }
   function tap(x, y) {
     let best = null, bd = 44;
     for (const h of hits) { const d = Math.hypot(h.x - x, h.y - y); if (d < bd) { bd = d; best = h; } }
-    if (best) openInfo(best);
+    if (!best && st.mode === 'con') {                // 이름이 멀어도 별자리 선 가까이 탭하면 그 별자리
+      let sd = 26;
+      for (const [id, x1, y1, x2, y2] of lineHits) {
+        const d = segDist(x, y, x1, y1, x2, y2);
+        if (d < sd) { sd = d; const n = SKY.names.find(r => r[0] === id); best = { kind: 'con', key: id, title: n ? n[1] : id }; }
+      }
+    }
+    if (best) { if (best.kind === 'con') select(best.key, best.title); openInfo(best); }
+    else { select(null); $('info').hidden = true; }
   }
   document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (c) c.closest('.sheet').hidden = true; });
 
@@ -440,8 +478,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   $('bTip').onclick = () => { $('info').hidden = true; $('tips').hidden = false; };
   $('bReset').onclick = () => { st.hOff = 0; st.pOff = 0; saveOff(); updCalib(); toast('방향·높이 보정을 지웠어요 (크기는 그대로)'); };
   $('resetFov').onclick = () => { st.vfov = FOV_DEFAULT; store.set('skycam_vfov_v1', st.vfov); updCalib(); toast('화각을 기본값으로 돌렸어요'); };
-  $('mStar').onclick = () => { st.mode = 'star'; store.set('skycam_mode_v1', st.mode); updBtns(); };
-  $('mCon').onclick = () => { st.mode = 'con'; store.set('skycam_mode_v1', st.mode); updBtns(); };
+  $('mStar').onclick = () => { st.mode = 'star'; store.set('skycam_mode_v1', st.mode); select(null); updBtns(); };
+  $('mCon').onclick = () => { st.mode = 'con'; store.set('skycam_mode_v1', st.mode); select(null); updBtns(); };
+  $('selChip').onclick = () => select(null);
   if (window.SKY_FIG_CREDIT) $('figCredit').textContent = ' · ' + window.SKY_FIG_CREDIT + ' · 그림 위치 데이터 CC BY-SA 4.0';
   if (Q.has('nostart')) $('start').hidden = true;
 
@@ -455,7 +494,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     st,
     moon: () => ({ az: sky.moon.az, alt: sky.moon.alt, s: proj(viewR(false), sky.moon.v, focal()) }),
     at: (az, alt) => proj(viewR(false), enu(az, alt), focal()),
-    tap, hits: () => hits
+    tap, select, hits: () => hits, lineHits: () => lineHits, figsDrawn: () => figsDrawn
   };
 })();
 </script>
