@@ -21,7 +21,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
 #bar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:center;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 12px);background:linear-gradient(rgba(5,10,24,0),rgba(5,10,24,.88))}
 #bar button{flex:1;max-width:96px;border:1px solid rgba(160,190,255,.25);background:var(--panel);color:var(--fg);border-radius:12px;padding:9px 4px;font-size:12px}
 #bar button.on{border-color:var(--acc);color:var(--acc)}
-#calib{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 72px);background:var(--panel);border:1px solid rgba(255,217,138,.45);border-radius:12px;padding:8px 12px;font-size:12px;line-height:1.5;text-align:center;width:max-content;max-width:calc(100% - 32px)}
+#dimBox{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 70px);display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid rgba(160,190,255,.25);border-radius:999px;padding:6px 14px;font-size:12px;width:min(340px,calc(100% - 32px))}
+#dimBox input{flex:1;min-width:0;accent-color:var(--acc)}
+#dimBox span{white-space:nowrap}
+#calib{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 124px);background:var(--panel);border:1px solid rgba(255,217,138,.45);border-radius:12px;padding:8px 12px;font-size:12px;line-height:1.5;text-align:center;width:max-content;max-width:calc(100% - 32px)}
 .sheet{position:fixed;left:0;right:0;bottom:0;max-height:72%;overflow:auto;background:rgba(8,14,32,.96);border-top:1px solid rgba(160,190,255,.25);border-radius:16px 16px 0 0;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 18px);font-size:14px;line-height:1.65;-webkit-user-select:text;user-select:text}
 .sheet h2{margin:0 36px 4px 0;font-size:18px}
 .sheet .x{position:absolute;right:8px;top:6px;border:0;background:transparent;color:var(--dim);font-size:24px;padding:4px 10px}
@@ -48,12 +51,13 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
 <button id="selChip" hidden></button>
 <div id="calib" hidden></div>
 <div id="bar"><button id="bCam">📷 카메라</button><button id="bCal">🎯 보정</button><button id="bTip">💡 팁</button><button id="bReset">↺ 초기화</button></div>
+<div id="dimBox" hidden><span>🌑 화면 어둡게</span><input type="range" id="dim" min="0" max="95" step="1" aria-label="카메라 화면 어둡게"><span id="dimVal"></span></div>
 <div id="info" class="sheet" hidden></div>
 <div id="tips" class="sheet" hidden>
   <button class="x" data-close>×</button>
   <h2>💡 보정 팁 — 달로 맞추기</h2>
   <ol>
-    <li>달이 보이는 곳에서 폰을 <b>세로로</b> 들고 달 쪽을 비춰 카메라에 달이 들어오게 해요. 화면 밖이면 🌙 화살표를 따라가요.</li>
+    <li>달이 보이는 곳에서 폰을 들고 달 쪽을 비춰 카메라에 달이 들어오게 해요. 화면 밖이면 🌙 화살표를 따라가요.</li>
     <li><b>🎯 보정</b>을 켜고, 한 손가락으로 화면을 밀어 🌙 표시를 실제 달 위에 겹쳐요. 방향과 높이가 함께 맞춰져요.</li>
     <li><b>크기(스케일)</b> — 폰을 돌려 달을 화면 가장자리 쪽으로 보내 봐요. 🌙 표시가 실제 달을 따라오면 맞은 거예요. 표시가 달보다 <b>안쪽</b>(화면 가운데 쪽)에 있으면 두 손가락으로 <b>벌리고</b>, <b>바깥쪽</b>에 있으면 <b>오므려요</b>. 크기는 이 기기에 저장돼서 한 번만 하면 돼요.</li>
     <li>다 맞췄으면 <b>🎯 보정</b>을 꺼서 실수로 밀리지 않게 해요.</li>
@@ -68,7 +72,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   <p>폰을 하늘로 들면 그 방향의 별과 별자리가 겹쳐 보여요.</p>
   <p class="small">카메라·위치·방향 센서를 써요. 영상과 위치는 폰 밖으로 보내지 않아요.</p>
   <button id="go">시작하기</button>
-  <p class="small">테스트 버전 · 세로로 들고 사용</p>
+  <p class="small">테스트 버전 · 세로·가로 모두 돼요</p>
 </div></div>
 <div id="toast" hidden></div>
 <script src="astronomy.browser.min.js"></script>
@@ -94,7 +98,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     sensor: false, north: '', vfov: store.get('skycam_vfov_v1', FOV_DEFAULT),
     hOff: 0, pOff: 0, calib: false, cam: false, stream: null,
     lookAz: +(Q.get('az') || 225), lookAlt: +(Q.get('alt') || 15),
-    mode: store.get('skycam_mode_v1', 'con'), sel: null
+    mode: store.get('skycam_mode_v1', 'con'), sel: null, dim: store.get('skycam_dim_v1', 35)
   };
   if (Q.get('lat')) { st.lat = +Q.get('lat'); st.lon = +Q.get('lon'); st.loc = `${st.lat.toFixed(2)}, ${st.lon.toFixed(2)}`; }
   const saved = store.get('skycam_offset_v1', null);
@@ -124,7 +128,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   let W = 0, H = 0, DPR = 1;
   function resize() { DPR = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * DPR; cv.height = H * DPR; cv.style.width = W + 'px'; cv.style.height = H + 'px'; }
   addEventListener('resize', resize); resize();
-  const focal = () => (H / 2) / Math.tan(st.vfov / 2 * D2R);
+  if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', () => setTimeout(resize, 50));
+  // 화각은 화면 긴 변 기준 — 가로로 돌려도 저장한 스케일이 그대로 맞는다
+  const focal = () => (Math.max(W, H) / 2) / Math.tan(st.vfov / 2 * D2R);
 
   // ── 방향 센서 ──
   let sensR = null, smR = null, gotAbs = false, iosOff = null;
@@ -146,6 +152,13 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     if ('ondeviceorientationabsolute' in window) addEventListener('deviceorientationabsolute', e => onOri(e, true));
     addEventListener('deviceorientation', e => onOri(e, !!e.absolute));
   }
+  // 화면 회전 각(반시계, 0/90/180/270). 센서 값은 기기 기준이라 화면 기준으로 돌려야 한다. ?rot= 는 검증용
+  const screenAngle = () => {
+    const a = Q.get('rot') != null ? +Q.get('rot')
+      : (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle
+      : (typeof window.orientation === 'number' ? window.orientation : 0);
+    return ((a % 360) + 360) % 360;
+  };
   function viewR(smooth = true) {
     let base;
     if (st.sensor && sensR) {
@@ -154,6 +167,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     } else {
       base = mul(Rz((-st.lookAz + st.hOff) * D2R), Rx((90 + st.lookAlt) * D2R));
     }
+    if (st.sensor && sensR) base = mul(base, Rz(-screenAngle() * D2R));   // 기기 좌표 → 화면 좌표
     return mul(base, Rx(st.pOff * D2R));
   }
   function proj(R, v, f) {
@@ -229,6 +243,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     ctx.clearRect(0, 0, W, H);
     if (!st.cam) { ctx.fillStyle = '#050a18'; ctx.fillRect(0, 0, W, H); }
+    else if (st.dim > 0) { ctx.fillStyle = `rgba(5,10,24,${st.dim / 100})`; ctx.fillRect(0, 0, W, H); }   // 카메라 화면 위 검은 막
     hits = []; lineHits = []; figsDrawn = [];
     const con = st.mode === 'con';
 
@@ -376,6 +391,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   }
   function updBtns() {
     $('bCam').classList.toggle('on', st.cam);
+    $('dimBox').hidden = !st.cam;
     $('bCal').classList.toggle('on', st.calib);
     $('mStar').classList.toggle('on', st.mode === 'star');
     $('mCon').classList.toggle('on', st.mode === 'con');
@@ -493,6 +509,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   $('mStar').onclick = () => { st.mode = 'star'; store.set('skycam_mode_v1', st.mode); select(null); updBtns(); };
   $('mCon').onclick = () => { st.mode = 'con'; store.set('skycam_mode_v1', st.mode); select(null); updBtns(); };
   $('selChip').onclick = () => select(null);
+  const setDim = v => { st.dim = Math.max(0, Math.min(95, +v || 0)); $('dim').value = st.dim; $('dimVal').textContent = `${Math.round(st.dim)}%`; store.set('skycam_dim_v1', st.dim); };
+  $('dim').addEventListener('input', e => setDim(e.target.value));
+  setDim(st.dim);
   if (window.SKY_FIG_CREDIT) $('figCredit').textContent = ' · ' + window.SKY_FIG_CREDIT + ' · 그림 위치 데이터 CC BY-SA 4.0';
   if (Q.has('nostart')) $('start').hidden = true;
 
@@ -506,7 +525,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     st,
     moon: () => ({ az: sky.moon.az, alt: sky.moon.alt, s: proj(viewR(false), sky.moon.v, focal()) }),
     at: (az, alt) => proj(viewR(false), enu(az, alt), focal()),
-    tap, select, hits: () => hits, lineHits: () => lineHits, figsDrawn: () => figsDrawn
+    tap, select, setSens: M => { sensR = M; smR = M; st.sensor = true; }, setCam: on => { st.cam = on; updBtns(); }, hits: () => hits, lineHits: () => lineHits, figsDrawn: () => figsDrawn
   };
 })();
 </script>
