@@ -309,7 +309,12 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
       hits.push({ x: mp.sx, y: mp.sy, kind: 'planet', key: 'Moon', title: '달', sub: `${phaseName(m.phase)} ${Math.round(m.frac * 100)}% · ${dirName(m.az)} ${Math.round(m.az)}° · 고도 ${Math.round(m.alt)}°` });
     } else {
       let dx, dy;
-      if (mp.vis) { dx = mp.sx - W / 2; dy = mp.sy - H / 2; } else { dx = mp.x; dy = -mp.y; }
+      if (mp.vis) { dx = mp.sx - W / 2; dy = mp.sy - H / 2; }
+      else {                                          // 등 뒤: 위로 넘기는 길 말고 좌우로 돌아서는 방향을 가리킨다
+        const fw = [-R[0][2], -R[1][2], -R[2][2]];
+        const vAz = Math.atan2(fw[0], fw[1]) * R2D, vAlt = Math.asin(Math.max(-1, Math.min(1, fw[2]))) * R2D;
+        dx = Math.sign(wrap(m.az - vAz)) || 1; dy = -(m.alt - vAlt) / 90;
+      }
       if (Math.hypot(dx, dy) < 1e-6) { dx = 0; dy = 1; }
       const L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
       const mx = W / 2 - 36, my = H / 2 - 120;
