@@ -79,6 +79,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
 <script>
 (function () {
   const A = window.Astronomy, SKY = window.SKY;
+  const CON_KO = {}; SKY.names.forEach(([id, ko]) => { if (!CON_KO[id]) CON_KO[id] = ko; });
   const $ = id => document.getElementById(id);
   const Q = new URLSearchParams(location.search);
   const D2R = Math.PI / 180, R2D = 180 / Math.PI;
@@ -191,7 +192,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
       stars: SKY.stars.map(s => [conv(s[0], s[1]), s[2]]),
       lines: SKY.lines.map(([id, segs]) => [id, segs.map(seg => seg.map(p => conv(p[0], p[1])))]),
       names: SKY.names.map(([id, ko, ra, dec]) => [id, ko, conv(ra, dec)]),
-      bright: SKY.bright.map(([ko, ra, dec, hip]) => [ko, conv(ra, dec), hip]),
+      bright: SKY.bright.map(([ko, ra, dec, hip, mag, en, con]) => [ko, conv(ra, dec), hip, mag, en, con]),
       planets: PLANETS.map(([en, ko]) => Object.assign(body(en), { en, ko })),
       figs: Object.entries(FIG).map(([id, f]) => [id, f, f.anchors.map(a => conv(a[2], a[3]))])
     };
@@ -299,11 +300,22 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
         hits.push({ x: p.sx, y: p.sy - 4, kind: 'con', key: id, title: ko });
       }
     } else {
-      for (const [ko, v, hip] of sky.bright) {
+      // 이름 붙은 별(4등급까지, 밝은 순) — 확대할수록 어두운 별 이름까지, 이름표끼리 겹치면 건너뜀. 탭 카드는 이름표가 없어도 됨
+      const magLimit = st.vfov >= 50 ? 2.5 : st.vfov >= 30 ? 3.5 : 4.0;
+      const boxes = [];
+      const free = (x, y, w, h) => {
+        for (const b of boxes) if (x < b[0] + b[2] && x + w > b[0] && y < b[1] + b[3] && y + h > b[1]) return false;
+        boxes.push([x, y, w, h]); return true;
+      };
+      for (const [ko, v, hip, mag, en, con] of sky.bright) {
         const p = proj(R, v, f);
         if (!onScr(p, 0)) continue;
-        label(ko, p.sx + 7, p.sy + 4, '#fff3c4', 12, false);
-        hits.push({ x: p.sx, y: p.sy, kind: 'star', key: hip, title: ko });
+        hits.push({ x: p.sx, y: p.sy, kind: 'star', key: hip, title: ko, sub: `${en} · ${CON_KO[con] || con} · ${mag.toFixed(1)}등급` });
+        if (mag > magLimit) continue;
+        const size = mag < 1.5 ? 12 : 11;
+        ctx.font = `${size}px -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif`;
+        if (!free(p.sx + 5, p.sy - 9, ctx.measureText(ko).width + 6, 17)) continue;
+        label(ko, p.sx + 7, p.sy + 4, mag < 1.5 ? '#fff3c4' : 'rgba(255,243,196,.78)', size, false);
       }
     }
 
@@ -384,7 +396,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
       if (s.shape) html += `<p><b>모양 찾기</b> ${esc(s.shape)}</p>`;
       html += `<p>${esc(s.story)}</p>`;
       if (s.src) html += `<div class="src">출처 ${esc(s.src)}</div>`;
-    } else html += `<p class="small">이야기는 준비 중이에요.</p>`;
+    } else if (h.kind !== 'star') html += `<p class="small">이야기는 준비 중이에요.</p>`;
     $('info').innerHTML = html;
     $('tips').hidden = true;
     $('info').hidden = false;
