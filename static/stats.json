@@ -1,65 +1,59 @@
 {
- "today": 1,
- "today_pv": 1,
+ "today": 0,
+ "today_pv": 0,
  "total": 152,
  "total_visits": 532,
  "yesterday": {
-  "users": 4,
-  "new": 2,
-  "pv": 6,
-  "sessions": 4
+  "users": 1,
+  "new": 1,
+  "pv": 1,
+  "sessions": 1
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 13,
-   "eng": 183,
-   "avg_sec": 14
+   "views": 9,
+   "eng": 98,
+   "avg_sec": 11
   },
   {
    "title": "고양이 Catcha!",
-   "views": 12,
-   "eng": 267,
-   "avg_sec": 22
-  },
-  {
-   "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
-   "views": 3,
-   "eng": 444,
-   "avg_sec": 148
-  },
-  {
-   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
-   "views": 2,
-   "eng": 1,
-   "avg_sec": 0
+   "views": 7,
+   "eng": 167,
+   "avg_sec": 24
   },
   {
    "title": "검색",
    "views": 2,
    "eng": 19,
    "avg_sec": 10
+  },
+  {
+   "title": "도구방",
+   "views": 2,
+   "eng": 6,
+   "avg_sec": 3
+  },
+  {
+   "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
+   "views": 2,
+   "eng": 2,
+   "avg_sec": 1
   }
  ],
  "top_dwell": [
   {
-   "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
-   "views": 3,
-   "eng": 444,
-   "avg_sec": 148
-  },
-  {
    "title": "고양이 Catcha!",
-   "views": 12,
-   "eng": 267,
-   "avg_sec": 22
+   "views": 7,
+   "eng": 167,
+   "avg_sec": 24
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 13,
-   "eng": 183,
-   "avg_sec": 14
+   "views": 9,
+   "eng": 98,
+   "avg_sec": 11
   }
  ],
- "updated": "2026-09-15 23:45"
+ "updated": "2026-09-16 00:45"
 }
