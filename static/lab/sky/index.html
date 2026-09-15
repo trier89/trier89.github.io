@@ -391,7 +391,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
     else { s = (S.planet || {})[h.key]; photo = P[h.key]; }
     let html = `<button class="x" data-close>×</button><h2>${esc(s && s.title || h.title)}</h2>`;
     if (h.sub) html += `<div class="sub">${esc(h.sub)}</div>`;
-    if (photo) html += `<img src="${esc(photo.img)}" alt=""><div class="src">${esc(photo.caption || '')}${photo.credit ? ' · 사진 ' + esc(photo.credit) : ''}${photo.license ? ' (' + esc(photo.license) + ')' : ''}</div>`;
+    if (photo) html += `<img src="${esc(photo.img)}" alt=""><div class="src">${esc(photo.caption || '')}${photo.credit ? ' · 사진 ' + esc(photo.credit) : ''}${photo.license ? ' (' + esc(photo.license) + ')' : ''}${photo.url ? ` · <a href="${esc(photo.url)}" target="_blank" rel="noopener" style="color:var(--acc)">원본</a>` : ''}</div>`;
     if (s) {
       if (s.shape) html += `<p><b>모양 찾기</b> ${esc(s.shape)}</p>`;
       html += `<p>${esc(s.story)}</p>`;
