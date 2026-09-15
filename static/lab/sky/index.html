@@ -437,7 +437,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#050a18;color:var(--fg
   $('resetFov').onclick = () => { st.vfov = FOV_DEFAULT; store.set('skycam_vfov_v1', st.vfov); updCalib(); toast('화각을 기본값으로 돌렸어요'); };
   $('mStar').onclick = () => { st.mode = 'star'; store.set('skycam_mode_v1', st.mode); updBtns(); };
   $('mCon').onclick = () => { st.mode = 'con'; store.set('skycam_mode_v1', st.mode); updBtns(); };
-  if (window.SKY_FIG_CREDIT) $('figCredit').textContent = ' · 별자리 그림 ' + window.SKY_FIG_CREDIT;
+  if (window.SKY_FIG_CREDIT) $('figCredit').textContent = ' · ' + window.SKY_FIG_CREDIT + ' · 그림 위치 데이터 CC BY-SA 4.0';
   if (Q.has('nostart')) $('start').hidden = true;
 
   computeSky();
