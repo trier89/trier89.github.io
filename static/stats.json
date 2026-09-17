@@ -5,8 +5,8 @@
  "total_visits": 538,
  "yesterday": {
   "users": 3,
-  "new": 2,
-  "pv": 4,
+  "new": 3,
+  "pv": 5,
   "sessions": 4
  },
  "top_views": [
@@ -18,9 +18,9 @@
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
+   "views": 5,
    "eng": 300,
-   "avg_sec": 75
+   "avg_sec": 60
   },
   {
    "title": "고양이 Catcha!",
@@ -44,9 +44,9 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
+   "views": 5,
    "eng": 300,
-   "avg_sec": 75
+   "avg_sec": 60
   },
   {
    "title": "고양이 Catcha!",
@@ -61,5 +61,5 @@
    "avg_sec": 10
   }
  ],
- "updated": "2026-09-17 11:49"
+ "updated": "2026-09-17 12:49"
 }
