@@ -1,38 +1,38 @@
 {
- "today": 4,
- "today_pv": 4,
+ "today": 0,
+ "today_pv": 0,
  "total": 159,
  "total_visits": 541,
  "yesterday": {
-  "users": 3,
-  "new": 3,
-  "pv": 5,
-  "sessions": 4
+  "users": 4,
+  "new": 4,
+  "pv": 4,
+  "sessions": 5
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 11,
    "eng": 98,
-   "avg_sec": 10
+   "avg_sec": 9
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 5,
-   "eng": 300,
-   "avg_sec": 60
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 81,
-   "avg_sec": 27
+   "views": 8,
+   "eng": 701,
+   "avg_sec": 88
   },
   {
    "title": "검색",
    "views": 2,
    "eng": 19,
    "avg_sec": 10
+  },
+  {
+   "title": "고양이 Catcha!",
+   "views": 2,
+   "eng": 3,
+   "avg_sec": 2
   },
   {
    "title": "도구방",
@@ -44,22 +44,16 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 5,
-   "eng": 300,
-   "avg_sec": 60
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 81,
-   "avg_sec": 27
+   "views": 8,
+   "eng": 701,
+   "avg_sec": 88
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 11,
    "eng": 98,
-   "avg_sec": 10
+   "avg_sec": 9
   }
  ],
- "updated": "2026-09-17 23:51"
+ "updated": "2026-09-18 00:51"
 }
