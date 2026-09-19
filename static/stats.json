@@ -2,19 +2,19 @@
  "today": 2,
  "today_pv": 2,
  "total": 164,
- "total_visits": 546,
+ "total_visits": 547,
  "yesterday": {
-  "users": 2,
-  "new": 2,
-  "pv": 4,
-  "sessions": 2
+  "users": 3,
+  "new": 3,
+  "pv": 6,
+  "sessions": 3
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 13,
+   "views": 15,
    "eng": 1440,
-   "avg_sec": 111
+   "avg_sec": 96
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -38,9 +38,9 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 13,
+   "views": 15,
    "eng": 1440,
-   "avg_sec": 111
+   "avg_sec": 96
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -49,5 +49,5 @@
    "avg_sec": 12
   }
  ],
- "updated": "2026-09-19 11:55"
+ "updated": "2026-09-19 12:55"
 }
