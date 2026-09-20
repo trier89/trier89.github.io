@@ -1,26 +1,32 @@
 {
- "today": 3,
- "today_pv": 3,
+ "today": 0,
+ "today_pv": 0,
  "total": 168,
  "total_visits": 551,
  "yesterday": {
   "users": 3,
-  "new": 2,
+  "new": 3,
   "pv": 3,
-  "sessions": 3
+  "sessions": 4
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 18,
-   "eng": 1958,
-   "avg_sec": 109
+   "views": 19,
+   "eng": 2601,
+   "avg_sec": 137
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 6,
    "eng": 71,
    "avg_sec": 12
+  },
+  {
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 2,
+   "eng": 78,
+   "avg_sec": 39
   },
   {
    "title": "고양이 Catcha!",
@@ -38,9 +44,9 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 18,
-   "eng": 1958,
-   "avg_sec": 109
+   "views": 19,
+   "eng": 2601,
+   "avg_sec": 137
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -49,5 +55,5 @@
    "avg_sec": 12
   }
  ],
- "updated": "2026-09-20 23:59"
+ "updated": "2026-09-21 00:59"
 }
