@@ -1,26 +1,26 @@
 {
- "today": 3,
- "today_pv": 5,
+ "today": 0,
+ "today_pv": 0,
  "total": 171,
  "total_visits": 554,
  "yesterday": {
   "users": 3,
   "new": 3,
-  "pv": 3,
-  "sessions": 4
+  "pv": 5,
+  "sessions": 3
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 19,
-   "eng": 2601,
-   "avg_sec": 137
+   "views": 21,
+   "eng": 2938,
+   "avg_sec": 140
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 6,
-   "eng": 71,
-   "avg_sec": 12
+   "views": 2,
+   "eng": 0,
+   "avg_sec": 0
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
@@ -29,31 +29,25 @@
    "avg_sec": 39
   },
   {
-   "title": "고양이 Catcha!",
-   "views": 1,
-   "eng": 3,
-   "avg_sec": 3
+   "title": "심리테스트",
+   "views": 2,
+   "eng": 8,
+   "avg_sec": 4
   },
   {
-   "title": "환율 계산기 — 달러·엔·유로 원화 환산 (실시간)",
+   "title": "카톡 답장 스타일 심리테스트 — 나는 어떤 답장 유형?",
    "views": 1,
-   "eng": 1,
-   "avg_sec": 1
+   "eng": 94,
+   "avg_sec": 94
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 19,
-   "eng": 2601,
-   "avg_sec": 137
-  },
-  {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 6,
-   "eng": 71,
-   "avg_sec": 12
+   "views": 21,
+   "eng": 2938,
+   "avg_sec": 140
   }
  ],
- "updated": "2026-09-21 23:46"
+ "updated": "2026-09-22 00:46"
 }
