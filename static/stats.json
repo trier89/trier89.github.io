@@ -1,6 +1,6 @@
 {
  "today": 1,
- "today_pv": 0,
+ "today_pv": 1,
  "total": 172,
  "total_visits": 555,
  "yesterday": {
@@ -49,5 +49,5 @@
    "avg_sec": 140
   }
  ],
- "updated": "2026-09-22 10:48"
+ "updated": "2026-09-22 11:48"
 }
