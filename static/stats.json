@@ -1,26 +1,32 @@
 {
- "today": 4,
- "today_pv": 11,
- "total": 172,
- "total_visits": 558,
+ "today": 0,
+ "today_pv": 0,
+ "total": 174,
+ "total_visits": 560,
  "yesterday": {
-  "users": 3,
+  "users": 6,
   "new": 3,
-  "pv": 5,
-  "sessions": 3
+  "pv": 13,
+  "sessions": 6
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 21,
-   "eng": 2938,
-   "avg_sec": 140
+   "views": 23,
+   "eng": 3543,
+   "avg_sec": 154
+  },
+  {
+   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
+   "views": 6,
+   "eng": 311,
+   "avg_sec": 52
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 2,
-   "eng": 0,
-   "avg_sec": 0
+   "views": 4,
+   "eng": 56,
+   "avg_sec": 14
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
@@ -33,21 +39,27 @@
    "views": 2,
    "eng": 8,
    "avg_sec": 4
-  },
-  {
-   "title": "카톡 답장 스타일 심리테스트 — 나는 어떤 답장 유형?",
-   "views": 1,
-   "eng": 94,
-   "avg_sec": 94
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 21,
-   "eng": 2938,
-   "avg_sec": 140
+   "views": 23,
+   "eng": 3543,
+   "avg_sec": 154
+  },
+  {
+   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
+   "views": 6,
+   "eng": 311,
+   "avg_sec": 52
+  },
+  {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 4,
+   "eng": 56,
+   "avg_sec": 14
   }
  ],
- "updated": "2026-09-22 23:49"
+ "updated": "2026-09-23 00:49"
 }
