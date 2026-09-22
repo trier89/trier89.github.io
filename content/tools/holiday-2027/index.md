@@ -19,7 +19,7 @@ readingTime: false
   <div style="font-size:13.5px;color:#6b7280;margin-bottom:12px;">쓸 수 있는 연차 개수를 넣으면, 그 안에서 가장 길게 쉬는 조합을 계산해요. 연차를 쓸 수 없는 날과 꼭 쉬어야 하는 날도 넣을 수 있어요.</div>
   <div class="h27-panel">
     <div class="h27-row"><label for="h27-n"><b>쓸 수 있는 연차</b></label><input id="h27-n" type="number" min="0" max="30" step="1" value="10"><span>일</span><button id="h27-reset" class="h27-add">표시 초기화</button></div>
-    <div class="h27-help">아래 달력에서 <b>평일을 누르면</b> 상태가 바뀝니다 — 한 번 누르면 <span class="k must">📌 꼭 쉬는 날</span>, 한 번 더 누르면 <span class="k blk">🚫 연차 못 쓰는 날</span>, 또 누르면 해제돼요. (길게 누르면 바로 🚫)</div>
+    <div class="h27-help">아래 달력에서 <b>평일을 누를 때마다</b> 상태가 바뀝니다 — <span class="k must">📌 연차</span>(꼭 쉬는 날) → <span class="k blk">🚫 금지</span>(연차 못 쓰는 날) → 해제 → 다시 연차</div>
   </div>
   <div id="h27-sum" class="h27-sum"></div>
   <div id="h27-reco" style="display:flex;flex-direction:column;gap:10px;"></div>
@@ -106,7 +106,7 @@ for(var mo=0;mo<12;mo++){var first=new Date(2027,mo,1),start=first.getDay(),dim=
 cal.innerHTML=html;
 function paint(leaves){[].forEach.call(cal.querySelectorAll(".h27-cell"),function(el){el.classList.remove("leave","must","blk");var t=el.querySelector(".hn.tag");if(t)t.remove();});
 function tag(is,cls,label){var el=cal.querySelector('[data-iso="'+is+'"]');if(!el)return;el.classList.add(cls);var old=el.querySelector(".hn.tag");if(old)old.remove();if(label){var d=document.createElement("div");d.className="hn tag";d.textContent=label;el.appendChild(d);}}
-leaves.forEach(function(is){tag(is,"leave","연차");});Object.keys(must).forEach(function(is){tag(is,"must","📌 연차");});Object.keys(blk).forEach(function(is){tag(is,"blk","🚫");});}
+leaves.forEach(function(is){tag(is,"leave","연차");});Object.keys(must).forEach(function(is){tag(is,"must","📌 연차");});Object.keys(blk).forEach(function(is){tag(is,"blk","🚫 금지");});}
 function solve(){var N=Math.max(0,Math.min(30,parseInt(document.getElementById("h27-n").value,10)||0));
 var mustSet={};Object.keys(must).forEach(function(is){var d=parseIso(is),g=d.getDay();if(g!==0&&g!==6&&!HOL[is])mustSet[is]=1;});
 var days=build(mustSet),n=days.length,mustCost=Object.keys(mustSet).length,rem=N-mustCost;
@@ -134,15 +134,10 @@ box.innerHTML=picks.length?picks.map(function(c){var r=(c.tot/c.cost),lv=c.lv.ma
 var mustList=Object.keys(mustSet).sort();
 if(mustList.length)box.innerHTML+='<div class="h27-card" style="border-left-color:#7aa7e8;"><div class="top"><span class="rng" style="color:#1d4ed8;">📌 직접 찍은 연차 '+mustCost+'일</span></div><div class="lv">'+mustList.map(function(is){return fmt(parseIso(is));}).join(", ")+'</div></div>';
 paint(usedLeave);save();}
-function cycle(is,toBlk){if(toBlk){if(blk[is]){delete blk[is];}else{delete must[is];blk[is]=1;}}else if(must[is]){delete must[is];blk[is]=1;}else if(blk[is]){delete blk[is];}else{must[is]=1;}solve();}
-var lpTimer=null,lpFired=false;
+function cycle(is){if(must[is]){delete must[is];blk[is]=1;}else if(blk[is]){delete blk[is];}else{must[is]=1;}solve();}
 function cellOf(t){while(t&&t!==cal){if(t.classList&&t.classList.contains("pick"))return t;t=t.parentNode;}return null;}
-cal.addEventListener("click",function(ev){if(lpFired){lpFired=false;return;}var el=cellOf(ev.target);if(!el)return;cycle(el.getAttribute("data-iso"),false);});
-cal.addEventListener("keydown",function(ev){if(ev.key!=="Enter"&&ev.key!==" ")return;var el=cellOf(ev.target);if(!el)return;ev.preventDefault();cycle(el.getAttribute("data-iso"),false);});
-function startLP(ev){var el=cellOf(ev.target);if(!el)return;lpFired=false;lpTimer=setTimeout(function(){lpFired=true;cycle(el.getAttribute("data-iso"),true);if(navigator.vibrate)navigator.vibrate(12);},500);}
-function cancelLP(){if(lpTimer){clearTimeout(lpTimer);lpTimer=null;}}
-cal.addEventListener("touchstart",startLP,{passive:true});cal.addEventListener("touchend",cancelLP);cal.addEventListener("touchmove",cancelLP);
-cal.addEventListener("mousedown",startLP);cal.addEventListener("mouseup",cancelLP);cal.addEventListener("mouseleave",cancelLP);
+cal.addEventListener("click",function(ev){var el=cellOf(ev.target);if(!el)return;cycle(el.getAttribute("data-iso"));});
+cal.addEventListener("keydown",function(ev){if(ev.key!=="Enter"&&ev.key!==" ")return;var el=cellOf(ev.target);if(!el)return;ev.preventDefault();cycle(el.getAttribute("data-iso"));});
 document.getElementById("h27-reset").addEventListener("click",function(){must={};blk={};solve();});
 document.getElementById("h27-n").addEventListener("change",solve);
 load();solve();
