@@ -1,20 +1,20 @@
 {
- "today": 8,
- "today_pv": 17,
- "total": 184,
- "total_visits": 571,
+ "today": 0,
+ "today_pv": 0,
+ "total": 185,
+ "total_visits": 572,
  "yesterday": {
-  "users": 2,
-  "new": 2,
-  "pv": 2,
-  "sessions": 2
+  "users": 9,
+  "new": 7,
+  "pv": 17,
+  "sessions": 9
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 17,
-   "eng": 2842,
-   "avg_sec": 167
+   "views": 18,
+   "eng": 3196,
+   "avg_sec": 178
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
@@ -24,29 +24,35 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 3,
-   "eng": 62,
-   "avg_sec": 21
+   "views": 5,
+   "eng": 68,
+   "avg_sec": 14
+  },
+  {
+   "title": "심리테스트",
+   "views": 5,
+   "eng": 12,
+   "avg_sec": 2
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 3,
    "eng": 78,
    "avg_sec": 26
-  },
-  {
-   "title": "도구방",
-   "views": 2,
-   "eng": 1,
-   "avg_sec": 0
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 17,
-   "eng": 2842,
-   "avg_sec": 167
+   "views": 18,
+   "eng": 3196,
+   "avg_sec": 178
+  },
+  {
+   "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
+   "views": 3,
+   "eng": 508,
+   "avg_sec": 169
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
@@ -62,10 +68,10 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 3,
-   "eng": 62,
-   "avg_sec": 21
+   "views": 5,
+   "eng": 68,
+   "avg_sec": 14
   }
  ],
- "updated": "2026-09-25 23:04"
+ "updated": "2026-09-26 00:04"
 }
