@@ -3,8 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>신화 인물 도감 — 다락방 컴퍼니</title>
-<meta name="description" content="다락방 그리스·로마 신화 영상에 등장하는 신과 영웅들의 계보도. 티탄에서 올림포스, 그 후손과 인간·영웅까지 가계도로 한눈에.">
+<title>그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방</title>
+<meta name="description" content="그리스·로마 신화 인물 관계도와 족보. 제우스·하데스·포세이돈 등 올림포스 신부터 티탄, 페르세우스·오디세우스 같은 영웅까지 누가 누구의 부모·배우자·자식인지 관계도로 한눈에 봅니다.">
+<meta name="keywords" content="그리스 신화 관계도, 그리스 신화 족보, 그리스 신화 가계도, 올림포스 12신, 제우스 가계도, 그리스 신화 인물">
+<link rel="canonical" href="https://planfully.ai.kr/darak-company/characters.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="그리스 신화 인물 관계도·족보 | 다락방">
+<meta property="og:description" content="올림포스 신부터 영웅까지, 그리스 신화 인물 관계를 한눈에.">
+<meta property="og:url" content="https://planfully.ai.kr/darak-company/characters.html">
+<meta property="og:image" content="https://planfully.ai.kr/darak-company/chars/zeus.png">
+<meta property="og:locale" content="ko_KR">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
 <style>
 :root{--txt:#f2e9dc;--dim:#b9a891;--gold:#e0b878;--coral:#d97757;--card:#241a10;--line:#52412c;--conn:#9c7c47;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -186,7 +196,8 @@ nav a.on{background:var(--gold);color:#17100a;font-weight:700;border-color:var(-
 
 <!-- ============ 신들의 계보 (divine tree) ============ -->
 <!--VIEWS-->
-<div class="vtabs"><button type="button" data-v="tree" class="on">🌳 족보로 보기</button><button type="button" data-v="graph">🕸 관계도로 보기</button></div>
+<div class="pf-ad-top" style="margin:4px auto 18px;text-align:center;"><ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-Iix8EuqtooyXPHVn" data-ad-width="320" data-ad-height="100"></ins></div>
+<div class="vtabs"><button type="button" data-v="graph" class="on">🕸 관계도로 보기</button><button type="button" data-v="tree">🌳 족보로 보기</button></div>
 <div id="tview">
 <div class="grp">🌩 신들의 계보<span class="sub">태초의 신 → 티탄 → 1세대 올림포스</span></div>
 <div class="treebox"><div class="tree">
@@ -668,13 +679,14 @@ function view(v,noHash){
   for(var i=0;i<tabs.length;i++)tabs[i].classList.toggle('on',tabs[i].dataset.v===v);
   tview.hidden=v!=='tree';gview.hidden=v!=='graph';
   if(v==='graph'){start();if(!noHash)setHash(focus?'graph='+focus.id:'graph');}
-  else{running=false;if(box.classList.contains('full'))toggleFull(false);if(!noHash)setHash('');}
+  else{running=false;if(box.classList.contains('full'))toggleFull(false);if(!noHash)setHash('tree');}
 }
 for(var ti=0;ti<tabs.length;ti++)tabs[ti].addEventListener('click',function(){view(this.dataset.v);});
 var m=/^#graph(?:=([A-Za-z0-9_-]+))?$/.exec(location.hash);
-if(m){view('graph',true);if(m[1]&&byId[m[1]])setFocus(byId[m[1]],{instant:true,noHash:true});}
+if(m){view('graph',true);if(m[1]&&byId[m[1]])setFocus(byId[m[1]],{instant:true,noHash:true});} else if(location.hash==='#tree'){view('tree',true);} else{view('graph',true);}
 })();
 </script>
 <!--/GRAPH-JS-->
+<div class="pf-ad" style="margin:30px auto 10px;text-align:center;"><ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-U3Tez6Y0llmoHKff" data-ad-width="300" data-ad-height="250"></ins><script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script></div>
 </body>
 </html>
