@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://planfully.ai.kr/sitemap.xml
 Sitemap: https://planfully.ai.kr/daily/sitemap.xml
+Sitemap: https://planfully.ai.kr/darak-company/sitemap.xml
