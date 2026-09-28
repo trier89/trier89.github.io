@@ -1,26 +1,26 @@
 {
- "today": 2,
- "today_pv": 3,
- "total": 192,
- "total_visits": 585,
+ "today": 0,
+ "today_pv": 0,
+ "total": 193,
+ "total_visits": 586,
  "yesterday": {
-  "users": 6,
-  "new": 5,
-  "pv": 8,
-  "sessions": 6
+  "users": 3,
+  "new": 3,
+  "pv": 4,
+  "sessions": 4
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 23,
-   "eng": 2352,
-   "avg_sec": 102
+   "eng": 2312,
+   "avg_sec": 101
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 9,
+   "views": 10,
    "eng": 687,
-   "avg_sec": 76
+   "avg_sec": 69
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
@@ -35,18 +35,18 @@
    "avg_sec": 84
   },
   {
-   "title": "심리테스트",
-   "views": 5,
-   "eng": 14,
-   "avg_sec": 3
+   "title": "도구방",
+   "views": 3,
+   "eng": 1,
+   "avg_sec": 0
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 23,
-   "eng": 2352,
-   "avg_sec": 102
+   "eng": 2312,
+   "avg_sec": 101
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
@@ -56,9 +56,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 9,
+   "views": 10,
    "eng": 687,
-   "avg_sec": 76
+   "avg_sec": 69
   },
   {
    "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
@@ -68,10 +68,10 @@
   },
   {
    "title": "심리테스트",
-   "views": 5,
-   "eng": 14,
-   "avg_sec": 3
+   "views": 3,
+   "eng": 6,
+   "avg_sec": 2
   }
  ],
- "updated": "2026-09-28 23:12"
+ "updated": "2026-09-29 00:12"
 }
