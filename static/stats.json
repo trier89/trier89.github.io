@@ -1,70 +1,64 @@
 {
- "today": 5,
- "today_pv": 9,
+ "today": 0,
+ "today_pv": 0,
  "total": 199,
  "total_visits": 593,
  "yesterday": {
   "users": 5,
-  "new": 5,
-  "pv": 7,
-  "sessions": 6
+  "new": 4,
+  "pv": 10,
+  "sessions": 5
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 26,
-   "eng": 2603,
-   "avg_sec": 100
+   "views": 25,
+   "eng": 2129,
+   "avg_sec": 85
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 10,
-   "eng": 687,
-   "avg_sec": 69
-  },
-  {
-   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
-   "views": 6,
-   "eng": 311,
-   "avg_sec": 52
+   "eng": 662,
+   "avg_sec": 66
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
-   "views": 6,
+   "views": 7,
    "eng": 503,
-   "avg_sec": 84
+   "avg_sec": 72
   },
   {
-   "title": "도구방",
+   "title": "심리테스트",
    "views": 3,
-   "eng": 1,
+   "eng": 6,
+   "avg_sec": 2
+  },
+  {
+   "title": "고양이 Catcha!",
+   "views": 2,
+   "eng": 0,
    "avg_sec": 0
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 26,
-   "eng": 2603,
-   "avg_sec": 100
+   "views": 25,
+   "eng": 2129,
+   "avg_sec": 85
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
-   "views": 6,
+   "views": 7,
    "eng": 503,
-   "avg_sec": 84
+   "avg_sec": 72
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
    "views": 10,
-   "eng": 687,
-   "avg_sec": 69
-  },
-  {
-   "title": "2027 공휴일 달력 · 연차 황금연휴 추천 — 최소 연차로 최장 연휴",
-   "views": 6,
-   "eng": 311,
-   "avg_sec": 52
+   "eng": 662,
+   "avg_sec": 66
   },
   {
    "title": "심리테스트",
@@ -73,5 +67,5 @@
    "avg_sec": 2
   }
  ],
- "updated": "2026-09-29 23:02"
+ "updated": "2026-09-30 00:02"
 }
