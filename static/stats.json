@@ -1,20 +1,20 @@
 {
- "today": 3,
- "today_pv": 2,
+ "today": 0,
+ "today_pv": 0,
  "total": 202,
  "total_visits": 597,
  "yesterday": {
-  "users": 5,
-  "new": 4,
-  "pv": 12,
-  "sessions": 6
+  "users": 3,
+  "new": 2,
+  "pv": 2,
+  "sessions": 3
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 27,
-   "eng": 2346,
-   "avg_sec": 87
+   "views": 29,
+   "eng": 2436,
+   "avg_sec": 84
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -44,9 +44,9 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 27,
-   "eng": 2346,
-   "avg_sec": 87
+   "views": 29,
+   "eng": 2436,
+   "avg_sec": 84
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
@@ -67,5 +67,5 @@
    "avg_sec": 2
   }
  ],
- "updated": "2026-09-30 23:05"
+ "updated": "2026-10-01 00:05"
 }
