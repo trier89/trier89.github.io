@@ -1,26 +1,26 @@
 {
- "today": 4,
- "today_pv": 30,
+ "today": 0,
+ "today_pv": 0,
  "total": 207,
  "total_visits": 608,
  "yesterday": {
-  "users": 5,
-  "new": 5,
-  "pv": 6,
-  "sessions": 5
+  "users": 4,
+  "new": 3,
+  "pv": 30,
+  "sessions": 9
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 32,
-   "eng": 2479,
-   "avg_sec": 77
+   "views": 48,
+   "eng": 4483,
+   "avg_sec": 93
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
-   "eng": 662,
-   "avg_sec": 60
+   "views": 10,
+   "eng": 661,
+   "avg_sec": 66
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
@@ -29,24 +29,24 @@
    "avg_sec": 72
   },
   {
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 4,
+   "eng": 12,
+   "avg_sec": 3
+  },
+  {
    "title": "심리테스트",
    "views": 3,
    "eng": 6,
    "avg_sec": 2
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 2,
-   "eng": 0,
-   "avg_sec": 0
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 32,
-   "eng": 2479,
-   "avg_sec": 77
+   "views": 48,
+   "eng": 4483,
+   "avg_sec": 93
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
@@ -56,9 +56,15 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
-   "eng": 662,
-   "avg_sec": 60
+   "views": 10,
+   "eng": 661,
+   "avg_sec": 66
+  },
+  {
+   "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
+   "views": 4,
+   "eng": 12,
+   "avg_sec": 3
   },
   {
    "title": "심리테스트",
@@ -67,5 +73,5 @@
    "avg_sec": 2
   }
  ],
- "updated": "2026-10-01 23:07"
+ "updated": "2026-10-02 00:08"
 }
