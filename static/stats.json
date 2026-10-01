@@ -1,13 +1,13 @@
 {
- "today": 0,
- "today_pv": 0,
- "total": 203,
- "total_visits": 598,
+ "today": 1,
+ "today_pv": 6,
+ "total": 204,
+ "total_visits": 600,
  "yesterday": {
-  "users": 4,
-  "new": 3,
-  "pv": 4,
-  "sessions": 4
+  "users": 5,
+  "new": 4,
+  "pv": 5,
+  "sessions": 5
  },
  "top_views": [
   {
@@ -18,9 +18,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 11,
    "eng": 662,
-   "avg_sec": 66
+   "avg_sec": 60
   },
   {
    "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
@@ -56,9 +56,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 11,
    "eng": 662,
-   "avg_sec": 66
+   "avg_sec": 60
   },
   {
    "title": "심리테스트",
@@ -67,5 +67,5 @@
    "avg_sec": 2
   }
  ],
- "updated": "2026-10-01 09:06"
+ "updated": "2026-10-01 10:06"
 }
