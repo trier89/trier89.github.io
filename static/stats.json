@@ -1,77 +1,77 @@
 {
- "today": 4,
- "today_pv": 12,
- "total": 210,
- "total_visits": 612,
+ "today": 0,
+ "today_pv": 0,
+ "total": 211,
+ "total_visits": 613,
  "yesterday": {
-  "users": 4,
-  "new": 3,
-  "pv": 36,
-  "sessions": 9
+  "users": 5,
+  "new": 4,
+  "pv": 13,
+  "sessions": 6
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 54,
-   "eng": 4764,
-   "avg_sec": 88
+   "views": 55,
+   "eng": 4603,
+   "avg_sec": 84
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
-   "eng": 661,
-   "avg_sec": 66
+   "views": 8,
+   "eng": 650,
+   "avg_sec": 81
   },
   {
-   "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
-   "views": 7,
-   "eng": 503,
-   "avg_sec": 72
+   "title": "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (무료)",
+   "views": 3,
+   "eng": 627,
+   "avg_sec": 209
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 4,
-   "eng": 12,
-   "avg_sec": 3
+   "views": 3,
+   "eng": 11,
+   "avg_sec": 4
   },
   {
-   "title": "심리테스트",
+   "title": "고양이 Catcha!",
    "views": 3,
-   "eng": 6,
-   "avg_sec": 2
+   "eng": 0,
+   "avg_sec": 0
   }
  ],
  "top_dwell": [
   {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 54,
-   "eng": 4764,
-   "avg_sec": 88
+   "title": "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (무료)",
+   "views": 3,
+   "eng": 627,
+   "avg_sec": 209
   },
   {
-   "title": "인지능력 프로필 테스트 — 언어이해·지각추론·작업기억·처리속도 4지표 (무료)",
-   "views": 7,
-   "eng": 503,
-   "avg_sec": 72
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 55,
+   "eng": 4603,
+   "avg_sec": 84
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
-   "eng": 661,
-   "avg_sec": 66
+   "views": 8,
+   "eng": 650,
+   "avg_sec": 81
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
-   "views": 4,
-   "eng": 12,
-   "avg_sec": 3
+   "views": 3,
+   "eng": 11,
+   "avg_sec": 4
   },
   {
-   "title": "심리테스트",
+   "title": "고양이 Catcha!",
    "views": 3,
-   "eng": 6,
-   "avg_sec": 2
+   "eng": 0,
+   "avg_sec": 0
   }
  ],
- "updated": "2026-10-02 23:55"
+ "updated": "2026-10-03 00:55"
 }
