@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 221,
- "total_visits": 623,
+ "total": 222,
+ "total_visits": 624,
  "yesterday": {
-  "users": 7,
-  "new": 6,
-  "pv": 7,
-  "sessions": 7
+  "users": 8,
+  "new": 7,
+  "pv": 8,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -18,9 +18,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 7,
+   "views": 8,
    "eng": 36,
-   "avg_sec": 5
+   "avg_sec": 4
   },
   {
    "title": "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (무료)",
@@ -62,9 +62,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 7,
+   "views": 8,
    "eng": 36,
-   "avg_sec": 5
+   "avg_sec": 4
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -73,5 +73,5 @@
    "avg_sec": 4
   }
  ],
- "updated": "2026-10-05 00:00"
+ "updated": "2026-10-05 01:00"
 }
