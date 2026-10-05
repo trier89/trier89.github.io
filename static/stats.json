@@ -1,26 +1,26 @@
 {
- "today": 8,
- "today_pv": 14,
- "total": 230,
- "total_visits": 636,
+ "today": 0,
+ "today_pv": 0,
+ "total": 231,
+ "total_visits": 637,
  "yesterday": {
-  "users": 8,
-  "new": 8,
-  "pv": 9,
-  "sessions": 8
+  "users": 9,
+  "new": 9,
+  "pv": 15,
+  "sessions": 12
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 58,
-   "eng": 5669,
-   "avg_sec": 98
+   "views": 63,
+   "eng": 6677,
+   "avg_sec": 106
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 8,
+   "views": 10,
    "eng": 41,
-   "avg_sec": 5
+   "avg_sec": 4
   },
   {
    "title": "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (무료)",
@@ -50,9 +50,9 @@
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 58,
-   "eng": 5669,
-   "avg_sec": 98
+   "views": 63,
+   "eng": 6677,
+   "avg_sec": 106
   },
   {
    "title": "다락방 컴퍼니 — AI 직원들이 일하는 가상 회사 | 다락방",
@@ -62,9 +62,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 8,
+   "views": 10,
    "eng": 41,
-   "avg_sec": 5
+   "avg_sec": 4
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
@@ -73,5 +73,5 @@
    "avg_sec": 4
   }
  ],
- "updated": "2026-10-05 23:03"
+ "updated": "2026-10-06 00:03"
 }
