@@ -5,8 +5,8 @@
  "total_visits": 643,
  "yesterday": {
   "users": 4,
-  "new": 3,
-  "pv": 6,
+  "new": 4,
+  "pv": 7,
   "sessions": 6
  },
  "top_views": [
@@ -23,6 +23,12 @@
    "avg_sec": 1
   },
   {
+   "title": "고양이 Catcha!",
+   "views": 4,
+   "eng": 1,
+   "avg_sec": 0
+  },
+  {
    "title": "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (무료)",
    "views": 3,
    "eng": 628,
@@ -33,12 +39,6 @@
    "views": 3,
    "eng": 11,
    "avg_sec": 4
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 0,
-   "avg_sec": 0
   }
  ],
  "top_dwell": [
@@ -68,10 +68,10 @@
   },
   {
    "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 0,
+   "views": 4,
+   "eng": 1,
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-07 04:07"
+ "updated": "2026-10-07 05:07"
 }
