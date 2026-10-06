@@ -1,26 +1,26 @@
 {
- "today": 1,
- "today_pv": 4,
+ "today": 0,
+ "today_pv": 0,
  "total": 232,
  "total_visits": 640,
  "yesterday": {
-  "users": 9,
-  "new": 9,
-  "pv": 15,
-  "sessions": 12
+  "users": 1,
+  "new": 1,
+  "pv": 4,
+  "sessions": 3
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 63,
-   "eng": 6813,
-   "avg_sec": 108
+   "views": 60,
+   "eng": 6611,
+   "avg_sec": 110
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
-   "eng": 46,
-   "avg_sec": 5
+   "views": 8,
+   "eng": 10,
+   "avg_sec": 1
   },
   {
    "title": "16 성격유형 테스트 — 24문항으로 알아보는 내 유형 (무료)",
@@ -35,10 +35,10 @@
    "avg_sec": 4
   },
   {
-   "title": "다락방 컴퍼니 — AI 직원들이 일하는 가상 회사 | 다락방",
-   "views": 3,
-   "eng": 17,
-   "avg_sec": 6
+   "title": "검색",
+   "views": 2,
+   "eng": 2,
+   "avg_sec": 1
   }
  ],
  "top_dwell": [
@@ -50,28 +50,22 @@
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 63,
-   "eng": 6813,
-   "avg_sec": 108
-  },
-  {
-   "title": "다락방 컴퍼니 — AI 직원들이 일하는 가상 회사 | 다락방",
-   "views": 3,
-   "eng": 17,
-   "avg_sec": 6
-  },
-  {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
-   "eng": 46,
-   "avg_sec": 5
+   "views": 60,
+   "eng": 6611,
+   "avg_sec": 110
   },
   {
    "title": "게임방 — 에디슨의 놀이터 | 계획대로 느긋하게",
    "views": 3,
    "eng": 11,
    "avg_sec": 4
+  },
+  {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 8,
+   "eng": 10,
+   "avg_sec": 1
   }
  ],
- "updated": "2026-10-06 23:06"
+ "updated": "2026-10-07 00:07"
 }
