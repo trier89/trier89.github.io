@@ -1,6 +1,6 @@
 ---
 title: "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)"
-description: "자극추구·위험회피·사회적 민감성·인내력·자율성·연대감·자기초월, 7가지 축으로 내 기질과 성격 성향을 알아보세요. 28문항, 무료, 회원가입 없음. 재미로 보는 자체 제작 테스트예요."
+description: "자극추구·위험회피·사회적 민감성·인내력·자율성·연대감·자기초월, 7가지 축으로 보는 16가지 기질 유형. 축별 자세한 해설, 연애·직장·공부 해석, 기질 궁합, 친구와 결과 비교까지. 28문항, 무료, 회원가입 없음."
 date: 2026-08-22
 slug: "temperament-character"
 aliases: ["/tools/temperament-character/"]
@@ -87,81 +87,182 @@ function show(){
     opts.appendChild(b);
   });
 }
-function result(){
-  var sc={NS:0,HA:0,RD:0,P:0,SD:0,C:0,ST:0};
-  QS.forEach(function(q,i){ if(ans[i]===0) sc[q[3]]+=1; });
-  function pct(a){return Math.round(sc[a]/4*100);}
-  var key=(sc.NS>=2?'1':'0')+(sc.HA>=2?'1':'0')+(sc.RD>=2?'1':'0');
-  renderResult(key,{NS:pct('NS'),HA:pct('HA'),RD:pct('RD'),P:pct('P'),SD:pct('SD'),C:pct('C'),ST:pct('ST')},false);
-}
 function tcbar(hi,lo,p){
   return '<div style="margin:10px 0;"><div style="display:flex;justify-content:space-between;font-size:13px;color:#555;"><span>'+lo+'</span><span style="font-weight:700;color:#047857;">'+hi+' '+p+'%</span></div><div style="height:10px;background:#e5e7eb;border-radius:5px;"><div style="height:10px;width:'+p+'%;background:#059669;border-radius:5px;"></div></div></div>';
 }
 function note(label,p,hi,lo){
   return '<li><b>'+label+'</b> — '+(p>=50?hi:lo)+'</li>';
 }
-function renderResult(key,P,shared){
+// ---- 16유형(인내력 추가) 보조 데이터
+var SUB={
+"1111":["끝장형","감정이 출렁여도 한번 빠진 일은 끝까지 붙잡아요. 불안할수록 포기 대신 더 파고드는 타입이라, 번아웃만 조심하면 깊이 있는 결과를 냅니다."],
+"1110":["전환형","설렘이 식으면 다음 설렘으로 옮겨가요. 다양한 경험이 자산이지만, 하다 만 일이 쌓이면 불안도 커지니 '하나는 끝내기' 규칙이 도움돼요."],
+"1101":["끝장형","오래 고민하지만 일단 시작하면 끝까지 갑니다. 준비가 길어 출발은 늦어도 완주율은 높아요."],
+"1100":["전환형","계획은 많은데 시작 전에 다른 관심사로 넘어가기 쉬워요. 작게 시작해 빨리 결과를 보는 방식이 잘 맞아요."],
+"1011":["끝장형","에너지와 끈기를 다 가진 추진력의 끝판왕. 사람을 모아 끝까지 밀어붙이는 리더형이지만, 주변이 지치지 않게 속도 조절을."],
+"1010":["전환형","시작의 천재. 판을 벌이고 분위기를 띄우는 데 최고고, 마무리는 꼼꼼한 파트너와 나누면 더 빛나요."],
+"1001":["끝장형","자기 방식으로 끝까지 가는 고집 있는 개척자. 남이 안 가는 길도 혼자서 완주해요."],
+"1000":["전환형","흥미를 따라 자유롭게 흘러다니는 여행자. 넓게 경험하는 게 강점이고, 꾸준함이 필요한 일은 마감·동료 같은 환경으로 보완해요."],
+"0111":["끝장형","맡은 일과 사람을 끝까지 책임지는 든든한 버팀목. 혼자 다 짊어지지만 않으면 돼요."],
+"0110":["전환형","분위기와 관계를 살피며 유연하게 맞춰가요. 무리하지 않는 대신 결정이 늦어질 수 있어요."],
+"0101":["끝장형","완성도에 대한 집념이 가장 강한 조합. 장인 기질이지만 '완벽해야 시작'은 내려놓기."],
+"0100":["전환형","신중하지만 고집하지 않아 현실적으로 타협할 줄 알아요. 큰 그림보다 당장 할 일을 정리하는 데 강해요."],
+"0011":["끝장형","느긋해 보여도 꾸준함으로 결국 해내는 거북이형. 오래가는 관계와 습관이 강점이에요."],
+"0010":["전환형","흐름에 몸을 맡기는 여유파. 스트레스는 적지만 목표가 흐려지기 쉬우니 가벼운 루틴 하나를."],
+"0001":["끝장형","조용히, 흔들림 없이 끝까지 가는 냉철한 완주자. 위기에 가장 믿음직해요."],
+"0000":["전환형","필요한 만큼만 담백하게 하는 효율주의자. 에너지 낭비가 없지만 무관심해 보일 수 있어요."]
+};
+// 실생활: 공부·일하는 법, 부딪히기 쉬운 기질
+var LIFE={
+"111":{st:"짧게 몰입하는 스프린트 + 피드백·칭찬을 받을 수 있는 스터디 모임",x:["100","정 많은 나와 달리 자유로운 상대의 연락·표현 온도에 서운해지기 쉬워요"],mw:"나의 출렁임을 받아주는 안정감"},
+"110":{st:"충분히 계획하되 '첫 단계'만은 오늘 하기, 혼자 집중할 수 있는 환경",x:["101","상대의 속도에 끌려가는 느낌이 들기 쉬워요"],mw:"재촉하지 않고 기다려주는 여유"},
+"101":{st:"사람들과 함께, 목표를 잘게 쪼개 게임처럼 보상 주기",x:["110","나의 속도와 즉흥이 상대에겐 부담이 되기 쉬워요"],mw:"벌여놓은 일을 차분히 다듬어주는 꼼꼼함"},
+"100":{st:"자율성이 큰 프로젝트형, 직접 해보며 배우기",x:["111","감정 표현의 온도 차이로 서로 지치기 쉬워요"],mw:"자유를 존중하면서 따뜻하게 챙겨주는 마음"},
+"011":{st:"안정된 루틴 + 함께하는 사람이 있을 때 꾸준해요",x:["000","표현이 적은 상대에게 서운함이 쌓이기 쉬워요"],mw:"새로운 세계로 데려가 주는 대담함"},
+"010":{st:"체계적인 계획표와 체크리스트, 조용한 환경",x:["100","규칙과 자유가 자주 부딪혀요"],mw:"딱딱해진 일상에 활력을 불어넣는 에너지"},
+"001":{st:"부담 없이 꾸준하게, 친구와 같이 하면 더 좋아요",x:["010","나의 느긋함과 상대의 꼼꼼함이 서로 답답할 수 있어요"],mw:"편안함 속에 적당한 긴장을 더해주는 신중함"},
+"000":{st:"혼자 효율적으로, 목표와 이유가 분명할 때 강해요",x:["011","연락·표현 빈도 차이로 상대가 서운해하기 쉬워요"],mw:"담백한 나를 감정이 풍부한 세계로 이끄는 열정"}
+};
+// 7개 축 구간별 해설: [축 이름, {hi:[한줄,강점,주의,조언], mid:[...], lo:[...]}]
+var AX=[
+["NS","자극추구",{hi:["새로움에 끌리는 탐험가","호기심과 추진력","쉽게 싫증 나고 충동적일 수 있음","큰 결정은 하룻밤 재우고 내리기"],mid:["새것도 익숙한 것도 괜찮은 균형형","상황에 맞춰 도전과 안정을 고름","가끔 어느 쪽인지 스스로도 헷갈림","하고 싶은 쪽을 먼저 적어보기"],lo:["검증된 길을 좋아하는 안정 추구형","꾸준함과 신중함","변화가 필요할 때 시작이 늦음","한 달에 하나, 작은 새로움 시도하기"]}],
+["HA","위험회피",{hi:["미리 걱정하고 대비하는 신중형","실수가 적고 준비성이 좋음","불안과 피로가 쉽게 쌓임","걱정하는 시간을 하루 15분으로 정해두기"],mid:["조심할 땐 조심, 부딪힐 땐 부딪히는 형","위험을 적당히 계산함","컨디션 따라 걱정이 커지기도","걱정되면 최악·최선·현실 세 가지로 적기"],lo:["낙천적이고 대담한 형","낯선 상황에도 금방 편안함","위험 신호를 가볍게 넘길 수 있음","중요한 결정엔 체크리스트 한 장"]}],
+["RD","사회적 민감성",{hi:["사람에게서 에너지를 얻는 공감형","정이 많고 관계를 잘 챙김","거절·평가에 쉽게 상처받음","인정은 남에게서만이 아니라 내 안에서도"],mid:["함께도 좋고 혼자도 괜찮은 형","관계와 독립의 균형","가끔 서운함을 말하지 못함","서운하면 그날 안에 한 문장으로 말하기"],lo:["혼자서도 잘 지내는 독립형","남의 시선에 덜 흔들림","차갑다는 오해를 받기도","고마움은 말로 한 번 더 표현하기"]}],
+["P","인내력",{hi:["한번 잡으면 끝을 보는 끈기형","완성도와 책임감","안 되는 일에도 너무 오래 매달림","그만둘 기준도 시작할 때 정해두기"],mid:["필요할 땐 버티고 아니면 접는 형","끈기와 유연함의 균형","흥미 없는 일엔 쉽게 늘어짐","재미없는 일은 작게 쪼개 보상 붙이기"],lo:["아니다 싶으면 빠르게 방향을 트는 유연형","전환이 빠르고 미련이 적음","마무리가 약하다는 소리를 듣기도","끝낼 날짜를 남에게 선언하기"]}],
+["SD","자율성",{hi:["내 삶을 스스로 운전하는 주도형","목표 설정과 자기 책임","남에게도 엄격해질 수 있음","도움을 청하는 것도 능력이에요"],mid:["상황에 따라 주도와 맞춤을 오가는 형","현실적인 자기 관리","남의 기대에 휘둘릴 때가 있음","이번 주 내가 정한 목표 하나 적기"],lo:["아직 방향을 찾는 중인 형","주변에 잘 맞춰주는 유연함","무력감이나 남 탓이 생기기 쉬움","작은 목표 하나를 끝까지 해보는 경험부터"]}],
+["C","연대감",{hi:["타인을 헤아리는 협력형","배려와 팀워크","내 주장을 삼키기 쉬움","거절도 관계의 일부예요"],mid:["협력하되 내 기준도 있는 형","균형 잡힌 관계","갈등을 피하려 넘어갈 때가 있음","의견 차이는 사실·감정 나눠 말하기"],lo:["내 기준이 뚜렷한 소신형","독립적인 판단","고집스러워 보일 수 있음","상대 입장을 한 문장으로 요약해보기"]}],
+["ST","자기초월",{hi:["큰 흐름에 몰입하는 감성·의미형","몰입과 영감","현실 감각이 흐려질 때가 있음","꿈에도 마감일을 붙이기"],mid:["현실과 의미를 오가는 형","실용과 감성의 균형","가끔 의미를 잃은 듯한 시기","하루 10분, 좋아하는 것에 그냥 빠져보기"],lo:["두 발을 땅에 딛는 현실형","실용적이고 객관적","의미나 보람이 옅어질 수 있음","가끔은 이유 없는 경험도 해보기"]}]
+];
+function band(p){return p>=75?'hi':(p<=25?'lo':'mid');}
+var BL={hi:'높음',mid:'중간',lo:'낮음'};
+function enc(sc){return [sc.NS,sc.HA,sc.RD,sc.P,sc.SD,sc.C,sc.ST].join('');}
+function dec(s){var k=['NS','HA','RD','P','SD','C','ST'],o={};for(var i=0;i<7;i++)o[k[i]]=Math.round((+s[i]||0)/4*100);return o;}
+function keyOf(P){return (P.NS>=50?'1':'0')+(P.HA>=50?'1':'0')+(P.RD>=50?'1':'0')+(P.P>=50?'1':'0');}
+function fullName(k4){var t=TYPES[k4.slice(0,3)]||TYPES['001'];var s=SUB[k4];return t.n+(s?' · '+s[0]:'');}
+function store(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function load(k){try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;}}
+
+function result(){
+  var sc={NS:0,HA:0,RD:0,P:0,SD:0,C:0,ST:0};
+  QS.forEach(function(q,i){ if(ans[i]===0) sc[q[3]]+=1; });
+  var s=enc(sc), P=dec(s);
+  renderResult(keyOf(P),P,false,s);
+}
+
+function cardImage(k4,P){
+  var c=document.createElement('canvas');c.width=1080;c.height=1350;var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,'#ecfdf5');g.addColorStop(1,'#d1fae5');x.fillStyle=g;x.fillRect(0,0,1080,1350);
+  x.fillStyle='#047857';x.textAlign='center';
+  x.font='500 40px sans-serif';x.fillText('나의 기질 유형은',540,150);
+  var t=TYPES[k4.slice(0,3)],s=SUB[k4];
+  x.font='800 92px sans-serif';x.fillText(t.n,540,270);
+  if(s){x.font='700 52px sans-serif';x.fillStyle='#059669';x.fillText('· '+s[0]+' ·',540,350);}
+  var rows=[['자극추구',P.NS],['위험회피',P.HA],['사회적 민감성',P.RD],['인내력',P.P],['자율성',P.SD],['연대감',P.C],['자기초월',P.ST]];
+  rows.forEach(function(r,i){var y=470+i*105;x.textAlign='left';x.fillStyle='#1f2937';x.font='600 38px sans-serif';x.fillText(r[0],110,y);
+    x.textAlign='right';x.fillStyle='#047857';x.fillText(r[1]+'%',970,y);
+    x.fillStyle='#ffffff';x.fillRect(110,y+20,860,26);x.fillStyle='#059669';x.fillRect(110,y+20,860*r[1]/100,26);});
+  x.textAlign='center';x.fillStyle='#6b7280';x.font='500 34px sans-serif';x.fillText('planfully.ai.kr · 기질·성격 유형 테스트',540,1290);
+  return c;
+}
+
+function compareHtml(me,fr){
+  var names={NS:'자극추구',HA:'위험회피',RD:'사회적 민감성',P:'인내력',SD:'자율성',C:'연대감',ST:'자기초월'};
+  var keys=['NS','HA','RD','P','SD','C','ST'],tot=0,maxk='NS',maxd=-1,h='';
+  keys.forEach(function(k){var d=Math.abs(me[k]-fr.P[k]);tot+=d;if(d>maxd){maxd=d;maxk=k;}
+    h+='<div style="margin:9px 0;"><div style="font-size:13px;color:#4b5563;display:flex;justify-content:space-between;"><span>'+names[k]+'</span><span><b style="color:#047857">나 '+me[k]+'%</b> · <b style="color:#7c3aed">친구 '+fr.P[k]+'%</b></span></div>'
+     +'<div style="height:8px;background:#e5e7eb;border-radius:4px;margin-top:3px;"><div style="height:8px;width:'+me[k]+'%;background:#059669;border-radius:4px;"></div></div>'
+     +'<div style="height:8px;background:#e5e7eb;border-radius:4px;margin-top:3px;"><div style="height:8px;width:'+fr.P[k]+'%;background:#8b5cf6;border-radius:4px;"></div></div></div>';});
+  var sim=Math.round(100-tot/keys.length);
+  var myk=keyOf(me).slice(0,3),frk=fr.key.slice(0,3),rel;
+  if(TYPES[myk].m===frk||TYPES[frk].m===myk)rel='💞 서로의 빈 곳을 채워주는 <b>환상의 짝</b> 조합이에요.';
+  else if(LIFE[myk].x[0]===frk||LIFE[frk].x[0]===myk)rel='🌡️ 온도 차가 생기기 쉬운 조합이에요. 다른 점을 알고 있으면 오히려 잘 지낼 수 있어요.';
+  else if(myk===frk)rel='🪞 기질이 닮은 조합이에요. 말 안 해도 통하지만, 같은 약점도 공유해요.';
+  else rel='🤝 비슷한 듯 다른 조합이에요. 서로에게 배울 점이 많아요.';
+  return '<div style="margin-top:22px;padding:16px;border-radius:14px;background:#f5f3ff;border:1px solid #ddd6fe;color:#1f2937;">'
+   +'<h3 style="margin:0 0 6px;font-size:18px;color:#5b21b6;">👥 친구와 비교</h3>'
+   +'<div style="font-size:15px;color:#1f2937;">친구: <b>'+fullName(fr.key)+'</b> · 닮은 정도 <b style="color:#7c3aed;font-size:18px;">'+sim+'%</b></div>'
+   +'<div style="margin-top:6px;line-height:1.6;color:#1f2937;">'+rel+'</div>'
+   +'<div style="margin-top:6px;font-size:14px;color:#555;">가장 다른 부분은 <b>'+names[maxk]+'</b>('+maxd+'%p 차이)예요.</div>'+h
+   +'<button id="tc-clearf" style="margin-top:8px;border:0;background:none;color:#7c3aed;font-size:13px;cursor:pointer;text-decoration:underline;">비교 지우기</button></div>';
+}
+
+function renderResult(k4,P,shared,scode){
   $('tc-intro').style.display='none';$('tc-quiz').style.display='none';
-  if(!TYPES[key])key='001';
-  var t=TYPES[key];
+  if(k4.length===3)k4=k4+'1';
+  var k3=k4.slice(0,3); if(!TYPES[k3]){k3='001';k4='0011';}
+  var t=TYPES[k3],sub=SUB[k4],L=LIFE[k3];
   function list(arr){return '<ul style="margin:6px 0 0;padding-left:20px;line-height:1.7;">'+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
-  var barsHtml = P ? (
-     '<h3 style="margin:20px 0 6px;font-size:17px;">🧭 나의 7가지 기질 프로파일</h3>'
-     +tcbar('자극추구','신중·절제',P.NS)
-     +tcbar('위험회피','대담·낙천',P.HA)
-     +tcbar('사회적 민감성','초연·독립',P.RD)
-     +tcbar('인내력','유연·전환',P.P)
-     +tcbar('자율성','상황 의존',P.SD)
-     +tcbar('연대감','자기 소신',P.C)
-     +tcbar('자기초월','현실 지향',P.ST)
-     +'<h3 style="margin:20px 0 6px;font-size:17px;">🌱 성격 성향 한 줄</h3>'
-     +'<ul style="margin:6px 0 0;padding-left:20px;line-height:1.8;">'
-     + note('인내력',P.P,'한번 잡으면 끝을 보는 끈기형','안 되면 빠르게 방향을 트는 유연형')
-     + note('자율성',P.SD,'내 삶을 스스로 운전하는 주도형','아직 방향을 찾는 중 — 작은 선택부터 내 손으로')
-     + note('연대감',P.C,'타인의 입장을 헤아리는 공감형','내 기준이 뚜렷한 소신형 (가끔은 한 발 양보도)')
-     + note('자기초월',P.ST,'큰 흐름에 몰입하는 감성·몰입형','두 발을 땅에 딛는 현실형')
-     +'</ul>'
-  ) : '';
+  function h3(s){return '<h3 style="margin:22px 0 6px;font-size:17px;">'+s+'</h3>';}
+  var bars='',axes='';
+  if(P){
+    bars=h3('🧭 나의 7가지 기질 프로파일')
+     +tcbar('자극추구','신중·절제',P.NS)+tcbar('위험회피','대담·낙천',P.HA)+tcbar('사회적 민감성','초연·독립',P.RD)+tcbar('인내력','유연·전환',P.P)
+     +tcbar('자율성','상황 의존',P.SD)+tcbar('연대감','자기 소신',P.C)+tcbar('자기초월','현실 지향',P.ST);
+    axes=h3('🔍 축별 자세한 해설')+'<div style="display:flex;flex-direction:column;gap:8px;">';
+    AX.forEach(function(a){var b=band(P[a[0]]),d=a[2][b];
+      axes+='<details style="border:1px solid #d1fae5;border-radius:10px;padding:10px 12px;background:#fff;color:#1f2937;"><summary style="cursor:pointer;font-weight:700;color:#1f2937;">'+a[1]+' <span style="color:#047857;">'+P[a[0]]+'% · '+BL[b]+'</span> — <span style="font-weight:400;">'+d[0]+'</span></summary>'
+       +'<div style="margin-top:8px;line-height:1.7;font-size:14.5px;color:#1f2937;">👍 <b>강점</b> '+d[1]+'<br>👀 <b>주의</b> '+d[2]+'<br>💡 <b>조언</b> '+d[3]+'</div></details>';});
+    axes+='</div>';
+  }
+  var fr=load('tc-friend');
   $('tc-result').innerHTML=
    '<div style="text-align:center;padding:22px;border-radius:14px;background:#ecfdf5;">'
-   +'<div style="font-size:14px;color:#555;">당신의 기질 유형은</div>'
+   +'<div style="font-size:14px;color:#555;">'+(shared?'친구의 기질 유형은':'당신의 기질 유형은')+'</div>'
    +'<div style="font-size:30px;font-weight:800;color:#047857;margin-top:4px;">'+t.n+'</div>'
+   +(sub?'<div style="display:inline-block;margin-top:6px;padding:3px 12px;border-radius:999px;background:#059669;color:#fff;font-weight:700;font-size:14px;">'+sub[0]+'</div>':'')
+   +'<div style="font-size:12.5px;color:#6b7280;margin-top:8px;">16가지 유형 중 하나 · 기질 3축 + 인내력</div>'
    +'</div>'
-   +(shared?'<div style="text-align:center;margin:10px 0;padding:10px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:14px;">친구가 공유한 결과예요 🎁 당신의 기질도 궁금하죠?</div>':barsHtml)
+   +(shared?'<div style="text-align:center;margin:10px 0;padding:10px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:14px;">친구가 공유한 결과예요 🎁 '+(P?'나도 테스트하면 친구와 비교해 드려요!':'당신의 기질도 궁금하죠?')+'</div>':'')
    +'<p style="line-height:1.7;margin-top:14px;">'+t.d+'</p>'
-   +'<h3 style="margin:20px 0 6px;font-size:17px;">👍 강점</h3>'+list(t.g)
-   +'<h3 style="margin:20px 0 6px;font-size:17px;">👀 약점</h3>'+list(t.b)
-   +'<h3 style="margin:20px 0 6px;font-size:17px;">⚠️ 조심할 것</h3>'+list(t.c)
-   +'<h3 style="margin:20px 0 6px;font-size:17px;">🎬 이럴 때 이런 반응</h3>'
-   +list(['스트레스 받으면: '+t.r.s,'연애할 때: '+t.r.l,'회사에서: '+t.r.w])
-   +'<h3 style="margin:20px 0 6px;font-size:17px;">💚 선호하는 스타일</h3><div style="line-height:1.7;">'+t.like+'</div>'
-   +'<h3 style="margin:20px 0 6px;font-size:17px;">💞 잘 맞는 기질</h3><div style="line-height:1.7;"><b>'+TYPES[t.m].n+'</b> — 서로의 빈 곳을 채워주는 조합으로 자주 꼽혀요 (재미로 봐주세요!)</div>'
-   +'<div style="display:flex;gap:10px;margin-top:22px;">'
+   +(sub?'<p style="line-height:1.7;padding:12px 14px;border-radius:10px;background:#f0fdf4;border-left:4px solid #059669;color:#1f2937;"><b>'+sub[0]+'</b> — '+sub[1]+'</p>':'')
+   +bars+axes
+   +h3('👍 강점')+list(t.g)+h3('👀 약점')+list(t.b)+h3('⚠️ 조심할 것')+list(t.c)
+   +h3('🏠 실생활에서는')
+   +list(['😣 스트레스 받으면: '+t.r.s,'💕 연애할 때: '+t.r.l,'💼 회사에서: '+t.r.w,'📚 공부·일하는 법: '+L.st])
+   +h3('💚 선호하는 스타일')+'<div style="line-height:1.7;">'+t.like+'</div>'
+   +h3('💞 기질 궁합')
+   +'<div style="line-height:1.8;">잘 맞는 기질: <b>'+TYPES[t.m].n+'</b> — '+L.mw+'<br>부딪히기 쉬운 기질: <b>'+TYPES[L.x[0]].n+'</b> — '+L.x[1]+'<br><span style="font-size:13px;color:#6b7280;">(재미로 봐주세요! 다른 점을 알면 어떤 조합이든 잘 지낼 수 있어요)</span></div>'
+   +(!shared&&fr&&P?compareHtml(P,fr):'')
+   +'<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;">'
    +(shared
-      ?'<button id="tc-mine" style="flex:1;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:16px;cursor:pointer;">나도 테스트하기 →</button>'
-      :'<button onclick="location.href=location.pathname" style="flex:1;padding:13px;border:2px solid #059669;border-radius:10px;background:#fff;color:#047857;font-weight:700;font-size:15px;cursor:pointer;">다시 하기</button>'
-       +'<button id="tc-share" style="flex:1;padding:13px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">결과 공유하기</button>')
+      ?'<button id="tc-mine" style="flex:1;min-width:200px;padding:14px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:16px;cursor:pointer;">'+(P?'나도 하고 친구와 비교하기 →':'나도 테스트하기 →')+'</button>'
+      :'<button id="tc-share" style="flex:1;min-width:140px;padding:13px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;font-size:15px;cursor:pointer;">친구에게 공유·비교</button>'
+       +'<button id="tc-img" style="flex:1;min-width:140px;padding:13px;border:2px solid #059669;border-radius:10px;background:#fff;color:#047857;font-weight:700;font-size:15px;cursor:pointer;">결과 이미지 저장</button>'
+       +'<button onclick="location.href=location.pathname" style="flex-basis:100%;padding:11px;border:0;border-radius:10px;background:#f3f4f6;color:#374151;font-size:14px;cursor:pointer;">다시 하기</button>')
    +'</div>'
-   +'<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14.5px;">🧠 다른 테스트도 → <a href="/tests/personality-test/">성격유형(MBTI식) 테스트</a> · <a href="/tests/eq-test/">공감능력(EQ) 테스트</a></div>'
+   +'<div style="margin-top:16px;padding:14px;border-radius:10px;background:#eff6ff;font-size:14.5px;">📖 <a href="/guide/temperament-types/">기질 4가지·16유형 해설 읽기</a> · <a href="/guide/mbti-vs-temperament/">MBTI와 뭐가 다를까?</a><br>🧠 다른 테스트 → <a href="/tests/personality-test/">성격유형(MBTI식)</a> · <a href="/tests/eq-test/">공감능력(EQ)</a></div>'
    +'<p style="margin-top:14px;font-size:12.5px;color:#6b7280;line-height:1.6;">※ 재미로 보는 자체 제작 테스트예요. 정식 기질·성격 검사(TCI 등)나 심리 진단이 아닙니다. 마음이 힘들 땐 전문가와 상담하세요.</p>';
   $('tc-result').style.display='block';
   if(shared){
-    var mine=$('tc-mine'); if(mine)mine.onclick=function(){location.href=location.pathname;};
+    $('tc-mine').onclick=function(){location.href=location.pathname;};
   }else{
     $('tc-share').onclick=function(){
-      var url=location.origin+location.pathname+'?r='+key;
-      var txt='나의 기질 유형은 "'+t.n+'"! 너의 기질도 궁금해 👉 '+url;
-      if(navigator.share){navigator.share({text:txt});}
-      else{navigator.clipboard.writeText(txt).then(function(){alert('결과가 복사됐어요! 붙여넣기로 공유하세요.');});}
+      var url=location.origin+location.pathname+'?r='+k4+(scode?'&s='+scode:'');
+      var txt='나의 기질 유형은 "'+fullName(k4)+'"! 너도 해보고 나랑 비교해봐 👉 '+url;
+      if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+      else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){$('tc-share').textContent='링크 복사됨! 붙여넣어 보내세요';});}
     };
+    $('tc-img').onclick=function(){
+      var c=cardImage(k4,P||dec('2222222'));
+      c.toBlob(function(b){
+        var f=new File([b],'my-temperament.png',{type:'image/png'});
+        if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:fullName(k4)}).catch(function(){});}
+        else{var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-temperament.png';document.body.appendChild(a);a.click();a.remove();}
+      },'image/png');
+    };
+    var cf=$('tc-clearf'); if(cf)cf.onclick=function(){store('tc-friend',null);cf.parentNode.remove();};
   }
   window.scrollTo({top:$('tctest').offsetTop-20,behavior:'smooth'});
 }
 $('tc-start').onclick=function(){$('tc-intro').style.display='none';$('tc-quiz').style.display='block';show();};
-// 공유 링크(?r=###)로 들어오면 그 유형을 바로 보여줌
+// 공유 링크: ?r=####(16유형) 또는 ?r=###(옛 8유형), &s=7자리(친구 점수) → 친구 결과 보여주고 비교용으로 저장
 (function(){
-  var m=(location.search.match(/[?&]r=([01]{3})/));
-  if(m){renderResult(m[1],null,true);}
+  var m=location.search.match(/[?&]r=([01]{3,4})/), s=location.search.match(/[?&]s=([0-4]{7})/);
+  if(m){
+    var P=s?dec(s[1]):null;
+    if(P) store('tc-friend',{key:keyOf(P),P:P});
+    renderResult(m[1],P,true);
+  }
 })();
 })();
 </script>
@@ -169,6 +270,7 @@ $('tc-start').onclick=function(){$('tc-intro').style.display='none';$('tc-quiz')
 ## 이 테스트에 대하여
 
 - **7가지 축**: 타고난 **기질** 4가지 — 자극추구(새로움을 얼마나 좇는지), 위험회피(걱정·조심의 정도), 사회적 민감성(관계·인정에 반응하는 정도), 인내력(끈기) — 과, 살면서 다듬어지는 **성격** 3가지 — 자율성(내 삶의 주도권), 연대감(타인과의 협력·공감), 자기초월(나를 넘어선 몰입) — 으로 나를 봅니다.
-- 기질 3축(자극추구·위험회피·사회적 민감성)의 조합으로 **8가지 유형**이 나오고, 나머지 축은 프로파일 막대와 한 줄 해설로 보여드려요.
+- 기질 3축(자극추구·위험회피·사회적 민감성)으로 8가지 기본 유형을 나누고, **인내력**이 높으면 '끝장형', 낮으면 '전환형'으로 나눠 **16가지 유형**이 나와요. 7개 축 모두 점수 구간별 해설(강점·주의·조언)과 실생활 해석, 기질 궁합을 보여드려요.
+- 결과를 친구에게 보내면, 친구가 테스트를 마친 뒤 **두 사람의 7개 축을 나란히 비교**해 드려요. 결과 이미지 카드로 저장할 수도 있어요.
 - 이 테스트는 위 **기질·성격 모델의 틀만 참고한 자체 제작 28문항**입니다. 심리학자 로버트 클로닌저의 기질·성격 이론에서 개념을 빌렸을 뿐, 정식 TCI® 검사(한국판 저작권 보유 기관)와는 무관하며 그 문항을 쓰지 않았습니다.
 - 재미와 자기이해를 위한 테스트예요. **의학적·심리학적 진단이 아닙니다.** 답변과 결과는 브라우저 안에서만 처리되고 어디에도 저장되지 않습니다.
