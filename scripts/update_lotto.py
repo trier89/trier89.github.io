@@ -63,6 +63,15 @@ def main():
             print("fetch error @%d: %s" % (probe, e))
             break
         lst = (j.get("data") or {}).get("list") or []
+        # 추첨 직후엔 당첨자수·상금이 0으로 먼저 올라온다(1242회가 0으로 굳은 사고, 2026-10-07) → 이미 있는 회차라도 상금이 비어 있으면 채운다
+        for x in lst:
+            r = by_round.get(x.get("ltEpsd"))
+            if r and not r.get("p1") and x.get("rnk1WnAmt"):
+                fixed = to_row(x)
+                if fixed["nums"] == r["nums"]:
+                    r["w"], r["p1"] = fixed["w"], fixed["p1"]
+                    added += 1
+                    print("prize backfill @%d" % r["round"])
         news = [x for x in lst if x.get("ltEpsd") and x["ltEpsd"] > cur_max and x["ltEpsd"] not in by_round]
         for x in news:
             row = to_row(x)
@@ -83,7 +92,7 @@ def main():
     out = [by_round[k] for k in sorted(by_round)]
     with open(DATA, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
-    print("added %d new round(s). new max: %d" % (added, max(by_round)))
+    print("updated %d round(s) (new or prize backfill). max: %d" % (added, max(by_round)))
     return 0
 
 
