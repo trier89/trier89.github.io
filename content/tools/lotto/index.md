@@ -9,9 +9,16 @@ toc: false
 readingTime: false
 ---
 
+<a class="lt-app" href="/apps/lotto/"><img src="/apps/lotto/img/icon.png" alt=""><span><b>앱으로도 나왔어요</b><br>QR 당첨확인·명당 지도까지 · 안드로이드 무료</span><em>받기 ›</em></a>
+
 <div class="pf-tool" id="lt-tool"><div id="lt-loading" style="text-align:center;padding:40px 0;color:#999;">불러오는 중…</div><div id="lt-body" style="display:none;"><div id="lt-reco"></div><div class="lt-honest">🎲 로또는 완전한 <b>무작위 추첨</b>이에요. 이 추천은 <b>재미·참고용</b>이며 <b>당첨을 보장하지 않아요.</b></div><section class="lt-sec"><h3 class="lt-sec-h">🔢 꼭 넣을 번호 <span>(선택 · 최대 6개)</span></h3><div id="lt-fix"></div></section><section class="lt-sec"><h3 class="lt-sec-h">⚙️ 생성 설정</h3><div id="lt-set"></div></section><section class="lt-sec"><h3 class="lt-sec-h">📋 요약 실적 <span>(과거 백테스트)</span></h3><div id="lt-summary" class="lt-summary"></div></section><section class="lt-sec"><h3 class="lt-sec-h">📊 번호 통계 <span>(역대 누적)</span></h3><div id="lt-stats"></div></section></div></div>
 
 <style>
+.lt-app{display:flex;align-items:center;gap:12px;max-width:560px;margin:0 0 16px;padding:12px 14px;border-radius:14px;background:#fff1f3;border:1px solid #ffd3da;text-decoration:none !important;color:#333 !important;}
+.lt-app img{width:44px;height:44px;border-radius:11px;flex:0 0 auto;}
+.lt-app span{font-size:13.5px;line-height:1.45;}
+.lt-app b{color:#ea3b5a;font-size:15px;}
+.lt-app em{margin-left:auto;font-style:normal;font-weight:800;color:#ea3b5a;white-space:nowrap;}
 #lt-tool{max-width:560px;}
 #lt-tool h3.lt-h{color:#111;font-size:16px;font-weight:800;margin:2px 0 14px;text-align:center;}
 .lt-balls{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
