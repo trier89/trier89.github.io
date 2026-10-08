@@ -56,7 +56,7 @@ readingTime: false
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">고향사랑기부금</span><input type="tel" id="yt-hometown" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
   <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-marry" style="width:18px;height:18px;"> 올해(2024~2026) 혼인신고했어요 <span style="color:#999;font-size:12px;">— 결혼세액공제 50만원(생애 1회)</span></label>
-  <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-ins4" checked style="width:18px;height:18px;"> 국민연금·건강·고용보험 공제 자동 반영 <span style="color:#999;font-size:12px;">— 직장인은 켜두세요(2026 요율로 추정)</span></label>
+  <div style="margin-top:12px;font-weight:700;color:#0f766e;">🏥 국민연금·건강·고용보험 <span style="color:#999;font-weight:400;font-size:12px;">— 비우면 연봉으로 자동 추정(2026 요율)</span></div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">국민연금 낸 금액 <span style="color:#999;">(연간·본인분, 비우면 추정)</span></span><input type="tel" id="yt-nps" inputmode="numeric" placeholder="자동 추정" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">건강·장기요양·고용보험 <span style="color:#999;">(연간 합계, 비우면 추정)</span></span><input type="tel" id="yt-hlth" inputmode="numeric" placeholder="자동 추정" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
@@ -131,7 +131,7 @@ $('yt-go').onclick=function(){
   var kgf=(Math.min(kgfUse,30000000)*0.40)+(Math.max(Math.min(kgfUse,50000000)-30000000,0)*0.20)+(Math.max(Math.min(kgfUse,70000000)-50000000,0)*0.10);
   kgf=Math.min(kgf,18000000);
   // 4대보험 근로자 부담분 추정(2026 요율): 국민연금 4.75%(기준소득월액 상한 637만), 건강 3.595%+장기요양(건강의 13.14%), 고용 0.9%
-  var ins4=$('yt-ins4').checked;
+  var ins4=true;   // 항상 반영(직장인 공통) — 실제 납부액을 넣으면 그 값 사용
   var npsIn=v('yt-nps'), hlthIn=v('yt-hlth');                         // 실제 납부액 입력 시 추정 대신 사용
   var npsDed=npsIn>0?npsIn:(ins4?Math.min(g/12,6370000)*0.0475*12:0);   // 연금보험료공제(전액)
   var hlth=hlthIn>0?hlthIn:(ins4?g*0.03595*(1+0.1314)+g*0.009:0);       // 건강·장기요양·고용 = 특별소득공제
