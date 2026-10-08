@@ -50,6 +50,11 @@ readingTime: false
   </div>
   <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-marry" style="width:18px;height:18px;"> 올해(2024~2026) 혼인신고했어요 <span style="color:#999;font-size:12px;">— 결혼세액공제 50만원(생애 1회)</span></label>
   <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-ins4" checked style="width:18px;height:18px;"> 국민연금·건강·고용보험 공제 자동 반영 <span style="color:#999;font-size:12px;">— 직장인은 켜두세요(2026 요율로 추정)</span></label>
+  <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">국민연금 낸 금액 <span style="color:#999;">(연간·본인분, 비우면 추정)</span></span><input type="tel" id="yt-nps" inputmode="numeric" placeholder="자동 추정" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+    <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">건강·장기요양·고용보험 <span style="color:#999;">(연간 합계, 비우면 추정)</span></span><input type="tel" id="yt-hlth" inputmode="numeric" placeholder="자동 추정" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
+  </div>
+  <div style="font-size:12px;color:#6b7280;margin-top:4px;">※ 급여명세서·원천징수영수증의 실제 납부액을 넣으면 그 값으로 계산해요.</div>
   <div style="margin-top:14px;font-weight:700;color:#7c3aed;">🏠 추가 소득공제 (연간, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
@@ -120,8 +125,9 @@ $('yt-go').onclick=function(){
   kgf=Math.min(kgf,18000000);
   // 4대보험 근로자 부담분 추정(2026 요율): 국민연금 4.75%(기준소득월액 상한 637만), 건강 3.595%+장기요양(건강의 13.14%), 고용 0.9%
   var ins4=$('yt-ins4').checked;
-  var npsDed=ins4?Math.min(g/12,6370000)*0.0475*12:0;               // 연금보험료공제(전액)
-  var hlth=ins4?g*0.03595*(1+0.1314)+g*0.009:0;                       // 건강·장기요양·고용 = 특별소득공제
+  var npsIn=v('yt-nps'), hlthIn=v('yt-hlth');                         // 실제 납부액 입력 시 추정 대신 사용
+  var npsDed=npsIn>0?npsIn:(ins4?Math.min(g/12,6370000)*0.0475*12:0);   // 연금보험료공제(전액)
+  var hlth=hlthIn>0?hlthIn:(ins4?g*0.03595*(1+0.1314)+g*0.009:0);       // 건강·장기요양·고용 = 특별소득공제
   // 특별공제(보험료·주택자금 소득공제 + 보험·의료·기부·월세 세액공제)를 받는 경우 vs 표준세액공제 13만 — 유리한 쪽 자동 선택
   var baseCommon=g-earnDed(g)-perDed-npsDed-cardDed-housing-youthfund-kgf;
   var baseA=baseCommon-hlth-mortgage, baseB=baseCommon;
@@ -183,7 +189,7 @@ $('yt-go').onclick=function(){
   var html=sec('① 소득')+row('총급여 (연봉)',g);
   html+=sec('② 소득공제 (소득을 줄여줘요)')
     +row('근로소득공제',earnDed(g),1)+row('인적공제 ('+fam+'명)',perDed,1)
-    +(npsDed>0?row('국민연금 (추정)',npsDed,1):'')+(hlth>0?row('건강·장기요양·고용보험 (추정)',hlth,1):'')
+    +(npsDed>0?row('국민연금 ('+(npsIn>0?'입력':'추정')+')',npsDed,1):'')+(hlth>0?row('건강·장기요양·고용보험 ('+(hlthIn>0?'입력':'추정')+')',hlth,1):'')
     +(baseDed>0?row('신용/체크카드'+(baseFull>baseCap?' (한도도달)':''),baseDed,1):'')
     +(addDed>0?row('전통시장·대중교통·문화비 추가'+(addFull>addCap?' (한도도달)':''),addDed,1):'')
     +(mortgageShown>0?row('장기주택저당 이자',mortgageShown,1):'')
