@@ -15,6 +15,13 @@ readingTime: false
 <div class="pf-tool" style="max-width:560px;margin:0 auto;">
   <label style="display:block;font-weight:700;margin-bottom:6px;">총급여 (연봉, 만원)</label>
   <input type="tel" id="yt-salary" inputmode="numeric" placeholder="예: 5000" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;">
+  <details style="margin-top:6px;font-size:13px;color:#555;line-height:1.6;"><summary style="cursor:pointer;color:#059669;font-weight:700;">총급여에 뭘 넣어야 하나요? (성과급·복지포인트·대출지원)</summary>
+  <div style="padding:8px 10px;background:#f0fdf4;border-radius:8px;margin-top:6px;">
+  <b>총급여 = 세금이 붙는 1년 치 근로소득 전부</b>예요. 계약 연봉만이 아니라 아래를 다 더해요.<br>
+  ✅ <b>넣어요</b>: 기본급·각종 과세 수당, <b>성과급·상여금·인센티브</b>, <b>복지포인트</b>(회사가 근로소득으로 과세 처리한 금액), <b>사내 대출 이자 지원</b>(시중 이자보다 싸게 빌려 생긴 차액 — 회사가 근로소득으로 신고한 경우), 연차수당, 회사가 대신 내준 개인 보험료 등<br>
+  ❌ <b>빼요(비과세)</b>: 식대 월 20만원, 자가운전보조금 월 20만원, 6세 이하 자녀 보육수당 월 20만원(2026년부터 자녀 1인당), 회사 출산지원금, 생산직 야간근로수당(요건 충족 시) 등<br>
+  👉 가장 정확한 건 <b>급여명세서 연간 합계의 '과세 급여'</b>나 작년 <b>근로소득 원천징수영수증의 '총급여'</b> 칸이에요. 회사마다 처리가 달라서 헷갈리면 이 값을 쓰세요.
+  </div></details>
   <div style="display:flex;gap:10px;margin-top:12px;">
     <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">부양가족 (본인 포함) <span style="color:#999;font-weight:400;font-size:12px;">부모=60세↑·소득100만↓</span></span><input type="tel" id="yt-fam" inputmode="numeric" value="1" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
     <label style="flex:1;"><span style="display:block;font-weight:700;margin-bottom:6px;">20세 이하 자녀</span><input type="tel" id="yt-child" inputmode="numeric" value="0" style="width:100%;padding:12px;border:2px solid #ccc;border-radius:10px;font-size:16px;box-sizing:border-box;"></label>
