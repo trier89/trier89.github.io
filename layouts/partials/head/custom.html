@@ -2,3 +2,7 @@
 <meta name="google-site-verification" content="rbNlXSTInYti9v9vL2iS9xyikzDjO6lp6G-HjbS7MN8" />
 <meta name="naver-site-verification" content="2a39da95f15f0776d30f4d51cf8a44045f4b47db" />
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
+{{/* 2026-10-08 검색 노출: 페이지 front matter의 faq(q/a 목록) → FAQPage 구조화 데이터. 도구 페이지는 WebApplication도 함께 */}}
+{{ with .Params.faq }}{{ $items := slice }}{{ range . }}{{ $items = $items | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" .a)) }}{{ end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $items | jsonify | safeJS }}</script>{{ end }}
+{{ if and (eq .Section "tools") .IsPage }}<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "WebApplication" "name" .Title "description" .Description "url" .Permalink "applicationCategory" "UtilitiesApplication" "operatingSystem" "All" "inLanguage" "ko" "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "KRW") | jsonify | safeJS }}</script>{{ end }}
