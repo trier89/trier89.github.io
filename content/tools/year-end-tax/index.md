@@ -2,6 +2,7 @@
 title: "연말정산 계산기 — 예상 환급금·결정세액 간편 계산 (2026)"
 description: "연봉과 주요 공제(부양가족·신용카드·의료비·보험료·연금저축 등)를 입력하면 예상 결정세액과 환급/추가납부액을 간편하게 계산해요."
 date: 2026-07-21
+lastmod: 2026-10-08
 slug: "year-end-tax"
 categories: ["도구"]
 tags: ["연말정산 계산기", "연말정산 환급금", "결정세액", "소득공제", "세액공제"]
@@ -9,7 +10,7 @@ toc: false
 readingTime: false
 ---
 
-연봉과 주요 공제 항목을 입력하면 **예상 결정세액**과 **환급/추가납부 예상액**을 간편하게 계산해요. (국세청 2026년 세율·공제 기준 — 간이 계산이라 실제와 차이가 날 수 있어요)
+연봉과 주요 공제 항목을 입력하면 **예상 결정세액**과 **환급/추가납부 예상액**을 간편하게 계산해요. (2026년에 번 소득을 2027년 1~2월에 정산하는 **2026년 귀속** 기준 — 간이 계산이라 실제와 차이가 날 수 있어요. 올해 바뀐 점은 [2026 연말정산 미리보기](/guide/2026-year-end-tax-preview/) 참고)
 
 <div class="pf-tool" style="max-width:560px;margin:0 auto;">
   <label style="display:block;font-weight:700;margin-bottom:6px;">총급여 (연봉, 만원)</label>
@@ -48,6 +49,7 @@ readingTime: false
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">고향사랑기부금</span><input type="tel" id="yt-hometown" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
   </div>
   <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-marry" style="width:18px;height:18px;"> 올해(2024~2026) 혼인신고했어요 <span style="color:#999;font-size:12px;">— 결혼세액공제 50만원(생애 1회)</span></label>
+  <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:#333;cursor:pointer;"><input type="checkbox" id="yt-ins4" checked style="width:18px;height:18px;"> 국민연금·건강·고용보험 공제 자동 반영 <span style="color:#999;font-size:12px;">— 직장인은 켜두세요(2026 요율로 추정)</span></label>
   <div style="margin-top:14px;font-weight:700;color:#7c3aed;">🏠 추가 소득공제 (연간, 만원)</div>
   <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
     <label style="flex:1 1 45%;"><span style="display:block;font-size:13px;color:#555;margin-bottom:4px;">장기주택저당 이자상환</span><input type="tel" id="yt-mortgage" inputmode="numeric" placeholder="0" style="width:100%;padding:10px;border:2px solid #ccc;border-radius:8px;box-sizing:border-box;"></label>
@@ -63,7 +65,7 @@ readingTime: false
     </div>
     <table style="width:100%;margin-top:12px;font-size:14.5px;border-collapse:collapse;"><tbody id="yt-rows"></tbody></table>
     <div id="yt-tips" style="margin-top:16px;"></div>
-    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ \'환급/추가납부\'는 <b>매달 미리 낸 세금(기납부) − 결정세액</b>이에요. 기납부는 급여명세서 원천징수액을 직접 넣으면 정확하고, 안 넣으면 원천징수세율(80/100/120%)로 간이세액을 추정해요. 카드공제 초과분 배분·의료비 문턱(3%)·표준세액공제 등은 근사치라 홈택스 실제값과 차이가 납니다. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
+    <div style="font-size:12px;color:#6b7280;margin-top:8px;">※ \'환급/추가납부\'는 <b>매달 미리 낸 세금(기납부) − 결정세액</b>이에요. 기납부는 급여명세서 원천징수액을 직접 넣으면 정확하고, 안 넣으면 원천징수세율(80/100/120%)로 간이세액을 추정해요. 4대보험료(2026 요율 추정)·간이세액·카드공제 배분·의료비 문턱(3%) 등은 근사치라 홈택스 실제값과 차이가 납니다. 근로소득세액공제·표준세액공제(특별공제와 비교해 유리한 쪽)·지방소득세(10%)는 반영했어요. 정확한 금액은 국세청 홈택스 연말정산 미리보기에서 확인하세요.</div>
     <button id="yt-share" style="width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#059669;color:#fff;font-weight:700;cursor:pointer;">📤 공유하기</button>
   </div>
 </div>
@@ -98,7 +100,8 @@ $('yt-go').onclick=function(){
   var bk=[{u:credit,r:0.15,g:'base'},{u:cash,r:0.30,g:'base'},{u:cultureUse,r:0.30,g:'add',n:'culture'},{u:market,r:0.40,g:'add',n:'market'},{u:transit,r:0.40,g:'add',n:'transit'}];
   bk.sort(function(a,b){return a.r-b.r;});
   var rem=thr; bk.forEach(function(x){var t=Math.min(x.u,rem); x.ded=(x.u-t)*x.r; rem-=t;});
-  var baseCap=g<=70000000?3000000:2500000;                 // 기본 한도(7천↓ 300만 / 초과 250만)
+  // 기본 한도(2026 사용분~ 자녀 수 따라 상향): 7천↓ 300/350/400만, 초과 250/275/300만
+  var baseCap=g<=70000000?(child>=2?4000000:child===1?3500000:3000000):(child>=2?3000000:child===1?2750000:2500000);
   var addCap =g<=70000000?3000000:2000000;                 // 추가 한도(시장+교통+문화, 7천↓ 300만 / 초과 200만)
   var baseFull=bk.filter(function(x){return x.g==='base';}).reduce(function(s,x){return s+x.ded;},0);
   var baseDed=Math.min(baseFull,baseCap);
@@ -115,14 +118,22 @@ $('yt-go').onclick=function(){
   var kgfUse=v('yt-kgf');
   var kgf=(Math.min(kgfUse,30000000)*0.40)+(Math.max(Math.min(kgfUse,50000000)-30000000,0)*0.20)+(Math.max(Math.min(kgfUse,70000000)-50000000,0)*0.10);
   kgf=Math.min(kgf,18000000);
-  var base=g-earnDed(g)-perDed-cardDed-mortgage-housing-youthfund-kgf;
-  var calcTax=tax(base);                   // 산출세액
+  // 4대보험 근로자 부담분 추정(2026 요율): 국민연금 4.75%(기준소득월액 상한 637만), 건강 3.595%+장기요양(건강의 13.14%), 고용 0.9%
+  var ins4=$('yt-ins4').checked;
+  var npsDed=ins4?Math.min(g/12,6370000)*0.0475*12:0;               // 연금보험료공제(전액)
+  var hlth=ins4?g*0.03595*(1+0.1314)+g*0.009:0;                       // 건강·장기요양·고용 = 특별소득공제
+  // 특별공제(보험료·주택자금 소득공제 + 보험·의료·기부·월세 세액공제)를 받는 경우 vs 표준세액공제 13만 — 유리한 쪽 자동 선택
+  var baseCommon=g-earnDed(g)-perDed-npsDed-cardDed-housing-youthfund-kgf;
+  var baseA=baseCommon-hlth-mortgage, baseB=baseCommon;
+  function earnCr(t){var c=t<=1300000?t*0.55:715000+(t-1300000)*0.30;
+    var lim=g<=33000000?740000:g<=70000000?Math.max(740000-(g-33000000)*0.008,660000):g<=120000000?Math.max(660000-(g-70000000)*0.5,500000):Math.max(500000-(g-120000000)*0.5,200000);
+    return Math.min(c,lim);}   // 근로소득세액공제(소득세법 59조)
   // 세액공제
   // 연금저축 단독 600만 한도 + IRP 포함 합산 900만 한도
   var pensionSaving=Math.min(v('yt-pension'),6000000);
   var irpAmt=v('yt-irp');
   var pension=Math.min(pensionSaving+irpAmt,9000000);
-  var pensionCr=pension*(g<=55000000?0.165:0.132);
+  var pensionCr=pension*(g<=55000000?0.15:0.12);   // 국세 기준(지방소득세 포함 시 16.5/13.2%)
   var ins=Math.min(v('yt-ins'),1000000);
   var insCr=ins*0.12;
   var med=v('yt-med'); var medBase=Math.max(med-g*0.03,0); var medCr=medBase*0.15;
@@ -133,36 +144,49 @@ $('yt-go').onclick=function(){
   var marryCr=$('yt-marry').checked?500000:0;
   // 월세 세액공제: 총급여 5,500만↓ 17%, 7,000만↓ 15%, 한도 1,000만
   var rent=Math.min(v('yt-rent'),10000000);
-  var rentCr=g<=55000000?rent*0.17:(g<=70000000?rent*0.15:0);
+  var rentCr=g<=55000000?rent*0.17:(g<=80000000?rent*0.15:0);   // 2024년 귀속~ 총급여 8천만 이하
   // 고향사랑기부: 10만원 이하 전액, 초과분 15%(상한 500만)
   var home=Math.min(v('yt-hometown'),5000000);
-  var homeCr=Math.min(home,100000)+Math.max(home-100000,0)*0.15;
-  var credits=pensionCr+insCr+medCr+donCr+childCr+rentCr+homeCr+marryCr;
-  var stdCredit=130000;                    // 표준세액공제(특별공제 없을때) 근사
-  var appliedCredit=Math.max(credits,stdCredit);
-  var decided=Math.max(calcTax-appliedCredit,0);      // 결정세액
+  var homeCr=Math.min(home,100000)*100/110+Math.max(Math.min(home,200000)-100000,0)*0.40+Math.max(home-200000,0)*0.15;   // 2026: 10만↓ 100/110(지방세 포함 전액), 10~20만 40%, 초과 15%
+  var commonCr=pensionCr+childCr+homeCr+marryCr;          // 누구나 받는 세액공제
+  var specialCr=insCr+medCr+donCr+rentCr;                  // 특별세액공제(+월세)
+  var stdCredit=130000;
+  var taxA=tax(baseA), taxB=tax(baseB);
+  var decA=Math.max(taxA-earnCr(taxA)-commonCr-specialCr,0);
+  var decB=Math.max(taxB-earnCr(taxB)-commonCr-stdCredit,0);
+  var useStd=decB<decA;                                     // 표준세액공제가 더 유리하면 그쪽
+  var base=useStd?baseB:baseA, calcTax=useStd?taxB:taxA;   // 과세표준·산출세액
+  var earnC=earnCr(calcTax);
+  var credits=earnC+commonCr+(useStd?0:specialCr);
+  var appliedCredit=credits+(useStd?stdCredit:0);
+  var decided=useStd?decB:decA;                             // 결정세액(국세)
+  if(useStd){hlth=0;}  // 표시용: 표준공제 선택 시 특별소득공제 미적용
+  var mortgageShown=useStd?0:mortgage;
   // 기납부(원천징수 총액) = 간이세액표 근사 × 선택 비율(80/100/120%)
   // 간이세액 ≈ 근로소득공제+본인공제150만만 반영한 산출세액 - 표준세액공제 13만
-  var simpleTax=Math.max(tax(g-earnDed(g)-1500000)-130000,0);
+  var sb=g-earnDed(g)-1500000-(ins4?Math.min(g/12,6370000)*0.0475*12+g*0.03595*1.1314+g*0.009:0);
+  var simpleTax=Math.max(tax(sb)-earnCr(tax(sb))-(ins4?0:130000),0);   // 간이세액표 근사(본인 1인, 4대보험·근로소득세액공제 반영) — 추가 공제가 없으면 환급≈0
   var wtRate=parseFloat($('yt-withhold').value)||100;
   var prepaidInput=v('yt-prepaid');   // 사용자가 직접 입력한 기납부(있으면 우선)
   var prepaidAuto=Math.round(simpleTax*wtRate/100);
   var noDeductTax=prepaidInput>0?prepaidInput:prepaidAuto;   // 기납부(원천징수)
   var prepaidManual=prepaidInput>0;
   var refund=noDeductTax-decided;
-  $('yt-big-label').textContent=refund>=0?'예상 환급 (원천징수 '+wtRate+'% 기준)':'예상 추가납부 (원천징수 '+wtRate+'% 기준)';
-  $('yt-big').textContent=won(Math.abs(refund));
+  var refundAll=refund*1.1;   // 지방소득세(소득세의 10%)까지 합친 실제 환급/추가납부
+  $('yt-big-label').textContent=refund>=0?'예상 환급 (지방소득세 포함 · 원천징수 '+wtRate+'%)':'예상 추가납부 (지방소득세 포함 · 원천징수 '+wtRate+'%)';
+  $('yt-big').textContent=won(Math.abs(refundAll));
   $('yt-big').style.color=refund>=0?'#047857':'#dc2626';
   $('yt-card2').style.background=refund>=0?'#ecfdf5':'#fef2f2';
   function sec(t){return '<tr><td colspan="2" style="padding-top:14px;font-weight:800;color:#111;border-bottom:2px solid #ddd;">'+t+'</td></tr>';}
   function row(l,val,neg){return '<tr><td style="color:#555;">'+l+'</td><td style="'+(neg?'color:#dc2626;':'')+'">'+(neg?'-':'')+won(val)+'</td></tr>';}
-  var incDedSum=earnDed(g)+perDed+cardDed+mortgage+housing+youthfund+kgf;
+  var incDedSum=earnDed(g)+perDed+npsDed+hlth+cardDed+mortgageShown+housing+youthfund+kgf;
   var html=sec('① 소득')+row('총급여 (연봉)',g);
   html+=sec('② 소득공제 (소득을 줄여줘요)')
     +row('근로소득공제',earnDed(g),1)+row('인적공제 ('+fam+'명)',perDed,1)
+    +(npsDed>0?row('국민연금 (추정)',npsDed,1):'')+(hlth>0?row('건강·장기요양·고용보험 (추정)',hlth,1):'')
     +(baseDed>0?row('신용/체크카드'+(baseFull>baseCap?' (한도도달)':''),baseDed,1):'')
     +(addDed>0?row('전통시장·대중교통·문화비 추가'+(addFull>addCap?' (한도도달)':''),addDed,1):'')
-    +(mortgage>0?row('장기주택저당 이자',mortgage,1):'')
+    +(mortgageShown>0?row('장기주택저당 이자',mortgageShown,1):'')
     +(housing>0?row('주택청약저축',housing,1):'')
     +(youthfund>0?row('청년형 장기펀드',youthfund,1):'')
     +(kgf>0?row('국민성장펀드',kgf,1):'')
@@ -170,21 +194,23 @@ $('yt-go').onclick=function(){
     +'<tr class="hl"><td>③ 과세표준</td><td>'+won(base)+'</td></tr>';
   html+=sec('④ 산출세액 (과세표준 × 세율)')+row('과세표준 '+won(base)+' 기준',calcTax);
   html+=sec('⑤ 세액공제 (세금을 직접 깎아줘요)')
+    +row('근로소득세액공제',earnC,1)
     +(pensionCr>0?row('연금저축·IRP',pensionCr,1):'')
-    +(rentCr>0?row('월세',rentCr,1):'')
-    +(insCr>0?row('보장성 보험료',insCr,1):'')
-    +(medCr>0?row('의료비',medCr,1):'')
-    +(donCr>0?row('기부금',donCr,1):'')
+    +(!useStd&&rentCr>0?row('월세',rentCr,1):'')
+    +(!useStd&&insCr>0?row('보장성 보험료',insCr,1):'')
+    +(!useStd&&medCr>0?row('의료비',medCr,1):'')
+    +(!useStd&&donCr>0?row('기부금',donCr,1):'')
     +(homeCr>0?row('고향사랑기부',homeCr,1):'')
     +(childCr>0?row('자녀 ('+child+'명)',childCr,1):'')
     +(marryCr>0?row('결혼세액공제',marryCr,1):'')
-    +(credits<stdCredit?row('표준세액공제 (특별공제 대신)',stdCredit,1):'')
+    +(useStd?row('표준세액공제 (특별공제보다 유리해 자동 선택)',stdCredit,1):'')
     +'<tr style="border-top:1px solid #eee;"><td style="color:#111;font-weight:700;">세액공제 합계</td><td style="color:#dc2626;font-weight:700;">-'+won(appliedCredit)+'</td></tr>'
     +'<tr class="hl"><td>⑥ 결정세액 (실제 낼 세금)</td><td>'+won(decided)+'</td></tr>';
   html+=sec('⑦ 환급 계산')
     +row('기납부 ('+(prepaidManual?'직접입력':'원천징수 '+wtRate+'% 자동추정')+', 매달 미리 낸 세금)',noDeductTax)
     +row('결정세액 (실제 낼 세금)',decided)
-    +'<tr class="hl"><td>'+(refund>=0?'→ 예상 환급':'→ 예상 추가납부')+'</td><td>'+won(Math.abs(refund))+'</td></tr>';
+    +'<tr class="hl"><td>'+(refund>=0?'→ 예상 환급 (소득세)':'→ 예상 추가납부 (소득세)')+'</td><td>'+won(Math.abs(refund))+'</td></tr>'
+    +'<tr class="hl"><td>'+(refund>=0?'→ 지방소득세 포함 환급':'→ 지방소득세 포함 추가납부')+'</td><td>'+won(Math.abs(refundAll))+'</td></tr>';
   $('yt-rows').innerHTML=html;
   // ── 맞춤 절세 팁 (입력값 기반) ──
   var tips=[];
@@ -192,7 +218,7 @@ $('yt-go').onclick=function(){
   var myRate=base<=14000000?6:base<=50000000?15:base<=88000000?24:base<=150000000?35:38;
   tips.push('💡 <b>세액공제가 소득공제보다 유리</b>해요. 소득공제는 내 세율('+myRate+'%)만큼만 줄지만, 세액공제(연금저축·월세 등)는 낸 세금에서 직접 깎여요. 여윳돈은 세액공제 항목부터 채우세요.');
   // 연금저축 한도 여유
-  if(pension<9000000){var room=(9000000-pension)/10000;var rate2=g<=55000000?16.5:13.2;
+  if(pension<9000000){var room=(9000000-pension)/10000;var rate2=g<=55000000?16.5:13.2;   // 지방소득세 포함 실제 환급률
     tips.push('🏦 <b>연금저축·IRP 한도가 '+Math.round(room).toLocaleString()+'만원 남았어요.</b> 여기 더 넣으면 '+rate2+'% ('+Math.round(room*rate2/100).toLocaleString()+'만원)를 돌려받아요. 절세율 최고 항목이에요.');}
   // 연금저축 vs IRP 우선순위
   tips.push('🥇 <b>연금저축 vs IRP, 뭐부터?</b> 세액공제율은 둘 다 같아요(16.5%/13.2%). 그래서 <b>연금저축부터 600만원 채우고, 남는 건 IRP로</b>(합산 900만). 이유: 연금저축은 ①중간에 일부만 인출 가능 ②주식형 100%까지 가능. IRP는 ①중도해지 시 세금 페널티가 크고 ②위험자산 70%까지만 담을 수 있어요. 유동성·운용자유도에서 연금저축이 유리해요.');
@@ -225,12 +251,12 @@ $('yt-go').onclick=function(){
   if(v('yt-housing')===0){
     tips.push('🏠 <b>무주택 세대주</b>라면 「주택청약종합저축」 납입액의 40%(연 300만원 한도)를 소득공제받아요. 청약 기회 + 절세 둘 다 챙기세요.');}
   // 부모님(직계존속) 부양가족 공제 자격
-  tips.push('👵 <b>부모님을 부양가족(150만원 공제)에 넣는 조건</b><br>· <b>나이</b>: 만 60세 이상(2025년 귀속 기준 1965년생 이전). ※함께 안 살아도, 형제 중 실제 부양하는 1명이 공제.<br>· <b>소득</b>: 연간 <b>소득금액 100만원 이하</b>(근로소득만 있으면 총급여 500만원 이하).<br>· <b>연금 받으셔도 가능</b>: 국민연금 등 공적연금은 <b>연 약 516만원(월 43만원) 이하</b>면 소득요건 충족. <b>기초연금은 비과세</b>라 아무리 받아도 소득에 안 잡혀요(공제 가능).<br>· <b>일용직이면 소득 무관</b>: 일용근로소득은 분리과세(그때그때 세금 끝)라 소득금액에 안 들어가요 → 얼마를 버셔도 공제 가능.');
+  tips.push('👵 <b>부모님을 부양가족(150만원 공제)에 넣는 조건</b><br>· <b>나이</b>: 만 60세 이상(2026년 귀속 기준 1966년생 이전). ※함께 안 살아도, 형제 중 실제 부양하는 1명이 공제.<br>· <b>소득</b>: 연간 <b>소득금액 100만원 이하</b>(근로소득만 있으면 총급여 500만원 이하).<br>· <b>연금 받으셔도 가능</b>: 국민연금 등 공적연금은 <b>연 약 516만원(월 43만원) 이하</b>면 소득요건 충족. <b>기초연금은 비과세</b>라 아무리 받아도 소득에 안 잡혀요(공제 가능).<br>· <b>일용직이면 소득 무관</b>: 일용근로소득은 분리과세(그때그때 세금 끝)라 소득금액에 안 들어가요 → 얼마를 버셔도 공제 가능.');
   // 고향사랑 꿀팁
-  if(home===0){tips.push('🎁 <b>고향사랑기부 10만원</b>은 전액 세액공제 + 답례품(3만원 상당)까지 받아요. 사실상 이득이라 안 하면 손해!');}
+  if(home===0){tips.push('🎁 <b>고향사랑기부 10만원</b>은 전액 세액공제 + 답례품(3만원 상당)까지 받아요. 2026년부터는 <b>10만~20만원 구간이 40%</b>로 올라서 20만원까지가 가장 효율이 좋아요.');}
   $('yt-tips').innerHTML='<div style="font-weight:700;color:#b45309;margin-bottom:8px;">🎯 나를 위한 절세 팁</div>'+tips.map(function(x){return '<div style="padding:10px 12px;background:#fffbeb;border-radius:8px;margin-bottom:6px;font-size:14px;line-height:1.6;">'+x+'</div>';}).join('');
   $('yt-out').style.display='block';
-  $('yt-share').onclick=function(){var t=(refund>=0?'연말정산 예상 환급 '+won(Math.abs(refund)):'연말정산 추가납부 '+won(Math.abs(refund)))+'! 나도 계산 👉 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
+  $('yt-share').onclick=function(){var t=(refund>=0?'연말정산 예상 환급 '+won(Math.abs(refundAll)):'연말정산 추가납부 '+won(Math.abs(refundAll)))+'! 나도 계산 👉 '+location.origin+location.pathname;if(navigator.share){navigator.share({text:t});}else{navigator.clipboard.writeText(t).then(function(){alert('복사됐어요!');});}};
 };
 })();
 </script>
