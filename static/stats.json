@@ -5,8 +5,8 @@
  "total_visits": 661,
  "yesterday": {
   "users": 6,
-  "new": 4,
-  "pv": 7,
+  "new": 5,
+  "pv": 8,
   "sessions": 7
  },
  "top_views": [
@@ -18,9 +18,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
+   "views": 12,
    "eng": 121,
-   "avg_sec": 11
+   "avg_sec": 10
   },
   {
    "title": "고양이 Catcha!",
@@ -50,9 +50,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
+   "views": 12,
    "eng": 121,
-   "avg_sec": 11
+   "avg_sec": 10
   },
   {
    "title": "고양이 Catcha!",
@@ -61,5 +61,5 @@
    "avg_sec": 4
   }
  ],
- "updated": "2026-10-10 03:17"
+ "updated": "2026-10-10 04:17"
 }
