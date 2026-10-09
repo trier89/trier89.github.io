@@ -1,32 +1,32 @@
 {
- "today": 5,
- "today_pv": 7,
+ "today": 0,
+ "today_pv": 0,
  "total": 245,
  "total_visits": 659,
  "yesterday": {
-  "users": 4,
-  "new": 2,
-  "pv": 6,
-  "sessions": 4
+  "users": 5,
+  "new": 4,
+  "pv": 7,
+  "sessions": 6
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 37,
-   "eng": 4697,
-   "avg_sec": 127
+   "views": 26,
+   "eng": 3540,
+   "avg_sec": 136
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 11,
    "eng": 116,
-   "avg_sec": 12
+   "avg_sec": 11
   },
   {
    "title": "고양이 Catcha!",
-   "views": 5,
-   "eng": 1,
-   "avg_sec": 0
+   "views": 8,
+   "eng": 28,
+   "avg_sec": 4
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
@@ -44,22 +44,22 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 37,
-   "eng": 4697,
-   "avg_sec": 127
+   "views": 26,
+   "eng": 3540,
+   "avg_sec": 136
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 11,
    "eng": 116,
-   "avg_sec": 12
+   "avg_sec": 11
   },
   {
    "title": "고양이 Catcha!",
-   "views": 5,
-   "eng": 1,
-   "avg_sec": 0
+   "views": 8,
+   "eng": 28,
+   "avg_sec": 4
   }
  ],
- "updated": "2026-10-09 23:16"
+ "updated": "2026-10-10 00:17"
 }
