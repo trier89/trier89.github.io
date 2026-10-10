@@ -155,7 +155,7 @@ function gyroQuat(){
   var c1=Math.cos(b/2),c2=Math.cos(a/2),c3=Math.cos(g/2),s1=Math.sin(b/2),s2=Math.sin(a/2),s3=Math.sin(g/2);
   var q=[s1*c2*c3+c1*s2*s3,c1*s2*c3-s1*c2*s3,c1*c2*s3-s1*s2*c3,c1*c2*c3+s1*s2*s3];
   q=qmul(q,[-Math.SQRT1_2,0,0,Math.SQRT1_2]);
-  var so=(screen.orientation&&screen.orientation.angle!=null?screen.orientation.angle:(window.orientation||0))*DEG;
+  var so=(typeof window.orientation==='number'?window.orientation:(screen.orientation&&screen.orientation.angle)||0)*DEG;// iOS는 window.orientation이 기준(three.js와 동일)
   q=qmul(q,qaxis(0,0,1,-so));
   return qmul(qaxis(0,1,0,state.gyroYaw),q);
 }
