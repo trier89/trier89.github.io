@@ -165,7 +165,8 @@ function rot(){
 
 function draw(){
   resize();
-  if(video&&!video.paused&&!video.ended){uploadVideo();dirty=true}
+  // 새 프레임이 나왔을 때만 올린다(120Hz 화면에서 30fps 영상을 4번씩 올리던 낭비 제거)
+  if(video&&!video.paused&&!video.ended){var now=performance.now();if(video._rvfc?video._newFrame:now-(video._last||0)>=31){video._newFrame=false;video._last=now;uploadVideo();dirty=true}}
   if(state.gyro&&ori)dirty=true;
   if(dirty&&state.hasMedia){
     dirty=false;
@@ -228,10 +229,12 @@ function openFile(f){
     loading(true);
     video=document.createElement('video');video._url=url;video.src=url;video.playsInline=true;video.setAttribute('playsinline','');video.muted=true;video.loop=true;video.preload='auto';video.crossOrigin='anonymous';
     video.addEventListener('loadeddata',function(){
-      var w=video.videoWidth,h=video.videoHeight;imgInfo='video '+w+'x'+h;ratioWarn(w,h);
+      var w=video.videoWidth,h=video.videoHeight;imgInfo='video '+w+'x'+h+' '+Math.round(f.size/1048576)+'MB';ratioWarn(w,h);
       useVideoCanvas=(w>MAXT||h>MAXT);
       if(useVideoCanvas){var s=fitSize(w,h);videoCanvas=document.createElement('canvas');videoCanvas.width=s[0];videoCanvas.height=s[1];videoCtx=videoCanvas.getContext('2d')}
       uploadVideo();state.hasMedia=true;dirty=true;loading(false);
+      if(video.requestVideoFrameCallback){var v=video;v._rvfc=true;(function tick(){v.requestVideoFrameCallback(function(){v._newFrame=true;if(video===v)tick()})})()}
+      video.addEventListener('seeked',function(){uploadVideo();dirty=true});
       $('vctl').classList.add('on');$('mute').textContent='🔇';
       showReady();
       video.play().then(function(){$('play').textContent='⏸'}).catch(function(){$('play').textContent='▶️'});
@@ -338,7 +341,7 @@ $('play').onclick=function(){if(!video)return;if(video.paused){video.play();$('p
 $('mute').onclick=function(){if(!video)return;video.muted=!video.muted;$('mute').textContent=video.muted?'🔇':'🔊'};
 $('seek').addEventListener('input',function(){if(!video||!video.duration)return;seeking=true;video.currentTime=$('seek').value/1000*video.duration});
 $('seek').addEventListener('change',function(){seeking=false});
-setInterval(function(){if(video){updateTime();if(video.paused&&!video.seeking){uploadVideo();dirty=true}}},250);
+setInterval(function(){if(video)updateTime()},250);
 
 resize();requestAnimationFrame(draw);
 var DBG=/[?&]debug\b/.test(location.search),imgInfo='';
