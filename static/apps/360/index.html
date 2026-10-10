@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>360 뷰어</title>
+<meta name="description" content="인스타360 등 360 카메라로 찍어 앨범에 저장한 360 사진·영상을 폰에서 바로 둘러보는 뷰어. 파일은 서버로 올라가지 않고 기기 안에서만 열립니다.">
+<meta name="theme-color" content="#111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{--ink:#f2f3f5;--muted:#9aa1a9;--glass:rgba(20,22,26,.62);--line:rgba(255,255,255,.14);--accent:#ff8a3d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#0b0c0e;color:var(--ink);font-family:-apple-system,"Apple SD Gothic Neo",Pretendard,sans-serif;overflow:hidden;overscroll-behavior:none}
+#gl{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block;cursor:grab}
+#gl:active{cursor:grabbing}
+.bar{position:fixed;left:0;right:0;display:flex;gap:8px;align-items:center;padding:10px 12px;z-index:5;pointer-events:none}
+.bar>*{pointer-events:auto}
+#top{top:0;padding-top:max(10px,env(safe-area-inset-top))}
+#bottom{bottom:0;padding-bottom:max(12px,env(safe-area-inset-bottom));flex-direction:column;align-items:stretch}
+.btn{border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.btn.on{background:var(--accent);border-color:var(--accent);color:#1a0f06}
+.btn:disabled{opacity:.4}
+.title{font-weight:800;font-size:15px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#vctl{display:none;align-items:center;gap:8px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:6px 10px}
+#vctl.on{display:flex}
+#seek{flex:1;accent-color:var(--accent)}
+#time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:78px;text-align:right}
+.icon{background:none;border:0;color:var(--ink);font-size:18px;padding:4px 6px;cursor:pointer}
+#intro{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px 16px;z-index:4;background:radial-gradient(ellipse at top,#23252b,#0b0c0e 70%)}
+#intro.hide{display:none}
+.card{max-width:420px;width:100%;text-align:center}
+.card h1{font-size:26px;margin:0 0 6px}
+.card p{color:var(--muted);font-size:14px;line-height:1.6;margin:6px 0}
+.big{display:block;width:100%;margin:22px 0 10px;padding:16px;border-radius:16px;border:0;background:var(--accent);color:#1a0f06;font-size:17px;font-weight:800;cursor:pointer}
+.ghost{background:none;border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer}
+.tips{text-align:left;margin-top:22px;font-size:13px;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);padding-top:14px}
+.tips b{color:var(--ink)}
+#toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);padding:12px 16px;border-radius:12px;font-size:14px;z-index:9;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center;max-width:86vw}
+#toast.on{opacity:1}
+#hint{position:fixed;left:50%;top:42%;transform:translateX(-50%);font-size:13px;color:#fff;background:rgba(0,0,0,.45);padding:8px 14px;border-radius:20px;z-index:3;pointer-events:none;transition:opacity .6s}
+#ui.hidden .bar,body.intro #ui .bar{opacity:0;pointer-events:none}
+#ui.hidden .bar>*,body.intro #ui .bar>*{pointer-events:none}
+@media(max-width:420px){.btn{padding:9px 10px;font-size:13px}.row{gap:6px}}
+#ui.hidden .bar>*{pointer-events:none}
+.bar{transition:opacity .25s}
+</style>
+</head>
+<body class="intro">
+<canvas id="gl"></canvas>
+
+<div id="intro">
+  <div class="card">
+    <h1>🌐 360 뷰어</h1>
+    <p>인스타360 등으로 찍고 앨범에 저장한<br>360 사진·영상을 둘러보세요.</p>
+    <button class="big" id="pickBig">앨범에서 360 사진·영상 열기</button>
+    <button class="ghost" id="demo">예시 화면으로 먼저 써보기</button>
+    <div class="tips">
+      <b>쓰는 법</b><br>
+      · 손가락으로 끌면 둘러보기, 두 손가락으로 확대·축소<br>
+      · <b>📱 자이로</b>를 켜면 폰을 돌리는 방향으로 화면이 따라와요<br>
+      · <b>🪐 작은 행성</b>으로 바꾸면 동그란 행성 모양으로 보여요<br>
+      · <b>💾 저장</b>으로 지금 보이는 장면을 사진으로 남길 수 있어요<br><br>
+      <b>파일은 어디에도 올라가지 않아요.</b> 폰 안에서만 열립니다.<br>
+      가로:세로 2:1 비율의 360 파일(인스타360 앱에서 내보낸 사진·영상)을 지원해요.
+    </div>
+  </div>
+</div>
+
+<div id="ui">
+  <div class="bar" id="top">
+    <button class="btn" id="pick">📂 열기</button>
+    <div class="title" id="name"></div>
+    <button class="btn" id="hideUi" title="버튼 숨기기">👁</button>
+  </div>
+  <div class="bar" id="bottom">
+    <div id="vctl">
+      <button class="icon" id="play">▶️</button>
+      <input type="range" id="seek" min="0" max="1000" value="0">
+      <span id="time">0:00 / 0:00</span>
+      <button class="icon" id="mute">🔇</button>
+    </div>
+    <div class="row">
+      <button class="btn" id="gyro">📱 자이로</button>
+      <button class="btn" id="planet">🪐 작은 행성</button>
+      <button class="btn" id="reset">🧭 정면</button>
+      <button class="btn" id="save">💾 저장</button>
+    </div>
+  </div>
+</div>
+<div id="hint" style="opacity:0">끌어서 둘러보세요</div>
+<div id="toast"></div>
+<input type="file" id="file" accept="image/*,video/*" hidden>
+
+<script>
+(function(){
+'use strict';
+var cv=document.getElementById('gl');
+var gl=cv.getContext('webgl',{preserveDrawingBuffer:true,antialias:false})||cv.getContext('experimental-webgl',{preserveDrawingBuffer:true});
+var $=function(id){return document.getElementById(id)};
+function toast(msg,ms){var t=$('toast');t.textContent=msg;t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('on')},ms||2200)}
+if(!gl){$('intro').querySelector('p').textContent='이 브라우저는 WebGL을 지원하지 않아 360 화면을 띄울 수 없어요.';return}
+
+// 화면 픽셀마다 시선 방향을 계산해 2:1 파노라마(등장방형)에서 색을 가져온다
+var VS='attribute vec2 p;varying vec2 v;void main(){v=p;gl_Position=vec4(p,0.,1.);}';
+var FS=[
+'precision highp float;',
+'varying vec2 v;uniform sampler2D tex;uniform mat3 R;uniform float aspect,scale,mode;',
+'const float PI=3.14159265359;',
+'void main(){',
+' vec2 q=vec2(v.x*aspect,v.y)*scale;vec3 d;',
+' if(mode<0.5){d=normalize(vec3(q,-1.));}',
+' else{float s=dot(q,q);d=vec3(2.*q,-(1.-s))/(1.+s);}',
+' d=R*d;',
+' float lon=atan(d.x,-d.z);float lat=asin(clamp(d.y,-1.,1.));',
+' vec2 uv=vec2(.5+lon/(2.*PI),.5-lat/PI);',
+' gl_FragColor=texture2D(tex,uv);',
+'}'].join('\n');
+function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o}
+var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(pr);gl.useProgram(pr);
+var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+var aP=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(aP);gl.vertexAttribPointer(aP,2,gl.FLOAT,false,0,0);
+var uR=gl.getUniformLocation(pr,'R'),uA=gl.getUniformLocation(pr,'aspect'),uS=gl.getUniformLocation(pr,'scale'),uM=gl.getUniformLocation(pr,'mode');
+var tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+var MAXT=Math.min(gl.getParameter(gl.MAX_TEXTURE_SIZE),8192);
+// iOS 캔버스 면적 한도(약 1,677만 픽셀) 안에서 축소
+var MAXW=Math.min(MAXT,5760);
+
+var state={yaw:0,pitch:0,fov:80,planet:false,pfov:250,gyro:false,gyroYaw:0,hasMedia:false};
+var video=null,videoCanvas=null,videoCtx=null,useVideoCanvas=false,dirty=true;
+
+function resize(){var r=Math.min(window.devicePixelRatio||1,2);var w=Math.round(cv.clientWidth*r),h=Math.round(cv.clientHeight*r);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;gl.viewport(0,0,w,h);dirty=true}}
+window.addEventListener('resize',resize);
+
+// 쿼터니언 → 회전행렬(열 우선)
+function qmul(a,b){return[a[3]*b[0]+a[0]*b[3]+a[1]*b[2]-a[2]*b[1],a[3]*b[1]-a[0]*b[2]+a[1]*b[3]+a[2]*b[0],a[3]*b[2]+a[0]*b[1]-a[1]*b[0]+a[2]*b[3],a[3]*b[3]-a[0]*b[0]-a[1]*b[1]-a[2]*b[2]]}
+function qaxis(x,y,z,ang){var s=Math.sin(ang/2);return[x*s,y*s,z*s,Math.cos(ang/2)]}
+function qmat(q){var x=q[0],y=q[1],z=q[2],w=q[3];return new Float32Array([1-2*(y*y+z*z),2*(x*y+z*w),2*(x*z-y*w),2*(x*y-z*w),1-2*(x*x+z*z),2*(y*z+x*w),2*(x*z+y*w),2*(y*z-x*w),1-2*(x*x+y*y)])}
+var DEG=Math.PI/180,ori=null;
+function gyroQuat(){
+  // three.js DeviceOrientationControls와 같은 변환
+  var a=(ori.alpha||0)*DEG,b=(ori.beta||0)*DEG,g=-(ori.gamma||0)*DEG;
+  var c1=Math.cos(b/2),c2=Math.cos(a/2),c3=Math.cos(g/2),s1=Math.sin(b/2),s2=Math.sin(a/2),s3=Math.sin(g/2);
+  var q=[s1*c2*c3+c1*s2*s3,c1*s2*c3-s1*c2*s3,c1*c2*s3-s1*s2*c3,c1*c2*c3+s1*s2*s3];
+  q=qmul(q,[-Math.SQRT1_2,0,0,Math.SQRT1_2]);
+  var so=(screen.orientation&&screen.orientation.angle!=null?screen.orientation.angle:(window.orientation||0))*DEG;
+  q=qmul(q,qaxis(0,0,1,-so));
+  return qmul(qaxis(0,1,0,state.gyroYaw),q);
+}
+function rot(){
+  if(state.gyro&&ori&&!state.planet)return qmat(gyroQuat());
+  var pitch=state.planet?-90*DEG:state.pitch*DEG;
+  return qmat(qmul(qaxis(0,1,0,state.yaw*DEG),qaxis(1,0,0,pitch)));
+}
+
+function draw(){
+  resize();
+  if(video&&!video.paused&&!video.ended){uploadVideo();dirty=true}
+  if(state.gyro&&ori)dirty=true;
+  if(dirty&&state.hasMedia){
+    dirty=false;
+    gl.uniformMatrix3fv(uR,false,rot());
+    gl.uniform1f(uA,cv.width/cv.height);
+    gl.uniform1f(uM,state.planet?1:0);
+    gl.uniform1f(uS,state.planet?Math.tan(state.pfov*DEG/4):Math.tan(state.fov*DEG/2));
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  }
+  requestAnimationFrame(draw);
+}
+
+function uploadVideo(){
+  try{
+    if(useVideoCanvas){videoCtx.drawImage(video,0,0,videoCanvas.width,videoCanvas.height);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,videoCanvas)}
+    else gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,video);
+  }catch(e){}
+  updateTime();
+}
+
+function fitSize(w,h){var s=Math.min(1,MAXW/w);var W=Math.round(w*s),H=Math.round(h*s);if(W*H>16000000){var k=Math.sqrt(16000000/(W*H));W=Math.floor(W*k);H=Math.floor(H*k)}return[W,H]}
+function ratioWarn(w,h){var r=w/h;if(Math.abs(r-2)>0.08)toast('가로:세로가 2:1이 아니에요('+w+'×'+h+'). 360 원본이 아니면 화면이 늘어나 보일 수 있어요.',4200)}
+
+function setImage(src){
+  var c=document.createElement('canvas');var s=fitSize(src.width||src.naturalWidth,src.height||src.naturalHeight);c.width=s[0];c.height=s[1];
+  c.getContext('2d').drawImage(src,0,0,s[0],s[1]);
+  gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
+  state.hasMedia=true;dirty=true;
+}
+
+function clearVideo(){if(video){video.pause();if(video._url)URL.revokeObjectURL(video._url);video.removeAttribute('src');video.load();video=null}$('vctl').classList.remove('on')}
+
+function openFile(f){
+  if(!f)return;
+  clearVideo();
+  $('name').textContent=f.name||'';
+  var url=URL.createObjectURL(f);
+  if((f.type||'').indexOf('video')===0||/\.(mp4|mov|m4v|webm)$/i.test(f.name)){
+    toast('영상 불러오는 중…');
+    video=document.createElement('video');video._url=url;video.src=url;video.playsInline=true;video.setAttribute('playsinline','');video.muted=true;video.loop=true;video.preload='auto';video.crossOrigin='anonymous';
+    video.addEventListener('loadeddata',function(){
+      var w=video.videoWidth,h=video.videoHeight;ratioWarn(w,h);
+      useVideoCanvas=(w>MAXT||h>MAXT);
+      if(useVideoCanvas){var s=fitSize(w,h);videoCanvas=document.createElement('canvas');videoCanvas.width=s[0];videoCanvas.height=s[1];videoCtx=videoCanvas.getContext('2d')}
+      uploadVideo();state.hasMedia=true;dirty=true;
+      $('vctl').classList.add('on');$('mute').textContent='🔇';
+      showReady();
+      video.play().then(function(){$('play').textContent='⏸'}).catch(function(){$('play').textContent='▶️'});
+    },{once:true});
+    video.addEventListener('error',function(){toast('이 영상은 브라우저에서 재생할 수 없는 형식이에요. 인스타360 앱에서 H.264로 내보내 보세요.',5000)});
+  }else{
+    toast('사진 불러오는 중…');
+    var img=new Image();
+    img.onload=function(){ratioWarn(img.naturalWidth,img.naturalHeight);try{setImage(img)}catch(e){toast('사진이 너무 커서 열 수 없어요.');return}URL.revokeObjectURL(url);showReady()};
+    img.onerror=function(){toast('이 사진 형식은 열 수 없어요. JPG로 저장된 360 사진을 골라주세요.',4000)};
+    img.src=url;
+  }
+}
+
+function showReady(){
+  $('intro').classList.add('hide');document.body.classList.remove('intro');
+  state.yaw=0;state.pitch=0;state.fov=80;dirty=true;
+  var h=$('hint');h.style.opacity=1;setTimeout(function(){h.style.opacity=0},2200);
+  setTimeout(function(){$('toast').classList.remove('on')},300);
+}
+
+// 예시: 방위·격자가 그려진 파노라마
+function demo(){
+  var W=4096,H=2048,c=document.createElement('canvas');c.width=W;c.height=H;var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,0,H/2);g.addColorStop(0,'#0e2a58');g.addColorStop(1,'#7fb4e6');x.fillStyle=g;x.fillRect(0,0,W,H/2);
+  g=x.createLinearGradient(0,H/2,0,H);g.addColorStop(0,'#5d8a4a');g.addColorStop(1,'#25381d');x.fillStyle=g;x.fillRect(0,H/2,W,H/2);
+  x.strokeStyle='rgba(255,255,255,.25)';x.lineWidth=2;
+  for(var i=0;i<=36;i++){x.beginPath();x.moveTo(i*W/36,0);x.lineTo(i*W/36,H);x.stroke()}
+  for(i=0;i<=18;i++){x.beginPath();x.moveTo(0,i*H/18);x.lineTo(W,i*H/18);x.stroke()}
+  x.fillStyle='#fff';x.font='bold 120px sans-serif';x.textAlign='center';x.textBaseline='middle';
+  [['앞',.5],['오른쪽',.75],['뒤',0],['뒤',1],['왼쪽',.25]].forEach(function(a){x.fillText(a[0],a[1]*W,H/2-150)});
+  x.font='bold 90px sans-serif';x.fillText('☀ 하늘',W/2,180);x.fillText('땅 🌱',W/2,H-180);
+  for(i=0;i<14;i++){var cx=(i+.5)*W/14,hh=150+((i*97)%7)*40;x.fillStyle='rgba(30,40,30,.85)';x.fillRect(cx-60,H/2-hh,120,hh)}
+  clearVideo();setImage(c);$('name').textContent='예시 화면';showReady();
+}
+
+// 입력
+$('pickBig').onclick=$('pick').onclick=function(){$('file').value='';$('file').click()};
+$('file').onchange=function(e){openFile(e.target.files[0])};
+$('demo').onclick=demo;
+$('hideUi').onclick=function(){$('ui').classList.add('hidden');toast('화면을 두 번 톡톡 치면 버튼이 다시 나와요')};
+var lastTap=0;
+cv.addEventListener('pointerup',function(){var n=Date.now();if(n-lastTap<300)$('ui').classList.toggle('hidden');lastTap=n});
+
+var ptrs={},pinch0=0,fov0=0;
+cv.addEventListener('pointerdown',function(e){cv.setPointerCapture(e.pointerId);ptrs[e.pointerId]={x:e.clientX,y:e.clientY};var k=Object.keys(ptrs);if(k.length===2){pinch0=dist();fov0=state.planet?state.pfov:state.fov}});
+function dist(){var k=Object.keys(ptrs),a=ptrs[k[0]],b=ptrs[k[1]];return Math.hypot(a.x-b.x,a.y-b.y)}
+cv.addEventListener('pointermove',function(e){
+  var p=ptrs[e.pointerId];if(!p)return;var k=Object.keys(ptrs);
+  if(k.length===2){p.x=e.clientX;p.y=e.clientY;var d=dist();if(pinch0>0)setFov(fov0*pinch0/d);return}
+  var dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;
+  var per=(state.planet?state.pfov:state.fov)/cv.clientHeight;
+  if(state.gyro&&!state.planet){state.gyroYaw+=dx*per*DEG}
+  else{state.yaw+=dx*per;if(!state.planet)state.pitch=Math.max(-89,Math.min(89,state.pitch+dy*per))}
+  dirty=true;
+});
+function up(e){delete ptrs[e.pointerId];pinch0=0}
+cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+cv.addEventListener('wheel',function(e){e.preventDefault();setFov((state.planet?state.pfov:state.fov)*Math.exp(e.deltaY*0.001))},{passive:false});
+function setFov(f){if(state.planet)state.pfov=Math.max(120,Math.min(330,f));else state.fov=Math.max(25,Math.min(120,f));dirty=true}
+document.addEventListener('gesturestart',function(e){e.preventDefault()});
+
+// 자이로
+function onOri(e){if(e.alpha==null&&e.beta==null)return;ori=e;dirty=true}
+$('gyro').onclick=function(){
+  if(state.gyro){state.gyro=false;$('gyro').classList.remove('on');window.removeEventListener('deviceorientation',onOri);dirty=true;return}
+  function start(){state.gyro=true;state.gyroYaw=0;$('gyro').classList.add('on');window.addEventListener('deviceorientation',onOri);
+    if(state.planet){state.planet=false;$('planet').classList.remove('on')}
+    setTimeout(function(){if(!ori){toast('이 기기에선 방향 센서를 읽을 수 없어요.');state.gyro=false;$('gyro').classList.remove('on')}},1500)}
+  if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+    DeviceOrientationEvent.requestPermission().then(function(r){if(r==='granted')start();else toast('동작 및 방향 접근을 허용해야 자이로를 쓸 수 있어요.',3500)}).catch(function(){toast('방향 센서 권한을 받지 못했어요.')});
+  }else start();
+};
+$('planet').onclick=function(){state.planet=!state.planet;$('planet').classList.toggle('on',state.planet);if(state.planet&&state.gyro){state.gyro=false;$('gyro').classList.remove('on');window.removeEventListener('deviceorientation',onOri)}dirty=true};
+$('reset').onclick=function(){state.yaw=0;state.pitch=0;state.fov=80;state.pfov=250;if(state.gyro&&ori){var q=gyroQuat();state.gyroYaw-=Math.atan2(-2*(q[0]*q[2]+q[3]*q[1]),-(1-2*(q[0]*q[0]+q[1]*q[1])))}dirty=true};
+
+// 지금 화면 저장
+$('save').onclick=function(){
+  if(!state.hasMedia)return;dirty=true;
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    cv.toBlob(function(b){
+      if(!b){toast('저장에 실패했어요.');return}
+      var fn='360_'+new Date().toISOString().replace(/[-:T]/g,'').slice(0,14)+'.jpg';
+      var file;try{file=new File([b],fn,{type:'image/jpeg'})}catch(e){}
+      if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file]}).catch(function(){})}
+      else{var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);toast('이미지를 저장했어요')}
+    },'image/jpeg',0.92);
+  })});
+};
+
+// 영상 컨트롤
+function fmt(s){s=Math.max(0,s||0);var m=Math.floor(s/60);return m+':'+('0'+Math.floor(s%60)).slice(-2)}
+var seeking=false;
+function updateTime(){if(!video)return;$('time').textContent=fmt(video.currentTime)+' / '+fmt(video.duration);if(!seeking&&video.duration)$('seek').value=Math.round(video.currentTime/video.duration*1000)}
+$('play').onclick=function(){if(!video)return;if(video.paused){video.play();$('play').textContent='⏸'}else{video.pause();$('play').textContent='▶️'}};
+$('mute').onclick=function(){if(!video)return;video.muted=!video.muted;$('mute').textContent=video.muted?'🔇':'🔊'};
+$('seek').addEventListener('input',function(){if(!video||!video.duration)return;seeking=true;video.currentTime=$('seek').value/1000*video.duration});
+$('seek').addEventListener('change',function(){seeking=false});
+setInterval(function(){if(video){updateTime();if(video.paused&&!video.seeking){uploadVideo();dirty=true}}},250);
+
+resize();requestAnimationFrame(draw);
+if(/[?&]demo\b/.test(location.search))demo();
+if(/[?&]planet\b/.test(location.search))$('planet').click();
+})();
+</script>
+</body>
+</html>
