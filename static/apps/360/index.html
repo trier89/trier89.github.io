@@ -39,6 +39,11 @@ html,body{margin:0;height:100%;background:#0b0c0e;color:var(--ink);font-family:-
 .tips b{color:var(--ink)}
 #toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);padding:12px 16px;border-radius:12px;font-size:14px;z-index:9;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center;max-width:86vw}
 #toast.on{opacity:1}
+#loading{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,.55);text-align:center;font-weight:700;font-size:15px}
+#loading.on{display:flex}
+#loading small{color:var(--muted);font-weight:500;font-size:12px}
+.spin{width:42px;height:42px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
 #hint{position:fixed;left:50%;top:42%;transform:translateX(-50%);font-size:13px;color:#fff;background:rgba(0,0,0,.45);padding:8px 14px;border-radius:20px;z-index:3;pointer-events:none;transition:opacity .6s}
 #ui.hidden .bar,body.intro #ui .bar{opacity:0;pointer-events:none}
 #ui.hidden .bar>*,body.intro #ui .bar>*{pointer-events:none}
@@ -91,6 +96,7 @@ html,body{margin:0;height:100%;background:#0b0c0e;color:var(--ink);font-family:-
 </div>
 <div id="hint" style="opacity:0">끌어서 둘러보세요</div>
 <div id="toast"></div>
+<div id="loading"><div class="spin"></div><div>불러오는 중…<br><small>큰 360 파일은 몇 초 걸릴 수 있어요</small></div></div>
 <div id="dbg" style="display:none;position:fixed;left:8px;top:70px;z-index:8;background:rgba(0,0,0,.7);color:#0f0;font:12px/1.5 monospace;padding:6px 8px;border-radius:8px;pointer-events:none;white-space:pre"></div>
 <input type="file" id="file" accept="image/*,video/*" hidden>
 
@@ -206,6 +212,7 @@ function setImage(src,orient){
   if(T)x.setTransform(T[0],T[1],T[2],T[3],T[4],T[5]);
   x.drawImage(src,0,0,rot?RH:RW,rot?RW:RH);
   gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
+  c.width=c.height=0;
   state.hasMedia=true;dirty=true;
   return [RW,RH];
 }
@@ -218,26 +225,34 @@ function openFile(f){
   $('name').textContent=f.name||'';
   var url=URL.createObjectURL(f);
   if((f.type||'').indexOf('video')===0||/\.(mp4|mov|m4v|webm)$/i.test(f.name)){
-    toast('영상 불러오는 중…');
+    loading(true);
     video=document.createElement('video');video._url=url;video.src=url;video.playsInline=true;video.setAttribute('playsinline','');video.muted=true;video.loop=true;video.preload='auto';video.crossOrigin='anonymous';
     video.addEventListener('loadeddata',function(){
       var w=video.videoWidth,h=video.videoHeight;imgInfo='video '+w+'x'+h;ratioWarn(w,h);
       useVideoCanvas=(w>MAXT||h>MAXT);
       if(useVideoCanvas){var s=fitSize(w,h);videoCanvas=document.createElement('canvas');videoCanvas.width=s[0];videoCanvas.height=s[1];videoCtx=videoCanvas.getContext('2d')}
-      uploadVideo();state.hasMedia=true;dirty=true;
+      uploadVideo();state.hasMedia=true;dirty=true;loading(false);
       $('vctl').classList.add('on');$('mute').textContent='🔇';
       showReady();
       video.play().then(function(){$('play').textContent='⏸'}).catch(function(){$('play').textContent='▶️'});
     },{once:true});
-    video.addEventListener('error',function(){toast('이 영상은 브라우저에서 재생할 수 없는 형식이에요. 인스타360 앱에서 H.264로 내보내 보세요.',5000)});
+    video.addEventListener('error',function(){loading(false);toast('이 영상은 브라우저에서 재생할 수 없는 형식이에요. 인스타360 앱에서 H.264로 내보내 보세요.',5000)});
   }else{
-    toast('사진 불러오는 중…');
-    var img=new Image();
-    img.onload=function(){exifOrient(f,function(o){var r;try{r=setImage(img,o)}catch(e){toast('사진이 너무 커서 열 수 없어요.');return}imgInfo='img '+img.naturalWidth+'x'+img.naturalHeight+' exif '+o+' → '+r[0]+'x'+r[1];ratioWarn(r[0],r[1]);URL.revokeObjectURL(url);showReady()})};
-    img.onerror=function(){toast('이 사진 형식은 열 수 없어요. JPG로 저장된 360 사진을 골라주세요.',4000)};
-    img.src=url;
+    loading(true);var t0=performance.now();
+    var fail=function(){loading(false);toast('이 사진 형식은 열 수 없어요. JPG로 저장된 360 사진을 골라주세요.',4000)};
+    var done=function(src,o,how){var r;try{r=setImage(src,o)}catch(e){loading(false);toast('사진이 너무 커서 열 수 없어요.');return}
+      imgInfo=how+' '+(src.naturalWidth||src.width)+'x'+(src.naturalHeight||src.height)+' exif '+o+' → '+r[0]+'x'+r[1]+' '+Math.round(performance.now()-t0)+'ms';
+      if(src.close)src.close();URL.revokeObjectURL(url);ratioWarn(r[0],r[1]);loading(false);showReady()};
+    var viaImg=function(o){var img=new Image();img.decoding='async';img.onload=function(){done(img,o,'img')};img.onerror=fail;img.src=url};
+    exifOrient(f,function(o){
+      // 큰 사진(X3 72MP 등)은 디코딩하면서 바로 줄이면 훨씬 빠르다
+      if(window.createImageBitmap){var opt={resizeQuality:'high'};opt[o>=5?'resizeHeight':'resizeWidth']=MAXW;
+        createImageBitmap(f,opt).then(function(b){done(b,o,'bitmap')}).catch(function(){viaImg(o)})}
+      else viaImg(o)});
   }
 }
+
+function loading(on){$('loading').classList.toggle('on',on)}
 
 function showReady(){
   $('intro').classList.add('hide');document.body.classList.remove('intro');
