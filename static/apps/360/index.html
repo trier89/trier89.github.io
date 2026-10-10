@@ -183,11 +183,31 @@ function uploadVideo(){
 function fitSize(w,h){var s=Math.min(1,MAXW/w);var W=Math.round(w*s),H=Math.round(h*s);if(W*H>16000000){var k=Math.sqrt(16000000/(W*H));W=Math.floor(W*k);H=Math.floor(H*k)}return[W,H]}
 function ratioWarn(w,h){var r=w/h;if(Math.abs(r-2)>0.08)toast('가로:세로가 2:1이 아니에요('+w+'×'+h+'). 360 원본이 아니면 화면이 늘어나 보일 수 있어요.',4200)}
 
-function setImage(src){
-  var c=document.createElement('canvas');var s=fitSize(src.width||src.naturalWidth,src.height||src.naturalHeight);c.width=s[0];c.height=s[1];
-  c.getContext('2d').drawImage(src,0,0,s[0],s[1]);
+// 앨범 사진의 EXIF 회전 태그를 브라우저가 적용해 360 사진이 옆으로 눕는 경우가 있어 원본 방향으로 되돌린다
+function exifOrient(file,cb){
+  var fr=new FileReader();
+  fr.onload=function(){try{
+    var v=new DataView(fr.result);if(v.getUint16(0)!==0xFFD8)return cb(1);
+    var o=2;while(o+4<v.byteLength){var m=v.getUint16(o);if((m&0xFF00)!==0xFF00)break;var len=v.getUint16(o+2);
+      if(m===0xFFE1&&v.getUint32(o+4)===0x45786966){var t=o+10,le=v.getUint16(t)===0x4949,ifd=t+v.getUint32(t+4,le),n=v.getUint16(ifd,le);
+        for(var i=0;i<n;i++){var e=ifd+2+i*12;if(v.getUint16(e,le)===0x0112)return cb(v.getUint16(e+8,le))}return cb(1)}
+      if(m===0xFFDA)break;o+=2+len}
+    cb(1)}catch(e){cb(1)}};
+  fr.onerror=function(){cb(1)};
+  fr.readAsArrayBuffer(file.slice(0,262144));
+}
+function setImage(src,orient){
+  var dw=src.naturalWidth||src.width,dh=src.naturalHeight||src.height,o=orient||1;
+  // 회전 태그(5~8)인데 그림이 세로로 나왔다면 브라우저가 이미 돌린 것 → 되돌림
+  if(o>=5&&!(dh>dw))o=1;
+  var rot=o>=5,raw=fitSize(rot?dh:dw,rot?dw:dh),RW=raw[0],RH=raw[1];
+  var c=document.createElement('canvas');c.width=RW;c.height=RH;var x=c.getContext('2d');
+  var T={2:[-1,0,0,1,RW,0],3:[-1,0,0,-1,RW,RH],4:[1,0,0,-1,0,RH],5:[0,1,1,0,0,0],6:[0,-1,1,0,0,RH],7:[0,-1,-1,0,RW,RH],8:[0,1,-1,0,RW,0]}[o];
+  if(T)x.setTransform(T[0],T[1],T[2],T[3],T[4],T[5]);
+  x.drawImage(src,0,0,rot?RH:RW,rot?RW:RH);
   gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
   state.hasMedia=true;dirty=true;
+  return [RW,RH];
 }
 
 function clearVideo(){if(video){video.pause();if(video._url)URL.revokeObjectURL(video._url);video.removeAttribute('src');video.load();video=null}$('vctl').classList.remove('on')}
@@ -213,7 +233,7 @@ function openFile(f){
   }else{
     toast('사진 불러오는 중…');
     var img=new Image();
-    img.onload=function(){imgInfo='img '+img.naturalWidth+'x'+img.naturalHeight;ratioWarn(img.naturalWidth,img.naturalHeight);try{setImage(img)}catch(e){toast('사진이 너무 커서 열 수 없어요.');return}URL.revokeObjectURL(url);showReady()};
+    img.onload=function(){exifOrient(f,function(o){var r;try{r=setImage(img,o)}catch(e){toast('사진이 너무 커서 열 수 없어요.');return}imgInfo='img '+img.naturalWidth+'x'+img.naturalHeight+' exif '+o+' → '+r[0]+'x'+r[1];ratioWarn(r[0],r[1]);URL.revokeObjectURL(url);showReady()})};
     img.onerror=function(){toast('이 사진 형식은 열 수 없어요. JPG로 저장된 360 사진을 골라주세요.',4000)};
     img.src=url;
   }
@@ -310,6 +330,7 @@ var DBG=/[?&]debug\b/.test(location.search),imgInfo='';
 if(DBG){$('dbg').style.display='block';setInterval(function(){var so=screen.orientation?screen.orientation.angle+' '+screen.orientation.type:'-';$('dbg').textContent='a '+(ori?Math.round(ori.alpha):'-')+' b '+(ori?Math.round(ori.beta):'-')+' g '+(ori?Math.round(ori.gamma):'-')+'\nscreen '+so+' / win.o '+window.orientation+'\nview '+innerWidth+'x'+innerHeight+'\n'+imgInfo+'\n'+navigator.userAgent.slice(0,60)},200)}
 if(/[?&]demo\b/.test(location.search))demo();
 if(/[?&]planet\b/.test(location.search))$('planet').click();
+var srcM=location.search.match(/[?&]src=([^&]+)/);if(srcM)fetch(decodeURIComponent(srcM[1])).then(function(r){return r.blob()}).then(function(b){openFile(new File([b],'test.jpg',{type:b.type}))});
 })();
 </script>
 </body>
