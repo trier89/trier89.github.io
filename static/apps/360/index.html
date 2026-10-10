@@ -218,7 +218,7 @@ function setImage(src,orient){
   return [RW,RH];
 }
 
-function clearVideo(){if(video){video.pause();if(video._url)URL.revokeObjectURL(video._url);video.removeAttribute('src');video.load();video=null}$('vctl').classList.remove('on')}
+function clearVideo(){if(video){video.pause();clearTimeout(video._to);if(video.parentNode)video.parentNode.removeChild(video);if(video._url)URL.revokeObjectURL(video._url);video.removeAttribute('src');video.load();video=null}$('vctl').classList.remove('on')}
 
 function openFile(f){
   if(!f)return;
@@ -227,8 +227,11 @@ function openFile(f){
   var url=URL.createObjectURL(f);
   if((f.type||'').indexOf('video')===0||/\.(mp4|mov|m4v|webm)$/i.test(f.name)){
     loading(true);
-    video=document.createElement('video');video._url=url;video.src=url;video.playsInline=true;video.setAttribute('playsinline','');video.muted=true;video.loop=true;video.preload='auto';video.crossOrigin='anonymous';
-    video.addEventListener('loadeddata',function(){
+    video=document.createElement('video');video._url=url;video.src=url;video.playsInline=true;video.setAttribute('playsinline','');video.muted=true;video.loop=true;video.preload='auto';
+    // iOS 사파리는 화면에 붙지 않은/재생 안 한 영상은 데이터를 안 읽어 loadeddata가 영영 안 온다 → DOM에 숨겨 붙이고 바로 재생
+    video.style.cssText='position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none';document.body.appendChild(video);
+    var vv=video,ready=false,onReady=function(){
+      if(ready||video!==vv||!vv.videoWidth)return;ready=true;clearTimeout(vv._to);
       var w=video.videoWidth,h=video.videoHeight;imgInfo='video '+w+'x'+h+' '+Math.round(f.size/1048576)+'MB';ratioWarn(w,h);
       useVideoCanvas=(w>MAXT||h>MAXT);
       if(useVideoCanvas){var s=fitSize(w,h);videoCanvas=document.createElement('canvas');videoCanvas.width=s[0];videoCanvas.height=s[1];videoCtx=videoCanvas.getContext('2d')}
@@ -237,8 +240,12 @@ function openFile(f){
       video.addEventListener('seeked',function(){uploadVideo();dirty=true});
       $('vctl').classList.add('on');$('mute').textContent='🔇';
       showReady();
-      video.play().then(function(){$('play').textContent='⏸'}).catch(function(){$('play').textContent='▶️'});
-    },{once:true});
+      $('play').textContent=video.paused?'▶️':'⏸';
+    };
+    ['loadeddata','canplay','playing','timeupdate'].forEach(function(ev){vv.addEventListener(ev,onReady)});
+    vv.load();
+    vv.play().then(function(){$('play').textContent='⏸'}).catch(function(){});
+    vv._to=setTimeout(function(){if(!ready&&video===vv){loading(false);toast('영상을 읽지 못하고 있어요. 이 폰 브라우저가 이 영상 형식을 못 여는 것 같아요.',5000)}},30000);
     video.addEventListener('error',function(){loading(false);toast('이 영상은 브라우저에서 재생할 수 없는 형식이에요. 인스타360 앱에서 H.264로 내보내 보세요.',5000)});
   }else{
     loading(true);var t0=performance.now();
