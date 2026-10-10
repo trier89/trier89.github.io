@@ -85,6 +85,7 @@ html,body{margin:0;height:100%;background:#0b0c0e;color:var(--ink);font-family:-
       <input type="range" id="seek" min="0" max="1000" value="0">
       <span id="time">0:00 / 0:00</span>
       <button class="icon" id="mute">🔇</button>
+      <button class="icon" id="vrot" title="영상이 누워 있으면 눌러서 돌리기">↻</button>
     </div>
     <div class="row">
       <button class="btn" id="gyro">📱 자이로</button>
@@ -113,7 +114,7 @@ if(!gl){$('intro').querySelector('p').textContent='이 브라우저는 WebGL을 
 var VS='attribute vec2 p;varying vec2 v;void main(){v=p;gl_Position=vec4(p,0.,1.);}';
 var FS=[
 'precision highp float;',
-'varying vec2 v;uniform sampler2D tex;uniform mat3 R;uniform float aspect,scale,mode;',
+'varying vec2 v;uniform sampler2D tex;uniform mat3 R;uniform float aspect,scale,mode,trot;',
 'const float PI=3.14159265359;',
 'void main(){',
 ' vec2 q=vec2(v.x*aspect,v.y)*scale;vec3 d;',
@@ -122,13 +123,14 @@ var FS=[
 ' d=R*d;',
 ' float lon=atan(d.x,-d.z);float lat=asin(clamp(d.y,-1.,1.));',
 ' vec2 uv=vec2(.5+lon/(2.*PI),.5-lat/PI);',
+' if(trot>.5&&trot<1.5)uv=vec2(1.-uv.y,uv.x);else if(trot>1.5&&trot<2.5)uv=1.-uv;else if(trot>2.5)uv=vec2(uv.y,1.-uv.x);',
 ' gl_FragColor=texture2D(tex,uv);',
 '}'].join('\n');
 function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o}
 var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(pr);gl.useProgram(pr);
 var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
 var aP=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(aP);gl.vertexAttribPointer(aP,2,gl.FLOAT,false,0,0);
-var uR=gl.getUniformLocation(pr,'R'),uA=gl.getUniformLocation(pr,'aspect'),uS=gl.getUniformLocation(pr,'scale'),uM=gl.getUniformLocation(pr,'mode');
+var uR=gl.getUniformLocation(pr,'R'),uA=gl.getUniformLocation(pr,'aspect'),uS=gl.getUniformLocation(pr,'scale'),uM=gl.getUniformLocation(pr,'mode'),uT=gl.getUniformLocation(pr,'trot');var texRot=0;
 var tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
 gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
@@ -163,22 +165,38 @@ function rot(){
   return qmat(qmul(qaxis(0,1,0,state.yaw*DEG),qaxis(1,0,0,pitch)));
 }
 
-function draw(){
-  resize();
+var lastT=0;
+function draw(t){
+  resize();if(lastT)frameTick(t-lastT);lastT=t;
   // 새 프레임이 나왔을 때만 올린다(120Hz 화면에서 30fps 영상을 4번씩 올리던 낭비 제거)
-  if(video&&!video.paused&&!video.ended){var now=performance.now();if(video._rvfc?video._newFrame:now-(video._last||0)>=31){video._newFrame=false;video._last=now;uploadVideo();dirty=true}}
+  if(video&&!video.paused&&!video.ended){var now=performance.now();var gap=Object.keys(ptrs).length?90:31;if((video._rvfc?video._newFrame:true)&&now-(video._last||0)>=(video._rvfc&&!Object.keys(ptrs).length?0:gap)){video._newFrame=false;video._last=now;uploadVideo();dirty=true}}
   if(state.gyro&&ori)dirty=true;
   if(dirty&&state.hasMedia){
     dirty=false;
     gl.uniformMatrix3fv(uR,false,rot());
     gl.uniform1f(uA,cv.width/cv.height);
-    gl.uniform1f(uM,state.planet?1:0);
+    gl.uniform1f(uM,state.planet?1:0);gl.uniform1f(uT,texRot);
     gl.uniform1f(uS,state.planet?Math.tan(state.pfov*DEG/4):Math.tan(state.fov*DEG/2));
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
   }
   requestAnimationFrame(draw);
 }
 
+// 폰이 큰 영상을 매 프레임 올리느라 버벅이면 해상도를 단계적으로 낮춘다(0=원본 그대로)
+var vt={tier:0,tiers:[0,2880,2048,1440],n:0,sum:0,fps:0};
+function setTier(t){
+  vt.tier=t;vt.n=vt.sum=0;var W=vt.tiers[t];
+  if(!W){useVideoCanvas=(video.videoWidth>MAXT||video.videoHeight>MAXT);if(!useVideoCanvas)return;var fs=fitSize(video.videoWidth,video.videoHeight);W=Math.max(fs[0],fs[1])}
+  else useVideoCanvas=true;
+  if(!videoCanvas){videoCanvas=document.createElement('canvas');videoCtx=videoCanvas.getContext('2d')}
+  var vw=video.videoWidth,vh=video.videoHeight;if(vh>vw){videoCanvas.height=W;videoCanvas.width=Math.round(W*vw/vh)}else{videoCanvas.width=W;videoCanvas.height=Math.round(W*vh/vw)}
+}
+function frameTick(dt){
+  if(!video||video.paused||dt>500)return;
+  vt.sum+=dt;vt.n++;
+  if(vt.n>=30){var avg=vt.sum/vt.n;vt.fps=Math.round(1000/avg);vt.n=vt.sum=0;
+    if(avg>40&&vt.tier<vt.tiers.length-1)setTier(vt.tier+1)}
+}
 function uploadVideo(){
   try{
     if(useVideoCanvas){videoCtx.drawImage(video,0,0,videoCanvas.width,videoCanvas.height);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,videoCanvas)}
@@ -214,7 +232,7 @@ function setImage(src,orient){
   x.drawImage(src,0,0,rot?RH:RW,rot?RW:RH);
   gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
   c.width=c.height=0;
-  state.hasMedia=true;dirty=true;
+  texRot=0;state.hasMedia=true;dirty=true;
   return [RW,RH];
 }
 
@@ -232,9 +250,12 @@ function openFile(f){
     video.style.cssText='position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none';document.body.appendChild(video);
     var vv=video,ready=false,onReady=function(){
       if(ready||video!==vv||!vv.videoWidth)return;ready=true;clearTimeout(vv._to);
-      var w=video.videoWidth,h=video.videoHeight;imgInfo='video '+w+'x'+h+' '+Math.round(f.size/1048576)+'MB';ratioWarn(w,h);
-      useVideoCanvas=(w>MAXT||h>MAXT);
-      if(useVideoCanvas){var s=fitSize(w,h);videoCanvas=document.createElement('canvas');videoCanvas.width=s[0];videoCanvas.height=s[1];videoCtx=videoCanvas.getContext('2d')}
+      var w=video.videoWidth,h=video.videoHeight;imgInfo='video '+w+'x'+h+' '+Math.round(f.size/1048576)+'MB';
+      setTier(0);
+      // 회전 메타데이터 때문에 세로로 서버린 360 영상이면 셰이더에서 되돌린다
+      texRot=0;if(h>w){texRot=vv._rot===270?3:1}else if(vv._rot===180)texRot=2;
+      imgInfo+=' rot '+vv._rot+' → '+texRot;
+      ratioWarn(Math.max(w,h),Math.min(w,h));
       uploadVideo();state.hasMedia=true;dirty=true;loading(false);
       if(video.requestVideoFrameCallback){var v=video;v._rvfc=true;(function tick(){v.requestVideoFrameCallback(function(){v._newFrame=true;if(video===v)tick()})})()}
       video.addEventListener('seeked',function(){uploadVideo();dirty=true});
@@ -243,6 +264,7 @@ function openFile(f){
       $('play').textContent=video.paused?'▶️':'⏸';
     };
     ['loadeddata','canplay','playing','timeupdate'].forEach(function(ev){vv.addEventListener(ev,onReady)});
+    vv._rot=-1;mp4Rotation(f,function(r){vv._rot=r;if(ready&&video===vv&&r===180&&vv.videoWidth>=vv.videoHeight){texRot=2;dirty=true}});
     vv.load();
     vv.play().then(function(){$('play').textContent='⏸'}).catch(function(){});
     vv._to=setTimeout(function(){if(!ready&&video===vv){loading(false);toast('영상을 읽지 못하고 있어요. 이 폰 브라우저가 이 영상 형식을 못 여는 것 같아요.',5000)}},30000);
@@ -260,6 +282,30 @@ function openFile(f){
         createImageBitmap(f,opt).then(function(b){done(b,o,'bitmap')}).catch(function(){viaImg(o)})}
       else viaImg(o)});
   }
+}
+
+// MP4/MOV의 영상 트랙 회전(tkhd 행렬)을 읽는다. moov가 파일 끝에 있어도 상자 머리만 훑어서 찾음
+function mp4Rotation(file,cb){
+  var rd=function(a,b){return file.slice(a,b).arrayBuffer().then(function(x){return new DataView(x)})};
+  var size=file.size;
+  (function scan(off){
+    if(off+8>size)return cb(-1);
+    rd(off,off+16).then(function(h){
+      var len=h.getUint32(0),typ=String.fromCharCode(h.getUint8(4),h.getUint8(5),h.getUint8(6),h.getUint8(7));
+      if(len===1)len=h.getUint32(8)*4294967296+h.getUint32(12);else if(len===0)len=size-off;
+      if(typ!=='moov')return len<8?cb(-1):scan(off+len);
+      if(len>64*1048576)return cb(-1);
+      rd(off,off+len).then(function(v){
+        var found=-1;
+        (function walk(a,b){for(var p=a;p+8<=b;){var l=v.getUint32(p),t=String.fromCharCode(v.getUint8(p+4),v.getUint8(p+5),v.getUint8(p+6),v.getUint8(p+7));if(l<8)break;
+          if(t==='trak')walk(p+8,p+l);
+          else if(t==='tkhd'&&found<0){var ver=v.getUint8(p+8),m=p+12+(ver===1?32:20)+16,wd=v.getUint32(m+36);
+            if(wd){var A=v.getInt32(m)/65536,B=v.getInt32(m+4)/65536;found=Math.round(Math.atan2(B,A)*180/Math.PI);found=((found%360)+360)%360}}
+          p+=l}})(8,len);
+        cb(found);
+      }).catch(function(){cb(-1)});
+    }).catch(function(){cb(-1)});
+  })(0);
 }
 
 function loading(on){$('loading').classList.toggle('on',on)}
@@ -345,6 +391,7 @@ function fmt(s){s=Math.max(0,s||0);var m=Math.floor(s/60);return m+':'+('0'+Math
 var seeking=false;
 function updateTime(){if(!video)return;$('time').textContent=fmt(video.currentTime)+' / '+fmt(video.duration);if(!seeking&&video.duration)$('seek').value=Math.round(video.currentTime/video.duration*1000)}
 $('play').onclick=function(){if(!video)return;if(video.paused){video.play();$('play').textContent='⏸'}else{video.pause();$('play').textContent='▶️'}};
+$('vrot').onclick=function(){texRot=(texRot+1)%4;dirty=true;toast('영상 방향을 90° 돌렸어요',1200)};
 $('mute').onclick=function(){if(!video)return;video.muted=!video.muted;$('mute').textContent=video.muted?'🔇':'🔊'};
 $('seek').addEventListener('input',function(){if(!video||!video.duration)return;seeking=true;video.currentTime=$('seek').value/1000*video.duration});
 $('seek').addEventListener('change',function(){seeking=false});
@@ -352,7 +399,7 @@ setInterval(function(){if(video)updateTime()},250);
 
 resize();requestAnimationFrame(draw);
 var DBG=/[?&]debug\b/.test(location.search),imgInfo='';
-if(DBG){$('dbg').style.display='block';setInterval(function(){var so=screen.orientation?screen.orientation.angle+' '+screen.orientation.type:'-';$('dbg').textContent='a '+(ori?Math.round(ori.alpha):'-')+' b '+(ori?Math.round(ori.beta):'-')+' g '+(ori?Math.round(ori.gamma):'-')+'\nscreen '+so+' / win.o '+window.orientation+'\nview '+innerWidth+'x'+innerHeight+'\n'+imgInfo+'\n'+navigator.userAgent.slice(0,60)},200)}
+if(DBG){$('dbg').style.display='block';setInterval(function(){var so=screen.orientation?screen.orientation.angle+' '+screen.orientation.type:'-';$('dbg').textContent='a '+(ori?Math.round(ori.alpha):'-')+' b '+(ori?Math.round(ori.beta):'-')+' g '+(ori?Math.round(ori.gamma):'-')+'\nscreen '+so+' / win.o '+window.orientation+'\nview '+innerWidth+'x'+innerHeight+'\n'+imgInfo+(video?' tier '+vt.tier+' '+(vt.tiers[vt.tier]||'원본')+' fps '+vt.fps:'')+'\n'+navigator.userAgent.slice(0,60)},200)}
 if(/[?&]demo\b/.test(location.search))demo();
 if(/[?&]planet\b/.test(location.search))$('planet').click();
 var srcM=location.search.match(/[?&]src=([^&]+)/);if(srcM)fetch(decodeURIComponent(srcM[1])).then(function(r){return r.blob()}).then(function(b){openFile(new File([b],'test.jpg',{type:b.type}))});
