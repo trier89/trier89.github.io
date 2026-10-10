@@ -37,7 +37,7 @@ html,body{margin:0;height:100%;background:#0b0c0e;color:var(--ink);font-family:-
 .ghost{background:none;border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer}
 .tips{text-align:left;margin-top:22px;font-size:13px;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);padding-top:14px}
 .tips b{color:var(--ink)}
-#toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);padding:12px 16px;border-radius:12px;font-size:14px;z-index:9;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center;max-width:86vw}
+#toast{white-space:pre-line;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);padding:12px 16px;border-radius:12px;font-size:14px;z-index:9;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center;max-width:86vw}
 #toast.on{opacity:1}
 #loading{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,.55);text-align:center;font-weight:700;font-size:15px}
 #loading.on{display:flex}
@@ -206,7 +206,7 @@ function uploadVideo(){
 }
 
 function fitSize(w,h){var s=Math.min(1,MAXW/w);var W=Math.round(w*s),H=Math.round(h*s);if(W*H>16000000){var k=Math.sqrt(16000000/(W*H));W=Math.floor(W*k);H=Math.floor(H*k)}return[W,H]}
-function ratioWarn(w,h){var r=w/h;if(Math.abs(r-2)>0.08)toast('가로:세로가 2:1이 아니에요('+w+'×'+h+'). 360 원본이 아니면 화면이 늘어나 보일 수 있어요.',4200)}
+function ratioWarn(w,h){var r=w/h;if(Math.abs(r-2)>0.08)toast('⚠️ 360 원본이 아니에요 ('+w+'×'+h+', 360은 가로:세로 2:1)\n한 방향만 잘라낸 일반 영상·사진이라 늘어나 보여요.\n인스타360 앱에서 "360°"로 내보낸 파일을 열어주세요.',8000)}
 
 // 앨범 사진의 EXIF 회전 태그를 브라우저가 적용해 360 사진이 옆으로 눕는 경우가 있어 원본 방향으로 되돌린다
 function exifOrient(file,cb){
