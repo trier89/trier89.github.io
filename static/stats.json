@@ -1,38 +1,38 @@
 {
- "today": 2,
- "today_pv": 3,
+ "today": 0,
+ "today_pv": 0,
  "total": 266,
  "total_visits": 685,
  "yesterday": {
-  "users": 4,
-  "new": 3,
-  "pv": 6,
-  "sessions": 5
+  "users": 2,
+  "new": 2,
+  "pv": 3,
+  "sessions": 2
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 14,
-   "eng": 182,
-   "avg_sec": 13
+   "views": 12,
+   "eng": 76,
+   "avg_sec": 6
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 8,
-   "eng": 766,
-   "avg_sec": 96
+   "views": 7,
+   "eng": 262,
+   "avg_sec": 37
   },
   {
    "title": "고양이 Catcha!",
-   "views": 5,
+   "views": 6,
    "eng": 27,
-   "avg_sec": 5
+   "avg_sec": 4
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 4,
+   "views": 5,
    "eng": 188,
-   "avg_sec": 47
+   "avg_sec": 38
   },
   {
    "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
@@ -49,29 +49,29 @@
    "avg_sec": 103
   },
   {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 8,
-   "eng": 766,
-   "avg_sec": 96
+   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
+   "views": 5,
+   "eng": 188,
+   "avg_sec": 38
   },
   {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 4,
-   "eng": 188,
-   "avg_sec": 47
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 7,
+   "eng": 262,
+   "avg_sec": 37
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 14,
-   "eng": 182,
-   "avg_sec": 13
+   "views": 12,
+   "eng": 76,
+   "avg_sec": 6
   },
   {
    "title": "고양이 Catcha!",
-   "views": 5,
+   "views": 6,
    "eng": 27,
-   "avg_sec": 5
+   "avg_sec": 4
   }
  ],
- "updated": "2026-10-15 23:35"
+ "updated": "2026-10-16 00:35"
 }
