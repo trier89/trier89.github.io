@@ -46,9 +46,14 @@ googleAnalytics = 'G-E8ECH6NV3Y'
   weight = 4
 
 [[menu.main]]
+  name = '여행방'
+  url = '/travel/'
+  weight = 5
+
+[[menu.main]]
   name = '데일리'
   url = 'https://planfully-daily.pages.dev/'
-  weight = 5
+  weight = 6
 
 [markup.goldmark.renderer]
   unsafe = true
