@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 279,
- "total_visits": 698,
+ "total": 280,
+ "total_visits": 699,
  "yesterday": {
-  "users": 7,
-  "new": 7,
-  "pv": 7,
-  "sessions": 7
+  "users": 8,
+  "new": 8,
+  "pv": 8,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -24,9 +24,9 @@
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 7,
-   "avg_sec": 2
+   "views": 5,
+   "eng": 476,
+   "avg_sec": 95
   },
   {
    "title": "고양이 Catcha!",
@@ -43,6 +43,12 @@
  ],
  "top_dwell": [
   {
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 5,
+   "eng": 476,
+   "avg_sec": 95
+  },
+  {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
    "views": 6,
    "eng": 359,
@@ -53,13 +59,7 @@
    "views": 11,
    "eng": 71,
    "avg_sec": 6
-  },
-  {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 7,
-   "avg_sec": 2
   }
  ],
- "updated": "2026-10-19 03:44"
+ "updated": "2026-10-19 04:44"
 }
