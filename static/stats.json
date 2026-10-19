@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 284,
- "total_visits": 704,
+ "total": 285,
+ "total_visits": 705,
  "yesterday": {
-  "users": 4,
-  "new": 4,
-  "pv": 6,
-  "sessions": 4
+  "users": 5,
+  "new": 5,
+  "pv": 7,
+  "sessions": 5
  },
  "top_views": [
   {
@@ -30,7 +30,7 @@
   },
   {
    "title": "고양이 Catcha!",
-   "views": 2,
+   "views": 3,
    "eng": 0,
    "avg_sec": 0
   },
@@ -59,7 +59,13 @@
    "views": 10,
    "eng": 71,
    "avg_sec": 7
+  },
+  {
+   "title": "고양이 Catcha!",
+   "views": 3,
+   "eng": 0,
+   "avg_sec": 0
   }
  ],
- "updated": "2026-10-20 01:47"
+ "updated": "2026-10-20 02:47"
 }
