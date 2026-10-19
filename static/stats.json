@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 285,
- "total_visits": 705,
+ "total": 288,
+ "total_visits": 708,
  "yesterday": {
-  "users": 5,
-  "new": 5,
-  "pv": 7,
-  "sessions": 5
+  "users": 8,
+  "new": 8,
+  "pv": 10,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -23,25 +23,31 @@
    "avg_sec": 73
   },
   {
+   "title": "고양이 Catcha!",
+   "views": 5,
+   "eng": 0,
+   "avg_sec": 0
+  },
+  {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 5,
    "eng": 476,
    "avg_sec": 95
   },
   {
-   "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 0,
-   "avg_sec": 0
-  },
-  {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 2,
-   "eng": 280,
-   "avg_sec": 140
+   "views": 3,
+   "eng": 288,
+   "avg_sec": 96
   }
  ],
  "top_dwell": [
+  {
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
+   "views": 3,
+   "eng": 288,
+   "avg_sec": 96
+  },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 5,
@@ -62,10 +68,10 @@
   },
   {
    "title": "고양이 Catcha!",
-   "views": 3,
+   "views": 5,
    "eng": 0,
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-20 03:47"
+ "updated": "2026-10-20 04:47"
 }
