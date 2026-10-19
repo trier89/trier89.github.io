@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 283,
- "total_visits": 703,
+ "total": 284,
+ "total_visits": 704,
  "yesterday": {
-  "users": 3,
-  "new": 3,
-  "pv": 5,
-  "sessions": 3
+  "users": 4,
+  "new": 4,
+  "pv": 6,
+  "sessions": 4
  },
  "top_views": [
   {
@@ -29,16 +29,16 @@
    "avg_sec": 95
   },
   {
+   "title": "고양이 Catcha!",
+   "views": 2,
+   "eng": 0,
+   "avg_sec": 0
+  },
+  {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
    "views": 2,
    "eng": 280,
    "avg_sec": 140
-  },
-  {
-   "title": "AI로 만드는 그리스 신화 영상 — 에피소드별 제작 노트 | 다락방",
-   "views": 1,
-   "eng": 0,
-   "avg_sec": 0
   }
  ],
  "top_dwell": [
@@ -61,5 +61,5 @@
    "avg_sec": 7
   }
  ],
- "updated": "2026-10-20 00:46"
+ "updated": "2026-10-20 01:47"
 }
