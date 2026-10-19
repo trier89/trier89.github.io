@@ -1,26 +1,26 @@
 {
- "today": 3,
- "today_pv": 5,
+ "today": 0,
+ "today_pv": 0,
  "total": 283,
  "total_visits": 703,
  "yesterday": {
-  "users": 8,
-  "new": 8,
-  "pv": 8,
-  "sessions": 8
+  "users": 3,
+  "new": 3,
+  "pv": 5,
+  "sessions": 3
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
+   "views": 10,
    "eng": 71,
-   "avg_sec": 6
+   "avg_sec": 7
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 6,
-   "eng": 359,
-   "avg_sec": 60
+   "views": 9,
+   "eng": 653,
+   "avg_sec": 73
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
@@ -29,16 +29,16 @@
    "avg_sec": 95
   },
   {
-   "title": "고양이 Catcha!",
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
    "views": 2,
-   "eng": 0,
-   "avg_sec": 0
+   "eng": 280,
+   "avg_sec": 140
   },
   {
-   "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
-   "views": 2,
-   "eng": 300,
-   "avg_sec": 150
+   "title": "AI로 만드는 그리스 신화 영상 — 에피소드별 제작 노트 | 다락방",
+   "views": 1,
+   "eng": 0,
+   "avg_sec": 0
   }
  ],
  "top_dwell": [
@@ -50,16 +50,16 @@
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 6,
-   "eng": 359,
-   "avg_sec": 60
+   "views": 9,
+   "eng": 653,
+   "avg_sec": 73
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
+   "views": 10,
    "eng": 71,
-   "avg_sec": 6
+   "avg_sec": 7
   }
  ],
- "updated": "2026-10-19 23:46"
+ "updated": "2026-10-20 00:46"
 }
