@@ -4,17 +4,17 @@
  "total": 289,
  "total_visits": 709,
  "yesterday": {
-  "users": 9,
-  "new": 9,
-  "pv": 11,
-  "sessions": 9
+  "users": 0,
+  "new": 0,
+  "pv": 0,
+  "sessions": 0
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 9,
    "eng": 71,
-   "avg_sec": 7
+   "avg_sec": 8
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
@@ -62,9 +62,9 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 10,
+   "views": 9,
    "eng": 71,
-   "avg_sec": 7
+   "avg_sec": 8
   },
   {
    "title": "고양이 Catcha!",
@@ -73,5 +73,5 @@
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-20 23:49"
+ "updated": "2026-10-21 00:49"
 }
