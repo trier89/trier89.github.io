@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 290,
- "total_visits": 711,
+ "total": 291,
+ "total_visits": 712,
  "yesterday": {
-  "users": 0,
-  "new": 0,
-  "pv": 0,
-  "sessions": 0
+  "users": 1,
+  "new": 1,
+  "pv": 1,
+  "sessions": 1
  },
  "top_views": [
   {
@@ -29,24 +29,24 @@
    "avg_sec": 0
   },
   {
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 4,
+   "eng": 481,
+   "avg_sec": 120
+  },
+  {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
    "views": 4,
    "eng": 289,
    "avg_sec": 72
-  },
-  {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 3,
-   "eng": 472,
-   "avg_sec": 157
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 3,
-   "eng": 472,
-   "avg_sec": 157
+   "views": 4,
+   "eng": 481,
+   "avg_sec": 120
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
@@ -73,5 +73,5 @@
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-22 01:52"
+ "updated": "2026-10-22 02:53"
 }
