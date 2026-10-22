@@ -1,38 +1,38 @@
 {
- "today": 5,
- "today_pv": 9,
+ "today": 0,
+ "today_pv": 0,
  "total": 295,
  "total_visits": 717,
  "yesterday": {
-  "users": 1,
-  "new": 1,
-  "pv": 1,
-  "sessions": 1
+  "users": 5,
+  "new": 4,
+  "pv": 9,
+  "sessions": 5
  },
  "top_views": [
   {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 8,
-   "eng": 494,
-   "avg_sec": 62
-  },
-  {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 7,
-   "eng": 0,
-   "avg_sec": 0
+   "views": 11,
+   "eng": 15,
+   "avg_sec": 1
   },
   {
    "title": "고양이 Catcha!",
-   "views": 7,
+   "views": 6,
    "eng": 0,
    "avg_sec": 0
   },
   {
+   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
+   "views": 5,
+   "eng": 475,
+   "avg_sec": 95
+  },
+  {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 481,
-   "avg_sec": 120
+   "views": 5,
+   "eng": 505,
+   "avg_sec": 101
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
@@ -44,9 +44,15 @@
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 481,
-   "avg_sec": 120
+   "views": 5,
+   "eng": 505,
+   "avg_sec": 101
+  },
+  {
+   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
+   "views": 5,
+   "eng": 475,
+   "avg_sec": 95
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
@@ -55,23 +61,17 @@
    "avg_sec": 72
   },
   {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 8,
-   "eng": 494,
-   "avg_sec": 62
-  },
-  {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 7,
-   "eng": 0,
-   "avg_sec": 0
+   "views": 11,
+   "eng": 15,
+   "avg_sec": 1
   },
   {
    "title": "고양이 Catcha!",
-   "views": 7,
+   "views": 6,
    "eng": 0,
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-22 23:55"
+ "updated": "2026-10-23 00:55"
 }
