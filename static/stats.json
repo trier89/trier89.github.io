@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 297,
- "total_visits": 719,
+ "total": 298,
+ "total_visits": 720,
  "yesterday": {
-  "users": 2,
-  "new": 2,
-  "pv": 2,
-  "sessions": 2
+  "users": 3,
+  "new": 3,
+  "pv": 5,
+  "sessions": 3
  },
  "top_views": [
   {
@@ -15,6 +15,12 @@
    "views": 12,
    "eng": 15,
    "avg_sec": 1
+  },
+  {
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
+   "views": 7,
+   "eng": 487,
+   "avg_sec": 70
   },
   {
    "title": "고양이 Catcha!",
@@ -33,12 +39,6 @@
    "views": 4,
    "eng": 505,
    "avg_sec": 126
-  },
-  {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 4,
-   "eng": 289,
-   "avg_sec": 72
   }
  ],
  "top_dwell": [
@@ -56,9 +56,9 @@
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 4,
-   "eng": 289,
-   "avg_sec": 72
+   "views": 7,
+   "eng": 487,
+   "avg_sec": 70
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -73,5 +73,5 @@
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-24 01:58"
+ "updated": "2026-10-24 02:59"
 }
