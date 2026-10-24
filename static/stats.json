@@ -1,12 +1,12 @@
 {
- "today": 3,
- "today_pv": 3,
+ "today": 0,
+ "today_pv": 0,
  "total": 301,
  "total_visits": 723,
  "yesterday": {
   "users": 3,
   "new": 3,
-  "pv": 5,
+  "pv": 3,
   "sessions": 3
  },
  "top_views": [
@@ -17,48 +17,48 @@
    "avg_sec": 1
   },
   {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 7,
-   "eng": 487,
-   "avg_sec": 70
-  },
-  {
    "title": "고양이 Catcha!",
    "views": 6,
    "eng": 0,
    "avg_sec": 0
   },
   {
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
+   "views": 6,
+   "eng": 210,
+   "avg_sec": 35
+  },
+  {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 4,
-   "eng": 298,
-   "avg_sec": 74
+   "views": 5,
+   "eng": 317,
+   "avg_sec": 63
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 505,
-   "avg_sec": 126
+   "views": 5,
+   "eng": 511,
+   "avg_sec": 102
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 505,
-   "avg_sec": 126
+   "views": 5,
+   "eng": 511,
+   "avg_sec": 102
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 4,
-   "eng": 298,
-   "avg_sec": 74
+   "views": 5,
+   "eng": 317,
+   "avg_sec": 63
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 7,
-   "eng": 487,
-   "avg_sec": 70
+   "views": 6,
+   "eng": 210,
+   "avg_sec": 35
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -73,5 +73,5 @@
    "avg_sec": 0
   }
  ],
- "updated": "2026-10-24 23:01"
+ "updated": "2026-10-25 00:01"
 }
