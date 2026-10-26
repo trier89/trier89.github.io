@@ -1,32 +1,32 @@
 {
- "today": 8,
- "today_pv": 14,
+ "today": 0,
+ "today_pv": 0,
  "total": 314,
- "total_visits": 741,
+ "total_visits": 742,
  "yesterday": {
-  "users": 6,
-  "new": 5,
-  "pv": 16,
-  "sessions": 7
+  "users": 9,
+  "new": 7,
+  "pv": 15,
+  "sessions": 10
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 13,
+   "eng": 86,
+   "avg_sec": 7
+  },
+  {
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 11,
-   "eng": 69,
-   "avg_sec": 6
+   "eng": 979,
+   "avg_sec": 89
   },
   {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
+   "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
    "views": 7,
-   "eng": 861,
-   "avg_sec": 123
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 6,
-   "eng": 0,
-   "avg_sec": 0
+   "eng": 372,
+   "avg_sec": 53
   },
   {
    "title": "다면 성격 프로필 테스트 — 48문항으로 보는 마음의 8가지 축 + 솔직성 지표 (무료)",
@@ -36,42 +36,42 @@
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 6,
-   "eng": 210,
-   "avg_sec": 35
+   "views": 4,
+   "eng": 199,
+   "avg_sec": 50
   }
  ],
  "top_dwell": [
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 7,
-   "eng": 861,
-   "avg_sec": 123
-  },
-  {
-   "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
-   "views": 4,
-   "eng": 192,
-   "avg_sec": 48
-  },
-  {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 6,
-   "eng": 210,
-   "avg_sec": 35
+   "views": 3,
+   "eng": 563,
+   "avg_sec": 188
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 11,
+   "eng": 979,
+   "avg_sec": 89
+  },
+  {
+   "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
+   "views": 7,
+   "eng": 372,
+   "avg_sec": 53
+  },
+  {
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
    "views": 4,
-   "eng": 42,
-   "avg_sec": 10
+   "eng": 199,
+   "avg_sec": 50
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 11,
-   "eng": 69,
-   "avg_sec": 6
+   "views": 13,
+   "eng": 86,
+   "avg_sec": 7
   }
  ],
- "updated": "2026-10-26 23:07"
+ "updated": "2026-10-27 00:07"
 }
