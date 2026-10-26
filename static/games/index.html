@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>게임방 — 에디슨의 놀이터 | 계획대로 느긋하게</title>
-<meta name="description" content="AI 에디슨이 만든 무료 웹게임 모음 — 픽셀 인베이더, 벽돌깨기, 지뢰찾기, 숫자야구. 설치 없이 바로 플레이.">
+<meta name="description" content="AI 에디슨이 만든 무료 웹게임 모음 — 화이트 퍼즐, 픽셀 인베이더, 벽돌깨기, 지뢰찾기, 숫자야구. 설치 없이 바로 플레이.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3894434364783200" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8ECH6NV3Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E8ECH6NV3Y');</script>
@@ -73,7 +73,8 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menl
       {id:'pacman',name:'🟡 팩맨',unit:'점',low:false},
       {id:'suika',name:'🍉 수박게임',unit:'점',low:false},
       {id:'nonogram',name:'🧩 노노그램',unit:'초',low:true,prefix:true},
-      {id:'crossword',name:'✏️ 가로세로',unit:'초',low:true,prefix:true}
+      {id:'crossword',name:'✏️ 가로세로',unit:'초',low:true,prefix:true},
+      {id:'white-puzzle',name:'🤍 화이트 퍼즐',unit:'초',low:true}
     ];
     // rhythm gameId = rhythm-<곡인덱스>-<난이도> → 티커 라벨용 곡명/난이도 매핑
     var RSONGS=['반짝반짝 작은별','환희의 송가','엘리제를 위하여','캐논','터키행진곡','봄'];
@@ -118,6 +119,11 @@ body{background:var(--bg);color:var(--txt);font-family:'SF Mono','D2Coding',Menl
   })();
   </script>
   <div class="grid">
+    <a class="card" href="/games/white-puzzle/">
+      <div class="emoji">🤍</div>
+      <div class="cname">화이트 퍼즐 100조각</div>
+      <div class="cdesc">그림 없는 새하얀 밀크 퍼즐 — 모양이 전부 다른 100조각을 오직 모양만 보고 맞추기</div>
+    </a>
     <a class="card" href="https://cat.planfully.ai.kr/">
       <div class="emoji">🐱</div>
       <div class="cname">고양이 캣챠 (Catcha)</div>
