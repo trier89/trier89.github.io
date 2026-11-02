@@ -1,8 +1,8 @@
 {
- "today": 0,
- "today_pv": 0,
- "total": 351,
- "total_visits": 784,
+ "today": 1,
+ "today_pv": 3,
+ "total": 352,
+ "total_visits": 785,
  "yesterday": {
   "users": 7,
   "new": 7,
@@ -73,5 +73,5 @@
    "avg_sec": 5
   }
  ],
- "updated": "2026-11-03 06:11"
+ "updated": "2026-11-03 07:11"
 }
