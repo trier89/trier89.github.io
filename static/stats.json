@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 357,
- "total_visits": 791,
+ "total": 358,
+ "total_visits": 792,
  "yesterday": {
-  "users": 3,
-  "new": 2,
-  "pv": 3,
-  "sessions": 3
+  "users": 4,
+  "new": 3,
+  "pv": 5,
+  "sessions": 4
  },
  "top_views": [
   {
@@ -61,17 +61,17 @@
    "avg_sec": 50
   },
   {
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
+   "views": 3,
+   "eng": 109,
+   "avg_sec": 36
+  },
+  {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 6,
    "eng": 149,
    "avg_sec": 25
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 4,
-   "eng": 31,
-   "avg_sec": 8
   }
  ],
- "updated": "2026-11-05 00:19"
+ "updated": "2026-11-05 01:19"
 }
