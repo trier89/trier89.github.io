@@ -1,20 +1,20 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 367,
- "total_visits": 801,
+ "total": 368,
+ "total_visits": 802,
  "yesterday": {
-  "users": 3,
-  "new": 3,
-  "pv": 3,
-  "sessions": 3
+  "users": 4,
+  "new": 4,
+  "pv": 4,
+  "sessions": 4
  },
  "top_views": [
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 9,
-   "eng": 1326,
-   "avg_sec": 147
+   "views": 10,
+   "eng": 1680,
+   "avg_sec": 168
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
@@ -50,9 +50,9 @@
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 9,
-   "eng": 1326,
-   "avg_sec": 147
+   "views": 10,
+   "eng": 1680,
+   "avg_sec": 168
   },
   {
    "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
@@ -73,5 +73,5 @@
    "avg_sec": 24
   }
  ],
- "updated": "2026-11-08 02:28"
+ "updated": "2026-11-08 03:28"
 }
