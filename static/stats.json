@@ -1,21 +1,15 @@
 {
- "today": 4,
- "today_pv": 5,
- "total": 372,
- "total_visits": 806,
+ "today": 0,
+ "today_pv": 0,
+ "total": 373,
+ "total_visits": 807,
  "yesterday": {
-  "users": 4,
-  "new": 4,
-  "pv": 4,
-  "sessions": 4
+  "users": 5,
+  "new": 5,
+  "pv": 6,
+  "sessions": 5
  },
  "top_views": [
-  {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 10,
-   "eng": 1680,
-   "avg_sec": 168
-  },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 9,
@@ -24,54 +18,54 @@
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 8,
-   "eng": 2017,
-   "avg_sec": 252
+   "views": 6,
+   "eng": 1816,
+   "avg_sec": 303
   },
   {
-   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
-   "views": 3,
-   "eng": 180,
-   "avg_sec": 60
+   "title": "고양이 Catcha!",
+   "views": 5,
+   "eng": 37,
+   "avg_sec": 7
   },
   {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
+   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
    "views": 3,
-   "eng": 109,
-   "avg_sec": 36
+   "eng": 430,
+   "avg_sec": 143
+  },
+  {
+   "title": "기질 4가지 쉽게 정리 — 자극추구·위험회피·사회적 민감성·인내력, 그리고 16가지 유형",
+   "views": 2,
+   "eng": 0,
+   "avg_sec": 0
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 8,
-   "eng": 2017,
-   "avg_sec": 252
+   "views": 6,
+   "eng": 1816,
+   "avg_sec": 303
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 10,
-   "eng": 1680,
-   "avg_sec": 168
-  },
-  {
-   "title": "무료 로또 번호 생성기 — 확률 기반 추천 5게임",
    "views": 3,
-   "eng": 180,
-   "avg_sec": 60
-  },
-  {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 3,
-   "eng": 109,
-   "avg_sec": 36
+   "eng": 430,
+   "avg_sec": 143
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 9,
    "eng": 215,
    "avg_sec": 24
+  },
+  {
+   "title": "고양이 Catcha!",
+   "views": 5,
+   "eng": 37,
+   "avg_sec": 7
   }
  ],
- "updated": "2026-11-08 23:30"
+ "updated": "2026-11-09 00:30"
 }
