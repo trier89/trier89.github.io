@@ -47,7 +47,7 @@ googleAnalytics = 'G-E8ECH6NV3Y'
 
 [[menu.main]]
   name = '여행방'
-  url = '/travel/'
+  url = '/trip/miyako/'
   weight = 5
 
 [[menu.main]]
