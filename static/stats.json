@@ -1,26 +1,26 @@
 {
- "today": 1,
- "today_pv": 1,
- "total": 382,
- "total_visits": 822,
+ "today": 0,
+ "today_pv": 0,
+ "total": 383,
+ "total_visits": 823,
  "yesterday": {
-  "users": 5,
-  "new": 3,
-  "pv": 13,
-  "sessions": 6
+  "users": 2,
+  "new": 2,
+  "pv": 2,
+  "sessions": 2
  },
  "top_views": [
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 6,
-   "eng": 537,
-   "avg_sec": 90
+   "views": 7,
+   "eng": 751,
+   "avg_sec": 107
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 5,
-   "eng": 66,
-   "avg_sec": 13
+   "eng": 82,
+   "avg_sec": 16
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
@@ -29,36 +29,36 @@
    "avg_sec": 4
   },
   {
-   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
-   "eng": 381,
-   "avg_sec": 95
-  },
-  {
    "title": "사람 그림 심리테스트 — 내가 그린 사람이 말해주는 자아상 (DAP 인물화)",
    "views": 4,
    "eng": 65,
    "avg_sec": 16
+  },
+  {
+   "title": "고양이 Catcha!",
+   "views": 3,
+   "eng": 7,
+   "avg_sec": 2
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 4,
+   "views": 3,
    "eng": 381,
-   "avg_sec": 95
+   "avg_sec": 127
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 6,
-   "eng": 537,
-   "avg_sec": 90
+   "views": 7,
+   "eng": 751,
+   "avg_sec": 107
   },
   {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 3,
-   "eng": 111,
-   "avg_sec": 37
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 5,
+   "eng": 82,
+   "avg_sec": 16
   },
   {
    "title": "사람 그림 심리테스트 — 내가 그린 사람이 말해주는 자아상 (DAP 인물화)",
@@ -67,11 +67,11 @@
    "avg_sec": 16
   },
   {
-   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 5,
-   "eng": 66,
-   "avg_sec": 13
+   "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
+   "views": 3,
+   "eng": 25,
+   "avg_sec": 8
   }
  ],
- "updated": "2026-11-11 23:38"
+ "updated": "2026-11-12 00:38"
 }
