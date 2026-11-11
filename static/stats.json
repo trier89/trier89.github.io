@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 383,
- "total_visits": 823,
+ "total": 384,
+ "total_visits": 825,
  "yesterday": {
-  "users": 2,
-  "new": 2,
-  "pv": 2,
-  "sessions": 2
+  "users": 3,
+  "new": 3,
+  "pv": 4,
+  "sessions": 4
  },
  "top_views": [
   {
@@ -17,28 +17,28 @@
    "avg_sec": 107
   },
   {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 5,
+   "eng": 22,
+   "avg_sec": 4
+  },
+  {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 5,
    "eng": 82,
    "avg_sec": 16
   },
   {
-   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
    "views": 4,
-   "eng": 17,
-   "avg_sec": 4
+   "eng": 25,
+   "avg_sec": 6
   },
   {
    "title": "사람 그림 심리테스트 — 내가 그린 사람이 말해주는 자아상 (DAP 인물화)",
    "views": 4,
    "eng": 65,
    "avg_sec": 16
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 7,
-   "avg_sec": 2
   }
  ],
  "top_dwell": [
@@ -68,10 +68,10 @@
   },
   {
    "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
-   "views": 3,
+   "views": 4,
    "eng": 25,
-   "avg_sec": 8
+   "avg_sec": 6
   }
  ],
- "updated": "2026-11-12 00:38"
+ "updated": "2026-11-12 01:38"
 }
