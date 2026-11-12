@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 388,
- "total_visits": 830,
+ "total": 389,
+ "total_visits": 831,
  "yesterday": {
-  "users": 4,
-  "new": 4,
-  "pv": 5,
-  "sessions": 5
+  "users": 5,
+  "new": 5,
+  "pv": 6,
+  "sessions": 6
  },
  "top_views": [
   {
@@ -29,16 +29,16 @@
    "avg_sec": 26
   },
   {
+   "title": "고양이 Catcha!",
+   "views": 4,
+   "eng": 8,
+   "avg_sec": 2
+  },
+  {
    "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
    "views": 4,
    "eng": 25,
    "avg_sec": 6
-  },
-  {
-   "title": "고양이 Catcha!",
-   "views": 3,
-   "eng": 7,
-   "avg_sec": 2
   }
  ],
  "top_dwell": [
@@ -73,5 +73,5 @@
    "avg_sec": 6
   }
  ],
- "updated": "2026-11-13 05:41"
+ "updated": "2026-11-13 06:41"
 }
