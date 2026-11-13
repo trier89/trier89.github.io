@@ -1,52 +1,64 @@
 {
- "today": 10,
- "today_pv": 46,
- "total": 399,
- "total_visits": 842,
+ "today": 0,
+ "today_pv": 0,
+ "total": 406,
+ "total_visits": 851,
  "yesterday": {
-  "users": 5,
-  "new": 5,
-  "pv": 6,
-  "sessions": 6
+  "users": 17,
+  "new": 17,
+  "pv": 54,
+  "sessions": 20
  },
  "top_views": [
   {
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 28,
+   "eng": 4245,
+   "avg_sec": 152
+  },
+  {
+   "title": "심리테스트",
+   "views": 13,
+   "eng": 142,
+   "avg_sec": 11
+  },
+  {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 8,
-   "eng": 1869,
-   "avg_sec": 234
+   "views": 10,
+   "eng": 1905,
+   "avg_sec": 190
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 5,
+   "views": 7,
    "eng": 22,
-   "avg_sec": 4
-  },
-  {
-   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 5,
-   "eng": 129,
-   "avg_sec": 26
+   "avg_sec": 3
   },
   {
    "title": "고양이 Catcha!",
-   "views": 4,
+   "views": 5,
    "eng": 8,
    "avg_sec": 2
-  },
-  {
-   "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
-   "views": 4,
-   "eng": 25,
-   "avg_sec": 6
   }
  ],
  "top_dwell": [
   {
+   "title": "전생 테스트 — 나의 전생은 어떤 사람이었을까?",
+   "views": 3,
+   "eng": 657,
+   "avg_sec": 219
+  },
+  {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 8,
-   "eng": 1869,
-   "avg_sec": 234
+   "views": 10,
+   "eng": 1905,
+   "avg_sec": 190
+  },
+  {
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 28,
+   "eng": 4245,
+   "avg_sec": 152
   },
   {
    "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
@@ -56,22 +68,10 @@
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 5,
-   "eng": 129,
-   "avg_sec": 26
-  },
-  {
-   "title": "사람 그림 심리테스트 — 내가 그린 사람이 말해주는 자아상 (DAP 인물화)",
    "views": 3,
-   "eng": 63,
-   "avg_sec": 21
-  },
-  {
-   "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
-   "views": 4,
-   "eng": 25,
-   "avg_sec": 6
+   "eng": 88,
+   "avg_sec": 29
   }
  ],
- "updated": "2026-11-13 16:42"
+ "updated": "2026-11-14 04:53"
 }
