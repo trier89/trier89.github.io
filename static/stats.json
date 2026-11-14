@@ -1,20 +1,20 @@
 {
- "today": 0,
- "today_pv": 0,
- "total": 411,
- "total_visits": 861,
+ "today": 2,
+ "today_pv": 1,
+ "total": 413,
+ "total_visits": 863,
  "yesterday": {
-  "users": 14,
-  "new": 10,
-  "pv": 32,
-  "sessions": 16
+  "users": 15,
+  "new": 11,
+  "pv": 33,
+  "sessions": 17
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 44,
+   "views": 45,
    "eng": 5329,
-   "avg_sec": 121
+   "avg_sec": 118
   },
   {
    "title": "심리테스트",
@@ -50,9 +50,9 @@
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 44,
+   "views": 45,
    "eng": 5329,
-   "avg_sec": 121
+   "avg_sec": 118
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
@@ -73,5 +73,5 @@
    "avg_sec": 11
   }
  ],
- "updated": "2026-11-15 03:56"
+ "updated": "2026-11-15 04:56"
 }
