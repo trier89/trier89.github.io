@@ -1,20 +1,20 @@
 {
- "today": 7,
- "today_pv": 9,
- "total": 423,
- "total_visits": 877,
+ "today": 0,
+ "today_pv": 0,
+ "total": 424,
+ "total_visits": 879,
  "yesterday": {
-  "users": 15,
-  "new": 11,
-  "pv": 33,
-  "sessions": 17
+  "users": 9,
+  "new": 7,
+  "pv": 15,
+  "sessions": 12
  },
  "top_views": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 45,
-   "eng": 5329,
-   "avg_sec": 118
+   "views": 48,
+   "eng": 5979,
+   "avg_sec": 125
   },
   {
    "title": "심리테스트",
@@ -30,15 +30,15 @@
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 9,
-   "eng": 1546,
-   "avg_sec": 172
+   "views": 11,
+   "eng": 1601,
+   "avg_sec": 146
   },
   {
-   "title": "고양이 Catcha!",
+   "title": "미야코지마 3박4일 여행 일정 — 지도·스노클·거북이·17END 가이드",
    "views": 5,
-   "eng": 8,
-   "avg_sec": 2
+   "eng": 25,
+   "avg_sec": 5
   }
  ],
  "top_dwell": [
@@ -50,15 +50,15 @@
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 9,
-   "eng": 1546,
-   "avg_sec": 172
+   "views": 11,
+   "eng": 1601,
+   "avg_sec": 146
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 45,
-   "eng": 5329,
-   "avg_sec": 118
+   "views": 48,
+   "eng": 5979,
+   "avg_sec": 125
   },
   {
    "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
@@ -67,11 +67,11 @@
    "avg_sec": 114
   },
   {
-   "title": "사람 그림 심리테스트 — 내가 그린 사람이 말해주는 자아상 (DAP 인물화)",
+   "title": "화이트 퍼즐 100조각(밀크 퍼즐) — 에디슨의 게임방 | 계획대로 느긋하게",
    "views": 3,
-   "eng": 63,
-   "avg_sec": 21
+   "eng": 100,
+   "avg_sec": 33
   }
  ],
- "updated": "2026-11-15 21:58"
+ "updated": "2026-11-16 06:52"
 }
