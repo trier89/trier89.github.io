@@ -1,13 +1,13 @@
 {
- "today": 2,
- "today_pv": 2,
+ "today": 0,
+ "today_pv": 0,
  "total": 435,
- "total_visits": 896,
+ "total_visits": 897,
  "yesterday": {
-  "users": 9,
-  "new": 7,
-  "pv": 30,
-  "sessions": 10
+  "users": 3,
+  "new": 2,
+  "pv": 4,
+  "sessions": 4
  },
  "top_views": [
   {
@@ -24,15 +24,15 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 14,
-   "eng": 64,
-   "avg_sec": 5
+   "views": 15,
+   "eng": 96,
+   "avg_sec": 6
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
    "views": 7,
-   "eng": 1426,
-   "avg_sec": 204
+   "eng": 1212,
+   "avg_sec": 173
   },
   {
    "title": "검색",
@@ -57,8 +57,8 @@
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
    "views": 7,
-   "eng": 1426,
-   "avg_sec": 204
+   "eng": 1212,
+   "avg_sec": 173
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
@@ -73,5 +73,5 @@
    "avg_sec": 114
   }
  ],
- "updated": "2026-11-18 23:58"
+ "updated": "2026-11-19 00:58"
 }
