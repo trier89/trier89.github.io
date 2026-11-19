@@ -1,13 +1,13 @@
 {
- "today": 3,
- "today_pv": 4,
- "total": 438,
- "total_visits": 901,
+ "today": 0,
+ "today_pv": 0,
+ "total": 439,
+ "total_visits": 903,
  "yesterday": {
-  "users": 3,
-  "new": 2,
-  "pv": 4,
-  "sessions": 4
+  "users": 5,
+  "new": 4,
+  "pv": 7,
+  "sessions": 6
  },
  "top_views": [
   {
@@ -24,21 +24,21 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 15,
+   "views": 17,
    "eng": 96,
    "avg_sec": 6
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 7,
-   "eng": 1212,
-   "avg_sec": 173
+   "views": 6,
+   "eng": 94,
+   "avg_sec": 16
   },
   {
-   "title": "검색",
+   "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
    "views": 4,
-   "eng": 76,
-   "avg_sec": 19
+   "eng": 56,
+   "avg_sec": 14
   }
  ],
  "top_dwell": [
@@ -55,23 +55,23 @@
    "avg_sec": 206
   },
   {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 7,
-   "eng": 1212,
-   "avg_sec": 173
-  },
-  {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
    "views": 51,
    "eng": 6761,
    "avg_sec": 133
   },
   {
-   "title": "랜덤 뽑기·사다리타기 — 제비뽑기·순서·팀 나누기",
+   "title": "나는 무슨 동물? — 성향으로 알아보는 내 동물 유형",
    "views": 4,
-   "eng": 455,
-   "avg_sec": 114
+   "eng": 93,
+   "avg_sec": 23
+  },
+  {
+   "title": "검색",
+   "views": 4,
+   "eng": 76,
+   "avg_sec": 19
   }
  ],
- "updated": "2026-11-19 23:01"
+ "updated": "2026-11-20 00:01"
 }
