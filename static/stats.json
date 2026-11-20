@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 443,
- "total_visits": 909,
+ "total": 444,
+ "total_visits": 910,
  "yesterday": {
-  "users": 5,
-  "new": 4,
-  "pv": 7,
-  "sessions": 6
+  "users": 6,
+  "new": 5,
+  "pv": 8,
+  "sessions": 7
  },
  "top_views": [
   {
@@ -29,16 +29,16 @@
    "avg_sec": 12
   },
   {
+   "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
+   "views": 5,
+   "eng": 56,
+   "avg_sec": 11
+  },
+  {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
    "views": 5,
    "eng": 75,
    "avg_sec": 15
-  },
-  {
-   "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 4,
-   "eng": 56,
-   "avg_sec": 14
   }
  ],
  "top_dwell": [
@@ -67,11 +67,11 @@
    "avg_sec": 15
   },
   {
-   "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 4,
-   "eng": 56,
-   "avg_sec": 14
+   "title": "심리테스트",
+   "views": 6,
+   "eng": 72,
+   "avg_sec": 12
   }
  ],
- "updated": "2026-11-21 00:04"
+ "updated": "2026-11-21 01:04"
 }
