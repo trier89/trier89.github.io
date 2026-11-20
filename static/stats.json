@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 444,
- "total_visits": 910,
+ "total": 445,
+ "total_visits": 911,
  "yesterday": {
-  "users": 6,
-  "new": 5,
-  "pv": 8,
-  "sessions": 7
+  "users": 7,
+  "new": 6,
+  "pv": 9,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -73,5 +73,5 @@
    "avg_sec": 12
   }
  ],
- "updated": "2026-11-21 01:04"
+ "updated": "2026-11-21 02:04"
 }
