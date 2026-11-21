@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 455,
- "total_visits": 924,
+ "total": 456,
+ "total_visits": 925,
  "yesterday": {
-  "users": 9,
-  "new": 9,
-  "pv": 13,
-  "sessions": 11
+  "users": 10,
+  "new": 10,
+  "pv": 14,
+  "sessions": 12
  },
  "top_views": [
   {
@@ -29,16 +29,16 @@
    "avg_sec": 1
   },
   {
+   "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
+   "views": 7,
+   "eng": 77,
+   "avg_sec": 11
+  },
+  {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
    "views": 7,
    "eng": 62,
    "avg_sec": 9
-  },
-  {
-   "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 6,
-   "eng": 62,
-   "avg_sec": 10
   }
  ],
  "top_dwell": [
@@ -68,10 +68,10 @@
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 6,
-   "eng": 62,
-   "avg_sec": 10
+   "views": 7,
+   "eng": 77,
+   "avg_sec": 11
   }
  ],
- "updated": "2026-11-22 02:07"
+ "updated": "2026-11-22 03:07"
 }
