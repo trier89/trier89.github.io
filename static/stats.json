@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 476,
- "total_visits": 945,
+ "total": 478,
+ "total_visits": 947,
  "yesterday": {
-  "users": 8,
-  "new": 8,
-  "pv": 10,
-  "sessions": 8
+  "users": 10,
+  "new": 10,
+  "pv": 12,
+  "sessions": 10
  },
  "top_views": [
   {
@@ -18,15 +18,15 @@
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 10,
+   "views": 11,
    "eng": 99,
-   "avg_sec": 10
+   "avg_sec": 9
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 8,
-   "eng": 68,
-   "avg_sec": 8
+   "views": 9,
+   "eng": 84,
+   "avg_sec": 9
   },
   {
    "title": "심리테스트",
@@ -68,10 +68,10 @@
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 10,
+   "views": 11,
    "eng": 99,
-   "avg_sec": 10
+   "avg_sec": 9
   }
  ],
- "updated": "2026-11-24 02:02"
+ "updated": "2026-11-24 03:02"
 }
