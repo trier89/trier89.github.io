@@ -1,13 +1,13 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 475,
- "total_visits": 944,
+ "total": 476,
+ "total_visits": 945,
  "yesterday": {
-  "users": 7,
-  "new": 7,
-  "pv": 9,
-  "sessions": 7
+  "users": 8,
+  "new": 8,
+  "pv": 10,
+  "sessions": 8
  },
  "top_views": [
   {
@@ -18,8 +18,8 @@
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 9,
-   "eng": 87,
+   "views": 10,
+   "eng": 99,
    "avg_sec": 10
   },
   {
@@ -68,10 +68,10 @@
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 9,
-   "eng": 87,
+   "views": 10,
+   "eng": 99,
    "avg_sec": 10
   }
  ],
- "updated": "2026-11-24 01:01"
+ "updated": "2026-11-24 02:02"
 }
