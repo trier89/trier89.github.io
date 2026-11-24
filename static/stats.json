@@ -1,26 +1,26 @@
 {
- "today": 12,
- "today_pv": 12,
- "total": 490,
- "total_visits": 960,
+ "today": 0,
+ "today_pv": 0,
+ "total": 491,
+ "total_visits": 961,
  "yesterday": {
-  "users": 10,
-  "new": 10,
-  "pv": 12,
-  "sessions": 10
+  "users": 13,
+  "new": 13,
+  "pv": 13,
+  "sessions": 13
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 17,
-   "eng": 110,
+   "views": 14,
+   "eng": 87,
    "avg_sec": 6
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 11,
-   "eng": 99,
-   "avg_sec": 9
+   "views": 9,
+   "eng": 60,
+   "avg_sec": 7
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
@@ -29,24 +29,24 @@
    "avg_sec": 9
   },
   {
-   "title": "심리테스트",
-   "views": 7,
-   "eng": 82,
-   "avg_sec": 12
+   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
+   "views": 8,
+   "eng": 44,
+   "avg_sec": 6
   },
   {
-   "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
-   "views": 7,
-   "eng": 4,
-   "avg_sec": 1
+   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
+   "views": 6,
+   "eng": 691,
+   "avg_sec": 115
   }
  ],
  "top_dwell": [
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 6,
-   "eng": 1351,
-   "avg_sec": 225
+   "views": 4,
+   "eng": 567,
+   "avg_sec": 142
   },
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
@@ -55,23 +55,23 @@
    "avg_sec": 115
   },
   {
-   "title": "검색",
-   "views": 3,
-   "eng": 72,
-   "avg_sec": 24
-  },
-  {
-   "title": "심리테스트",
-   "views": 7,
-   "eng": 82,
-   "avg_sec": 12
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 9,
+   "eng": 84,
+   "avg_sec": 9
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 11,
-   "eng": 99,
-   "avg_sec": 9
+   "views": 9,
+   "eng": 60,
+   "avg_sec": 7
+  },
+  {
+   "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
+   "views": 14,
+   "eng": 87,
+   "avg_sec": 6
   }
  ],
- "updated": "2026-11-24 23:05"
+ "updated": "2026-11-25 00:05"
 }
