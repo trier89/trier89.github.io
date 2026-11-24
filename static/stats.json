@@ -1,18 +1,18 @@
 {
  "today": 0,
  "today_pv": 0,
- "total": 491,
- "total_visits": 961,
+ "total": 492,
+ "total_visits": 962,
  "yesterday": {
-  "users": 13,
-  "new": 13,
-  "pv": 13,
-  "sessions": 13
+  "users": 14,
+  "new": 14,
+  "pv": 14,
+  "sessions": 14
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 14,
+   "views": 15,
    "eng": 87,
    "avg_sec": 6
   },
@@ -68,10 +68,10 @@
   },
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 14,
+   "views": 15,
    "eng": 87,
    "avg_sec": 6
   }
  ],
- "updated": "2026-11-25 02:05"
+ "updated": "2026-11-25 03:05"
 }
