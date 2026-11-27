@@ -1,77 +1,77 @@
 {
- "today": 13,
- "today_pv": 15,
- "total": 519,
- "total_visits": 990,
+ "today": 0,
+ "today_pv": 0,
+ "total": 520,
+ "total_visits": 991,
  "yesterday": {
-  "users": 7,
-  "new": 7,
-  "pv": 7,
-  "sessions": 7
+  "users": 14,
+  "new": 13,
+  "pv": 16,
+  "sessions": 15
  },
  "top_views": [
   {
    "title": "계획대로 느긋하게 — 생활 계산기 · 심리테스트 · 미니게임",
-   "views": 17,
-   "eng": 69,
+   "views": 22,
+   "eng": 97,
    "avg_sec": 4
   },
   {
+   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
+   "views": 12,
+   "eng": 177,
+   "avg_sec": 15
+  },
+  {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 10,
+   "views": 9,
    "eng": 48,
    "avg_sec": 5
   },
   {
-   "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 10,
-   "eng": 107,
-   "avg_sec": 11
-  },
-  {
-   "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 7,
-   "eng": 1000,
-   "avg_sec": 143
+   "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
+   "views": 9,
+   "eng": 1695,
+   "avg_sec": 188
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
    "views": 6,
-   "eng": 42,
-   "avg_sec": 7
+   "eng": 50,
+   "avg_sec": 8
   }
  ],
  "top_dwell": [
   {
    "title": "그리스 신화 인물 관계도·족보 — 신과 영웅 가계도 한눈에 | 다락방",
-   "views": 7,
-   "eng": 1000,
-   "avg_sec": 143
+   "views": 5,
+   "eng": 983,
+   "avg_sec": 197
   },
   {
    "title": "기질·성격 유형 테스트 — 28문항으로 보는 나의 7가지 기질 (무료)",
-   "views": 5,
-   "eng": 567,
-   "avg_sec": 113
+   "views": 9,
+   "eng": 1695,
+   "avg_sec": 188
   },
   {
    "title": "본관 유명인 찾기 — 우리 집안(성씨·본관) 유명 인물",
-   "views": 10,
-   "eng": 107,
-   "avg_sec": 11
+   "views": 12,
+   "eng": 177,
+   "avg_sec": 15
   },
   {
    "title": "집 그림 심리테스트 — 내가 그린 집이 말해주는 진짜 속마음 (HTP)",
    "views": 6,
-   "eng": 42,
-   "avg_sec": 7
+   "eng": 50,
+   "avg_sec": 8
   },
   {
    "title": "360 사진·영상 뷰어 — 인스타360 파일을 폰에서 360으로 보기",
-   "views": 10,
+   "views": 9,
    "eng": 48,
    "avg_sec": 5
   }
  ],
- "updated": "2026-11-27 23:14"
+ "updated": "2026-11-28 00:14"
 }
